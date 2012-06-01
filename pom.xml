@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.cloudifysource.examples</groupId>
-  <artifactId>java-hello-world-webapp</artifactId>
+  <artifactId>java-hello-world</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>java-hello-world-webapp Maven Webapp</name>
