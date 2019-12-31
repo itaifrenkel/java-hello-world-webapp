@@ -1,22 +1,15 @@
 package com.github.dagwud.woodlands;
 
-import com.github.dagwud.woodlands.game.InvalidGameDefinition;
-import com.github.dagwud.woodlands.game.commands.ActionsCache;
-import com.github.dagwud.woodlands.gson.Action;
-import com.github.dagwud.woodlands.gson.Root;
-import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
-import com.github.dagwud.woodlands.gson.adapter.TestJSON;
+import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
+import com.github.dagwud.woodlands.game.commands.invocation.ActionInvokerDelegate;
+
+import java.util.HashMap;
 
 public class MainTest
 {
-  public static void main(String[] args) throws InvalidGameDefinition
+  public static void main(String[] args) throws ActionInvocationException
   {
-    Root root = GsonHelper.readJSON(TestJSON.TEST, Root.class);
-    System.out.println(root);
-
-    ActionsCache actions = new ActionsCache(root);
-    Action action = actions.findAction("ReadPlayerName");
-    System.out.println(action);
+    ActionInvokerDelegate.invoke("ReadPlayerName", new HashMap<String, String>());
   }
 
 }

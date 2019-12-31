@@ -13,7 +13,7 @@ public abstract class GsonHelper
   {
   }
 
-  public static Gson createGson()
+  private static Gson createGson()
   {
     return createBuilder().create();
   }

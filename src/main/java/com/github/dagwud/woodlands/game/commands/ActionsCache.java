@@ -1,6 +1,5 @@
 package com.github.dagwud.woodlands.game.commands;
 
-import com.github.dagwud.woodlands.game.InvalidGameDefinition;
 import com.github.dagwud.woodlands.gson.Action;
 import com.github.dagwud.woodlands.gson.Package;
 import com.github.dagwud.woodlands.gson.Root;
@@ -24,12 +23,12 @@ public class ActionsCache
     }
   }
 
-  public Action findAction(String actionName) throws InvalidGameDefinition
+  public Action findAction(String actionName) throws UnknownActionException
   {
     Action found = actions.get(actionName);
     if (null == found)
     {
-      throw new InvalidGameDefinition("No action named '" + actionName + "' exists");
+      throw new UnknownActionException("No action named '" + actionName + "' exists");
     }
     return found;
   }
