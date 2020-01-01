@@ -2,16 +2,15 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
 
-class NativeActionResolver
+public class NativeActionResolver
 {
   private static final String NATIVE_ACTIONS_PACKAGE = "com.github.dagwud.woodlands.game.commands.natives";
-  private static final String NATIVE_ACTIONS_SUFFIX = "Action";
+  public static final String NATIVE_ACTIONS_SUFFIX = "Action";
 
   static NativeAction lookupNativeAction(String nativeProcName) throws ActionInvocationException
   {
     Class<? extends NativeAction> actionClass = lookupNativeActionClass(nativeProcName);
-    NativeAction nativeAction = instantiateNativeAction(actionClass);
-    return nativeAction;
+    return instantiateNativeAction(actionClass);
   }
 
   private static NativeAction instantiateNativeAction(Class<? extends NativeAction> actionClass) throws ActionInvocationException

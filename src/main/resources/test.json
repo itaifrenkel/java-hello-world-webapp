@@ -111,7 +111,7 @@
             {
               "ProcName": "Native:SendMessage",
               "ParamMappings": {
-                "Message": "Message"
+                "Message": "${Message}"
               }
             }
           ]

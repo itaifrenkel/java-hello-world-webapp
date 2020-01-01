@@ -6,11 +6,14 @@ import com.github.dagwud.woodlands.game.commands.invocation.ActionResults;
 @SuppressWarnings("unused") // called at runtime via reflection
 public class ReadTextInputAction extends NativeAction
 {
+  private static final String OUTPUT_CAPTURED_TEXT = "CapturedText";
+
   @Override
-  public ActionResults invoke(ActionParameters callParameters)
+  public ActionResults invoke(ActionParameters parameters)
   {
-    // todo requireNoParameters(callParameters);
-    System.out.println("READ TEXT");
-    return new ActionResults();
+    System.out.println("<<< READ TEXT");
+    ActionResults actionResults = new ActionResults();
+    actionResults.put(OUTPUT_CAPTURED_TEXT, "DummyValue");
+    return actionResults;
   }
 }

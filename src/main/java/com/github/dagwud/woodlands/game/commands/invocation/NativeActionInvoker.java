@@ -1,8 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
+import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
-
-import java.util.Map;
 
 class NativeActionInvoker extends ActionInvoker
 {
@@ -14,8 +13,18 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionResults invoke(ActionParameters parameters)
+  void verifyParameters(ActionParameters parameters) throws ActionParameterException
   {
-    return nativeAction.invoke(parameters);
+    nativeAction.verifyParameters(parameters);
+  }
+
+  @Override
+  ActionResults invoke(ActionParameters parameters) throws ActionParameterException
+  {
+    System.out.println(nativeAction.getClass().getSimpleName() + " invoking (native)");
+    nativeAction.verifyParameters(parameters);
+    ActionResults results = nativeAction.invoke(parameters);
+    System.out.println(nativeAction.getClass().getSimpleName() + " result: " + results);
+    return results;
   }
 }

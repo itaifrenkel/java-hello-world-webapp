@@ -7,7 +7,7 @@ import com.github.dagwud.woodlands.game.commands.invocation.ActionResults;
 public class SetVarAction extends NativeAction
 {
   @Override
-  public ActionResults invoke(ActionParameters callParameters)
+  public ActionResults invoke(ActionParameters parameters)
   {
     System.out.println("SET VAR");
     return new ActionResults();

@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
+import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.gson.Action;
 import com.github.dagwud.woodlands.gson.Step;
 
@@ -16,14 +17,30 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
+  void verifyParameters(ActionParameters parameters) throws ActionParameterException
+  {
+    if (action.inputs != null)
+    {
+      for (String input : action.inputs)
+      {
+        parameters.verifyRequiredParameter(action.name, input);
+      }
+    }
+  }
+
+  @Override
   ActionResults invoke(ActionParameters parameters) throws ActionInvocationException
   {
-    System.out.println("INVOKING: " + action.name);
+    verifyParameters(parameters);
+
+    System.out.println(action.name + " invoking");
     for (Step step : action.steps)
     {
       invokeStep(step);
     }
-    return new ActionResults();
+    ActionResults result = new ActionResults();
+    System.out.println(action.name + " result: " + result);
+    return result;
   }
 
   private void invokeStep(Step step) throws ActionInvocationException
