@@ -6,10 +6,6 @@ abstract class ActionInvoker
 {
   abstract void verifyParameters(ActionParameters parameters) throws ActionParameterException;
 
-  abstract ActionResults invoke(ActionParameters parameters) throws ActionInvocationException;
+  abstract ActionResults invoke(ActionCallContext context) throws ActionInvocationException;
 
-  String resolveValue(String valueExpression)
-  {
-    return valueExpression;
-  }
 }

@@ -19,11 +19,11 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionResults invoke(ActionParameters parameters) throws ActionParameterException
+  ActionResults invoke(ActionCallContext context) throws ActionParameterException
   {
     System.out.println(nativeAction.getClass().getSimpleName() + " invoking (native)");
-    nativeAction.verifyParameters(parameters);
-    ActionResults results = nativeAction.invoke(parameters);
+    nativeAction.verifyParameters(context.getCallParameters());
+    ActionResults results = nativeAction.invoke(context);
     System.out.println(nativeAction.getClass().getSimpleName() + " result: " + results);
     return results;
   }

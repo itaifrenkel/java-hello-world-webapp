@@ -29,24 +29,25 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionResults invoke(ActionParameters parameters) throws ActionInvocationException
+  ActionResults invoke(ActionCallContext context) throws ActionInvocationException
   {
-    verifyParameters(parameters);
+    verifyParameters(context.getCallParameters());
 
     System.out.println(action.name + " invoking");
     for (Step step : action.steps)
     {
-      invokeStep(step);
+      invokeStep(step, context);
     }
     ActionResults result = new ActionResults();
     System.out.println(action.name + " result: " + result);
     return result;
   }
 
-  private void invokeStep(Step step) throws ActionInvocationException
+  private void invokeStep(Step step, ActionCallContext actionCallContext) throws ActionInvocationException
   {
     Map<String, String> callParameters = buildParameters(step);
-    ActionInvokerDelegate.invoke(step.procName, callParameters);
+    ActionCallContext callContext = new ActionCallContext(actionCallContext, callParameters);
+    ActionInvokerDelegate.invoke(step.procName, callContext);
   }
 
   private Map<String, String> buildParameters(Step step)
@@ -54,11 +55,7 @@ class NamedActionInvoker extends ActionInvoker
     Map<String, String> callParameters = new HashMap<>();
     if (step.paramMappings != null)
     {
-      for (Map.Entry<String, String> paramBinding : step.paramMappings.mappings.entrySet())
-      {
-        String resolvedValue = resolveValue(paramBinding.getValue());
-        callParameters.put(paramBinding.getKey(), resolvedValue);
-      }
+      callParameters.putAll(step.paramMappings.mappings);
     }
     return callParameters;
   }

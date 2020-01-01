@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
+import com.github.dagwud.woodlands.game.commands.invocation.ActionCallContext;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionParameters;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionResults;
 
@@ -15,9 +16,9 @@ public class SendMessageAction extends NativeAction
   }
 
   @Override
-  public ActionResults invoke(ActionParameters parameters)
+  public ActionResults invoke(ActionCallContext context)
   {
-    String message = parameters.get(PARAMETER_NAME_MESSAGE);
+    String message = context.getCallParameters().get(PARAMETER_NAME_MESSAGE);
     System.out.println(">>> " + message);
     return new ActionResults();
   }

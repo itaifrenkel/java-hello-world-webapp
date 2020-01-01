@@ -2,17 +2,19 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.gson.Action;
 
-import java.util.Map;
-
 public class ActionInvokerDelegate
 {
   private static final String NATIVE_ACTION_PREFIX = "Native:";
 
-  public static void invoke(String procName, Map<String, String> callParameters) throws ActionInvocationException
+  public static void invoke(String procName) throws ActionInvocationException
+  {
+    invoke(procName, new ActionCallContext());
+  }
+
+  static void invoke(String procName, ActionCallContext callContext) throws ActionInvocationException
   {
     ActionInvoker invoker = createInvoker(procName);
-    ActionParameters parameters = new ActionParameters(callParameters);
-    invoker.invoke(parameters);
+    invoker.invoke(callContext);
   }
 
   private static ActionInvoker createInvoker(String procName) throws ActionInvocationException
