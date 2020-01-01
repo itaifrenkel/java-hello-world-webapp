@@ -1,6 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import com.github.dagwud.woodlands.game.InvalidGameDefinition;
 import com.github.dagwud.woodlands.gson.Action;
 import com.github.dagwud.woodlands.gson.Step;
 
@@ -11,14 +10,13 @@ class NamedActionInvoker extends ActionInvoker
 {
   private final Action action;
 
-  NamedActionInvoker(Action action, Map<String, String> callParameters)
+  NamedActionInvoker(Action action)
   {
-    super(callParameters);
     this.action = action;
   }
 
   @Override
-  ActionResults invoke() throws ActionInvocationException
+  ActionResults invoke(ActionParameters parameters) throws ActionInvocationException
   {
     System.out.println("INVOKING: " + action.name);
     for (Step step : action.steps)

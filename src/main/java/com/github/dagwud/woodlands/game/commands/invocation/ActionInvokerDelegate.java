@@ -1,7 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import com.github.dagwud.woodlands.game.commands.UnknownActionException;
-import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
 import com.github.dagwud.woodlands.gson.Action;
 
 import java.util.Map;
@@ -12,20 +10,21 @@ public class ActionInvokerDelegate
 
   public static void invoke(String procName, Map<String, String> callParameters) throws ActionInvocationException
   {
-    ActionInvoker invoker = createInvoker(procName, callParameters);
-    invoker.invoke();
+    ActionInvoker invoker = createInvoker(procName);
+    ActionParameters parameters = new ActionParameters(callParameters);
+    invoker.invoke(parameters);
   }
 
-  private static ActionInvoker createInvoker(String procName, Map<String, String> callParameters) throws ActionInvocationException
+  private static ActionInvoker createInvoker(String procName) throws ActionInvocationException
   {
     if (isNativeAction(procName))
     {
       String nativeActionName = procName.substring(NATIVE_ACTION_PREFIX.length());
-      return NativeActionInvokerFactory.create(nativeActionName, callParameters);
+      return NativeActionInvokerFactory.create(nativeActionName);
     }
 
     Action invokedAction = lookupAction(procName);
-    return new NamedActionInvoker(invokedAction, callParameters);
+    return new NamedActionInvoker(invokedAction);
   }
 
   private static boolean isNativeAction(String procName)

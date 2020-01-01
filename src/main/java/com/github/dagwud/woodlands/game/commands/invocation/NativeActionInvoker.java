@@ -8,15 +8,14 @@ class NativeActionInvoker extends ActionInvoker
 {
   private final NativeAction nativeAction;
 
-  NativeActionInvoker(NativeAction action, Map<String, String> callParameters)
+  NativeActionInvoker(NativeAction action)
   {
-    super(callParameters);
     this.nativeAction = action;
   }
 
   @Override
-  ActionResults invoke()
+  ActionResults invoke(ActionParameters parameters)
   {
-    return nativeAction.invoke();
+    return nativeAction.invoke(parameters);
   }
 }
