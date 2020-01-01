@@ -1,7 +1,7 @@
 {
   "Packages": [
     {
-      "Name": "Draft",
+      "Name": "core",
       "actions": [
         {
           "name": "GetPlayerAttribute",
@@ -25,19 +25,27 @@
           ]
         },
         {
-          "name": "Echo",
+          "name": "SetPlayerAttribute",
           "inputs": [
-            "Message"
+            "AttributeName",
+            "AttributeValue"
           ],
           "steps": [
             {
-              "ProcName": "Native:SendMessage",
+              "ProcName": "Native:SetVar",
               "ParamMappings": {
-                "Message": "Message"
+                "VarSet": "Player",
+                "VarName": "AttributeName",
+                "VarValue": "AttributeValue"
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "Name": "setup",
+      "actions": [
         {
           "name": "ReadPlayerName",
           "steps": [
@@ -68,7 +76,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "Message": "Please choose your player class" 
+                "Message": "Please choose your player class"
               }
             },
             {
@@ -85,6 +93,25 @@
               "ParamMappings": {
                 "AttributeName": "Class",
                 "AttributeValue": "ChosenClass"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "io",
+      "actions": [
+        {
+          "name": "Echo",
+          "inputs": [
+            "Message"
+          ],
+          "steps": [
+            {
+              "ProcName": "Native:SendMessage",
+              "ParamMappings": {
+                "Message": "Message"
               }
             }
           ]
