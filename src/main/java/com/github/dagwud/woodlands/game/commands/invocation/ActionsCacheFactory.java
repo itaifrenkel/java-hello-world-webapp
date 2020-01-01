@@ -3,20 +3,40 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 import com.github.dagwud.woodlands.game.commands.ActionsCache;
 import com.github.dagwud.woodlands.gson.Root;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
-import com.github.dagwud.woodlands.gson.adapter.TestJSON;
 
-public class ActionsCacheFactory
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+class ActionsCacheFactory
 {
   private static ActionsCacheFactory instance;
   private final ActionsCache actions;
 
   private ActionsCacheFactory()
   {
-    Root root = GsonHelper.readJSON(TestJSON.TEST, Root.class);
+    String json = readFile();
+    Root root = GsonHelper.readJSON(json, Root.class);
     actions = new ActionsCache(root);
   }
 
-  public static ActionsCacheFactory instance()
+  private String readFile()
+  {
+    Path path = new File("src/main/resources/test.json").toPath();
+    byte[] bytes;
+    try
+    {
+      bytes = Files.readAllBytes(path);
+    }
+    catch (IOException e)
+    {
+      throw new RuntimeException("Unable to initialize", e);
+    }
+    return new String(bytes);
+  }
+
+  static ActionsCacheFactory instance()
   {
     if (null == instance)
     {
@@ -33,7 +53,7 @@ public class ActionsCacheFactory
     }
   }
 
-  protected ActionsCache getActions()
+  ActionsCache getActions()
   {
     return actions;
   }

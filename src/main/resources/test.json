@@ -1,0 +1,115 @@
+{
+  "Packages": [
+    {
+      "Name": "Draft",
+      "actions": [
+        {
+          "name": "GetPlayerAttribute",
+          "inputs": [
+            "AttributeName"
+          ],
+          "steps": [
+            {
+              "ProcName": "Native:ReadVar",
+              "ParamMappings": {
+                "VarSet": "Player",
+                "VarName": "AttributeName"
+              },
+              "OutputMappings": {
+                "VarValue": "AttributeValue"
+              }
+            }
+          ],
+          "outputs": [
+            "AttributeValue"
+          ]
+        },
+        {
+          "name": "Echo",
+          "inputs": [
+            "Message"
+          ],
+          "steps": [
+            {
+              "ProcName": "Native:SendMessage",
+              "ParamMappings": {
+                "Message": "Message"
+              }
+            }
+          ]
+        },
+        {
+          "name": "ReadPlayerName",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "Message": "By what name will you be known?"
+              }
+            },
+            {
+              "ProcName": "Native:ReadTextInput",
+              "OutputMappings": {
+                "CapturedText": "CharacterName"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Name",
+                "AttributeValue": "CharacterName"
+              }
+            }
+          ]
+        },
+        {
+          "name": "ReadPlayerClass",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "Message": "Please choose your player class" 
+              }
+            },
+            {
+              "ProcName": "ReadOption",
+              "ParamMappings": {
+                "OptionsCSV": "[Wizard,Druid,Explorer]"
+              },
+              "OutputMappings": {
+                "ChosenOption": "Class"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Class",
+                "AttributeValue": "ChosenClass"
+              }
+            }
+          ]
+        },
+        {
+          "name": "ReadOption",
+          "inputs": [
+            "OptionsCSV"
+          ],
+          "steps": [
+            {
+              "ProcName": "Native:ReadOption",
+              "ParamMappings": {
+                "OptionsCSV": "OptionsCSV"
+              },
+              "OutputMappings": {
+                "ChosenOption": "ChosenOption"
+              }
+            }
+          ],
+          "outputs": [
+            "ChosenOption"
+          ]
+        }
+      ]
+    }
+  ]
+}
