@@ -2,19 +2,23 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 abstract class ValueResolver
 {
+
+  public static final String START_VARIABLE = "${";
+  public static final String END_VARIABLE = "}";
+
   private ValueResolver()
   {
   }
 
   static String resolve(String expression, ActionParameters callParameters) throws VariableUndefinedException
   {
-    if (!expression.contains("${"))
+    if (!expression.contains(START_VARIABLE))
     {
       return expression;
     }
 
-    ExpressionTree toks = new ExpressionTree(expression, "${", "}");
-    replaceVars(toks.root, callParameters);
+    ExpressionTree toks = new ExpressionTree(expression, START_VARIABLE, END_VARIABLE);
+    replaceVars(toks.getRoot(), callParameters);
 
     String resolved = toks.collapse();
     System.out.println("resolve " + expression + " --> " + resolved);
@@ -23,7 +27,7 @@ abstract class ValueResolver
 
   private static void replaceVars(ExpressionTreeNode expressionTreeNode, ActionParameters callParameters)
   {
-    if (expressionTreeNode.getValue().contains("${"))
+    if (expressionTreeNode.getValue().contains(START_VARIABLE))
     {
       String value = resolveVar(expressionTreeNode.getValue(), callParameters);
       expressionTreeNode.setValue(value);
@@ -36,7 +40,7 @@ abstract class ValueResolver
 
   private static String resolveVar(String varExpression, ActionParameters callParameters) throws VariableUndefinedException
   {
-    String varName = varExpression.substring("${".length(), varExpression.length() - "}".length());
+    String varName = varExpression.substring(START_VARIABLE.length(), varExpression.length() - END_VARIABLE.length());
     String value = callParameters.get(varName);
     if (value == null)
     {
