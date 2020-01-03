@@ -14,7 +14,7 @@ abstract class ActionInvoker
     context.pushNewVariablesStackFrame(getActionName(), callParameters);
 //    System.out.println(getActionName() + " before call: \n" + context.getCallParameters());
 
-    ActionParameters results = doInvoke(context, outputMappings);
+    Variables results = doInvoke(context, outputMappings);
 
     context.dropStackFrame();
     mapResults(results, context, outputMappings);
@@ -26,9 +26,9 @@ abstract class ActionInvoker
 
   abstract String getActionName();
 
-  abstract ActionParameters doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionInvocationException;
+  abstract Variables doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionInvocationException;
 
-  private static void mapResults(ActionParameters results, VariableStack callContext, ParamMappings outputMappings)
+  private static void mapResults(Variables results, VariableStack callContext, ParamMappings outputMappings)
   {
     for (Map.Entry<String, String> outputMapping : outputMappings.mappings.entrySet()) // todo is it necessary to have OM on context now?
     {

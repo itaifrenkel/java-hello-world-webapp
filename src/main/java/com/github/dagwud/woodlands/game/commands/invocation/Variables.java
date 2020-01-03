@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActionParameters
+public class Variables
 {
   private final String comment;
   private final Map<String, String> values = new HashMap<>();
 
-  public ActionParameters(String comment, Map<String, String> callParameters)
+  public Variables(String comment, Map<String, String> callParameters)
   {
     this.comment = comment;
     for (Map.Entry<String, String> callParameter : callParameters.entrySet())

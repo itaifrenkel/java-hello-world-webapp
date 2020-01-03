@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.game.commands.natives.MissingRequiredParameterException;
-import com.github.dagwud.woodlands.game.commands.values.WoodlandsRuntimeException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,17 +9,17 @@ import java.util.Stack;
 
 public class VariableStack
 {
-  private final Stack<ActionParameters> stack;
+  private final Stack<Variables> stack;
 
   VariableStack()
   {
     stack = new Stack<>();
-    stack.push(new ActionParameters("root", new HashMap<String, String>(0)));
+    stack.push(new Variables("root", new HashMap<String, String>(0)));
   }
 
   void pushNewVariablesStackFrame(String name, Map<String, String> callParameters)
   {
-    stack.push(new ActionParameters(name, callParameters));
+    stack.push(new Variables(name, callParameters));
   }
 
   void dropStackFrame()
@@ -50,7 +49,7 @@ public class VariableStack
   {
     for (int i = stack.size() - 1; i >= 0; i--)
     {
-      ActionParameters stackFrame = stack.get(i);
+      Variables stackFrame = stack.get(i);
       if (stackFrame.containsParameter(variableName))
       {
         return stackFrame.getParameterValue(variableName);
@@ -66,7 +65,7 @@ public class VariableStack
       setGlobalValue(variableName, value);
       return;
     }
-    for (ActionParameters parameters : stack)
+    for (Variables parameters : stack)
     {
       if (parameters.containsParameter(variableName))
       {

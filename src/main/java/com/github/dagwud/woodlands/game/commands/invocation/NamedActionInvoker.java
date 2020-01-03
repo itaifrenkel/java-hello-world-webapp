@@ -36,7 +36,7 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionParameters doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
+  Variables doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
   {
     verifyParameters(context);
 

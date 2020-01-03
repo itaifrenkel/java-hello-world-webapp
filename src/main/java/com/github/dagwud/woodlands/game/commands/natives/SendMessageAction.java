@@ -16,10 +16,10 @@ public class SendMessageAction extends NativeAction
   }
 
   @Override
-  public ActionParameters invoke(VariableStack context)
+  public Variables invoke(VariableStack context)
   {
     String message = context.lookupVariableValue(PARAMETER_NAME_MESSAGE);
     System.out.println(">>> " + message);
-    return new ActionParameters("test", new HashMap<String, String>());
+    return new Variables("test", new HashMap<String, String>());
   }
 }
