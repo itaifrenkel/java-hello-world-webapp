@@ -52,7 +52,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "Message": "By what name will you be known?"
+                "MessageToPrint": "By what name will you be known?"
               }
             },
             {
@@ -76,7 +76,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "Message": "Please choose your player class"
+                "MessageToPrint": "Please choose your player class"
               }
             },
             {
@@ -105,13 +105,13 @@
         {
           "name": "Echo",
           "inputs": [
-            "Message"
+            "MessageToPrint"
           ],
           "steps": [
             {
               "ProcName": "Native:SendMessage",
               "ParamMappings": {
-                "Message": "${Message}"
+                "Message": "${MessageToPrint}"
               }
             }
           ]

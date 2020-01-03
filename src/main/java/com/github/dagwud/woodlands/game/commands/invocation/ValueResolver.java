@@ -42,9 +42,13 @@ abstract class ValueResolver
   {
     String varName = varExpression.substring(START_VARIABLE.length(), varExpression.length() - END_VARIABLE.length());
     String value = callParameters.lookupVariable(varName);
-    if (value == null)
+    if (value.contains(START_VARIABLE))
     {
-      throw new VariableUndefinedException(varExpression);
+      if (value.contains(varExpression))
+      {
+        throw new RuntimeException("Attempt made to create a self-referential variable");
+      }
+      value = resolveVar(value, callParameters);
     }
     return value;
   }
