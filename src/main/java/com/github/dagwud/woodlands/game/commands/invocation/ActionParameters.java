@@ -1,47 +1,27 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
-import com.github.dagwud.woodlands.game.commands.natives.MissingRequiredParameterException;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActionParameters extends HashMap<String, String>
+class ActionParameters
 {
+  private final Map<String, String> values = new HashMap<>();
+
   ActionParameters(Map<String, String> callParameters)
   {
-    for (Entry<String, String> callParameter : callParameters.entrySet())
+    for (Map.Entry<String, String> callParameter : callParameters.entrySet())
     {
-      put(callParameter.getKey(), callParameter.getValue());
+      values.put(callParameter.getKey(), callParameter.getValue());
     }
   }
 
-  @Override
-  public String put(String key, String value)
+  boolean containsParameter(String variableName)
   {
-    String paramValue = ValueResolver.resolve(value, this);
-    return super.put(key, paramValue);
+    return values.containsKey(variableName);
   }
 
-  @Override
-  public void putAll(Map<? extends String, ? extends String> m)
+  String getParameterValue(String variableName)
   {
-    Map<String, String> mResolved = new HashMap<>(m);
-    for (String k : m.keySet())
-    {
-      String valueExpr = m.get(k);
-      valueExpr = ValueResolver.resolve(valueExpr, this);
-      mResolved.put(k, valueExpr);
-    }
-    super.putAll(mResolved);
+    return values.get(variableName);
   }
-
-  public void verifyRequiredParameter(String actionName, String requiredParameterName) throws ActionParameterException
-  {
-    if (!containsKey(requiredParameterName))
-    {
-      throw new MissingRequiredParameterException(actionName, requiredParameterName);
-    }
-  }
-
 }

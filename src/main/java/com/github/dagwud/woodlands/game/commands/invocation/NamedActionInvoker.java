@@ -17,7 +17,7 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  void verifyParameters(ActionParameters parameters) throws ActionParameterException
+  void verifyParameters(Variables parameters) throws ActionParameterException
   {
     if (action.inputs != null)
     {
@@ -46,8 +46,9 @@ class NamedActionInvoker extends ActionInvoker
   private void invokeStep(Step step, ActionCallContext actionCallContext) throws ActionInvocationException
   {
     Map<String, String> callParameters = buildParameters(step);
-    ActionCallContext callContext = new ActionCallContext(actionCallContext, callParameters);
-    ActionInvokerDelegate.invoke(step.procName, callContext);
+    actionCallContext.getCallParameters().pushNewVariablesStackFrame(callParameters);
+    ActionInvokerDelegate.invoke(step.procName, actionCallContext);
+    actionCallContext.getCallParameters().dropStackFrame();
   }
 
   private Map<String, String> buildParameters(Step step)

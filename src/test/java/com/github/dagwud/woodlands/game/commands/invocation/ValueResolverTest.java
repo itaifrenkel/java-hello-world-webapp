@@ -10,17 +10,18 @@ import static org.junit.Assert.assertEquals;
 
 public class ValueResolverTest
 {
-  private ActionParameters vars;
+  private Variables vars;
 
   @Before
   public void setup()
   {
+    vars = new Variables();
     Map<String, String> values = new HashMap<>();
     values.put("single", "one");
     values.put("double", "two");
     values.put("triple", "three");
     values.put("quadruple", "four");
-    vars = new ActionParameters(values);
+    vars.pushNewVariablesStackFrame(values);
   }
 
   @Test

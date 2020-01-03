@@ -13,7 +13,7 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  void verifyParameters(ActionParameters parameters) throws ActionParameterException
+  void verifyParameters(Variables parameters) throws ActionParameterException
   {
     nativeAction.verifyParameters(parameters);
   }

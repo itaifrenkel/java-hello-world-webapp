@@ -3,14 +3,14 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 abstract class ValueResolver
 {
 
-  public static final String START_VARIABLE = "${";
-  public static final String END_VARIABLE = "}";
+  static final String START_VARIABLE = "${";
+  static final String END_VARIABLE = "}";
 
   private ValueResolver()
   {
   }
 
-  static String resolve(String expression, ActionParameters callParameters) throws VariableUndefinedException
+  static String resolve(String expression, Variables callParameters) throws VariableUndefinedException
   {
     if (!expression.contains(START_VARIABLE))
     {
@@ -25,7 +25,7 @@ abstract class ValueResolver
     return resolved;
   }
 
-  private static void replaceVars(ExpressionTreeNode expressionTreeNode, ActionParameters callParameters)
+  private static void replaceVars(ExpressionTreeNode expressionTreeNode, Variables callParameters)
   {
     if (expressionTreeNode.getValue().contains(START_VARIABLE))
     {
@@ -38,10 +38,10 @@ abstract class ValueResolver
     }
   }
 
-  private static String resolveVar(String varExpression, ActionParameters callParameters) throws VariableUndefinedException
+  private static String resolveVar(String varExpression, Variables callParameters) throws VariableUndefinedException
   {
     String varName = varExpression.substring(START_VARIABLE.length(), varExpression.length() - END_VARIABLE.length());
-    String value = callParameters.get(varName);
+    String value = callParameters.lookupVariable(varName);
     if (value == null)
     {
       throw new VariableUndefinedException(varExpression);

@@ -4,7 +4,7 @@ import com.github.dagwud.woodlands.game.commands.natives.ActionParameterExceptio
 
 abstract class ActionInvoker
 {
-  abstract void verifyParameters(ActionParameters parameters) throws ActionParameterException;
+  abstract void verifyParameters(Variables parameters) throws ActionParameterException;
 
   abstract ActionResults invoke(ActionCallContext context) throws ActionInvocationException;
 
