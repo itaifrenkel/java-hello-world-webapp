@@ -14,7 +14,7 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  void verifyParameters(Variables parameters) throws ActionParameterException
+  void verifyParameters(VariableStack parameters) throws ActionParameterException
   {
     nativeAction.verifyParameters(parameters);
   }
@@ -26,7 +26,7 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionParameters doInvoke(Variables context, ParamMappings outputMappings) throws ActionParameterException
+  ActionParameters doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionParameterException
   {
     nativeAction.verifyParameters(context);
     return nativeAction.invoke(context);

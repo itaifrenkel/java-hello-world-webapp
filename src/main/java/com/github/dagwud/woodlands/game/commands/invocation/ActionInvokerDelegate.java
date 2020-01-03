@@ -12,10 +12,10 @@ public class ActionInvokerDelegate
 
   public static void invoke(String procName) throws ActionInvocationException
   {
-    invoke(procName, new HashMap<String, String>(0), new Variables(), new ParamMappings());
+    invoke(procName, new HashMap<String, String>(0), new VariableStack(), new ParamMappings());
   }
 
-  static void invoke(String procName, Map<String, String> callParameters, Variables context, ParamMappings outputMappings) throws ActionInvocationException
+  static void invoke(String procName, Map<String, String> callParameters, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
   {
     ActionInvoker invoker = createInvoker(procName);
     invoker.invoke(context, callParameters, outputMappings); //todo

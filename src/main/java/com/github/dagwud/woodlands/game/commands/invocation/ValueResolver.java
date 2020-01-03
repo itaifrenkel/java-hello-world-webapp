@@ -10,7 +10,7 @@ abstract class ValueResolver
   {
   }
 
-  static String resolve(String expression, Variables callParameters) throws VariableUndefinedException
+  static String resolve(String expression, VariableStack callParameters) throws VariableUndefinedException
   {
     if (!expression.contains(START_VARIABLE))
     {
@@ -25,7 +25,7 @@ abstract class ValueResolver
     return resolved;
   }
 
-  private static void replaceVars(ExpressionTreeNode expressionTreeNode, Variables callParameters)
+  private static void replaceVars(ExpressionTreeNode expressionTreeNode, VariableStack callParameters)
   {
     if (expressionTreeNode.getValue().contains(START_VARIABLE))
     {
@@ -38,7 +38,7 @@ abstract class ValueResolver
     }
   }
 
-  private static String resolveVar(String varExpression, Variables callParameters) throws VariableUndefinedException
+  private static String resolveVar(String varExpression, VariableStack callParameters) throws VariableUndefinedException
   {
     String varName = varExpression.substring(START_VARIABLE.length(), varExpression.length() - END_VARIABLE.length());
     String value = callParameters.lookupVariable(varName);

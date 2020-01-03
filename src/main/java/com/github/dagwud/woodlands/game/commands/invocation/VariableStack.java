@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-public class Variables
+public class VariableStack
 {
   private final Stack<ActionParameters> stack;
 
-  Variables()
+  VariableStack()
   {
     stack = new Stack<>();
     stack.push(new ActionParameters("root", new HashMap<String, String>(0)));

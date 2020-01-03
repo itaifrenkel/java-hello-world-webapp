@@ -18,7 +18,7 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  void verifyParameters(Variables parameters) throws ActionParameterException
+  void verifyParameters(VariableStack parameters) throws ActionParameterException
   {
     if (action.inputs != null)
     {
@@ -36,7 +36,7 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionParameters doInvoke(Variables context, ParamMappings outputMappings) throws ActionInvocationException
+  ActionParameters doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
   {
     verifyParameters(context);
 
@@ -48,7 +48,7 @@ class NamedActionInvoker extends ActionInvoker
     return null;
   }
 
-  private void invokeStep(Step step, Variables context) throws ActionInvocationException
+  private void invokeStep(Step step, VariableStack context) throws ActionInvocationException
   {
     Map<String, String> callParameters = buildParameters(step);
     ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;

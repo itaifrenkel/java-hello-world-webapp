@@ -10,13 +10,13 @@ public class SendMessageAction extends NativeAction
   private static final String PARAMETER_NAME_MESSAGE = "Message";
 
   @Override
-  public void verifyParameters(Variables parameters) throws ActionParameterException
+  public void verifyParameters(VariableStack parameters) throws ActionParameterException
   {
     parameters.verifyRequiredParameter("SendMessage", PARAMETER_NAME_MESSAGE);
   }
 
   @Override
-  public ActionParameters invoke(Variables context)
+  public ActionParameters invoke(VariableStack context)
   {
     String message = context.lookupVariableValue(PARAMETER_NAME_MESSAGE);
     System.out.println(">>> " + message);

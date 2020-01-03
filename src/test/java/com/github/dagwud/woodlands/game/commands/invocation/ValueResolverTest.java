@@ -10,12 +10,12 @@ import static org.junit.Assert.assertEquals;
 
 public class ValueResolverTest
 {
-  private Variables vars;
+  private VariableStack vars;
 
   @Before
   public void setup()
   {
-    vars = new Variables();
+    vars = new VariableStack();
     Map<String, String> values = new HashMap<>();
     values.put("single", "one");
     values.put("double", "two");
