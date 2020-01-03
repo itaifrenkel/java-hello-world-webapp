@@ -35,6 +35,7 @@ abstract class ActionInvoker
       String outputName = outputMapping.getKey();
       String mapToVariableName = outputMapping.getValue();
       String outputValue = results.get(outputName);
+      //todo null handling - mapping refers to an invalid output
       callContext.setValue(mapToVariableName, outputValue);
     }
 

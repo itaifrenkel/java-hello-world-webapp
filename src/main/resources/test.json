@@ -47,6 +47,17 @@
       "Name": "setup",
       "actions": [
         {
+          "name": "PlayerSetup",
+          "steps": [
+            {
+              "ProcName": "ReadPlayerName"
+            },
+            {
+              "ProcName": "ReadPlayerClass"
+            }
+          ]
+        },
+        {
           "name": "ReadPlayerName",
           "steps": [
             {
@@ -80,9 +91,9 @@
               }
             },
             {
-              "ProcName": "ReadOption",
+              "ProcName": "Native:ReadOption",
               "ParamMappings": {
-                "OptionsCSV": "[Wizard,Druid,Explorer]"
+                "OptionsCSV": "Wizard,Druid,Explorer"
               },
               "OutputMappings": {
                 "ChosenOption": "Class"
@@ -92,7 +103,7 @@
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "Class",
-                "AttributeValue": "ChosenClass"
+                "AttributeValue": "${Class}"
               }
             }
           ]

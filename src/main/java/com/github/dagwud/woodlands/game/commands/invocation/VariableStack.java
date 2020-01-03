@@ -55,7 +55,7 @@ public class VariableStack
         return stackFrame.get(variableName);
       }
     }
-    return null;
+    throw new VariableUndefinedException(variableName);
   }
 
   void setValue(String variableName, String value)
