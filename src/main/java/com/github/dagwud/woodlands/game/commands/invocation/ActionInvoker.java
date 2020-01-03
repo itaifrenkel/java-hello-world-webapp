@@ -18,7 +18,7 @@ abstract class ActionInvoker
 
     context.dropStackFrame();
     mapResults(results, context, outputMappings);
-    if (results != null && !results.getValues().isEmpty())
+    if (results != null && !((Map<String, String>) results).isEmpty())
     {
       System.out.println(getActionName() + " after call: \n" + context);
     }
@@ -34,13 +34,13 @@ abstract class ActionInvoker
     {
       String outputName = outputMapping.getKey();
       String mapToVariableName = outputMapping.getValue();
-      String outputValue = results.getParameterValue(outputName);
+      String outputValue = results.get(outputName);
       callContext.setValue(mapToVariableName, outputValue);
     }
 
     if (null != results)
     {
-      for (Map.Entry<String, String> result : results.getValues().entrySet())
+      for (Map.Entry<String, String> result : ((Map<String, String>) results).entrySet())
       {
         if (VariableStack.isGlobalVariable(result.getKey()))
         {

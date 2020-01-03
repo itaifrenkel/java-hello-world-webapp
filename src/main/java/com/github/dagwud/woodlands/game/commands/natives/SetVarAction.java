@@ -16,7 +16,7 @@ public class SetVarAction extends NativeAction
     String varValue = parameters.lookupVariableValue("VarValue");
     System.out.println("SET VAR: " + varName + " = " + varValue);
     Variables result = new Variables("setvarparams", new HashMap<String, String>());
-    result.putParameterValue(varName, varValue);
+    result.put(varName, varValue);
     return result;
   }
 }

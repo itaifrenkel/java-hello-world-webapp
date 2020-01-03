@@ -50,9 +50,9 @@ public class VariableStack
     for (int i = stack.size() - 1; i >= 0; i--)
     {
       Variables stackFrame = stack.get(i);
-      if (stackFrame.containsParameter(variableName))
+      if (stackFrame.containsKey(variableName))
       {
-        return stackFrame.getParameterValue(variableName);
+        return stackFrame.get(variableName);
       }
     }
     return null;
@@ -65,15 +65,15 @@ public class VariableStack
       setGlobalValue(variableName, value);
       return;
     }
-    for (Variables parameters : stack)
+    for (Variables variables : stack)
     {
-      if (parameters.containsParameter(variableName))
+      if (variables.containsKey(variableName))
       {
-        parameters.putParameterValue(variableName, value);
+        variables.put(variableName, value);
         return;
       }
     }
-    stack.get(stack.size() - 1).putParameterValue(variableName, value);
+    stack.get(stack.size() - 1).put(variableName, value);
   }
 
   static boolean isGlobalVariable(String variableName)
@@ -83,7 +83,7 @@ public class VariableStack
 
   private void setGlobalValue(String variableName, String value)
   {
-    stack.get(0).putParameterValue(variableName, value);
+    stack.get(0).put(variableName, value);
   }
 
   @Override
