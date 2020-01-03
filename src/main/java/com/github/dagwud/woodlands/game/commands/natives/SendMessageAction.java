@@ -16,9 +16,9 @@ public class SendMessageAction extends NativeAction
   }
 
   @Override
-  public ActionParameters invoke(ActionCallContext context)
+  public ActionParameters invoke(Variables context)
   {
-    String message = context.getCallParameters().lookupVariableValue(PARAMETER_NAME_MESSAGE);
+    String message = context.lookupVariableValue(PARAMETER_NAME_MESSAGE);
     System.out.println(">>> " + message);
     return new ActionParameters("test", new HashMap<String, String>());
   }

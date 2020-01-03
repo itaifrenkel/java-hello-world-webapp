@@ -36,9 +36,9 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionParameters doInvoke(ActionCallContext context, ParamMappings outputMappings) throws ActionInvocationException
+  ActionParameters doInvoke(Variables context, ParamMappings outputMappings) throws ActionInvocationException
   {
-    verifyParameters(context.getCallParameters());
+    verifyParameters(context);
 
     System.out.println(action.name + " invoking");
     for (Step step : action.steps)
@@ -48,7 +48,7 @@ class NamedActionInvoker extends ActionInvoker
     return null;
   }
 
-  private void invokeStep(Step step, ActionCallContext context) throws ActionInvocationException
+  private void invokeStep(Step step, Variables context) throws ActionInvocationException
   {
     Map<String, String> callParameters = buildParameters(step);
     ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;

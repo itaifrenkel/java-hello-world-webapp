@@ -9,33 +9,33 @@ abstract class ActionInvoker
 {
   abstract void verifyParameters(Variables parameters) throws ActionParameterException;
 
-  final void invoke(ActionCallContext context, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
+  final void invoke(Variables context, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
   {
-    context.getCallParameters().pushNewVariablesStackFrame(getActionName(), callParameters);
+    context.pushNewVariablesStackFrame(getActionName(), callParameters);
 //    System.out.println(getActionName() + " before call: \n" + context.getCallParameters());
 
     ActionParameters results = doInvoke(context, outputMappings);
 
-    context.getCallParameters().dropStackFrame();
+    context.dropStackFrame();
     mapResults(results, context, outputMappings);
     if (results != null && !results.getValues().isEmpty())
     {
-      System.out.println(getActionName() + " after call: \n" + context.getCallParameters());
+      System.out.println(getActionName() + " after call: \n" + context);
     }
   }
 
   abstract String getActionName();
 
-  abstract ActionParameters doInvoke(ActionCallContext context, ParamMappings outputMappings) throws ActionInvocationException;
+  abstract ActionParameters doInvoke(Variables context, ParamMappings outputMappings) throws ActionInvocationException;
 
-  private static void mapResults(ActionParameters results, ActionCallContext callContext, ParamMappings outputMappings)
+  private static void mapResults(ActionParameters results, Variables callContext, ParamMappings outputMappings)
   {
     for (Map.Entry<String, String> outputMapping : outputMappings.mappings.entrySet()) // todo is it necessary to have OM on context now?
     {
       String outputName = outputMapping.getKey();
       String mapToVariableName = outputMapping.getValue();
       String outputValue = results.getParameterValue(outputName);
-      callContext.getCallParameters().setValue(mapToVariableName, outputValue);
+      callContext.setValue(mapToVariableName, outputValue);
     }
 
     if (null != results)
@@ -44,7 +44,7 @@ abstract class ActionInvoker
       {
         if (Variables.isGlobalVariable(result.getKey()))
         {
-          callContext.getCallParameters().setValue(result.getKey(), result.getValue());
+          callContext.setValue(result.getKey(), result.getValue());
         }
       }
     }

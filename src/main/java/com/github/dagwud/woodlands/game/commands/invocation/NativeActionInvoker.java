@@ -26,9 +26,9 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionParameters doInvoke(ActionCallContext context, ParamMappings outputMappings) throws ActionParameterException
+  ActionParameters doInvoke(Variables context, ParamMappings outputMappings) throws ActionParameterException
   {
-    nativeAction.verifyParameters(context.getCallParameters());
+    nativeAction.verifyParameters(context);
     return nativeAction.invoke(context);
   }
 }
