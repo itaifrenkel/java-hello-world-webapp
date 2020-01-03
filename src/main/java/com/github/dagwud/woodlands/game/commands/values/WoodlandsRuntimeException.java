@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.commands.values;
 
 public class WoodlandsRuntimeException extends RuntimeException
 {
-  protected WoodlandsRuntimeException(String message)
+  public WoodlandsRuntimeException(String message)
   {
     super(message);
   }

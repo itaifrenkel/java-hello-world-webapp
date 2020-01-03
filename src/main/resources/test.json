@@ -13,7 +13,7 @@
               "ProcName": "Native:ReadVar",
               "ParamMappings": {
                 "VarSet": "Player",
-                "VarName": "AttributeName"
+                "VarName": "${AttributeName}"
               },
               "OutputMappings": {
                 "VarValue": "AttributeValue"
@@ -35,8 +35,8 @@
               "ProcName": "Native:SetVar",
               "ParamMappings": {
                 "VarSet": "Player",
-                "VarName": "AttributeName",
-                "VarValue": "AttributeValue"
+                "VarName": "${AttributeName}",
+                "VarValue": "${AttributeValue}"
               }
             }
           ]
@@ -65,7 +65,7 @@
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "Name",
-                "AttributeValue": "CharacterName"
+                "AttributeValue": "${CharacterName}"
               }
             }
           ]

@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
+import com.github.dagwud.woodlands.gson.ParamMappings;
 
 class NativeActionInvoker extends ActionInvoker
 {
@@ -19,12 +20,15 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionResults invoke(ActionCallContext context) throws ActionParameterException
+  String getActionName()
   {
-    System.out.println(nativeAction.getClass().getSimpleName() + " invoking (native)");
+    return nativeAction.getClass().getSimpleName() + " (native)";
+  }
+
+  @Override
+  ActionParameters doInvoke(ActionCallContext context, ParamMappings outputMappings) throws ActionParameterException
+  {
     nativeAction.verifyParameters(context.getCallParameters());
-    ActionResults results = nativeAction.invoke(context);
-    System.out.println(nativeAction.getClass().getSimpleName() + " result: " + results);
-    return results;
+    return nativeAction.invoke(context);
   }
 }

@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.gson.Action;
+import com.github.dagwud.woodlands.gson.ParamMappings;
 import com.github.dagwud.woodlands.gson.Step;
 
 import java.util.HashMap;
@@ -29,7 +30,13 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  ActionResults invoke(ActionCallContext context) throws ActionInvocationException
+  String getActionName()
+  {
+    return action.name;
+  }
+
+  @Override
+  ActionParameters doInvoke(ActionCallContext context, ParamMappings outputMappings) throws ActionInvocationException
   {
     verifyParameters(context.getCallParameters());
 
@@ -38,17 +45,14 @@ class NamedActionInvoker extends ActionInvoker
     {
       invokeStep(step, context);
     }
-    ActionResults result = new ActionResults();
-    System.out.println(action.name + " result: " + result);
-    return result;
+    return null;
   }
 
-  private void invokeStep(Step step, ActionCallContext actionCallContext) throws ActionInvocationException
+  private void invokeStep(Step step, ActionCallContext context) throws ActionInvocationException
   {
     Map<String, String> callParameters = buildParameters(step);
-    actionCallContext.getCallParameters().pushNewVariablesStackFrame(callParameters);
-    ActionInvokerDelegate.invoke(step.procName, actionCallContext);
-    actionCallContext.getCallParameters().dropStackFrame();
+    ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;
+    ActionInvokerDelegate.invoke(step.procName, callParameters, context, outputMappings);
   }
 
   private Map<String, String> buildParameters(Step step)

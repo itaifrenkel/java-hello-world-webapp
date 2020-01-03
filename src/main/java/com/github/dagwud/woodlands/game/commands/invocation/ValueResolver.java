@@ -21,7 +21,7 @@ abstract class ValueResolver
     replaceVars(toks.getRoot(), callParameters);
 
     String resolved = toks.collapse();
-    System.out.println("resolve " + expression + " --> " + resolved);
+//    System.out.println("resolved " + expression + " --> " + resolved);
     return resolved;
   }
 

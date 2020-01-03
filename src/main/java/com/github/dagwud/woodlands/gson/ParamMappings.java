@@ -1,10 +1,16 @@
 package com.github.dagwud.woodlands.gson;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class ParamMappings
 {
   public Map<String, String> mappings;
+
+  public ParamMappings()
+  {
+    mappings = new HashMap<>();
+  }
 
   @Override
   public String toString()
