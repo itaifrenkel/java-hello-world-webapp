@@ -1,11 +1,15 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
+
 public class GameState
 {
   private static GameState instance;
+  private VariableStack variables;
 
   GameState()
   {
+    variables = new VariableStack();
   }
 
   public static GameState instance()
@@ -24,5 +28,10 @@ public class GameState
       return;
     }
     instance = new GameState();
+  }
+
+  public VariableStack getVariables()
+  {
+    return variables;
   }
 }

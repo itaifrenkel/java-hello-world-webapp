@@ -10,7 +10,12 @@ abstract class ActionInvoker
 {
   abstract void verifyParameters(VariableStack parameters) throws ActionParameterException;
 
-  final void invoke(GameState gameState, VariableStack context, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
+  final void invoke(GameState gameState, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
+  {
+    invoke1(gameState, gameState.getVariables(), callParameters, outputMappings);
+  }
+
+  private final void invoke1(GameState gameState, VariableStack context, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
   {
     context.pushNewVariablesStackFrame(getActionName(), callParameters);
 //    System.out.println(getActionName() + " before call: \n" + context.getCallParameters());

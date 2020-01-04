@@ -13,10 +13,9 @@ public class MainTest
 {
   public static void main(String[] args) throws ActionInvocationException
   {
-    VariableStack variables = new VariableStack();
-    variables.setValue("chatId", "-1");
     GameState gameState = GameStatesRegistry.lookup(-1);
-    ActionInvokerDelegate.invoke(gameState, "PlayerSetup", new HashMap<>(), variables, new ParamMappings());
+    gameState.getVariables().setValue("chatId", "-1");
+    ActionInvokerDelegate.invoke(gameState, "PlayerSetup", new HashMap<>(), new ParamMappings());
   }
 
 }
