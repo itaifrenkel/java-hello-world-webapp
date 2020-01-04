@@ -10,9 +10,5 @@ import java.io.IOException;
 
 public abstract class NativeAction
 {
-  public void verifyParameters(VariableStack parameters) throws ActionParameterException
-  {
-  }
-
   public abstract InvocationResults invoke(GameState gameState) throws ActionInvocationException, IOException;
 }

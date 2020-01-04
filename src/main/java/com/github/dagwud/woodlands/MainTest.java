@@ -17,6 +17,10 @@ public class MainTest
     gameState.getVariables().setValue("chatId", "-1");
     CallDetails callDetails = new CallDetails(new HashMap<>(), new ParamMappings());
     ActionInvokerDelegate.invoke(gameState, "PlayerSetup", callDetails);
+
+    // suspends to ask for player text:
+    gameState.getVariables().setValue("^^input", "hellloooo");
+    ActionInvokerDelegate.invoke(gameState, "Native:ReceiveInputText", new CallDetails(new HashMap<>(), new ParamMappings()));
   }
 
 }

@@ -22,7 +22,6 @@ class NativeActionInvoker extends ActionInvoker
   @Override
   InvocationResults doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
   {
-    nativeAction.verifyParameters(gameState.getVariables());
     try
     {
       return nativeAction.invoke(gameState);

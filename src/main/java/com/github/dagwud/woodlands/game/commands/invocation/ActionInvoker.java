@@ -1,11 +1,13 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
+import java.util.HashMap;
 import java.util.Map;
 
-abstract class ActionInvoker
+public abstract class ActionInvoker
 {
   final InvocationResults invoke(GameState gameState, CallDetails callDetails) throws ActionInvocationException
   {
@@ -13,13 +15,26 @@ abstract class ActionInvoker
 //    System.out.println(getActionName() + " before call: \n" + variables.getCallParameters());
 
     InvocationResults results = doInvoke(gameState, callDetails.getOutputMappings());
-
-    gameState.getVariables().dropStackFrame();
-    Variables resultVariables = results.getVariables();
-    mapResults(resultVariables, gameState.getVariables(), callDetails.getOutputMappings());
-    if (resultVariables != null && !resultVariables.isEmpty())
+    switch (results.getReturnMode())
     {
-      System.out.println(getActionName() + " after call: \n" + gameState.getVariables());
+      case CONTINUE:
+        gameState.getVariables().dropStackFrame();
+        Variables resultVariables = results.getVariables();
+        mapResults(resultVariables, gameState.getVariables(), callDetails.getOutputMappings());
+        if (resultVariables != null && !resultVariables.isEmpty())
+        {
+          System.out.println(getActionName() + " after call: \n" + gameState.getVariables());
+        }
+        break;
+      case SUSPEND:
+        System.out.println(getActionName() + " suspending: \n" + gameState.getVariables());
+        gameState.setSuspendedInvocation(this, gameState, callDetails);
+        return new InvocationResults(new Variables("suspend", new HashMap<>()), ReturnMode.SUSPENDED);
+      case SUSPENDED:
+        System.out.println(getActionName() + " suspended: \n" + gameState.getVariables());
+        return new InvocationResults(new Variables("suspended", new HashMap<>()), ReturnMode.SUSPENDED);
+      default:
+        throw new IllegalArgumentException("Unknown return mode " + results.getReturnMode());
     }
     return results;
   }

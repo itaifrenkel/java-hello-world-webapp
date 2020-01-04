@@ -30,17 +30,21 @@ class NamedActionInvoker extends ActionInvoker
     System.out.println(action.name + " invoking");
     for (Step step : action.steps)
     {
-      invokeStep(gameState, step);
+      InvocationResults result = invokeStep(gameState, step);
+      if (result.getReturnMode() != ReturnMode.CONTINUE)
+      {
+        return result;
+      }
     }
     return new InvocationResults(null);
   }
 
-  private void invokeStep(GameState gameState, Step step) throws ActionInvocationException
+  private InvocationResults invokeStep(GameState gameState, Step step) throws ActionInvocationException
   {
     Map<String, String> callParameters = buildParameters(step);
     ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;
     CallDetails callDetails = new CallDetails(callParameters, outputMappings);
-    ActionInvokerDelegate.invoke(gameState, step.procName, callDetails);
+    return ActionInvokerDelegate.invoke(gameState, step.procName, callDetails);
   }
 
   private Map<String, String> buildParameters(Step step)

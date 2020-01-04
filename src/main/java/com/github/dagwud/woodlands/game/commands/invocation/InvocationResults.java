@@ -20,4 +20,9 @@ public class InvocationResults
   {
     return variables;
   }
+
+  public ReturnMode getReturnMode()
+  {
+    return returnMode;
+  }
 }

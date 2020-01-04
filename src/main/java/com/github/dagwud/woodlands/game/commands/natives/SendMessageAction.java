@@ -13,11 +13,6 @@ public class SendMessageAction extends NativeAction
   private static final String PARAMETER_NAME_MESSAGE = "Message";
 
   @Override
-  public void verifyParameters(VariableStack parameters) throws ActionParameterException
-  {
-  }
-
-  @Override
   public InvocationResults invoke(GameState gameState) throws IOException
   {
     String message = gameState.getVariables().lookupVariableValue(PARAMETER_NAME_MESSAGE);
