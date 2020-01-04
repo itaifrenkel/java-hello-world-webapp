@@ -60,6 +60,7 @@ public class TelegramServlet extends HttpServlet
   {
     String endpoint = buildTelegramURL(method);
     String url = encode(endpoint, params);
+    System.out.println("CALLING: " + url);
     String result = callURL(url);
   }
 
