@@ -22,6 +22,8 @@ public class TelegramServlet extends HttpServlet
     try
     {
       String info = parse(update);
+
+      throw new RuntimeException(info);
     }
     catch (Exception e)
     {
