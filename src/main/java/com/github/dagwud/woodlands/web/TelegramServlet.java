@@ -33,7 +33,6 @@ public class TelegramServlet extends HttpServlet
 
       Map<String, String> params = buildParams(update.message.chat.id, info);
       callTelegram("sendMessage", params);
-      throw new RuntimeException(info);
     }
     catch (Exception e)
     {
