@@ -14,10 +14,12 @@ public abstract class TelegramHelper
 {
   private static final String BOT_TOK = "802063349:AAEpMcSlEzIbk5Ue3B0lSaLuO24fm-JI9hc"; // TODO REMOVE AND REGENERATE!!!
 
-  public static void sendMessage(int chatId, String message) throws IOException
+  static String callTelegram(String method, Map<String, String> params) throws IOException
   {
-    Map<String, String> params = buildParams(chatId, message);
-    callTelegram("sendMessage", params);
+    String endpoint = buildTelegramURL(method);
+    String url = encode(endpoint, params);
+    System.out.println("CALLING: " + url);
+    return callURL(url);
   }
 
   private static String callURL(String url) throws IOException
@@ -51,7 +53,7 @@ public abstract class TelegramHelper
     return resp.toString();
   }
 
-  private static Map<String, String> buildParams(int chatId, String message)
+  static Map<String, String> buildUrlParams(int chatId, String message)
   {
     Map<String, String> params = new HashMap<>();
     params.put("chat_id", String.valueOf(chatId));
@@ -76,14 +78,6 @@ public abstract class TelegramHelper
     {
       throw new RuntimeException(e);
     }
-  }
-
-  private static String callTelegram(String method, Map<String, String> params) throws IOException
-  {
-    String endpoint = buildTelegramURL(method);
-    String url = encode(endpoint, params);
-    System.out.println("CALLING: " + url);
-    return callURL(url);
   }
 
   private static String buildTelegramURL(String method)
