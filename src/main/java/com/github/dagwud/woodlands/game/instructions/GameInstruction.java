@@ -6,11 +6,9 @@ import java.io.IOException;
 
 public abstract class GameInstruction
 {
-  protected GameInstruction()
+  GameInstruction()
   {
   }
-
-  public abstract void execute(GameState gameState);
 
   public abstract void execute(GameState gameState) throws IOException;
 }
