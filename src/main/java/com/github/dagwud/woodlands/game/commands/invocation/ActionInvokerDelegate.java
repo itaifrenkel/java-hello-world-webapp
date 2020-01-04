@@ -11,11 +11,6 @@ public class ActionInvokerDelegate
 {
   private static final String NATIVE_ACTION_PREFIX = "Native:";
 
-  public static void invoke(String procName) throws ActionInvocationException
-  {
-    invoke(GameState.instance(), procName, new HashMap<>(0), new VariableStack(), new ParamMappings());
-  }
-
   public static void invoke(GameState gameState, String procName, Map<String, String> callParameters, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
   {
     ActionInvoker invoker = createInvoker(procName);
