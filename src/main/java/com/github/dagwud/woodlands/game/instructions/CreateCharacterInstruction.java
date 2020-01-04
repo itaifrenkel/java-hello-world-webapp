@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.instructions;
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvokerDelegate;
+import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
 import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
@@ -27,6 +28,7 @@ public class CreateCharacterInstruction extends GameInstruction
     VariableStack variables = new VariableStack();
     variables.setValue("chatId", String.valueOf(chatId));
 
-    ActionInvokerDelegate.invoke(gameState, "PlayerSetup", new HashMap<>(), new ParamMappings());
+    CallDetails callDetails = new CallDetails(new HashMap<>(), new ParamMappings());
+    ActionInvokerDelegate.invoke(gameState, "PlayerSetup", callDetails);
   }
 }

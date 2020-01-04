@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
 public class GameState
 {
   private static GameState instance;
-  private VariableStack variables;
+  private final VariableStack variables;
 
   GameState()
   {

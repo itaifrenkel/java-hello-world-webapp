@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 class ExpressionTree
 {
-  private ExpressionTreeNode root;
+  private final ExpressionTreeNode root;
 
   ExpressionTree(String expression, String start, String end)
   {

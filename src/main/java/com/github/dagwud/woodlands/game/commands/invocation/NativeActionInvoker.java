@@ -29,12 +29,12 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  Variables doInvoke(GameState gameState, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
+  Variables doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
   {
-    nativeAction.verifyParameters(context);
+    nativeAction.verifyParameters(gameState.getVariables());
     try
     {
-      return nativeAction.invoke(gameState, context);
+      return nativeAction.invoke(gameState);
     }
     catch (Exception e)
     {

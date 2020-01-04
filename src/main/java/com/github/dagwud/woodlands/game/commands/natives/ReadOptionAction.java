@@ -14,9 +14,9 @@ public class ReadOptionAction extends NativeAction
   private static final String PARAMETER_NAME_OPTIONS = "OptionsCSV";
 
   @Override
-  public Variables invoke(GameState gameState, VariableStack context)
+  public Variables invoke(GameState gameState)
   {
-    String optionsText = context.lookupVariableValue(PARAMETER_NAME_OPTIONS);
+    String optionsText = gameState.getVariables().lookupVariableValue(PARAMETER_NAME_OPTIONS);
     String[] options = optionsText.split(",");
     System.out.println("<<< Choose option: " + Arrays.toString(options));
     HashMap<String, String> results = new HashMap<>();

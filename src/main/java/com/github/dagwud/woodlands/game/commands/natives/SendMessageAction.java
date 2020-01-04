@@ -19,10 +19,10 @@ public class SendMessageAction extends NativeAction
   }
 
   @Override
-  public Variables invoke(GameState gameState, VariableStack context) throws IOException
+  public Variables invoke(GameState gameState) throws IOException
   {
-    String message = context.lookupVariableValue(PARAMETER_NAME_MESSAGE);
-    String chatId = context.lookupVariableValue("chatId");
+    String message = gameState.getVariables().lookupVariableValue(PARAMETER_NAME_MESSAGE);
+    String chatId = gameState.getVariables().lookupVariableValue("chatId");
     if (!chatId.equals("-1"))
     {
       TelegramMessageSender.sendMessage(Integer.parseInt(chatId), message);

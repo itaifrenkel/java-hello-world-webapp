@@ -12,7 +12,7 @@ public class ReadTextInputAction extends NativeAction
   private static final String OUTPUT_CAPTURED_TEXT = "CapturedText";
 
   @Override
-  public Variables invoke(GameState gameState, VariableStack context)
+  public Variables invoke(GameState gameState)
   {
     System.out.println("<<< READ TEXT");
     HashMap<String, String> results = new HashMap<>();

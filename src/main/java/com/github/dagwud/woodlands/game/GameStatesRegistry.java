@@ -6,7 +6,7 @@ import java.util.Map;
 public class GameStatesRegistry
 {
   private static GameStatesRegistry instance;
-  private Map<Integer, GameState> gameStatesByCharacter = new HashMap<>();
+  private final Map<Integer, GameState> gameStatesByCharacter = new HashMap<>();
 
   private GameStatesRegistry()
   {

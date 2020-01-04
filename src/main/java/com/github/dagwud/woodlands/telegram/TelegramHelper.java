@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
 
-public abstract class TelegramHelper
+abstract class TelegramHelper
 {
   private static final String BOT_TOK = "802063349:AAEpMcSlEzIbk5Ue3B0lSaLuO24fm-JI9hc"; // TODO REMOVE AND REGENERATE!!!
 

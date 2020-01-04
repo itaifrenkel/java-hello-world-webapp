@@ -4,7 +4,7 @@ import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvokerDelegate;
-import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
+import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
 import java.util.HashMap;
@@ -15,7 +15,8 @@ public class MainTest
   {
     GameState gameState = GameStatesRegistry.lookup(-1);
     gameState.getVariables().setValue("chatId", "-1");
-    ActionInvokerDelegate.invoke(gameState, "PlayerSetup", new HashMap<>(), new ParamMappings());
+    CallDetails callDetails = new CallDetails(new HashMap<>(), new ParamMappings());
+    ActionInvokerDelegate.invoke(gameState, "PlayerSetup", callDetails);
   }
 
 }

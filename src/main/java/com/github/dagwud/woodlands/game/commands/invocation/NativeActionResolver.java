@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
 
-public class NativeActionResolver
+class NativeActionResolver
 {
   private static final String NATIVE_ACTIONS_PACKAGE = "com.github.dagwud.woodlands.game.commands.natives";
   private static final String NATIVE_ACTIONS_SUFFIX = "Action";

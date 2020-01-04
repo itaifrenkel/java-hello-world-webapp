@@ -10,29 +10,24 @@ abstract class ActionInvoker
 {
   abstract void verifyParameters(VariableStack parameters) throws ActionParameterException;
 
-  final void invoke(GameState gameState, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
+  final void invoke(GameState gameState, CallDetails callDetails) throws ActionInvocationException
   {
-    invoke1(gameState, gameState.getVariables(), callParameters, outputMappings);
-  }
+    gameState.getVariables().pushNewVariablesStackFrame(getActionName(), callDetails.getCallParameters());
+//    System.out.println(getActionName() + " before call: \n" + variables.getCallParameters());
 
-  private final void invoke1(GameState gameState, VariableStack context, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
-  {
-    context.pushNewVariablesStackFrame(getActionName(), callParameters);
-//    System.out.println(getActionName() + " before call: \n" + context.getCallParameters());
+    Variables results = doInvoke(gameState, callDetails.getOutputMappings());
 
-    Variables results = doInvoke(gameState, context, outputMappings);
-
-    context.dropStackFrame();
-    mapResults(results, context, outputMappings);
+    gameState.getVariables().dropStackFrame();
+    mapResults(results, gameState.getVariables(), callDetails.getOutputMappings());
     if (results != null && !((Map<String, String>) results).isEmpty())
     {
-      System.out.println(getActionName() + " after call: \n" + context);
+      System.out.println(getActionName() + " after call: \n" + gameState.getVariables());
     }
   }
 
   abstract String getActionName();
 
-  abstract Variables doInvoke(GameState gameState, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException;
+  abstract Variables doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException;
 
   private static void mapResults(Variables results, VariableStack callContext, ParamMappings outputMappings)
   {

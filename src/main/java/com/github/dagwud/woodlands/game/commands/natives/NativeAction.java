@@ -13,5 +13,5 @@ public abstract class NativeAction
   {
   }
 
-  public abstract Variables invoke(GameState gameState, VariableStack context) throws ActionInvocationException, IOException;
+  public abstract Variables invoke(GameState gameState) throws ActionInvocationException, IOException;
 }

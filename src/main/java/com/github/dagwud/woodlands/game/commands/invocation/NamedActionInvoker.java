@@ -37,23 +37,24 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  Variables doInvoke(GameState gameState, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
+  Variables doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
   {
-    verifyParameters(context);
+    verifyParameters(gameState.getVariables());
 
     System.out.println(action.name + " invoking");
     for (Step step : action.steps)
     {
-      invokeStep(gameState, step, context);
+      invokeStep(gameState, step);
     }
     return null;
   }
 
-  private void invokeStep(GameState gameState, Step step, VariableStack context) throws ActionInvocationException
+  private void invokeStep(GameState gameState, Step step) throws ActionInvocationException
   {
     Map<String, String> callParameters = buildParameters(step);
     ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;
-    ActionInvokerDelegate.invoke(gameState, step.procName, callParameters, outputMappings);
+    CallDetails callDetails = new CallDetails(callParameters, outputMappings);
+    ActionInvokerDelegate.invoke(gameState, step.procName, callDetails);
   }
 
   private Map<String, String> buildParameters(Step step)

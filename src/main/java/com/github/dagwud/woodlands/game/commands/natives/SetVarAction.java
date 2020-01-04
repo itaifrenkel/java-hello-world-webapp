@@ -10,13 +10,13 @@ import java.util.HashMap;
 public class SetVarAction extends NativeAction
 {
   @Override
-  public Variables invoke(GameState gameState, VariableStack parameters)
+  public Variables invoke(GameState gameState)
   {
-    String varSet = parameters.lookupVariableValue("VarSet");
-    String varName = "__" + varSet + "." + parameters.lookupVariableValue("VarName");
-    String varValue = parameters.lookupVariableValue("VarValue");
+    String varSet = gameState.getVariables().lookupVariableValue("VarSet");
+    String varName = "__" + varSet + "." + gameState.getVariables().lookupVariableValue("VarName");
+    String varValue = gameState.getVariables().lookupVariableValue("VarValue");
     System.out.println("SET VAR: " + varName + " = " + varValue);
-    Variables result = new Variables("setvarparams", new HashMap<String, String>());
+    Variables result = new Variables("setvarparams", new HashMap<>());
     result.put(varName, varValue);
     return result;
   }
