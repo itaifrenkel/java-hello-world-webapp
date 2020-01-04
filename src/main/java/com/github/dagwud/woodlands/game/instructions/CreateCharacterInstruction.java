@@ -25,8 +25,7 @@ public class CreateCharacterInstruction extends GameInstruction
   {
     TelegramMessageSender.sendMessage(chatId, "Here we go!");
 
-    VariableStack variables = new VariableStack();
-    variables.setValue("chatId", String.valueOf(chatId));
+    gameState.getVariables().setValue("chatId", String.valueOf(chatId));
 
     CallDetails callDetails = new CallDetails(new HashMap<>(), new ParamMappings());
     ActionInvokerDelegate.invoke(gameState, "PlayerSetup", callDetails);
