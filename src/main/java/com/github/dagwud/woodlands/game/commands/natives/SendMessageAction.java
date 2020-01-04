@@ -23,7 +23,14 @@ public class SendMessageAction extends NativeAction
   {
     String message = context.lookupVariableValue(PARAMETER_NAME_MESSAGE);
     String chatId = context.lookupVariableValue("chatId");
-    TelegramMessageSender.sendMessage(Integer.parseInt(chatId), message);
-    return new Variables("test", new HashMap<String, String>());
+    if (!chatId.equals("-1"))
+    {
+      TelegramMessageSender.sendMessage(Integer.parseInt(chatId), message);
+    }
+    else
+    {
+      System.out.println(">>> " + chatId);
+    }
+    return new Variables("test", new HashMap<>());
   }
 }
