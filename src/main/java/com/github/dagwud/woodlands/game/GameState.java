@@ -23,6 +23,6 @@ public class GameState
     {
       return;
     }
-    instance = new GameState();2
+    instance = new GameState();
   }
 }
