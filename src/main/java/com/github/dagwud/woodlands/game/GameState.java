@@ -4,7 +4,7 @@ public class GameState
 {
   private static GameState instance;
 
-  private GameState()
+  GameState()
   {
   }
 

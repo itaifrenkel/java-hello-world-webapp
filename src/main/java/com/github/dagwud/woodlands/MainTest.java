@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvokerDelegate;
 import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
@@ -14,7 +15,8 @@ public class MainTest
   {
     VariableStack variables = new VariableStack();
     variables.setValue("chatId", "-1");
-    ActionInvokerDelegate.invoke(GameState.instance(), "PlayerSetup", new HashMap<String, String>(), variables, new ParamMappings());
+    GameState gameState = GameStatesRegistry.lookup(-1);
+    ActionInvokerDelegate.invoke(gameState, "PlayerSetup", new HashMap<>(), variables, new ParamMappings());
   }
 
 }

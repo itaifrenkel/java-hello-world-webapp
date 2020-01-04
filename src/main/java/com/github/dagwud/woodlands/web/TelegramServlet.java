@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.web;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.instructions.GameInstruction;
 import com.github.dagwud.woodlands.game.instructions.GameInstructionFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
@@ -25,7 +26,8 @@ public class TelegramServlet extends HttpServlet
     try
     {
       GameInstruction instruction = GameInstructionFactory.instance().create(update);
-      instruction.execute(GameState.instance());
+      GameState gameState = GameStatesRegistry.lookup(update.message.chat.id);
+      instruction.execute(gameState);
     }
     catch (Exception e)
     {
