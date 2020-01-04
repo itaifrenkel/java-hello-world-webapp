@@ -8,7 +8,6 @@ import java.util.Map;
 
 abstract class ActionInvoker
 {
-  abstract void verifyParameters(VariableStack parameters) throws ActionParameterException;
 
   final void invoke(GameState gameState, CallDetails callDetails) throws ActionInvocationException
   {

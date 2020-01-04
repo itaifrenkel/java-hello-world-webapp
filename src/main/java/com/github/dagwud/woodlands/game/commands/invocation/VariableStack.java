@@ -1,8 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
-import com.github.dagwud.woodlands.game.commands.natives.MissingRequiredParameterException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -25,19 +22,6 @@ public class VariableStack
   void dropStackFrame()
   {
     stack.pop();
-  }
-
-  public void verifyRequiredParameter(String actionName, String requiredParameterName) throws ActionParameterException
-  {
-    if (!hasVariable(requiredParameterName))
-    {
-      throw new MissingRequiredParameterException(actionName, requiredParameterName);
-    }
-  }
-
-  private boolean hasVariable(String requiredParameterName)
-  {
-    return lookupVariable(requiredParameterName) != null;
   }
 
   public String lookupVariableValue(String varName)

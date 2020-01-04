@@ -19,18 +19,6 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  void verifyParameters(VariableStack parameters) throws ActionParameterException
-  {
-    if (action.inputs != null)
-    {
-      for (String input : action.inputs)
-      {
-        parameters.verifyRequiredParameter(action.name, input);
-      }
-    }
-  }
-
-  @Override
   String getActionName()
   {
     return action.name;
@@ -39,8 +27,6 @@ class NamedActionInvoker extends ActionInvoker
   @Override
   Variables doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
   {
-    verifyParameters(gameState.getVariables());
-
     System.out.println(action.name + " invoking");
     for (Step step : action.steps)
     {

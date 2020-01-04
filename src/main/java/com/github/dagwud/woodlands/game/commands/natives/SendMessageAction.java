@@ -15,7 +15,6 @@ public class SendMessageAction extends NativeAction
   @Override
   public void verifyParameters(VariableStack parameters) throws ActionParameterException
   {
-    parameters.verifyRequiredParameter("SendMessage", PARAMETER_NAME_MESSAGE);
   }
 
   @Override
