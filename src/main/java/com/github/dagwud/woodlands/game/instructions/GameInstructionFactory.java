@@ -19,8 +19,9 @@ public class GameInstructionFactory
   {
     if (instance != null)
     {
-      instance = new GameInstructionFactory();
+      return;
     }
+    instance = new GameInstructionFactory();
   }
 
   public GameInstruction create(Update telegramUpdate)
