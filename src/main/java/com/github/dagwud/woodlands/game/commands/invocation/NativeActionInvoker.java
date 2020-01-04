@@ -1,8 +1,11 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
+import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
+
+import java.io.IOException;
 
 class NativeActionInvoker extends ActionInvoker
 {
@@ -26,9 +29,16 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  Variables doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionParameterException
+  Variables doInvoke(GameState gameState, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
   {
     nativeAction.verifyParameters(context);
-    return nativeAction.invoke(context);
+    try
+    {
+      return nativeAction.invoke(gameState, context);
+    }
+    catch (Exception e)
+    {
+      throw new ActionInvocationException(e);
+    }
   }
 }

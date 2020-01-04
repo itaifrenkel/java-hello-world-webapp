@@ -11,7 +11,7 @@ public class VariableStack
 {
   private final Stack<Variables> stack;
 
-  VariableStack()
+  public VariableStack()
   {
     stack = new Stack<>();
     stack.push(new Variables("root", new HashMap<String, String>(0)));
@@ -58,7 +58,7 @@ public class VariableStack
     throw new VariableUndefinedException(variableName);
   }
 
-  void setValue(String variableName, String value)
+  public void setValue(String variableName, String value)
   {
     if (isGlobalVariable(variableName))
     {

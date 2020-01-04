@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
+import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
 
@@ -11,7 +12,7 @@ public class ReadTextInputAction extends NativeAction
   private static final String OUTPUT_CAPTURED_TEXT = "CapturedText";
 
   @Override
-  public Variables invoke(VariableStack context)
+  public Variables invoke(GameState gameState, VariableStack context)
   {
     System.out.println("<<< READ TEXT");
     HashMap<String, String> results = new HashMap<>();

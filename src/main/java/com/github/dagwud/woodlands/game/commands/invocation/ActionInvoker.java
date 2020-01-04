@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
+import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
@@ -9,12 +10,12 @@ abstract class ActionInvoker
 {
   abstract void verifyParameters(VariableStack parameters) throws ActionParameterException;
 
-  final void invoke(VariableStack context, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
+  final void invoke(GameState gameState, VariableStack context, Map<String, String> callParameters, ParamMappings outputMappings) throws ActionInvocationException
   {
     context.pushNewVariablesStackFrame(getActionName(), callParameters);
 //    System.out.println(getActionName() + " before call: \n" + context.getCallParameters());
 
-    Variables results = doInvoke(context, outputMappings);
+    Variables results = doInvoke(gameState, context, outputMappings);
 
     context.dropStackFrame();
     mapResults(results, context, outputMappings);
@@ -26,7 +27,7 @@ abstract class ActionInvoker
 
   abstract String getActionName();
 
-  abstract Variables doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionInvocationException;
+  abstract Variables doInvoke(GameState gameState, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException;
 
   private static void mapResults(Variables results, VariableStack callContext, ParamMappings outputMappings)
   {

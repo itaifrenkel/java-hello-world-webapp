@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
+import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
 
@@ -9,7 +10,7 @@ import java.util.HashMap;
 public class SetVarAction extends NativeAction
 {
   @Override
-  public Variables invoke(VariableStack parameters)
+  public Variables invoke(GameState gameState, VariableStack parameters)
   {
     String varSet = parameters.lookupVariableValue("VarSet");
     String varName = "__" + varSet + "." + parameters.lookupVariableValue("VarName");

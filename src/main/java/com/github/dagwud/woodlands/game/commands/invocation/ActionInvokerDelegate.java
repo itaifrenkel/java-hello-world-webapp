@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
+import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
@@ -12,13 +13,13 @@ public class ActionInvokerDelegate
 
   public static void invoke(String procName) throws ActionInvocationException
   {
-    invoke(procName, new HashMap<String, String>(0), new VariableStack(), new ParamMappings());
+    invoke(GameState.instance(), procName, new HashMap<>(0), new VariableStack(), new ParamMappings());
   }
 
-  static void invoke(String procName, Map<String, String> callParameters, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
+  public static void invoke(GameState gameState, String procName, Map<String, String> callParameters, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
   {
     ActionInvoker invoker = createInvoker(procName);
-    invoker.invoke(context, callParameters, outputMappings); //todo
+    invoker.invoke(gameState, context, callParameters, outputMappings); //todo
   }
 
   private static ActionInvoker createInvoker(String procName) throws ActionInvocationException

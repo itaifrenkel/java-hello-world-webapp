@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
+import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
@@ -36,23 +37,23 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  Variables doInvoke(VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
+  Variables doInvoke(GameState gameState, VariableStack context, ParamMappings outputMappings) throws ActionInvocationException
   {
     verifyParameters(context);
 
     System.out.println(action.name + " invoking");
     for (Step step : action.steps)
     {
-      invokeStep(step, context);
+      invokeStep(gameState, step, context);
     }
     return null;
   }
 
-  private void invokeStep(Step step, VariableStack context) throws ActionInvocationException
+  private void invokeStep(GameState gameState, Step step, VariableStack context) throws ActionInvocationException
   {
     Map<String, String> callParameters = buildParameters(step);
     ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;
-    ActionInvokerDelegate.invoke(step.procName, callParameters, context, outputMappings);
+    ActionInvokerDelegate.invoke(gameState, step.procName, callParameters, context, outputMappings);
   }
 
   private Map<String, String> buildParameters(Step step)

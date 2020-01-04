@@ -1,10 +1,16 @@
 package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
+import com.github.dagwud.woodlands.game.commands.invocation.ActionInvokerDelegate;
+import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
+import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.github.dagwud.woodlands.telegram.TelegramHelper;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateCharacterInstruction extends GameInstruction
 {
@@ -16,8 +22,13 @@ public class CreateCharacterInstruction extends GameInstruction
   }
 
   @Override
-  public void execute(GameState gameState) throws IOException
+  public void execute(GameState gameState) throws IOException, ActionInvocationException
   {
     TelegramMessageSender.sendMessage(chatId, "Here we go!");
+
+    VariableStack variables = new VariableStack();
+    variables.setValue("chatId", String.valueOf(chatId));
+
+    ActionInvokerDelegate.invoke(gameState, "PlayerSetup", new HashMap<>(), variables, new ParamMappings());
   }
 }
