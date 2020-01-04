@@ -20,7 +20,7 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  Variables doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
+  InvocationResults doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
   {
     nativeAction.verifyParameters(gameState.getVariables());
     try

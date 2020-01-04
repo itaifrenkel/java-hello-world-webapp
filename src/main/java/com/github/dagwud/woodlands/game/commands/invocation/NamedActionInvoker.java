@@ -25,14 +25,14 @@ class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  Variables doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
+  InvocationResults doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
   {
     System.out.println(action.name + " invoking");
     for (Step step : action.steps)
     {
       invokeStep(gameState, step);
     }
-    return null;
+    return new InvocationResults(null);
   }
 
   private void invokeStep(GameState gameState, Step step) throws ActionInvocationException

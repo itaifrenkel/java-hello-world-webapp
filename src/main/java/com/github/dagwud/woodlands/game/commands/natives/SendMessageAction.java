@@ -18,7 +18,7 @@ public class SendMessageAction extends NativeAction
   }
 
   @Override
-  public Variables invoke(GameState gameState) throws IOException
+  public InvocationResults invoke(GameState gameState) throws IOException
   {
     String message = gameState.getVariables().lookupVariableValue(PARAMETER_NAME_MESSAGE);
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
@@ -30,6 +30,6 @@ public class SendMessageAction extends NativeAction
     {
       System.out.println(">>> " + chatId);
     }
-    return new Variables("test", new HashMap<>());
+    return new InvocationResults(new Variables("test", new HashMap<>()));
   }
 }
