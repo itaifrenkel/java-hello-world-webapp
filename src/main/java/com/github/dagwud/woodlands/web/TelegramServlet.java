@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.joining;
 @WebServlet(name = "TelegramServlet", urlPatterns = "/telegram")
 public class TelegramServlet extends HttpServlet
 {
-  private static final String BOT_TOK = "802063349:AAEpMcSlEzIbk5Ue3B0lSaLu024fm-JI9hc"; // TODO REMOVE AND REGENERATE!!!
+  private static final String BOT_TOK = "802063349:AAEpMcSlEzIbk5Ue3B0lSaLuO24fm-JI9hc"; // TODO REMOVE AND REGENERATE!!!
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
