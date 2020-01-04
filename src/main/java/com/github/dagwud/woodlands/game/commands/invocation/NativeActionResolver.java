@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
 public class NativeActionResolver
 {
   private static final String NATIVE_ACTIONS_PACKAGE = "com.github.dagwud.woodlands.game.commands.natives";
-  public static final String NATIVE_ACTIONS_SUFFIX = "Action";
+  private static final String NATIVE_ACTIONS_SUFFIX = "Action";
 
   static NativeAction lookupNativeAction(String nativeProcName) throws ActionInvocationException
   {
