@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.telegram.TelegramHelper;
+import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import java.io.IOException;
 
@@ -19,6 +20,6 @@ public class SendMessageInstruction extends GameInstruction
   @Override
   public void execute(GameState gameState) throws IOException
   {
-    TelegramHelper.sendMessage(chatId, message);
+    TelegramMessageSender.sendMessage(chatId, message);
   }
 }
