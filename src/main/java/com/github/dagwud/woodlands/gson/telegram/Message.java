@@ -9,5 +9,7 @@ public class Message
 
   public User from;
 
+  public Chat chat;
+
   public String text;
 }
