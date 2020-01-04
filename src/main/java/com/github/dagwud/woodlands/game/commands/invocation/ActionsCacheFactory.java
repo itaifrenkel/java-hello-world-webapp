@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.ActionsCache;
-import com.github.dagwud.woodlands.gson.Root;
+import com.github.dagwud.woodlands.gson.game.Root;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 
 import java.io.File;

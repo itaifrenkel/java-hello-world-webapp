@@ -1,9 +1,9 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
-import com.github.dagwud.woodlands.gson.Action;
-import com.github.dagwud.woodlands.gson.ParamMappings;
-import com.github.dagwud.woodlands.gson.Step;
+import com.github.dagwud.woodlands.gson.game.Action;
+import com.github.dagwud.woodlands.gson.game.ParamMappings;
+import com.github.dagwud.woodlands.gson.game.Step;
 
 import java.util.HashMap;
 import java.util.Map;

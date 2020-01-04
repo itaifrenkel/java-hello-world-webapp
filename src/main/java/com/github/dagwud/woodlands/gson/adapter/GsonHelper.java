@@ -1,11 +1,12 @@
 package com.github.dagwud.woodlands.gson.adapter;
 
-import com.github.dagwud.woodlands.gson.ParamMappings;
+import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 
 public abstract class GsonHelper
 {
@@ -18,12 +19,17 @@ public abstract class GsonHelper
     return createBuilder().create();
   }
 
-  public static <T> T readJSON(String json, Class<T> classOfT)
+  public static <T> T readJSON(Reader reader, Class<T> classOfT)
   {
     Gson gson = createGson();
+    return gson.fromJson(reader, classOfT);
+  }
+
+  public static <T> T readJSON(String json, Class<T> classOfT)
+  {
     byte[] chars = json.getBytes();
     InputStreamReader reader = new InputStreamReader(new ByteArrayInputStream(chars));
-    return gson.fromJson(reader, classOfT);
+    return readJSON(reader, classOfT);
   }
 
   private static GsonBuilder createBuilder()

@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.gson;
+package com.github.dagwud.woodlands.gson.game;
 
 import java.util.Arrays;
 

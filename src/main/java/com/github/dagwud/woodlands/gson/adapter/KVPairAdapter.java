@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.gson.adapter;
 
-import com.github.dagwud.woodlands.gson.ParamMappings;
+import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;

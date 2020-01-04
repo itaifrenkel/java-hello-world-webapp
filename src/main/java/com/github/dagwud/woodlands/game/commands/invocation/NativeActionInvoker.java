@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
-import com.github.dagwud.woodlands.gson.ParamMappings;
+import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
 class NativeActionInvoker extends ActionInvoker
 {

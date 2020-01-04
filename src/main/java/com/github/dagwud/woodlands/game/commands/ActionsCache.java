@@ -1,8 +1,8 @@
 package com.github.dagwud.woodlands.game.commands;
 
-import com.github.dagwud.woodlands.gson.Action;
-import com.github.dagwud.woodlands.gson.Package;
-import com.github.dagwud.woodlands.gson.Root;
+import com.github.dagwud.woodlands.gson.game.Action;
+import com.github.dagwud.woodlands.gson.game.Package;
+import com.github.dagwud.woodlands.gson.game.Root;
 
 import java.util.HashMap;
 import java.util.Map;
