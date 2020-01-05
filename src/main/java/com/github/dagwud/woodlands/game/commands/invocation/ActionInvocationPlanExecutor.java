@@ -15,7 +15,6 @@ public abstract class ActionInvocationPlanExecutor
   public static void execute(InvocationPlan plan) throws ActionInvocationException
   {
     execute(plan, 0);
-plan.getGameState().suspended = null; //todo DRY
   }
 
   public static void resume(InvocationPlan plan) throws ActionInvocationException
@@ -52,5 +51,7 @@ plan.getGameState().suspended = null; //todo DRY
         throw new ActionInvocationException("Error while invoking plan step " + invoker.getActionInvoker().getActionName(), e);
       }
     }
+
+plan.getGameState().suspended = null; //todo DRY
   }
 }
