@@ -40,10 +40,6 @@ public class GameInstructionFactory
     {
       return new ResetServerInstruction();
     }
-    if (gameState.suspended != null)
-    {
-      return new ResumeInstruction(telegramUpdate.message.text);
-    }
     return new SendMessageInstruction(chatId, "I'm not sure what you mean... perhaps try /help?");
   }
 }
