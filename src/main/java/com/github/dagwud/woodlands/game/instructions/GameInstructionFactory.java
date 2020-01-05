@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.instructions;
 
+import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
 public class GameInstructionFactory
@@ -24,7 +25,7 @@ public class GameInstructionFactory
     instance = new GameInstructionFactory();
   }
 
-  public GameInstruction create(Update telegramUpdate)
+  public GameInstruction create(Update telegramUpdate, GameState gameState)
   {
     int chatId = telegramUpdate.message.chat.id;
     if (telegramUpdate.message.text.equals("/new"))
@@ -34,6 +35,10 @@ public class GameInstructionFactory
     if (telegramUpdate.message.text.equals("/help"))
     {
       return new ShowHelpInstruction(chatId);
+    }
+    if (gameState.suspended != null)
+    {
+      return new ResumeInstruction(telegramUpdate.message.text);
     }
     return new SendMessageInstruction(chatId, "I'm not sure what you mean... perhaps try /help?");
   }

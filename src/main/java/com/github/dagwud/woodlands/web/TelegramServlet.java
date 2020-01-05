@@ -2,8 +2,6 @@ package com.github.dagwud.woodlands.web;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationPlanExecutor;
 import com.github.dagwud.woodlands.game.instructions.GameInstruction;
 import com.github.dagwud.woodlands.game.instructions.GameInstructionFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
@@ -28,31 +26,13 @@ public class TelegramServlet extends HttpServlet
     try
     {
       GameState gameState = GameStatesRegistry.lookup(update.message.chat.id);
-      if (gameState.suspended != null)
-      {
-        resume(update, gameState);
-      }
-      else
-      {
-        process(update, gameState);
-      }
+      GameInstruction instruction = GameInstructionFactory.instance().create(update, gameState);
+      instruction.execute(gameState);
     }
     catch (Exception e)
     {
       throw new ServletException("Internal Error", e); //todo nuke e! Don't expose!
     }
-  }
-
-  private void process(Update update, GameState gameState) throws IOException, ActionInvocationException
-  {
-    GameInstruction instruction = GameInstructionFactory.instance().create(update);
-    instruction.execute(gameState);
-  }
-
-  private void resume(Update update, GameState gameState) throws ActionInvocationException
-  {
-    gameState.suspended.getGameState().getVariables().setValue("__buffer", update.message.text);
-    ActionInvocationPlanExecutor.resume(gameState.suspended);
   }
 
   @Override
