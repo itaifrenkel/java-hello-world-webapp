@@ -39,6 +39,7 @@ public class VariableStack
         return stackFrame.get(variableName);
       }
     }
+    System.err.println("Not found '" + variableName + "': \n" + this);
     throw new VariableUndefinedException(variableName);
   }
 
