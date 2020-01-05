@@ -26,7 +26,6 @@ public class CreateCharacterInstruction extends GameInstruction
 
     gameState.getVariables().setValue("chatId", String.valueOf(chatId));
 
-    CallDetails callDetails = new CallDetails(new HashMap<>(), new ParamMappings());
     ActionInvokerDelegate.invoke(gameState, "PlayerSetup");
   }
 }
