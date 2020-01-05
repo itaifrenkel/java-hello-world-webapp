@@ -87,7 +87,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "${CharacterName}"
+                "MessageToPrint": "Very well. So shall you be known."
               }
             },
             {
