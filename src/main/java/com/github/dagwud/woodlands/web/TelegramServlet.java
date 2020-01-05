@@ -27,6 +27,7 @@ public class TelegramServlet extends HttpServlet
     try
     {
       GameState gameState = GameStatesRegistry.lookup(update.message.chat.id);
+      System.out.println("GAMESTATE[" + update.message.chat.id + "] = " + gameState);
       if (gameState.suspended != null)
       {
         gameState.suspended.getGameState().getVariables().setValue("__buffer", update.message.text);
