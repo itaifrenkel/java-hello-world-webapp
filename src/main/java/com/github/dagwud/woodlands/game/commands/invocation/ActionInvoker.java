@@ -18,7 +18,7 @@ public abstract class ActionInvoker
   {
     if (!this.getActionName().equals("PushVariablesAction"))
     {
-//      System.out.println(getActionName() + " before call: \n" + gameState.getVariables());
+      System.out.println(getActionName() + " before call: \n" + gameState.getVariables());
     }
 
     InvocationResults results = doInvoke(gameState, callDetails.getOutputMappings());
