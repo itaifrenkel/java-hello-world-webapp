@@ -19,7 +19,7 @@ public class ReadOptionAction extends NativeAction
     String[] options = optionsText.split(",");
     System.out.println("<<< Choose option: " + Arrays.toString(options));
     HashMap<String, String> results = new HashMap<>();
-    results.put(OUTPUT_CHOSEN_OPTION, options[options.length - 1]);
+    results.put(OUTPUT_CHOSEN_OPTION, "${buffer}");
     return new InvocationResults(new Variables("return", results), ReturnMode.SUSPEND);
   }
 }
