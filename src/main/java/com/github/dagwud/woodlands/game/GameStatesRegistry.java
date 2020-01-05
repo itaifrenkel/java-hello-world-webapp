@@ -12,14 +12,16 @@ public class GameStatesRegistry
   {
   }
 
-  public static GameState lookup(int characterId)
+  public static GameState lookup(int chatId)
   {
     GameStatesRegistry registry = instance();
-    if (!registry.gameStatesByCharacter.containsKey(characterId))
+    if (!registry.gameStatesByCharacter.containsKey(chatId))
     {
-      registry.gameStatesByCharacter.put(characterId, new GameState());
+      GameState gameStateForChat = new GameState();
+      gameStateForChat.getVariables().setValue("chatId", String.valueOf(chatId));
+      registry.gameStatesByCharacter.put(chatId, gameStateForChat);
     }
-    return registry.gameStatesByCharacter.get(characterId);
+    return registry.gameStatesByCharacter.get(chatId);
   }
 
   public static void reset()
