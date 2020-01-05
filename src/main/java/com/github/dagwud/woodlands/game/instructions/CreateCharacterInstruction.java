@@ -4,7 +4,6 @@ import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvokerDelegate;
 import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
-import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 

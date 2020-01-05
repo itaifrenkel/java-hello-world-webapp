@@ -31,6 +31,10 @@ public class GameInstructionFactory
     {
       return new CreateCharacterInstruction(chatId);
     }
-    return new SendMessageInstruction(chatId, "I'm not sure what you mean... perhaps try `/help`?");
+    if (telegramUpdate.message.text.equals("/help"))
+    {
+      return new ShowHelpInstruction(chatId);
+    }
+    return new SendMessageInstruction(chatId, "I'm not sure what you mean... perhaps try /help?");
   }
 }
