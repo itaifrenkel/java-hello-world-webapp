@@ -41,6 +41,7 @@ public abstract class ActionInvocationPlanExecutor
         if (result.getReturnMode() == ReturnMode.SUSPEND)
         {
           plan.setSuspended(i, result);
+          plan.getGameState().suspended = plan; //todo DRY
           System.out.println("-----SUSPENDED-----");
           return;
         }
