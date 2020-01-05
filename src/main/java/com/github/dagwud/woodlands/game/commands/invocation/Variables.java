@@ -48,4 +48,11 @@ public class Variables extends HashMap<String, String>
     }
     return b.toString();
   }
+
+  @Override
+  public String put(String key, String value)
+  {
+    //todo inline
+    return super.put(key, value);
+  }
 }

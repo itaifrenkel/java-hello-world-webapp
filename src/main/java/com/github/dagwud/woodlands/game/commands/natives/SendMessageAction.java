@@ -10,12 +10,11 @@ import java.util.HashMap;
 @SuppressWarnings("unused") // called at runtime via reflection
 public class SendMessageAction extends NativeAction
 {
-  private static final String PARAMETER_NAME_MESSAGE = "Message";
 
   @Override
-  public InvocationResults invoke(GameState gameState) throws IOException
+  public InvocationResults invoke(GameState gameState, CallDetails callDetails) throws IOException
   {
-    String message = gameState.getVariables().lookupVariableValue(PARAMETER_NAME_MESSAGE);
+    String message = gameState.getVariables().lookupVariableValue("MessageToPrint");
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
     if (!chatId.equals("-1"))
     {
@@ -23,7 +22,7 @@ public class SendMessageAction extends NativeAction
     }
     else
     {
-      System.out.println(">>> " + chatId);
+      System.out.println(">>> " + message);
     }
     return new InvocationResults(new Variables("test", new HashMap<>()));
   }

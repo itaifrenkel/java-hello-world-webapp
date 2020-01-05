@@ -13,7 +13,7 @@ public class ActionsCache
 
   public ActionsCache(Root root)
   {
-    this.actions = new HashMap<String, Action>();
+    this.actions = new HashMap<>();
     for (Package aPackage : root.packages)
     {
       for (Action action : aPackage.actions)

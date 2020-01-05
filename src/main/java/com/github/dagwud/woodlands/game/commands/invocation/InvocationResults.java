@@ -21,7 +21,7 @@ public class InvocationResults
     return variables;
   }
 
-  public ReturnMode getReturnMode()
+  ReturnMode getReturnMode()
   {
     return returnMode;
   }

@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.natives.ActionParameterException;
 import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.github.dagwud.woodlands.gson.game.Step;
@@ -9,12 +8,13 @@ import com.github.dagwud.woodlands.gson.game.Step;
 import java.util.HashMap;
 import java.util.Map;
 
-class NamedActionInvoker extends ActionInvoker
+public class NamedActionInvoker extends ActionInvoker
 {
   private final Action action;
 
-  NamedActionInvoker(Action action)
+  public NamedActionInvoker(Action action, CallDetails callDetails)
   {
+    super(callDetails);
     this.action = action;
   }
 

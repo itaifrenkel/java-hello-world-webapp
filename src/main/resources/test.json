@@ -54,6 +54,12 @@
             },
             {
               "ProcName": "ReadPlayerClass"
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
+              }
             }
           ]
         },
@@ -70,6 +76,12 @@
               "ProcName": "Native:ReadTextInput",
               "OutputMappings": {
                 "CapturedText": "CharacterName"
+              }
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "${CharacterName}"
               }
             },
             {

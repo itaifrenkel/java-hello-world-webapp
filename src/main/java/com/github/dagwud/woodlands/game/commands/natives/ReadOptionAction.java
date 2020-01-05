@@ -1,10 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
-import com.github.dagwud.woodlands.game.commands.invocation.ReturnMode;
-import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
-import com.github.dagwud.woodlands.game.commands.invocation.Variables;
+import com.github.dagwud.woodlands.game.commands.invocation.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,7 +13,7 @@ public class ReadOptionAction extends NativeAction
   private static final String PARAMETER_NAME_OPTIONS = "OptionsCSV";
 
   @Override
-  public InvocationResults invoke(GameState gameState)
+  public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
     String optionsText = gameState.getVariables().lookupVariableValue(PARAMETER_NAME_OPTIONS);
     String[] options = optionsText.split(",");

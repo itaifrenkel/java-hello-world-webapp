@@ -14,12 +14,12 @@ public class VariableStack
     stack.push(new Variables("root", new HashMap<String, String>(0)));
   }
 
-  void pushNewVariablesStackFrame(String name, Map<String, String> callParameters)
+  public void pushNewVariablesStackFrame(String name, Map<String, String> callParameters)
   {
     stack.push(new Variables(name, callParameters));
   }
 
-  void dropStackFrame()
+  public void dropStackFrame()
   {
     stack.pop();
   }
@@ -44,11 +44,17 @@ public class VariableStack
 
   public void setValue(String variableName, String value)
   {
+    setValue(variableName, value, 0);
+  }
+
+  void setValue(String variableName, String value, int offset)
+  {
     if (isGlobalVariable(variableName))
     {
       setGlobalValue(variableName, value);
       return;
     }
+
     for (Variables variables : stack)
     {
       if (variables.containsKey(variableName))
@@ -57,7 +63,7 @@ public class VariableStack
         return;
       }
     }
-    stack.get(stack.size() - 1).put(variableName, value);
+    stack.get(stack.size() - 1 - (-offset)).put(variableName, value);
   }
 
   static boolean isGlobalVariable(String variableName)
@@ -67,6 +73,7 @@ public class VariableStack
 
   private void setGlobalValue(String variableName, String value)
   {
+    variableName = variableName.substring("__".length());
     stack.get(0).put(variableName, value);
   }
 
@@ -76,10 +83,8 @@ public class VariableStack
     StringBuilder b = new StringBuilder();
     b.append("===================\n");
     for (int i = 0; i < stack.size(); i++)
-//    for (int i = stack.size() - 1; i >= 0; i--)
     {
       String s = stack.get(i).toString(i);
-//      String s = stack.get(i).toString(stack.size() - i);
       b.append(s).append("\n");
     }
     b.append("===================");

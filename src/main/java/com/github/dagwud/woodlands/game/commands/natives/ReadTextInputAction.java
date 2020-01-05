@@ -1,11 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
-import com.github.dagwud.woodlands.game.commands.invocation.ReturnMode;
-import com.github.dagwud.woodlands.game.commands.invocation.Variables;
-import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
+import com.github.dagwud.woodlands.game.commands.invocation.*;
 
 import java.util.HashMap;
 
@@ -15,11 +11,11 @@ public class ReadTextInputAction extends NativeAction
   private static final String OUTPUT_CAPTURED_TEXT = "CapturedText";
 
   @Override
-  public InvocationResults invoke(GameState gameState)
+  public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
     System.out.println("<<< READ TEXT");
     HashMap<String, String> results = new HashMap<>();
-    results.put(OUTPUT_CAPTURED_TEXT, "DummyValue");
+    results.put(OUTPUT_CAPTURED_TEXT, "${buffer}");
     return new InvocationResults(new Variables("return", results), ReturnMode.SUSPEND);
   }
 }

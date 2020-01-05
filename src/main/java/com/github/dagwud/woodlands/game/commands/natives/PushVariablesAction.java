@@ -8,17 +8,16 @@ import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import java.util.HashMap;
 
 @SuppressWarnings("unused") // called at runtime via reflection
-public class SetVarAction extends NativeAction
+public class PushVariablesAction extends NativeAction
 {
+  public PushVariablesAction()
+  {
+  }
+
   @Override
   public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
-    String varSet = gameState.getVariables().lookupVariableValue("VarSet");
-    String varName = "__" + varSet + "." + gameState.getVariables().lookupVariableValue("VarName");
-    String varValue = gameState.getVariables().lookupVariableValue("VarValue");
-    System.out.println("SET VAR: " + varName + " = " + varValue);
-    Variables result = new Variables("setvarparams", new HashMap<>());
-    result.put(varName, varValue);
-    return new InvocationResults(result);
+    gameState.getVariables().pushNewVariablesStackFrame("push variables", callDetails.getCallParameters());
+    return new InvocationResults(new Variables("push variables", new HashMap<>(0)));
   }
 }

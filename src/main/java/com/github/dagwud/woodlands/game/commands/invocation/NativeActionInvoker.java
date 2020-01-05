@@ -8,8 +8,9 @@ class NativeActionInvoker extends ActionInvoker
 {
   private final NativeAction nativeAction;
 
-  NativeActionInvoker(NativeAction action)
+  NativeActionInvoker(NativeAction action, CallDetails callDetails)
   {
+    super(callDetails);
     this.nativeAction = action;
   }
 
@@ -24,7 +25,7 @@ class NativeActionInvoker extends ActionInvoker
   {
     try
     {
-      return nativeAction.invoke(gameState);
+      return nativeAction.invoke(gameState, callDetails);
     }
     catch (Exception e)
     {

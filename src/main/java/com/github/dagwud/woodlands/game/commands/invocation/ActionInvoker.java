@@ -1,42 +1,46 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.commands.natives.PushVariablesAction;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ActionInvoker
 {
-  final InvocationResults invoke(GameState gameState, CallDetails callDetails) throws ActionInvocationException
+  final CallDetails callDetails;
+
+  ActionInvoker(CallDetails callDetails)
   {
-    gameState.getVariables().pushNewVariablesStackFrame(getActionName(), callDetails.getCallParameters());
-//    System.out.println(getActionName() + " before call: \n" + variables.getCallParameters());
+    this.callDetails = callDetails;
+  }
+
+  final InvocationResults invoke(GameState gameState) throws ActionInvocationException
+  {
+//    gameState.getVariables().pushNewVariablesStackFrame(getActionName(), callDetails.getCallParameters());
+    if (!this.getActionName().equals("PushVariablesAction"))
+    {
+//      System.out.println(getActionName() + " before call: \n" + gameState.getVariables());
+    }
 
     InvocationResults results = doInvoke(gameState, callDetails.getOutputMappings());
-    switch (results.getReturnMode())
+    if (results.getReturnMode() != ReturnMode.SUSPEND)
     {
-      case CONTINUE:
-        gameState.getVariables().dropStackFrame();
-        Variables resultVariables = results.getVariables();
-        mapResults(resultVariables, gameState.getVariables(), callDetails.getOutputMappings());
-        if (resultVariables != null && !resultVariables.isEmpty())
-        {
-          System.out.println(getActionName() + " after call: \n" + gameState.getVariables());
-        }
-        break;
-      case SUSPEND:
-        System.out.println(getActionName() + " suspending: \n" + gameState.getVariables());
-        gameState.setSuspendedInvocation(this, gameState, callDetails);
-        return new InvocationResults(new Variables("suspend", new HashMap<>()), ReturnMode.SUSPENDED);
-      case SUSPENDED:
-        System.out.println(getActionName() + " suspended: \n" + gameState.getVariables());
-        return new InvocationResults(new Variables("suspended", new HashMap<>()), ReturnMode.SUSPENDED);
-      default:
-        throw new IllegalArgumentException("Unknown return mode " + results.getReturnMode());
+      complete(gameState, results, callDetails.getOutputMappings());
     }
+
     return results;
+  }
+
+  void complete(GameState gameState, InvocationResults results, ParamMappings outputMappings)
+  {
+    Variables resultVariables = results.getVariables();
+    mapResults(resultVariables, gameState.getVariables(), outputMappings);
+//    gameState.getVariables().dropStackFrame();
+    if (resultVariables != null && !resultVariables.isEmpty())
+    {
+//      System.out.println(getActionName() + " after call: \n" + gameState.getVariables());
+    }
   }
 
   abstract String getActionName();
@@ -50,8 +54,12 @@ public abstract class ActionInvoker
       String outputName = outputMapping.getKey();
       String mapToVariableName = outputMapping.getValue();
       String outputValue = results.get(outputName);
-      //todo null handling - mapping refers to an invalid output
-      callContext.setValue(mapToVariableName, outputValue);
+      //todo null handling of outputName==null - mapping refers to an invalid output
+      if (outputValue != null && outputValue.startsWith("$"))
+      {
+        outputValue = ValueResolver.resolve(outputValue, callContext);
+      }
+      callContext.setValue(mapToVariableName, outputValue, -1);
     }
 
     if (null != results)
@@ -59,6 +67,10 @@ public abstract class ActionInvoker
       for (Map.Entry<String, String> result : ((Map<String, String>) results).entrySet())
       {
         if (VariableStack.isGlobalVariable(result.getKey()))
+        {
+          callContext.setValue(result.getKey(), result.getValue());
+        }
+        else if (false)
         {
           callContext.setValue(result.getKey(), result.getValue());
         }

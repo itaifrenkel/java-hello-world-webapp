@@ -18,14 +18,14 @@ abstract class ValueResolver
     }
 
     ExpressionTree toks = new ExpressionTree(expression, START_VARIABLE, END_VARIABLE);
-    replaceVars(toks.getRoot(), callParameters);
+    resolveVars(toks.getRoot(), callParameters);
 
     String resolved = toks.collapse();
 //    System.out.println("resolved " + expression + " --> " + resolved);
     return resolved;
   }
 
-  private static void replaceVars(ExpressionTreeNode expressionTreeNode, VariableStack callParameters)
+  private static void resolveVars(ExpressionTreeNode expressionTreeNode, VariableStack callParameters)
   {
     if (expressionTreeNode.getValue().contains(START_VARIABLE))
     {
@@ -34,7 +34,7 @@ abstract class ValueResolver
     }
     if (null != expressionTreeNode.getRight())
     {
-      replaceVars(expressionTreeNode.getRight(), callParameters);
+      resolveVars(expressionTreeNode.getRight(), callParameters);
     }
   }
 
@@ -48,7 +48,8 @@ abstract class ValueResolver
       {
         throw new RuntimeException("Attempt made to create a self-referential variable");
       }
-      value = resolveVar(value, callParameters);
+//      value = resolveVar(value, callParameters);
+      value = ValueResolver.resolve(value, callParameters);
     }
     return value;
   }

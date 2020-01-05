@@ -7,7 +7,7 @@ import java.util.Map;
 public class CallDetails
 {
   private final Map<String, String> callParameters;
-  private final ParamMappings outputMappings;
+  public final ParamMappings outputMappings;
 
   public CallDetails(Map<String, String> callParameters, ParamMappings outputMappings)
   {
@@ -15,7 +15,7 @@ public class CallDetails
     this.outputMappings = outputMappings;
   }
 
-  Map<String, String> getCallParameters()
+  public Map<String, String> getCallParameters()
   {
     return callParameters;
   }

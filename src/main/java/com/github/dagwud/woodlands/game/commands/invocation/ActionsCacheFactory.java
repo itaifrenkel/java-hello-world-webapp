@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-class ActionsCacheFactory
+public class ActionsCacheFactory
 {
   private static ActionsCacheFactory instance;
   private final ActionsCache actions;
@@ -36,7 +36,7 @@ class ActionsCacheFactory
     return new String(bytes);
   }
 
-  static ActionsCacheFactory instance()
+  public static ActionsCacheFactory instance()
   {
     if (null == instance)
     {
@@ -53,7 +53,7 @@ class ActionsCacheFactory
     }
   }
 
-  ActionsCache getActions()
+  public ActionsCache getActions()
   {
     return actions;
   }
