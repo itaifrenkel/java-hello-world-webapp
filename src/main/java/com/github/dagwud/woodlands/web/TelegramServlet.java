@@ -31,7 +31,7 @@ public class TelegramServlet extends HttpServlet
     }
     catch (Exception e)
     {
-      throw new ServletException("Internal Error", e); //todo nuke e! Don't expose!
+      e.printStackTrace();
     }
   }
 
