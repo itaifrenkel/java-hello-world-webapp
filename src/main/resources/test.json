@@ -56,6 +56,12 @@
               "ProcName": "ReadPlayerClass"
             },
             {
+              "ProcName": "Goto",
+              "ParamMappings": {
+                "Location": "The Village"
+              }
+            },
+            {
               "ProcName": "Echo",
               "ParamMappings": {
                 "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
@@ -119,7 +125,24 @@
               }
             }
           ]
+        },
+
+
+        {
+          "name": "GoTo",
+          "inputs": ["Location"],
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Location",
+                "AttributeValue": "${Location}"
+              }
+            }
+          ]
         }
+
+
       ]
     },
     {
