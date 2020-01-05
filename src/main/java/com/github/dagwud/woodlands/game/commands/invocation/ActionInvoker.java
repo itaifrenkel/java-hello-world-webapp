@@ -21,11 +21,10 @@ public abstract class ActionInvoker
 //      System.out.println(getActionName() + " before call: \n" + gameState.getVariables());
     }
 
-    ParamMappings outputMappings = callDetails == null ? new ParamMappings() : callDetails.getOutputMappings();
-    InvocationResults results = doInvoke(gameState, outputMappings);
+    InvocationResults results = doInvoke(gameState, callDetails.getOutputMappings());
     if (results.getReturnMode() != ReturnMode.SUSPEND)
     {
-      complete(gameState, results, outputMappings);
+      complete(gameState, results, callDetails.getOutputMappings());
     }
 
     return results;
