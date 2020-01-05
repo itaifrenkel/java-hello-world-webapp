@@ -12,13 +12,12 @@ import static java.util.stream.Collectors.joining;
 
 abstract class TelegramHelper
 {
-  private static final String BOT_TOK = "802063349:AAEpMcSlEzIbk5Ue3B0lSaLuO24fm-JI9hc"; // TODO REMOVE AND REGENERATE!!!
+  private static final String BOT_TOK = TemporaryHardCodedConstants.BOT_TOK;
 
   static String callTelegram(String method, Map<String, String> params) throws IOException
   {
     String endpoint = buildTelegramURL(method);
     String url = encode(endpoint, params);
-    System.out.println("CALLING: " + url);
     return callURL(url);
   }
 
