@@ -129,7 +129,7 @@
 
 
         {
-          "name": "GoTo",
+          "name": "Goto",
           "inputs": ["Location"],
           "steps": [
             {
