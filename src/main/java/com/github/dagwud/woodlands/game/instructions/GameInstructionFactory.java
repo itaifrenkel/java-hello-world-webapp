@@ -36,6 +36,10 @@ public class GameInstructionFactory
     {
       return new ShowHelpInstruction(chatId);
     }
+    if (telegramUpdate.message.text.equals("/reset"))
+    {
+      return new ResetServerInstruction();
+    }
     if (gameState.suspended != null)
     {
       return new ResumeInstruction(telegramUpdate.message.text);

@@ -22,6 +22,11 @@ public class GameStatesRegistry
     return registry.gameStatesByCharacter.get(characterId);
   }
 
+  public static void reset()
+  {
+    instance = null;
+  }
+
   private static GameStatesRegistry instance()
   {
     if (null == instance)
