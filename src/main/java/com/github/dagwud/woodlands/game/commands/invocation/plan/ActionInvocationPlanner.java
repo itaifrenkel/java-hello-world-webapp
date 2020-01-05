@@ -35,11 +35,11 @@ public abstract class ActionInvocationPlanner
     else
     {
       Action action = lookupAction(procName);
-      addInvokers(action, callDetails, invokers);
+      addInvokers(action, invokers);
     }
   }
 
-  private static void addInvokers(Action action, CallDetails callDetails, InvocationPlan invokers) throws ActionInvocationException
+  private static void addInvokers(Action action, InvocationPlan invokers) throws ActionInvocationException
   {
     for (Step step : action.steps)
     {

@@ -11,7 +11,7 @@ import java.util.List;
 public class InvocationPlan
 {
   private final List<InvocationPlanStep> invokers;
-  final GameState gameState;
+  private final GameState gameState;
   private Suspension suspension;
 
   InvocationPlan(GameState gameState)

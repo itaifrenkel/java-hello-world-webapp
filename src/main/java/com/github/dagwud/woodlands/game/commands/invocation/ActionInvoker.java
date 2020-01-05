@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.natives.PushVariablesAction;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
 import java.util.Map;
@@ -17,7 +16,6 @@ public abstract class ActionInvoker
 
   final InvocationResults invoke(GameState gameState) throws ActionInvocationException
   {
-//    gameState.getVariables().pushNewVariablesStackFrame(getActionName(), callDetails.getCallParameters());
     if (!this.getActionName().equals("PushVariablesAction"))
     {
 //      System.out.println(getActionName() + " before call: \n" + gameState.getVariables());
@@ -67,10 +65,6 @@ public abstract class ActionInvoker
       for (Map.Entry<String, String> result : ((Map<String, String>) results).entrySet())
       {
         if (VariableStack.isGlobalVariable(result.getKey()))
-        {
-          callContext.setValue(result.getKey(), result.getValue());
-        }
-        else if (false)
         {
           callContext.setValue(result.getKey(), result.getValue());
         }

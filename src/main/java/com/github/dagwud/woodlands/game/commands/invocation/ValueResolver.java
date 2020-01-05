@@ -20,9 +20,8 @@ abstract class ValueResolver
     ExpressionTree toks = new ExpressionTree(expression, START_VARIABLE, END_VARIABLE);
     resolveVars(toks.getRoot(), callParameters);
 
-    String resolved = toks.collapse();
-//    System.out.println("resolved " + expression + " --> " + resolved);
-    return resolved;
+    //    System.out.println("resolved " + expression + " --> " + resolved);
+    return toks.collapse();
   }
 
   private static void resolveVars(ExpressionTreeNode expressionTreeNode, VariableStack callParameters)

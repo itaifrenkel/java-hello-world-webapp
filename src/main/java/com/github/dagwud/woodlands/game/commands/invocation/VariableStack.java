@@ -11,7 +11,7 @@ public class VariableStack
   public VariableStack()
   {
     stack = new Stack<>();
-    stack.push(new Variables("root", new HashMap<String, String>(0)));
+    stack.push(new Variables("root", new HashMap<>(0)));
   }
 
   public void pushNewVariablesStackFrame(String name, Map<String, String> callParameters)

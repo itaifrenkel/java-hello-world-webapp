@@ -6,12 +6,12 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
-public class KVPairAdapter implements JsonDeserializer
+class KVPairAdapter implements JsonDeserializer
 {
   public Object deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
   {
     JsonObject jsonParamMappings = jsonElement.getAsJsonObject();
-    HashMap<String, String> mappings = new HashMap<String, String>();
+    HashMap<String, String> mappings = new HashMap<>();
     for (String key : jsonParamMappings.keySet())
     {
       String value = jsonParamMappings.get(key).getAsString();

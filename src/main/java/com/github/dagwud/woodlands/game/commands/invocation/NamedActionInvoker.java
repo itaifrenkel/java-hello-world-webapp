@@ -44,7 +44,7 @@ public class NamedActionInvoker extends ActionInvoker
     Map<String, String> callParameters = buildParameters(step);
     ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;
     CallDetails callDetails = new CallDetails(callParameters, outputMappings);
-    return ActionInvokerDelegate.invoke(gameState, step.procName, callDetails);
+    return ActionInvokerDelegate.invoke(gameState, step.procName);
   }
 
   private Map<String, String> buildParameters(Step step)

@@ -24,11 +24,9 @@ public class MainTest
     ActionInvocationPlanExecutor.execute(plan);
     // suspends to ask for player text:
 
-    Variables captured1 = new Variables("captured-text", new HashMap<>(1));
     plan.getGameState().getVariables().setValue("__buffer", "helloooo");
     ActionInvocationPlanExecutor.resume(plan);
 
-    Variables captured2 = new Variables("captured-text", new HashMap<>(1));
     plan.getGameState().getVariables().setValue("__buffer", "Druid");
     ActionInvocationPlanExecutor.resume(plan);
   }

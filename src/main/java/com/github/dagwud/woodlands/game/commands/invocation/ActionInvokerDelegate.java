@@ -7,11 +7,10 @@ public class ActionInvokerDelegate
 {
   private static final String NATIVE_ACTION_PREFIX = "Native:"; //todo moved
 
-  public static InvocationResults invoke(GameState gameState, String procName, CallDetails callDetails) throws ActionInvocationException
+  public static InvocationResults invoke(GameState gameState, String procName) throws ActionInvocationException
   {
     ActionInvoker invoker = createInvoker(procName);
-    InvocationResults result = invoker.invoke(gameState);
-    return result;
+    return invoker.invoke(gameState);
   }
 
   //todo moved
