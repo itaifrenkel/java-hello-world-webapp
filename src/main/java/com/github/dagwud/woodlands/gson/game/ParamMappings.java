@@ -1,7 +1,18 @@
 package com.github.dagwud.woodlands.gson.game;
 
-import java.util.HashMap;
+import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 
-public class ParamMappings extends HashMap<String, String>
+import java.util.Map;
+
+public class ParamMappings extends Variables
 {
+  public ParamMappings()
+  {
+    super("call-parameters");
+  }
+
+  public ParamMappings(Map<String, String> callParameters)
+  {
+    super("call-parameters", callParameters);
+  }
 }
