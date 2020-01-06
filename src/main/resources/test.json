@@ -156,6 +156,9 @@
               "ParamMappings": {
                 "MessageToPrint": "You are now at ${Player.Location}"
               }
+            },
+            {
+              "ProcName": "VillageMenu"
             }
           ]
         }
@@ -196,6 +199,32 @@
           ],
           "outputs": [
             "ChosenOption"
+          ]
+        }
+      ]
+    },
+
+    {
+      "Name": "Village",
+      "actions": [
+        {
+          "name": "VillageMenu",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "The bustle of the village square brings a reassuring comfort to weary adventurers - the only danger here is the prices charged by the local bartender. 
+The square is dominated on the one side by the local tavern, from which you hear loud music and the occasional raised voides of a disagreement.
+Facing it, within stumbling range, is the Inn. The innkeeper is a friend, and has offered to look after any items you may wish to leave behind while you're out on your adventures.
+To the north lies a path leading up to The Mountain, and another leading out to the Woodlands."
+              }
+            },
+            {
+              "ProcName": "ReadOptions",
+              "ParamMappings": {
+                "OptionsCSV": "The Inn,The Mountain,The Woodlands"
+              }
+            }
           ]
         }
       ]
