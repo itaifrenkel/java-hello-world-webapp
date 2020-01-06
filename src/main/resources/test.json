@@ -9,10 +9,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "The following commands are available:
-* /new - create a new character
-* /help - show this help info
-* /village, /mountain, /woodlands - move around"
+                "MessageToPrint": "The following commands are available:\n* /new - create a new character\n* /help - show this help info\n* /village, /mountain, /woodlands - move around"
               }
             }
           ]
