@@ -13,7 +13,6 @@ public class ReadTextInputAction extends NativeAction
   @Override
   public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
-    System.out.println("<<< READ TEXT");
     HashMap<String, String> results = new HashMap<>();
     results.put(OUTPUT_CAPTURED_TEXT, "${buffer}");
     return new InvocationResults(new Variables("return", results), ReturnMode.SUSPEND);

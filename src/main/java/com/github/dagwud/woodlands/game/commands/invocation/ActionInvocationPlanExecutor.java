@@ -19,7 +19,7 @@ public abstract class ActionInvocationPlanExecutor
 
   public static void resume(InvocationPlan plan) throws ActionInvocationException
   {
-    System.out.println("Resuming: \n" + plan.getGameState().getVariables());
+//    System.out.println("Resuming: \n" + plan.getGameState().getVariables());
     Suspension suspension = plan.getSuspension();
     InvocationPlanStep suspendedStep = plan.getInvokers().get(suspension.getSuspendedAt());
 
@@ -42,7 +42,6 @@ public abstract class ActionInvocationPlanExecutor
         {
           plan.setSuspended(i, result);
           plan.getGameState().suspended = plan; //todo DRY
-          System.out.println("-----SUSPENDED-----");
           return;
         }
       }
