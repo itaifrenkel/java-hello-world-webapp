@@ -19,10 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 @WebServlet(name = "TelegramServlet", urlPatterns = "/telegram")
 public class TelegramServlet extends HttpServlet
 {
@@ -56,7 +52,7 @@ public class TelegramServlet extends HttpServlet
       {
         while (e != null)
         {
-          TelegramMessageSender.sendMessage(chatId, e);
+          TelegramMessageSender.sendMessage(chatId, e.toString());
           e = e.getCause();
         }
       }
