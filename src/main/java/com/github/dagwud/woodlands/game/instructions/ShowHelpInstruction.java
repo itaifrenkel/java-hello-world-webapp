@@ -7,20 +7,15 @@ import java.io.IOException;
 
 public class ShowHelpInstruction extends GameInstruction
 {
-  private static final String HELP_MESSAGE = "The following commands are available:\n" +
-          "* /new - create a new character\n" +
-          "* /help - show this help info";
-
-  private final int chatId;
-
-  ShowHelpInstruction(int chatId)
+  ShowHelpInstruction()
   {
-    this.chatId = chatId;
   }
 
   @Override
   public void execute(GameState gameState) throws IOException
   {
-    TelegramMessageSender.sendMessage(chatId, HELP_MESSAGE);
+    CallDetails callDetails = new CallDetails(new HashMap<>(), new ParamMappings());
+    InvocationPlan plan = ActionInvocationPlanner.plan("ShowHelp", gameState, callDetails);
+    ActionInvocationPlanExecutor.execute(plan);
   }
 }
