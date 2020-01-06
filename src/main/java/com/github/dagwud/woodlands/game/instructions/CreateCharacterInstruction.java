@@ -25,8 +25,6 @@ public class CreateCharacterInstruction extends GameInstruction
   @Override
   public void execute(GameState gameState) throws IOException, ActionInvocationException
   {
-    TelegramMessageSender.sendMessage(chatId, "Here we go!");
-
     CallDetails callDetails = new CallDetails(new HashMap<>(), new ParamMappings());
     InvocationPlan plan = ActionInvocationPlanner.plan("PlayerSetup", gameState, callDetails);
     ActionInvocationPlanExecutor.execute(plan);
