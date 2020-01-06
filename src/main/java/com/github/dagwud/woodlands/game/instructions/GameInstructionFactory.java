@@ -38,15 +38,15 @@ public class GameInstructionFactory
     {
       return new ShowHelpInstruction();
     }
-    if (cmd.equals("/village"))
+    if (cmd.equals("The Village"))
     {
       return new GoToVillageInstruction();
     }
-    if (cmd.equals("/mountain"))
+    if (cmd.equals("The Mountain"))
     {
       return new GoToMountainInstruction();
     }
-    if (cmd.equals("/woodlands"))
+    if (cmd.equals("The Woodlands"))
     {
       return new GoToWoodlandsInstruction();
     }
