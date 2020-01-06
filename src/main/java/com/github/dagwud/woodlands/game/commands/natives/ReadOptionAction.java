@@ -35,16 +35,9 @@ public class ReadOptionAction extends NativeAction
 
   private String buildInlineKeyboard(String[] options)
   {
-    return "{" +
-               "\"keyboard\": [" +
-                 "[\"A\", \"B\"]," +
-                 "[\"C\", \"D\"]" +
-               "]," +
-               "\"one_time_keyboard\": true" +
-            "}";
-    /*StringBuilder b = new StringBuilder();
+    StringBuilder b = new StringBuilder();
     b.append(" {")
-            .append("\"inline_keyboard\": ["
+            .append("\"keyboard\": ["
     );
     for (int i = 0; i < options.length; i++)
     {
@@ -53,11 +46,10 @@ public class ReadOptionAction extends NativeAction
       {
         b.append(",");
       }
-      b.append("[{\"text\": \"").append(option).append("\", ")
-              .append("\"callback_data\": \"").append(option).append("\"}]");
+      b.append("[\"").append(option).append("\"]");
     }
     b.append("]}");
 
-    return b.toString();*/
+    return b.toString();
   }
 }
