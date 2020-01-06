@@ -16,10 +16,6 @@ import java.util.HashMap;
 
 public class GoToVillage extends GameInstruction
 {
-  ShowHelpInstruction()
-  {
-  }
-
   @Override
   public void execute(GameState gameState) throws ActionInvocationException, IOException
   {
