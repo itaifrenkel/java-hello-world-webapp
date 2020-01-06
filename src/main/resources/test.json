@@ -1,6 +1,6 @@
 {
-  "Hooks": {
-    [
+  "Hooks": [
+    {
       "Name": "TestHook",
       "type": "VarChange",
       "trigger": "__Player.Location",
@@ -12,8 +12,8 @@
           }
         }
       ]
-    ]
-  },
+    }
+  ],
 
   "Packages": [
     {
