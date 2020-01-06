@@ -22,7 +22,7 @@ public class GoToWoodlandsInstruction extends GameInstruction
     Map<String, String> inputs = new HashMap<>();
     inputs.put("Location", "The Woodlands");
     CallDetails callDetails = new CallDetails(inputs, new ParamMappings());
-    InvocationPlan plan = ActionInvocationPlanner.plan("GoTo", gameState, callDetails);
+    InvocationPlan plan = ActionInvocationPlanner.plan("Goto", gameState, callDetails);
     ActionInvocationPlanExecutor.execute(plan);
   }
 }
