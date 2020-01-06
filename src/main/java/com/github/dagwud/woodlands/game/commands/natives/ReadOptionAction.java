@@ -37,6 +37,7 @@ public class ReadOptionAction extends NativeAction
   {
     StringBuilder b = new StringBuilder();
     b.append(" {")
+            .append("\"resize_keyboard\": true,")
             .append("\"keyboard\": ["
     );
     for (int i = 0; i < options.length; i++)
