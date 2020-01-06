@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused") // called at runtime via reflection
 public class ReadOptionAction extends NativeAction
@@ -25,7 +27,7 @@ public class ReadOptionAction extends NativeAction
     String optionsText = gameState.getVariables().lookupVariableValue(PARAMETER_NAME_OPTIONS);
     String[] options = optionsText.split(",");
 
-    String buttons = buildInlineKeyboard(options);
+    String buttons = buildInlineKeyboard(options, 2);
     TelegramMessageSender.sendMessage(Integer.parseInt(chatId), prompt, buttons);
 
     Variables results = new Variables();
@@ -33,24 +35,62 @@ public class ReadOptionAction extends NativeAction
     return new InvocationResults(results, ReturnMode.SUSPEND);
   }
 
-  private String buildInlineKeyboard(String[] options)
+  private String buildInlineKeyboard(String[] options, int numCols)
   {
     StringBuilder b = new StringBuilder();
     b.append(" {")
             .append("\"resize_keyboard\": true,")
-            .append("\"keyboard\": ["
+            .append("\"keyboard\": "
     );
-    for (int i = 0; i < options.length; i++)
-    {
-      String option = options[i];
-      if (i > 0)
-      {
-        b.append(",");
-      }
-      b.append("[\"").append(option).append("\"]");
-    }
-    b.append("]}");
+
+    b.append(toGrid(options, numCols));
+    b.append("}");
 
     return b.toString();
   }
+
+  private String toGrid(String[] options, int numCols)
+  {
+    List<List<String>> cols = new ArrayList<>();
+    for (int i = 0; i < numCols; i++)
+    {
+      cols.add(new ArrayList<>());
+    }
+
+    for (int i = 0; i < options.length; i++)
+    {
+      for (int k = 0; k < numCols; k++)
+      {
+        if (i % numCols == k)
+        {
+          cols.get(k).add(options[i]);
+        }
+      }
+    }
+
+    StringBuilder grid = new StringBuilder();
+    for (int r = 0; r < cols.get(0).size(); r++)
+    {
+      if (r > 0)
+      {
+        grid.append(",");
+      }
+      grid.append("[");
+      for (int c = 0; c < cols.size(); c++)
+      {
+        List<String> col = cols.get(c);
+        if (r < col.size())
+        {
+          if (c > 0)
+          {
+            grid.append(",");
+          }
+          grid.append("\"").append(col.get(r)).append("\"");
+        }
+      }
+      grid.append("]");
+    }
+    return grid.toString();
+  }
+
 }
