@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationPlan
 import com.github.dagwud.woodlands.game.instructions.GameInstruction;
 import com.github.dagwud.woodlands.game.instructions.GameInstructionFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
+import com.github.dagwud.woodlands.gson.telegram.CallbackQuery;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
 import javax.servlet.ServletException;
@@ -22,14 +23,17 @@ public class TelegramServlet extends HttpServlet
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
   {
-    // todo verify request came from telegram - token in request
-    Update update = GsonHelper.readJSON(req.getReader(), Update.class);
     try
     {
-      GameState gameState = GameStatesRegistry.lookup(update.message.chat.id);
+      // todo verify request came from telegram - token in request
+      Update update = GsonHelper.readJSON(req.getReader(), Update.class);
+      String chatId = determineChatId(update);
+      String text = determineText(update);
+
+      GameState gameState = GameStatesRegistry.lookup(chatId);
       if (gameState.suspended != null)
       {
-        gameState.suspended.getGameState().getVariables().setValue("__buffer", update.message.text);
+        gameState.suspended.getGameState().getVariables().setValue("__buffer", text);
         ActionInvocationPlanExecutor.resume(gameState.suspended);
       }
       else
@@ -48,6 +52,26 @@ public class TelegramServlet extends HttpServlet
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException
   {
     throw new UnavailableException("Not available");
+  }
+
+  private Chat determineText(Update update)
+  {
+    if (update.message != null)
+    {
+      return update.message.text;
+    }
+    CallbackQuery callback = update.callbackQuery;
+    return callback.data;
+  }
+
+  private int determineChatId(Update update)
+  {
+    if (update.message != null)
+    {
+      return update.message.chat.id;
+    }
+    CallbackQuery callback = update.callbackQuery;
+    return callback.message.chat.id;
   }
 
 }
