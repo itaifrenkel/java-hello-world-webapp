@@ -16,9 +16,6 @@
         },
         {
           "name": "GetPlayerAttribute",
-          "inputs": [
-            "AttributeName"
-          ],
           "steps": [
             {
               "ProcName": "Native:ReadVar",
@@ -30,17 +27,10 @@
                 "VarValue": "AttributeValue"
               }
             }
-          ],
-          "outputs": [
-            "AttributeValue"
           ]
         },
         {
           "name": "SetPlayerAttribute",
-          "inputs": [
-            "AttributeName",
-            "AttributeValue"
-          ],
           "steps": [
             {
               "ProcName": "Native:SetVar",
@@ -139,7 +129,6 @@
         },
         {
           "name": "Goto",
-          "inputs": ["NewLocation"],
           "steps": [
             {
               "ProcName": "SetPlayerAttribute",
@@ -166,9 +155,6 @@
       "actions": [
         {
           "name": "Echo",
-          "inputs": [
-            "MessageToPrint"
-          ],
           "steps": [
             {
               "ProcName": "Native:SendMessage",
@@ -180,9 +166,6 @@
         },
         {
           "name": "ReadOption",
-          "inputs": [
-            "OptionsCSV"
-          ],
           "steps": [
             {
               "ProcName": "Native:ReadOption",
@@ -193,9 +176,6 @@
                 "ChosenOption": "ChosenOption"
               }
             }
-          ],
-          "outputs": [
-            "ChosenOption"
           ]
         }
       ]
