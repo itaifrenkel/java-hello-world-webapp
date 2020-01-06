@@ -19,9 +19,9 @@ public class GoToMountainInstruction extends GameInstruction
   @Override
   public void execute(GameState gameState) throws ActionInvocationException, IOException
   {
-    Map<String, String> inputs = new HashMap<>();
-    inputs.put("Location", "The Mountain");
-    CallDetails callDetails = new CallDetails(inputs, new ParamMappings());
+    Map<String, String> params = new HashMap<>();
+    params.put("Location", "The Mountain");
+    CallDetails callDetails = new CallDetails(new HashMap<>(), params); 
     InvocationPlan plan = ActionInvocationPlanner.plan("Goto", gameState, callDetails);
     ActionInvocationPlanExecutor.execute(plan);
   }

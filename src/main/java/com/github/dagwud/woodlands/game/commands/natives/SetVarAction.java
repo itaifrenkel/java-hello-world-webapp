@@ -20,9 +20,4 @@ public class SetVarAction extends NativeAction
     Variables result = new Variables("setvarparams", new HashMap<>());
     return new InvocationResults(result);
   }
-
-  private boolean isGlobal(String varSet)
-  {
-    return varSet.equals("Player");
-  }
 }
