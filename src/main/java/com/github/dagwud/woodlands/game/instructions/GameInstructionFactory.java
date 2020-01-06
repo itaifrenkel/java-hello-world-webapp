@@ -44,7 +44,7 @@ public class GameInstructionFactory
     }
     if (cmd.equals("/mountain"))
     {
-      return new GoToMountainsInstruction();
+      return new GoToMountainInstruction();
     }
     if (cmd.equals("/woodlands"))
     {
