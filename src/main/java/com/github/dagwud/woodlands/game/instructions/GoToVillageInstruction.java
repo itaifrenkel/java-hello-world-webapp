@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 
-public class GoToVillage extends GameInstruction
+public class GoToVillageInstruction extends GameInstruction
 {
   @Override
   public void execute(GameState gameState) throws ActionInvocationException, IOException
