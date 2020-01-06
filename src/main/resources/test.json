@@ -11,7 +11,8 @@
               "ParamMappings": {
                 "MessageToPrint": "The following commands are available:
 * /new - create a new character
-* /help - show this help info"
+* /help - show this help info
+* /village, /mountain, /woodlands - move around"
               }
             }
           ]
@@ -145,7 +146,9 @@
           "steps": [
             {
               "ProcName": "Echo",
-              "MessageToPrint": "You have left ${Player.Location}"
+              "ParamMappings": {
+                "MessageToPrint": "You have left ${Player.Location}"
+              }
             },
             {
               "ProcName": "SetPlayerAttribute",
@@ -156,7 +159,9 @@
             },
             {
               "ProcName": "Echo",
-              "MessageToPrint": "You are now at ${Player.Location}"
+              "ParamMappings": {
+                "MessageToPrint": "You are now at ${Player.Location}"
+              }
             }
           ]
         }
