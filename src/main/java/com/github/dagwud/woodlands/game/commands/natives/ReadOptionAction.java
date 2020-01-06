@@ -43,9 +43,25 @@ public class ReadOptionAction extends NativeAction
       {
         b.append(",");
       }
-      b.append("[{text: '").append(option).append("', '").append(option).append("', ").append(i).append("}]");
+      b.append("[{text: '").append(option).append("', '")
+              .append("callback_data: '").append(option).append("', ").append("}]");
     }
-    b.append("]});");
+    b.append("]}");
+    /*
+
+     {
+      inline_keyboard:
+      [
+        [
+          {
+            text: 'Wizard',
+            callback_data: 'Wizard'
+           }
+        ]
+      ]
+
+    });
+     */
     return b.toString();
   }
 }
