@@ -220,7 +220,7 @@ To the north lies a path leading up to The Mountain, and another leading out to 
               }
             },
             {
-              "ProcName": "ReadOptions",
+              "ProcName": "ReadOption",
               "ParamMappings": {
                 "OptionsCSV": "The Inn,The Mountain,The Woodlands"
               }
