@@ -45,8 +45,9 @@ public class TelegramServlet extends HttpServlet
         instruction.execute(gameState);
       }
     }
-    catch (Exception e)
+    catch (Exception e2)
     {
+      Throwable e = e2;
       e.printStackTrace();
       try
       {
