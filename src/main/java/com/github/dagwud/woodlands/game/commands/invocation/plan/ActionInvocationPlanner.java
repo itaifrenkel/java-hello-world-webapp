@@ -44,7 +44,7 @@ public abstract class ActionInvocationPlanner
     invokers.add(NativeActionInvokerFactory.create("PushVariables", callDetails));
     for (Step step : action.steps)
     {
-      Map<String, String> callParameters = (step.paramMappings == null ? new HashMap<>() : step.paramMappings.mappings);
+      Map<String, String> callParameters = (step.paramMappings == null ? new HashMap<>() : step.paramMappings);
       ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;
       CallDetails empty = new CallDetails(callParameters, new ParamMappings());
       invokers.add(NativeActionInvokerFactory.create("PushVariables", empty));

@@ -18,8 +18,6 @@ class KVPairAdapter implements JsonDeserializer
       mappings.put(key, value);
     }
 
-    ParamMappings paramMappings = new ParamMappings();
-    paramMappings.mappings = mappings;
-    return paramMappings;
+    return mappings;
   }
 }

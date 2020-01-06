@@ -8,7 +8,6 @@ import com.github.dagwud.woodlands.game.commands.invocation.plan.ActionInvocatio
 import com.github.dagwud.woodlands.game.commands.invocation.plan.InvocationPlan;
 import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +26,7 @@ public abstract class GoToLocationInstruction extends GameInstruction
     Map<String, String> inputs = new HashMap<>();
     inputs.put("NewLocation", locationName);
     ParamMappings params = new ParamMappings();
-    params.mappings.put("NewLocation", locationName);
+    params.put("NewLocation", locationName);
     CallDetails callDetails = new CallDetails(inputs, params);
     InvocationPlan plan = ActionInvocationPlanner.plan("Goto", gameState, callDetails);
     ActionInvocationPlanExecutor.execute(plan);

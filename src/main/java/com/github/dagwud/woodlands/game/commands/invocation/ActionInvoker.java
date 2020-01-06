@@ -47,7 +47,7 @@ public abstract class ActionInvoker
 
   private static void mapResults(Variables results, VariableStack callContext, ParamMappings outputMappings)
   {
-    for (Map.Entry<String, String> outputMapping : outputMappings.mappings.entrySet()) // todo is it necessary to have OM on context now?
+    for (Map.Entry<String, String> outputMapping : outputMappings.entrySet()) // todo is it necessary to have OM on context now?
     {
       String outputName = outputMapping.getKey();
       String mapToVariableName = outputMapping.getValue();

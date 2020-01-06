@@ -51,7 +51,7 @@ public class NamedActionInvoker extends ActionInvoker
     Map<String, String> callParameters = new HashMap<>();
     if (step.paramMappings != null)
     {
-      callParameters.putAll(step.paramMappings.mappings);
+      callParameters.putAll(step.paramMappings);
     }
     return callParameters;
   }
