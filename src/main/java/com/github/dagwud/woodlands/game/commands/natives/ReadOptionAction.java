@@ -39,7 +39,11 @@ public class ReadOptionAction extends NativeAction
     for (int i = 0; i < options.length; i++)
     {
       String option = options[i];
-      b.append("[{text: '").append(option).append("', '").append(option).append("', ").append(i);
+      if (i > 0)
+      {
+        b.append(",");
+      }
+      b.append("[{text: '").append(option).append("', '").append(option).append("', ").append(i).append("}]");
     }
     b.append("]});");
     return b.toString();
