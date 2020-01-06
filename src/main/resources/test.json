@@ -48,7 +48,7 @@
             {
               "ProcName": "Native:SetVar",
               "ParamMappings": {
-                "VarSet": "Player",
+                "VarSet": "__Player",
                 "VarName": "${AttributeName}",
                 "VarValue": "${AttributeValue}"
               }
