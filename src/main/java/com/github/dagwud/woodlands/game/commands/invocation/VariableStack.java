@@ -34,7 +34,12 @@ public class VariableStack
       Variables stackFrame = stack.get(i);
       if (stackFrame.containsKey(variableName))
       {
-        return stackFrame.get(variableName);
+        String value = stackFrame.get(variableName);
+        // cases like a=${a} - i.e. it's intended to read from parent frame - don't use this value but keep looking:
+         if (!value.equals(ValueResolver.START_VARIABLE + variableName + ValueResolver.END_VARIABLE))
+        {
+          return value;
+        }
       }
     }
     System.err.println("Not found '" + variableName + "': \n" + this);
