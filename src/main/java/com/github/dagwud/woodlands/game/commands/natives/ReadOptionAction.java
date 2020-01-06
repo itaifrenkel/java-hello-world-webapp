@@ -34,7 +34,7 @@ public class ReadOptionAction extends NativeAction
   {
     StringBuilder b = new StringBuilder();
     b.append(" {")
-            .append("inline_keyboard: ["
+            .append("\"inline_keyboard\": ["
     );
     for (int i = 0; i < options.length; i++)
     {
@@ -43,25 +43,11 @@ public class ReadOptionAction extends NativeAction
       {
         b.append(",");
       }
-      b.append("[{text: \"").append(option).append("\", ")
-              .append("callback_data: \"").append(option).append("\"}]");
+      b.append("[{\"text\": \"").append(option).append("\", ")
+              .append("\"callback_data\": \"").append(option).append("\"}]");
     }
     b.append("]}");
-    /*
-
-     {
-      inline_keyboard:
-      [
-        [
-          {
-            text: 'Wizard',
-            callback_data: 'Wizard'
-           }
-        ]
-      ]
-
-    });
-     */
+    
     return b.toString();
   }
 }
