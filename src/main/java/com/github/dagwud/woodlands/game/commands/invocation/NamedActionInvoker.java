@@ -36,8 +36,7 @@ public class NamedActionInvoker extends ActionInvoker
 
   private InvocationResults invokeStep(GameState gameState, Step step) throws ActionInvocationException
   {
-    String proc = ValueResolver.resolve(step.procName, gameState.getVariables());
-    return ActionInvokerDelegate.invoke(gameState, proc);
+    return ActionInvokerDelegate.invoke(gameState, step.procName);
   }
 
 }
