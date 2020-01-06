@@ -4,20 +4,19 @@ import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 
 class KVPairAdapter implements JsonDeserializer
 {
   public Variables deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
   {
     JsonObject jsonParamMappings = jsonElement.getAsJsonObject();
-    HashMap<String, String> mappings = new HashMap<>();
+    Variables mappings = new Variables();
     for (String key : jsonParamMappings.keySet())
     {
       String value = jsonParamMappings.get(key).getAsString();
       mappings.put(key, value);
     }
 
-    return new Variables(mappings);
+    return new mappings;
   }
 }

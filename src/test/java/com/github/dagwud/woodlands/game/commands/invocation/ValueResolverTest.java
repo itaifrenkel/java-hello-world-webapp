@@ -16,7 +16,7 @@ public class ValueResolverTest
   public void setup()
   {
     vars = new VariableStack();
-    Map<String, String> values = new HashMap<>();
+    Variables values = new Variables();
     values.put("single", "one");
     values.put("double", "two");
     values.put("triple", "three");

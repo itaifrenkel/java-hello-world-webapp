@@ -8,14 +8,12 @@ import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.invocation.plan.ActionInvocationPlanner;
 import com.github.dagwud.woodlands.game.commands.invocation.plan.InvocationPlan;
 
-import java.util.HashMap;
-
 public class CreateCharacterInstruction extends GameInstruction
 {
   @Override
   public void execute(GameState gameState) throws ActionInvocationException
   {
-    CallDetails callDetails = new CallDetails(new HashMap<>(), new Variables());
+    CallDetails callDetails = new CallDetails(new Variables(), new Variables());
     InvocationPlan plan = ActionInvocationPlanner.plan("PlayerSetup", gameState, callDetails);
     ActionInvocationPlanExecutor.execute(plan);
   }

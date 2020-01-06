@@ -4,16 +4,16 @@ import java.util.Map;
 
 public class CallDetails
 {
-  private final Map<String, String> callParameters;
+  private final Variables callParameters;
   private final Variables outputMappings;
 
-  public CallDetails(Map<String, String> callParameters, Variables outputMappings)
+  public CallDetails(Variables callParameters, Variables outputMappings)
   {
     this.callParameters = callParameters;
     this.outputMappings = outputMappings;
   }
 
-  public Map<String, String> getCallParameters()
+  public Variables getCallParameters()
   {
     return callParameters;
   }

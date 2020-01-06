@@ -5,9 +5,6 @@ import com.github.dagwud.woodlands.game.commands.invocation.*;
 import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.Step;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public abstract class ActionInvocationPlanner
 {
   private static final String NATIVE_ACTION_PREFIX = "Native:";
@@ -43,7 +40,7 @@ public abstract class ActionInvocationPlanner
     invokers.add(NativeActionInvokerFactory.create("PushVariables", callDetails));
     for (Step step : action.steps)
     {
-      Map<String, String> callParameters = (step.paramMappings == null ? new HashMap<>() : step.paramMappings);
+      Variables callParameters = (step.paramMappings == null ? new Variables() : step.paramMappings);
       CallDetails empty = new CallDetails(callParameters, new Variables());
       invokers.add(NativeActionInvokerFactory.create("PushVariables", empty));
 

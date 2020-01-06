@@ -1,7 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 public class VariableStack
@@ -11,10 +9,10 @@ public class VariableStack
   public VariableStack()
   {
     stack = new Stack<>();
-    stack.push(new Variables(new HashMap<>(0)));
+    stack.push(new Variables());
   }
 
-  public void pushNewVariablesStackFrame(Map<String, String> callParameters)
+  public void pushNewVariablesStackFrame(Variables callParameters)
   {
     stack.push(new Variables(callParameters));
   }

@@ -1,12 +1,13 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.invocation.*;
+import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
+import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
+import com.github.dagwud.woodlands.game.commands.invocation.ReturnMode;
+import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
 
 @SuppressWarnings("unused") // called at runtime via reflection
 public class ReadOptionAction extends NativeAction

@@ -1,11 +1,12 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.invocation.*;
+import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
+import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
+import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 @SuppressWarnings("unused") // called at runtime via reflection
 public class SendMessageAction extends NativeAction
@@ -24,6 +25,6 @@ public class SendMessageAction extends NativeAction
     {
       System.out.println(">>> " + message);
     }
-    return new InvocationResults(new Variables(new HashMap<>()));
+    return new InvocationResults(new Variables());
   }
 }

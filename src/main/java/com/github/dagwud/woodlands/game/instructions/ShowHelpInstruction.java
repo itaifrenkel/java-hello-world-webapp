@@ -8,8 +8,6 @@ import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.invocation.plan.ActionInvocationPlanner;
 import com.github.dagwud.woodlands.game.commands.invocation.plan.InvocationPlan;
 
-import java.util.HashMap;
-
 public class ShowHelpInstruction extends GameInstruction
 {
   ShowHelpInstruction()
@@ -19,7 +17,7 @@ public class ShowHelpInstruction extends GameInstruction
   @Override
   public void execute(GameState gameState) throws ActionInvocationException
   {
-    CallDetails callDetails = new CallDetails(new HashMap<>(), new Variables());
+    CallDetails callDetails = new CallDetails(new Variables(), new Variables());
     InvocationPlan plan = ActionInvocationPlanner.plan("ShowHelp", gameState, callDetails);
     ActionInvocationPlanExecutor.execute(plan);
   }

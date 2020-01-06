@@ -7,7 +7,7 @@ public class Variables extends HashMap<String, String>
 {
   public Variables()
   {
-    this(new HashMap<>());
+    super();
   }
 
   public Variables(Map<String, String> callParameters)

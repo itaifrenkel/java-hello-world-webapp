@@ -8,9 +8,6 @@ import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.invocation.plan.ActionInvocationPlanner;
 import com.github.dagwud.woodlands.game.commands.invocation.plan.InvocationPlan;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public abstract class GoToLocationInstruction extends GameInstruction
 {
   private final String locationName;
@@ -23,10 +20,12 @@ public abstract class GoToLocationInstruction extends GameInstruction
   @Override
   public void execute(GameState gameState) throws ActionInvocationException
   {
-    Map<String, String> inputs = new HashMap<>();
-    inputs.put("NewLocation", locationName);
+    Variables inputs = new Variables();
+    inputs.put("NewLocation", locationName); //todo only one of these (inputs or params) should be necessary
+
     Variables params = new Variables();
-    params.put("NewLocation", locationName);
+    params.put("NewLocation", locationName); //todo only one of these (inputs or params) should be necessary
+
     CallDetails callDetails = new CallDetails(inputs, params);
     InvocationPlan plan = ActionInvocationPlanner.plan("Goto", gameState, callDetails);
     ActionInvocationPlanExecutor.execute(plan);
