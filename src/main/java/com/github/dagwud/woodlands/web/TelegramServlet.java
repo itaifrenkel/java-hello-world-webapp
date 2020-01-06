@@ -9,6 +9,7 @@ import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 import com.github.dagwud.woodlands.gson.telegram.CallbackQuery;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Update;
+import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
@@ -24,11 +25,12 @@ public class TelegramServlet extends HttpServlet
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
   {
+    Update update = GsonHelper.readJSON(req.getReader(), Update.class);
+    int chatId = determineChatId(update);
+      
     try
     {
       // todo verify request came from telegram - token in request
-      Update update = GsonHelper.readJSON(req.getReader(), Update.class);
-      int chatId = determineChatId(update);
       String text = determineText(update);
 
       GameState gameState = GameStatesRegistry.lookup(chatId);
@@ -46,6 +48,11 @@ public class TelegramServlet extends HttpServlet
     catch (Exception e)
     {
       e.printStackTrace();
+      try
+      {
+        TelegramMessageSender.sendMessage(chatId, e.toString());
+      }
+      catch (Exception ignored) {} // oh well
     }
   }
 
