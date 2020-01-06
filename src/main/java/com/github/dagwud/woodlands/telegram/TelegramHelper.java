@@ -54,9 +54,18 @@ abstract class TelegramHelper
 
   static Map<String, String> buildUrlParams(int chatId, String message)
   {
+    return buildUrlParams(chatId, message, null);
+  }
+
+  static Map<String, String> buildUrlParams(int chatId, String message, String replyMarkup)
+  {
     Map<String, String> params = new HashMap<>();
     params.put("chat_id", String.valueOf(chatId));
     params.put("text", message);
+    if (null != replyMarkup)
+    {
+      params.put("reply_markup", replyMarkup);
+    }
     return params;
   }
 

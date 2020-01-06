@@ -23,17 +23,17 @@ public class ReadOptionAction extends NativeAction
     HashMap<String, String> results = new HashMap<>();
     results.put(OUTPUT_CHOSEN_OPTION, "${buffer}");
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
-    String message = buildInlineKeyboard(options);
+    String buttons = buildInlineKeyboard(options);
     System.out.println("SENT INLINE:");
-    System.out.println(message);
-    TelegramMessageSender.sendMessage(Integer.parseInt(chatId), message);
+    System.out.println(buttons);
+    TelegramMessageSender.sendMessage(Integer.parseInt(chatId), "", buttons);
     return new InvocationResults(new Variables("return", results), ReturnMode.SUSPEND);
   }
 
   private String buildInlineKeyboard(String[] options)
   {
     StringBuilder b = new StringBuilder();
-    b.append("{reply_markup: {")
+    b.append(" {")
             .append("inline_keyboard: ["
     );
     for (int i = 0; i < options.length; i++)
@@ -41,7 +41,7 @@ public class ReadOptionAction extends NativeAction
       String option = options[i];
       b.append("[{text: '").append(option).append("', '").append(option).append("', ").append(i);
     }
-    b.append("]})};");
+    b.append("]});");
     return b.toString();
   }
 }
