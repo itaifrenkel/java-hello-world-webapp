@@ -139,12 +139,14 @@
             }
           ]
         },
-
-
         {
           "name": "Goto",
           "inputs": ["Location"],
           "steps": [
+            {
+              "ProcName": "Echo",
+              "MessageToPrint", "You have left ${Player.Location}"
+            },
             {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
@@ -154,7 +156,7 @@
             },
             {
               "ProcName": "Echo",
-              "MessageToPrint", "You are at ${Player.Location}"
+              "MessageToPrint", "You are now at ${Player.Location}"
             }
           ]
         }
