@@ -139,7 +139,7 @@
               }
             },
             {
-              "ProcName": "VillageMenu"
+              "ProcName": "${Player.Location} Menu"
             }
           ]
         }
@@ -166,7 +166,7 @@
       "Name": "Village",
       "actions": [
         {
-          "name": "VillageMenu",
+          "name": "The Village Menu",
           "steps": [
             {
               "ProcName": "Native:ReadOption",
@@ -178,6 +178,24 @@
           ]
         }
       ]
+    },
+    {
+      "Name": "Mountain",
+      "actions": [
+        {
+          "name": "The Mountain Menu",
+          "steps": [
+            {
+              "ProcName": "Native:ReadOption",
+              "ParamMappings": {
+                "MessageToPrint": "This is the mountain...",
+                "Options": "The Village"
+              }
+            }
+          ]
+        }
+      ]
     }
+
   ]
 }

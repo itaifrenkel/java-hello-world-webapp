@@ -36,14 +36,8 @@ public class NamedActionInvoker extends ActionInvoker
 
   private InvocationResults invokeStep(GameState gameState, Step step) throws ActionInvocationException
   {
-    Variables callParameters = buildParameters(step.paramMappings);
-    Variables outputMappings = buildParameters(step.outputMappings);
-    CallDetails callDetails = new CallDetails(callParameters, outputMappings);
-    return ActionInvokerDelegate.invoke(gameState, step.procName);
+    String proc = ValueResolver.resolve(step.procName, gameState.getVariables());
+    return ActionInvokerDelegate.invoke(gameState, proc);
   }
 
-  private Variables buildParameters(Variables paramMappings)
-  {
-    return paramMappings == null ? new Variables() : paramMappings;
-  }
 }
