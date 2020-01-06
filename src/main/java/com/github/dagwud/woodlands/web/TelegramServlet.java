@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.instructions.GameInstruction;
 import com.github.dagwud.woodlands.game.instructions.GameInstructionFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 import com.github.dagwud.woodlands.gson.telegram.CallbackQuery;
+import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
 import javax.servlet.ServletException;
