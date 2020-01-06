@@ -145,12 +145,6 @@
           "inputs": ["Location"],
           "steps": [
             {
-              "ProcName": "Echo",
-              "ParamMappings": {
-                "MessageToPrint": "You have left ${Player.Location}"
-              }
-            },
-            {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "Location",
