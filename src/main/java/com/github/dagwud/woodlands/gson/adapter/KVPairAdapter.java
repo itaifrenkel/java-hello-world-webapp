@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 class KVPairAdapter implements JsonDeserializer
 {
-  public Object deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
+  public ParamMappings deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
   {
     JsonObject jsonParamMappings = jsonElement.getAsJsonObject();
     HashMap<String, String> mappings = new HashMap<>();
@@ -18,6 +18,6 @@ class KVPairAdapter implements JsonDeserializer
       mappings.put(key, value);
     }
 
-    return mappings;
+    return new ParamMappings(mappings);
   }
 }
