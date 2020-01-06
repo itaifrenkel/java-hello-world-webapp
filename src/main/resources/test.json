@@ -72,7 +72,7 @@
             {
               "ProcName": "Goto",
               "ParamMappings": {
-                "Location": "The Village"
+                "NewLocation": "The Village"
               }
             },
             {
@@ -142,13 +142,13 @@
         },
         {
           "name": "Goto",
-          "inputs": ["Location"],
+          "inputs": ["NewLocation"],
           "steps": [
             {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "Location",
-                "AttributeValue": "${Location}"
+                "AttributeValue": "${NewLocation}"
               }
             },
             {

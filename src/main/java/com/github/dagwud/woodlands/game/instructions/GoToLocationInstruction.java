@@ -21,10 +21,10 @@ public abstract class GoToLocationInstruction extends GameInstruction
   }
 
   @Override
-  public void execute(GameState gameState) throws ActionInvocationException, IOException
+  public void execute(GameState gameState) throws ActionInvocationException
   {
     ParamMappings params = new ParamMappings();
-    params.mappings.put("Location", locationName);
+    params.mappings.put("NewLocation", locationName);
     CallDetails callDetails = new CallDetails(new HashMap<>(), params);
     InvocationPlan plan = ActionInvocationPlanner.plan("Goto", gameState, callDetails);
     ActionInvocationPlanExecutor.execute(plan);

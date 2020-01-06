@@ -35,12 +35,13 @@ public abstract class ActionInvocationPlanner
     else
     {
       Action action = lookupAction(procName);
-      addInvokers(action, invokers);
+      addInvokers(action, callDetails, invokers);
     }
   }
 
-  private static void addInvokers(Action action, InvocationPlan invokers) throws ActionInvocationException
+  private static void addInvokers(Action action, CallDetails callDetails, InvocationPlan invokers) throws ActionInvocationException
   {
+    invokers.add(NativeActionInvokerFactory.create("PushVariables", callDetails));
     for (Step step : action.steps)
     {
       Map<String, String> callParameters = (step.paramMappings == null ? new HashMap<>() : step.paramMappings.mappings);
@@ -53,6 +54,7 @@ public abstract class ActionInvocationPlanner
 
       invokers.add(NativeActionInvokerFactory.create("PopVariables", empty));
     }
+    invokers.add(NativeActionInvokerFactory.create("PopVariables", callDetails));
   }
 
   private static boolean isNativeAction(String procName)
