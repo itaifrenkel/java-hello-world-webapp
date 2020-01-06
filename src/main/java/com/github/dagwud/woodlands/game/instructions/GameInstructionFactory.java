@@ -34,7 +34,7 @@ public class GameInstructionFactory
     }
     if (telegramUpdate.message.text.equals("/help"))
     {
-      return new ShowHelpInstruction(chatId);
+      return new ShowHelpInstruction();
     }
     if (telegramUpdate.message.text.equals("/reset"))
     {
