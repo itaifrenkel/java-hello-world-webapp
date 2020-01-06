@@ -1,4 +1,4 @@
-ackage com.github.dagwud.woodlands.gson.telegram;
+package com.github.dagwud.woodlands.gson.telegram;
 
 import com.google.gson.annotations.SerializedName;
 
