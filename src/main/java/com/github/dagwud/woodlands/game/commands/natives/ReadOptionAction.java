@@ -43,8 +43,8 @@ public class ReadOptionAction extends NativeAction
       {
         b.append(",");
       }
-      b.append("[{text: '").append(option).append("', ")
-              .append("callback_data: '").append(option).append("}]");
+      b.append("[{text: \"").append(option).append("\", ")
+              .append("callback_data: \"").append(option).append("\"}]");
     }
     b.append("]}");
     /*
