@@ -151,11 +151,13 @@
                 "AttributeName": "Location",
                 "AttributeValue": "${Location}"
               }
+            },
+            {
+              "ProcName": "Echo",
+              "MessageToPrint", "You are at ${Player.Location}"
             }
           ]
         }
-
-
       ]
     },
     {
