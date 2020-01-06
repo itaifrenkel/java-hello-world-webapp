@@ -11,6 +11,8 @@ import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
 
 public class ShowHelpInstruction extends GameInstruction
 {
