@@ -60,7 +60,7 @@ PrintWriter pw = new PrintWriter(sw);
 e.printStackTrace(pw);
 String sStackTrace = sw.toString();
 
-        TelegramMessageSender.sendMessage(chatId, sStackTrace);
+        TelegramMessageSender.sendMessage(chatId, "`" + sStackTrace + "`");
       }
       catch (Exception ignored) {} // oh well
     }
