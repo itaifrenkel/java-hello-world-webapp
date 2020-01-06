@@ -26,7 +26,7 @@ public class ReadOptionAction extends NativeAction
     String buttons = buildInlineKeyboard(options);
     System.out.println("SENT INLINE:");
     System.out.println(buttons);
-    TelegramMessageSender.sendMessage(Integer.parseInt(chatId), "", buttons);
+    TelegramMessageSender.sendMessage(Integer.parseInt(chatId), "Please make a choice", buttons);
     return new InvocationResults(new Variables("return", results), ReturnMode.SUSPEND);
   }
 
