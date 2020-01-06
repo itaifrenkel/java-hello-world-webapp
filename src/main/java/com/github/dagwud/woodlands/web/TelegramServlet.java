@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+import java.io.StringWriter;
+import java.io.PrintWriter;
+
 @WebServlet(name = "TelegramServlet", urlPatterns = "/telegram")
 public class TelegramServlet extends HttpServlet
 {
@@ -50,7 +54,13 @@ public class TelegramServlet extends HttpServlet
       e.printStackTrace();
       try
       {
-        TelegramMessageSender.sendMessage(chatId, e.toString());
+
+StringWriter sw = new StringWriter();
+PrintWriter pw = new PrintWriter(sw);
+e.printStackTrace(pw);
+String sStackTrace = sw.toString();
+
+        TelegramMessageSender.sendMessage(chatId, sStackTrace);
       }
       catch (Exception ignored) {} // oh well
     }
