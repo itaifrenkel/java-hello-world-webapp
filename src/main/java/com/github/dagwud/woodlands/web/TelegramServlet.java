@@ -55,7 +55,7 @@ public class TelegramServlet extends HttpServlet
     throw new UnavailableException("Not available");
   }
 
-  private Chat determineText(Update update)
+  private String determineText(Update update)
   {
     if (update.message != null)
     {
