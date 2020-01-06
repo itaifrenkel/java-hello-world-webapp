@@ -4,6 +4,19 @@
       "Name": "core",
       "actions": [
         {
+          "name": "ShowHelp",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "The following commands are available:
+* /new - create a new character
+* /help - show this help info"
+              }
+            }
+          ]
+        },
+        {
           "name": "GetPlayerAttribute",
           "inputs": [
             "AttributeName"
