@@ -62,7 +62,10 @@ String sStackTrace = sw.toString();
 
         TelegramMessageSender.sendMessage(chatId, "`" + sStackTrace + "`");
       }
-      catch (Exception ignored) {} // oh well
+      catch (Exception f)
+      {
+        f.printStackTrace();
+      }
     }
   }
 
