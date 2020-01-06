@@ -36,13 +36,11 @@ public class ReadOptionAction extends NativeAction
   private String buildInlineKeyboard(String[] options)
   {
     return "{" +
-            "  \"reply_keyboard\": {" +
                "\"keyboard\": [" +
                  "[\"A\", \"B\"]," +
                  "[\"C\", \"D\"]" +
                "]," +
                "\"one_time_keyboard\": true" +
-              "}" +
             "}";
     /*StringBuilder b = new StringBuilder();
     b.append(" {")
