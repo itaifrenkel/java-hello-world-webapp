@@ -37,16 +37,11 @@ public class ReadOptionAction extends NativeAction
 
   private String buildInlineKeyboard(String[] options, int numCols)
   {
-    StringBuilder b = new StringBuilder();
-    b.append(" {")
-            .append("\"resize_keyboard\": true,")
-            .append("\"keyboard\": "
-    );
-
-    b.append(toGrid(options, numCols));
-    b.append("}");
-
-    return b.toString();
+    return " {" +
+            "\"resize_keyboard\": true," +
+            "\"keyboard\": " +
+            toGrid(options, numCols) +
+            "}";
   }
 
   private String toGrid(String[] options, int numCols)
