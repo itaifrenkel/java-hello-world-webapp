@@ -9,4 +9,7 @@ public class Update
 
   @SerializedName("message")
   public Message message;
+
+  @SerializedName("callback_query")
+  public CallbackQuery callbackQuery;
 }
