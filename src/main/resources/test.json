@@ -104,10 +104,10 @@
           "name": "ReadPlayerClass",
           "steps": [
             {
-              "ProcName": "ReadOption",
+              "ProcName": "Native:ReadOption",
               "ParamMappings": {
                 "MessageToPrint": "Please choose your player class",
-                "OptionsCSV": "Wizard,Druid,Explorer"
+                "Options": "Wizard,Druid,Explorer"
               },
               "OutputMappings": {
                 "ChosenOption": "Class"
@@ -158,21 +158,6 @@
               }
             }
           ]
-        },
-        {
-          "name": "ReadOption",
-          "steps": [
-            {
-              "ProcName": "Native:ReadOption",
-              "ParamMappings": {
-                "MessageToPrint": "${MessageToPrint}",
-                "Options": "${OptionsCSV}"
-              },
-              "OutputMappings": {
-                "ChosenOption": "ChosenOption"
-              }
-            }
-          ]
         }
       ]
     },
@@ -184,10 +169,10 @@
           "name": "VillageMenu",
           "steps": [
             {
-              "ProcName": "ReadOption",
+              "ProcName": "Native:ReadOption",
               "ParamMappings": {
                 "MessageToPrint": "The bustle of the village square brings a reassuring comfort to weary adventurers - the only danger here is the prices charged by the local bartender.\n\nThe square is dominated on the one side by the local tavern, from which you hear loud music and the occasional raised voides of a disagreement.\n\nFacing it, within stumbling range, is the Inn. The innkeeper is a friend, and has offered to look after any items you may wish to leave behind while you're out on your adventures.\n\nTo the north lies a path leading up to The Mountain, and another leading out to the Woodlands.",
-                "OptionsCSV": "The Inn,The Mountain,The Woodlands"
+                "Options": "The Inn,The Mountain,The Woodlands"
               }
             }
           ]
