@@ -5,7 +5,7 @@
       "type": "VarChange",
       "trigger": "__Player.Location",
       "steps": {
-        "ProcName": "Echo";
+        "ProcName": "Echo",
         "ParamMappings": {
            "MessageToPrint": "TESTING! Hook fired!"
         }
