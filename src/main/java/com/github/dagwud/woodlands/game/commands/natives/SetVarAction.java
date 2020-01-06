@@ -17,7 +17,7 @@ public class SetVarAction extends NativeAction
     String varName = varSet + "." + gameState.getVariables().lookupVariableValue("VarName");
     String varValue = gameState.getVariables().lookupVariableValue("VarValue");
     gameState.getVariables().setValue(varName, varValue);
-    Variables result = new Variables("setvarparams", new HashMap<>());
+    Variables result = new Variables(new HashMap<>());
     return new InvocationResults(result);
   }
 }

@@ -17,7 +17,7 @@ public class PushVariablesAction extends NativeAction
   @Override
   public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
-    gameState.getVariables().pushNewVariablesStackFrame("push variables", callDetails.getCallParameters());
-    return new InvocationResults(new Variables("push variables", new HashMap<>(0)));
+    gameState.getVariables().pushNewVariablesStackFrame(callDetails.getCallParameters());
+    return new InvocationResults(new Variables(new HashMap<>(0)));
   }
 }

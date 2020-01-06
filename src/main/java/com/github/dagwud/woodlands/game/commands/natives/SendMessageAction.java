@@ -24,6 +24,6 @@ public class SendMessageAction extends NativeAction
     {
       System.out.println(">>> " + message);
     }
-    return new InvocationResults(new Variables("test", new HashMap<>()));
+    return new InvocationResults(new Variables(new HashMap<>()));
   }
 }

@@ -32,7 +32,7 @@ public class GameInstructionFactory
 
     if (cmd.equals("/new"))
     {
-      return new CreateCharacterInstruction(chatId);
+      return new CreateCharacterInstruction();
     }
     if (cmd.equals("/help"))
     {

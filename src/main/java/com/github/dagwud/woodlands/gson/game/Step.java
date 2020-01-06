@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.gson.game;
 
+import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.google.gson.annotations.SerializedName;
 
 public class Step
@@ -8,10 +9,10 @@ public class Step
   public String procName;
 
   @SerializedName(value = "ParamMappings")
-  public ParamMappings paramMappings;
+  public Variables paramMappings;
 
   @SerializedName(value = "OutputMappings")
-  public ParamMappings outputMappings;
+  public Variables outputMappings;
 
   @Override
   public String toString()

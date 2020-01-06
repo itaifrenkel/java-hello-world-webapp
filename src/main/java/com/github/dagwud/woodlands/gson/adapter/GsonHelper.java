@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.gson.adapter;
 
-import com.github.dagwud.woodlands.gson.game.ParamMappings;
+import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -35,7 +35,7 @@ public abstract class GsonHelper
   private static GsonBuilder createBuilder()
   {
     GsonBuilder builder = new GsonBuilder();
-    builder.registerTypeAdapter(ParamMappings.class, new KVPairAdapter());
+    builder.registerTypeAdapter(Variables.class, new KVPairAdapter());
     return builder;
   }
 

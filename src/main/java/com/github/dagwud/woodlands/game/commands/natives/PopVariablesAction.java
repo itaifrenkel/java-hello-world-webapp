@@ -18,6 +18,6 @@ public class PopVariablesAction extends NativeAction
   public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
     gameState.getVariables().dropStackFrame();
-    return new InvocationResults(new Variables("pop variables", new HashMap<>(0)));
+    return new InvocationResults(new Variables(new HashMap<>(0)));
   }
 }

@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.commands.invocation.plan;
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.invocation.*;
 import com.github.dagwud.woodlands.gson.game.Action;
-import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.github.dagwud.woodlands.gson.game.Step;
 
 import java.util.HashMap;
@@ -45,10 +44,10 @@ public abstract class ActionInvocationPlanner
     for (Step step : action.steps)
     {
       Map<String, String> callParameters = (step.paramMappings == null ? new HashMap<>() : step.paramMappings);
-      ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;
-      CallDetails empty = new CallDetails(callParameters, new ParamMappings());
+      CallDetails empty = new CallDetails(callParameters, new Variables());
       invokers.add(NativeActionInvokerFactory.create("PushVariables", empty));
 
+      Variables outputMappings = step.outputMappings == null ? new Variables() : step.outputMappings;
       CallDetails callDetails1 = new CallDetails(callParameters, outputMappings);
       addInvokers(step.procName, callDetails1, invokers);
 

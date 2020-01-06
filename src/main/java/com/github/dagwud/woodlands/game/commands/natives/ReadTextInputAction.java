@@ -15,6 +15,6 @@ public class ReadTextInputAction extends NativeAction
   {
     HashMap<String, String> results = new HashMap<>();
     results.put(OUTPUT_CAPTURED_TEXT, "${buffer}");
-    return new InvocationResults(new Variables("return", results), ReturnMode.SUSPEND);
+    return new InvocationResults(new Variables(results), ReturnMode.SUSPEND);
   }
 }

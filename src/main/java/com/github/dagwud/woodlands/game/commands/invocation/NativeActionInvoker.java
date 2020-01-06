@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.natives.NativeAction;
-import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
 class NativeActionInvoker extends ActionInvoker
 {
@@ -21,7 +20,7 @@ class NativeActionInvoker extends ActionInvoker
   }
 
   @Override
-  InvocationResults doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
+  InvocationResults doInvoke(GameState gameState, Variables outputMappings) throws ActionInvocationException
   {
     try
     {

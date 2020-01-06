@@ -5,17 +5,14 @@ import java.util.Map;
 
 public class Variables extends HashMap<String, String>
 {
-  private final String comment;
-
-  public Variables(String comment)
+  public Variables()
   {
-    this(comment, new HashMap<>());
+    this(new HashMap<>());
   }
 
-  public Variables(String comment, Map<String, String> callParameters)
+  public Variables(Map<String, String> callParameters)
   {
-    super(callParameters);
-    this.comment = comment;
+    super(callParameters == null ? new HashMap<>(0) : callParameters);
   }
 
   @Override
@@ -27,7 +24,6 @@ public class Variables extends HashMap<String, String>
   String toString(int indent)
   {
     StringBuilder b = new StringBuilder();
-    b.append(space(indent)).append("| ").append(comment).append("\n");
     b.append(space(indent)).append("| Variable              | Value   ").append("\n");
     for (Map.Entry<String, String> value : entrySet())
     {

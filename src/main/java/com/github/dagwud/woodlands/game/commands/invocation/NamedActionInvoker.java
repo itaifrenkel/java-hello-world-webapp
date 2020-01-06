@@ -2,11 +2,7 @@ package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.gson.game.Action;
-import com.github.dagwud.woodlands.gson.game.ParamMappings;
 import com.github.dagwud.woodlands.gson.game.Step;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class NamedActionInvoker extends ActionInvoker
 {
@@ -25,7 +21,7 @@ public class NamedActionInvoker extends ActionInvoker
   }
 
   @Override
-  InvocationResults doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException
+  InvocationResults doInvoke(GameState gameState, Variables outputMappings) throws ActionInvocationException
   {
     for (Step step : action.steps)
     {
@@ -40,19 +36,14 @@ public class NamedActionInvoker extends ActionInvoker
 
   private InvocationResults invokeStep(GameState gameState, Step step) throws ActionInvocationException
   {
-    Map<String, String> callParameters = buildParameters(step);
-    ParamMappings outputMappings = step.outputMappings == null ? new ParamMappings() : step.outputMappings;
+    Variables callParameters = buildParameters(step.paramMappings);
+    Variables outputMappings = buildParameters(step.outputMappings);
     CallDetails callDetails = new CallDetails(callParameters, outputMappings);
     return ActionInvokerDelegate.invoke(gameState, step.procName);
   }
 
-  private Map<String, String> buildParameters(Step step)
+  private Variables buildParameters(Variables paramMappings)
   {
-    Map<String, String> callParameters = new HashMap<>();
-    if (step.paramMappings != null)
-    {
-      callParameters.putAll(step.paramMappings);
-    }
-    return callParameters;
+    return paramMappings == null ? new Variables() : paramMappings;
   }
 }

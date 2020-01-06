@@ -1,15 +1,13 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import com.github.dagwud.woodlands.gson.game.ParamMappings;
-
 import java.util.Map;
 
 public class CallDetails
 {
   private final Map<String, String> callParameters;
-  private final ParamMappings outputMappings;
+  private final Variables outputMappings;
 
-  public CallDetails(Map<String, String> callParameters, ParamMappings outputMappings)
+  public CallDetails(Map<String, String> callParameters, Variables outputMappings)
   {
     this.callParameters = callParameters;
     this.outputMappings = outputMappings;
@@ -20,7 +18,7 @@ public class CallDetails
     return callParameters;
   }
 
-  ParamMappings getOutputMappings()
+  Variables getOutputMappings()
   {
     return outputMappings;
   }

@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.gson.game.ParamMappings;
 
 import java.util.Map;
 
@@ -30,7 +29,7 @@ public abstract class ActionInvoker
     return results;
   }
 
-  void complete(GameState gameState, InvocationResults results, ParamMappings outputMappings)
+  void complete(GameState gameState, InvocationResults results, Variables outputMappings)
   {
     Variables resultVariables = results.getVariables();
     mapResults(resultVariables, gameState.getVariables(), outputMappings);
@@ -43,9 +42,9 @@ public abstract class ActionInvoker
 
   abstract String getActionName();
 
-  abstract InvocationResults doInvoke(GameState gameState, ParamMappings outputMappings) throws ActionInvocationException;
+  abstract InvocationResults doInvoke(GameState gameState, Variables outputMappings) throws ActionInvocationException;
 
-  private static void mapResults(Variables results, VariableStack callContext, ParamMappings outputMappings)
+  private static void mapResults(Variables results, VariableStack callContext, Variables outputMappings)
   {
     for (Map.Entry<String, String> outputMapping : outputMappings.entrySet()) // todo is it necessary to have OM on context now?
     {

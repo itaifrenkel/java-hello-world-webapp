@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.gson.adapter;
 
-import com.github.dagwud.woodlands.gson.game.ParamMappings;
+import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 class KVPairAdapter implements JsonDeserializer
 {
-  public ParamMappings deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
+  public Variables deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
   {
     JsonObject jsonParamMappings = jsonElement.getAsJsonObject();
     HashMap<String, String> mappings = new HashMap<>();
@@ -18,6 +18,6 @@ class KVPairAdapter implements JsonDeserializer
       mappings.put(key, value);
     }
 
-    return new ParamMappings(mappings);
+    return new Variables(mappings);
   }
 }
