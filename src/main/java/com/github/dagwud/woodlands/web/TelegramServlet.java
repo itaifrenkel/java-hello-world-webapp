@@ -54,13 +54,11 @@ public class TelegramServlet extends HttpServlet
       e.printStackTrace();
       try
       {
-
-StringWriter sw = new StringWriter();
-PrintWriter pw = new PrintWriter(sw);
-e.printStackTrace(pw);
-String sStackTrace = sw.toString();
-
-        TelegramMessageSender.sendMessage(chatId, "`" + sStackTrace + "`");
+        while (e != null)
+        {
+          TelegramMessageSender.sendMessage(chatId, e);
+          e = e.getCause();
+        }
       }
       catch (Exception f)
       {
