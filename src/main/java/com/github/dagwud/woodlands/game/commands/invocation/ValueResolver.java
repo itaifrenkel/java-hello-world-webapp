@@ -47,7 +47,6 @@ abstract class ValueResolver
       {
         throw new RuntimeException("Attempt made to create a self-referential variable: " + varExpression + " = " + value);
       }
-//      value = resolveVar(value, callParameters);
       value = ValueResolver.resolve(value, callParameters);
     }
     return value;
