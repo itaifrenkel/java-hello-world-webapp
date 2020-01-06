@@ -24,7 +24,7 @@ public abstract class GoToLocationInstruction extends GameInstruction
   @Override
   public void execute(GameState gameState) throws ActionInvocationException
   {
-    MapString, String> inputs = new HashMap<>();
+    Map<String, String> inputs = new HashMap<>();
     inputs.put("NewLocation", locationName);
     ParamMappings params = new ParamMappings();
     params.mappings.put("NewLocation", locationName);
