@@ -145,7 +145,7 @@
           "steps": [
             {
               "ProcName": "Echo",
-              "MessageToPrint", "You have left ${Player.Location}"
+              "MessageToPrint": "You have left ${Player.Location}"
             },
             {
               "ProcName": "SetPlayerAttribute",
@@ -156,7 +156,7 @@
             },
             {
               "ProcName": "Echo",
-              "MessageToPrint", "You are now at ${Player.Location}"
+              "MessageToPrint": "You are now at ${Player.Location}"
             }
           ]
         }
