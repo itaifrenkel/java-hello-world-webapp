@@ -36,7 +36,7 @@ public class VariableStack
       {
         String value = stackFrame.get(variableName);
         // cases like a=${a} - i.e. it's intended to read from parent frame - don't use this value but keep looking:
-         if (!value.equals(ValueResolver.START_VARIABLE + variableName + ValueResolver.END_VARIABLE))
+         if (value != null && !value.equals(ValueResolver.START_VARIABLE + variableName + ValueResolver.END_VARIABLE))
         {
           return value;
         }
