@@ -1,7 +1,7 @@
 {
   "Hooks": [
     {
-      "Name": "TestHook",
+      "name": "TestHook",
       "type": "VarChange",
       "trigger": "__Player.Location",
       "steps": [
