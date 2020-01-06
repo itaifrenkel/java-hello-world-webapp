@@ -107,7 +107,7 @@
               "ProcName": "Native:ReadOption",
               "ParamMappings": {
                 "MessageToPrint": "Please choose your player class",
-                "Options": "Wizard,Druid,Explorer"
+                "Options": "General,Trickster,Explorer,Brawler,Wizard,Druid"
               },
               "OutputMappings": {
                 "ChosenOption": "Class"
