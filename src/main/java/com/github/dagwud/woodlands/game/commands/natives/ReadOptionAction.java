@@ -22,7 +22,7 @@ public class ReadOptionAction extends NativeAction
     System.out.println("<<< Choose option: " + Arrays.toString(options));
     HashMap<String, String> results = new HashMap<>();
     results.put(OUTPUT_CHOSEN_OPTION, "${buffer}");
-    String chatId = gameState.getVariables().lookupVariableValue("chat_id");
+    String chatId = gameState.getVariables().lookupVariableValue("chatId");
     String message = buildInlineKeyboard(options);
     System.out.println("SENT INLINE:");
     System.out.println(message);
