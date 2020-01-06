@@ -14,7 +14,7 @@ public class ReadOptionAction extends NativeAction
 {
   private static final String PARAMETER_NAME_PROMPT = "MessageToPrint";
   private static final String OUTPUT_CHOSEN_OPTION = "ChosenOption";
-  private static final String PARAMETER_NAME_OPTIONS = "OptionsCSV";
+  private static final String PARAMETER_NAME_OPTIONS = "Options";
 
   @Override
   public InvocationResults invoke(GameState gameState, CallDetails callDetails) throws IOException

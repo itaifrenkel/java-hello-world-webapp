@@ -104,7 +104,7 @@
           "name": "ReadPlayerClass",
           "steps": [
             {
-              "ProcName": "Native:ReadOption",
+              "ProcName": "ReadOption",
               "ParamMappings": {
                 "MessageToPrint": "Please choose your player class",
                 "OptionsCSV": "Wizard,Druid,Explorer"
@@ -166,7 +166,7 @@
               "ProcName": "Native:ReadOption",
               "ParamMappings": {
                 "MessageToPrint": "${MessageToPrint}",
-                "OptionsCSV": "${OptionsCSV}"
+                "Options": "${OptionsCSV}"
               },
               "OutputMappings": {
                 "ChosenOption": "ChosenOption"
