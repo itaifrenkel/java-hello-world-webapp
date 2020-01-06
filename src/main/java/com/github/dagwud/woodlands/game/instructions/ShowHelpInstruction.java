@@ -21,7 +21,7 @@ public class ShowHelpInstruction extends GameInstruction
   }
 
   @Override
-  public void execute(GameState gameState) throws IOException
+  public void execute(GameState gameState) throws ActionInvocationException, IOException
   {
     CallDetails callDetails = new CallDetails(new HashMap<>(), new ParamMappings());
     InvocationPlan plan = ActionInvocationPlanner.plan("ShowHelp", gameState, callDetails);
