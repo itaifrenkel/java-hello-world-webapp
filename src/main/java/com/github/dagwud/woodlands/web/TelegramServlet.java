@@ -27,7 +27,7 @@ public class TelegramServlet extends HttpServlet
     {
       // todo verify request came from telegram - token in request
       Update update = GsonHelper.readJSON(req.getReader(), Update.class);
-      String chatId = determineChatId(update);
+      int chatId = determineChatId(update);
       String text = determineText(update);
 
       GameState gameState = GameStatesRegistry.lookup(chatId);
