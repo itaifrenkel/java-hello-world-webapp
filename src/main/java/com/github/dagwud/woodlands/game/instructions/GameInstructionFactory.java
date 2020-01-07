@@ -41,36 +41,11 @@ public class GameInstructionFactory
       return new RunProcInstruction(quickCommand.procName, quickCommand.paramMappings == null ? new Variables() : quickCommand.paramMappings, new Variables());
     }
 
-    if (cmd.equals("The Village") || cmd.equals("Village Square"))
-    {
-      return new GoToLocationInstruction("The Village");
-    }
-    if (cmd.equals("The Inn"))
-    {
-      return new GoToLocationInstruction("The Inn");
-    }
-    if (cmd.equals("The Tavern"))
-    {
-      return new GoToLocationInstruction("The Tavern");
-    }
     if (cmd.equals("Buy Drinks"))
     {
       return new RunProcInstruction("Buy Drinks");
     }
-    if (cmd.equals("The Mountain"))
-    {
-      return new GoToLocationInstruction("The Mountain");
-    }
-    if (cmd.equals("The Woodlands"))
-    {
-      return new GoToLocationInstruction("The Woodlands");
-    }
 
-    if (telegramUpdate.message.text.equals("/reset"))
-    {
-//todo nuke this
-      return new ResetServerInstruction();
-    }
     return new SendMessageInstruction(chatId, "I'm not sure what you mean... perhaps try /help?");
   }
 }

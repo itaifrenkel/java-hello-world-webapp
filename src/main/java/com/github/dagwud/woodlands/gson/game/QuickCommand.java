@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class QuickCommand
 {
-  public String command;
+  public String[] command;
 
   @SerializedName(value = "ProcName")
   public String procName;

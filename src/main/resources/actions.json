@@ -1,33 +1,47 @@
 {
   "QuickCommands": [
     {
-      "command": "/start",
+      "command": ["/start"],
       "ProcName": "ShowHelp"
     },
     {
-      "command": "/help",
+      "command": ["/help"],
       "ProcName": "ShowHelp"
     },
     {
-      "command": "/new",
+      "command": ["/new"],
       "ProcName": "PlayerSetup"
     },
     {
-      "command": "/village",
+      "command": ["/village", "The Village", "Village Square"],
       "ProcName": "Goto",
       "ParamMappings": {
         "NewLocation": "The Village"
       }
     },
     {
-      "command": "/mountain",
+      "command": ["The Inn"],
+      "ProcName": "Goto",
+      "ParamMappings": {
+        "NewLocation": "The Inn"
+      }
+    },
+    {
+      "command": ["The Tavern"],
+      "ProcName": "Goto",
+      "ParamMappings": {
+        "NewLocation": "The Tavern"
+      }
+    },
+    {
+      "command": ["/mountain", "The Mountain"],
       "ProcName": "Goto",
       "ParamMappings": {
         "NewLocation": "The Mountain"
       }
     },
     {
-      "command": "/woodlands",
+      "command": ["/woodlands", "The Woodlands"],
       "ProcName": "Goto",
       "ParamMappings": {
         "NewLocation": "The Woodlands"
