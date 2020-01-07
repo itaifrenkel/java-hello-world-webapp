@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.ActionsCache;
+import com.github.dagwud.woodlands.game.commands.quickcommands.QuickCommandsCache;
 import com.github.dagwud.woodlands.gson.game.Root;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 
@@ -16,11 +17,13 @@ public class ActionsCacheFactory
   private static ActionsCacheFactory instance;
 
   private final ActionsCache actions;
+  private final QuickCommandsCache quickCommands;
 
   private ActionsCacheFactory()
   {
     Root root = GsonHelper.readJSON(new File(ACTIONS_FILE), Root.class);
     actions = new ActionsCache(root);
+    quickCommands = new QuickCommandsCache(root);
   }
 
   public static ActionsCacheFactory instance()
@@ -43,5 +46,10 @@ public class ActionsCacheFactory
   public ActionsCache getActions()
   {
     return actions;
+  }
+
+  public QuickCommandsCache getQuickCommands()
+  {
+    return quickCommands;
   }
 }

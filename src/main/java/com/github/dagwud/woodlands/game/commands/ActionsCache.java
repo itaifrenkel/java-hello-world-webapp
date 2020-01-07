@@ -42,15 +42,4 @@ public class ActionsCache
     return action.name;
   }
 
-  public Action findCommand(String cmd)
-  {
-    for (Action action : actions.values())
-    {
-      if (cmd.equals(action.command))
-      {
-        return action;
-      }
-    }
-    return null;
-  }
 }

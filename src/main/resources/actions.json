@@ -1,25 +1,19 @@
 {
-  "Packages": [
+  "Commands": [
     {
-      "Name": "Commands",
-      "actions:": [
-        {
-          "name": "CommandShowHelp",
-          "command": "/start",
-          "ProcName": "ShowHelp"
-        },
-        {
-          "name": "CommandShowHelp",
-          "command": "/help",
-          "ProcName": "ShowHelp"
-        },
-        {
-          "name": "CommandNew",
-          "command": "/new",
-          "ProcName": "PlayerSetup"
-        }
-      ]
+      "command": "/start",
+      "ProcName": "ShowHelp"
     },
+    {
+      "command": "/help",
+      "ProcName": "ShowHelp"
+    },
+    {
+      "command": "/new",
+      "ProcName": "PlayerSetup"
+    }
+  ],
+  "Packages": [
     {
       "Name": "core",
       "actions": [
@@ -166,7 +160,6 @@
         }
       ]
     },
-
     {
       "Name": "Village",
       "actions": [
@@ -245,7 +238,6 @@
         }
       ]
     },
-
     {
       "Name": "Woodlands",
       "actions": [
@@ -263,6 +255,5 @@
         }
       ]
     }
-
   ]
 }

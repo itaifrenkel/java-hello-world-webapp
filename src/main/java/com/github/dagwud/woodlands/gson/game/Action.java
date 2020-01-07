@@ -6,7 +6,6 @@ public class Action
 {
   public String name;
   public Step[] steps;
-  public String command;
 
   @Override
   public String toString()
