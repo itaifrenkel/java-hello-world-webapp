@@ -15,21 +15,6 @@
           ]
         },
         {
-          "name": "GetPlayerAttribute",
-          "steps": [
-            {
-              "ProcName": "Native:ReadVar",
-              "ParamMappings": {
-                "VarSet": "Player",
-                "VarName": "${AttributeName}"
-              },
-              "OutputMappings": {
-                "VarValue": "AttributeValue"
-              }
-            }
-          ]
-        },
-        {
           "name": "SetPlayerAttribute",
           "steps": [
             {
@@ -197,6 +182,18 @@
               "ParamMappings": {
                 "MessageToPrint": "This is the tavern",
                 "Options": "Village Square,Buy Drinks"
+              }
+            }
+          ]
+        },
+
+        {
+          "name": "Buy Drinks",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "Construction workers still at work here"
               }
             }
           ]
