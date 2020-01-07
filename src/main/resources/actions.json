@@ -211,7 +211,7 @@
           ]
         },
         {
-          "Name": "InitCharacterStats",
+          "name": "InitCharacterStats",
           "steps": [
             {
               "ProcName": "SetPlayerAttribute",
