@@ -44,19 +44,19 @@ public class GameInstructionFactory
     }
     if (cmd.equals("The Village") || cmd.equals("/village"))
     {
-      return new GoToVillageInstruction();
+      return new GoToLocationInstruction("The Village");
     }
     if (cmd.equals("The Inn"))
     {
-      return new GoToInnInstruction();
+      return new GoToLocationInstruction("The Inn");
     }
     if (cmd.equals("The Mountain") || cmd.equals("/mountain"))
     {
-      return new GoToMountainInstruction();
+      return new GoToLocationInstruction("The Mountain");
     }
     if (cmd.equals("The Woodlands") || cmd.equals("/woodlands"))
     {
-      return new GoToWoodlandsInstruction();
+      return new GoToLocationInstruction("The Woodlands");
     }
 
     if (telegramUpdate.message.text.equals("/reset"))

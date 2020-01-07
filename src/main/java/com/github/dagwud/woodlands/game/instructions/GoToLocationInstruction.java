@@ -8,7 +8,7 @@ import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.invocation.plan.ActionInvocationPlanner;
 import com.github.dagwud.woodlands.game.commands.invocation.plan.InvocationPlan;
 
-public abstract class GoToLocationInstruction extends GameInstruction
+public class GoToLocationInstruction extends GameInstruction
 {
   private final String locationName;
 
