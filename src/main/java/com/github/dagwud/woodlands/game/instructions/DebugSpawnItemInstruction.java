@@ -24,7 +24,7 @@ public class DebugSpawnItemInstruction extends GameInstruction
     int rand = random.nextInt(allWeapons.size());
     Weapon chosenWeapon = allWeapons.get(rand);
     String weaponText = buildWeaponText(chosenWeapon);
-    TelegramMessageSender.sendMessage(Integer.parseInt(chatId), "You got " + weaponText);
+    TelegramMessageSender.sendMessage(Integer.parseInt(chatId), "You got a " + weaponText);
   }
 
   private String buildWeaponText(Weapon chosenWeapon)
