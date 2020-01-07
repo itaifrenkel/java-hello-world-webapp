@@ -11,7 +11,6 @@ import java.util.Random;
 
 public class DebugSpawnItemInstruction extends GameInstruction
 {
-  private static final Random random = new Random(System.currentTimeMillis());
   private static final String MELEE_ICON = "\u2694"; // crossed swords
   private static final String RANGED_ICON = "\ud83c\udff9"; // bow and arrow
 
@@ -21,7 +20,7 @@ public class DebugSpawnItemInstruction extends GameInstruction
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
 
     List<Weapon> allWeapons = ItemsCacheFactory.instance().getItems().getWeapons();
-    int rand = random.nextInt(allWeapons.size());
+    int rand = (int) (Math.random() * allWeapons.size());
     Weapon chosenWeapon = allWeapons.get(rand);
     String weaponText = buildWeaponText(chosenWeapon);
     TelegramMessageSender.sendMessage(Integer.parseInt(chatId), "You got a " + weaponText);

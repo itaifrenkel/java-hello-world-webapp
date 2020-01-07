@@ -22,6 +22,9 @@ public class Step
   @SerializedName(value = "Chance")
   public String chance;
 
+  @SerializedName(value = "IfFalse")
+  public Step ifFalse;
+
   public BigDecimal determineChanceRatio()
   {
     if (chance == null)

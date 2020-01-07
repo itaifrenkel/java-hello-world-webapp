@@ -5,6 +5,8 @@ import com.github.dagwud.woodlands.game.commands.invocation.*;
 import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.Step;
 
+import java.math.BigDecimal;
+
 public abstract class ActionInvocationPlanner
 {
   private static final String NATIVE_ACTION_PREFIX = "Native:";
@@ -52,11 +54,26 @@ public abstract class ActionInvocationPlanner
 
       Variables outputMappings = step.outputMappings == null ? new Variables() : step.outputMappings;
       CallDetails callDetails1 = new CallDetails(callParameters, outputMappings);
-      addInvokers(step.procName, callDetails1, invokers);
+      addInvokers(step, callDetails1, invokers);
 
       invokers.add(NativeActionInvokerFactory.create("PopVariables", empty));
     }
     invokers.add(NativeActionInvokerFactory.create("PopVariables", callDetails));
+  }
+
+  private static void addInvokers(Step step, CallDetails callDetails, InvocationPlan invokers) throws ActionInvocationException
+  {
+    BigDecimal chance = step.determineChanceRatio();
+    boolean shouldRun = true;
+    if (!chance.equals(BigDecimal.ONE))
+    {
+      BigDecimal random = new BigDecimal(Math.random());
+      shouldRun = random.compareTo(chance) > 0;
+    }
+    if (shouldRun)
+    {
+      addInvokers(step.procName, callDetails, invokers);
+    }
   }
 
   private static boolean isNativeAction(String procName)
