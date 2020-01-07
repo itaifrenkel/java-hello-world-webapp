@@ -59,7 +59,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}! You are at ${Player.Location}"
+                "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
               }
             },
             {
