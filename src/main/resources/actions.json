@@ -13,6 +13,10 @@
       "ProcName": "PlayerSetup"
     },
     {
+      "command": ["/me"],
+      "ProcName": "ShowCharacterInfo"
+    },
+    {
       "command": ["/village", "The Village", "Village Square"],
       "ProcName": "Goto",
       "ParamMappings": {
@@ -107,6 +111,17 @@
               "ProcName": "${Player.Location} Menu"
             }
           ]
+        },
+        {
+          "name": "ShowCharacterInfo",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level}\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.ManaMax}\nCarrying:\n- ${Player.Item.Carrying.Left}\n- ${Player.Item.Carrying.Right}"
+              }
+            }
+          ]
         }
       ]
     },
@@ -184,6 +199,60 @@
               "ParamMappings": {
                 "AttributeName": "Class",
                 "AttributeValue": "${Class}"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "InitCharacterStats",
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Level",
+                "AttributeValue": "1"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "MaxHP",
+                "AttributeValue": "100"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "HP",
+                "AttributeValue": "80"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Mana",
+                "AttributeValue": "2"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "ManaMax",
+                "AttributeValue": "3"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Item.Carrying.Left",
+                "AttributeValue": "nothing"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Item.Carrying.Right",
+                "AttributeValue": "nothing"
               }
             }
           ]
