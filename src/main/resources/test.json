@@ -176,6 +176,18 @@
               }
             }
           ]
+        },
+        {
+          "name": "The Inn Menu",
+          "steps": [
+            {
+              "ProcName": "Native:ReadOption",
+              "ParamMappings": {
+                "MessageToPrint": "This is the inn",
+                "Options": "Leave Items,Retrieve Items,The Village"
+              }
+            }
+          ]
         }
       ]
     },
@@ -190,6 +202,24 @@
               "ParamMappings": {
                 "MessageToPrint": "This is the mountain...",
                 "Options": "The Village"
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "Name": "Woodlands",
+      "actions": [
+        {
+          "name": "The Woodlands Menu",
+          "steps": [
+            {
+              "ProcName": "Native:Menu",
+              "ParamMappings": {
+                "MessageToPrint": "This is the Woodlands...",
+                "Options": "The Village,Deeper"
               }
             }
           ]
