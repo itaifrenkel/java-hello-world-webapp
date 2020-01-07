@@ -18,6 +18,20 @@
       "ParamMappings": {
         "NewLocation": "The Village"
       }
+    },
+    {
+      "command": "/mountain",
+      "ProcName": "Goto",
+      "ParamMappings": {
+        "NewLocation": "The Mountain"
+      }
+    },
+    {
+      "command": "/woodlands",
+      "ProcName": "Goto",
+      "ParamMappings": {
+        "NewLocation": "The Woodlands"
+      }
     }
   ],
   "Packages": [

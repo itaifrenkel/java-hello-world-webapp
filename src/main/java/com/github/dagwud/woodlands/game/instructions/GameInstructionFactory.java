@@ -57,11 +57,11 @@ public class GameInstructionFactory
     {
       return new RunProcInstruction("Buy Drinks");
     }
-    if (cmd.equals("The Mountain") || cmd.equals("/mountain"))
+    if (cmd.equals("The Mountain"))
     {
       return new GoToLocationInstruction("The Mountain");
     }
-    if (cmd.equals("The Woodlands") || cmd.equals("/woodlands"))
+    if (cmd.equals("The Woodlands"))
     {
       return new GoToLocationInstruction("The Woodlands");
     }
