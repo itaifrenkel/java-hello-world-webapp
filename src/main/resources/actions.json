@@ -31,6 +31,10 @@
       }
     },
     {
+      "command": ["Retrieve Item"],
+      "ProcName": "Retrieve Item"
+    },
+    {
       "command": ["The Tavern"],
       "ProcName": "Goto",
       "ParamMappings": {
@@ -283,6 +287,23 @@
                 "MessageToPrint": "This is the inn",
                 "Options": "Leave Items,Retrieve Items,Village Square"
               }
+            }
+          ]
+        },
+        {
+          "name": "Retrieve Items",
+          "steps": [
+            {
+              "ProcName": "Native:SpawnItem",
+              "OutputMappings": {
+                "SpawnedItem": "SpawnedItem"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Item.Carrying.Left",
+                "AttributeValue": "${SpawnedItem}"
             }
           ]
         },
