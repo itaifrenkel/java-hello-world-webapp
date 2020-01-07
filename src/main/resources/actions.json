@@ -143,7 +143,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "damage: ${weapon.${Player.Item.Carrying.Left}}.damage"
+                "MessageToPrint": "damage: ${weapons.${Player.Item.Carrying.Left}}.damage"
               }
             }
           ]
