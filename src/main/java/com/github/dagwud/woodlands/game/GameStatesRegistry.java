@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.game;
 
-import com.github.dagwud.woodlands.game.items.ItemCacheFactory;
+import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.HashMap;
@@ -33,11 +33,11 @@ public class GameStatesRegistry
     instance = null;
   }
 
-  private void populateItems(GameState gameState)
+  private static void populateItems(GameState gameState)
   {
     for (Weapon weapon : ItemsCacheFactory.instance().getItems().getWeapons())
     {
-      gameState.getVariables().put("weapons." + weapon.name + ".damage", 
+      gameState.getVariables().setValue("weapons." + weapon.name + ".damage", 
         weapon.damage.determineAverageRoll());
     }
   }
