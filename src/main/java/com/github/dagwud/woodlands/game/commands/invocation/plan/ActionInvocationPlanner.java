@@ -61,7 +61,6 @@ public abstract class ActionInvocationPlanner
 
   private static void addInvokers(Step step, InvocationPlan invokers) throws ActionInvocationException
   {
-
     BigDecimal chance = step.determineChanceRatio();
     boolean shouldRun = true;
     if (!chance.equals(BigDecimal.ONE))
