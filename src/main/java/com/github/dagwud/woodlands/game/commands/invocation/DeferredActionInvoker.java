@@ -31,7 +31,7 @@ public class DeferredActionInvoker extends ActionInvoker
   InvocationResults doInvoke(GameState gameState, Variables outputMappings) throws ActionInvocationException
   {
     String proc = ValueResolver.resolve(procName, gameState.getVariables());
-    System.out.println("defer: " + procName + " -> " proc);
+    System.out.println("defer: " + procName + " -> " + proc);
     InvocationPlan subplan = ActionInvocationPlanner.plan(proc, gameState, callDetails);
 
     invokers.insertAdditionalInvokers(subplan.getInvokers(), addAfter);
