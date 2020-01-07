@@ -81,7 +81,7 @@ public abstract class ActionInvocationPlanner
 
     if (stepToInvoke != null)
     {
-      addInvokers(stepToInvoke.procName, createCallDetails(step.ifFalse), invokers);
+      addInvokers(stepToInvoke.procName, createCallDetails(stepToInvoke), invokers);
     }
   }
 
