@@ -16,7 +16,10 @@ public class QuickCommandsCache
     this.quickCommands = new HashMap<>();
     for (QuickCommand quickCommand : root.quickCommands)
     {
-      quickCommands.put(quickCommand.command, quickCommand);
+      for (String command : quickCommand.command)
+      {
+        quickCommands.put(command, quickCommand);
+      }
     }
   }
 
