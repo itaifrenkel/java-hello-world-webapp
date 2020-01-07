@@ -67,6 +67,7 @@ public abstract class ActionInvocationPlanner
     {
       BigDecimal random = new BigDecimal(Math.random());
       shouldRun = random.compareTo(chance) > 0;
+      System.out.println("RANDOM CHECK: " + random + " vs " + chance + ": " + shouldRun);
     }
 
     Step stepToInvoke = null;
