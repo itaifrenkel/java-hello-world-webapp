@@ -52,17 +52,16 @@ public abstract class ActionInvocationPlanner
       CallDetails empty = new CallDetails(callParameters, new Variables());
       invokers.add(NativeActionInvokerFactory.create("PushVariables", empty));
 
-      Variables outputMappings = step.outputMappings == null ? new Variables() : step.outputMappings;
-      CallDetails callDetails1 = new CallDetails(callParameters, outputMappings);
-      addInvokers(step, callDetails1, invokers);
+      addInvokers(step, invokers);
 
       invokers.add(NativeActionInvokerFactory.create("PopVariables", empty));
     }
     invokers.add(NativeActionInvokerFactory.create("PopVariables", callDetails));
   }
 
-  private static void addInvokers(Step step, CallDetails callDetails, InvocationPlan invokers) throws ActionInvocationException
+  private static void addInvokers(Step step, InvocationPlan invokers) throws ActionInvocationException
   {
+
     BigDecimal chance = step.determineChanceRatio();
     boolean shouldRun = true;
     if (!chance.equals(BigDecimal.ONE))
@@ -70,10 +69,28 @@ public abstract class ActionInvocationPlanner
       BigDecimal random = new BigDecimal(Math.random());
       shouldRun = random.compareTo(chance) > 0;
     }
+
+    Step stepToInvoke = null;
     if (shouldRun)
     {
-      addInvokers(step.procName, callDetails, invokers);
+      stepToInvoke = step;
     }
+    else if (step.ifFalse != null)
+    {
+      stepToInvoke = step.ifFalse;
+    }
+
+    if (stepToInvoke != null)
+    {
+      addInvokers(stepToInvoke.procName, createCallDetails(step.ifFalse), invokers);
+    }
+  }
+
+  private static CallDetails createCallDetails(Step step)
+  {
+    Variables outputMappings = step.outputMappings == null ? new Variables() : step.outputMappings;
+    Variables callParameters = (step.paramMappings == null ? new Variables() : step.paramMappings);
+    return new CallDetails(callParameters, outputMappings);
   }
 
   private static boolean isNativeAction(String procName)
