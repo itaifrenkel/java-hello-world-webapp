@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionsCacheFactory;
+import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.quickcommands.QuickCommandsCache;
 import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.QuickCommand;
@@ -37,10 +38,10 @@ public class GameInstructionFactory
     if (ActionsCacheFactory.instance().getQuickCommands().isQuickCommand(cmd))
     {
       QuickCommand quickCommand = ActionsCacheFactory.instance().getQuickCommands().findQuickCommand(cmd);
-      return new RunProcInstruction(quickCommand.procName);
+      return new RunProcInstruction(quickCommand.procName, quickCommand.paramMappings == null ? new Variables() : quickCommand.paramMappings, new Variables());
     }
 
-    if (cmd.equals("The Village") || cmd.equals("Village Square") || cmd.equals("/village"))
+    if (cmd.equals("The Village") || cmd.equals("Village Square"))
     {
       return new GoToLocationInstruction("The Village");
     }

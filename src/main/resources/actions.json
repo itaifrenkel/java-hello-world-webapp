@@ -11,6 +11,13 @@
     {
       "command": "/new",
       "ProcName": "PlayerSetup"
+    },
+    {
+      "command": "/village",
+      "ProcName": "Goto",
+      "ParamMappings": {
+        "NewLocation": "The Village"
+      }
     }
   ],
   "Packages": [

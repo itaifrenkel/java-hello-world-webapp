@@ -15,8 +15,13 @@ public class RunProcInstruction extends GameInstruction
 
   RunProcInstruction(String procName)
   {
+    this(procName, new Variables(), new Variables());
+  }
+
+  RunProcInstruction(String procName, Variables callParameters, Variables outputMappings)
+  {
     this.procName = procName;
-    callDetails = new CallDetails(new Variables(), new Variables());
+    callDetails = new CallDetails(callParameters, outputMappings);
   }
 
   @Override
