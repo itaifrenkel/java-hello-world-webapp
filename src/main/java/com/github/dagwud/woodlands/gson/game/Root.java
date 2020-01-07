@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Root
 {
-  @SerializedName("Commands")
+  @SerializedName("QuickCommands")
   public QuickCommand[] quickCommands;
 
   @SerializedName("Packages")
