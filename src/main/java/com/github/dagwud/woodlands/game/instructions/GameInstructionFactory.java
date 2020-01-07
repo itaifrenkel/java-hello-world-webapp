@@ -30,6 +30,10 @@ public class GameInstructionFactory
     int chatId = telegramUpdate.message.chat.id;
     String cmd = telegramUpdate.message.text;
 
+    if (cmd.equals("/start"))
+    {
+      return new ShowHelpInstruction();
+    }
     if (cmd.equals("/new"))
     {
       return new CreateCharacterInstruction();
