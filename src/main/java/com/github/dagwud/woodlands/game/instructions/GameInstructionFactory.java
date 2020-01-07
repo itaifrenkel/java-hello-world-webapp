@@ -42,13 +42,21 @@ public class GameInstructionFactory
     {
       return new ShowHelpInstruction();
     }
-    if (cmd.equals("The Village") || cmd.equals("/village"))
+    if (cmd.equals("The Village") || cmd.equals("Village Square") || cmd.equals("/village"))
     {
       return new GoToLocationInstruction("The Village");
     }
     if (cmd.equals("The Inn"))
     {
       return new GoToLocationInstruction("The Inn");
+    }
+    if (cmd.equals("The Tavern"))
+    {
+      return new GoToLocationInstruction("The Tavern");
+    }
+    if (cmd.equals("Buy Drinks"))
+    {
+      return new DebugSpawnItemInstruction();
     }
     if (cmd.equals("The Mountain") || cmd.equals("/mountain"))
     {

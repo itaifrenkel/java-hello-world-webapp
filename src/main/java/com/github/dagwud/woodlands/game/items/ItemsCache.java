@@ -1,13 +1,11 @@
 package com.github.dagwud.woodlands.game.items;
 
-import com.github.dagwud.woodlands.game.commands.UnknownActionException;
 import com.github.dagwud.woodlands.gson.game.ItemsRoot;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-class ItemsCache
+public class ItemsCache
 {
   private final Map<String, Weapon> weapons;
 
@@ -37,5 +35,10 @@ class ItemsCache
       throw new UnknownWeaponException("No weapon named '" + name + "' exists");
     }
     return found;
+  }
+
+  public List<Weapon> getWeapons()
+  {
+    return new ArrayList<>(weapons.values());
   }
 }

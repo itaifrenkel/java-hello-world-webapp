@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game.items;
 
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 import com.github.dagwud.woodlands.gson.game.ItemsRoot;
-import com.github.dagwud.woodlands.gson.game.Root;
 
 import java.io.File;
 
@@ -20,7 +19,7 @@ public class ItemsCacheFactory
     items = new ItemsCache(root);
   }
 
-  static ItemsCacheFactory instance()
+  public static ItemsCacheFactory instance()
   {
     if (null == instance)
     {
@@ -37,7 +36,7 @@ public class ItemsCacheFactory
     }
   }
 
-  ItemsCache getItems()
+  public ItemsCache getItems()
   {
     return items;
   }
