@@ -192,6 +192,7 @@
           "steps": [
             {
               "ProcName": "Echo",
+              "Chance": "50%,
               "ParamMappings": {
                 "MessageToPrint": "Construction workers still at work here"
               }
