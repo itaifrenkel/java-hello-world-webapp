@@ -31,8 +31,8 @@
       }
     },
     {
-      "command": ["Retrieve Item"],
-      "ProcName": "Retrieve Item"
+      "command": ["Retrieve Items"],
+      "ProcName": "Retrieve Items"
     },
     {
       "command": ["The Tavern"],
