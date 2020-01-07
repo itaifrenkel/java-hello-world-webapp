@@ -16,9 +16,12 @@ public class ActionsCache
     this.actions = new HashMap<>();
     for (Package aPackage : root.packages)
     {
-      for (Action action : aPackage.actions)
+      if (null != aPackage.actions)
       {
-        actions.put(buildActionReference(action), action);
+        for (Action action : aPackage.actions)
+        {
+          actions.put(buildActionReference(action), action);
+        }
       }
     }
   }
