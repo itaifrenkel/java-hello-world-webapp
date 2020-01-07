@@ -17,6 +17,10 @@
       "ProcName": "ShowCharacterInfo"
     },
     {
+      "command": ["/men"],
+      "ProcName": "ShowCharacterInfo2"
+    },
+    {
       "command": ["/village", "The Village", "Village Square"],
       "ProcName": "Goto",
       "ParamMappings": {
@@ -126,7 +130,25 @@
               }
             }
           ]
+        },
+        {
+          "name": "ShowCharacterInfo2",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "carrying ${Player.Item.Carrying.Left}"
+              }
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "damage: ${weapon.${Player.Item.Carrying.Left}}.damage"
+              }
+            }
+          ]
         }
+
       ]
     },
     {
