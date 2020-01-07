@@ -25,7 +25,7 @@ public class SpawnItemAction extends NativeAction
     String weaponText = buildWeaponText(chosenWeapon);
 
     Variables result = new Variables();
-    result.put("SpawnedItem", weaponText);
+    result.put("SpawnedItem", chosenWeapon.name);
     return new InvocationResults(result);
   }
 
