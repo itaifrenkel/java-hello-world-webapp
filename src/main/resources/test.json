@@ -1,20 +1,4 @@
 {
-  "Hooks": [
-    {
-      "name": "TestHook",
-      "type": "VarChange",
-      "trigger": "__Player.Location",
-      "steps": [
-        {
-          "ProcName": "Echo",
-          "ParamMappings": {
-            "MessageToPrint": "TESTING! Hook fired!"
-          }
-        }
-      ]
-    }
-  ],
-
   "Packages": [
     {
       "Name": "core",
@@ -202,7 +186,7 @@
           "name": "The Mountain Menu",
           "steps": [
             {
-              "ProcName": "Native:ReadOption",
+              "ProcName": "Native:Menu",
               "ParamMappings": {
                 "MessageToPrint": "This is the mountain...",
                 "Options": "The Village"
