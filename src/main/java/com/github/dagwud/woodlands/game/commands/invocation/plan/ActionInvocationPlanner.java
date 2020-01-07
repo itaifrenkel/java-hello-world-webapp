@@ -66,7 +66,7 @@ public abstract class ActionInvocationPlanner
     if (!chance.equals(BigDecimal.ONE))
     {
       BigDecimal random = new BigDecimal(Math.random());
-      shouldRun = random.compareTo(chance) > 0;
+      shouldRun = chance.compareTo(random) > 0;
       System.out.println("RANDOM CHECK: " + random + " vs " + chance + ": " + shouldRun);
     }
 
