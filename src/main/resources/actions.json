@@ -64,6 +64,17 @@
           ]
         },
         {
+          "name": "Echo",
+          "steps": [
+            {
+              "ProcName": "Native:SendMessage",
+              "ParamMappings": {
+                "Message": "${MessageToPrint}"
+              }
+            }
+          ]
+        },
+        {
           "name": "SetPlayerAttribute",
           "steps": [
             {
@@ -73,6 +84,27 @@
                 "VarName": "${AttributeName}",
                 "VarValue": "${AttributeValue}"
               }
+            }
+          ]
+        },
+        {
+          "name": "Goto",
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Location",
+                "AttributeValue": "${NewLocation}"
+              }
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "You are now at ${Player.Location}"
+              }
+            },
+            {
+              "ProcName": "${Player.Location} Menu"
             }
           ]
         }
@@ -152,43 +184,6 @@
               "ParamMappings": {
                 "AttributeName": "Class",
                 "AttributeValue": "${Class}"
-              }
-            }
-          ]
-        },
-        {
-          "name": "Goto",
-          "steps": [
-            {
-              "ProcName": "SetPlayerAttribute",
-              "ParamMappings": {
-                "AttributeName": "Location",
-                "AttributeValue": "${NewLocation}"
-              }
-            },
-            {
-              "ProcName": "Echo",
-              "ParamMappings": {
-                "MessageToPrint": "You are now at ${Player.Location}"
-              }
-            },
-            {
-              "ProcName": "${Player.Location} Menu"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Name": "io",
-      "actions": [
-        {
-          "name": "Echo",
-          "steps": [
-            {
-              "ProcName": "Native:SendMessage",
-              "ParamMappings": {
-                "Message": "${MessageToPrint}"
               }
             }
           ]
