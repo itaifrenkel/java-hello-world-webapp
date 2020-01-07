@@ -33,7 +33,7 @@ public class GameStatesRegistry
     instance = null;
   }
 
-  private void populateItems(GameState gameStateForChat)
+  private void populateItems(GameState gameState)
   {
     for (Weapon weapon : ItemsCacheFactory.instance().getItems().getWeapons())
     {
