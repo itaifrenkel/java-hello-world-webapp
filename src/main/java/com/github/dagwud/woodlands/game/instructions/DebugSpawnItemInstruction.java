@@ -12,8 +12,8 @@ import java.util.Random;
 public class DebugSpawnItemInstruction extends GameInstruction
 {
   private static final Random random = new Random(System.currentTimeMillis());
-  private static final String MELEE_ICON = "\uFE0F"; // crossed swords
-  private static final String RANGED_ICON = "\u1F3F9"; // bow and arrow
+  private static final String MELEE_ICON = "\u2694"; // crossed swords
+  private static final String RANGED_ICON = "\ud83c\udff9"; // bow and arrow
 
   @Override
   public void execute(GameState gameState) throws IOException
