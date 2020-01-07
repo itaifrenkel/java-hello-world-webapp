@@ -304,6 +304,7 @@
               "ParamMappings": {
                 "AttributeName": "Item.Carrying.Left",
                 "AttributeValue": "${SpawnedItem}"
+              }
             }
           ]
         },
