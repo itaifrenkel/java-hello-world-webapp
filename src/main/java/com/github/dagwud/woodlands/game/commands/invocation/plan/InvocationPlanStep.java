@@ -16,4 +16,12 @@ public class InvocationPlanStep
   {
     return invoker;
   }
+
+  @Override
+  public String toString()
+  {
+    return "InvocationPlanStep{" +
+            getActionInvoker().toString() +
+            "}";
+  }
 }

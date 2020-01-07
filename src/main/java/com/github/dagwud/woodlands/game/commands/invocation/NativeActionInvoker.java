@@ -31,4 +31,12 @@ class NativeActionInvoker extends ActionInvoker
       throw new ActionInvocationException(e);
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "NativeActionInvoker{" +
+            "nativeAction=" + nativeAction.getClass().getSimpleName() +
+            '}';
+  }
 }

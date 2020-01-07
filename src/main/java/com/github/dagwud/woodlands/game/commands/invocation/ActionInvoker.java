@@ -33,7 +33,6 @@ public abstract class ActionInvoker
   {
     Variables resultVariables = results.getVariables();
     mapResults(resultVariables, gameState.getVariables(), outputMappings);
-//    gameState.getVariables().dropStackFrame();
     if (resultVariables != null && !resultVariables.isEmpty())
     {
 //      System.out.println(getActionName() + " after call: \n" + gameState.getVariables());

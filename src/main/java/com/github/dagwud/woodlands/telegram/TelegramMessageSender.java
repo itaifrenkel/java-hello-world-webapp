@@ -13,7 +13,14 @@ public class TelegramMessageSender extends TelegramHelper
   public static void sendMessage(int chatId, String message, String replyMarkup) throws IOException
   {
     Map<String, String> params = buildUrlParams(chatId, message, replyMarkup);
-    callTelegram("sendMessage", params);
+    if (chatId != -1)
+    {
+      callTelegram("sendMessage", params);
+    }
+    else
+    {
+      System.out.println("SEND MESSAGE: " + params);
+    }
   }
 
 }

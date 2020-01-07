@@ -1,9 +1,9 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-abstract class ValueResolver
+public abstract class ValueResolver
 {
 
-  static final String START_VARIABLE = "${";
+  public static final String START_VARIABLE = "${";
   static final String END_VARIABLE = "}";
 
   private ValueResolver()

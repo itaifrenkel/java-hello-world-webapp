@@ -17,14 +17,7 @@ public class SendMessageAction extends NativeAction
   {
     String message = gameState.getVariables().lookupVariableValue("MessageToPrint");
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
-    if (!chatId.equals("-1"))
-    {
-      TelegramMessageSender.sendMessage(Integer.parseInt(chatId), message);
-    }
-    else
-    {
-      System.out.println(">>> " + message);
-    }
+    TelegramMessageSender.sendMessage(Integer.parseInt(chatId), message);
     return new InvocationResults(new Variables());
   }
 }

@@ -139,7 +139,7 @@
               }
             },
             {
-              "ProcName": "The Village Menu"
+              "ProcName": "${Player.Location} Menu"
             }
           ]
         }

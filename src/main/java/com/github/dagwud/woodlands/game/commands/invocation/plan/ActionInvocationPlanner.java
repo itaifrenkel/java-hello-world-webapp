@@ -22,6 +22,12 @@ public abstract class ActionInvocationPlanner
 
   private static void addInvokers(String procName, CallDetails callDetails, InvocationPlan invokers) throws ActionInvocationException
   {
+    if (procName.contains(ValueResolver.START_VARIABLE))
+    {
+      invokers.add(new DeferredActionInvoker(procName, callDetails, invokers));
+      return;
+    }
+
     if (isNativeAction(procName))
     {
       String nativeActionName = procName.substring(NATIVE_ACTION_PREFIX.length());

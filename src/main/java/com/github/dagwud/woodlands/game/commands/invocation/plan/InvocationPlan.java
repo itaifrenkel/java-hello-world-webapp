@@ -1,7 +1,9 @@
 package com.github.dagwud.woodlands.game.commands.invocation.plan;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvoker;
+import com.github.dagwud.woodlands.game.commands.invocation.DeferredActionInvoker;
 import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
 
 import java.util.ArrayList;
@@ -29,6 +31,25 @@ public class InvocationPlan
   public List<InvocationPlanStep> getInvokers()
   {
     return Collections.unmodifiableList(invokers);
+  }
+
+  public void insertAdditionalInvokers(List<InvocationPlanStep> additional, DeferredActionInvoker insertAfter)
+  {
+    int addAfterIndex = findIndex(insertAfter) + 1;
+    invokers.addAll(addAfterIndex, additional);
+  }
+
+  private int findIndex(DeferredActionInvoker find)
+  {
+    for (int i = 0; i < invokers.size(); i++)
+    {
+      InvocationPlanStep invoker = invokers.get(i);
+      if (invoker.getActionInvoker() == find)
+      {
+        return i;
+      }
+    }
+    throw new ArrayIndexOutOfBoundsException("Could not find original action");
   }
 
   public GameState getGameState()
