@@ -31,11 +31,9 @@ public class SpawnItemAction extends NativeAction
 
   private String buildWeaponText(Weapon chosenWeapon)
   {
-    StringBuilder b = new StringBuilder();
-    b.append(chosenWeapon.name);
-    b.append(" ");
-    b.append(chosenWeapon.ranged ? RANGED_ICON : MELEE_ICON );
-    b.append(chosenWeapon.damage.determineAverageRoll());
-    return b.toString();
+    String b = chosenWeapon.name + " " +
+            (chosenWeapon.ranged ? RANGED_ICON : MELEE_ICON) +
+            chosenWeapon.damage.determineAverageRoll();
+    return b;
   }
 }
