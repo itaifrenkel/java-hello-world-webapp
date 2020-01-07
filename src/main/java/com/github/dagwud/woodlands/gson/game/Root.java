@@ -9,11 +9,6 @@ public class Root
   @SerializedName("Packages")
   public Package[] packages;
 
-  @Override
-  public String toString()
-  {
-    return "Root{" +
-            "packges=" + Arrays.toString(packages) +
-            '}';
-  }
+  @SerializedName("Hooks");
+  public Hook[] hooks;
 }
