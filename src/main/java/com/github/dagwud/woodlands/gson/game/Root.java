@@ -9,6 +9,6 @@ public class Root
   @SerializedName("Packages")
   public Package[] packages;
 
-  @SerializedName("Hooks");
+  @SerializedName("Hooks")
   public Hook[] hooks;
 }
