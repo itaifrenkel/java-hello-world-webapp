@@ -32,6 +32,11 @@ public class ReadOptionAction extends NativeAction
 
     Variables results = new Variables();
     results.put(OUTPUT_CHOSEN_OPTION, "${buffer}");
+    return buildResults();
+  }
+
+  protected InvocationResults buildResults()
+  {
     return new InvocationResults(results, ReturnMode.SUSPEND);
   }
 
