@@ -56,7 +56,7 @@ public class GameInstructionFactory
     }
     if (cmd.equals("Buy Drinks"))
     {
-      return new DebugSpawnItemInstruction();
+      return new RunProcInstruction("Buy Drinks");
     }
     if (cmd.equals("The Mountain") || cmd.equals("/mountain"))
     {
