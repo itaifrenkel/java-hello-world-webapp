@@ -1,6 +1,26 @@
 {
   "Packages": [
     {
+      "Name": "Commands",
+      "actions:": [
+        {
+          "name": "CommandShowHelp",
+          "command": "/start",
+          "ProcName": "ShowHelp"
+        },
+        {
+          "name": "CommandShowHelp",
+          "command": "/help",
+          "ProcName": "ShowHelp"
+        },
+        {
+          "name": "CommandNew",
+          "command": "/new",
+          "ProcName": "PlayerSetup"
+        }
+      ]
+    },
+    {
       "Name": "core",
       "actions": [
         {

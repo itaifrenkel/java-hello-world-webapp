@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.invocation.ActionsCacheFactory;
+import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
 public class GameInstructionFactory
@@ -30,18 +32,12 @@ public class GameInstructionFactory
     int chatId = telegramUpdate.message.chat.id;
     String cmd = telegramUpdate.message.text;
 
-    if (cmd.equals("/start"))
+    Action commandAction = ActionsCacheFactory.instance().getActions().findCommand(cmd);
+    if (commandAction != null)
     {
-      return new ShowHelpInstruction();
+      return new RunProcInstruction(commandAction.name);
     }
-    if (cmd.equals("/new"))
-    {
-      return new CreateCharacterInstruction();
-    }
-    if (cmd.equals("/help"))
-    {
-      return new ShowHelpInstruction();
-    }
+
     if (cmd.equals("The Village") || cmd.equals("Village Square") || cmd.equals("/village"))
     {
       return new GoToLocationInstruction("The Village");

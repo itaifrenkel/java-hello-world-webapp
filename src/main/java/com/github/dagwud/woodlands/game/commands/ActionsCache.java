@@ -38,4 +38,16 @@ public class ActionsCache
     // maybe we want to include the pacakge name in future?
     return action.name;
   }
+
+  public Action findCommand(String cmd)
+  {
+    for (Action action : actions.values())
+    {
+      if (cmd.equals(action.command))
+      {
+        return action;
+      }
+    }
+    return null;
+  }
 }
