@@ -31,9 +31,8 @@ public class SpawnItemAction extends NativeAction
 
   private String buildWeaponText(Weapon chosenWeapon)
   {
-    String b = chosenWeapon.name + " " +
+    return chosenWeapon.name + " " +
             (chosenWeapon.ranged ? RANGED_ICON : MELEE_ICON) +
             chosenWeapon.damage.determineAverageRoll();
-    return b;
   }
 }
