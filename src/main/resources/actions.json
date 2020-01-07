@@ -142,6 +142,9 @@
               "ProcName": "ReadPlayerClass"
             },
             {
+              "ProcName": "InitCharacterStats"
+            },
+            {
               "ProcName": "Echo",
               "ParamMappings": {
                 "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
