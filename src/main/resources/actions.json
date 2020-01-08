@@ -134,6 +134,18 @@
       "actions": [
         {
           "name": "PlayerSetup",
+          "requires":
+          {
+            "condition": "${Player.SetupComplete}=='true'",
+            "or-else": [
+              {
+                "ProcName": "Echo",
+                "ParamMappings": {
+                  "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
+                }
+              }
+            ]
+          },
           "steps": [
             {
               "ProcName": "ReadPlayerName"
@@ -143,6 +155,13 @@
             },
             {
               "ProcName": "InitCharacterStats"
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "SetupComplete",
+                "AttributeValue": "true"
+              }
             },
             {
               "ProcName": "Echo",
