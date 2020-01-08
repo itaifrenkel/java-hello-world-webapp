@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.web;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationPlanExecutor;
 import com.github.dagwud.woodlands.game.instructions.GameInstruction;
 import com.github.dagwud.woodlands.game.instructions.GameInstructionFactory;
@@ -25,47 +26,48 @@ public class TelegramServlet extends HttpServlet
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException
   {
-    Update update = GsonHelper.readJSON(req.getReader(), Update.class);
-    processTelegramUpdate(update);
-  }
-
-  public void processTelegramUpdate(Update update)
-  {
-    int chatId = determineChatId(update);
-
+    Update update = null;
     try
     {
-      // todo verify request came from telegram - token in request
-      String text = determineText(update);
-
-      GameState gameState = GameStatesRegistry.lookup(chatId);
-      if (gameState.suspended != null)
-      {
-        gameState.suspended.getGameState().getVariables().setValue("__buffer", text);
-        ActionInvocationPlanExecutor.resume(gameState.suspended);
-      }
-      else
-      {
-        GameInstruction instruction = GameInstructionFactory.instance().create(update, gameState);
-        instruction.execute(gameState);
-      }
+      update = GsonHelper.readJSON(req.getReader(), Update.class);
+      processTelegramUpdate(update);
     }
-    catch (Exception e2)
+    catch (Exception e)
     {
-      Throwable e = e2;
-      e.printStackTrace();
+      Throwable t = e;
+      t.printStackTrace();
       try
       {
-        while (e != null)
+        while (t != null)
         {
-          TelegramMessageSender.sendMessage(chatId, e.toString());
-          e = e.getCause();
+          TelegramMessageSender.sendMessage(determineChatId(update), t.toString());
+          t = t.getCause();
         }
       }
       catch (Exception f)
       {
         f.printStackTrace();
       }
+    }
+  }
+
+  public void processTelegramUpdate(Update update) throws ActionInvocationException, IOException
+  {
+    int chatId = determineChatId(update);
+
+    // todo verify request came from telegram - token in request
+    String text = determineText(update);
+
+    GameState gameState = GameStatesRegistry.lookup(chatId);
+    if (gameState.suspended != null)
+    {
+      gameState.suspended.getGameState().getVariables().setValue("__buffer", text);
+      ActionInvocationPlanExecutor.resume(gameState.suspended);
+    }
+    else
+    {
+      GameInstruction instruction = GameInstructionFactory.instance().create(update, gameState);
+      instruction.execute(gameState);
     }
   }
 

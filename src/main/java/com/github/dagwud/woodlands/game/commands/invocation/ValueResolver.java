@@ -28,7 +28,16 @@ public abstract class ValueResolver
   {
     if (expressionTreeNode.getValue().contains(START_VARIABLE))
     {
-      String value = resolveVar(expressionTreeNode.getValue(), callParameters);
+      String value;
+//      if (expressionTreeNode.getValue().indexOf(START_VARIABLE) == expressionTreeNode.getValue().lastIndexOf(START_VARIABLE))
+//      {
+        // simple expression containing one variable
+        value = resolveVar(expressionTreeNode.getValue(), callParameters);
+//      }
+//      else
+//      {
+//        value = resolve(expressionTreeNode.getValue(), callParameters);
+//      }
       expressionTreeNode.setValue(value);
     }
     if (null != expressionTreeNode.getRight())

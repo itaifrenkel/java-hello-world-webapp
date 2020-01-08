@@ -17,10 +17,6 @@
       "ProcName": "ShowCharacterInfo"
     },
     {
-      "command": ["/men"],
-      "ProcName": "ShowCharacterInfo2"
-    },
-    {
       "command": ["/village", "The Village", "Village Square"],
       "ProcName": "Goto",
       "ParamMappings": {
@@ -126,18 +122,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level}\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nCarrying:\n- ${Player.Item.Carrying.Left}\n- ${Player.Item.Carrying.Right}"
-              }
-            }
-          ]
-        },
-        {
-          "name": "ShowCharacterInfo2",
-          "steps": [
-            {
-              "ProcName": "Echo",
-              "ParamMappings": {
-                "MessageToPrint": "carrying ${Player.Item.Carrying.Left}"
+                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nCarrying:\n- ${Player.Item.Carrying.Left}\n- ${Player.Item.Carrying.Right}"
               }
             },
             {
@@ -148,7 +133,6 @@
             }
           ]
         }
-
       ]
     },
     {

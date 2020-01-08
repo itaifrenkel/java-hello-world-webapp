@@ -2,18 +2,21 @@ package com.github.dagwud.woodlands;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 import com.github.dagwud.woodlands.web.TelegramServlet;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class MainTest
 {
   @Test
-  public void testPlayerSetup()
+  public void testPlayerSetup() throws IOException, ActionInvocationException
   {
     GameState gameState = GameStatesRegistry.lookup(-1);
     gameState.getVariables().setValue("chatId", "-1");
@@ -30,13 +33,20 @@ public class MainTest
   }
 
   @Test
-  public void testWeapon()
+  public void testWeapon() throws IOException, ActionInvocationException
   {
     GameState gameState = GameStatesRegistry.lookup(-1);
     gameState.getVariables().setValue("chatId", "-1");
     initPlayer();
-    Update update = createUpdate("/village");
+    Update update;
+
+    update = createUpdate("The Inn");
     new TelegramServlet().processTelegramUpdate(update);
+    update = createUpdate("Retrieve Items");
+    new TelegramServlet().processTelegramUpdate(update);
+    update = createUpdate("/me");
+    new TelegramServlet().processTelegramUpdate(update);
+
   }
 
   private Update createUpdate(String messageText)
@@ -49,7 +59,7 @@ public class MainTest
     return u;
   }
 
-  private void initPlayer()
+  private void initPlayer() throws IOException, ActionInvocationException
   {
     Update update = createUpdate("/new");
     new TelegramServlet().processTelegramUpdate(update);
