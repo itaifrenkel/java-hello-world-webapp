@@ -26,6 +26,7 @@ public class MainTest
     assertEquals("100", gameState.getVariables().lookupVariableValue("Player.MaxHP"));
     assertEquals("2", gameState.getVariables().lookupVariableValue("Player.Mana"));
     assertEquals("3", gameState.getVariables().lookupVariableValue("Player.MaxMana"));
+    assertEquals("The Village", gameState.getVariables().lookupVariableValue("Player.Location"));
   }
 
   @Test
