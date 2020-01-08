@@ -126,7 +126,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level}\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.ManaMax}\nCarrying:\n- ${Player.Item.Carrying.Left}\n- ${Player.Item.Carrying.Right}"
+                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level}\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nCarrying:\n- ${Player.Item.Carrying.Left}\n- ${Player.Item.Carrying.Right}"
               }
             }
           ]
@@ -266,7 +266,7 @@
             {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
-                "AttributeName": "ManaMax",
+                "AttributeName": "MaxMana",
                 "AttributeValue": "3"
               }
             },
