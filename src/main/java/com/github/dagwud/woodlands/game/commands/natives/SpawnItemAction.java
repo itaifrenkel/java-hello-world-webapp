@@ -12,8 +12,8 @@ import java.util.List;
 @SuppressWarnings("unused") // called at runtime via reflection
 public class SpawnItemAction extends NativeAction
 {
-  private static final String MELEE_ICON = "\u2694"; // crossed swords
-  private static final String RANGED_ICON = "\ud83c\udff9"; // bow and arrow
+  public static final String MELEE_ICON = "\u2694"; // crossed swords
+  public static final String RANGED_ICON = "\ud83c\udff9"; // bow and arrow
 
   @Override
   public InvocationResults invoke(GameState gameState, CallDetails callDetails)

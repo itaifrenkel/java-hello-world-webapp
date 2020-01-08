@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.commands.natives.SpawnItemAction;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -39,6 +40,8 @@ public class GameStatesRegistry
     {
       gameState.getVariables().setValue("weapons." + weapon.name + ".damage", 
         weapon.damage.determineAverageRoll());
+      gameState.getVariables().setValue("weapons." + weapon.name + ".icon",
+        weapon.ranged ? SpawnItemAction.RANGED_ICON : SpawnItemAction.MELEE_ICON); // todo move icon constants
     }
   }
 

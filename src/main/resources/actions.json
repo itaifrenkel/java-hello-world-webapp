@@ -122,13 +122,13 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nCarrying:\n- ${Player.Item.Carrying.Left}\n- ${Player.Item.Carrying.Right}"
+                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nCarrying:\n- ${Player.Item.Carrying.Left}\n- ${Player.Item.Carrying.Right} "
               }
             },
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "damage: ${weapons.${Player.Item.Carrying.Left}.damage}"
+                "MessageToPrint": "damage: ${weapons.${Player.Item.Carrying.Left}.damage} ${weapons.${Player.Item.Carrying.Left}.icon}"
               }
             }
           ]
