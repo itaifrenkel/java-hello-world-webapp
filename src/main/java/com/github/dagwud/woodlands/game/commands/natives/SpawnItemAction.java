@@ -12,9 +12,6 @@ import java.util.List;
 @SuppressWarnings("unused") // called at runtime via reflection
 public class SpawnItemAction extends NativeAction
 {
-  public static final String MELEE_ICON = "\u2694"; // crossed swords
-  public static final String RANGED_ICON = "\ud83c\udff9"; // bow and arrow
-
   @Override
   public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
@@ -22,17 +19,9 @@ public class SpawnItemAction extends NativeAction
     List<Weapon> allWeapons = ItemsCacheFactory.instance().getItems().getWeapons();
     int rand = (int) (Math.random() * allWeapons.size());
     Weapon chosenWeapon = allWeapons.get(rand);
-    String weaponText = buildWeaponText(chosenWeapon);
 
     Variables result = new Variables();
     result.put("SpawnedItem", chosenWeapon.name);
     return new InvocationResults(result);
-  }
-
-  private String buildWeaponText(Weapon chosenWeapon)
-  {
-    return chosenWeapon.name + " " +
-            (chosenWeapon.ranged ? RANGED_ICON : MELEE_ICON) +
-            chosenWeapon.damage.determineAverageRoll();
   }
 }
