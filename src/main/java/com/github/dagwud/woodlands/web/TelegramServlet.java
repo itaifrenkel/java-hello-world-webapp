@@ -23,11 +23,16 @@ import java.io.IOException;
 public class TelegramServlet extends HttpServlet
 {
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException
   {
     Update update = GsonHelper.readJSON(req.getReader(), Update.class);
+    processTelegramUpdate(update);
+  }
+
+  public void processTelegramUpdate(Update update)
+  {
     int chatId = determineChatId(update);
-      
+
     try
     {
       // todo verify request came from telegram - token in request
