@@ -49,6 +49,14 @@ public abstract class ValueResolver
   private static String resolveVar(String varExpression, VariableStack callParameters) throws VariableUndefinedException
   {
     String varName = varExpression.substring(START_VARIABLE.length(), varExpression.length() - END_VARIABLE.length());
+    if (varName.contains(START_VARIABLE))
+    {
+      // Compound variables - i.e. where the outer variable name is built using
+      // another variable name. For example, ${some${abc}} where abc="thing", result is the value
+      // of the variable ${something}:
+      varName = resolve(varName, callParameters);
+    }
+
     String value = callParameters.lookupVariable(varName);
     if (value.contains(START_VARIABLE))
     {
