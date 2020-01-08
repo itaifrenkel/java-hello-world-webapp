@@ -1,5 +1,6 @@
 {
   "weapons": [
+    {"name": "nothing", "damage": {"dice_count": 0,"dice_faces": 0}, "ranged":false, "prevent_spawning":true, "custom_icon": ""},
     {"name": "Brick", "damage": {"dice_count": 1,"dice_faces": 4},"ranged":false},
     {"name": "Dagger", "damage": {"dice_count": 1,"dice_faces": 4},"ranged":false},
     {"name": "Sickle", "damage": {"dice_count": 1,"dice_faces": 4},"ranged":false},
