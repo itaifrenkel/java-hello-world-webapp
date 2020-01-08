@@ -13,10 +13,10 @@ public class Weapon
 
   public boolean ranged;
 
-  @SeriaizedName(value = "custom_icon")
+  @SerializedName(value = "custom_icon")
   public String customIcon;
 
-  @SeriaizedName(value = "prevent_spawning")
+  @SerializedName(value = "prevent_spawning")
   public boolean preventSpawning;
 
   public String getIcon()
