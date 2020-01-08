@@ -7,4 +7,8 @@ public class Weapon
   public Damage damage;
 
   public boolean ranged;
+
+  public String customIcon;
+
+  public boolean preventSpawning;
 }
