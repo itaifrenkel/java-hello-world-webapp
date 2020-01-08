@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Action
 {
   public String name;
+  public Requires requires;
   public Step[] steps;
 
   @Override
