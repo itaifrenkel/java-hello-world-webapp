@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.gson.game;
 
+import com.google.code.gson.SerializedName;
+
 public class Weapon
 {
   private static final String MELEE_ICON = "\u2694"; // crossed swords
@@ -11,8 +13,10 @@ public class Weapon
 
   public boolean ranged;
 
+  @SeriaizedName(value = "custom_icon")
   public String customIcon;
 
+  @SeriaizedName(value = "prevent_spawning")
   public boolean preventSpawning;
 
   public String getIcon()
