@@ -41,9 +41,7 @@ public class GameStatesRegistry
       gameState.getVariables().setValue("weapons." + weapon.name + ".damage", 
         weapon.damage.determineAverageRoll());
       gameState.getVariables().setValue("weapons." + weapon.name + ".icon",
-//todo icky
-       (weapon.customIcon != null?weapon.customIcon :
-        weapon.ranged ? SpawnItemAction.RANGED_ICON : SpawnItemAction.MELEE_ICON)); // todo move icon constants
+        weapon.getIcon());
     }
   }
 
