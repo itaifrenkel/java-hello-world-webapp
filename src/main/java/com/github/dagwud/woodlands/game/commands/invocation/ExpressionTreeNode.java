@@ -25,27 +25,22 @@ class ExpressionTreeNode
       }
       endIndex += end.length();
 
-      if (startIndex == 0)
+      if (startIndex == 0 && endIndex == value.length())
       {
-        if (endIndex == value.length())
-        {
-          return;
-        }
-        String newValue = value.substring(0, endIndex);
-        String newRight = value.substring(endIndex);
-        this.value = newValue;
-        this.right = new ExpressionTreeNode(newRight);
-        right.split(start, end);
+        return;
       }
-      else
-      {
-        String newValue = value.substring(0, startIndex);
-        String newRight = value.substring(startIndex);
-        this.value = newValue;
-        this.right = new ExpressionTreeNode(newRight);
-        right.split(start, end);
-      }
+      int splitPoint = startIndex != 0 ? startIndex : endIndex;
+      split(start, end, splitPoint);
     }
+  }
+
+  private void split(String start, String end, int splitPoint)
+  {
+    String newValue = value.substring(0, splitPoint);
+    String newRight = value.substring(splitPoint);
+    this.value = newValue;
+    this.right = new ExpressionTreeNode(newRight);
+    right.split(start, end);
   }
 
   private int findClosing(String str, String starting, String closing, int startWith)

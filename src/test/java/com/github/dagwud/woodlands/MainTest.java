@@ -38,15 +38,14 @@ public class MainTest
     GameState gameState = GameStatesRegistry.lookup(-1);
     gameState.getVariables().setValue("chatId", "-1");
     initPlayer();
-    Update update;
 
+    Update update;
     update = createUpdate("The Inn");
     new TelegramServlet().processTelegramUpdate(update);
     update = createUpdate("Retrieve Items");
     new TelegramServlet().processTelegramUpdate(update);
     update = createUpdate("/me");
     new TelegramServlet().processTelegramUpdate(update);
-
   }
 
   private Update createUpdate(String messageText)
