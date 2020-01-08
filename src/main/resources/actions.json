@@ -134,17 +134,18 @@
       "actions": [
         {
           "name": "PlayerSetup",
-          "requires":
-          {
+          "requires": {
             "condition": "${Player.SetupComplete}=='true'",
-            "or-else": [
-              {
-                "ProcName": "Echo",
-                "ParamMappings": {
-                  "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
+            "or-else": {
+              "steps": [
+                {
+                  "ProcName": "Echo",
+                  "ParamMappings": {
+                    "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
+                  }
                 }
-              }
-            ]
+              ]
+            }
           },
           "steps": [
             {
