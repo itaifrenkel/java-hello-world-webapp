@@ -42,5 +42,28 @@
     {"name": "Skullcrusher", "damage": {"dice_count": 2,"dice_faces": 8},"ranged":false},
     {"name": "Shotgun", "damage": {"dice_count": 2,"dice_faces": 8},"ranged":true},
     {"name": "Flame Thrower", "damage": {"dice_count": 2,"dice_faces": 8},"ranged":true}
+  ],
+  "shields": [
+    {"name": "Small wooden shield", "strength": 1},
+    {"name": "Small iron shield", "strength": 2},
+    {"name": "Large wooden shield", "strength": 2},
+    {"name": "Large iron shield", "strength": 3},
+    {"name": "Heavy wooden shield", "strength": 3},
+    {"name": "Heavy iron shield", "strength": 4},
+    {"name": "Dragonscale shield", "strength": 5}
+  ],
+  "armour": [
+    {"name": "Cotton-wool armour", "base-strength": 11 , "boost-by-agility-max": 100},
+    {"name": "Leather armour", "base-strength": 11, "boost-by-agility-max": 100},
+
+    {"name": "Thick leather armour", "base-strength": 12, "boost-by-agility-max": 2},
+    {"name": "Hardened leather armour", "base-strength": 13, "boost-by-agility-max": 2},
+    {"name": "Chainmail jacket", "base-strength": 14, "boost-by-agility-max": 2},
+    {"name": "Breastplate", "base-strength": 15, "boost-by-agility-max": 2},
+
+    {"name": "Chainmail", "base-strength": 14, "boost-by-agility-max": 0},
+    {"name": "Splint armour", "base-strength": 15, "boost-by-agility-max": 0},
+    {"name": "Troll-Hide armour", "base-strength": 16, "boost-by-agility-max": 0},
+    {"name": "Dragonscale armour", "base-strength": 18, "boost-by-agility-max": 0}
   ]
 }
