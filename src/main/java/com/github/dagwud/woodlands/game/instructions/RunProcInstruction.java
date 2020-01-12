@@ -1,12 +1,7 @@
 package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationPlanExecutor;
-import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
-import com.github.dagwud.woodlands.game.commands.invocation.Variables;
-import com.github.dagwud.woodlands.game.commands.invocation.plan.ActionInvocationPlanner;
-import com.github.dagwud.woodlands.game.commands.invocation.plan.InvocationPlan;
+import com.github.dagwud.woodlands.game.commands.invocation.*;
 
 public class RunProcInstruction extends GameInstruction
 {
@@ -27,7 +22,6 @@ public class RunProcInstruction extends GameInstruction
   @Override
   public void execute(GameState gameState) throws ActionInvocationException
   {
-    InvocationPlan plan = ActionInvocationPlanner.plan(procName, gameState, callDetails);
-    ActionInvocationPlanExecutor.execute(plan);
+    new ActionInvoker2(procName, gameState).invokeAction(callDetails.getCallParameters());
   }
 }

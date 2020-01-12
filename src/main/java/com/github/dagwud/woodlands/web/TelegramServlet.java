@@ -3,12 +3,10 @@ package com.github.dagwud.woodlands.web;
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationPlanExecutor;
 import com.github.dagwud.woodlands.game.instructions.GameInstruction;
 import com.github.dagwud.woodlands.game.instructions.GameInstructionFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 import com.github.dagwud.woodlands.gson.telegram.CallbackQuery;
-import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
@@ -59,10 +57,11 @@ public class TelegramServlet extends HttpServlet
     String text = determineText(update);
 
     GameState gameState = GameStatesRegistry.lookup(chatId);
-    if (gameState.suspended != null)
+    if (gameState.suspended2 != null)
     {
-      gameState.suspended.getGameState().getVariables().setValue("__buffer", text);
-      ActionInvocationPlanExecutor.resume(gameState.suspended);
+      gameState.getVariables().setValue("__buffer", text);
+//      ActionInvocationPlanExecutor.resume(gameState.suspended);
+      gameState.suspended2.invokeAction();
     }
     else
     {

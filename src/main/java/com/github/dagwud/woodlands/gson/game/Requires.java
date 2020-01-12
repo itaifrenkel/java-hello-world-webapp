@@ -6,6 +6,8 @@ public class Requires
 {
   public String condition;
 
+  public Step[] steps;
+
   @SerializedName("or-else")
   public OrElse orElse;
 }

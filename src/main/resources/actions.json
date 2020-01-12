@@ -2,7 +2,7 @@
   "QuickCommands": [
     {
       "command": ["/start"],
-      "ProcName": "ShowHelp"
+      "ProcName": "Start"
     },
     {
       "command": ["/help"],
@@ -61,6 +61,18 @@
       "Name": "core",
       "actions": [
         {
+          "name": "Start",
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "SetupComplete",
+                "AttributeValue": "false"
+              }
+            }
+          ]
+        },
+        {
           "name": "ShowHelp",
           "steps": [
             {
@@ -97,24 +109,34 @@
         },
         {
           "name": "Goto",
-          "steps": [
-            {
-              "ProcName": "SetPlayerAttribute",
-              "ParamMappings": {
-                "AttributeName": "Location",
-                "AttributeValue": "${NewLocation}"
+          "requires": {
+            "condition": "${Player.SetupComplete}==true",
+            "steps": [
+              {
+                "ProcName": "SetPlayerAttribute",
+                "ParamMappings": {
+                  "AttributeName": "Location",
+                  "AttributeValue": "${NewLocation}"
+                }
+              },
+              {
+                "ProcName": "Echo",
+                "ParamMappings": {
+                  "MessageToPrint": "You are now at ${Player.Location}"
+                }
+              },
+              {
+                "ProcName": "${Player.Location} Menu"
               }
-            },
-            {
-              "ProcName": "Echo",
-              "ParamMappings": {
-                "MessageToPrint": "You are now at ${Player.Location}"
-              }
-            },
-            {
-              "ProcName": "${Player.Location} Menu"
+            ],
+            "or-else": {
+              "steps": [
+                {
+                  "ProcName": "NoCharacterCreatedError"
+                }
+              ]
             }
-          ]
+          }
         },
         {
           "name": "ShowCharacterInfo",
@@ -123,6 +145,17 @@
               "ProcName": "Echo",
               "ParamMappings": {
                 "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nCarrying:\n- ${Player.Item.Carrying.Left} ${weapons.${Player.Item.Carrying.Left}.icon}${weapons.${Player.Item.Carrying.Left}.damage}\n- ${Player.Item.Carrying.Right} "
+              }
+            }
+          ]
+        },
+        {
+          "name": "NoCharacterCreatedError",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "You need to create a character first. Please use /new"
               }
             }
           ]
@@ -135,48 +168,48 @@
         {
           "name": "PlayerSetup",
           "requires": {
-            "condition": "${Player.SetupComplete}=='true'",
+            "condition": "${Player.SetupComplete}==false",
+            "steps": [
+              {
+                "ProcName": "ReadPlayerName"
+              },
+              {
+                "ProcName": "ReadPlayerClass"
+              },
+              {
+                "ProcName": "InitCharacterStats"
+              },
+              {
+                "ProcName": "SetPlayerAttribute",
+                "ParamMappings": {
+                  "AttributeName": "SetupComplete",
+                  "AttributeValue": "true"
+                }
+              },
+              {
+                "ProcName": "Echo",
+                "ParamMappings": {
+                  "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
+                }
+              },
+              {
+                "ProcName": "Goto",
+                "ParamMappings": {
+                  "NewLocation": "The Village"
+                }
+              }
+            ],
             "or-else": {
               "steps": [
                 {
                   "ProcName": "Echo",
                   "ParamMappings": {
-                    "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
+                    "MessageToPrint": "You already have an active character - you're ${Player.Name} the ${Player.Class}"
                   }
                 }
               ]
             }
-          },
-          "steps": [
-            {
-              "ProcName": "ReadPlayerName"
-            },
-            {
-              "ProcName": "ReadPlayerClass"
-            },
-            {
-              "ProcName": "InitCharacterStats"
-            },
-            {
-              "ProcName": "SetPlayerAttribute",
-              "ParamMappings": {
-                "AttributeName": "SetupComplete",
-                "AttributeValue": "true"
-              }
-            },
-            {
-              "ProcName": "Echo",
-              "ParamMappings": {
-                "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
-              }
-            },
-            {
-              "ProcName": "Goto",
-              "ParamMappings": {
-                "NewLocation": "The Village"
-              }
-            }
-          ]
+          }
         },
         {
           "name": "ReadPlayerName",
@@ -343,25 +376,26 @@
             }
           ]
         },
-
         {
           "name": "Buy Drinks",
-          "steps": [
-            {
-              "Chance": "33.333%",
-              "ProcName": "Echo",
-              "ParamMappings": {
-                "MessageToPrint": "Aaah, a nice cold beer. Just what the druid ordered."
-              },
-              "IfFalse":
+          "requires": {
+            "condition": "chance(33.333%)",
+            "steps": [
               {
                 "ProcName": "Echo",
                 "ParamMappings": {
-                  "MessageToPrint": "You don't know what the drink is the barman puts down in front of you, but it doesn't look good."
+                  "MessageToPrint": "Aaah, a nice cold beer. Just what the druid ordered."
                 }
               }
+            ]
+          },
+          "or-else":
+          {
+            "ProcName": "Echo",
+            "ParamMappings": {
+              "MessageToPrint": "You don't know what the drink is the barman puts down in front of you, but it doesn't look good."
             }
-          ]
+          }
         }
       ]
     },

@@ -1,7 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import java.util.Map;
-
 public class CallDetails
 {
   private final Variables callParameters;

@@ -18,7 +18,7 @@ public class ValueResolverTest
     values.put("double", "two");
     values.put("triple", "three");
     values.put("quadruple", "four");
-    vars.pushNewVariablesStackFrame(values);
+    vars.pushNewVariablesStackFrame("test", values);
   }
 
   @Test

@@ -16,13 +16,21 @@ import static junit.framework.TestCase.assertEquals;
 public class MainTest
 {
   @Test
+  public void testPlayerSetupRequired() throws IOException, ActionInvocationException
+  {
+    startBot();
+    Update update;
+    update = createUpdate("The Inn");
+    new TelegramServlet().processTelegramUpdate(update);
+  }
+
+  @Test
   public void testPlayerSetup() throws IOException, ActionInvocationException
   {
-    GameState gameState = GameStatesRegistry.lookup(-1);
-    gameState.getVariables().setValue("chatId", "-1");
+    GameState gameState = startBot();
     initPlayer();
 
-    assertEquals("helloooo", gameState.getVariables().lookupVariableValue("Player.Name"));
+    assertEquals("TestUser", gameState.getVariables().lookupVariableValue("Player.Name"));
     assertEquals("Druid", gameState.getVariables().lookupVariableValue("Player.Class"));
     assertEquals("1", gameState.getVariables().lookupVariableValue("Player.Level"));
     assertEquals("80", gameState.getVariables().lookupVariableValue("Player.HP"));
@@ -32,11 +40,19 @@ public class MainTest
     assertEquals("The Village", gameState.getVariables().lookupVariableValue("Player.Location"));
   }
 
-  @Test
-  public void testWeapon() throws IOException, ActionInvocationException
+  private GameState startBot() throws IOException, ActionInvocationException
   {
     GameState gameState = GameStatesRegistry.lookup(-1);
     gameState.getVariables().setValue("chatId", "-1");
+    Update update = createUpdate("/start");
+    new TelegramServlet().processTelegramUpdate(update);
+    return gameState;
+  }
+
+  @Test
+  public void testWeapon() throws IOException, ActionInvocationException
+  {
+    startBot();
     initPlayer();
 
     Update update;
@@ -61,12 +77,17 @@ public class MainTest
   private void initPlayer() throws IOException, ActionInvocationException
   {
     Update update = createUpdate("/new");
+    System.out.println("/new");
     new TelegramServlet().processTelegramUpdate(update);
     // suspends to ask for player name
-    update = createUpdate("helloooo");
+
+    update = createUpdate("TestUser");
+    System.out.println("TestUser");
     new TelegramServlet().processTelegramUpdate(update);
+
     // suspends to ask for player class
     update = createUpdate("Druid");
+    System.out.println("Druid");
     new TelegramServlet().processTelegramUpdate(update);
   }
 

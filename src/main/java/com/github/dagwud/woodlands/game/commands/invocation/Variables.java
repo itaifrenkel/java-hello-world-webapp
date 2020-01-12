@@ -5,23 +5,31 @@ import java.util.Map;
 
 public class Variables extends HashMap<String, String>
 {
+  private String contextName;
+
   public Variables()
   {
     super();
+    contextName = "(anon)";
   }
 
-  public Variables(Map<String, String> callParameters)
+  public Variables(String name, Map<String, String> callParameters)
   {
     super(callParameters == null ? new HashMap<>(0) : callParameters);
+    contextName = (name == null) ? "(anon)" : name;
   }
 
-  @Override
-  public String toString()
+  public Variables(String contextName)
   {
-    return toString(0);
+    this.contextName = contextName;
   }
 
-  String toString(int indent)
+  public String pretty()
+  {
+    return pretty(0);
+  }
+
+  String pretty(int indent)
   {
     StringBuilder b = new StringBuilder();
     b.append(space(indent)).append("| Variable              | Value   ").append("\n");
@@ -33,6 +41,14 @@ public class Variables extends HashMap<String, String>
     }
     b.append(space(indent)).append("----------------------------------");
     return b.toString();
+  }
+
+  @Override
+  public String toString()
+  {
+    return "Variables{" +
+            "contextName='" + contextName + '\'' +
+            '}';
   }
 
   private String space(int indent)
@@ -55,5 +71,10 @@ public class Variables extends HashMap<String, String>
   {
     //todo inline
     return super.put(key, value);
+  }
+
+  String getContextName()
+  {
+    return contextName;
   }
 }

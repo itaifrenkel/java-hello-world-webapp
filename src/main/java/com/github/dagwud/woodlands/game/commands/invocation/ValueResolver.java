@@ -10,7 +10,7 @@ public abstract class ValueResolver
   {
   }
 
-  static String resolve(String expression, VariableStack callParameters) throws VariableUndefinedException
+  public static String resolve(String expression, VariableStack callParameters) throws VariableUndefinedException
   {
     if (!expression.contains(START_VARIABLE))
     {

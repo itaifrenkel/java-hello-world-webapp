@@ -9,12 +9,27 @@ public class VariableStack
   public VariableStack()
   {
     stack = new Stack<>();
-    stack.push(new Variables());
+    pushNewVariablesStackFrame("<root>", new Variables());
   }
 
-  public void pushNewVariablesStackFrame(Variables callParameters)
+  void pushNewVariablesStackFrame(String stackName, Variables callParameters)
   {
-    stack.push(new Variables(callParameters));
+    stack.push(new Variables(stackName, callParameters));
+    System.out.println(buildContext());
+  }
+
+  private String buildContext()
+  {
+    StringBuilder b = new StringBuilder();
+    for (Variables variables : stack)
+    {
+      if (b.length() != 0)
+      {
+        b.append(" -> ");
+      }
+      b.append(variables.getContextName()).append(" (").append(variables.size()).append(")");
+    }
+    return b.toString();
   }
 
   public void dropStackFrame()
@@ -42,7 +57,7 @@ public class VariableStack
         }
       }
     }
-    System.err.println("Not found '" + variableName + "': \n" + this);
+    System.err.println("Not found '" + variableName + "': \n" + this.pretty());
     throw new VariableUndefinedException(variableName);
   }
 
@@ -81,14 +96,13 @@ public class VariableStack
     stack.get(0).put(variableName, value);
   }
 
-  @Override
-  public String toString()
+  public String pretty()
   {
     StringBuilder b = new StringBuilder();
     b.append("===================\n");
     for (int i = 0; i < stack.size(); i++)
     {
-      String s = stack.get(i).toString(i);
+      String s = stack.get(i).pretty(i);
       b.append(s).append("\n");
     }
     b.append("===================");
