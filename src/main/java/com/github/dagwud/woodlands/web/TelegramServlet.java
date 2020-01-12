@@ -57,16 +57,18 @@ public class TelegramServlet extends HttpServlet
     String text = determineText(update);
 
     GameState gameState = GameStatesRegistry.lookup(chatId);
-    if (gameState.suspended2 != null)
+    synchronized (GameStatesRegistry.lookup(chatId))
     {
-      gameState.getVariables().setValue("__buffer", text);
-//      ActionInvocationPlanExecutor.resume(gameState.suspended);
-      gameState.suspended2.invokeAction();
-    }
-    else
-    {
-      GameInstruction instruction = GameInstructionFactory.instance().create(update, gameState);
-      instruction.execute(gameState);
+      if (gameState.suspended2 != null)
+      {
+        gameState.getVariables().setValue("__buffer", text);
+        gameState.suspended2.invokeAction();
+      }
+      else
+      {
+        GameInstruction instruction = GameInstructionFactory.instance().create(update, gameState);
+        instruction.execute(gameState);
+      }
     }
   }
 
