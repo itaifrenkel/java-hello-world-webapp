@@ -21,7 +21,7 @@
     {
       "name": "Brawler",
       "stats": {
-        "short-rest-dice": 12
+        "short-rest-dice": 12,
         "initial-strength": 16,
         "initial-strength-modifier": 3,
         "initial-agility": 14,
@@ -40,6 +40,7 @@
         "initial-hit-points": 14,
         "initial-hit-dice": "1d12",
         "notes": ""
+      }
     },
     {
       "name": "Wizard",
