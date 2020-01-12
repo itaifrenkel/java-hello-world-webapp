@@ -40,7 +40,6 @@ public class ActionInvoker
     while (!suspended && hasNext()) ///todo
     {
       InvocationResults results = invokeNext();
-      System.out.println(++i);
       if (results.getReturnMode() == ReturnMode.SUSPEND)
       {
         suspended = true;

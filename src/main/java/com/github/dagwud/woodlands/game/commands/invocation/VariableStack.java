@@ -15,7 +15,6 @@ public class VariableStack
   void pushNewVariablesStackFrame(String stackName, Variables callParameters)
   {
     stack.push(new Variables(stackName, callParameters));
-    System.out.println(buildContext());
   }
 
   private String buildContext()

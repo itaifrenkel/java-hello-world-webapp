@@ -34,8 +34,8 @@ public class MainTest
     assertEquals("TestUser", gameState.getVariables().lookupVariableValue("Player.Name"));
     assertEquals("Wizard", gameState.getVariables().lookupVariableValue("Player.Class"));
     assertEquals("1", gameState.getVariables().lookupVariableValue("Player.Level"));
-    assertEquals("80", gameState.getVariables().lookupVariableValue("Player.HP"));
-    assertEquals("100", gameState.getVariables().lookupVariableValue("Player.MaxHP"));
+    assertEquals("8", gameState.getVariables().lookupVariableValue("Player.HP"));
+    assertEquals("8", gameState.getVariables().lookupVariableValue("Player.MaxHP"));
     assertEquals("2", gameState.getVariables().lookupVariableValue("Player.Mana"));
     assertEquals("3", gameState.getVariables().lookupVariableValue("Player.MaxMana"));
     assertEquals("The Village", gameState.getVariables().lookupVariableValue("Player.Location"));

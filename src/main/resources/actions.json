@@ -35,6 +35,10 @@
       "ProcName": "Retrieve Items"
     },
     {
+      "command": ["Short Rest"],
+      "ProcName": "Short Rest"
+    },
+    {
       "command": ["The Tavern"],
       "ProcName": "Goto",
       "ParamMappings": {
@@ -341,7 +345,7 @@
               "ProcName": "Native:Menu",
               "ParamMappings": {
                 "MessageToPrint": "This is the inn",
-                "Options": "Leave Items,Retrieve Items,Village Square"
+                "Options": "Leave Items,Retrieve Items,Short Rest,Village Square"
               }
             }
           ]
@@ -353,6 +357,25 @@
               "ProcName": "Native:SpawnItem",
               "OutputMappings": {
                 "SpawnedItem": "SpawnedItem"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Item.Carrying.Left",
+                "AttributeValue": "${SpawnedItem}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Short Rest",
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "HP",
+                "AttributeValue": "eval(${Player.Level}d${class.${Player.Class}.short-rest-dice})"
               }
             },
             {
