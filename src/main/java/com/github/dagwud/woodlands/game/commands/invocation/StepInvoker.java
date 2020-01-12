@@ -10,6 +10,7 @@ public class StepInvoker
   private final Step step;
   private final GameState gameState;
   private ActionInvoker invoker = null;
+  private Variables boundParams = null;
 
   StepInvoker(Step step, GameState gameState)
   {
@@ -21,18 +22,18 @@ public class StepInvoker
   {
     if (invoker == null)
     {
-      bindParameters();
+      boundParams = bindParameters();
     }
     InvocationResults results = invokeStep();
     if (isComplete())
     {
-      unbindParameters();
+      unbindParameters(boundParams);
     }
     mapResults(results);
     return results;
   }
 
-  private void bindParameters()
+  private Variables bindParameters()
   {
     Variables parameters = new Variables();
     if (step.paramMappings != null)
@@ -45,7 +46,11 @@ public class StepInvoker
         parameters.put(bindTo, value);
       }
     }
-    gameState.getVariables().pushNewVariablesStackFrame("call " + step.procName , parameters);
+    for (Map.Entry<String, String> params : parameters.entrySet())
+    {
+      gameState.getVariables().setValue(params.getKey(), params.getValue());
+    }
+    return parameters;
   }
 
   private InvocationResults invokeStep() throws ActionInvocationException
@@ -53,7 +58,6 @@ public class StepInvoker
     if (invoker == null)
     {
       invoker = new ActionInvoker(step.procName, gameState);
-
     }
     InvocationResults results = invoker.invokeNext();
     return results;
@@ -78,8 +82,16 @@ public class StepInvoker
     }
   }
 
-  private void unbindParameters()
+  private void unbindParameters(Variables boundParams)
   {
-    gameState.getVariables().dropStackFrame();
+    for (Map.Entry<String, String> boundParam : boundParams.entrySet())
+    {
+      gameState.getVariables().unsetValue(boundParam.getKey());
+    }
+  }
+
+  public String toString()
+  {
+    return "StepInvoker@" + hashCode() + "[" + step.procName + "]";
   }
 }

@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
 import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 
-import java.text.NumberFormat;
+import java.util.HashMap;
 
 @SuppressWarnings("unused") // called at runtime via reflection
 public class SetVarAction extends NativeAction
@@ -14,10 +14,16 @@ public class SetVarAction extends NativeAction
   public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
     String varSet = gameState.getVariables().lookupVariableValue("VarSet");
-    String varName = varSet + "." + gameState.getVariables().lookupVariableValue("VarName");
+    if (!varSet.isEmpty())
+    {
+      varSet += ".";
+    }
+    String varName = varSet + gameState.getVariables().lookupVariableValue("VarName");
     String varValue = gameState.getVariables().lookupVariableValue("VarValue");
     gameState.getVariables().setValue(varName, varValue);
-    return new InvocationResults(new Variables());
+    Variables variableThatWasSet = new Variables("results SetVarAction", new HashMap<>());
+    variableThatWasSet.put(varName, varValue);
+    return new InvocationResults(variableThatWasSet);
   }
 
 }

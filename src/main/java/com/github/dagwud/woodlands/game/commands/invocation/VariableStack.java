@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
+import com.github.dagwud.woodlands.game.commands.values.WoodlandsRuntimeException;
+
 import java.util.Stack;
 
 public class VariableStack
@@ -82,6 +84,15 @@ public class VariableStack
       }
     }
     stack.get(stack.size() - 1 - (-offset)).put(variableName, value);
+  }
+
+  void unsetValue(String valueName)
+  {
+    if (!stack.get(stack.size() - 1).containsKey(valueName))
+    {
+      throw new WoodlandsRuntimeException("Value " + valueName + " isn't set");
+    }
+    stack.get(stack.size() - 1).remove(valueName);
   }
 
   static boolean isGlobalVariable(String variableName)

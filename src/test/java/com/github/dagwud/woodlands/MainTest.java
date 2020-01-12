@@ -85,11 +85,11 @@ public class MainTest
     assertEquals("8", gameState.getVariables().lookupVariableValue("Player.HP"));
 
     update = createUpdate("Buy Drinks");
-    while (gameState.getVariables().lookupVariableValue("Player.HP").equals("8"))
+    while (Integer.parseInt(gameState.getVariables().lookupVariableValue("Player.HP")) > 5)
     {
       new TelegramServlet().processTelegramUpdate(update);
     }
-    assertEquals("7", gameState.getVariables().lookupVariableValue("Player.HP"));
+    assertEquals("5", gameState.getVariables().lookupVariableValue("Player.HP"));
 
     update = createUpdate("Village Square");
     new TelegramServlet().processTelegramUpdate(update);

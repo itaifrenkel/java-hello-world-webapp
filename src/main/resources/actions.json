@@ -411,15 +411,38 @@
               }
             },
             {
-              "ProcName": "SetPlayerHP",
+              "ProcName": "RollShortRest",
+              "OutputMappings": {
+                "HPRecovered": "HPRested"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
-                "NewHP": "eval(${Player.HP} + ((${Player.Level}d${classes.${Player.Class}.short-rest-dice}) + floor((${Player.Constitution} - 10)/2)))"
+                "AttributeName": "HP",
+                "AttributeValue": "eval(${Player.HP} + ${HPRecovered})"
               }
             },
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "Ahhhh. Much better. Now at ${Player.HP} of ${Player.MaxHP}"
+                "MessageToPrint": "Ahhhh. Much better. You rested and recovered ❤️${HPRecovered}. Now at ${Player.HP} of ${Player.MaxHP}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "RollShortRest",
+          "steps": [
+            {
+              "ProcName": "Native:SetVar",
+              "ParamMappings": {
+                "VarSet": "",
+                "VarName": "tmp",
+                "VarValue": "eval(((${Player.HP} + ((${Player.Level}d${classes.${Player.Class}.short-rest-dice}) + floor((${Player.Constitution} - 10)/2)))<${Player.MaxHP}) - ${Player.HP})"
+              },
+              "OutputMappings": {
+                "tmp": "HPRecovered"
               }
             }
           ]

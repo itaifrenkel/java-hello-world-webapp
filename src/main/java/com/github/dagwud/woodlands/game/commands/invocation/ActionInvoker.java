@@ -198,4 +198,9 @@ public class ActionInvoker
     }
     return steps;
   }
+
+  public String toString()
+  {
+    return "ActionInvoker@" + hashCode() + "[" + procNameExpression + "#" + lastCompleted + "]";
+  }
 }
