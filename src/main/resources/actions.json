@@ -160,7 +160,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nCarrying:\n- ${Player.Item.Carrying.Left} ${weapons.${Player.Item.Carrying.Left}.icon}${weapons.${Player.Item.Carrying.Left}.damage}\n- ${Player.Item.Carrying.Right} "
+                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nStrength: ${Player.Strength}\nAgility: ${Player.Agility}\nConstitution: ${Player.Constitution}\nCarrying:\n- ${Player.Item.Carrying.Left} ${weapons.${Player.Item.Carrying.Left}.icon}${weapons.${Player.Item.Carrying.Left}.damage}\n- ${Player.Item.Carrying.Right}"
               }
             }
           ]
@@ -301,6 +301,27 @@
               "ParamMappings": {
                 "AttributeName": "HP",
                 "AttributeValue": "${Player.MaxHP}"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Constitution",
+                "AttributeValue": "${classes.${Player.Class}.initial-constitution}"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Strength",
+                "AttributeValue": "${classes.${Player.Class}.initial-strength}"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Agility",
+                "AttributeValue": "${classes.${Player.Class}.initial-agility}"
               }
             },
             {
