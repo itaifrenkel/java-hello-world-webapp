@@ -29,7 +29,7 @@
     {"name": "Cat o' Nine Tails", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":true},
     {"name": "Pistol", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":true},
     {"name": "Shuriken", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":true},
-    
+
 
     {"name": "Flanged Mace", "damage": {"dice_count": 1,"dice_faces": 12},"ranged":false},
     {"name": "Warrior Axe", "damage": {"dice_count": 1,"dice_faces": 12},"ranged":false},

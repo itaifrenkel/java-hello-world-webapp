@@ -70,7 +70,7 @@ public class ActionInvoker
     }
     else
     {
-      Action action = ActionsCacheFactory.instance().getActions().findAction(proc);
+      Action action = ActionsCacheFactory.instance().findAction(proc);
       results = invokeNextStep(action, gameState);
     }
     return results;

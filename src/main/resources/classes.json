@@ -1,0 +1,26 @@
+{
+  "classes": [
+    {
+      "name": "General",
+      "stats": {
+        "a": 2,
+        "b": 5
+      }
+    },
+    {
+      "name": "Trickster"
+    },
+    {
+      "name": "Explorer"
+    },
+    {
+      "name": "Brawler"
+    },
+    {
+      "name": "Wizard"
+    },
+    {
+      "name": "Druid"
+    }
+  ]
+}

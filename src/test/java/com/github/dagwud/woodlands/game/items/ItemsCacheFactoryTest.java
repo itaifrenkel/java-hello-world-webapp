@@ -11,7 +11,7 @@ public class ItemsCacheFactoryTest
   public void testParse() throws UnknownWeaponException
   {
     ItemsCacheFactory f = ItemsCacheFactory.instance();
-    Weapon weapon = f.getItems().findWeapon("Dagger");
+    Weapon weapon = f.getCache().findWeapon("Dagger");
     assertNotNull(weapon);
     assertEquals(1, weapon.damage.diceCount);
     assertEquals(4, weapon.damage.diceFaces);

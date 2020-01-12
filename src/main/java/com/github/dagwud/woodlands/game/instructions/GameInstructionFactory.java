@@ -3,8 +3,6 @@ package com.github.dagwud.woodlands.game.instructions;
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionsCacheFactory;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
-import com.github.dagwud.woodlands.game.commands.quickcommands.QuickCommandsCache;
-import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.QuickCommand;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
@@ -35,9 +33,9 @@ public class GameInstructionFactory
     int chatId = telegramUpdate.message.chat.id;
     String cmd = telegramUpdate.message.text;
 
-    if (ActionsCacheFactory.instance().getQuickCommands().isQuickCommand(cmd))
+    if (ActionsCacheFactory.instance().isQuickCommand(cmd))
     {
-      QuickCommand quickCommand = ActionsCacheFactory.instance().getQuickCommands().findQuickCommand(cmd);
+      QuickCommand quickCommand = ActionsCacheFactory.instance().findQuickCommand(cmd);
       return new RunProcInstruction(quickCommand.procName, quickCommand.paramMappings == null ? new Variables() : quickCommand.paramMappings, new Variables());
     }
 

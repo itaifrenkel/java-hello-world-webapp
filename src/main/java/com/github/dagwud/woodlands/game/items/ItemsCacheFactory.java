@@ -11,12 +11,12 @@ public class ItemsCacheFactory
 
   private static ItemsCacheFactory instance;
 
-  private final ItemsCache items;
+  private final ItemsCache cache;
 
   private ItemsCacheFactory()
   {
     ItemsRoot root = GsonHelper.readJSON(new File(ITEMS_FILE), ItemsRoot.class);
-    items = new ItemsCache(root);
+    cache = new ItemsCache(root);
   }
 
   public static ItemsCacheFactory instance()
@@ -36,9 +36,9 @@ public class ItemsCacheFactory
     }
   }
 
-  public ItemsCache getItems()
+  public ItemsCache getCache()
   {
-    return items;
+    return cache;
   }
 
 }

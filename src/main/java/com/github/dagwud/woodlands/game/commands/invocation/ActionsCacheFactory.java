@@ -1,14 +1,14 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
 import com.github.dagwud.woodlands.game.commands.ActionsCache;
+import com.github.dagwud.woodlands.game.commands.UnknownActionException;
 import com.github.dagwud.woodlands.game.commands.quickcommands.QuickCommandsCache;
+import com.github.dagwud.woodlands.gson.game.Action;
+import com.github.dagwud.woodlands.gson.game.QuickCommand;
 import com.github.dagwud.woodlands.gson.game.Root;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class ActionsCacheFactory
 {
@@ -16,14 +16,14 @@ public class ActionsCacheFactory
 
   private static ActionsCacheFactory instance;
 
-  private final ActionsCache actions;
-  private final QuickCommandsCache quickCommands;
+  private final ActionsCache actionsCache;
+  private final QuickCommandsCache quickCommandsCache;
 
   private ActionsCacheFactory()
   {
     Root root = GsonHelper.readJSON(new File(ACTIONS_FILE), Root.class);
-    actions = new ActionsCache(root);
-    quickCommands = new QuickCommandsCache(root);
+    actionsCache = new ActionsCache(root);
+    quickCommandsCache = new QuickCommandsCache(root);
   }
 
   public static ActionsCacheFactory instance()
@@ -43,13 +43,23 @@ public class ActionsCacheFactory
     }
   }
 
-  public ActionsCache getActions()
+  private ActionsCache getActionsCache()
   {
-    return actions;
+    return actionsCache;
   }
 
-  public QuickCommandsCache getQuickCommands()
+  Action findAction(String proc) throws UnknownActionException
   {
-    return quickCommands;
+    return getActionsCache().findAction(proc);
+  }
+
+  public boolean isQuickCommand(String cmd)
+  {
+    return quickCommandsCache.isQuickCommand(cmd);
+  }
+
+  public QuickCommand findQuickCommand(String cmd)
+  {
+    return quickCommandsCache.findQuickCommand(cmd);
   }
 }

@@ -1,7 +1,8 @@
 package com.github.dagwud.woodlands.game;
 
-import com.github.dagwud.woodlands.game.commands.natives.SpawnItemAction;
+import com.github.dagwud.woodlands.game.characterclasses.CharacterClassesCacheFactory;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
+import com.github.dagwud.woodlands.gson.game.CharacterClass;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class GameStatesRegistry
     {
       GameState gameStateForChat = new GameState();
       gameStateForChat.getVariables().setValue("chatId", String.valueOf(chatId));
+      populateCharacterClasses(gameStateForChat);
       populateItems(gameStateForChat);
       registry.gameStatesByCharacter.put(chatId, gameStateForChat);
     }
@@ -34,9 +36,24 @@ public class GameStatesRegistry
     instance = null;
   }
 
+  private static void populateCharacterClasses(GameState gameState)
+  {
+    for (CharacterClass characterClass : CharacterClassesCacheFactory.instance().getCharacterClasses())
+    {
+      String varPrefix = "__classes." + characterClass.name + ".stats.";
+      if (characterClass.stats != null)
+      {
+        for (Map.Entry<String, String> stat : characterClass.stats.entrySet())
+        {
+          gameState.getVariables().setValue(varPrefix + stat.getKey(), stat.getValue());
+        }
+      }
+    }
+  }
+
   private static void populateItems(GameState gameState)
   {
-    for (Weapon weapon : ItemsCacheFactory.instance().getItems().getWeapons())
+    for (Weapon weapon : ItemsCacheFactory.instance().getCache().getWeapons())
     {
       gameState.getVariables().setValue("weapons." + weapon.name + ".damage", 
         weapon.damage.determineAverageRoll());

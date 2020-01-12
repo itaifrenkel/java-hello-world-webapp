@@ -16,7 +16,7 @@ public class SpawnItemAction extends NativeAction
   public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
-    List<Weapon> allWeapons = ItemsCacheFactory.instance().getItems().getWeapons();
+    List<Weapon> allWeapons = ItemsCacheFactory.instance().getCache().getWeapons();
     int rand = (int) (Math.random() * allWeapons.size());
     Weapon chosenWeapon = allWeapons.get(rand);
 
