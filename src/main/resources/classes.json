@@ -22,7 +22,24 @@
       "name": "Brawler",
       "stats": {
         "short-rest-dice": 12
-      }
+        "initial-strength": 16,
+        "initial-strength-modifier": 3,
+        "initial-agility": 14,
+        "initial-agility-modifier": 2,
+        "initial-constitution": 15,
+        "initial-constitution-modifier": 2,
+        "initial-intelligence-unused": 9,
+        "initial-intelligence-modifier-unused": -1,
+        "initial-wisdom-unused": 13,
+        "initial-wisdom-modifier-unused": 1,
+        "initial-charisma-unused": 11,
+        "initial-charisma--unusedmodifier": 0,
+        "initial-armor-class": 14,
+        "initial-initiative": 2,
+        "initial-speed-unused": 30,
+        "initial-hit-points": 14,
+        "initial-hit-dice": "1d12",
+        "notes": ""
     },
     {
       "name": "Wizard",
@@ -51,7 +68,24 @@
     {
       "name": "Druid",
       "stats": {
-        "short-rest-dice": 8
+        "short-rest-dice": 8,
+        "initial-strength": 11,
+        "initial-strength-modifier": 0,
+        "initial-agility": 14,
+        "initial-agility-modifier": 2,
+        "initial-constitution": 15,
+        "initial-constitution-modifier": 2,
+        "initial-intelligence-unused": 9,
+        "initial-intelligence-modifier-unused": -1,
+        "initial-wisdom-unused": 16,
+        "initial-wisdom-modifier-unused": 3,
+        "initial-charisma-unused": 13,
+        "initial-charisma--unusedmodifier": 1,
+        "initial-armor-class": 15,
+        "initial-initiative": 2,
+        "initial-speed-unused": 30,
+        "initial-hit-points": 10,
+        "initial-hit-dice": "1d8"
       }
     }
   ]
