@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.values.WoodlandsRuntimeExceptio
 import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.Step;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class ActionInvoker
@@ -130,7 +131,12 @@ public class ActionInvoker
   private Step determineNextStep()
   {
     int lastRunIndex = determineLastCompletedStep();
-    return stepsToRun.keySet().toArray(new Step[0])[lastRunIndex + 1];
+    Step[] steps = stepsToRun.keySet().toArray(new Step[0]);
+    if (lastRunIndex + 1 > steps.length)
+    {
+      throw new WoodlandsRuntimeException("Attempt to access invalid step: step " + (lastRunIndex + 1) + " of " + Arrays.toString(steps) + " in " + procNameExpression);
+    }
+    return steps[lastRunIndex + 1];
   }
 
   private void initStepsToRun(Action action, GameState gameState)

@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class MainTest
 {
@@ -40,19 +41,10 @@ public class MainTest
     assertEquals("The Village", gameState.getVariables().lookupVariableValue("Player.Location"));
   }
 
-  private GameState startBot() throws IOException, ActionInvocationException
-  {
-    GameState gameState = GameStatesRegistry.lookup(-1);
-    gameState.getVariables().setValue("chatId", "-1");
-    Update update = createUpdate("/start");
-    new TelegramServlet().processTelegramUpdate(update);
-    return gameState;
-  }
-
   @Test
   public void testWeapon() throws IOException, ActionInvocationException
   {
-    startBot();
+    GameState gameState = startBot();
     initPlayer();
 
     Update update;
@@ -62,6 +54,30 @@ public class MainTest
     new TelegramServlet().processTelegramUpdate(update);
     update = createUpdate("/me");
     new TelegramServlet().processTelegramUpdate(update);
+    assertNotEquals("nothing", gameState.getVariables().lookupVariableValue("Player.Item.Carrying.Left"));
+    assertEquals("nothing", gameState.getVariables().lookupVariableValue("Player.Item.Carrying.Right"));
+  }
+
+  @Test
+  public void testDrink() throws IOException, ActionInvocationException
+  {
+    GameState gameState = startBot();
+    initPlayer();
+
+    Update update;
+    update = createUpdate("The Tavern");
+    new TelegramServlet().processTelegramUpdate(update);
+    update = createUpdate("Buy Drinks");
+    new TelegramServlet().processTelegramUpdate(update);
+  }
+
+  private GameState startBot() throws IOException, ActionInvocationException
+  {
+    GameState gameState = GameStatesRegistry.lookup(-1);
+    gameState.getVariables().setValue("chatId", "-1");
+    Update update = createUpdate("/start");
+    new TelegramServlet().processTelegramUpdate(update);
+    return gameState;
   }
 
   private Update createUpdate(String messageText)
