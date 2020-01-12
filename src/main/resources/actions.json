@@ -438,7 +438,7 @@
                 {
                   "ProcName": "SetPlayerHP",
                   "ParamMappings": {
-                    "NewHP": "eval(${Player.HP}-1)"
+                    "NewHP": "eval((${Player.HP}-1)>0)"
                   }
                 }
               ]
