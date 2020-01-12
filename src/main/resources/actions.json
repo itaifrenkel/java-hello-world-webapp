@@ -73,6 +73,9 @@
                 "AttributeName": "SetupComplete",
                 "AttributeValue": "false"
               }
+            },
+            {
+              "ProcName": "PlayerSetup"
             }
           ]
         },
