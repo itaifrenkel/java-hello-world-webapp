@@ -3,19 +3,76 @@
     {
       "name": "General",
       "stats": {
-        "short-rest-dice": 8
+        "short-rest-dice": 8,
+        "initial-strength": 16,
+        "initial-strength-modifier": 3,
+        "initial-agility": 14,
+        "initial-agility-modifier": 2,
+        "initial-constitution": 15,
+        "initial-constitution-modifier": 2,
+        "initial-intelligence-unused": 11,
+        "initial-intelligence-modifier-unused": 0,
+        "initial-wisdom-unused": 13,
+        "initial-wisdom-modifier-unused": 1,
+        "initial-charisma-unused": 9,
+        "initial-charisma--unusedmodifier": -1,
+        "initial-proficiency-bonus": 2,
+        "initial-armor-class": 18,
+        "initial-initiative": 2,
+        "initial-speed-unused": 30,
+        "initial-hit-points": 12,
+        "initial-hit-dice": "1d10",
+        "notes": ""
       }
     },
     {
       "name": "Trickster",
       "stats": {
-        "short-rest-dice": 8
+        "short-rest-dice": 8,
+        "initial-strength": 11,
+        "initial-strength-modifier": 0,
+        "initial-agility": 16,
+        "initial-agility-modifier": 3,
+        "initial-constitution": 14,
+        "initial-constitution-modifier": 2,
+        "initial-intelligence-unused": 15,
+        "initial-intelligence-modifier-unused": 2,
+        "initial-wisdom-unused": 9,
+        "initial-wisdom-modifier-unused": -1,
+        "initial-charisma-unused": 11,
+        "initial-charisma--unusedmodifier": -1,
+        "initial-proficiency-bonus": 2,
+        "initial-armor-class": 14,
+        "initial-initiative": 3,
+        "initial-speed-unused": 30,
+        "initial-hit-points": 10,
+        "initial-hit-dice": "1d8",
+        "notes": ""
       }
     },
     {
       "name": "Explorer",
       "stats": {
-        "short-rest-dice": 8
+        "short-rest-dice": 8,
+        "initial-strength": 13,
+        "initial-strength-modifier": 1,
+        "initial-agility": 9,
+        "initial-agility-modifier": -1,
+        "initial-constitution": 14,
+        "initial-constitution-modifier": 2,
+        "initial-intelligence-unused": 15,
+        "initial-intelligence-modifier-unused": 2,
+        "initial-wisdom-unused": 16,
+        "initial-wisdom-modifier-unused": 3,
+        "initial-charisma-unused": 11,
+        "initial-charisma--unusedmodifier": 0,
+        "initial-proficiency-bonus": 2,
+        "initial-armor-class": 15,
+        "initial-initiative": -1,
+        "initial-speed-unused": 30,
+        "initial-hit-points": 10,
+        "initial-hit-dice": "1d8",
+        "notes": ""
       }
     },
     {
@@ -34,6 +91,7 @@
         "initial-wisdom-modifier-unused": 1,
         "initial-charisma-unused": 11,
         "initial-charisma--unusedmodifier": 0,
+        "initial-proficiency-bonus": 2,
         "initial-armor-class": 14,
         "initial-initiative": 2,
         "initial-speed-unused": 30,
@@ -58,6 +116,7 @@
         "initial-wisdom-modifier-unused": 1,
         "initial-charisma-unused": 11,
         "initial-charisma--unusedmodifier": 0,
+        "initial-proficiency-bonus": 2,
         "initial-armor-class": 12,
         "initial-initiative": 2,
         "initial-speed-unused": 30,
@@ -82,6 +141,7 @@
         "initial-wisdom-modifier-unused": 3,
         "initial-charisma-unused": 13,
         "initial-charisma--unusedmodifier": 1,
+        "initial-proficiency-bonus": 2,
         "initial-armor-class": 15,
         "initial-initiative": 2,
         "initial-speed-unused": 30,
