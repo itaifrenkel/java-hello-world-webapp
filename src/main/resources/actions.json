@@ -413,7 +413,7 @@
             {
               "ProcName": "SetPlayerHP",
               "ParamMappings": {
-                "NewHP": "eval(${Player.HP} + (${Player.Level}d${classes.${Player.Class}.short-rest-dice}))"
+                "NewHP": "eval(${Player.HP} + (${Player.Level}d${classes.${Player.Class}.short-rest-dice}) + floor((${Player.Constitution} - 10)/2))"
               }
             },
             {

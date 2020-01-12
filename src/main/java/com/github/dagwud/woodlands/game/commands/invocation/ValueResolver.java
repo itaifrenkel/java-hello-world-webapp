@@ -77,11 +77,14 @@ public abstract class ValueResolver
     expr = expr.substring("eval(".length());
     expr = expr.substring(0, expr.length() - ")".length());
     double result = MathEvaluator.eval(expr);
-    if (result == (long)result)
+
+    String resultString = String.format("%s", result);
+    if (result == (long) result)
     {
-      return String.format("%d", (long)result);
+      resultString = String.format("%d", (long) result);
     }
-    return String.format("%s", result);
+    System.out.println("EVAL: " + expr + " = " + resultString);
+    return resultString;
   }
 
 }

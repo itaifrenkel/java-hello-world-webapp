@@ -145,6 +145,12 @@ public class MathEvaluator
             case "tan":
               x = Math.tan(Math.toRadians(x));
               break;
+            case "floor":
+              x = Math.floor(x);
+              break;
+            case "ceil":
+              x = Math.ceil(x);
+              break;
             default:
               throw new RuntimeException("Unknown function: " + func);
           }
