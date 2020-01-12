@@ -405,12 +405,6 @@
           "name": "Short Rest",
           "steps": [
             {
-              "ProcName": "Echo",
-              "ParamMappings": {
-                "MessageToPrint": "Going to nap.... Now at ${Player.HP} of ${Player.MaxHP}"
-              }
-            },
-            {
               "ProcName": "RollShortRest",
               "OutputMappings": {
                 "HPRecovered": "HPRested"
@@ -426,7 +420,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "Ahhhh. Much better. You rested and recovered ❤️${HPRecovered}. Now at ${Player.HP} of ${Player.MaxHP}"
+                "MessageToPrint": "You rested and recovered ❤️${HPRecovered}. Now at ${Player.HP} of ${Player.MaxHP}"
               }
             }
           ]
