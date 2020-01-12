@@ -72,19 +72,32 @@ public class MainTest
   }
 
   @Test
-  public void testStats() throws IOException, ActionInvocationException
+  public void testDamageAndShortRest() throws IOException, ActionInvocationException
   {
     GameState gameState = startBot();
     initPlayer();
 
     Update update;
-    update = createUpdate("/me");
-    new TelegramServlet().processTelegramUpdate(update);
     assertEquals("8", gameState.getVariables().lookupVariableValue("Player.HP"));
 
     update = createUpdate("Buy Drinks");
-    new TelegramServlet().processTelegramUpdate(update);
+    while (gameState.getVariables().lookupVariableValue("Player.HP").equals("8"))
+    {
+      new TelegramServlet().processTelegramUpdate(update);
+    }
     assertEquals("7", gameState.getVariables().lookupVariableValue("Player.HP"));
+
+    update = createUpdate("Village Square");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals("The Village", gameState.getVariables().lookupVariableValue("Player.Location"));
+
+    update = createUpdate("The Inn");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals("The Inn", gameState.getVariables().lookupVariableValue("Player.Location"));
+
+    update = createUpdate("Short Rest");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals("8", gameState.getVariables().lookupVariableValue("Player.HP"));
   }
 
 

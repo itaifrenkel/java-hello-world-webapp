@@ -74,6 +74,14 @@ public class MathEvaluator
           {
             x = roll(x, parseFactor());
           }
+          else if (eat('<'))
+          {
+            x = Math.min(x, parseFactor());
+          }
+          else if (eat('>'))
+          {
+            x = Math.min(x, parseFactor());
+          }
           else if (eat('*'))
           {
             x *= parseFactor(); // multiplication
@@ -164,10 +172,10 @@ public class MathEvaluator
     double total = 0;
     for (int i = 0; i < diceCount; i++)
     {
-      double diceRoll = (int)(Math.random() * diceFaces) + 1;
+      int diceRoll = (int)(Math.random() * diceFaces) + 1;
       total += diceRoll;
     }
-    System.out.println("ROLL: " + x + "d" + parseFactor + "=" + total);
+    System.out.println("ROLL: " + diceCount + "d" + diceFaces + "=" + total);
     return total;
   }
 }

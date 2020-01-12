@@ -112,6 +112,18 @@
           ]
         },
         {
+          "name": "SetPlayerHP",
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "HP",
+                "AttributeValue": "eval(${NewHP}<${Player.MaxHP})"
+              }
+            }
+          ]
+        },
+        {
           "name": "Goto",
           "requires": {
             "condition": "${Player.SetupComplete}==true",
@@ -372,17 +384,21 @@
           "name": "Short Rest",
           "steps": [
             {
-              "ProcName": "SetPlayerAttribute",
+              "ProcName": "Echo",
               "ParamMappings": {
-                "AttributeName": "HP",
-                "AttributeValue": "eval(${Player.Level}d${class.${Player.Class}.short-rest-dice})"
+                "MessageToPrint": "Going to nap.... Now at ${Player.HP} of ${Player.MaxHP}"
               }
             },
             {
-              "ProcName": "SetPlayerAttribute",
+              "ProcName": "SetPlayerHP",
               "ParamMappings": {
-                "AttributeName": "Item.Carrying.Left",
-                "AttributeValue": "${SpawnedItem}"
+                "NewHP": "eval(${Player.HP} + (${Player.Level}d${classes.${Player.Class}.short-rest-dice}))"
+              }
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "Ahhhh. Much better. Now at ${Player.HP} of ${Player.MaxHP}"
               }
             }
           ]
@@ -420,10 +436,9 @@
                   }
                 },
                 {
-                  "ProcName": "SetPlayerAttribute",
+                  "ProcName": "SetPlayerHP",
                   "ParamMappings": {
-                    "AttributeName": "HP",
-                    "AttributeValue": "eval(${Player.HP}-1)"
+                    "NewHP": "eval(${Player.HP}-1)"
                   }
                 }
               ]

@@ -1,9 +1,11 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
+import com.github.dagwud.woodlands.game.commands.natives.MathEvaluator;
+
 public abstract class ValueResolver
 {
 
-  public static final String START_VARIABLE = "${";
+  static final String START_VARIABLE = "${";
   static final String END_VARIABLE = "}";
 
   private ValueResolver()
@@ -14,14 +16,14 @@ public abstract class ValueResolver
   {
     if (!expression.contains(START_VARIABLE))
     {
-      return expression;
+      return eval(expression);
     }
 
     ExpressionTree toks = new ExpressionTree(expression, START_VARIABLE, END_VARIABLE);
     resolveVars(toks.getRoot(), callParameters);
 
     //    System.out.println("resolved " + expression + " --> " + resolved);
-    return toks.collapse();
+    return eval(toks.collapse());
   }
 
   private static void resolveVars(ExpressionTreeNode expressionTreeNode, VariableStack callParameters)
@@ -29,15 +31,7 @@ public abstract class ValueResolver
     if (expressionTreeNode.getValue().contains(START_VARIABLE))
     {
       String value;
-//      if (expressionTreeNode.getValue().indexOf(START_VARIABLE) == expressionTreeNode.getValue().lastIndexOf(START_VARIABLE))
-//      {
-        // simple expression containing one variable
-        value = resolveVar(expressionTreeNode.getValue(), callParameters);
-//      }
-//      else
-//      {
-//        value = resolve(expressionTreeNode.getValue(), callParameters);
-//      }
+      value = resolveVar(expressionTreeNode.getValue(), callParameters);
       expressionTreeNode.setValue(value);
     }
     if (null != expressionTreeNode.getRight())
@@ -68,4 +62,26 @@ public abstract class ValueResolver
     }
     return value;
   }
+
+  private static String eval(String expression)
+  {
+    if (expression.contains("eval("))
+    {
+      return evaluateMath(expression);
+    }
+    return expression;
+  }
+
+  private static String evaluateMath(String expr)
+  {
+    expr = expr.substring("eval(".length());
+    expr = expr.substring(0, expr.length() - ")".length());
+    double result = MathEvaluator.eval(expr);
+    if (result == (long)result)
+    {
+      return String.format("%d", (long)result);
+    }
+    return String.format("%s", result);
+  }
+
 }

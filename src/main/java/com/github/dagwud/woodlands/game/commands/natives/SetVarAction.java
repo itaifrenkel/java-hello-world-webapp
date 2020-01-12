@@ -16,23 +16,8 @@ public class SetVarAction extends NativeAction
     String varSet = gameState.getVariables().lookupVariableValue("VarSet");
     String varName = varSet + "." + gameState.getVariables().lookupVariableValue("VarName");
     String varValue = gameState.getVariables().lookupVariableValue("VarValue");
-    if (varValue.startsWith("eval(") && varValue.endsWith(")"))
-    {
-      varValue = evaluate(varValue);
-    }
     gameState.getVariables().setValue(varName, varValue);
     return new InvocationResults(new Variables());
   }
 
-  private String evaluate(String expr)
-  {
-    expr = expr.substring("eval(".length());
-    expr = expr.substring(0, expr.length() - ")".length());
-    double result = MathEvaluator.eval(expr);
-    if (result == (long)result)
-    {
-      return String.format("%d", (long)result);
-    }
-    return String.format("%s", result);
-  }
 }
