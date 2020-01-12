@@ -5,13 +5,13 @@ import com.github.dagwud.woodlands.gson.game.Step;
 
 import java.util.Map;
 
-public class StepInvoker2
+public class StepInvoker
 {
   private final Step step;
   private final GameState gameState;
-  private ActionInvoker2 invoker = null;
+  private ActionInvoker invoker = null;
 
-  StepInvoker2(Step step, GameState gameState)
+  StepInvoker(Step step, GameState gameState)
   {
     this.step = step;
     this.gameState = gameState;
@@ -52,7 +52,7 @@ public class StepInvoker2
   {
     if (invoker == null)
     {
-      invoker = new ActionInvoker2(step.procName, gameState);
+      invoker = new ActionInvoker(step.procName, gameState);
 
     }
     InvocationResults results = invoker.invokeNext();

@@ -10,16 +10,16 @@ import com.github.dagwud.woodlands.gson.game.Step;
 
 import java.util.LinkedHashMap;
 
-public class ActionInvoker2
+public class ActionInvoker
 {
   private static final String NATIVE_ACTION_PREFIX = "Native:";
   private final String procNameExpression;
   private final GameState gameState;
 
-  private LinkedHashMap<Step, StepInvoker2> stepsToRun;
+  private LinkedHashMap<Step, StepInvoker> stepsToRun;
   private Step lastCompleted;
 
-  public ActionInvoker2(String procNameExpression, GameState gameState)
+  public ActionInvoker(String procNameExpression, GameState gameState)
   {
     this.procNameExpression = procNameExpression;
     this.gameState = gameState;
@@ -107,7 +107,7 @@ public class ActionInvoker2
       initStepsToRun(action, gameState);
     }
     Step step = determineNextStep();
-    StepInvoker2 stepInvoker = determineStepInvoker(gameState, step);
+    StepInvoker stepInvoker = determineStepInvoker(gameState, step);
     InvocationResults results = stepInvoker.invoke();
     if (stepInvoker.isComplete())
     {
@@ -116,12 +116,12 @@ public class ActionInvoker2
     return results;
   }
 
-  private StepInvoker2 determineStepInvoker(GameState gameState, Step step)
+  private StepInvoker determineStepInvoker(GameState gameState, Step step)
   {
-    StepInvoker2 stepInvoker = stepsToRun.get(step);
+    StepInvoker stepInvoker = stepsToRun.get(step);
     if (stepInvoker == null)
     {
-      stepInvoker = new StepInvoker2(step, gameState);
+      stepInvoker = new StepInvoker(step, gameState);
       stepsToRun.put(step, stepInvoker);
     }
     return stepInvoker;

@@ -22,6 +22,6 @@ public class RunProcInstruction extends GameInstruction
   @Override
   public void execute(GameState gameState) throws ActionInvocationException
   {
-    new ActionInvoker2(procName, gameState).invokeAction(callDetails.getCallParameters());
+    new ActionInvoker(procName, gameState).invokeAction(callDetails.getCallParameters());
   }
 }
