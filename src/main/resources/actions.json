@@ -82,7 +82,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "The following commands are available:\n* /new - create a new character\n* /help - show this help info\n* /village, /mountain, /woodlands - move around.\n\nYour chat ID is ${chatId}"
+                "MessageToPrint": "The following commands are available:\n* /new - create a new character\n* /help - show this help info\n* /me - show your character information.\n\nYour chat ID is ${chatId}"
               }
             }
           ]
