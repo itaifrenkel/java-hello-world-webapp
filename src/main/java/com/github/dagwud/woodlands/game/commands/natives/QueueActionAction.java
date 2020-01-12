@@ -8,16 +8,12 @@ import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.values.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.instructions.RunProcInstruction;
-import com.github.dagwud.woodlands.web.TelegramServlet;
 
-import javax.ejb.SessionContext;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
-import javax.ejb.TimerService;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("unused") // called at runtime via reflection
@@ -99,10 +95,10 @@ public class QueueActionAction extends NativeAction
     }
     else
     {
-      InitialContext ic = new InitialContext();
-      SessionContext sctxLookup = (SessionContext) ic.lookup("java:comp/EJBContext");
-      TimerService timerService = sctxLookup.getTimerService();
-      timerService.createTimer(System.currentTimeMillis() + delayMS, timerInfo);
+      Callable<String> callable = new CallableProc<String>(delayMS, timerInfo);
+      FutureTask task = new FutureTask<>(callable);
+      System.out.println("SCHEDULING: " + timerInfo);
+      new Thread(task).start();
       System.out.println("Timer scheduled - " + delayMS + "ms: run " + procName);
     }
   }
