@@ -40,7 +40,7 @@ public class GameStatesRegistry
   {
     for (CharacterClass characterClass : CharacterClassesCacheFactory.instance().getCharacterClasses())
     {
-      String varPrefix = "__classes." + characterClass.name + ".stats.";
+      String varPrefix = "__classes." + characterClass.name + ".";
       if (characterClass.stats != null)
       {
         for (Map.Entry<String, String> stat : characterClass.stats.entrySet())

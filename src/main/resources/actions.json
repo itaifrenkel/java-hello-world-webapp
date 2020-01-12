@@ -277,14 +277,14 @@
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "MaxHP",
-                "AttributeValue": "100"
+                "AttributeValue": "${classes.${Player.Class}.initial-hit-points}"
               }
             },
             {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "HP",
-                "AttributeValue": "80"
+                "AttributeValue": "${Player.MaxHP}"
               }
             },
             {
@@ -393,7 +393,14 @@
                 {
                   "ProcName": "Echo",
                   "ParamMappings": {
-                    "MessageToPrint": "You don't know what the drink is the barman puts down in front of you, but it doesn't look good."
+                    "MessageToPrint": "You don't know what the drink is the barman puts down in front of you, but it doesn't look good. You drink it anyway.. you don't feel good."
+                  }
+                },
+                {
+                  "ProcName": "SetPlayerAttribute",
+                  "ParamMappings": {
+                    "AttributeName": "HP",
+                    "AttributeValue": "eval(${Player.HP}-1)"
                   }
                 }
               ]

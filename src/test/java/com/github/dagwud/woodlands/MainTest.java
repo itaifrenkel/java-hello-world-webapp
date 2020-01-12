@@ -32,7 +32,7 @@ public class MainTest
     initPlayer();
 
     assertEquals("TestUser", gameState.getVariables().lookupVariableValue("Player.Name"));
-    assertEquals("Druid", gameState.getVariables().lookupVariableValue("Player.Class"));
+    assertEquals("Wizard", gameState.getVariables().lookupVariableValue("Player.Class"));
     assertEquals("1", gameState.getVariables().lookupVariableValue("Player.Level"));
     assertEquals("80", gameState.getVariables().lookupVariableValue("Player.HP"));
     assertEquals("100", gameState.getVariables().lookupVariableValue("Player.MaxHP"));
@@ -71,6 +71,23 @@ public class MainTest
     new TelegramServlet().processTelegramUpdate(update);
   }
 
+  @Test
+  public void testStats() throws IOException, ActionInvocationException
+  {
+    GameState gameState = startBot();
+    initPlayer();
+
+    Update update;
+    update = createUpdate("/me");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals("8", gameState.getVariables().lookupVariableValue("Player.HP"));
+
+    update = createUpdate("Buy Drinks");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals("7", gameState.getVariables().lookupVariableValue("Player.HP"));
+  }
+
+
   private GameState startBot() throws IOException, ActionInvocationException
   {
     GameState gameState = GameStatesRegistry.lookup(-1);
@@ -102,8 +119,8 @@ public class MainTest
     new TelegramServlet().processTelegramUpdate(update);
 
     // suspends to ask for player class
-    update = createUpdate("Druid");
-    System.out.println("Druid");
+    update = createUpdate("Wizard");
+    System.out.println("Wizard");
     new TelegramServlet().processTelegramUpdate(update);
   }
 
