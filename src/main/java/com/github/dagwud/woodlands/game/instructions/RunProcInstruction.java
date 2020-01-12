@@ -8,7 +8,7 @@ public class RunProcInstruction extends GameInstruction
   private final String procName;
   private final CallDetails callDetails;
 
-  RunProcInstruction(String procName)
+  public RunProcInstruction(String procName)
   {
     this(procName, new Variables(), new Variables());
   }

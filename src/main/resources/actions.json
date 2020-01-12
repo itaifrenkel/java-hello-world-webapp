@@ -405,6 +405,18 @@
           "name": "Short Rest",
           "steps": [
             {
+              "ProcName": "Native:QueueAction",
+              "ParamMappings": {
+                "delay": "10s",
+                "ProcName": "DoShortRest"
+              }
+            }
+          ]
+        },
+        {
+          "name": "DoShortRest",
+          "steps": [
+            {
               "ProcName": "RollShortRest",
               "OutputMappings": {
                 "HPRecovered": "HPRested"
