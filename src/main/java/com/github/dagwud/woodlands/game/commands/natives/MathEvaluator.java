@@ -80,7 +80,7 @@ public class MathEvaluator
           }
           else if (eat('>'))
           {
-            x = Math.min(x, parseFactor());
+            x = Math.max(x, parseFactor());
           }
           else if (eat('*'))
           {
