@@ -1,17 +1,12 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
 import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.commands.values.WoodlandsRuntimeException;
-import com.github.dagwud.woodlands.game.instructions.RunProcInstruction;
 
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
-import javax.naming.NamingException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
@@ -27,14 +22,7 @@ public class QueueActionAction extends NativeAction
     String procToInvoke = gameState.getVariables().lookupVariableValue("ProcName");
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
 
-    try
-    {
-      schedule(Long.parseLong(chatId), procToInvoke, timerDurationMS);
-    }
-    catch (NamingException e)
-    {
-      throw new ActionInvocationException(e);
-    }
+    schedule(Integer.parseInt(chatId), procToInvoke, timerDurationMS);
 
     return new InvocationResults(new Variables());
   }
@@ -86,47 +74,33 @@ public class QueueActionAction extends NativeAction
     }
   }
 
-  public void schedule(long chatId, String procName, long delayMS) throws NamingException, ActionInvocationException
+  private void schedule(int chatId, String procName, long delayMS)
   {
-    String timerInfo = chatId + "@" + procName;
     if (chatId == -1)
     {
-      timerLapse(String.valueOf(chatId), procName);
+      delayMS = 0;
+    }
+    Callable<String> callable = new CallableProc<String>(delayMS, chatId, procName);
+
+    if (delayMS <= 0)
+    {
+      try
+      {
+        callable.call();
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+      }
     }
     else
     {
-      Callable<String> callable = new CallableProc<String>(delayMS, timerInfo);
+      System.out.println("SCHEDULING: " + chatId + "@" + procName);
       FutureTask task = new FutureTask<>(callable);
-      System.out.println("SCHEDULING: " + timerInfo);
+      // Yes, threads are forbidden in EJB... but the current deployment server isn't actually
+      // using an EJB container, so this seems ok.
       new Thread(task).start();
-      System.out.println("Timer scheduled - " + delayMS + "ms: run " + procName);
+      System.out.println("SCHEDULED: " + chatId + "@" + procName);
     }
   }
-
-  @Timeout
-  public void timerLapse(Timer timer)
-  {
-    System.out.println("TIMER TICKED!");
-    String[] details = ((String)timer.getInfo()).split("@");
-    String chatId = details[0];
-    String procName = details[1];
-    try
-    {
-      timerLapse(chatId, procName);
-    }
-    catch (ActionInvocationException e)
-    {
-      // can't throw exception out of timer:
-      System.err.println("Error invoking timer " + timer.getInfo());
-      e.printStackTrace();
-    }
-  }
-
-  private void timerLapse(String chatId, String procName) throws ActionInvocationException
-  {
-    GameState gameState = GameStatesRegistry.lookup(Integer.parseInt(chatId));
-    RunProcInstruction instruction = new RunProcInstruction(procName);
-    instruction.execute(gameState);
-  }
-
 }
