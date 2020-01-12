@@ -9,7 +9,7 @@ import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-class CallableProc<T> implements Callable<String>
+class CallableProc implements Callable<String>
 {
   private final long delayMS;
   private final int chatId;

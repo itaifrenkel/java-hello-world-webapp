@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
 import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
 import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
@@ -15,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class QueueActionAction extends NativeAction
 {
   @Override
-  public InvocationResults invoke(GameState gameState, CallDetails callDetails) throws ActionInvocationException
+  public InvocationResults invoke(GameState gameState, CallDetails callDetails)
   {
     String delay = gameState.getVariables().lookupVariableValue("delay");
     long timerDurationMS = determineDurationMS(delay);
@@ -80,7 +79,7 @@ public class QueueActionAction extends NativeAction
     {
       delayMS = 0;
     }
-    Callable<String> callable = new CallableProc<String>(delayMS, chatId, procName);
+    Callable<String> callable = new CallableProc(delayMS, chatId, procName);
 
     if (delayMS <= 0)
     {
