@@ -160,7 +160,7 @@
             {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\nHealth: ${Player.HP} / ${Player.MaxHP}\nMana: ${Player.Mana} / ${Player.MaxMana}\nStrength: ${Player.Strength}\nAgility: ${Player.Agility}\nConstitution: ${Player.Constitution}\nCarrying:\n- ${Player.Item.Carrying.Left} ${weapons.${Player.Item.Carrying.Left}.icon}${weapons.${Player.Item.Carrying.Left}.damage}\n- ${Player.Item.Carrying.Right}"
+                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\n❤️: ${Player.HP} / ${Player.MaxHP}\n✨: ${Player.Mana} / ${Player.MaxMana}\nStrength: ${Player.Strength}\nAgility: ${Player.Agility}\nConstitution: ${Player.Constitution}\nCarrying:\n• ${Player.Item.Carrying.Left} ${weapons.${Player.Item.Carrying.Left}.icon}${weapons.${Player.Item.Carrying.Left}.damage}\n• ${Player.Item.Carrying.Right}"
               }
             }
           ]
