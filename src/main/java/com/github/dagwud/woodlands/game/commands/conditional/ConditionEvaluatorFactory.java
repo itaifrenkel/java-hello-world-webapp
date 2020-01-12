@@ -21,6 +21,10 @@ public abstract class ConditionEvaluatorFactory
     {
       return new CompareNotEqualEvaluator(condition);
     }
+    if (condition.startsWith("chance(") && condition.endsWith(")"))
+    {
+      return new ChanceCalculator(condition);
+    }
     throw new WoodlandsRuntimeException("Unable to evaluate expression: " + condition);
   }
 }

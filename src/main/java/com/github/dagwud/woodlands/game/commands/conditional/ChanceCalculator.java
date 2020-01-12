@@ -3,12 +3,23 @@ package com.github.dagwud.woodlands.game.commands.conditional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class ChanceCalculator
+public class ChanceCalculator extends ConditionEvaluator
 {
   private static final BigDecimal ONE_HUNDRED = new BigDecimal("100");
 
-  private ChanceCalculator()
+  ChanceCalculator(String expression)
   {
+    super(expression);
+  }
+
+  @Override
+  public boolean evaluatesToTrue()
+  {
+    String chance = expression.substring("chance(".length());
+    chance = chance.substring(0, chance.length() - ")".length());
+    BigDecimal chanceToMeet = determineChanceRatio(chance);
+    BigDecimal rolled = new BigDecimal(Math.random());
+    return rolled.compareTo(chanceToMeet) <= 0;
   }
 
   public static BigDecimal determineChanceRatio(String chance)
@@ -24,5 +35,4 @@ public class ChanceCalculator
     }
     throw new IllegalArgumentException("Unrecognizable chance format: \"" + c + "\"");
   }
-
 }
