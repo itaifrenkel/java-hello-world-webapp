@@ -410,6 +410,12 @@
                 "delay": "10s",
                 "ProcName": "DoShortRest"
               }
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "You're resting."
+              }
             }
           ]
         },
