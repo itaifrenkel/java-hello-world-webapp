@@ -22,7 +22,11 @@
         "initial-speed-unused": 30,
         "initial-hit-points": 12,
         "initial-hit-dice": "1d10",
-        "notes": ""
+        "notes": "",
+        "weapon-mastery-bonus-hit.Battle Axe": 5,
+        "weapon-mastery-bonus-damage.Battle Axe": 3,
+        "weapon-mastery-bonus-hit.Javelin": 5,
+        "weapon-mastery-bonus-damage.Javelin": 3
       }
     },
     {
@@ -47,7 +51,13 @@
         "initial-speed-unused": 30,
         "initial-hit-points": 10,
         "initial-hit-dice": "1d8",
-        "notes": ""
+        "notes": "",
+        "weapon-mastery-bonus-hit.Katana": 5,
+        "weapon-mastery-bonus-damage.Katana": 3,
+        "weapon-mastery-bonus-hit.Dart Gun": 5,
+        "weapon-mastery-bonus-damage.Dart Gun": 3,
+        "weapon-mastery-bonus-hit.Dagger": 5,
+        "weapon-mastery-bonus-damage.Dagger": 3
       }
     },
     {
@@ -72,7 +82,9 @@
         "initial-speed-unused": 30,
         "initial-hit-points": 10,
         "initial-hit-dice": "1d8",
-        "notes": ""
+        "notes": "",
+        "weapon-mastery-bonus-hit.Mace": 3,
+        "weapon-mastery-bonus-damage.Mace": 1
       }
     },
     {
@@ -97,7 +109,13 @@
         "initial-speed-unused": 30,
         "initial-hit-points": 14,
         "initial-hit-dice": "1d12",
-        "notes": ""
+        "notes": "",
+        "weapon-mastery-bonus-hit.Warrior Club": 5,
+        "weapon-mastery-bonus-damage.Warrior Club": 3,
+        "weapon-mastery-bonus-hit.Hand Axe": 5,
+        "weapon-mastery-bonus-damage.Hand Axe": 3,
+        "weapon-mastery-bonus-hit.Javelin": 5,
+        "weapon-mastery-bonus-damage.Javelin": 3
       }
     },
     {
@@ -122,7 +140,11 @@
         "initial-speed-unused": 30,
         "initial-hit-points": 8,
         "initial-hit-dice": "1d6",
-        "note": "???: Querterstaff: Melee Weapon Attack +1 to hit, 1d6-1 damage"
+        "note": "???: Querterstaff: Melee Weapon Attack +1 to hit, 1d6-1 damage",
+        "weapon-mastery-bonus-hit.Staff": 1,
+        "weapon-mastery-bonus-damage.Staff": 2,
+        "weapon-mastery-bonus-hit.Dagger": 4,
+        "weapon-mastery-bonus-damage.Dagger": 2
       }
     },
     {
@@ -146,7 +168,13 @@
         "initial-initiative": 2,
         "initial-speed-unused": 30,
         "initial-hit-points": 10,
-        "initial-hit-dice": "1d8"
+        "initial-hit-dice": "1d8",
+        "weapon-mastery-bonus-hit.Scimitar": 4,
+        "weapon-mastery-bonus-damage.Scimitar": 2,
+        "weapon-mastery-bonus-hit.Dagger": 4,
+        "weapon-mastery-bonus-damage.Dagger": 2,
+        "weapon-mastery-bonus-hit.Slingshot": 4,
+        "weapon-mastery-bonus-damage.Slingshot": 2
       }
     }
   ]
