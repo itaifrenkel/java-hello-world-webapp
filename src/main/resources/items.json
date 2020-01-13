@@ -23,6 +23,13 @@
     {"name": "Harpoon", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":true},
     {"name": "Knopkierrie", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":true},
 
+    {"name":  "Katana", "damage": {"dice_count": 1,"dice_faces": 8}, "ranged": false},
+    {"name":  "Battle Club", "damage": {"dice_count": 1,"dice_faces": 8}, "ranged": false},
+    {"name":  "Battle Hammer", "damage": {"dice_count": 1,"dice_faces": 8}, "ranged": false},
+    {"name":  "Longsword", "damage": {"dice_count": 1,"dice_faces": 8}, "ranged": true},
+    {"name":  "Longbow", "damage": {"dice_count": 1,"dice_faces": 8}, "ranged": true},
+    {"name":  "Throwing Knife", "damage": {"dice_count": 1,"dice_faces": 8}, "ranged": true},
+
     {"name": "Mace", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":false},
     {"name": "Battle Axe", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":false},
     {"name": "Poison Dagger", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":false},
