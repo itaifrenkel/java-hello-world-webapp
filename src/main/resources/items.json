@@ -17,7 +17,7 @@
     {"name": "Spear", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":false},
     {"name": "Katar", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":false},
     {"name": "Throwing Axe", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":true},
-    {"name": "Bow & Arrows", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":true},
+    {"name": "Dart Gun", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":true},
     {"name": "Throwing Spear", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":true},
     {"name": "Javelin", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":true},
     {"name": "Harpoon", "damage": {"dice_count": 1,"dice_faces": 6},"ranged":true},
