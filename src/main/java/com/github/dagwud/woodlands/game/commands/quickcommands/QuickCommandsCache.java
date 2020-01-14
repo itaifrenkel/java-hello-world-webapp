@@ -4,6 +4,8 @@ import com.github.dagwud.woodlands.game.commands.values.WoodlandsRuntimeExceptio
 import com.github.dagwud.woodlands.gson.game.QuickCommand;
 import com.github.dagwud.woodlands.gson.game.Root;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,14 +13,17 @@ public class QuickCommandsCache
 {
   private final Map<String, QuickCommand> quickCommands;
 
-  public QuickCommandsCache(Root root)
+  public QuickCommandsCache(Collection<Root> roots)
   {
     this.quickCommands = new HashMap<>();
-    for (QuickCommand quickCommand : root.quickCommands)
+    for (Root root : roots)
     {
-      for (String command : quickCommand.command)
+      for (QuickCommand quickCommand : root.quickCommands)
       {
-        quickCommands.put(command, quickCommand);
+        for (String command : quickCommand.command)
+        {
+          quickCommands.put(command, quickCommand);
+        }
       }
     }
   }

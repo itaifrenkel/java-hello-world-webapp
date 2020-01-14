@@ -4,15 +4,19 @@ import com.github.dagwud.woodlands.game.commands.ActionsCache;
 import com.github.dagwud.woodlands.game.commands.UnknownActionException;
 import com.github.dagwud.woodlands.game.commands.quickcommands.QuickCommandsCache;
 import com.github.dagwud.woodlands.gson.game.Action;
+import com.github.dagwud.woodlands.gson.game.Package;
 import com.github.dagwud.woodlands.gson.game.QuickCommand;
 import com.github.dagwud.woodlands.gson.game.Root;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class ActionsCacheFactory
 {
-  private static final String ACTIONS_FILE = "src/main/resources/actions.json";
+  private static final String ACTIONS_FILES_PATH = "src/main/resources/actions/";
 
   private static ActionsCacheFactory instance;
 
@@ -21,9 +25,15 @@ public class ActionsCacheFactory
 
   private ActionsCacheFactory()
   {
-    Root root = GsonHelper.readJSON(new File(ACTIONS_FILE), Root.class);
-    actionsCache = new ActionsCache(root);
-    quickCommandsCache = new QuickCommandsCache(root);
+    File[] files = new File(ACTIONS_FILES_PATH).listFiles();
+    Collection<Root> roots = new ArrayList<>(files.length);
+    for (File file : files)
+    {
+      Root fileRoot = GsonHelper.readJSON(file, Root.class);
+      roots.add(fileRoot);
+    }
+    actionsCache = new ActionsCache(roots);
+    quickCommandsCache = new QuickCommandsCache(roots);
   }
 
   public static ActionsCacheFactory instance()

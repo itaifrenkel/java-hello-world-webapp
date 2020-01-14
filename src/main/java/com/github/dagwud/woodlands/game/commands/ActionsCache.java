@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.gson.game.Action;
 import com.github.dagwud.woodlands.gson.game.Package;
 import com.github.dagwud.woodlands.gson.game.Root;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,16 +12,19 @@ public class ActionsCache
 {
   private final Map<String, Action> actions;
 
-  public ActionsCache(Root root)
+  public ActionsCache(Collection<Root> roots)
   {
     this.actions = new HashMap<>();
-    for (Package aPackage : root.packages)
+    for (Root root : roots)
     {
-      if (null != aPackage.actions)
+      for (Package aPackage : root.packages)
       {
-        for (Action action : aPackage.actions)
+        if (null != aPackage.actions)
         {
-          actions.put(buildActionReference(action), action);
+          for (Action action : aPackage.actions)
+          {
+            actions.put(buildActionReference(action), action);
+          }
         }
       }
     }
