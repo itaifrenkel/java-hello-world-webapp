@@ -123,7 +123,10 @@ public class MainTest
   {
     GameState gameState = GameStatesRegistry.lookup(-1);
     gameState.getVariables().setValue("chatId", "-1");
-    Update update = createUpdate("/start");
+    Update update;
+    update = createUpdate("/start");
+    new TelegramServlet().processTelegramUpdate(update);
+    update = createUpdate("/new");
     new TelegramServlet().processTelegramUpdate(update);
     return gameState;
   }
