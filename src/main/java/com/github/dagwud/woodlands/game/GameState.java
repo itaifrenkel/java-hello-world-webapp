@@ -6,7 +6,7 @@ import com.github.dagwud.woodlands.game.commands.invocation.VariableStack;
 public class GameState
 {
   private final VariableStack variables;
-  public ActionInvoker suspended2;
+  public ActionInvoker suspended;
 
   GameState()
   {

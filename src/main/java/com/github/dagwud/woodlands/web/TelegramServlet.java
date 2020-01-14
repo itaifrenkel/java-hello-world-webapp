@@ -59,10 +59,10 @@ public class TelegramServlet extends HttpServlet
     GameState gameState = GameStatesRegistry.lookup(chatId);
     synchronized (GameStatesRegistry.lookup(chatId))
     {
-      if (gameState.suspended2 != null)
+      if (gameState.suspended != null)
       {
         gameState.getVariables().setValue("__buffer", text);
-        gameState.suspended2.invokeAction();
+        gameState.suspended.invokeAction();
       }
       else
       {

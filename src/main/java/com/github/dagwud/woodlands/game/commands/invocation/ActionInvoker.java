@@ -33,11 +33,10 @@ public class ActionInvoker
 
   public InvocationResults invokeAction(Variables callDetails) throws ActionInvocationException
   {
-    gameState.suspended2 = null;
+    gameState.suspended = null;
     gameState.getVariables().pushNewVariablesStackFrame("invoke " + procNameExpression, callDetails);
-    int i = 0;
     boolean suspended = false;
-    while (!suspended && hasNext()) ///todo
+    while (!suspended && hasNext())
     {
       InvocationResults results = invokeNext();
       if (results.getReturnMode() == ReturnMode.SUSPEND)
@@ -53,7 +52,7 @@ public class ActionInvoker
 
     if (suspended)
     {
-      gameState.suspended2 = this;
+      gameState.suspended = this;
     }
     return new InvocationResults(new Variables()); //todo
   }
