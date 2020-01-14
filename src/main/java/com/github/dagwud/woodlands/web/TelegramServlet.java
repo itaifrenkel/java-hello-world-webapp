@@ -66,7 +66,7 @@ public class TelegramServlet extends HttpServlet
       }
       else
       {
-        GameInstruction instruction = GameInstructionFactory.instance().create(update, gameState);
+        GameInstruction instruction = GameInstructionFactory.instance().create(update);
         instruction.execute(gameState);
       }
     }

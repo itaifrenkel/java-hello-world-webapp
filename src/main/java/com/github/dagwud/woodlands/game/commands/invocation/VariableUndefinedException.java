@@ -4,8 +4,8 @@ import com.github.dagwud.woodlands.game.commands.values.WoodlandsRuntimeExceptio
 
 public class VariableUndefinedException extends WoodlandsRuntimeException
 {
-  VariableUndefinedException(String varName)
+  VariableUndefinedException(String varName, VariableStack definedVariables)
   {
-    super("Variable named '" + varName + "' is not defined");
+    super("Variable named '" + varName + "' is not defined: \n" + definedVariables.pretty());
   }
 }

@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
 import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
@@ -13,7 +12,7 @@ import java.util.List;
 public class SpawnItemAction extends NativeAction
 {
   @Override
-  public InvocationResults invoke(GameState gameState, CallDetails callDetails)
+  public InvocationResults invoke(GameState gameState, Variables callDetails)
   {
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
     List<Weapon> allWeapons = ItemsCacheFactory.instance().getCache().getWeapons();

@@ -58,8 +58,7 @@ public class VariableStack
         }
       }
     }
-    System.err.println("Not found '" + variableName + "': \n" + this.pretty());
-    throw new VariableUndefinedException(variableName);
+    throw new VariableUndefinedException(variableName, this);
   }
 
   public void setValue(String variableName, String value)
@@ -117,5 +116,18 @@ public class VariableStack
     }
     b.append("===================");
     return b.toString();
+  }
+
+  public boolean hasVariable(String variableName)
+  {
+    try
+    {
+      lookupVariableValue(variableName);
+      return true;
+    }
+    catch (VariableUndefinedException e)
+    {
+      return false;
+    }
   }
 }

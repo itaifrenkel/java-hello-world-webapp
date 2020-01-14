@@ -11,16 +11,12 @@ public class Step
   @SerializedName(value = "ParamMappings")
   public Variables paramMappings;
 
-  @SerializedName(value = "OutputMappings")
-  public Variables outputMappings;
-
   @Override
   public String toString()
   {
     return "Step{" +
             "procName='" + procName + '\'' +
             ", paramMappings=" + paramMappings +
-            ", outputMappings=" + outputMappings +
             '}';
   }
 }

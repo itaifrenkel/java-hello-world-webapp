@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Variables extends HashMap<String, String>
 {
@@ -32,11 +31,15 @@ public class Variables extends HashMap<String, String>
   String pretty(int indent)
   {
     StringBuilder b = new StringBuilder();
-    b.append(space(indent)).append("| Variable              | Value   ").append("\n");
-    for (Map.Entry<String, String> value : entrySet())
+    b.append(space(indent)).append("| Variable                                                       | Value   ").append("\n");
+
+    List<Entry<String, String>> vars = new ArrayList<>(entrySet());
+    vars.sort(Comparator.comparing(Entry::getKey));
+
+    for (Map.Entry<String, String> value : vars)
     {
       b.append(space(indent)).append("| ").append(value.getKey());
-      b.append(space(indent)).append(space(value.getKey(), 23 - value.getKey().length()));
+      b.append(space(indent)).append(space(value.getKey(), 63));
       b.append(space(indent)).append("| ").append(value.getValue()).append("\n");
     }
     b.append(space(indent)).append("----------------------------------");
@@ -58,10 +61,10 @@ public class Variables extends HashMap<String, String>
 
   private String space(String s, int spaces)
   {
-    StringBuilder b= new StringBuilder();
+    StringBuilder b = new StringBuilder();
     for (int i = s.length(); i < spaces; i++)
     {
-      b.append("  ");
+      b.append(" ");
     }
     return b.toString();
   }

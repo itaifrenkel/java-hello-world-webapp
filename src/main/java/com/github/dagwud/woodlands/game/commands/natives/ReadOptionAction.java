@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.natives;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.invocation.CallDetails;
 import com.github.dagwud.woodlands.game.commands.invocation.InvocationResults;
 import com.github.dagwud.woodlands.game.commands.invocation.ReturnMode;
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
@@ -19,7 +18,7 @@ public class ReadOptionAction extends NativeAction
   private static final String PARAMETER_NAME_OPTIONS = "Options";
 
   @Override
-  public InvocationResults invoke(GameState gameState, CallDetails callDetails) throws IOException
+  public InvocationResults invoke(GameState gameState, Variables callDetails) throws IOException
   {
     String chatId = gameState.getVariables().lookupVariableValue("chatId");
 

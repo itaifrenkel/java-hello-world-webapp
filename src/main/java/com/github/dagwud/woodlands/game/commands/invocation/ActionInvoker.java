@@ -84,9 +84,8 @@ public class ActionInvoker
   {
     proc = proc.substring(NATIVE_ACTION_PREFIX.length());
     NativeAction action = NativeActionResolver.lookupNativeAction(proc);
-    CallDetails cd = new CallDetails(new Variables(), new Variables());
-    NativeActionInvoker invoker = new NativeActionInvoker(action, cd);
-    return invoker.doInvoke(gameState, cd.getOutputMappings());
+    NativeActionInvoker invoker = new NativeActionInvoker(action, new Variables());
+    return invoker.doInvoke(gameState);
   }
 
   boolean hasNext()

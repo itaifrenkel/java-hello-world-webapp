@@ -26,6 +26,20 @@ public class MainTest
   }
 
   @Test
+  public void testABC() throws IOException, ActionInvocationException
+  {
+    startBot();
+    initPlayer();
+
+    Update update;
+    update = createUpdate("Retrieve Items");
+    new TelegramServlet().processTelegramUpdate(update);
+
+    update = createUpdate("/me");
+    new TelegramServlet().processTelegramUpdate(update);
+  }
+
+  @Test
   public void testPlayerSetup() throws IOException, ActionInvocationException
   {
     GameState gameState = startBot();
@@ -126,10 +140,7 @@ public class MainTest
 
   private void initPlayer() throws IOException, ActionInvocationException
   {
-    Update update = createUpdate("/new");
-    System.out.println("/new");
-    new TelegramServlet().processTelegramUpdate(update);
-    // suspends to ask for player name
+    Update update;
 
     update = createUpdate("TestUser");
     System.out.println("TestUser");

@@ -40,7 +40,7 @@ public class GameStatesRegistry
   {
     for (CharacterClass characterClass : CharacterClassesCacheFactory.instance().getCharacterClasses())
     {
-      String varPrefix = "__classes." + characterClass.name + ".";
+      String varPrefix = "__Classes." + characterClass.name + ".";
       if (characterClass.stats != null)
       {
         for (Map.Entry<String, String> stat : characterClass.stats.entrySet())
@@ -55,9 +55,9 @@ public class GameStatesRegistry
   {
     for (Weapon weapon : ItemsCacheFactory.instance().getCache().getWeapons())
     {
-      gameState.getVariables().setValue("weapons." + weapon.name + ".damage", 
+      gameState.getVariables().setValue("Weapons." + weapon.name + ".damage",
         weapon.damage.determineAverageRoll());
-      gameState.getVariables().setValue("weapons." + weapon.name + ".icon",
+      gameState.getVariables().setValue("Weapons." + weapon.name + ".icon",
         weapon.getIcon());
     }
   }

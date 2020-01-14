@@ -29,7 +29,7 @@ public class StepInvoker
     {
       unbindParameters(boundParams);
     }
-    mapResults(results);
+    mapResults(results.getVariables(), gameState.getVariables());
     return results;
   }
 
@@ -68,17 +68,11 @@ public class StepInvoker
     return !invoker.hasNext();
   }
 
-  private void mapResults(InvocationResults results)
+  static void mapResults(Variables results, VariableStack callContext)
   {
-    if (step.outputMappings != null)
+    for (Map.Entry<String, String> result : results.entrySet())
     {
-      for (Map.Entry<String, String> outputMapping : step.outputMappings.entrySet())
-      {
-        String returnedVarName = outputMapping.getKey();
-        String resultValue = results.getVariables().get(returnedVarName);
-        String mapTo = outputMapping.getValue();
-        gameState.getVariables().setValue(mapTo, resultValue);
-      }
+      callContext.setValue(result.getKey(), result.getValue(), -1);
     }
   }
 

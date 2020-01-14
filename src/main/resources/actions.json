@@ -161,9 +161,22 @@
           "name": "ShowCharacterInfo",
           "steps": [
             {
+              "ProcName": "DetermineItemDamageText",
+              "ParamMappings": {
+                "hand": "Left"
+              }
+            },
+            {
+              "ProcName": "Native:SetVar",
+              "ParamMappings": {
+                "VarName": "leftItemDamage",
+                "VarValue": "${DamageText}"
+              }
+            },
+            {
               "ProcName": "Echo",
               "ParamMappings": {
-                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\n❤️: ${Player.HP} / ${Player.MaxHP}\n✨: ${Player.Mana} / ${Player.MaxMana}\nStrength: ${Player.Strength}\nAgility: ${Player.Agility}\nConstitution: ${Player.Constitution}\nCarrying:\n• ${Player.Item.Carrying.Left} ${weapons.${Player.Item.Carrying.Left}.icon}${weapons.${Player.Item.Carrying.Left}.damage}\n• ${Player.Item.Carrying.Right}"
+                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\n❤️: ${Player.HP} / ${Player.MaxHP}\n✨: ${Player.Mana} / ${Player.MaxMana}\nStrength: ${Player.Strength}\nAgility: ${Player.Agility}\nConstitution: ${Player.Constitution}\nCarrying:\n• ${Player.Item.Carrying.Left} ${Weapons.${Player.Item.Carrying.Left}.icon}${leftItemDamage}\n• ${Player.Item.Carrying.Right}"
               }
             }
           ]
@@ -175,6 +188,25 @@
               "ProcName": "Echo",
               "ParamMappings": {
                 "MessageToPrint": "You need to create a character first. Please use /new"
+              }
+            }
+          ]
+        },
+        {
+          "name": "DetermineItemDamageText",
+          "steps": [
+            {
+              "ProcName": "Native:SetVar",
+              "ParamMappings": {
+                "VarName": "DamageText",
+                "VarValue": "${Weapons.${Player.Item.Carrying.Left}.damage}"
+              }
+            },
+            {
+              "ProcName": "Native:SetVar",
+              "ParamMappings": {
+                "VarName": "DamageText",
+                "VarValue": "${DamageText}"
               }
             }
           ]
@@ -240,9 +272,13 @@
               }
             },
             {
-              "ProcName": "Native:ReadTextInput",
-              "OutputMappings": {
-                "CapturedText": "CharacterName"
+              "ProcName": "Native:ReadTextInput"
+            },
+            {
+              "ProcName": "Native:SetVar",
+              "ParamMappings": {
+                "VarName": "CharacterName",
+                "VarValue": "${CapturedText}"
               }
             },
             {
@@ -268,16 +304,13 @@
               "ParamMappings": {
                 "MessageToPrint": "Please choose your player class",
                 "Options": "General,Trickster,Explorer,Brawler,Wizard,Druid"
-              },
-              "OutputMappings": {
-                "ChosenOption": "Class"
               }
             },
             {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "Class",
-                "AttributeValue": "${Class}"
+                "AttributeValue": "${ChosenOption}"
               }
             }
           ]
@@ -296,7 +329,7 @@
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "MaxHP",
-                "AttributeValue": "${classes.${Player.Class}.initial-hit-points}"
+                "AttributeValue": "${Classes.${Player.Class}.initial-hit-points}"
               }
             },
             {
@@ -310,21 +343,21 @@
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "Constitution",
-                "AttributeValue": "${classes.${Player.Class}.initial-constitution}"
+                "AttributeValue": "${Classes.${Player.Class}.initial-constitution}"
               }
             },
             {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "Strength",
-                "AttributeValue": "${classes.${Player.Class}.initial-strength}"
+                "AttributeValue": "${Classes.${Player.Class}.initial-strength}"
               }
             },
             {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "Agility",
-                "AttributeValue": "${classes.${Player.Class}.initial-agility}"
+                "AttributeValue": "${Classes.${Player.Class}.initial-agility}"
               }
             },
             {
@@ -390,10 +423,7 @@
           "name": "Retrieve Items",
           "steps": [
             {
-              "ProcName": "Native:SpawnItem",
-              "OutputMappings": {
-                "SpawnedItem": "SpawnedItem"
-              }
+              "ProcName": "Native:SpawnItem"
             },
             {
               "ProcName": "SetPlayerAttribute",
@@ -426,16 +456,13 @@
           "name": "DoShortRest",
           "steps": [
             {
-              "ProcName": "RollShortRest",
-              "OutputMappings": {
-                "HPRecovered": "HPRested"
-              }
+              "ProcName": "RollShortRest"
             },
             {
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "HP",
-                "AttributeValue": "eval(${Player.HP} + ${HPRecovered})"
+                "AttributeValue": "eval(${Player.HP} + ${HPRested})"
               }
             },
             {
@@ -453,11 +480,8 @@
               "ProcName": "Native:SetVar",
               "ParamMappings": {
                 "VarSet": "",
-                "VarName": "tmp",
+                "VarName": "HPRecovered",
                 "VarValue": "eval(((${Player.HP} + ((${Player.Level}d${classes.${Player.Class}.short-rest-dice}) + floor((${Player.Constitution} - 10)/2)))<${Player.MaxHP}) - ${Player.HP})"
-              },
-              "OutputMappings": {
-                "tmp": "HPRecovered"
               }
             }
           ]

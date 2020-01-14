@@ -6,22 +6,22 @@ import com.github.dagwud.woodlands.game.commands.invocation.*;
 public class RunProcInstruction extends GameInstruction
 {
   private final String procName;
-  private final CallDetails callDetails;
+  private final Variables callDetails;
 
   public RunProcInstruction(String procName)
   {
-    this(procName, new Variables(), new Variables());
+    this(procName, new Variables());
   }
 
-  RunProcInstruction(String procName, Variables callParameters, Variables outputMappings)
+  RunProcInstruction(String procName, Variables callParameters)
   {
     this.procName = procName;
-    callDetails = new CallDetails(callParameters, outputMappings);
+    callDetails = callParameters;
   }
 
   @Override
   public void execute(GameState gameState) throws ActionInvocationException
   {
-    new ActionInvoker(procName, gameState).invokeAction(callDetails.getCallParameters());
+    new ActionInvoker(procName, gameState).invokeAction(callDetails);
   }
 }

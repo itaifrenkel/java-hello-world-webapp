@@ -28,7 +28,7 @@ public class GameInstructionFactory
     instance = new GameInstructionFactory();
   }
 
-  public GameInstruction create(Update telegramUpdate, GameState gameState)
+  public GameInstruction create(Update telegramUpdate)
   {
     int chatId = telegramUpdate.message.chat.id;
     String cmd = telegramUpdate.message.text;
@@ -36,7 +36,7 @@ public class GameInstructionFactory
     if (ActionsCacheFactory.instance().isQuickCommand(cmd))
     {
       QuickCommand quickCommand = ActionsCacheFactory.instance().findQuickCommand(cmd);
-      return new RunProcInstruction(quickCommand.procName, quickCommand.paramMappings == null ? new Variables() : quickCommand.paramMappings, new Variables());
+      return new RunProcInstruction(quickCommand.procName, quickCommand.paramMappings == null ? new Variables() : quickCommand.paramMappings);
     }
 
     if (cmd.equals("Buy Drinks"))

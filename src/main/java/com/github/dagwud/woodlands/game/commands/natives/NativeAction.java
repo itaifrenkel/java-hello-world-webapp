@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public abstract class NativeAction
 {
-  public abstract InvocationResults invoke(GameState gameState, CallDetails callDetails) throws ActionInvocationException, IOException;
+  public abstract InvocationResults invoke(GameState gameState, Variables callDetails) throws ActionInvocationException, IOException;
 }
