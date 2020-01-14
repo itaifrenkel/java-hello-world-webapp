@@ -1,0 +1,195 @@
+{
+  "Packages": [
+    {
+      "Name": "core",
+      "actions": [
+        {
+          "name": "Start",
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "SetupComplete",
+                "AttributeValue": "false"
+              }
+            }
+          ]
+        },
+        {
+          "name": "PlayerSetup",
+          "requires": {
+            "condition": "${Player.SetupComplete}==false",
+            "steps": [
+              {
+                "ProcName": "ReadPlayerName"
+              },
+              {
+                "ProcName": "ReadPlayerClass"
+              },
+              {
+                "ProcName": "InitCharacterStats"
+              },
+              {
+                "ProcName": "SetPlayerAttribute",
+                "ParamMappings": {
+                  "AttributeName": "SetupComplete",
+                  "AttributeValue": "true"
+                }
+              },
+              {
+                "ProcName": "Echo",
+                "ParamMappings": {
+                  "MessageToPrint": "Welcome, ${Player.Name} the ${Player.Class}!"
+                }
+              },
+              {
+                "ProcName": "Goto",
+                "ParamMappings": {
+                  "NewLocation": "The Village"
+                }
+              }
+            ],
+            "or-else": {
+              "steps": [
+                {
+                  "ProcName": "Echo",
+                  "ParamMappings": {
+                    "MessageToPrint": "You already have an active character - you're ${Player.Name} the ${Player.Class}"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ReadPlayerName",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "By what name will you be known?"
+              }
+            },
+            {
+              "ProcName": "Native:ReadTextInput"
+            },
+            {
+              "ProcName": "Native:SetVar",
+              "ParamMappings": {
+                "VarName": "CharacterName",
+                "VarValue": "${CapturedText}"
+              }
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "Very well. So shall you be known."
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Name",
+                "AttributeValue": "${CharacterName}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "ReadPlayerClass",
+          "steps": [
+            {
+              "ProcName": "Native:ReadOption",
+              "ParamMappings": {
+                "MessageToPrint": "Please choose your player class",
+                "Options": "General,Trickster,Explorer,Brawler,Wizard,Druid"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Class",
+                "AttributeValue": "${ChosenOption}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "InitCharacterStats",
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Level",
+                "AttributeValue": "1"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "MaxHP",
+                "AttributeValue": "${Classes.${Player.Class}.initial-hit-points}"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "HP",
+                "AttributeValue": "${Player.MaxHP}"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Constitution",
+                "AttributeValue": "${Classes.${Player.Class}.initial-constitution}"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Strength",
+                "AttributeValue": "${Classes.${Player.Class}.initial-strength}"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Agility",
+                "AttributeValue": "${Classes.${Player.Class}.initial-agility}"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Mana",
+                "AttributeValue": "2"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "MaxMana",
+                "AttributeValue": "3"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Item.Carrying.Left",
+                "AttributeValue": "nothing"
+              }
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Item.Carrying.Right",
+                "AttributeValue": "nothing"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

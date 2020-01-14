@@ -1,0 +1,33 @@
+{
+  "Packages": [
+    {
+      "Name": "core",
+      "actions": [
+        {
+          "name": "Echo",
+          "steps": [
+            {
+              "ProcName": "Native:SendMessage",
+              "ParamMappings": {
+                "Message": "${MessageToPrint}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "SetPlayerAttribute",
+          "steps": [
+            {
+              "ProcName": "Native:SetVar",
+              "ParamMappings": {
+                "VarSet": "__Player",
+                "VarName": "${AttributeName}",
+                "VarValue": "${AttributeValue}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
