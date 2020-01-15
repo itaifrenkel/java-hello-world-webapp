@@ -22,10 +22,10 @@ public class StepInvoker
   {
     if (invoker == null)
     {
-      boundParams = bindParameters();
+      bindParameters();
     }
     InvocationResults results = invokeStep();
-    if (isComplete())
+    if (isComplete() && results.getReturnMode() != ReturnMode.SUSPEND)
     {
       unbindParameters(boundParams);
     }
@@ -36,6 +36,7 @@ public class StepInvoker
   private Variables bindParameters()
   {
     Variables parameters = new Variables();
+    boundParams = new Variables();
     if (step.paramMappings != null)
     {
       for (Map.Entry<String, String> paramMapping : step.paramMappings.entrySet())
@@ -48,6 +49,10 @@ public class StepInvoker
     }
     for (Map.Entry<String, String> params : parameters.entrySet())
     {
+      if (!gameState.getVariables().hasVariable(params.getKey()))
+      {
+        boundParams.put(params.getKey(), params.getValue());
+      }
       gameState.getVariables().setValue(params.getKey(), params.getValue());
     }
     return parameters;
@@ -59,8 +64,7 @@ public class StepInvoker
     {
       invoker = new ActionInvoker(step.procName, gameState);
     }
-    InvocationResults results = invoker.invokeNext();
-    return results;
+    return invoker.invokeNext();
   }
 
   boolean isComplete()

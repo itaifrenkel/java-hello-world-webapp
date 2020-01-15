@@ -87,11 +87,15 @@ public class VariableStack
 
   void unsetValue(String valueName)
   {
-    if (!stack.get(stack.size() - 1).containsKey(valueName))
+    for (int i = stack.size() - 1; i >= 0; i--)
     {
-      throw new WoodlandsRuntimeException("Value " + valueName + " isn't set");
+      if (stack.get(i).containsKey(valueName))
+      {
+        stack.get(i).remove(valueName);
+        return;
+      }
     }
-    stack.get(stack.size() - 1).remove(valueName);
+    throw new WoodlandsRuntimeException("Value " + valueName + " isn't set");
   }
 
   static boolean isGlobalVariable(String variableName)
