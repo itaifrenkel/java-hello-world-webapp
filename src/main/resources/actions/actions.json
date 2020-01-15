@@ -75,7 +75,7 @@
   ],
   "Packages": [
     {
-      "Name": "core",
+      "Name": "actions",
       "actions": [
         {
           "name": "Goto",
