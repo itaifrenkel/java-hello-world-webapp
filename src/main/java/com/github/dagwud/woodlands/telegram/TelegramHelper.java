@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.joining;
 
 abstract class TelegramHelper
 {
-  private static final String BOT_TOK = TemporaryHardCodedConstants.BOT_TOK;
+  private static final String BOT_TOK = System.getProperty("TELEGRAM_TOKEN");
 
   static String callTelegram(String method, Map<String, String> params) throws IOException
   {
