@@ -109,7 +109,7 @@
           "name": "ReadPlayerClass",
           "steps": [
             {
-              "ProcName": "Native:ReadOption",
+              "ProcName": "Choice",
               "ParamMappings": {
                 "MessageToPrint": "Please choose your player class",
                 "Options": "General,Trickster,Explorer,Brawler,Wizard,Druid"

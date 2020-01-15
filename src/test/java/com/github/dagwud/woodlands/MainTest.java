@@ -121,6 +121,7 @@ public class MainTest
 
   private GameState startBot() throws IOException, ActionInvocationException
   {
+    GameStatesRegistry.reset();
     GameState gameState = GameStatesRegistry.lookup(-1);
     gameState.getVariables().setValue("chatId", "-1");
     Update update;

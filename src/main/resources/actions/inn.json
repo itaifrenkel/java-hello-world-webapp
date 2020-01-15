@@ -75,7 +75,7 @@
               "ProcName": "SetPlayerAttribute",
               "ParamMappings": {
                 "AttributeName": "HP",
-                "AttributeValue": "eval(${Player.HP} + ${HPRested})"
+                "AttributeValue": "eval(${Player.HP} + ${HPRecovered})"
               }
             },
             {
@@ -92,9 +92,8 @@
             {
               "ProcName": "Native:SetVar",
               "ParamMappings": {
-                "VarSet": "",
                 "VarName": "HPRecovered",
-                "VarValue": "eval(((${Player.HP} + ((${Player.Level}d${classes.${Player.Class}.short-rest-dice}) + floor((${Player.Constitution} - 10)/2)))<${Player.MaxHP}) - ${Player.HP})"
+                "VarValue": "eval(((${Player.HP} + ((${Player.Level}d${Classes.${Player.Class}.short-rest-dice}) + floor((${Player.Constitution} - 10)/2)))<${Player.MaxHP}) - ${Player.HP})"
               }
             }
           ]

@@ -15,6 +15,24 @@
           ]
         },
         {
+          "name": "Choice",
+          "steps": [
+            {
+              "ProcName": "Native:ReadOption",
+              "ParamMappings": {
+                "AllowedOptions": "${Options}"
+              }
+            },
+            {
+              "ProcName": "Native:VerifyOption",
+              "ParamMappings": {
+                "AllowedOptions": "${Options}",
+                "OptionToVerify": "${ChosenOption}"
+              }
+            }
+          ]
+        },
+        {
           "name": "ShowHelp",
           "steps": [
             {
