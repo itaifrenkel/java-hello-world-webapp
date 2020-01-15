@@ -1,0 +1,102 @@
+{
+  "QuickCommands": [
+    {
+      "command": [
+        "Retrieve Items"
+      ],
+      "ProcName": "Retrieve Items"
+    },
+    {
+      "command": [
+        "Short Rest"
+      ],
+      "ProcName": "Short Rest"
+    }
+  ],
+  "Packages": [
+    {
+      "Name": "Inn",
+      "actions": [
+        {
+          "name": "The Inn Menu",
+          "steps": [
+            {
+              "ProcName": "Native:Menu",
+              "ParamMappings": {
+                "MessageToPrint": "This is the inn",
+                "Options": "Leave Items,Retrieve Items,Short Rest,Village Square"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Retrieve Items",
+          "steps": [
+            {
+              "ProcName": "Native:SpawnItem"
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "Item.Carrying.Left",
+                "AttributeValue": "${SpawnedItem}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Short Rest",
+          "steps": [
+            {
+              "ProcName": "Native:QueueAction",
+              "ParamMappings": {
+                "delay": "10s",
+                "ProcName": "DoShortRest"
+              }
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "You're resting."
+              }
+            }
+          ]
+        },
+        {
+          "name": "DoShortRest",
+          "steps": [
+            {
+              "ProcName": "RollShortRest"
+            },
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "HP",
+                "AttributeValue": "eval(${Player.HP} + ${HPRested})"
+              }
+            },
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "You rested and recovered ❤️${HPRecovered}. Now at ${Player.HP} of ${Player.MaxHP}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "RollShortRest",
+          "steps": [
+            {
+              "ProcName": "Native:SetVar",
+              "ParamMappings": {
+                "VarSet": "",
+                "VarName": "HPRecovered",
+                "VarValue": "eval(((${Player.HP} + ((${Player.Level}d${classes.${Player.Class}.short-rest-dice}) + floor((${Player.Constitution} - 10)/2)))<${Player.MaxHP}) - ${Player.HP})"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

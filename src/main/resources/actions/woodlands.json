@@ -1,0 +1,21 @@
+{
+  "Packages": [
+    {
+      "Name": "Mountain",
+      "actions": [
+        {
+          "name": "The Woodlands Menu",
+          "steps": [
+            {
+              "ProcName": "Native:Menu",
+              "ParamMappings": {
+                "MessageToPrint": "This is the Woodlands...",
+                "Options": "The Village,Deeper"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

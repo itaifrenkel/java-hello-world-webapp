@@ -15,6 +15,17 @@
           ]
         },
         {
+          "name": "ShowHelp",
+          "steps": [
+            {
+              "ProcName": "Echo",
+              "ParamMappings": {
+                "MessageToPrint": "The following commands are available:\n* /new - create a new character\n* /help - show this help info\n* /me - show your character information.\n\nYour chat ID is ${chatId}"
+              }
+            }
+          ]
+        },
+        {
           "name": "SetPlayerAttribute",
           "steps": [
             {
@@ -23,6 +34,18 @@
                 "VarSet": "__Player",
                 "VarName": "${AttributeName}",
                 "VarValue": "${AttributeValue}"
+              }
+            }
+          ]
+        },
+        {
+          "name": "SetPlayerHP",
+          "steps": [
+            {
+              "ProcName": "SetPlayerAttribute",
+              "ParamMappings": {
+                "AttributeName": "HP",
+                "AttributeValue": "eval(${NewHP}<${Player.MaxHP})"
               }
             }
           ]
