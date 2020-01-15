@@ -1,4 +1,14 @@
 {
+  "QuickCommands": [
+    {
+      "command": ["/start"],
+      "ProcName": "Start"
+    },
+    {
+      "command": ["/new"],
+      "ProcName": "PlayerSetup"
+    }
+  ],
   "Packages": [
     {
       "Name": "start",

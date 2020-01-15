@@ -1,4 +1,15 @@
 {
+  "QuickCommands": [
+    {
+      "command": [
+        "The Tavern"
+      ],
+      "ProcName": "Goto",
+      "ParamMappings": {
+        "NewLocation": "The Tavern"
+      }
+    }
+  ],
   "Packages": [
     {
       "Name": "Tavern",

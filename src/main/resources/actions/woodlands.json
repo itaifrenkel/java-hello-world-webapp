@@ -1,4 +1,13 @@
 {
+  "QuickCommands": [
+    {
+      "command": ["The Woodlands"],
+      "ProcName": "Goto",
+      "ParamMappings": {
+        "NewLocation": "The Woodlands"
+      }
+    }
+  ],
   "Packages": [
     {
       "Name": "Woodlands",
