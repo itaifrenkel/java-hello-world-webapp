@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.domain.menu.*;
+
 public enum ELocation
 {
   VILLAGE_SQUARE("The Village", new VillageMenu()),

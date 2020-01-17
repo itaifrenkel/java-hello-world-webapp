@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.domain;
+package com.github.dagwud.woodlands.game.domain.stats;
 
 public class Stats
 {

@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.domain.stats.Stats;
+
 public class GameCharacter
 {
   private String name;

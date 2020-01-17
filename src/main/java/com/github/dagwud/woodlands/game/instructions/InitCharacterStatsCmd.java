@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Stats;
+import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.game.domain.stats.InitialStats;
 
 public class InitCharacterStatsCmd extends AbstractCmd

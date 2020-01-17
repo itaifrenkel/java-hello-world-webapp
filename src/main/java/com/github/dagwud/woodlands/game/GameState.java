@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.GameMenu;
+import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.instructions.SuspendableCmd;
 
