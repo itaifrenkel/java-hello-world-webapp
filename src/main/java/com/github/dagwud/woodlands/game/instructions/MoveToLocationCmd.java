@@ -34,11 +34,22 @@ public class MoveToLocationCmd extends AbstractCmd
     CommandDelegate.execute(cmd);
 
     showMenuForLocation(location, gameState);
+    handleLocationEntry(location, gameState);
   }
+
 
   private void showMenuForLocation(ELocation location, GameState gameState)
   {
     ShowMenuCmd cmd = new ShowMenuCmd(location.getMenu(), gameState);
     CommandDelegate.execute(cmd);
+  }
+
+  private void handleLocationEntry(ELocation location, GameState gameState)
+  {
+    if (location == ELocation.MOUNTAIN)
+    {
+      EnterTheMountainCmd cmd = new EnterTheMountainCmd(gameState);
+      CommandDelegate.execute(cmd);
+    }
   }
 }
