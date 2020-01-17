@@ -50,7 +50,7 @@ public class MoveToLocationCmd extends AbstractCmd
     }
     else if (location == ELocation.TAVERN)
     {
-      String[] options = {"Buy Drinks", "Village Square", "The Mountain"};
+      String[] options = {"Buy Drinks", "Village Square"};
       ShowMenuCmd cmd = new ShowMenuCmd(chatId, "This is the Tavern", options);
       CommandDelegate.execute(cmd);
     }
