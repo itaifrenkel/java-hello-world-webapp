@@ -38,16 +38,20 @@ public class CommandFactory
       return new AcceptInputCmd(waiting, cmd);
     }
 
+    int chatId = telegramUpdate.message.chat.id;
+    if (cmd.equals("/help"))
+    {
+      return new ShowHelpCmd(chatId);
+    }
     if (cmd.equals("/start"))
     {
-      return new StartCmd(gameState, telegramUpdate.message.chat.id);
+      return new StartCmd(gameState, chatId);
     }
     if (cmd.equals("/new"))
     {
       return new PlayerSetupCmd(gameState);
     }
 
-    int chatId = gameState.getPlayer().getChatId();
     GameCharacter activeCharacter = gameState.getActiveCharacter();
     if (gameState.getCurrentMenu().containsOption(cmd))
     {

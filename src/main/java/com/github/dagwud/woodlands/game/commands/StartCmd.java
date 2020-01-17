@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -22,5 +23,8 @@ public class StartCmd extends AbstractCmd
     gameState.setPlayer(new Player(chatId));
     gameState.getPlayer().setActiveCharacter(new GameCharacter());
     gameState.getPlayer().getActiveCharacter().setSetupComplete(false);
+
+    ShowHelpCmd cmd = new ShowHelpCmd(chatId);
+    CommandDelegate.execute(cmd);
   }
 }
