@@ -60,6 +60,17 @@ public class GameInstructionFactory
     {
       return new MoveToLocationCmd(chatId, activeCharacter, ELocation.VILLAGE_SQUARE);
     }
+
+    if (cmd.equals("The Mountain"))
+    {
+      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.MOUNTAIN);
+    }
+
+    if (cmd.equals("The Woodlands"))
+    {
+      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.WOODLANDS);
+    }
+
     if (cmd.equals("Retrieve Items"))
     {
       return new RetrieveItemsCmd(chatId, activeCharacter);
