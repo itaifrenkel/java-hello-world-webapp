@@ -2,8 +2,7 @@ package com.github.dagwud.woodlands.web;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
-import com.github.dagwud.woodlands.game.instructions.GameInstruction;
+import com.github.dagwud.woodlands.game.instructions.AbstractCmd;
 import com.github.dagwud.woodlands.game.instructions.GameInstructionFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 import com.github.dagwud.woodlands.gson.telegram.CallbackQuery;
@@ -49,7 +48,7 @@ public class TelegramServlet extends HttpServlet
     }
   }
 
-  public void processTelegramUpdate(Update update) throws ActionInvocationException, IOException
+  public void processTelegramUpdate(Update update) throws Exception
   {
     int chatId = determineChatId(update);
 
@@ -59,16 +58,8 @@ public class TelegramServlet extends HttpServlet
     GameState gameState = GameStatesRegistry.lookup(chatId);
     synchronized (GameStatesRegistry.lookup(chatId))
     {
-      if (gameState.suspended != null)
-      {
-        gameState.getVariables().setValue("__buffer", text);
-        gameState.suspended.invokeAction();
-      }
-      else
-      {
-        GameInstruction instruction = GameInstructionFactory.instance().create(update);
-        instruction.execute(gameState);
-      }
+      AbstractCmd instruction = GameInstructionFactory.instance().create(update, gameState);
+      instruction.execute();
     }
   }
 

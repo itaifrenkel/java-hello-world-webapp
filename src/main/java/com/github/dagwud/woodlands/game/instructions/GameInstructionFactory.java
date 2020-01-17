@@ -1,9 +1,8 @@
 package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionsCacheFactory;
-import com.github.dagwud.woodlands.game.commands.invocation.Variables;
-import com.github.dagwud.woodlands.gson.game.QuickCommand;
+import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
 public class GameInstructionFactory
@@ -28,22 +27,57 @@ public class GameInstructionFactory
     instance = new GameInstructionFactory();
   }
 
-  public GameInstruction create(Update telegramUpdate)
+  public AbstractCmd create(Update telegramUpdate, GameState gameState)
   {
-    int chatId = telegramUpdate.message.chat.id;
     String cmd = telegramUpdate.message.text;
 
-    if (ActionsCacheFactory.instance().isQuickCommand(cmd))
+    SuspendableCmd waiting = gameState.getWaitingForInputCmd();
+    if (waiting != null)
     {
-      QuickCommand quickCommand = ActionsCacheFactory.instance().findQuickCommand(cmd);
-      return new RunProcInstruction(quickCommand.procName, quickCommand.paramMappings == null ? new Variables() : quickCommand.paramMappings);
+      return new AcceptInputCmd(waiting, cmd);
     }
 
+    if (cmd.equals("/start"))
+    {
+      return new StartCmd(gameState, telegramUpdate.message.chat.id);
+    }
+    if (cmd.equals("/new"))
+    {
+      return new PlayerSetupCmd(gameState);
+    }
+
+    int chatId = gameState.getPlayer().getChatId();
+    GameCharacter activeCharacter = gameState.getActiveCharacter();
+    if (cmd.equals("The Inn"))
+    {
+      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.INN);
+    }
+    if (cmd.equals("The Tavern"))
+    {
+      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.TAVERN);
+    }
+    if (cmd.equals("The Village") || cmd.equals("Village Square"))
+    {
+      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.VILLAGE_SQUARE);
+    }
+    if (cmd.equals("Retrieve Items"))
+    {
+      return new RetrieveItemsCmd(chatId, activeCharacter);
+    }
+    if (cmd.equals("/me"))
+    {
+      return new ShowCharacterInfoCmd(chatId, activeCharacter);
+    }
     if (cmd.equals("Buy Drinks"))
     {
-      return new RunProcInstruction("Buy Drinks");
+      return new BuyDrinksCmd(chatId, activeCharacter);
+    }
+    if (cmd.equals("Short Rest"))
+    {
+      return new ShortRestCmd(chatId, activeCharacter);
     }
 
-    return new SendMessageInstruction(chatId, "I'm not sure what you mean... perhaps try /help?");
+    return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");
   }
+
 }

@@ -19,20 +19,6 @@ public class VariableStack
     stack.push(new Variables(stackName, callParameters));
   }
 
-  private String buildContext()
-  {
-    StringBuilder b = new StringBuilder();
-    for (Variables variables : stack)
-    {
-      if (b.length() != 0)
-      {
-        b.append(" -> ");
-      }
-      b.append(variables.getContextName()).append(" (").append(variables.size()).append(")");
-    }
-    return b.toString();
-  }
-
   public void dropStackFrame()
   {
     stack.pop();

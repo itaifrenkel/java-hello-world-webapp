@@ -4,35 +4,6 @@
       "Name": "core",
       "actions": [
         {
-          "name": "Echo",
-          "steps": [
-            {
-              "ProcName": "Native:SendMessage",
-              "ParamMappings": {
-                "Message": "${MessageToPrint}"
-              }
-            }
-          ]
-        },
-        {
-          "name": "Choice",
-          "steps": [
-            {
-              "ProcName": "Native:ReadOption",
-              "ParamMappings": {
-                "AllowedOptions": "${Options}"
-              }
-            },
-            {
-              "ProcName": "Native:VerifyOption",
-              "ParamMappings": {
-                "AllowedOptions": "${Options}",
-                "OptionToVerify": "${ChosenOption}"
-              }
-            }
-          ]
-        },
-        {
           "name": "ShowHelp",
           "steps": [
             {
@@ -42,20 +13,7 @@
               }
             }
           ]
-        },
-        {
-          "name": "SetPlayerAttribute",
-          "steps": [
-            {
-              "ProcName": "Native:SetVar",
-              "ParamMappings": {
-                "VarSet": "__Player",
-                "VarName": "${AttributeName}",
-                "VarValue": "${AttributeValue}"
-              }
-            }
-          ]
-        },
+        }, ,
         {
           "name": "SetPlayerHP",
           "steps": [

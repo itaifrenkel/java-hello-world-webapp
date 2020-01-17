@@ -16,7 +16,7 @@
           "name": "The Mountain Menu",
           "steps": [
             {
-              "ProcName": "Native:Menu",
+              "ProcName": "ShowMenu",
               "ParamMappings": {
                 "MessageToPrint": "This is the mountain...",
                 "Options": "The Village"

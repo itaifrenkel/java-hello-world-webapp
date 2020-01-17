@@ -22,10 +22,10 @@ public class GameStatesRegistry
     GameStatesRegistry registry = instance();
     if (!registry.gameStatesByCharacter.containsKey(chatId))
     {
-      GameState gameStateForChat = new GameState();
-      gameStateForChat.getVariables().setValue("chatId", String.valueOf(chatId));
-      populateCharacterClasses(gameStateForChat);
-      populateItems(gameStateForChat);
+      CreateGameStateCmd cmd = new CreateGameStateCmd(chatId);
+      CommandDelegate.execute(cmd);
+
+      GameState gameStateForChat = cmd.getCreatedGameState();
       registry.gameStatesByCharacter.put(chatId, gameStateForChat);
     }
     return registry.gameStatesByCharacter.get(chatId);
@@ -34,32 +34,6 @@ public class GameStatesRegistry
   public static void reset()
   {
     instance = null;
-  }
-
-  private static void populateCharacterClasses(GameState gameState)
-  {
-    for (CharacterClass characterClass : CharacterClassesCacheFactory.instance().getCharacterClasses())
-    {
-      String varPrefix = "__Classes." + characterClass.name + ".";
-      if (characterClass.stats != null)
-      {
-        for (Map.Entry<String, String> stat : characterClass.stats.entrySet())
-        {
-          gameState.getVariables().setValue(varPrefix + stat.getKey(), stat.getValue());
-        }
-      }
-    }
-  }
-
-  private static void populateItems(GameState gameState)
-  {
-    for (Weapon weapon : ItemsCacheFactory.instance().getCache().getWeapons())
-    {
-      gameState.getVariables().setValue("Weapons." + weapon.name + ".damage",
-        weapon.damage.determineAverageRoll());
-      gameState.getVariables().setValue("Weapons." + weapon.name + ".icon",
-        weapon.getIcon());
-    }
   }
 
   private static GameStatesRegistry instance()

@@ -16,10 +16,10 @@
           "name": "The Woodlands Menu",
           "steps": [
             {
-              "ProcName": "Native:Menu",
+              "ProcName": "ShowMenu",
               "ParamMappings": {
                 "MessageToPrint": "This is the Woodlands...",
-                "Options": "The Village,Deeper"
+                "MenuOptions": "The Village,Deeper"
               }
             }
           ]

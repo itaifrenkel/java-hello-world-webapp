@@ -14,61 +14,6 @@
       "Name": "actions",
       "actions": [
         {
-          "name": "Goto",
-          "requires": {
-            "condition": "${Player.SetupComplete}==true",
-            "steps": [
-              {
-                "ProcName": "SetPlayerAttribute",
-                "ParamMappings": {
-                  "AttributeName": "Location",
-                  "AttributeValue": "${NewLocation}"
-                }
-              },
-              {
-                "ProcName": "Echo",
-                "ParamMappings": {
-                  "MessageToPrint": "You are now at ${Player.Location}"
-                }
-              },
-              {
-                "ProcName": "${Player.Location} Menu"
-              }
-            ],
-            "or-else": {
-              "steps": [
-                {
-                  "ProcName": "NoCharacterCreatedError"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "ShowCharacterInfo",
-          "steps": [
-            {
-              "ProcName": "DetermineItemDamageText",
-              "ParamMappings": {
-                "hand": "Left"
-              }
-            },
-            {
-              "ProcName": "Native:SetVar",
-              "ParamMappings": {
-                "VarName": "leftItemDamage",
-                "VarValue": "${DamageText}"
-              }
-            },
-            {
-              "ProcName": "Echo",
-              "ParamMappings": {
-                "MessageToPrint": "${Player.Name} (${Player.Class} - L${Player.Level})\nLocation: ${Player.Location}\n\n❤️: ${Player.HP} / ${Player.MaxHP}\n✨: ${Player.Mana} / ${Player.MaxMana}\nStrength: ${Player.Strength}\nAgility: ${Player.Agility}\nConstitution: ${Player.Constitution}\nCarrying:\n• ${Player.Item.Carrying.Left} ${Weapons.${Player.Item.Carrying.Left}.icon}${leftItemDamage}\n• ${Player.Item.Carrying.Right}"
-              }
-            }
-          ]
-        },
-        {
           "name": "NoCharacterCreatedError",
           "steps": [
             {
@@ -79,25 +24,6 @@
             }
           ]
         },
-        {
-          "name": "DetermineItemDamageText",
-          "steps": [
-            {
-              "ProcName": "Native:SetVar",
-              "ParamMappings": {
-                "VarName": "DamageText",
-                "VarValue": "${Weapons.${Player.Item.Carrying.Left}.damage}"
-              }
-            },
-            {
-              "ProcName": "Native:SetVar",
-              "ParamMappings": {
-                "VarName": "DamageText",
-                "VarValue": "${DamageText}"
-              }
-            }
-          ]
-        }
       ]
     }
   ]

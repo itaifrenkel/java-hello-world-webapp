@@ -2,22 +2,21 @@ package com.github.dagwud.woodlands;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.commands.invocation.ActionInvocationException;
+import com.github.dagwud.woodlands.game.domain.ECharacterClass;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 import com.github.dagwud.woodlands.web.TelegramServlet;
 import org.junit.Test;
 
-import java.io.IOException;
-
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class MainTest
 {
   @Test
-  public void testPlayerSetupRequired() throws IOException, ActionInvocationException
+  public void testPlayerSetupRequired() throws Exception
   {
     startBot();
     Update update;
@@ -26,41 +25,27 @@ public class MainTest
   }
 
   @Test
-  public void testABC() throws IOException, ActionInvocationException
-  {
-    startBot();
-    initPlayer();
-
-    Update update;
-    update = createUpdate("Retrieve Items");
-    new TelegramServlet().processTelegramUpdate(update);
-
-    update = createUpdate("/me");
-    new TelegramServlet().processTelegramUpdate(update);
-  }
-
-  @Test
-  public void testPlayerSetup() throws IOException, ActionInvocationException
+  public void testPlayerSetup() throws Exception
   {
     GameState gameState = startBot();
     initPlayer();
 
-    assertEquals("TestUser", gameState.getVariables().lookupVariableValue("Player.Name"));
-    assertEquals("Wizard", gameState.getVariables().lookupVariableValue("Player.Class"));
-    assertEquals("1", gameState.getVariables().lookupVariableValue("Player.Level"));
-    assertEquals("8", gameState.getVariables().lookupVariableValue("Player.HP"));
-    assertEquals("8", gameState.getVariables().lookupVariableValue("Player.MaxHP"));
-    assertEquals("2", gameState.getVariables().lookupVariableValue("Player.Mana"));
-    assertEquals("3", gameState.getVariables().lookupVariableValue("Player.MaxMana"));
-    assertEquals("9", gameState.getVariables().lookupVariableValue("Player.Strength"));
-    assertEquals("14", gameState.getVariables().lookupVariableValue("Player.Agility"));
-    assertEquals("15", gameState.getVariables().lookupVariableValue("Player.Constitution"));
+    assertEquals("TestUser", gameState.getActiveCharacter().getName());
+    assertEquals(ECharacterClass.WIZARD, gameState.getActiveCharacter().getCharacterClass());
+    assertEquals(1, gameState.getActiveCharacter().getStats().getLevel());
+    assertEquals(8, gameState.getActiveCharacter().getStats().getHitPoints());
+    assertEquals(8, gameState.getActiveCharacter().getStats().getMaxHitPoints());
+    assertEquals(2, gameState.getActiveCharacter().getStats().getMana());
+    assertEquals(3, gameState.getActiveCharacter().getStats().getMaxMana());
+    assertEquals(9, gameState.getActiveCharacter().getStats().getStrength());
+    assertEquals(14, gameState.getActiveCharacter().getStats().getAgility());
+    assertEquals(15, gameState.getActiveCharacter().getStats().getConstitution());
 
-    assertEquals("The Village", gameState.getVariables().lookupVariableValue("Player.Location"));
+    assertEquals(ELocation.VILLAGE_SQUARE, gameState.getActiveCharacter().getLocation());
   }
 
   @Test
-  public void testWeapon() throws IOException, ActionInvocationException
+  public void testWeapon() throws Exception
   {
     GameState gameState = startBot();
     initPlayer();
@@ -72,12 +57,12 @@ public class MainTest
     new TelegramServlet().processTelegramUpdate(update);
     update = createUpdate("/me");
     new TelegramServlet().processTelegramUpdate(update);
-    assertNotEquals("nothing", gameState.getVariables().lookupVariableValue("Player.Item.Carrying.Left"));
-    assertEquals("nothing", gameState.getVariables().lookupVariableValue("Player.Item.Carrying.Right"));
+    assertNotNull(gameState.getActiveCharacter().getCarrying().getCarriedLeft());
+    assertNull(gameState.getActiveCharacter().getCarrying().getCarriedRight());
   }
 
   @Test
-  public void testDrink() throws IOException, ActionInvocationException
+  public void testDrink() throws Exception
   {
     GameState gameState = startBot();
     initPlayer();
@@ -90,40 +75,44 @@ public class MainTest
   }
 
   @Test
-  public void testDamageAndShortRest() throws IOException, ActionInvocationException
+  public void testDamageAndShortRest() throws Exception
   {
     GameState gameState = startBot();
     initPlayer();
 
     Update update;
-    assertEquals("8", gameState.getVariables().lookupVariableValue("Player.HP"));
+    assertEquals(8, gameState.getActiveCharacter().getStats().getHitPoints());
+    assertEquals(ELocation.VILLAGE_SQUARE, gameState.getActiveCharacter().getLocation());
+
+    update = createUpdate("The Tavern");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals(ELocation.TAVERN, gameState.getActiveCharacter().getLocation());
 
     update = createUpdate("Buy Drinks");
-    while (Integer.parseInt(gameState.getVariables().lookupVariableValue("Player.HP")) > 5)
+    while (gameState.getActiveCharacter().getStats().getHitPoints() > 5)
     {
       new TelegramServlet().processTelegramUpdate(update);
     }
-    assertEquals("5", gameState.getVariables().lookupVariableValue("Player.HP"));
+    assertEquals(5, gameState.getActiveCharacter().getStats().getHitPoints());
 
     update = createUpdate("Village Square");
     new TelegramServlet().processTelegramUpdate(update);
-    assertEquals("The Village", gameState.getVariables().lookupVariableValue("Player.Location"));
+    assertEquals(ELocation.VILLAGE_SQUARE, gameState.getActiveCharacter().getLocation());
 
     update = createUpdate("The Inn");
     new TelegramServlet().processTelegramUpdate(update);
-    assertEquals("The Inn", gameState.getVariables().lookupVariableValue("Player.Location"));
+    assertEquals(ELocation.INN, gameState.getActiveCharacter().getLocation());
 
     update = createUpdate("Short Rest");
     new TelegramServlet().processTelegramUpdate(update);
-    assertEquals("8", gameState.getVariables().lookupVariableValue("Player.HP"));
+    assertEquals(8, gameState.getActiveCharacter().getStats().getHitPoints());
   }
 
 
-  private GameState startBot() throws IOException, ActionInvocationException
+  private GameState startBot() throws Exception
   {
     GameStatesRegistry.reset();
     GameState gameState = GameStatesRegistry.lookup(-1);
-    gameState.getVariables().setValue("chatId", "-1");
     Update update;
     update = createUpdate("/start");
     new TelegramServlet().processTelegramUpdate(update);
@@ -142,7 +131,7 @@ public class MainTest
     return u;
   }
 
-  private void initPlayer() throws IOException, ActionInvocationException
+  private void initPlayer() throws Exception
   {
     Update update;
 

@@ -24,7 +24,7 @@ public class VerifyOptionAction extends NativeAction
     String[] options = allowedOptions.split(",");
     if (!contains(options, chosen))
     {
-      TelegramMessageSender.sendMessage(Integer.parseInt(chatId), "That's not a valid option");
+      TelegramMessageSender.sendMessage(Integer.parseInt(chatId), "\"" + chosen + "\" is not a valid option");
       throw new WoodlandsRuntimeException("That's not a valid option");
     }
 
