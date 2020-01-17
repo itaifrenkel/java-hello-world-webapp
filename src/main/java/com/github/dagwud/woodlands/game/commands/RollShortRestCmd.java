@@ -1,6 +1,8 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class RollShortRestCmd extends AbstractCmd

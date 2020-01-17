@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.domain.Player;
-import com.github.dagwud.woodlands.game.instructions.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.AbstractCmd;
 
 public class CreateGameStateCmd extends AbstractCmd
 {

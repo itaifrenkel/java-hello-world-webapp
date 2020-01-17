@@ -1,11 +1,11 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 public class AcceptInputCmd extends AbstractCmd
 {
   private final SuspendableCmd receiverCmd;
   private final String capturedInput;
 
-  AcceptInputCmd(SuspendableCmd receiverCmd, String capturedInput)
+  public AcceptInputCmd(SuspendableCmd receiverCmd, String capturedInput)
   {
     super();
     this.receiverCmd = receiverCmd;

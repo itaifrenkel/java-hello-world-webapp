@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
@@ -10,7 +10,7 @@ public class MoveToLocationCmd extends AbstractCmd
   private GameState gameState;
   private final ELocation location;
 
-  MoveToLocationCmd(GameState gameState, ELocation location)
+  public MoveToLocationCmd(GameState gameState, ELocation location)
   {
     this.gameState = gameState;
     this.location = location;

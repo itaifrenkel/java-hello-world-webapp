@@ -1,6 +1,6 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
-import com.github.dagwud.woodlands.game.commands.WoodlandsRuntimeException;
+import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 
 public class CommandException extends WoodlandsRuntimeException
 {

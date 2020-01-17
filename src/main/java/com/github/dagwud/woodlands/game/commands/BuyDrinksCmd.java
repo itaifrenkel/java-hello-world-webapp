@@ -1,7 +1,6 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 import java.math.BigDecimal;
@@ -11,7 +10,7 @@ public class BuyDrinksCmd extends AbstractCmd
   private final int chatId;
   private final GameCharacter activeCharacters;
 
-  BuyDrinksCmd(int chatId, GameCharacter activeCharacter)
+  public BuyDrinksCmd(int chatId, GameCharacter activeCharacter)
   {
     this.chatId = chatId;
     this.activeCharacters = activeCharacter;

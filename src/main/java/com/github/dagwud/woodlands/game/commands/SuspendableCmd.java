@@ -1,6 +1,7 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.AbstractCmd;
 
 public abstract class SuspendableCmd extends AbstractCmd
 {

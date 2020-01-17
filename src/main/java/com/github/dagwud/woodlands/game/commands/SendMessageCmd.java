@@ -1,5 +1,6 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
+import com.github.dagwud.woodlands.game.commands.AbstractCmd;
 import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ public class SendMessageCmd extends AbstractCmd
   private final String message;
   private final String replyMarkup;
 
-  SendMessageCmd(int chatId, String message)
+  public SendMessageCmd(int chatId, String message)
   {
     this(chatId, message, null);
   }

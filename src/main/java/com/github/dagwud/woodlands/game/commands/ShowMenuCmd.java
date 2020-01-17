@@ -1,7 +1,9 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.ChoiceCmd;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 
 public class ShowMenuCmd extends AbstractCmd

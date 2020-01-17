@@ -1,7 +1,5 @@
 package com.github.dagwud.woodlands.game.commands;
 
-import com.github.dagwud.woodlands.game.instructions.AbstractCmd;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

@@ -1,6 +1,7 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 
@@ -9,7 +10,7 @@ public class StartCmd extends AbstractCmd
   private final int chatId;
   private final GameState gameState;
 
-  StartCmd(GameState gameState, int chatId)
+  public StartCmd(GameState gameState, int chatId)
   {
     this.gameState = gameState;
     this.chatId = chatId;

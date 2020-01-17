@@ -1,15 +1,16 @@
 package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.*;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
-public class GameInstructionFactory
+public class CommandFactory
 {
-  private static GameInstructionFactory instance;
+  private static CommandFactory instance;
 
-  public static GameInstructionFactory instance()
+  public static CommandFactory instance()
   {
     if (null == instance)
     {
@@ -24,7 +25,7 @@ public class GameInstructionFactory
     {
       return;
     }
-    instance = new GameInstructionFactory();
+    instance = new CommandFactory();
   }
 
   public AbstractCmd create(Update telegramUpdate, GameState gameState)

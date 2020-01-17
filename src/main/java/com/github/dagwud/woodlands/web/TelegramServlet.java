@@ -2,8 +2,8 @@ package com.github.dagwud.woodlands.web;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.instructions.AbstractCmd;
-import com.github.dagwud.woodlands.game.instructions.GameInstructionFactory;
+import com.github.dagwud.woodlands.game.commands.AbstractCmd;
+import com.github.dagwud.woodlands.game.instructions.CommandFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 import com.github.dagwud.woodlands.gson.telegram.CallbackQuery;
 import com.github.dagwud.woodlands.gson.telegram.Update;
@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @WebServlet(name = "TelegramServlet", urlPatterns = "/telegram")
 public class TelegramServlet extends HttpServlet
@@ -58,7 +57,7 @@ public class TelegramServlet extends HttpServlet
     GameState gameState = GameStatesRegistry.lookup(chatId);
     synchronized (GameStatesRegistry.lookup(chatId))
     {
-      AbstractCmd instruction = GameInstructionFactory.instance().create(update, gameState);
+      AbstractCmd instruction = CommandFactory.instance().create(update, gameState);
       instruction.execute();
     }
   }

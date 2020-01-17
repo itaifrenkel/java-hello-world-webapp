@@ -1,7 +1,7 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
+import com.github.dagwud.woodlands.game.commands.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -12,7 +12,7 @@ public class RetrieveItemsCmd extends AbstractCmd
   private final int chatId;
   private final GameCharacter character;
 
-  RetrieveItemsCmd(int chatId, GameCharacter character)
+  public RetrieveItemsCmd(int chatId, GameCharacter character)
   {
     this.chatId = chatId;
     this.character = character;

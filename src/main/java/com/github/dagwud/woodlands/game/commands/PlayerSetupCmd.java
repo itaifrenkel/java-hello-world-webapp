@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
@@ -7,7 +7,7 @@ public class PlayerSetupCmd extends AbstractCmd
 {
   private final GameState gameState;
 
-  PlayerSetupCmd(GameState gameState)
+  public PlayerSetupCmd(GameState gameState)
   {
     this.gameState = gameState;
   }

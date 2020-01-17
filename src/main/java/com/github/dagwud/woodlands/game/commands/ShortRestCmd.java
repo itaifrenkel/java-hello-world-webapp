@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -8,7 +8,7 @@ public class ShortRestCmd extends AbstractCmd
   private final int chatId;
   private final GameCharacter activeCharacter;
 
-  ShortRestCmd(int chatId, GameCharacter activeCharacter)
+  public ShortRestCmd(int chatId, GameCharacter activeCharacter)
   {
     this.chatId = chatId;
     this.activeCharacter = activeCharacter;

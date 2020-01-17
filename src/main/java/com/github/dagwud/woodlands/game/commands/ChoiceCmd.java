@@ -1,7 +1,6 @@
-package com.github.dagwud.woodlands.game.instructions;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
 
 import java.util.ArrayList;
 import java.util.List;
