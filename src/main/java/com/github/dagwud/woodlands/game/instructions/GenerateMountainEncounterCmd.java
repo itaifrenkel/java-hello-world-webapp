@@ -4,11 +4,11 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 
-public class GenerateEncounterCmd extends AbstractCmd
+public class GenerateMountainEncounterCmd extends AbstractCmd
 {
   private GameState gameState;
 
-  GenerateEncounterCmd(GameState gameState)
+  GenerateMountainEncounterCmd(GameState gameState)
   {
     this.gameState = gameState;
   }
@@ -21,7 +21,7 @@ public class GenerateEncounterCmd extends AbstractCmd
       SendMessageCmd cmd = new SendMessageCmd(gameState.getPlayer().getChatId(), "Encounter occurs");
       CommandDelegate.execute(cmd);
 
-      RunLaterCmd nextEncounter = new RunLaterCmd(30000, new GenerateEncounterCmd(gameState));
+      RunLaterCmd nextEncounter = new RunLaterCmd(30000, new GenerateMountainEncounterCmd(gameState));
       CommandDelegate.execute(nextEncounter);
     }
   }

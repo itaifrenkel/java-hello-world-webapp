@@ -15,7 +15,7 @@ public class EnterTheMountainCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    RunLaterCmd cmd = new RunLaterCmd(30000, new GenerateEncounterCmd(gameState));
+    RunLaterCmd cmd = new RunLaterCmd(30000, new GenerateMountainEncounterCmd(gameState));
     CommandDelegate.execute(cmd);
   }
 }
