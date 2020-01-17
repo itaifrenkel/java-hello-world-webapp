@@ -1,14 +1,4 @@
 {
-  "QuickCommands": [
-    {
-      "command": ["/help"],
-      "ProcName": "ShowHelp"
-    },
-    {
-      "command": ["/me"],
-      "ProcName": "ShowCharacterInfo"
-    }
-  ],
   "Packages": [
     {
       "Name": "actions",

@@ -13,18 +13,6 @@
               }
             }
           ]
-        }, ,
-        {
-          "name": "SetPlayerHP",
-          "steps": [
-            {
-              "ProcName": "SetPlayerAttribute",
-              "ParamMappings": {
-                "AttributeName": "HP",
-                "AttributeValue": "eval(${NewHP}<${Player.MaxHP})"
-              }
-            }
-          ]
         }
       ]
     }
