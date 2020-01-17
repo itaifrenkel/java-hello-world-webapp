@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.domain.stats;
 
 public class TricksterInitialStats extends InitialStats
 {
-  TricksterInitialStats()
+  public TricksterInitialStats()
   {
     shortRestDice = 8;
     initialStrength = 11;

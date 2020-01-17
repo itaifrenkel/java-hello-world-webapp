@@ -1,10 +1,5 @@
 package com.github.dagwud.woodlands.game;
 
-import com.github.dagwud.woodlands.game.characterclasses.CharacterClassesCacheFactory;
-import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
-import com.github.dagwud.woodlands.gson.game.CharacterClass;
-import com.github.dagwud.woodlands.gson.game.Weapon;
-
 import java.util.HashMap;
 import java.util.Map;
 

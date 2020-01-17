@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.domain.stats;
 
 public class DruidInitialStats extends InitialStats
 {
-  DruidInitialStats()
+  public DruidInitialStats()
   {
     shortRestDice = 8;
     initialStrength = 11;
