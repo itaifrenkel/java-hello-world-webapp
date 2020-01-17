@@ -30,7 +30,7 @@ public abstract class GsonHelper
     return gson.fromJson(reader, classOfT);
   }
 
-  static <T> T readJSON(String json, Class<T> classOfT)
+  private static <T> T readJSON(String json, Class<T> classOfT)
   {
     byte[] chars = json.getBytes();
     InputStreamReader reader = new InputStreamReader(new ByteArrayInputStream(chars));

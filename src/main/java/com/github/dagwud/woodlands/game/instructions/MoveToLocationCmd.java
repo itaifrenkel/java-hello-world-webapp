@@ -37,7 +37,6 @@ public class MoveToLocationCmd extends AbstractCmd
     handleLocationEntry(location, gameState);
   }
 
-
   private void showMenuForLocation(ELocation location, GameState gameState)
   {
     ShowMenuCmd cmd = new ShowMenuCmd(location.getMenu(), gameState);
