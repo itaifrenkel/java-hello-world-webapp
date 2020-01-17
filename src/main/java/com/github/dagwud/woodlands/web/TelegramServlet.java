@@ -21,7 +21,7 @@ import java.io.IOException;
 public class TelegramServlet extends HttpServlet
 {
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
   {
     Update update = null;
     try
