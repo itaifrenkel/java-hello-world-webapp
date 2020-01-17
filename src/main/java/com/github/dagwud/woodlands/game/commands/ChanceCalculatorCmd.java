@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands.conditional;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.instructions.AbstractCmd;
 

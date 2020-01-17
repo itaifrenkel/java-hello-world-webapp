@@ -9,13 +9,4 @@ public class ActionInvocationException extends WoodlandsException
     super(message);
   }
 
-  public ActionInvocationException(String message, Throwable cause)
-  {
-    super(message, cause);
-  }
-
-  public ActionInvocationException(Throwable cause)
-  {
-    super(cause);
-  }
 }

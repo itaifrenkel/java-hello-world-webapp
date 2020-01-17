@@ -1,7 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.invocation;
 
-import com.github.dagwud.woodlands.game.commands.values.WoodlandsRuntimeException;
-
 import java.util.Stack;
 
 public class VariableStack
@@ -24,77 +22,6 @@ public class VariableStack
     stack.pop();
   }
 
-  public String lookupVariableValue(String varName)
-  {
-    return ValueResolver.resolve(ValueResolver.START_VARIABLE + varName + ValueResolver.END_VARIABLE, this);
-  }
-
-  String lookupVariable(String variableName)
-  {
-    for (int i = stack.size() - 1; i >= 0; i--)
-    {
-      Variables stackFrame = stack.get(i);
-      if (stackFrame.containsKey(variableName))
-      {
-        String value = stackFrame.get(variableName);
-        // cases like a=${a} - i.e. it's intended to read from parent frame - don't use this value but keep looking:
-         if (value != null && !value.equals(ValueResolver.START_VARIABLE + variableName + ValueResolver.END_VARIABLE))
-        {
-          return value;
-        }
-      }
-    }
-    throw new VariableUndefinedException(variableName, this);
-  }
-
-  public void setValue(String variableName, String value)
-  {
-    setValue(variableName, value, 0);
-  }
-
-  void setValue(String variableName, String value, int offset)
-  {
-    if (isGlobalVariable(variableName))
-    {
-      setGlobalValue(variableName, value);
-      return;
-    }
-
-    for (Variables variables : stack)
-    {
-      if (variables.containsKey(variableName))
-      {
-        variables.put(variableName, value);
-        return;
-      }
-    }
-    stack.get(stack.size() - 1 - (-offset)).put(variableName, value);
-  }
-
-  void unsetValue(String valueName)
-  {
-    for (int i = stack.size() - 1; i >= 0; i--)
-    {
-      if (stack.get(i).containsKey(valueName))
-      {
-        stack.get(i).remove(valueName);
-        return;
-      }
-    }
-    throw new WoodlandsRuntimeException("Value " + valueName + " isn't set");
-  }
-
-  static boolean isGlobalVariable(String variableName)
-  {
-    return variableName.startsWith("__");
-  }
-
-  private void setGlobalValue(String variableName, String value)
-  {
-    variableName = variableName.substring("__".length());
-    stack.get(0).put(variableName, value);
-  }
-
   public String pretty()
   {
     StringBuilder b = new StringBuilder();
@@ -108,16 +35,4 @@ public class VariableStack
     return b.toString();
   }
 
-  public boolean hasVariable(String variableName)
-  {
-    try
-    {
-      lookupVariableValue(variableName);
-      return true;
-    }
-    catch (VariableUndefinedException e)
-    {
-      return false;
-    }
-  }
 }

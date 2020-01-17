@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.conditional.ChanceCalculatorCmd;
+import com.github.dagwud.woodlands.game.commands.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 import java.math.BigDecimal;

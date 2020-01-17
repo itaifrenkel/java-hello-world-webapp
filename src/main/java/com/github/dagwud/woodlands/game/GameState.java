@@ -7,18 +7,11 @@ import com.github.dagwud.woodlands.game.instructions.SuspendableCmd;
 
 public class GameState
 {
-  private final VariableStack variables;
   private Player player;
   private SuspendableCmd waitingForInputCmd;
 
   GameState()
   {
-    variables = new VariableStack();
-  }
-
-  public VariableStack getVariables()
-  {
-    return variables;
   }
 
   public Player getPlayer()
