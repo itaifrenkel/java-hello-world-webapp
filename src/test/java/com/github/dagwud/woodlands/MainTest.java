@@ -62,6 +62,42 @@ public class MainTest
   }
 
   @Test
+  public void testMenuBlocksDisallowedOptions() throws Exception
+  {
+    GameState gameState = startBot();
+    initPlayer();
+
+    Update update;
+    update = createUpdate("The Inn");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals(ELocation.INN, gameState.getActiveCharacter().getLocation());
+
+    update = createUpdate("The Mountain"); // not allowed to jump straight
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals(ELocation.INN, gameState.getActiveCharacter().getLocation());
+  }
+
+  @Test
+  public void testMenuBlocksAllowsValidOptions() throws Exception
+  {
+    GameState gameState = startBot();
+    initPlayer();
+
+    Update update;
+    update = createUpdate("The Inn");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals(ELocation.INN, gameState.getActiveCharacter().getLocation());
+
+    update = createUpdate("Village Square");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals(ELocation.VILLAGE_SQUARE, gameState.getActiveCharacter().getLocation());
+
+    update = createUpdate("The Inn");
+    new TelegramServlet().processTelegramUpdate(update);
+    assertEquals(ELocation.INN, gameState.getActiveCharacter().getLocation());
+  }
+
+  @Test
   public void testDrink() throws Exception
   {
     GameState gameState = startBot();

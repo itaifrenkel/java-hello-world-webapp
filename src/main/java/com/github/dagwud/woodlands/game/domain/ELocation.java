@@ -2,21 +2,28 @@ package com.github.dagwud.woodlands.game.domain;
 
 public enum ELocation
 {
-  VILLAGE_SQUARE("The Village"),
-  INN("The Inn"),
-  TAVERN("The Tavern"),
-  MOUNTAIN("The Mountain"),
-  WOODLANDS("The Woodlands");
+  VILLAGE_SQUARE("The Village", new VillageMenu()),
+  INN("The Inn", new InnMenu()),
+  TAVERN("The Tavern", new TavernMenu()),
+  MOUNTAIN("The Mountain", new MountainMenu()),
+  WOODLANDS("The Woodlands", new WoodlandsMenu());
 
   private final String displayName;
+  private final GameMenu menu;
 
-  ELocation(String displayName)
+  ELocation(String displayName, GameMenu menu)
   {
     this.displayName = displayName;
+    this.menu = menu;
   }
 
   public String toString()
   {
     return displayName;
+  }
+
+  public GameMenu getMenu()
+  {
+    return menu;
   }
 }

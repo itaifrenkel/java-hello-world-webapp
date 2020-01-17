@@ -48,32 +48,35 @@ public class GameInstructionFactory
 
     int chatId = gameState.getPlayer().getChatId();
     GameCharacter activeCharacter = gameState.getActiveCharacter();
-    if (cmd.equals("The Inn"))
+    if (gameState.getCurrentMenu().containsOption(cmd))
     {
-      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.INN);
-    }
-    if (cmd.equals("The Tavern"))
-    {
-      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.TAVERN);
-    }
-    if (cmd.equals("The Village") || cmd.equals("Village Square"))
-    {
-      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.VILLAGE_SQUARE);
-    }
+      if (cmd.equals("The Inn"))
+      {
+        return new MoveToLocationCmd(gameState, ELocation.INN);
+      }
+      if (cmd.equals("The Tavern"))
+      {
+        return new MoveToLocationCmd(gameState, ELocation.TAVERN);
+      }
+      if (cmd.equals("The Village") || cmd.equals("Village Square"))
+      {
+        return new MoveToLocationCmd(gameState, ELocation.VILLAGE_SQUARE);
+      }
 
-    if (cmd.equals("The Mountain"))
-    {
-      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.MOUNTAIN);
-    }
+      if (cmd.equals("The Mountain"))
+      {
+        return new MoveToLocationCmd(gameState, ELocation.MOUNTAIN);
+      }
 
-    if (cmd.equals("The Woodlands"))
-    {
-      return new MoveToLocationCmd(chatId, activeCharacter, ELocation.WOODLANDS);
-    }
+      if (cmd.equals("The Woodlands"))
+      {
+        return new MoveToLocationCmd(gameState, ELocation.WOODLANDS);
+      }
 
-    if (cmd.equals("Retrieve Items"))
-    {
-      return new RetrieveItemsCmd(chatId, activeCharacter);
+      if (cmd.equals("Retrieve Items"))
+      {
+        return new RetrieveItemsCmd(chatId, activeCharacter);
+      }
     }
     if (cmd.equals("/me"))
     {

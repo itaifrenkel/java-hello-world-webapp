@@ -61,7 +61,7 @@ class DoPlayerSetupCmd extends SuspendableCmd
     SendMessageCmd welcomeCmd = new SendMessageCmd(getGameState().getPlayer().getChatId(), "Welcome, " + character.getName() + " the " + character.getCharacterClass() + "!");
     CommandDelegate.execute(welcomeCmd);
 
-    MoveToLocationCmd move = new MoveToLocationCmd(getGameState().getPlayer().getChatId(), character, ELocation.VILLAGE_SQUARE);
+    MoveToLocationCmd move = new MoveToLocationCmd(getGameState(), ELocation.VILLAGE_SQUARE);
     CommandDelegate.execute(move);
   }
 }

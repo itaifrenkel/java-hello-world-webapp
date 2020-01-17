@@ -1,24 +1,25 @@
 package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.domain.GameMenu;
 
 public class ShowMenuCmd extends AbstractCmd
 {
-  private final int chatId;
-  private final String message;
-  private final String[] options;
+  private final GameMenu menu;
+  private GameState gameState;
 
-  ShowMenuCmd(int chatId, String message, String[] options)
+  ShowMenuCmd(GameMenu menu, GameState gameState)
   {
-    this.chatId = chatId;
-    this.message = message;
-    this.options = options;
+    this.menu = menu;
+    this.gameState = gameState;
   }
 
   @Override
   public void execute()
   {
-    ChoiceCmd cmd = new ChoiceCmd(chatId, message, options);
+    ChoiceCmd cmd = new ChoiceCmd(gameState.getPlayer().getChatId(), menu.getPrompt(), menu.getOptions());
     CommandDelegate.execute(cmd);
+    gameState.setCurrentMenu(menu);
   }
 }
