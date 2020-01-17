@@ -4,7 +4,9 @@ public enum ELocation
 {
   VILLAGE_SQUARE("The Village"),
   INN("The Inn"),
-  TAVERN("The Tavern");
+  TAVERN("The Tavern"),
+  MOUNTAIN("The Mountain"),
+  WOODLANDS("The Woodlands");
 
   private final String displayName;
 
