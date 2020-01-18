@@ -25,8 +25,8 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     Stats stats = character.getStats();
     CarriedItems carrying = character.getCarrying();
 
-    String message = character.getName() + " (" +
-            " - L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
+    String message = character.getName() + " " +
+            "(L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
             "Location: " + character.getLocation() + "\n" +
             "\n" +
             "❤️: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +

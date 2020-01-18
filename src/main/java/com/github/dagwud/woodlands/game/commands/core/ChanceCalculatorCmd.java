@@ -28,7 +28,7 @@ public class ChanceCalculatorCmd extends AbstractCmd
     {
       return BigDecimal.ONE;
     }
-    return percentChance.divide(ONE_HUNDRED, RoundingMode.HALF_UP);
+    return percentChance.divide(ONE_HUNDRED, 4, RoundingMode.HALF_UP);
   }
 
   public boolean getResult()
