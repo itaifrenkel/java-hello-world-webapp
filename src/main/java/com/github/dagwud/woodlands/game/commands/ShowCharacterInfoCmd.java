@@ -48,6 +48,18 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     {
       return "nothing";
     }
-    return carrying.name + " " + carrying.getIcon() + carrying.damage.determineAverageRoll();
+    return carrying.name + " " + carrying.getIcon() + determineDamageText(carrying);
+  }
+
+  private String determineDamageText(Weapon carrying)
+  {
+    int bonusDamage = character.getStats().getWeaponBonusDamage(carrying);
+
+    String damageText = carrying.damage.determineAverageRoll();
+    if (bonusDamage != 0)
+    {
+      damageText += " +" + bonusDamage;
+    }
+    return damageText;
   }
 }
