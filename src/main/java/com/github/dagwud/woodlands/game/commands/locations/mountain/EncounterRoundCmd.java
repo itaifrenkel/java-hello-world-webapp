@@ -13,7 +13,7 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class EncounterRoundCmd extends AbstractCmd
 {
-  private static final long DELAY_BETWEEN_ROUNDS_MS = 5000;
+  private static final long DELAY_BETWEEN_ROUNDS_MS = 15000;
   private static final String CRITICAL_HIT_ICON = "\uD83C\uDFAF";
   private static final String MISSED_ICON = "\uD83D\uDE48";
 
