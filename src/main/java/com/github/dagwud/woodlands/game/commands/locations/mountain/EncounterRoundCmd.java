@@ -43,7 +43,7 @@ public class EncounterRoundCmd extends AbstractCmd
       description = encounter.getHost().getName() + " " +
               hostDamageInflicted.getInflictedWith().getIcon() +
               hostDamageInflicted.getBaseDamage() + "+" + hostDamageInflicted.getBonusDamage() +
-              " → " + encounter.getEnemy()
+              " → " + encounter.getEnemy().name
               + (hitResult == HitStatus.CRITICAL_HIT ? " (" + CRITICAL_HIT_ICON + ")" : "");
     }
     SendMessageCmd status = new SendMessageCmd(chatId, description);
