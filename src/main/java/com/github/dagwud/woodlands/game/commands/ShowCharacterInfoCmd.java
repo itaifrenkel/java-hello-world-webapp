@@ -25,8 +25,8 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     Stats stats = character.getStats();
     CarriedItems carrying = character.getCarrying();
 
-    String message = character.getName() + " " + character.getCharacterClass() +
-            " - L" + stats.getLevel() + ")\n" +
+    String message = character.getName() + " (" +
+            " - L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
             "Location: " + character.getLocation() + "\n" +
             "\n" +
             "❤️: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
@@ -36,10 +36,29 @@ public class ShowCharacterInfoCmd extends AbstractCmd
             "Constitution: " + stats.getConstitution() + "\n" +
             "Carrying:\n" +
             "• " + describeItem(carrying.getCarriedLeft()) + "\n" +
-            "• " + describeItem(carrying.getCarriedRight());
+            "• " + describeItem(carrying.getCarriedRight()) + "\n\n" +
+            skilledWith();
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);
     CommandDelegate.execute(cmd);
+  }
+
+  private String skilledWith()
+  {
+    StringBuilder b = new StringBuilder();
+    b.append("Skilled with: ");
+
+    boolean first = true;
+    for (String weapon : character.getStats().getWeaponBonusDamage().keySet())
+    {
+      if (!first)
+      {
+        b.append(", ");
+        first = false;
+      }
+      b.append(weapon);
+    }
+    return b.toString();
   }
 
   private String describeItem(Weapon carrying)

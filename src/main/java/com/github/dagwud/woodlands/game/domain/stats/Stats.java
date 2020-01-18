@@ -116,4 +116,9 @@ public class Stats
   {
     this.weaponBonusDamage = weaponBonusDamage;
   }
+
+  public Map<String, Integer> getWeaponBonusDamage()
+  {
+    return weaponBonusDamage;
+  }
 }
