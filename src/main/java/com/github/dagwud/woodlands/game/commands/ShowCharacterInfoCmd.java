@@ -54,8 +54,8 @@ public class ShowCharacterInfoCmd extends AbstractCmd
       if (!first)
       {
         b.append(", ");
-        first = false;
       }
+      first = false;
       b.append(weapon);
     }
     return b.toString();
