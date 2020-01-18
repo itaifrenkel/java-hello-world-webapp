@@ -29,6 +29,11 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (encounter.isEnded())
+    {
+      return;
+    }
+
     doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedLeft(), encounter.getEnemy());
     doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedRight(), encounter.getEnemy());
 
