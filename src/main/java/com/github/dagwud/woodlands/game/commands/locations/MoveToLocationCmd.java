@@ -26,7 +26,12 @@ public class MoveToLocationCmd extends AbstractCmd
     GameCharacter characterToMove = gameState.getActiveCharacter();
     int chatId = gameState.getPlayer().getChatId();
 
-    gameState.setActiveEncounter(null);
+    if (gameState.getActiveEncounter() != null)
+    {
+      gameState.getActiveEncounter().end();
+      gameState.setActiveEncounter(null);
+    }
+
     if (!characterToMove.isSetupComplete())
     {
       SendMessageCmd cmd = new SendMessageCmd(chatId,"You need to create a character first. Please use /new");
