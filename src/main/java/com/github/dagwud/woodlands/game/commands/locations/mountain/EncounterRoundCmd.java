@@ -42,7 +42,8 @@ public class EncounterRoundCmd extends AbstractCmd
       DamageInflicted hostDamageInflicted = rollForDamage(encounter.getHost(), leftWeapon, hitResult == HitStatus.CRITICAL_HIT);
       description = encounter.getHost().getName() + " " +
               hostDamageInflicted.getInflictedWith().getIcon() +
-              hostDamageInflicted.getBaseDamage() + "+" + hostDamageInflicted.getBonusDamage() +
+              hostDamageInflicted.getBaseDamage() + 
+              (hostDamageInflicted.getBonusDamage() != 0 ? "+" + hostDamageInflicted.getBonusDamage() : "") +
               " → " + encounter.getEnemy().name
               + (hitResult == HitStatus.CRITICAL_HIT ? " (" + CRITICAL_HIT_ICON + ")" : "");
     }
