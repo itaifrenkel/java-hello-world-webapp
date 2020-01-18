@@ -35,7 +35,7 @@ public class EncounterRoundCmd extends AbstractCmd
     HitStatus hitResult = rollForHit(encounter.getHost(), leftWeapon, encounter.getEnemy());
     if (hitResult == HitStatus.MISS)
     {
-      description = encounter.getHost().getName() + " " + MISSED_ICON + " missed → " + encounter.getEnemy();
+      description = encounter.getHost().getName() + " " + MISSED_ICON + " missed → " + encounter.getEnemy().name;
     }
     else
     {
