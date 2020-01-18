@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 

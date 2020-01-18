@@ -1,6 +1,10 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.locations.village;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.character.ReduceHitPointsCmd;
+import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 import java.math.BigDecimal;
@@ -31,7 +35,7 @@ public class BuyDrinksCmd extends AbstractCmd
       SendMessageCmd cmd = new SendMessageCmd(chatId, "You don't know what the drink is the barman puts down in front of you, but it doesn't look good. You drink it anyway.. you don't feel good.");
       CommandDelegate.execute(cmd);
 
-      ReducePlayerHealthCmd damage = new ReducePlayerHealthCmd(activeCharacters, 1);
+      ReduceHitPointsCmd damage = new ReduceHitPointsCmd(activeCharacters, 1);
       CommandDelegate.execute(damage);
     }
   }

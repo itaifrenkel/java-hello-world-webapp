@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.core;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
@@ -8,7 +8,7 @@ public class RunLaterCmd extends AbstractCmd
   private final long delayMS;
   private final AbstractCmd cmdToRun;
 
-  RunLaterCmd(long delayMS, AbstractCmd cmdToRun)
+  public RunLaterCmd(long delayMS, AbstractCmd cmdToRun)
   {
     this.delayMS = delayMS;
     this.cmdToRun = cmdToRun;

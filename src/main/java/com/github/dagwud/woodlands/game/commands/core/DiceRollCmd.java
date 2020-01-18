@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.core;
 
 public class DiceRollCmd extends AbstractCmd
 {
@@ -6,7 +6,7 @@ public class DiceRollCmd extends AbstractCmd
   private final int diceFaces;
   private int total;
 
-  DiceRollCmd(int diceCount, int diceFaces)
+  public DiceRollCmd(int diceCount, int diceFaces)
   {
     this.diceCount = diceCount;
     this.diceFaces = diceFaces;
@@ -24,7 +24,7 @@ public class DiceRollCmd extends AbstractCmd
     System.out.println("ROLL: " + diceCount + "d" + diceFaces + "=" + total);
   }
 
-  int getTotal()
+  public int getTotal()
   {
     return total;
   }

@@ -1,13 +1,16 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.locations.mountain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.GenerateMountainEncounterCmd;
+import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 
 public class EnterTheMountainCmd extends AbstractCmd
 {
   private final GameState gameState;
 
-  EnterTheMountainCmd(GameState gameState)
+  public EnterTheMountainCmd(GameState gameState)
   {
     this.gameState = gameState;
   }

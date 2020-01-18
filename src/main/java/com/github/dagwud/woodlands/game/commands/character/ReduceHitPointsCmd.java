@@ -1,13 +1,14 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.character;
 
+import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
-class ReducePlayerHealthCmd extends AbstractCmd
+public class ReduceHitPointsCmd extends AbstractCmd
 {
   private final GameCharacter character;
   private final int reduceBy;
 
-  ReducePlayerHealthCmd(GameCharacter character, int reduceBy)
+  public ReduceHitPointsCmd(GameCharacter character, int reduceBy)
   {
     this.character = character;
     this.reduceBy = reduceBy;

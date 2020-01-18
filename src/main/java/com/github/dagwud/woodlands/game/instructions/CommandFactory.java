@@ -2,6 +2,16 @@ package com.github.dagwud.woodlands.game.instructions;
 
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.*;
+import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.AcceptInputCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.BuyDrinksCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.RetrieveItemsCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.ShortRestCmd;
+import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
+import com.github.dagwud.woodlands.game.commands.start.StartCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.gson.telegram.Update;

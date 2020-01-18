@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 import com.github.dagwud.woodlands.game.domain.Player;
-import com.github.dagwud.woodlands.game.commands.SuspendableCmd;
+import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 
 public class GameState
 {

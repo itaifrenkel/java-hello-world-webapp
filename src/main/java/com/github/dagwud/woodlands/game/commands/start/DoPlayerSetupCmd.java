@@ -1,12 +1,17 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.commands.character.InitCharacterStatsCmd;
+import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
-class DoPlayerSetupCmd extends SuspendableCmd
+public class DoPlayerSetupCmd extends SuspendableCmd
 {
   DoPlayerSetupCmd(GameState gameState)
   {
@@ -14,7 +19,7 @@ class DoPlayerSetupCmd extends SuspendableCmd
   }
 
   @Override
-  void executePart(int phaseToExecute, String capturedInput)
+  public void executePart(int phaseToExecute, String capturedInput)
   {
     switch (phaseToExecute)
     {

@@ -1,9 +1,7 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.ChoiceCmd;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 
 public class ShowMenuCmd extends AbstractCmd
@@ -11,7 +9,7 @@ public class ShowMenuCmd extends AbstractCmd
   private final GameMenu menu;
   private GameState gameState;
 
-  ShowMenuCmd(GameMenu menu, GameState gameState)
+  public ShowMenuCmd(GameMenu menu, GameState gameState)
   {
     this.menu = menu;
     this.gameState = gameState;

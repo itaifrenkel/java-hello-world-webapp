@@ -1,17 +1,17 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class ChoiceCmd extends AbstractCmd
+public class ChoiceCmd extends AbstractCmd
 {
   private final int chatId;
   private final String prompt;
   private final Object[] options;
 
-  ChoiceCmd(int chatId, String prompt, Object[] options)
+  public ChoiceCmd(int chatId, String prompt, Object[] options)
   {
     this.chatId = chatId;
     this.prompt = prompt;
