@@ -3,9 +3,12 @@ package com.github.dagwud.woodlands.game.commands.locations.mountain;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+
+import java.math.BigDecimal;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
@@ -19,13 +22,31 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (gameState.getActiveCharacter().getLocation() == ELocation.MOUNTAIN)
+    // You've left the mountain; encounter no longer happens:
+    if (gameState.getActiveCharacter().getLocation() != ELocation.MOUNTAIN)
     {
-      SendMessageCmd cmd = new SendMessageCmd(gameState.getPlayer().getChatId(), "Encounter occurs");
-      CommandDelegate.execute(cmd);
-
-      RunLaterCmd nextEncounter = new RunLaterCmd(30000, new GenerateMountainEncounterCmd(gameState));
-      CommandDelegate.execute(nextEncounter);
+      return;
     }
+
+    ChanceCalculatorCmd chance = new ChanceCalculatorCmd(new BigDecimal("75"));
+    CommandDelegate.execute(chance);
+
+    if (!chance.getResult())
+    {
+      SendMessageCmd cmd = new SendMessageCmd(gameState.getPlayer().getChatId(), "Time passes. You keep moving. Nothing interesting happens.");
+      CommandDelegate.execute(cmd);
+      scheduleNextEncounter();
+      return;
+    }
+
+    SendMessageCmd cmd = new SendMessageCmd(gameState.getPlayer().getChatId(), "Something happens!");
+    CommandDelegate.execute(cmd);
+    scheduleNextEncounter();
+  }
+
+  private void scheduleNextEncounter()
+  {
+    RunLaterCmd nextEncounter = new RunLaterCmd(30000, new GenerateMountainEncounterCmd(gameState));
+    CommandDelegate.execute(nextEncounter);
   }
 }
