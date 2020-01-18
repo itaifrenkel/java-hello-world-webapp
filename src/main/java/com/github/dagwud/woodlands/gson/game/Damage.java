@@ -14,7 +14,7 @@ public class Damage
 
   public String determineAverageRoll()
   {
-    float average = ((1f + (float) diceFaces) / 2f) * (float) diceFaces;
+    float average = ((1f + (float) diceFaces) / 2f) * (float) diceCount;
     return new DecimalFormat("#.##").format(average);
   }
 }
