@@ -6,6 +6,17 @@ public class Encounter
 {
   private GameCharacter host;
   private Creature enemy;
+  boolean ended;
+
+  public boolean isEnded()
+  {
+    return ended;
+  }
+
+  public void end()
+  {
+    ended = true;
+  }
 
   public void setEnemy(Creature enemy)
   {
