@@ -31,6 +31,8 @@ public class EncounterRoundCmd extends AbstractCmd
   {
     doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedLeft(), encounter.getEnemy());
     doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedRight(), encounter.getEnemy());
+
+    scheduleNextRound();
   }
 
   private void doAttack(GameCharacter attacker, Weapon attackWith, Creature defender)
@@ -60,8 +62,6 @@ public class EncounterRoundCmd extends AbstractCmd
     }
     SendMessageCmd status = new SendMessageCmd(chatId, description);
     CommandDelegate.execute(status);
-
-    scheduleNextRound();
   }
 
   private HitStatus rollForHit(GameCharacter attacker, Weapon attackWith, Creature defender)
