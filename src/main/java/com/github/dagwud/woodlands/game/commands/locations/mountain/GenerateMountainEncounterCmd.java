@@ -6,9 +6,12 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
@@ -41,6 +44,14 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
     SendMessageCmd cmd = new SendMessageCmd(gameState.getPlayer().getChatId(), "Something happens!");
     CommandDelegate.execute(cmd);
+
+    Creature creature = CreaturesCacheFactory.instance().getCache().pickRandom();
+    String message = "You encountered a " + creature.name + " (L" + creature.level + ")";
+    SendMessageCmd msg = new SendMessageCmd(gameState.getPlayer().getChatId(), message);
+    CommandDelegate.execute(msg);
+
+    gameState.getActiveCharacter().getStats().setLevel(gameState.getActiveCharacter().getStats().getLevel() + 1);
+
     scheduleNextEncounter();
   }
 

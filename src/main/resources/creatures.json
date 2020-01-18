@@ -1,0 +1,23 @@
+{
+  "creatures": [
+    {"name":  "Viper", "level": 1},
+    {"name":  "Giant Rat", "level": 1},
+    {"name":  "Snake", "level": 1},
+    {"name":  "Angry Raccoon", "level": 1},
+    {"name":  "Bear Cub", "level": 1},
+    {"name":  "Vampire Bat", "level": 1},
+    {"name":  "Armoured Monkey", "level": 2},
+    {"name":  "Wild Boar", "level": 2},
+    {"name":  "Wolf", "level": 2},
+    {"name":  "Brown Bear", "level": 3},
+    {"name":  "Great Ape", "level": 3},
+    {"name":  "Giant Lizard", "level": 3},
+    {"name":  "Black Bear", "level": 4},
+    {"name":  "Grizzly Bear", "level": 4},
+    {"name":  "Crocodile", "level": 4},
+    {"name":  "Giant Snake", "level": 5},
+    {"name":  "Giant Spider", "level": 6},
+    {"name":  "Armoured Boar", "level": 6},
+    {"name":  "Killer Rabbit of Caerbannog", "level": 8}
+  ]
+}
