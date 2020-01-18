@@ -29,23 +29,34 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    String description;
-    Weapon leftWeapon = encounter.getHost().getCarrying().getCarriedLeft();
+    doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedLeft(), encounter.getEnemy());
+    doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedRight(), encounter.getEnemy());
+  }
 
-    HitStatus hitResult = rollForHit(encounter.getHost(), leftWeapon, encounter.getEnemy());
-    if (hitResult == HitStatus.MISS)
+  private void doAttack(GameCharacter attacker, Weapon attackWith, Creature defender)
+  {
+    String description;
+    if (attackWith == null)
     {
-      description = encounter.getHost().getName() + " " + MISSED_ICON + " missed → " + encounter.getEnemy().name;
+      description = attacker.getName() + " does nothing";
     }
     else
     {
-      DamageInflicted hostDamageInflicted = rollForDamage(encounter.getHost(), leftWeapon, hitResult == HitStatus.CRITICAL_HIT);
-      description = encounter.getHost().getName() + " " +
-              hostDamageInflicted.getInflictedWith().getIcon() +
-              hostDamageInflicted.getBaseDamage() + 
-              (hostDamageInflicted.getBonusDamage() != 0 ? "+" + hostDamageInflicted.getBonusDamage() : "") +
-              " → " + encounter.getEnemy().name
-              + (hitResult == HitStatus.CRITICAL_HIT ? " (" + CRITICAL_HIT_ICON + ")" : "");
+      HitStatus hitResult = rollForHit(attacker, attackWith, defender);
+      if (hitResult == HitStatus.MISS)
+      {
+        description = attacker.getName() + " " + MISSED_ICON + " missed → " + defender.name;
+      }
+      else
+      {
+        DamageInflicted hostDamageInflicted = rollForDamage(attacker, attackWith, hitResult == HitStatus.CRITICAL_HIT);
+        description = attacker.getName() + " " +
+                hostDamageInflicted.getInflictedWith().getIcon() +
+                hostDamageInflicted.getBaseDamage() +
+                (hostDamageInflicted.getBonusDamage() != 0 ? "+" + hostDamageInflicted.getBonusDamage() : "") +
+                " → " + defender.name
+                + (hitResult == HitStatus.CRITICAL_HIT ? " (" + CRITICAL_HIT_ICON + ")" : "");
+      }
     }
     SendMessageCmd status = new SendMessageCmd(chatId, description);
     CommandDelegate.execute(status);
