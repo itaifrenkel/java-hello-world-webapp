@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 import com.github.dagwud.woodlands.game.domain.Player;
@@ -10,6 +11,7 @@ public class GameState
   private Player player;
   private SuspendableCmd waitingForInputCmd;
   private GameMenu currentMenu;
+  private Encounter encounter;
 
   GameState()
   {
@@ -49,5 +51,15 @@ public class GameState
   public void setCurrentMenu(GameMenu currentMenu)
   {
     this.currentMenu = currentMenu;
+  }
+
+  public void setActiveEncounter(Encounter encounter)
+  {
+    this.encounter = encounter;
+  }
+
+  public Encounter getActiveEncounter()
+  {
+    return encounter;
   }
 }

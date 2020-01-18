@@ -8,10 +8,11 @@ import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.Encounter;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
@@ -31,6 +32,13 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
       return;
     }
 
+    // There's already an encounter in progress; don't start another one:
+    if (gameState.getActiveEncounter() != null)
+    {
+      scheduleNextEncounter();
+      return;
+    }
+
     ChanceCalculatorCmd chance = new ChanceCalculatorCmd(new BigDecimal("75"));
     CommandDelegate.execute(chance);
 
@@ -42,17 +50,33 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
       return;
     }
 
-    SendMessageCmd cmd = new SendMessageCmd(gameState.getPlayer().getChatId(), "Something happens!");
+    Encounter encounter = startEncounter();
+    gameState.setActiveEncounter(encounter);
+
+    EncounterRoundCmd cmd = new EncounterRoundCmd(gameState.getPlayer().getChatId(), encounter);
     CommandDelegate.execute(cmd);
 
-    Creature creature = CreaturesCacheFactory.instance().getCache().pickRandom();
-    String message = "You encountered a " + creature.name + " (L" + creature.level + ")";
+    scheduleNextEncounter();
+  }
+
+  private Encounter startEncounter()
+  {
+    Encounter encounter = createEncounter(gameState.getActiveCharacter());
+
+    String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().level + ")";
     SendMessageCmd msg = new SendMessageCmd(gameState.getPlayer().getChatId(), message);
     CommandDelegate.execute(msg);
+    return encounter;
+  }
 
-    gameState.getActiveCharacter().getStats().setLevel(gameState.getActiveCharacter().getStats().getLevel() + 1);
+  private Encounter createEncounter(GameCharacter host)
+  {
+    Creature creature = CreaturesCacheFactory.instance().getCache().pickRandom();
 
-    scheduleNextEncounter();
+    Encounter encounter = new Encounter();
+    encounter.setHost(host);
+    encounter.setEnemy(creature);
+    return encounter;
   }
 
   private void scheduleNextEncounter()
