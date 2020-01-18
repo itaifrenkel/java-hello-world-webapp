@@ -9,12 +9,10 @@ import java.util.List;
 
 public class RetrieveItemsCmd extends AbstractCmd
 {
-  private final int chatId;
   private final GameCharacter character;
 
-  public RetrieveItemsCmd(int chatId, GameCharacter character)
+  public RetrieveItemsCmd(GameCharacter character)
   {
-    this.chatId = chatId;
     this.character = character;
   }
 

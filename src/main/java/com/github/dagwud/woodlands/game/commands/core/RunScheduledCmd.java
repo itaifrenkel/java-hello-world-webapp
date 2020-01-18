@@ -1,14 +1,13 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 
 import java.util.concurrent.Callable;
 
 public class RunScheduledCmd implements Callable<String>
 {
   private final AbstractCmd cmdToRun;
-  private long delayMS;
+  private final long delayMS;
 
   RunScheduledCmd(long delayMS, AbstractCmd cmdToRun)
   {

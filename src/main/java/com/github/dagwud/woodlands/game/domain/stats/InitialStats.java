@@ -26,8 +26,8 @@ public abstract class InitialStats
   String initialHitDice;
 
   // todo map string -> enum for weapon
-  Map<String, Integer> weaponMasteryBonusHit;
-  Map<String, Integer> weaponMasteryBonusDamage;
+  final Map<String, Integer> weaponMasteryBonusHit;
+  final Map<String, Integer> weaponMasteryBonusDamage;
 
   InitialStats()
   {

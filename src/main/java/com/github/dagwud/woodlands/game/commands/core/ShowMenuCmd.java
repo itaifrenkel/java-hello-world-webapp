@@ -7,7 +7,7 @@ import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 public class ShowMenuCmd extends AbstractCmd
 {
   private final GameMenu menu;
-  private GameState gameState;
+  private final GameState gameState;
 
   public ShowMenuCmd(GameMenu menu, GameState gameState)
   {

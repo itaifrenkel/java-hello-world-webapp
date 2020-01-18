@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 
 public abstract class SuspendableCmd extends AbstractCmd
 {
@@ -32,7 +31,7 @@ public abstract class SuspendableCmd extends AbstractCmd
     }
   }
 
-  public abstract void executePart(int phaseToExecute, String capturedInput);
+  protected abstract void executePart(int phaseToExecute, String capturedInput);
 
   void setCapturedInput(String input)
   {

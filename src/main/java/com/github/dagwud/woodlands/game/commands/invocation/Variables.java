@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Variables extends HashMap<String, String>
 {
-  private String contextName;
+  private final String contextName;
 
   public Variables()
   {

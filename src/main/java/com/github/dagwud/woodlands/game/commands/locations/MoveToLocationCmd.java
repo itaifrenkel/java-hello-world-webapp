@@ -11,7 +11,7 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class MoveToLocationCmd extends AbstractCmd
 {
-  private GameState gameState;
+  private final GameState gameState;
   private final ELocation location;
 
   public MoveToLocationCmd(GameState gameState, ELocation location)

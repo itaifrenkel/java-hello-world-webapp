@@ -90,7 +90,7 @@ public class CommandFactory
 
       if (cmd.equals("Retrieve Items"))
       {
-        return new RetrieveItemsCmd(chatId, activeCharacter);
+        return new RetrieveItemsCmd(activeCharacter);
       }
     }
     if (cmd.equals("/me"))

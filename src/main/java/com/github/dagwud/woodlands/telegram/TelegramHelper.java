@@ -14,12 +14,12 @@ abstract class TelegramHelper
 {
   private static final String BOT_TOK = System.getenv().get("TELEGRAM_TOKEN");
 
-  static String callTelegram(String method, Map<String, String> params) throws IOException
+  static void callTelegram(String method, Map<String, String> params) throws IOException
   {
     String endpoint = buildTelegramURL(method);
     String url = encode(endpoint, params);
     //System.out.println("CALL: " + url);
-    return callURL(url);
+    callURL(url);
   }
 
   private static String callURL(String url) throws IOException

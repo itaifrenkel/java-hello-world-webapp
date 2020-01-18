@@ -9,7 +9,7 @@ import com.github.dagwud.woodlands.game.domain.ELocation;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
-  private GameState gameState;
+  private final GameState gameState;
 
   public GenerateMountainEncounterCmd(GameState gameState)
   {

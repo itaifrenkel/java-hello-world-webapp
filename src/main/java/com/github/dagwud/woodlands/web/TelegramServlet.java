@@ -32,18 +32,26 @@ public class TelegramServlet extends HttpServlet
     {
       Throwable t = e;
       t.printStackTrace();
-      try
+      if (update != null)
       {
-        while (t != null)
-        {
-          TelegramMessageSender.sendMessage(determineChatId(update), t.toString());
-          t = t.getCause();
-        }
+        sendStackTraceIfPossible(update, t);
       }
-      catch (Exception f)
+    }
+  }
+
+  private void sendStackTraceIfPossible(Update sendTo, Throwable stackToSend)
+  {
+    try
+    {
+      while (stackToSend != null)
       {
-        f.printStackTrace();
+        TelegramMessageSender.sendMessage(determineChatId(sendTo), stackToSend.toString());
+        stackToSend = stackToSend.getCause();
       }
+    }
+    catch (Exception f)
+    {
+      f.printStackTrace();
     }
   }
 
