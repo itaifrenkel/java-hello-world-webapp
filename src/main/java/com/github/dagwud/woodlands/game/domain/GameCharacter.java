@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
-public class GameCharacter
+public class GameCharacter implements IFighter
 {
   private String name;
   private ECharacterClass characterClass;
@@ -46,6 +46,7 @@ public class GameCharacter
     this.location = location;
   }
 
+  @Override
   public Stats getStats()
   {
     return stats;

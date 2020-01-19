@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.domain.stats;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Stats
@@ -16,8 +17,8 @@ public class Stats
   private int agility;
   private int constitution;
   private int defenceRating;
-  private Map<String, Integer> weaponBonusHit;
-  private Map<String, Integer> weaponBonusDamage;
+  private Map<String, Integer> weaponBonusHit = new HashMap<>();
+  private Map<String, Integer> weaponBonusDamage = new HashMap<>();
   private EState state;
 
   public int getLevel()

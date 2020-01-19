@@ -6,4 +6,9 @@ public class WoodlandsRuntimeException extends RuntimeException
   {
     super(cause);
   }
+
+  public WoodlandsRuntimeException(String message, Throwable cause)
+  {
+    super(message, cause);
+  }
 }

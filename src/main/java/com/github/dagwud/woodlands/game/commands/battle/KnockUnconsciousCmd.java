@@ -2,13 +2,13 @@ package com.github.dagwud.woodlands.game.commands.battle;
 
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.game.domain.IFighter;
 
 public class KnockUnconsciousCmd extends AbstractCmd
 {
-  private final Creature target;
+  private final IFighter target;
 
-  KnockUnconsciousCmd(Creature target)
+  KnockUnconsciousCmd(IFighter target)
   {
     this.target = target;
   }

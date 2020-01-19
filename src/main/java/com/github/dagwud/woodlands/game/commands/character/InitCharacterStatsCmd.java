@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.game.domain.stats.InitialStats;
@@ -19,6 +20,7 @@ public class InitCharacterStatsCmd extends AbstractCmd
   {
     Stats stats = new Stats();
     stats.setLevel(1);
+    stats.setState(EState.ALIVE);
 
     InitialStats classStats = character.getCharacterClass().getInitialStats();
 

@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EHitStatus;
-import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class DamageInflicted
@@ -12,11 +11,11 @@ public class DamageInflicted
   private final Weapon inflictedWith;
   private final int baseDamage;
   private final int bonusDamage;
-  private final GameCharacter attacker;
-  private final Creature defender;
+  private final IFighter attacker;
+  private final IFighter defender;
   private EHitStatus hitStatus;
 
-  public DamageInflicted(GameCharacter attacker, Weapon inflictedWith, EHitStatus hitStatus, int baseDamage, Creature defender, int bonusDamage)
+  public DamageInflicted(IFighter attacker, Weapon inflictedWith, EHitStatus hitStatus, int baseDamage, IFighter defender, int bonusDamage)
   {
     this.attacker = attacker;
     this.inflictedWith = inflictedWith;
@@ -41,12 +40,12 @@ public class DamageInflicted
     return bonusDamage;
   }
 
-  private GameCharacter getAttacker()
+  private IFighter getAttacker()
   {
     return attacker;
   }
 
-  private Creature getDefender()
+  private IFighter getDefender()
   {
     return defender;
   }
@@ -59,12 +58,12 @@ public class DamageInflicted
     }
     if (hitStatus == EHitStatus.MISS)
     {
-      return attacker.getName() + " " + MISSED_ICON + " missed → " + defender.name;
+      return attacker.getName() + " " + MISSED_ICON + " missed → " + defender.getName();
     }
     return attacker.getName() + " " +
             inflictedWith.getIcon() +
             baseDamage + (bonusDamage != 0 ? "+" + bonusDamage : "") +
-            " → " + defender.name
+            " → " + defender.getName()
             + (hitStatus == EHitStatus.CRITICAL_HIT ? " (" + CRITICAL_HIT_ICON + ")" : "");
   }
 }

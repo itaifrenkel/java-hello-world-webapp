@@ -3,14 +3,14 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
-import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.game.domain.IFighter;
 
 public class DealDamageCmd extends AbstractCmd
 {
   private final DamageInflicted damageInflicted;
-  private final Creature inflictedOn;
+  private final IFighter inflictedOn;
 
-  public DealDamageCmd(DamageInflicted damageInflicted, Creature inflictedOn)
+  public DealDamageCmd(DamageInflicted damageInflicted, IFighter inflictedOn)
   {
     this.damageInflicted = damageInflicted;
     this.inflictedOn = inflictedOn;

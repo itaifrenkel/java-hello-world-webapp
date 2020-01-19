@@ -5,13 +5,12 @@ import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.DamageInflicted;
-import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.Encounter;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
-import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Weapon;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class EncounterRoundCmd extends AbstractCmd
 {
@@ -35,14 +34,14 @@ public class EncounterRoundCmd extends AbstractCmd
     }
 
     encounter.incrementBattleRound();
-    if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
-    {
-      doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedLeft(), encounter.getEnemy());
-    }
-    if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
-    {
-      doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedRight(), encounter.getEnemy());
-    }
+    List<DamageInflicted> roundActivity = new LinkedList<>();
+
+    doAttack(encounter.getHost(), roundActivity);
+    doAttack(encounter.getEnemy(), roundActivity);
+
+    StringBuilder summary = buildRoundSummary(roundActivity);
+    SendMessageCmd status = new SendMessageCmd(chatId, summary.toString());
+    CommandDelegate.execute(status);
 
     if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
     {
@@ -56,22 +55,43 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
-  private void doAttack(GameCharacter attacker, Weapon attackWith, Creature defender)
+  private void doAttack(IFighter attacker, List<DamageInflicted> roundActivity)
   {
-    String description = "⚔️ Battle Round #" + encounter.getBattleRound() + ": ⚔️\n" +
-            "———————————\n";
+    IFighter defender = (attacker == encounter.getEnemy() ? encounter.getHost() : encounter.getEnemy());
+    if (attacker.getStats().getState() == EState.ALIVE && defender.getStats().getState() == EState.ALIVE)
+    {
+      DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
+      roundActivity.add(damage);
+    }
+    if (attacker.getStats().getState() == EState.ALIVE && defender.getStats().getState() == EState.ALIVE)
+    {
+      DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);
+      roundActivity.add(damage);
+    }
+  }
+
+  private DamageInflicted doAttack(IFighter attacker, Weapon attackWith, IFighter defender)
+  {
     AttackCmd attack = new AttackCmd(attacker, attackWith, defender);
     CommandDelegate.execute(attack);
-    DamageInflicted hostDamageInflicted = attack.getDamageInflicted();
+    DamageInflicted damageInflicted = attack.getDamageInflicted();
 
-    DealDamageCmd cmd = new DealDamageCmd(hostDamageInflicted, defender);
+    DealDamageCmd cmd = new DealDamageCmd(damageInflicted, defender);
     CommandDelegate.execute(cmd);
-    description += hostDamageInflicted.buildDamageDescription();
+    return damageInflicted;
+  }
 
-    description += "\n\n" + buildBattleStatsSummary();
-
-    SendMessageCmd status = new SendMessageCmd(chatId, description);
-    CommandDelegate.execute(status);
+  private StringBuilder buildRoundSummary(List<DamageInflicted> roundActivity)
+  {
+    StringBuilder description = new StringBuilder();
+    description.append("⚔️ Battle Round #").append(encounter.getBattleRound()).append(": ⚔️\n")
+            .append("———————————");
+    for (DamageInflicted damageInflicted : roundActivity)
+    {
+      description.append("\n").append(damageInflicted.buildDamageDescription());
+    }
+    description.append("\n\n").append(buildBattleStatsSummary());
+    return description;
   }
 
   private String buildBattleStatsSummary()
@@ -81,7 +101,6 @@ public class EncounterRoundCmd extends AbstractCmd
             "\n" + buildCharacterSummaryLine(encounter.getHost().getName(), encounter.getHost().getStats()) +
             "\n" + buildCharacterSummaryLine(encounter.getEnemy().name, encounter.getEnemy().getStats());
   }
-
 
   private String buildCharacterSummaryLine(String characterName, Stats stats)
   {
