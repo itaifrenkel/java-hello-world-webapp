@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
 import com.github.dagwud.woodlands.gson.telegram.Update;
@@ -147,6 +148,8 @@ public class MainTest
 
   private GameState startBot() throws Exception
   {
+    MessagingFactory.create(new SimulatorSender());
+
     GameStatesRegistry.reset();
     GameState gameState = GameStatesRegistry.lookup(-1);
     Update update;
