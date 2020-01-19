@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
-import com.github.dagwud.woodlands.telegram.TelegramMessageSender;
+import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 
 import java.io.IOException;
 
@@ -25,13 +25,6 @@ public class SendMessageCmd extends AbstractCmd
   @Override
   public void execute() throws IOException
   {
-    if (replyMarkup == null)
-    {
-      TelegramMessageSender.sendMessage(chatId, message);
-    }
-    else
-    {
-      TelegramMessageSender.sendMessage(chatId, message, replyMarkup);
-    }
+    MessagingFactory.create().sender().sendMessage(chatId, message, replyMarkup);
   }
 }

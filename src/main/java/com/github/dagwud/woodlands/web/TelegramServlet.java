@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.GameState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.instructions.CommandFactory;
+import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 import com.github.dagwud.woodlands.gson.telegram.CallbackQuery;
 import com.github.dagwud.woodlands.gson.telegram.Update;
@@ -45,7 +46,7 @@ public class TelegramServlet extends HttpServlet
     {
       while (stackToSend != null)
       {
-        TelegramMessageSender.sendMessage(determineChatId(sendTo), stackToSend.toString());
+        MessagingFactory.create().sender().sendMessage(determineChatId(sendTo), stackToSend.toString());
         stackToSend = stackToSend.getCause();
       }
     }
