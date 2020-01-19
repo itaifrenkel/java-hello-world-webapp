@@ -6,7 +6,8 @@ public class Encounter
 {
   private GameCharacter host;
   private Creature enemy;
-  boolean ended;
+  private boolean ended;
+  private int currentRound;
 
   public boolean isEnded()
   {
@@ -36,5 +37,15 @@ public class Encounter
   public void setHost(GameCharacter host)
   {
     this.host = host;
+  }
+
+  public int getBattleRound()
+  {
+    return currentRound;
+  }
+
+  public void incrementBattleRound()
+  {
+    currentRound++;
   }
 }
