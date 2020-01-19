@@ -43,15 +43,23 @@ public class EncounterRoundCmd extends AbstractCmd
     SendMessageCmd status = new SendMessageCmd(chatId, summary.toString());
     CommandDelegate.execute(status);
 
-    if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
+    if (encounter.getEnemy().getStats().getState() == EState.ALIVE && encounter.getHost().getStats().getState() == EState.ALIVE)
     {
       scheduleNextRound();
     }
     else
     {
       encounter.end();
-      SendMessageCmd cmd = new SendMessageCmd(chatId, encounter.getEnemy().name + " has been defeated!");
-      CommandDelegate.execute(cmd);
+      if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
+      {
+        SendMessageCmd cmd = new SendMessageCmd(chatId, "You have been defeated!");
+        CommandDelegate.execute(cmd);
+      }
+      else
+      {
+        SendMessageCmd cmd = new SendMessageCmd(chatId, encounter.getEnemy().name + " has been defeated!");
+        CommandDelegate.execute(cmd);
+      }
     }
   }
 
