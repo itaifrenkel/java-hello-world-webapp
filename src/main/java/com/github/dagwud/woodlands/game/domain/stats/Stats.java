@@ -15,6 +15,7 @@ public class Stats
   private int strength;
   private int agility;
   private int constitution;
+  private int defenceRating;
   private Map<String, Integer> weaponBonusHit;
   private Map<String, Integer> weaponBonusDamage;
   private EState state;
@@ -132,5 +133,15 @@ public class Stats
   public void setState(EState state)
   {
     this.state = state;
+  }
+
+  public int getDefenceRating()
+  {
+    return defenceRating;
+  }
+
+  public void setDefenceRating(int defenceRating)
+  {
+    this.defenceRating = defenceRating;
   }
 }
