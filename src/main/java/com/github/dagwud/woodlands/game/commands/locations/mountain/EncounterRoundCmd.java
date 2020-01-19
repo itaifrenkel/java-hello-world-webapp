@@ -85,12 +85,37 @@ public class EncounterRoundCmd extends AbstractCmd
     int modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
     int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
 
-    int defenderDefenceLevel = defender.level; // todo - not at all a good enough formula.
-    if (naturalRoll.getTotal() + modifier + weaponBoost >= defenderDefenceLevel)
+    int defenderDefenceRating = determineDefenceRating(defender);
+    if (naturalRoll.getTotal() + modifier + weaponBoost >= defenderDefenceRating)
     {
       return HitStatus.HIT;
     }
     return HitStatus.MISS;
+  }
+
+  private int determineDefenceRating(Creature defender)
+  {
+    if (defender.difficulty <= 3)
+    {
+      return 13;
+    }
+    if (defender.difficulty == 4)
+    {
+      return 14;
+    }
+    if (defender.difficulty <= 7)
+    {
+      return 15;
+    }
+    if (defender.difficulty <= 9)
+    {
+      return 16;
+    }
+    if (defender.difficulty <= 12)
+    {
+      return 17;
+    }
+    return defender.difficulty + 5;
   }
 
   private DamageInflicted rollForDamage(GameCharacter attacker, Weapon weaponUsed, boolean criticalHit)

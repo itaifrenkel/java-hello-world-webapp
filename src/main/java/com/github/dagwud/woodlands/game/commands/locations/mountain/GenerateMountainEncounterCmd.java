@@ -63,7 +63,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
   {
     Encounter encounter = createEncounter(gameState.getActiveCharacter());
 
-    String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().level + ")";
+    String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + ")";
     SendMessageCmd msg = new SendMessageCmd(gameState.getPlayer().getChatId(), message);
     CommandDelegate.execute(msg);
     return encounter;
