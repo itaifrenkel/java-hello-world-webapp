@@ -19,9 +19,17 @@ public class RetrieveItemsCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    List<Weapon> allWeapons = ItemsCacheFactory.instance().getCache().getWeapons();
-    int rand = (int) (Math.random() * allWeapons.size());
-    Weapon chosenWeapon = allWeapons.get(rand);
+    Weapon chosenWeapon = null;
+    while (chosenWeapon == null)
+    {
+      List<Weapon> allWeapons = ItemsCacheFactory.instance().getCache().getWeapons();
+      int rand = (int) (Math.random() * allWeapons.size());
+      chosenWeapon = allWeapons.get(rand);
+      if (chosenWeapon.preventSpawning)
+      {
+        chosenWeapon = null; // try again
+      }
+    }
 
     if (character.getCarrying().getCarriedLeft() == null)
     {
