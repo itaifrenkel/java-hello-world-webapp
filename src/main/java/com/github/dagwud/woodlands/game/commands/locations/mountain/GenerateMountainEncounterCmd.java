@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureCmd;
 import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
@@ -16,6 +17,8 @@ import java.math.BigDecimal;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
+  private static final int DELAY_BETWEEN_ROUNDS_MS = 1000;
+  private static final BigDecimal PERCENT_CHANGE_OF_ENCOUNTER = new BigDecimal("75");
   private final GameState gameState;
 
   GenerateMountainEncounterCmd(GameState gameState)
@@ -39,7 +42,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
       return;
     }
 
-    ChanceCalculatorCmd chance = new ChanceCalculatorCmd(new BigDecimal("75"));
+    ChanceCalculatorCmd chance = new ChanceCalculatorCmd(PERCENT_CHANGE_OF_ENCOUNTER);
     CommandDelegate.execute(chance);
 
     if (!chance.getResult())
@@ -53,7 +56,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
     Encounter encounter = startEncounter();
     gameState.setActiveEncounter(encounter);
 
-    EncounterRoundCmd cmd = new EncounterRoundCmd(gameState.getPlayer().getChatId(), encounter);
+    EncounterRoundCmd cmd = new EncounterRoundCmd(gameState.getPlayer().getChatId(), encounter, DELAY_BETWEEN_ROUNDS_MS);
     CommandDelegate.execute(cmd);
 
     scheduleNextEncounter();
@@ -71,7 +74,9 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
   private Encounter createEncounter(GameCharacter host)
   {
-    Creature creature = CreaturesCacheFactory.instance().getCache().pickRandom();
+    SpawnCreatureCmd cmd = new SpawnCreatureCmd();
+    CommandDelegate.execute(cmd);
+    Creature creature = cmd.getSpawnedCreature();
 
     Encounter encounter = new Encounter();
     encounter.setHost(host);

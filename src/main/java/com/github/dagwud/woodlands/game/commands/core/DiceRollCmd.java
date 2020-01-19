@@ -21,7 +21,6 @@ public class DiceRollCmd extends AbstractCmd
       int diceRoll = (int) (Math.random() * diceFaces) + 1;
       total += diceRoll;
     }
-    System.out.println("ROLL: " + diceCount + "d" + diceFaces + "=" + total);
   }
 
   public int getTotal()

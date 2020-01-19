@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.locations.mountain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
@@ -8,22 +9,24 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class EncounterRoundCmd extends AbstractCmd
 {
-  private static final long DELAY_BETWEEN_ROUNDS_MS = 15000;
   private static final String CRITICAL_HIT_ICON = "\uD83C\uDFAF";
   private static final String MISSED_ICON = "\uD83D\uDE48";
 
   private final int chatId;
   private final Encounter encounter;
+  private final int delayBetweenRoundsMS;
 
-  EncounterRoundCmd(int chatId, Encounter encounter)
+  EncounterRoundCmd(int chatId, Encounter encounter, int delayBetweenRoundsMS)
   {
     this.chatId = chatId;
     this.encounter = encounter;
+    this.delayBetweenRoundsMS = delayBetweenRoundsMS;
   }
 
   @Override
@@ -57,6 +60,9 @@ public class EncounterRoundCmd extends AbstractCmd
       else
       {
         DamageInflicted hostDamageInflicted = rollForDamage(attacker, attackWith, hitResult == HitStatus.CRITICAL_HIT);
+        DealDamageCmd cmd = new DealDamageCmd(hostDamageInflicted, defender);
+        CommandDelegate.execute(cmd);
+
         description = attacker.getName() + " " +
                 hostDamageInflicted.getInflictedWith().getIcon() +
                 hostDamageInflicted.getBaseDamage() +
@@ -65,8 +71,27 @@ public class EncounterRoundCmd extends AbstractCmd
                 + (hitResult == HitStatus.CRITICAL_HIT ? " (" + CRITICAL_HIT_ICON + ")" : "");
       }
     }
+
+    description += "\n\n" + buildBattleStatsSummary();
+
     SendMessageCmd status = new SendMessageCmd(chatId, description);
     CommandDelegate.execute(status);
+  }
+
+  private String buildBattleStatsSummary()
+  {
+    return "Stats:\n" +
+            "-------------" +
+            "\n" + buildCharacterSummaryLine(encounter.getHost().getName(), encounter.getHost().getStats()) +
+            "\n" + buildCharacterSummaryLine(encounter.getEnemy().name, encounter.getEnemy().getStats());
+  }
+
+
+  private String buildCharacterSummaryLine(String characterName, Stats stats)
+  {
+    return "• " + characterName + ": \uD83D\uDC9A"
+            + stats.getHitPoints() + "/" + stats.getMaxHitPoints()
+            + ", " + stats.getMana() + "/" + stats.getMaxMana();
   }
 
   private HitStatus rollForHit(GameCharacter attacker, Weapon attackWith, Creature defender)
@@ -139,7 +164,8 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private void scheduleNextRound()
   {
-    RunLaterCmd nextEncounter = new RunLaterCmd(DELAY_BETWEEN_ROUNDS_MS, new EncounterRoundCmd(chatId, encounter));
+    EncounterRoundCmd nextRoundCmd = new EncounterRoundCmd(chatId, encounter, delayBetweenRoundsMS);
+    RunLaterCmd nextEncounter = new RunLaterCmd(delayBetweenRoundsMS, nextRoundCmd);
     CommandDelegate.execute(nextEncounter);
   }
 }

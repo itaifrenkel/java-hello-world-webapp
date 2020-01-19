@@ -1,0 +1,24 @@
+{
+  "difficulties": [
+    { "difficulty": 1, "defensive": 13, "proficiency": 2, "hit-points-min": 71, "hit-points-max": 85},
+    { "difficulty": 2, "defensive": 13, "proficiency": 2, "hit-points-min": 86, "hit-points-max": 100},
+    { "difficulty": 3, "defensive": 13, "proficiency": 2, "hit-points-min": 101, "hit-points-max": 115},
+    { "difficulty": 4, "defensive": 14, "proficiency": 2, "hit-points-min": 116, "hit-points-max": 130},
+    { "difficulty": 5, "defensive": 15, "proficiency": 3, "hit-points-min": 131, "hit-points-max": 145},
+    { "difficulty": 6, "defensive": 15, "proficiency": 3, "hit-points-min": 146, "hit-points-max": 160},
+    { "difficulty": 7, "defensive": 15, "proficiency": 3, "hit-points-min": 161, "hit-points-max": 175},
+    { "difficulty": 8, "defensive": 16, "proficiency": 3, "hit-points-min": 176, "hit-points-max": 190},
+    { "difficulty": 9, "defensive": 16, "proficiency": 4, "hit-points-min": 191, "hit-points-max": 205},
+    { "difficulty": 10, "defensive": 17, "proficiency": 4, "hit-points-min": 206, "hit-points-max": 220},
+    { "difficulty": 11, "defensive": 17, "proficiency": 4, "hit-points-min": 221, "hit-points-max": 235},
+    { "difficulty": 12, "defensive": 17, "proficiency": 4, "hit-points-min": 236, "hit-points-max": 250},
+    { "difficulty": 13, "defensive": 18, "proficiency": 5, "hit-points-min": 251, "hit-points-max": 265},
+    { "difficulty": 14, "defensive": 18, "proficiency": 5, "hit-points-min": 266, "hit-points-max": 280},
+    { "difficulty": 15, "defensive": 19, "proficiency": 5, "hit-points-min": 281, "hit-points-max": 295},
+    { "difficulty": 16, "defensive": 19, "proficiency": 5, "hit-points-min": 296, "hit-points-max": 310},
+    { "difficulty": 17, "defensive": 19, "proficiency": 6, "hit-points-min": 311, "hit-points-max": 325},
+    { "difficulty": 18, "defensive": 20, "proficiency": 6, "hit-points-min": 326, "hit-points-max": 340},
+    { "difficulty": 19, "defensive": 21, "proficiency": 6, "hit-points-min": 341, "hit-points-max": 355},
+    { "difficulty": 20, "defensive": 22, "proficiency": 6, "hit-points-min": 356, "hit-points-max": 400}
+  ]
+}
