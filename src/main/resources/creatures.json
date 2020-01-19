@@ -102,5 +102,27 @@
     {"name": "Spartan Warrior", "difficulty": 6},
     {"name": "Axe Murderer", "difficulty": 8},
     {"name": "Warlord", "difficulty": 10}
+  ],
+  "difficulties": [
+    { "difficulty": 1, "defensive": 13, "proficiency": 2, "hit-points-min": 71, "hit-points-max": 86},
+    { "difficulty": 2, "defensive": 13, "proficiency": 2, "hit-points-min": 86, "hit-points-max": 101},
+    { "difficulty": 3, "defensive": 13, "proficiency": 2, "hit-points-min": 101, "hit-points-max": 116},
+    { "difficulty": 4, "defensive": 14, "proficiency": 2, "hit-points-min": 116, "hit-points-max": 131},
+    { "difficulty": 5, "defensive": 15, "proficiency": 3, "hit-points-min": 131, "hit-points-max": 146},
+    { "difficulty": 6, "defensive": 15, "proficiency": 3, "hit-points-min": 146, "hit-points-max": 161},
+    { "difficulty": 7, "defensive": 15, "proficiency": 3, "hit-points-min": 161, "hit-points-max": 176},
+    { "difficulty": 8, "defensive": 16, "proficiency": 3, "hit-points-min": 176, "hit-points-max": 191},
+    { "difficulty": 9, "defensive": 16, "proficiency": 4, "hit-points-min": 191, "hit-points-max": 206},
+    { "difficulty": 10, "defensive": 17, "proficiency": 4, "hit-points-min": 206, "hit-points-max": 221},
+    { "difficulty": 11, "defensive": 17, "proficiency": 4, "hit-points-min": 221, "hit-points-max": 236},
+    { "difficulty": 12, "defensive": 17, "proficiency": 4, "hit-points-min": 236, "hit-points-max": 251},
+    { "difficulty": 13, "defensive": 18, "proficiency": 5, "hit-points-min": 251, "hit-points-max": 266},
+    { "difficulty": 14, "defensive": 18, "proficiency": 5, "hit-points-min": 266, "hit-points-max": 281},
+    { "difficulty": 15, "defensive": 19, "proficiency": 5, "hit-points-min": 281, "hit-points-max": 296},
+    { "difficulty": 16, "defensive": 19, "proficiency": 5, "hit-points-min": 296, "hit-points-max": 311},
+    { "difficulty": 17, "defensive": 19, "proficiency": 6, "hit-points-min": 311, "hit-points-max": 326},
+    { "difficulty": 18, "defensive": 20, "proficiency": 6, "hit-points-min": 326, "hit-points-max": 341},
+    { "difficulty": 19, "defensive": 21, "proficiency": 6, "hit-points-min": 341, "hit-points-max": 356},
+    { "difficulty": 20, "defensive": 22, "proficiency": 6, "hit-points-min": 356, "hit-points-max": 400}
   ]
 }
