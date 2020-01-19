@@ -2,24 +2,19 @@ package com.github.dagwud.woodlands.game.commands.locations.mountain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureCmd;
-import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
-import java.math.BigDecimal;
-
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
-  static final int DELAY_BETWEEN_ENCOUNTERS_MS = 3000;
-  private static final int DELAY_BETWEEN_ROUNDS_MS = 1000;
-  private static final BigDecimal PERCENT_CHANGE_OF_ENCOUNTER = new BigDecimal("75");
   private final GameState gameState;
 
   GenerateMountainEncounterCmd(GameState gameState)
@@ -43,7 +38,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
       return;
     }
 
-    ChanceCalculatorCmd chance = new ChanceCalculatorCmd(PERCENT_CHANGE_OF_ENCOUNTER);
+    ChanceCalculatorCmd chance = new ChanceCalculatorCmd(Settings.PERCENT_CHANGE_OF_ENCOUNTER);
     CommandDelegate.execute(chance);
 
     if (!chance.getResult())
@@ -57,7 +52,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
     Encounter encounter = startEncounter();
     gameState.setActiveEncounter(encounter);
 
-    EncounterRoundCmd cmd = new EncounterRoundCmd(gameState.getPlayer().getChatId(), encounter, DELAY_BETWEEN_ROUNDS_MS);
+    EncounterRoundCmd cmd = new EncounterRoundCmd(gameState.getPlayer().getChatId(), encounter, Settings.DELAY_BETWEEN_ROUNDS_MS);
     CommandDelegate.execute(cmd);
 
     scheduleNextEncounter();
@@ -87,7 +82,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
   private void scheduleNextEncounter()
   {
-    RunLaterCmd nextEncounter = new RunLaterCmd(DELAY_BETWEEN_ENCOUNTERS_MS, new GenerateMountainEncounterCmd(gameState));
+    RunLaterCmd nextEncounter = new RunLaterCmd(Settings.DELAY_BETWEEN_ENCOUNTERS_MS, new GenerateMountainEncounterCmd(gameState));
     CommandDelegate.execute(nextEncounter);
   }
 }
