@@ -18,8 +18,17 @@ public class RunScheduledCmd implements Callable<String>
   @Override
   public String call() throws Exception
   {
-    Thread.sleep(delayMS);
-    CommandDelegate.execute(cmdToRun);
-    return null;
+    try
+    {
+      Thread.sleep(delayMS);
+      CommandDelegate.execute(cmdToRun);
+      return null;
+    }
+    catch (Exception e)
+    {
+      System.err.println("WARNING: Exception in asynchronous thread; can't be thrown to caller so logging it here:");
+      e.printStackTrace();
+      throw e;
+    }
   }
 }
