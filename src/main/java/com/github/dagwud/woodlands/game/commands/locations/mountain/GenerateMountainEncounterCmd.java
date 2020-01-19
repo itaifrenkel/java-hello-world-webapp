@@ -34,8 +34,15 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
     // There's already an encounter in progress; don't start another one:
     if (gameState.getActiveEncounter() != null)
     {
-      scheduleNextEncounter();
-      return;
+      if (gameState.getActiveEncounter().isEnded())
+      {
+        gameState.setActiveEncounter(null);
+      }
+      else
+      {
+        scheduleNextEncounter();
+        return;
+      }
     }
 
     ChanceCalculatorCmd chance = new ChanceCalculatorCmd(Settings.PERCENT_CHANGE_OF_ENCOUNTER);
