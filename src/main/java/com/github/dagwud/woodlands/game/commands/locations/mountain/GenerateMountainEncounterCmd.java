@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
+  static final int DELAY_BETWEEN_ENCOUNTERS_MS = 3000;
   private static final int DELAY_BETWEEN_ROUNDS_MS = 1000;
   private static final BigDecimal PERCENT_CHANGE_OF_ENCOUNTER = new BigDecimal("75");
   private final GameState gameState;
@@ -86,7 +87,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
   private void scheduleNextEncounter()
   {
-    RunLaterCmd nextEncounter = new RunLaterCmd(30000, new GenerateMountainEncounterCmd(gameState));
+    RunLaterCmd nextEncounter = new RunLaterCmd(DELAY_BETWEEN_ENCOUNTERS_MS, new GenerateMountainEncounterCmd(gameState));
     CommandDelegate.execute(nextEncounter);
   }
 }

@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.gson.game;
 
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class Creature
@@ -12,10 +13,11 @@ public class Creature
   {
   }
 
-  public Creature(Creature copyFrom)
+  public Creature(Creature template)
   {
-    this.name = copyFrom.name;
-    this.difficulty = copyFrom.difficulty;
+    this();
+    this.name = template.name;
+    this.difficulty = template.difficulty;
   }
 
   public Stats getStats()

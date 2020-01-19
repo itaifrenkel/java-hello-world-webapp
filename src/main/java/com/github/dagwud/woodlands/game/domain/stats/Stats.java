@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.stats;
 
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.Map;
@@ -16,6 +17,7 @@ public class Stats
   private int constitution;
   private Map<String, Integer> weaponBonusHit;
   private Map<String, Integer> weaponBonusDamage;
+  private EState state;
 
   public int getLevel()
   {
@@ -120,5 +122,15 @@ public class Stats
   public Map<String, Integer> getWeaponBonusDamage()
   {
     return weaponBonusDamage;
+  }
+
+  public EState getState()
+  {
+    return state;
+  }
+
+  public void setState(EState state)
+  {
+    this.state = state;
   }
 }

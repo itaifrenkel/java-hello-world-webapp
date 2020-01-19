@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
@@ -37,10 +38,25 @@ public class EncounterRoundCmd extends AbstractCmd
       return;
     }
 
-    doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedLeft(), encounter.getEnemy());
-    doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedRight(), encounter.getEnemy());
+    if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
+    {
+      doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedLeft(), encounter.getEnemy());
+    }
+    if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
+    {
+      doAttack(encounter.getHost(), encounter.getHost().getCarrying().getCarriedRight(), encounter.getEnemy());
+    }
 
-    scheduleNextRound();
+    if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
+    {
+      scheduleNextRound();
+    }
+    else
+    {
+      encounter.end();
+      SendMessageCmd cmd = new SendMessageCmd(chatId, encounter.getEnemy().name + " has been defeated!");
+      CommandDelegate.execute(cmd);
+    }
   }
 
   private void doAttack(GameCharacter attacker, Weapon attackWith, Creature defender)
@@ -89,9 +105,17 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private String buildCharacterSummaryLine(String characterName, Stats stats)
   {
-    return "• " + characterName + ": \uD83D\uDC9A"
-            + stats.getHitPoints() + "/" + stats.getMaxHitPoints()
-            + ", " + stats.getMana() + "/" + stats.getMaxMana();
+    if (stats.getState() == EState.DEAD)
+    {
+      return "• " + characterName + ": ☠️dead";
+    }
+    String msg = "• " + characterName
+            + ": ❤️" + stats.getHitPoints() + "/" + stats.getMaxHitPoints();
+    if (stats.getMaxMana() != 0)
+    {
+      msg += ", ✨" + stats.getMana() + "/" + stats.getMaxMana();
+    }
+    return msg;
   }
 
   private HitStatus rollForHit(GameCharacter attacker, Weapon attackWith, Creature defender)
