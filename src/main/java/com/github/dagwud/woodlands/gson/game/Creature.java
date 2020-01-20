@@ -17,6 +17,9 @@ public class Creature implements IFighter
   @SerializedName("weapon-left")
   public String weaponLeft;
 
+  @SerializedName("weapon-right")
+  public String weaponRight;
+
   private Stats stats;
   private CarriedItems carriedItems;
 
@@ -49,17 +52,29 @@ public class Creature implements IFighter
   {
     if (carriedItems == null)
     {
-      carriedItems = new CarriedItems();
-      try
+      populateCarriedItems();
+    }
+    return carriedItems;
+  }
+
+  private void populateCarriedItems()
+  {
+    carriedItems = new CarriedItems();
+    try
+    {
+      if (null != weaponLeft)
       {
         carriedItems.setCarriedLeft(ItemsCacheFactory.instance().getCache().findWeapon(weaponLeft));
       }
-      catch (UnknownWeaponException e)
+      if (null != weaponRight)
       {
-        throw new WoodlandsRuntimeException("Bad config for creature " + name, e);
+        carriedItems.setCarriedRight(ItemsCacheFactory.instance().getCache().findWeapon(weaponRight));
       }
     }
-    return carriedItems;
+    catch (UnknownWeaponException e)
+    {
+      throw new WoodlandsRuntimeException("Bad config for creature " + name, e);
+    }
   }
 
   public void setStats(Stats stats)

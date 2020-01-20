@@ -1,6 +1,13 @@
 {
   "weapons": [
     {"name": "nothing", "damage": {"dice_count": 0,"dice_faces": 0}, "ranged":false, "prevent_spawning":true, "custom_icon": ""},
+
+    {"name": "Bite", "damage":  {"dice_count": 1, "dice_faces": 4}, "ranged": false, "prevent_spawning": true},
+    {"name": "Claw", "damage":  {"dice_count": 1, "dice_faces": 4}, "ranged": false, "prevent_spawning": true},
+    {"name": "Swipe", "damage":  {"dice_count": 1, "dice_faces": 4}, "ranged": false, "prevent_spawning": true},
+    {"name": "Venomous Spit", "damage":  {"dice_count": 1, "dice_faces": 6}, "ranged": false, "prevent_spawning": true},
+    {"name": "Claw 2", "damage":  {"dice_count": 1, "dice_faces": 6}, "ranged": false, "prevent_spawning": true},
+
     {"name": "Brick", "damage": {"dice_count": 1,"dice_faces": 4},"ranged":false},
     {"name": "Dagger", "damage": {"dice_count": 1,"dice_faces": 4},"ranged":false},
     {"name": "Sickle", "damage": {"dice_count": 1,"dice_faces": 4},"ranged":false},
