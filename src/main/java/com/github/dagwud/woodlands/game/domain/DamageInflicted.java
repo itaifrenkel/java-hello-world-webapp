@@ -35,6 +35,11 @@ public class DamageInflicted
     return baseDamage;
   }
 
+  public EHitStatus getHitStatus()
+  {
+    return hitStatus;
+  }
+
   public int getBonusDamage()
   {
     return bonusDamage;

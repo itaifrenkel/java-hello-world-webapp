@@ -129,7 +129,10 @@ public class EncounterRoundCmd extends AbstractCmd
             .append("———————————");
     for (DamageInflicted damageInflicted : roundActivity)
     {
-      description.append("\n").append(damageInflicted.buildDamageDescription());
+      if (damageInflicted.getHitStatus() != EHitStatus.DO_NOTHING)
+      {
+        description.append("\n").append(damageInflicted.buildDamageDescription());
+      }
     }
     description.append("\n\n").append(buildBattleStatsSummary());
     return description;
