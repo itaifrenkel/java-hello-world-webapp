@@ -1,9 +1,9 @@
 package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.character.CreateShadowPlayerCmd;
+import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.character.SpawnCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -15,9 +15,9 @@ public class DoPlayerSetupCmd extends SuspendableCmd
   private String characterName;
   private String characterClass;
 
-  DoPlayerSetupCmd(GameState gameState)
+  DoPlayerSetupCmd(PlayerState playerState)
   {
-    super(gameState, 3);
+    super(playerState, 3);
   }
 
   @Override
@@ -39,7 +39,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
 
   private void promptForCharacterName()
   {
-    SendMessageCmd cmd = new SendMessageCmd(getGameState().getPlayer().getChatId(), "By what name will you be known?");
+    SendMessageCmd cmd = new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "By what name will you be known?");
     CommandDelegate.execute(cmd);
   }
 
@@ -47,10 +47,10 @@ public class DoPlayerSetupCmd extends SuspendableCmd
   {
     characterName = capturedInput;
 
-    SendMessageCmd ack = new SendMessageCmd(getGameState().getPlayer().getChatId(), "Very well. So shall you be known.");
+    SendMessageCmd ack = new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "Very well. So shall you be known.");
     CommandDelegate.execute(ack);
 
-    ChoiceCmd prompt = new ChoiceCmd(getGameState().getPlayer().getChatId(), "Please choose your player class", ECharacterClass.values());
+    ChoiceCmd prompt = new ChoiceCmd(getPlayerState().getPlayer().getChatId(), "Please choose your player class", ECharacterClass.values());
     CommandDelegate.execute(prompt);
   }
 
@@ -58,10 +58,16 @@ public class DoPlayerSetupCmd extends SuspendableCmd
   {
     characterClass = capturedInput;
 
-    SpawnCharacterCmd cmd = new SpawnCharacterCmd(getGameState().getPlayer().getChatId(), characterName, ECharacterClass.of(characterClass));
+    SpawnCharacterCmd cmd = new SpawnCharacterCmd(getPlayerState().getPlayer().getChatId(), characterName, ECharacterClass.of(characterClass));
     CommandDelegate.execute(cmd);
 
-    CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100, getGameState().getPlayer().getActiveCharacter());
+    JoinPartyCmd join = new JoinPartyCmd(cmd.getSpawned(), "TestParty");
+    CommandDelegate.execute(join);
+
+    CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100, getPlayerState().getPlayer().getActiveCharacter());
     CommandDelegate.execute(shadow);
+
+    JoinPartyCmd shadowJoin = new JoinPartyCmd(shadow.getSpawned(), "TestParty");
+    CommandDelegate.execute(shadowJoin);
   }
 }

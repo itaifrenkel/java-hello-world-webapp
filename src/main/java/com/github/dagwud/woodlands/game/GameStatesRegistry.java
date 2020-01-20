@@ -6,13 +6,13 @@ import java.util.Map;
 public class GameStatesRegistry
 {
   private static GameStatesRegistry instance;
-  private final Map<Integer, GameState> gameStatesByCharacter = new HashMap<>();
+  private final Map<Integer, PlayerState> gameStatesByCharacter = new HashMap<>();
 
   private GameStatesRegistry()
   {
   }
 
-  public static GameState lookup(int chatId)
+  public static PlayerState lookup(int chatId)
   {
     GameStatesRegistry registry = instance();
     if (!registry.gameStatesByCharacter.containsKey(chatId))
@@ -20,8 +20,8 @@ public class GameStatesRegistry
       CreateGameStateCmd cmd = new CreateGameStateCmd(chatId);
       CommandDelegate.execute(cmd);
 
-      GameState gameStateForChat = cmd.getCreatedGameState();
-      registry.gameStatesByCharacter.put(chatId, gameStateForChat);
+      PlayerState playerStateForChat = cmd.getCreatedPlayerState();
+      registry.gameStatesByCharacter.put(chatId, playerStateForChat);
     }
     return registry.gameStatesByCharacter.get(chatId);
   }

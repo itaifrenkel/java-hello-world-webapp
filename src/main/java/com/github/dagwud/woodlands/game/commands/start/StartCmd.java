@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.ShowHelpCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -10,20 +10,21 @@ import com.github.dagwud.woodlands.game.domain.Player;
 public class StartCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameState gameState;
+  private final PlayerState playerState;
 
-  public StartCmd(GameState gameState, int chatId)
+  public StartCmd(PlayerState playerState, int chatId)
   {
-    this.gameState = gameState;
+    this.playerState = playerState;
     this.chatId = chatId;
   }
 
   @Override
   public void execute()
   {
-    gameState.setPlayer(new Player(chatId));
-    gameState.getPlayer().setActiveCharacter(new GameCharacter());
-    gameState.getPlayer().getActiveCharacter().setSetupComplete(false);
+    Player player = new Player(chatId);
+    playerState.setPlayer(player);
+    playerState.getPlayer().setActiveCharacter(new GameCharacter(player));
+    playerState.getPlayer().getActiveCharacter().setSetupComplete(false);
 
     ShowHelpCmd cmd = new ShowHelpCmd(chatId);
     CommandDelegate.execute(cmd);

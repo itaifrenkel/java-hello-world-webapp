@@ -6,7 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 public class CreateGameStateCmd extends AbstractCmd
 {
   private final int chatId;
-  private GameState createdGameState;
+  private PlayerState createdPlayerState;
 
   CreateGameStateCmd(int chatId)
   {
@@ -16,12 +16,12 @@ public class CreateGameStateCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    createdGameState = new GameState();
-    createdGameState.setPlayer(new Player(chatId));
+    createdPlayerState = new PlayerState();
+    createdPlayerState.setPlayer(new Player(chatId));
   }
 
-  GameState getCreatedGameState()
+  PlayerState getCreatedPlayerState()
   {
-    return createdGameState;
+    return createdPlayerState;
   }
 }

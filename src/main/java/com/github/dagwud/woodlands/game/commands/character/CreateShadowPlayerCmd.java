@@ -8,6 +8,7 @@ public class CreateShadowPlayerCmd extends AbstractCmd
 {
   private final GameCharacter shadowOfCharacter;
   private final int chatId;
+  private GameCharacter spawned;
 
   public CreateShadowPlayerCmd(int chatId, GameCharacter shadowOfCharacter)
   {
@@ -18,7 +19,13 @@ public class CreateShadowPlayerCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    SpawnCharacterCmd cmd = new SpawnCharacterCmd(chatId, shadowOfCharacter.getName(), shadowOfCharacter.getCharacterClass());
+    SpawnCharacterCmd cmd = new SpawnCharacterCmd(chatId, "Shadow " + shadowOfCharacter.getName(), shadowOfCharacter.getCharacterClass());
     CommandDelegate.execute(cmd);
+    spawned = cmd.getSpawned();
+  }
+
+  public GameCharacter getSpawned()
+  {
+    return spawned;
   }
 }

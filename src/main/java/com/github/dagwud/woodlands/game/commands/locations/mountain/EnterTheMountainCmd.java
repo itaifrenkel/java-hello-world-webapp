@@ -1,25 +1,25 @@
 package com.github.dagwud.woodlands.game.commands.locations.mountain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 
 public class EnterTheMountainCmd extends AbstractCmd
 {
-  private final GameState gameState;
+  private final PlayerState playerState;
 
-  public EnterTheMountainCmd(GameState gameState)
+  public EnterTheMountainCmd(PlayerState playerState)
   {
-    this.gameState = gameState;
+    this.playerState = playerState;
   }
 
   @Override
   public void execute()
   {
     RunLaterCmd cmd = new RunLaterCmd(Settings.DELAY_BETWEEN_ENCOUNTERS_MS,
-            new GenerateMountainEncounterCmd(gameState));
+            new GenerateMountainEncounterCmd(playerState));
     CommandDelegate.execute(cmd);
   }
 }

@@ -6,14 +6,14 @@ import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 
-public class GameState
+public class PlayerState
 {
   private Player player;
   private SuspendableCmd waitingForInputCmd;
   private GameMenu currentMenu;
   private Encounter encounter;
 
-  GameState()
+  PlayerState()
   {
   }
 

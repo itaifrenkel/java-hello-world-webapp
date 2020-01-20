@@ -1,17 +1,17 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
-import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.PlayerState;
 
 public abstract class SuspendableCmd extends AbstractCmd
 {
-  private final GameState gameState;
+  private final PlayerState playerState;
   private final int numberOfPhases;
   private int nextPhaseToRun;
   private String capturedInput;
 
-  protected SuspendableCmd(GameState gameState, int numberOfPhases)
+  protected SuspendableCmd(PlayerState playerState, int numberOfPhases)
   {
-    this.gameState = gameState;
+    this.playerState = playerState;
     this.numberOfPhases = numberOfPhases;
   }
 
@@ -21,13 +21,13 @@ public abstract class SuspendableCmd extends AbstractCmd
     executePart(nextPhaseToRun, capturedInput);
     if (nextPhaseToRun == 0)
     {
-      gameState.setWaitingForInputCmd(this);
+      playerState.setWaitingForInputCmd(this);
     }
     nextPhaseToRun++;
     capturedInput = null;
     if (nextPhaseToRun == numberOfPhases)
     {
-      gameState.setWaitingForInputCmd(null);
+      playerState.setWaitingForInputCmd(null);
     }
   }
 
@@ -38,8 +38,8 @@ public abstract class SuspendableCmd extends AbstractCmd
     this.capturedInput = input;
   }
 
-  protected GameState getGameState()
+  protected PlayerState getPlayerState()
   {
-    return gameState;
+    return playerState;
   }
 }

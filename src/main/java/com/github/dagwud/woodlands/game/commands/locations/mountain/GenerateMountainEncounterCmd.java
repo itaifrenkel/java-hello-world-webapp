@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.locations.mountain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
@@ -15,28 +15,28 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
-  private final GameState gameState;
+  private final PlayerState playerState;
 
-  GenerateMountainEncounterCmd(GameState gameState)
+  GenerateMountainEncounterCmd(PlayerState playerState)
   {
-    this.gameState = gameState;
+    this.playerState = playerState;
   }
 
   @Override
   public void execute()
   {
     // You've left the mountain; encounter no longer happens:
-    if (gameState.getActiveCharacter().getLocation() != ELocation.MOUNTAIN)
+    if (playerState.getActiveCharacter().getLocation() != ELocation.MOUNTAIN)
     {
       return;
     }
 
     // There's already an encounter in progress; don't start another one:
-    if (gameState.getActiveEncounter() != null)
+    if (playerState.getActiveEncounter() != null)
     {
-      if (gameState.getActiveEncounter().isEnded())
+      if (playerState.getActiveEncounter().isEnded())
       {
-        gameState.setActiveEncounter(null);
+        playerState.setActiveEncounter(null);
       }
       else
       {
@@ -50,16 +50,16 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
     if (!chance.getResult())
     {
-      SendMessageCmd cmd = new SendMessageCmd(gameState.getPlayer().getChatId(), "Time passes. You keep moving. Nothing interesting happens.");
+      SendMessageCmd cmd = new SendMessageCmd(playerState.getPlayer().getChatId(), "Time passes. You keep moving. Nothing interesting happens.");
       CommandDelegate.execute(cmd);
       scheduleNextEncounter();
       return;
     }
 
     Encounter encounter = startEncounter();
-    gameState.setActiveEncounter(encounter);
+    playerState.setActiveEncounter(encounter);
 
-    EncounterRoundCmd cmd = new EncounterRoundCmd(gameState.getPlayer().getChatId(), encounter, Settings.DELAY_BETWEEN_ROUNDS_MS);
+    EncounterRoundCmd cmd = new EncounterRoundCmd(playerState.getPlayer().getChatId(), encounter, Settings.DELAY_BETWEEN_ROUNDS_MS);
     CommandDelegate.execute(cmd);
 
     scheduleNextEncounter();
@@ -67,10 +67,10 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
   private Encounter startEncounter()
   {
-    Encounter encounter = createEncounter(gameState.getActiveCharacter());
+    Encounter encounter = createEncounter(playerState.getActiveCharacter());
 
     String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + ")";
-    SendMessageCmd msg = new SendMessageCmd(gameState.getPlayer().getChatId(), message);
+    SendMessageCmd msg = new SendMessageCmd(playerState.getPlayer().getChatId(), message);
     CommandDelegate.execute(msg);
     return encounter;
   }
@@ -89,7 +89,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
   private void scheduleNextEncounter()
   {
-    RunLaterCmd nextEncounter = new RunLaterCmd(Settings.DELAY_BETWEEN_ENCOUNTERS_MS, new GenerateMountainEncounterCmd(gameState));
+    RunLaterCmd nextEncounter = new RunLaterCmd(Settings.DELAY_BETWEEN_ENCOUNTERS_MS, new GenerateMountainEncounterCmd(playerState));
     CommandDelegate.execute(nextEncounter);
   }
 }

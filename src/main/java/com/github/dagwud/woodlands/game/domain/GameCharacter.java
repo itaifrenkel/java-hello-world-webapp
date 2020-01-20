@@ -4,12 +4,19 @@ import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class GameCharacter implements IFighter
 {
+  private final Player playedBy;
   private String name;
   private ECharacterClass characterClass;
   private Stats stats;
   private ELocation location;
   private CarriedItems carrying = new CarriedItems();
   private boolean setupComplete;
+  private Party party;
+
+  public GameCharacter(Player playedBy)
+  {
+    this.playedBy = playedBy;
+  }
 
   public ELocation getLocation()
   {
@@ -70,5 +77,20 @@ public class GameCharacter implements IFighter
   public void setCarrying(CarriedItems carrying)
   {
     this.carrying = carrying;
+  }
+
+  public Party getParty()
+  {
+    return party;
+  }
+
+  public void setParty(Party party)
+  {
+    this.party = party;
+  }
+
+  public Player getPlayedBy()
+  {
+    return playedBy;
   }
 }

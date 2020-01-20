@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.game.commands;
 
-import com.github.dagwud.woodlands.game.GameState;
+import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.BuyDrinksCmd;
@@ -63,8 +63,8 @@ public enum ECommand
         return menuCmd;
     }
 
-    public AbstractCmd build(GameState gameState, int chatId)
+    public AbstractCmd build(PlayerState playerState, int chatId)
     {
-        return commandBuilder.build(gameState, chatId);
+        return commandBuilder.build(playerState, chatId);
     }
 }
