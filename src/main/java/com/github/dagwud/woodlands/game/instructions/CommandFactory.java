@@ -45,7 +45,7 @@ public class CommandFactory
 
         if (by != null && (!by.isMenuCmd() || playerState.getCurrentMenu().containsOption(cmd)))
         {
-            return by.build(playerState, chatId);
+            return by.build(playerState.getActiveCharacter(), chatId);
         }
 
         return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");

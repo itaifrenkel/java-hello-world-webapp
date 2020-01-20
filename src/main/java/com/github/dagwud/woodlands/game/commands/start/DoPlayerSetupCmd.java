@@ -6,18 +6,20 @@ import com.github.dagwud.woodlands.game.commands.character.CreateShadowPlayerCmd
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.character.SpawnCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
+import com.github.dagwud.woodlands.game.domain.Player;
 
 public class DoPlayerSetupCmd extends SuspendableCmd
 {
   private String characterName;
   private String characterClass;
 
-  DoPlayerSetupCmd(PlayerState playerState)
+  DoPlayerSetupCmd(Player player)
   {
-    super(playerState, 3);
+    super(player.getPlayerState(), 3);
   }
 
   @Override
@@ -64,10 +66,16 @@ public class DoPlayerSetupCmd extends SuspendableCmd
     JoinPartyCmd join = new JoinPartyCmd(cmd.getSpawned(), "TestParty");
     CommandDelegate.execute(join);
 
-    CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100, getPlayerState().getPlayer().getActiveCharacter());
-    CommandDelegate.execute(shadow);
-
-    JoinPartyCmd shadowJoin = new JoinPartyCmd(shadow.getSpawned(), "TestParty");
-    CommandDelegate.execute(shadowJoin);
+    //todo for testing
+    if (characterName.startsWith("Dagwud") && !characterName.equals("Dagwud"))
+    {
+      int numShadows = Integer.parseInt(characterName.substring("Dagwud".length()));
+      for (int i = 0; i < numShadows; i++)
+      {
+        CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100, "Shadow " + (i + 1) + " " + characterName, getPlayerState().getPlayer().getActiveCharacter());
+        RunLaterCmd delayed = new RunLaterCmd(3000, shadow);
+        CommandDelegate.execute(delayed);
+      }
+    }
   }
 }

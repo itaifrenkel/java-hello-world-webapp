@@ -11,7 +11,6 @@ public class PlayerState
   private Player player;
   private SuspendableCmd waitingForInputCmd;
   private GameMenu currentMenu;
-  private Encounter encounter;
 
   PlayerState()
   {
@@ -53,13 +52,4 @@ public class PlayerState
     this.currentMenu = currentMenu;
   }
 
-  public void setActiveEncounter(Encounter encounter)
-  {
-    this.encounter = encounter;
-  }
-
-  public Encounter getActiveEncounter()
-  {
-    return encounter;
-  }
 }

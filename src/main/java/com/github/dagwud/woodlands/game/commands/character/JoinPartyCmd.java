@@ -26,7 +26,7 @@ public class JoinPartyCmd extends AbstractCmd
   {
     Party party = PartyRegistry.lookup(partyName);
     joiner.setParty(party);
-    party.getMembers().add(joiner);
+    party.addMember(joiner);
 
     SendPartyMessageCmd welcome = new SendPartyMessageCmd(party, joiner.getName() + " has joined " + partyName + "!");
     CommandDelegate.execute(welcome);

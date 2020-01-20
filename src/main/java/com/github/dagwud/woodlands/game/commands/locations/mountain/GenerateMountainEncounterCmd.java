@@ -32,11 +32,11 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
     }
 
     // There's already an encounter in progress; don't start another one:
-    if (playerState.getActiveEncounter() != null)
+    if (playerState.getActiveCharacter().getParty().getActiveEncounter() != null)
     {
-      if (playerState.getActiveEncounter().isEnded())
+      if (playerState.getActiveCharacter().getParty().getActiveEncounter().isEnded())
       {
-        playerState.setActiveEncounter(null);
+        playerState.getActiveCharacter().getParty().setActiveEncounter(null);
       }
       else
       {
@@ -57,7 +57,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
     }
 
     Encounter encounter = startEncounter();
-    playerState.setActiveEncounter(encounter);
+    playerState.getActiveCharacter().getParty().setActiveEncounter(encounter);
 
     EncounterRoundCmd cmd = new EncounterRoundCmd(playerState.getPlayer().getChatId(), encounter, Settings.DELAY_BETWEEN_ROUNDS_MS);
     CommandDelegate.execute(cmd);

@@ -1,30 +1,30 @@
 package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.domain.Player;
 
 public class PlayerSetupCmd extends AbstractCmd
 {
-  private final PlayerState playerState;
+  private final Player player;
 
-  public PlayerSetupCmd(PlayerState playerState)
+  public PlayerSetupCmd(Player player)
   {
-    this.playerState = playerState;
+    this.player = player;
   }
 
   @Override
   public void execute()
   {
-    if (playerState.getActiveCharacter().isSetupComplete())
+    if (player.getActiveCharacter().isSetupComplete())
     {
-      SendMessageCmd cmd = new SendMessageCmd(playerState.getPlayer().getChatId(), "You already have an active character - you're " + playerState.getActiveCharacter().getName() + " the " + playerState.getActiveCharacter().getCharacterClass());
+      SendMessageCmd cmd = new SendMessageCmd(player.getChatId(), "You already have an active character - you're " + player.getActiveCharacter().getName() + " the " + player.getActiveCharacter().getCharacterClass());
       CommandDelegate.execute(cmd);
     }
     else
     {
-      DoPlayerSetupCmd cmd = new DoPlayerSetupCmd(playerState);
+      DoPlayerSetupCmd cmd = new DoPlayerSetupCmd(player);
       CommandDelegate.execute(cmd);
     }
   }

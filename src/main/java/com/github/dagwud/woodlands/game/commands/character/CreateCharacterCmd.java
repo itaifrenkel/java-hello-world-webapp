@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.Player;
 
 public class CreateCharacterCmd extends AbstractCmd
@@ -30,6 +31,9 @@ public class CreateCharacterCmd extends AbstractCmd
     InitCharacterStatsCmd cmd = new InitCharacterStatsCmd(character);
     CommandDelegate.execute(cmd);
     character.setSetupComplete(true);
+
+    JoinPartyCmd join = new JoinPartyCmd(character, characterName);
+    CommandDelegate.execute(join);
 
     createdCharacter = character;
   }

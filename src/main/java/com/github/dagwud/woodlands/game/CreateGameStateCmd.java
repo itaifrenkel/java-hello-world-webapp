@@ -17,7 +17,7 @@ public class CreateGameStateCmd extends AbstractCmd
   public void execute()
   {
     createdPlayerState = new PlayerState();
-    createdPlayerState.setPlayer(new Player(chatId));
+    createdPlayerState.setPlayer(new Player(chatId, createdPlayerState));
   }
 
   PlayerState getCreatedPlayerState()

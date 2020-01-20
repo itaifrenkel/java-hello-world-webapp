@@ -5,9 +5,9 @@ import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
-import com.github.dagwud.woodlands.gson.game.Damage;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.LinkedList;
@@ -37,14 +37,17 @@ public class EncounterRoundCmd extends AbstractCmd
     encounter.incrementBattleRound();
     List<DamageInflicted> roundActivity = new LinkedList<>();
 
-    doAttack(encounter.getHost(), roundActivity);
+    for (GameCharacter partyMember : encounter.getHost().getParty().getMembers())
+    {
+      doAttack(partyMember, roundActivity);
+    }
     doAttack(encounter.getEnemy(), roundActivity);
 
     StringBuilder summary = buildRoundSummary(roundActivity);
     SendMessageCmd status = new SendMessageCmd(chatId, summary.toString());
     CommandDelegate.execute(status);
 
-    if (encounter.getEnemy().getStats().getState() == EState.ALIVE && encounter.getHost().getStats().getState() == EState.ALIVE)
+    if (encounter.getEnemy().getStats().getState() == EState.ALIVE && anyPlayerCharactersStillAlive(encounter))
     {
       scheduleNextRound();
     }
@@ -53,20 +56,32 @@ public class EncounterRoundCmd extends AbstractCmd
       encounter.end();
       if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
       {
-        SendMessageCmd cmd = new SendMessageCmd(chatId, "You have been defeated!");
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getHost().getParty(), "You have been defeated!");
         CommandDelegate.execute(cmd);
       }
       else
       {
-        SendMessageCmd cmd = new SendMessageCmd(chatId, encounter.getEnemy().name + " has been defeated!");
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getHost().getParty(), encounter.getEnemy().name + " has been defeated!");
         CommandDelegate.execute(cmd);
       }
     }
   }
 
+  private boolean anyPlayerCharactersStillAlive(Encounter encounter)
+  {
+    for (GameCharacter member : encounter.getHost().getParty().getMembers())
+    {
+      if (member.getStats().getState() == EState.ALIVE)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private void doAttack(IFighter attacker, List<DamageInflicted> roundActivity)
   {
-    IFighter defender = (attacker == encounter.getEnemy() ? encounter.getHost() : encounter.getEnemy());
+    IFighter defender = determineDefender(attacker);
     if (attacker.getStats().getState() == EState.ALIVE && defender.getStats().getState() == EState.ALIVE)
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
@@ -77,6 +92,24 @@ public class EncounterRoundCmd extends AbstractCmd
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);
       roundActivity.add(damage);
     }
+  }
+
+  private IFighter determineDefender(IFighter attacker)
+  {
+    if (attacker instanceof GameCharacter)
+    {
+      return encounter.getEnemy();
+    }
+    List<GameCharacter> members = encounter.getHost().getParty().getMembers();
+    for (int i = members.size() - 1; i >= 0; i--)
+    {
+      GameCharacter member = members.get(i);
+      if (member.getStats().getState() == EState.ALIVE)
+      {
+        return member;
+      }
+    }
+    return encounter.getHost();
   }
 
   private DamageInflicted doAttack(IFighter attacker, Weapon attackWith, IFighter defender)
@@ -105,10 +138,15 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private String buildBattleStatsSummary()
   {
-    return "Stats after round " + encounter.getBattleRound() + ":\n" +
-            "—————————" +
-            "\n" + buildCharacterSummaryLine(encounter.getHost().getName(), encounter.getHost().getStats()) +
-            "\n" + buildCharacterSummaryLine(encounter.getEnemy().name, encounter.getEnemy().getStats());
+    StringBuilder b = new StringBuilder();
+    b.append("Stats after round ").append(encounter.getBattleRound()).append("\n")
+            .append("—————————");
+    for (GameCharacter member : encounter.getHost().getParty().getMembers())
+    {
+      b.append("\n").append(buildCharacterSummaryLine(member.getName(), member.getStats()));
+    }
+    b.append("\n").append(buildCharacterSummaryLine(encounter.getEnemy().name, encounter.getEnemy().getStats()));
+    return b.toString();
   }
 
   private String buildCharacterSummaryLine(String characterName, Stats stats)

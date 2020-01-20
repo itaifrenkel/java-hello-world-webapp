@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -11,25 +12,24 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class MoveToLocationCmd extends AbstractCmd
 {
-  private final PlayerState playerState;
+  private final GameCharacter characterToMove;
   private final ELocation location;
 
-  public MoveToLocationCmd(PlayerState playerState, ELocation location)
+  public MoveToLocationCmd(GameCharacter characterToMove, ELocation location)
   {
-    this.playerState = playerState;
+    this.characterToMove = characterToMove;
     this.location = location;
   }
 
   @Override
   public void execute()
   {
-    GameCharacter characterToMove = playerState.getActiveCharacter();
-    int chatId = playerState.getPlayer().getChatId();
+    int chatId = characterToMove.getPlayedBy().getChatId();
 
-    if (playerState.getActiveEncounter() != null)
+    if (characterToMove.getParty().getActiveEncounter() != null)
     {
-      playerState.getActiveEncounter().end();
-      playerState.setActiveEncounter(null);
+      characterToMove.getParty().getActiveEncounter().end();
+      characterToMove.getParty().setActiveEncounter(null);
     }
 
     if (!characterToMove.isSetupComplete())
@@ -39,12 +39,19 @@ public class MoveToLocationCmd extends AbstractCmd
       return;
     }
 
-    characterToMove.setLocation(location);
-    SendMessageCmd cmd = new SendMessageCmd(chatId, "You are now at " + characterToMove.getLocation());
+    for (GameCharacter character : characterToMove.getParty().getMembers())
+    {
+      character.setLocation(location);
+    }
+
+    SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "You are now at " + location);
     CommandDelegate.execute(cmd);
 
-    showMenuForLocation(location, playerState);
-    handleLocationEntry(location, playerState);
+    for (GameCharacter character : characterToMove.getParty().getMembers())
+    {
+      showMenuForLocation(location, character.getPlayedBy().getPlayerState());
+      handleLocationEntry(location, character.getPlayedBy().getPlayerState());
+    }
   }
 
   private void showMenuForLocation(ELocation location, PlayerState playerState)
@@ -55,10 +62,13 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private void handleLocationEntry(ELocation location, PlayerState playerState)
   {
-    if (location == ELocation.MOUNTAIN)
+    if (playerState.getActiveCharacter().getParty().isLedBy(playerState.getActiveCharacter()))
     {
-      EnterTheMountainCmd cmd = new EnterTheMountainCmd(playerState);
-      CommandDelegate.execute(cmd);
+      if (location == ELocation.MOUNTAIN)
+      {
+        EnterTheMountainCmd cmd = new EnterTheMountainCmd(playerState);
+        CommandDelegate.execute(cmd);
+      }
     }
   }
 }

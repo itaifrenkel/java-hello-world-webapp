@@ -2,11 +2,13 @@ package com.github.dagwud.woodlands.game.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Party
 {
-  private Collection<GameCharacter> members = new ArrayList<>(4);
+  private List<GameCharacter> members = new ArrayList<>(4);
   private String name;
+  private Encounter encounter;
 
   public void setName(String name)
   {
@@ -18,8 +20,29 @@ public class Party
     return name;
   }
 
-  public Collection<GameCharacter> getMembers()
+  public void setActiveEncounter(Encounter encounter)
   {
-    return members;
+    this.encounter = encounter;
+  }
+
+  public Encounter getActiveEncounter()
+  {
+    return encounter;
+  }
+
+  public void addMember(GameCharacter joiner)
+  {
+    members.add(joiner);
+  }
+
+  public List<GameCharacter> getMembers()
+  {
+    // quick and easy synchronization protection:
+    return new ArrayList<>(members);
+  }
+
+  public boolean isLedBy(GameCharacter activeCharacter)
+  {
+    return members.iterator().next() == activeCharacter;
   }
 }

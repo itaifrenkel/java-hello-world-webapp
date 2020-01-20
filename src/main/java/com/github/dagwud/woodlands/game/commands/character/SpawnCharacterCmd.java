@@ -9,6 +9,7 @@ import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Player;
 
 public class SpawnCharacterCmd extends AbstractCmd
 {
@@ -27,19 +28,19 @@ public class SpawnCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    PlayerState playerState = GameStatesRegistry.lookup(chatId);
+    Player player = GameStatesRegistry.lookup(chatId).getPlayer();
 
-    CreateCharacterCmd create = new CreateCharacterCmd(playerState.getPlayer(), characterName, characterClass);
+    CreateCharacterCmd create = new CreateCharacterCmd(player, characterName, characterClass);
     CommandDelegate.execute(create);
     GameCharacter character = create.getCreatedCharacter();
 
-    SwitchCharacterCmd makeActive = new SwitchCharacterCmd(playerState.getPlayer(), character);
+    SwitchCharacterCmd makeActive = new SwitchCharacterCmd(player, character);
     CommandDelegate.execute(makeActive);
 
-    SendMessageCmd welcomeCmd = new SendMessageCmd(playerState.getPlayer().getChatId(), "Welcome, " + character.getName() + " the " + character.getCharacterClass() + "!");
+    SendMessageCmd welcomeCmd = new SendMessageCmd(player.getChatId(), "Welcome, " + character.getName() + " the " + character.getCharacterClass() + "!");
     CommandDelegate.execute(welcomeCmd);
 
-    MoveToLocationCmd move = new MoveToLocationCmd(playerState, ELocation.VILLAGE_SQUARE);
+    MoveToLocationCmd move = new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE);
     CommandDelegate.execute(move);
 
     this.spawned = character;

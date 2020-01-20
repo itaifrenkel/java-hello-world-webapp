@@ -21,7 +21,7 @@ public class ShortRestCmd extends AbstractCmd
   public void execute()
   {
     AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, activeCharacter);
-    if (chatId != -1)
+    if (chatId > 0)
     {
       restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
     }

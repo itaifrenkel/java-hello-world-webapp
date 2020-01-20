@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands;
 
+import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
@@ -9,27 +10,28 @@ import com.github.dagwud.woodlands.game.commands.locations.village.ShortRestCmd;
 import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
 import com.github.dagwud.woodlands.game.commands.start.StartCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum ECommand
 {
-    HELP("/help", false, (state, chatId) -> new ShowHelpCmd(chatId)),
-    START("/start", false, StartCmd::new),
-    NEW("/new", false, (state, chatId) -> new PlayerSetupCmd(state)),
-    ME("/me", false, (state, chatId) -> new ShowCharacterInfoCmd(chatId, state.getActiveCharacter())),
+    HELP("/help", false, (character, chatId) -> new ShowHelpCmd(chatId)),
+    START("/start", false, (character, chatId) -> new StartCmd(GameStatesRegistry.lookup(chatId), chatId)),
+    NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character.getPlayedBy())),
+    ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
 
-    THE_INN("The Inn", true, (state, chatId) -> new MoveToLocationCmd(state, ELocation.INN)),
-    THE_TAVERN("The Tavern", true, (state, chatId) -> new MoveToLocationCmd(state, ELocation.TAVERN)),
-    THE_VILLAGE("The Village", true, (state, chatId) -> new MoveToLocationCmd(state, ELocation.VILLAGE_SQUARE)),
-    VILLAGE_SQUARE("Village Square", true, (state, chatId) -> new MoveToLocationCmd(state, ELocation.VILLAGE_SQUARE)),
-    THE_MOUNTAIN("The Mountain", true, (state, chatId) -> new MoveToLocationCmd(state, ELocation.MOUNTAIN)),
-    THE_WOODLANDS("The Woodlands", true, (state, chatId) -> new MoveToLocationCmd(state, ELocation.WOODLANDS)),
+    THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
+    THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
+    THE_VILLAGE("The Village", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
+    VILLAGE_SQUARE("Village Square", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
+    THE_MOUNTAIN("The Mountain", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.MOUNTAIN)),
+    THE_WOODLANDS("The Woodlands", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.WOODLANDS)),
 
-    BUY_DRINKS("Buy Drinks", true, (state, chatId) -> new BuyDrinksCmd(chatId, state.getActiveCharacter())),
-    SHORT_REST("Short Rest", true, (state, chatId) -> new ShortRestCmd(chatId, state.getActiveCharacter())),
-    RETRIEVE_ITEMS("Retrieve Items", true, (state, chatId) -> new RetrieveItemsCmd(state.getActiveCharacter())),
+    BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
+    SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
+    RETRIEVE_ITEMS("Retrieve Items", true, (character, chatId) -> new RetrieveItemsCmd(character)),
     ;
 
     ECommand(String name, boolean menuCmd, ICommandBuilder commandBuilder)
@@ -63,8 +65,8 @@ public enum ECommand
         return menuCmd;
     }
 
-    public AbstractCmd build(PlayerState playerState, int chatId)
+    public AbstractCmd build(GameCharacter character, int chatId)
     {
-        return commandBuilder.build(playerState, chatId);
+        return commandBuilder.build(character, chatId);
     }
 }
