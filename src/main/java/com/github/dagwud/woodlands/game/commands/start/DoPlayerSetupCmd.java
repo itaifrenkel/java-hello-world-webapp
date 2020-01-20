@@ -2,7 +2,9 @@ package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.character.InitCharacterStatsCmd;
+import com.github.dagwud.woodlands.game.commands.character.CreateCharacterCmd;
+import com.github.dagwud.woodlands.game.commands.character.CreateShadowPlayerCmd;
+import com.github.dagwud.woodlands.game.commands.character.SwitchCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
@@ -13,6 +15,9 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class DoPlayerSetupCmd extends SuspendableCmd
 {
+  private String characterName;
+  private String characterClass;
+
   DoPlayerSetupCmd(GameState gameState)
   {
     super(gameState, 3);
@@ -37,15 +42,13 @@ public class DoPlayerSetupCmd extends SuspendableCmd
 
   private void promptForCharacterName()
   {
-    getGameState().getPlayer().setActiveCharacter(new GameCharacter());
-
     SendMessageCmd cmd = new SendMessageCmd(getGameState().getPlayer().getChatId(), "By what name will you be known?");
     CommandDelegate.execute(cmd);
   }
 
   private void receiveCharacterNameAndPromptForClass(String capturedInput)
   {
-    getGameState().getActiveCharacter().setName(capturedInput);
+    characterName = capturedInput;
 
     SendMessageCmd ack = new SendMessageCmd(getGameState().getPlayer().getChatId(), "Very well. So shall you be known.");
     CommandDelegate.execute(ack);
@@ -56,13 +59,15 @@ public class DoPlayerSetupCmd extends SuspendableCmd
 
   private void receiveClassAndInitStats(String capturedInput)
   {
-    GameCharacter character = getGameState().getActiveCharacter();
-    character.setCharacterClass(ECharacterClass.of(capturedInput));
+    characterClass = capturedInput;
 
-    InitCharacterStatsCmd cmd = new InitCharacterStatsCmd(character);
-    CommandDelegate.execute(cmd);
+    CreateCharacterCmd create = new CreateCharacterCmd(characterName, ECharacterClass.of(characterClass));
+    CommandDelegate.execute(create);
+    GameCharacter character = create.getCreatedCharacter();
 
-    character.setSetupComplete(true);
+    SwitchCharacterCmd makeActive = new SwitchCharacterCmd(getGameState().getPlayer(), character);
+    CommandDelegate.execute(makeActive);
+
     SendMessageCmd welcomeCmd = new SendMessageCmd(getGameState().getPlayer().getChatId(), "Welcome, " + character.getName() + " the " + character.getCharacterClass() + "!");
     CommandDelegate.execute(welcomeCmd);
 
