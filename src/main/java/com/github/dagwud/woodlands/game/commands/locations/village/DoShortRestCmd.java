@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.locations.village;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.RollShortRestCmd;
@@ -24,10 +25,11 @@ public class DoShortRestCmd extends AbstractCmd
     CommandDelegate.execute(roll);
 
     int hitPointsRecovered = roll.getRecoveredHitPoints();
-    character.getStats().setHitPoints(character.getStats().getHitPoints() + hitPointsRecovered);
+    RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, hitPointsRecovered);
+    CommandDelegate.execute(cmd);
 
     SendMessageCmd echo = new SendMessageCmd(chatId, "You rested and recovered ❤️" + hitPointsRecovered + ". " +
-            "Now at " + character.getStats().getHitPoints() + " of " + character.getStats().getMaxHitPoints());
+            "Now at ❤️" + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints());
     CommandDelegate.execute(echo);
   }
 }

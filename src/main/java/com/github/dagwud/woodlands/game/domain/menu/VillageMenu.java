@@ -1,7 +1,5 @@
 package com.github.dagwud.woodlands.game.domain.menu;
 
-import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
-
 public class VillageMenu extends GameMenu
 {
   public VillageMenu()

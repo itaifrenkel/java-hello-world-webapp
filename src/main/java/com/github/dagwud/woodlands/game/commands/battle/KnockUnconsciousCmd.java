@@ -8,7 +8,7 @@ public class KnockUnconsciousCmd extends AbstractCmd
 {
   private final IFighter target;
 
-  KnockUnconsciousCmd(IFighter target)
+  public KnockUnconsciousCmd(IFighter target)
   {
     this.target = target;
   }

@@ -8,7 +8,7 @@ public class DeathCmd extends AbstractCmd
 {
   private final IFighter target;
 
-  DeathCmd(IFighter target)
+  public DeathCmd(IFighter target)
   {
     this.target = target;
   }

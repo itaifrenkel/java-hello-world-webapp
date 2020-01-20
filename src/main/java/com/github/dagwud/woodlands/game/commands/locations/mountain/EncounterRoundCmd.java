@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
+import com.github.dagwud.woodlands.gson.game.Damage;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.LinkedList;

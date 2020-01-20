@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.battle;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.character.ReduceHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.IFighter;
@@ -20,24 +21,7 @@ public class DealDamageCmd extends AbstractCmd
   public void execute()
   {
     int totalDamageInflicted = damageInflicted.getBaseDamage() + damageInflicted.getBonusDamage();
-    int newHP = inflictedOn.getStats().getHitPoints() - totalDamageInflicted;
-    inflictedOn.getStats().setHitPoints(newHP);
-
-    if (inflictedOn.getStats().getHitPoints() <= 0)
-    {
-      if (inflictedOn.getStats().getHitPoints() < -inflictedOn.getStats().getMaxHitPoints())
-      {
-        // instant death:
-        DeathCmd cmd = new DeathCmd(inflictedOn);
-        CommandDelegate.execute(cmd);
-      }
-      else
-      {
-        // unconscious:
-        KnockUnconsciousCmd cmd = new KnockUnconsciousCmd(inflictedOn);
-        CommandDelegate.execute(cmd);
-      }
-      inflictedOn.getStats().setHitPoints(0);
-    }
+    ReduceHitPointsCmd cmd = new ReduceHitPointsCmd(inflictedOn, totalDamageInflicted);
+    CommandDelegate.execute(cmd);
   }
 }
