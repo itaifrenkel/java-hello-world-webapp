@@ -37,7 +37,7 @@ public class EncounterRoundCmd extends AbstractCmd
     encounter.incrementBattleRound();
     List<DamageInflicted> roundActivity = new LinkedList<>();
 
-    for (GameCharacter partyMember : encounter.getHost().getParty().getMembers())
+    for (GameCharacter partyMember : encounter.getParty().getMembers())
     {
       doAttack(partyMember, roundActivity);
     }
@@ -56,12 +56,12 @@ public class EncounterRoundCmd extends AbstractCmd
       encounter.end();
       if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
       {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getHost().getParty(), "You have been defeated!");
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
         CommandDelegate.execute(cmd);
       }
       else
       {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getHost().getParty(), encounter.getEnemy().name + " has been defeated!");
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated!");
         CommandDelegate.execute(cmd);
       }
     }
@@ -69,7 +69,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private boolean anyPlayerCharactersStillAlive(Encounter encounter)
   {
-    for (GameCharacter member : encounter.getHost().getParty().getMembers())
+    for (GameCharacter member : encounter.getParty().getMembers())
     {
       if (member.getStats().getState() == EState.ALIVE)
       {
@@ -100,7 +100,7 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       return encounter.getEnemy();
     }
-    List<GameCharacter> members = encounter.getHost().getParty().getMembers();
+    List<GameCharacter> members = encounter.getParty().getMembers();
     for (int i = members.size() - 1; i >= 0; i--)
     {
       GameCharacter member = members.get(i);
@@ -109,7 +109,7 @@ public class EncounterRoundCmd extends AbstractCmd
         return member;
       }
     }
-    return encounter.getHost();
+    return members.get(0);
   }
 
   private DamageInflicted doAttack(IFighter attacker, Weapon attackWith, IFighter defender)
@@ -141,7 +141,7 @@ public class EncounterRoundCmd extends AbstractCmd
     StringBuilder b = new StringBuilder();
     b.append("Stats after round ").append(encounter.getBattleRound()).append("\n")
             .append("—————————");
-    for (GameCharacter member : encounter.getHost().getParty().getMembers())
+    for (GameCharacter member : encounter.getParty().getMembers())
     {
       b.append("\n").append(buildCharacterSummaryLine(member.getName(), member.getStats()));
     }

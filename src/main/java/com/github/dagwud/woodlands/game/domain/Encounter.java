@@ -4,7 +4,7 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class Encounter
 {
-  private GameCharacter host;
+  private Party party;
   private Creature enemy;
   private boolean ended;
   private int currentRound;
@@ -29,14 +29,14 @@ public class Encounter
     return enemy;
   }
 
-  public GameCharacter getHost()
+  public Party getParty()
   {
-    return host;
+    return party;
   }
 
-  public void setHost(GameCharacter host)
+  public void setParty(Party party)
   {
-    this.host = host;
+    this.party = party;
   }
 
   public int getBattleRound()

@@ -3,14 +3,12 @@ package com.github.dagwud.woodlands.game.commands.locations.mountain;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
-import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
@@ -50,7 +48,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
     if (!chance.getResult())
     {
-      SendMessageCmd cmd = new SendMessageCmd(playerState.getPlayer().getChatId(), "Time passes. You keep moving. Nothing interesting happens.");
+      SendPartyMessageCmd cmd = new SendPartyMessageCmd(playerState.getPlayer().getActiveCharacter().getParty(), "Time passes. You keep moving. Nothing interesting happens.");
       CommandDelegate.execute(cmd);
       scheduleNextEncounter();
       return;
@@ -67,22 +65,22 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
   private Encounter startEncounter()
   {
-    Encounter encounter = createEncounter(playerState.getActiveCharacter());
+    Encounter encounter = createEncounter(playerState.getActiveCharacter().getParty());
 
     String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + ")";
-    SendMessageCmd msg = new SendMessageCmd(playerState.getPlayer().getChatId(), message);
+    SendPartyMessageCmd msg = new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), message);
     CommandDelegate.execute(msg);
     return encounter;
   }
 
-  private Encounter createEncounter(GameCharacter host)
+  private Encounter createEncounter(Party party)
   {
     SpawnCreatureCmd cmd = new SpawnCreatureCmd();
     CommandDelegate.execute(cmd);
     Creature creature = cmd.getSpawnedCreature();
 
     Encounter encounter = new Encounter();
-    encounter.setHost(host);
+    encounter.setParty(party);
     encounter.setEnemy(creature);
     return encounter;
   }
