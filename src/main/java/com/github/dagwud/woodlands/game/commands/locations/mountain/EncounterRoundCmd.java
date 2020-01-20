@@ -4,7 +4,6 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
@@ -44,7 +43,7 @@ public class EncounterRoundCmd extends AbstractCmd
     doAttack(encounter.getEnemy(), roundActivity);
 
     StringBuilder summary = buildRoundSummary(roundActivity);
-    SendMessageCmd status = new SendMessageCmd(chatId, summary.toString());
+    SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.toString());
     CommandDelegate.execute(status);
 
     if (encounter.getEnemy().getStats().getState() == EState.ALIVE && anyPlayerCharactersStillAlive(encounter))
