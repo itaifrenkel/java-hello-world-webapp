@@ -11,7 +11,7 @@ public class CreateCharacterCmd extends AbstractCmd
   private final ECharacterClass characterClass;
   private GameCharacter createdCharacter;
 
-  public CreateCharacterCmd(String characterName, ECharacterClass characterClass)
+  CreateCharacterCmd(String characterName, ECharacterClass characterClass)
   {
     this.characterName = characterName;
     this.characterClass = characterClass;

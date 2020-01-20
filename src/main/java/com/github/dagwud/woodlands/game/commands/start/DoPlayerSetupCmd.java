@@ -2,16 +2,13 @@ package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameState;
-import com.github.dagwud.woodlands.game.commands.character.CreateCharacterCmd;
+import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.character.CreateShadowPlayerCmd;
-import com.github.dagwud.woodlands.game.commands.character.SwitchCharacterCmd;
+import com.github.dagwud.woodlands.game.commands.character.SpawnCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
-import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class DoPlayerSetupCmd extends SuspendableCmd
 {
@@ -61,17 +58,10 @@ public class DoPlayerSetupCmd extends SuspendableCmd
   {
     characterClass = capturedInput;
 
-    CreateCharacterCmd create = new CreateCharacterCmd(characterName, ECharacterClass.of(characterClass));
-    CommandDelegate.execute(create);
-    GameCharacter character = create.getCreatedCharacter();
+    SpawnCharacterCmd cmd = new SpawnCharacterCmd(getGameState().getPlayer().getChatId(), characterName, ECharacterClass.of(characterClass));
+    CommandDelegate.execute(cmd);
 
-    SwitchCharacterCmd makeActive = new SwitchCharacterCmd(getGameState().getPlayer(), character);
-    CommandDelegate.execute(makeActive);
-
-    SendMessageCmd welcomeCmd = new SendMessageCmd(getGameState().getPlayer().getChatId(), "Welcome, " + character.getName() + " the " + character.getCharacterClass() + "!");
-    CommandDelegate.execute(welcomeCmd);
-
-    MoveToLocationCmd move = new MoveToLocationCmd(getGameState(), ELocation.VILLAGE_SQUARE);
-    CommandDelegate.execute(move);
+    CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100, getGameState().getPlayer().getActiveCharacter());
+    CommandDelegate.execute(shadow);
   }
 }
