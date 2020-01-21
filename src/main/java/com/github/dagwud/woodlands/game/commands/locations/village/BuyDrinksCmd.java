@@ -23,6 +23,13 @@ public class BuyDrinksCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (activeCharacters.getStats().getHitPoints() <= 1)
+    {
+      SendMessageCmd c = new SendMessageCmd(chatId, "\"You've had enough, mate\"");
+      CommandDelegate.execute(c);
+      return;
+    }
+
     ChanceCalculatorCmd chance = new ChanceCalculatorCmd(new BigDecimal("33.333"));
     chance.execute();
     if (chance.getResult())
