@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.ReduceHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
@@ -47,6 +48,9 @@ public class BuyDrinksCmd extends AbstractCmd
       modifyDrunkeness();
       modifyDrunkeness();
     }
+
+    RunLaterCmd runLaterCmd = new RunLaterCmd(10_000, new SoberUpCmd(activeCharacter));
+    CommandDelegate.execute(runLaterCmd);
   }
 
   private void modifyDrunkeness()
