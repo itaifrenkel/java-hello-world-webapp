@@ -59,6 +59,10 @@ public class Party
 
   public GameCharacter getLeader()
   {
+    if (!members.iterator().hasNext())
+    {
+      return null;
+    }
     return members.iterator().next();
   }
 }

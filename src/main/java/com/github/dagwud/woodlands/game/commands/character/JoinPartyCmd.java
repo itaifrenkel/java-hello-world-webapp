@@ -37,7 +37,7 @@ public class JoinPartyCmd extends AbstractCmd
     }
 
     Party party = PartyRegistry.lookup(partyName);
-    if (party.getLeader().getLocation() != ELocation.VILLAGE_SQUARE)
+    if (null != party.getLeader() && party.getLeader().getLocation() != ELocation.VILLAGE_SQUARE)
     {
       SendMessageCmd send = new SendMessageCmd(joiner.getPlayedBy().getChatId(), "You can't join that party - it's not in the Village");
       CommandDelegate.execute(send);
