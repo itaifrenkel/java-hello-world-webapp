@@ -45,13 +45,13 @@ public class SpawnCharacterCmd extends AbstractCmd
     MoveToLocationCmd move = new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE);
     CommandDelegate.execute(move);
 
-    RunLaterCmd runLaterCmd = new RunLaterCmd(SoberUpCmd.SOBER_UP_DELAY_MS, new SoberUpCmd(character, chatId));
-    CommandDelegate.execute(runLaterCmd);
+    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, chatId);
+    CommandDelegate.execute(periodicSoberUp);
 
     this.spawned = character;
   }
 
-  public GameCharacter getSpawned()
+  GameCharacter getSpawned()
   {
     return spawned;
   }
