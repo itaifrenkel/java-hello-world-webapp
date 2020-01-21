@@ -34,7 +34,7 @@ public class MainTest
     PlayerState playerState = startBot();
     initPlayer(playerState);
 
-    assertEquals("TestUser", playerState.getActiveCharacter().getName());
+    assertEquals("TestUser"+playerState.getPlayer().getChatId(), playerState.getActiveCharacter().getName());
     assertEquals(ECharacterClass.WIZARD, playerState.getActiveCharacter().getCharacterClass());
     assertEquals(1, playerState.getActiveCharacter().getStats().getLevel());
     assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());

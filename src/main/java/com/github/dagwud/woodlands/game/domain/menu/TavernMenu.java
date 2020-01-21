@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.menu;
 
-import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
+import com.github.dagwud.woodlands.game.commands.ECommand;
 
 public class TavernMenu extends GameMenu
 {
@@ -14,6 +14,6 @@ public class TavernMenu extends GameMenu
     "\"Long journey?\" he asks jovially, though something about his demeanor suggests he’s not that interested in your journey so much as how many coins are in your pocket.";
 
     setPrompt(message);
-    setOptions(new String[]{"Buy Drinks", "Village Square"});
+    setOptions(ECommand.BUY_DRINKS, ECommand.VILLAGE_SQUARE);
   }
 }

@@ -1,10 +1,12 @@
 package com.github.dagwud.woodlands.game.domain.menu;
 
+import com.github.dagwud.woodlands.game.commands.ECommand;
+
 public class InnMenu extends GameMenu
 {
   public InnMenu()
   {
     setPrompt("This is the inn");
-    setOptions(new String[]{"Leave Items", "Retrieve Items", "Short Rest", "Village Square"});
+    setOptions(ECommand.RETRIEVE_ITEMS, ECommand.SHORT_REST, ECommand.VILLAGE_SQUARE);
   }
 }

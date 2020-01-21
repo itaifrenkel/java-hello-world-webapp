@@ -1,9 +1,11 @@
 package com.github.dagwud.woodlands.game.domain.menu;
 
+import com.github.dagwud.woodlands.game.commands.ECommand;
+
 public class GameMenu
 {
   private String prompt;
-  private String[] options;
+  private ECommand[] options;
 
   public String getPrompt()
   {
@@ -15,21 +17,21 @@ public class GameMenu
     this.prompt = prompt;
   }
 
-  public String[] getOptions()
+  public ECommand[] getOptions()
   {
     return options;
   }
 
-  void setOptions(String[] options)
+  void setOptions(ECommand... options)
   {
     this.options = options;
   }
 
   public boolean containsOption(String option)
   {
-    for (String opt : options)
+    for (ECommand opt : options)
     {
-      if (opt.equals(option))
+      if (opt.matches(option))
       {
         return true;
       }

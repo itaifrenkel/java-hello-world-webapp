@@ -9,6 +9,10 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Party;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class MoveToLocationCmd extends AbstractCmd
 {
@@ -40,7 +44,7 @@ public class MoveToLocationCmd extends AbstractCmd
     }
 
 
-    if (location == ELocation.MOUNTAIN || location == ELocation.VILLAGE || location == Location.WOODLANDS)
+    if (location == ELocation.MOUNTAIN || location == ELocation.VILLAGE_SQUARE || location == ELocation.WOODLANDS)
     {
       // location requires whole party to move as one:
       if (!allAtSameLocation(characterToMove.getParty()))
@@ -74,13 +78,14 @@ public class MoveToLocationCmd extends AbstractCmd
     }
   }
 
-  private boolean areAllAtSameLocation(Party party)
+  private boolean allAtSameLocation(Party party)
   {
+    Set<ELocation> locations = new HashSet<>();
     for (GameCharacter member : party.getMembers())
     {
       locations.add(member.getLocation());
     }
-    return locations.size() == 1
+    return locations.size() == 1;
   }
 
   private void showMenuForLocation(ELocation location, PlayerState playerState)

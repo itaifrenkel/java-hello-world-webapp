@@ -68,6 +68,11 @@ public enum ECommand
         return menuCmd;
     }
 
+    public boolean matches(String name)
+    {
+        return this.name.equalsIgnoreCase(name);
+    }
+
     public AbstractCmd build(GameCharacter character, int chatId)
     {
         return commandBuilder.build(character, chatId);
