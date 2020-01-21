@@ -48,9 +48,6 @@ public class BuyDrinksCmd extends AbstractCmd
       modifyDrunkeness();
       modifyDrunkeness();
     }
-
-    RunLaterCmd runLaterCmd = new RunLaterCmd(10_000, new SoberUpCmd(activeCharacter));
-    CommandDelegate.execute(runLaterCmd);
   }
 
   private void modifyDrunkeness()

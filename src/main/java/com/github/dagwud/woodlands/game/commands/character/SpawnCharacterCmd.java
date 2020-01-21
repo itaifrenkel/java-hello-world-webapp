@@ -4,8 +4,10 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.SoberUpCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -42,6 +44,9 @@ public class SpawnCharacterCmd extends AbstractCmd
 
     MoveToLocationCmd move = new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE);
     CommandDelegate.execute(move);
+
+    RunLaterCmd runLaterCmd = new RunLaterCmd(SoberUpCmd.SOBER_UP_DELAY_MS, new SoberUpCmd(character, chatId));
+    CommandDelegate.execute(runLaterCmd);
 
     this.spawned = character;
   }

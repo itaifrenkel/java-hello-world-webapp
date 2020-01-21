@@ -31,5 +31,16 @@ public class DoShortRestCmd extends AbstractCmd
     SendMessageCmd echo = new SendMessageCmd(chatId, "You rested and recovered ❤️" + hitPointsRecovered + ". " +
             "Now at ❤️" + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints());
     CommandDelegate.execute(echo);
+
+    soberUp();
+  }
+
+  private void soberUp()
+  {
+    for (int i = 0; i < 3; i++)
+    {
+      SoberUpCmd sober = new SoberUpCmd(character, chatId);
+      CommandDelegate.execute(sober);
+    }
   }
 }

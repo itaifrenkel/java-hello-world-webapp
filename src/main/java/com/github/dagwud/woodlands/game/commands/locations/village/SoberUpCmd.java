@@ -5,31 +5,32 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class SoberUpCmd extends AbstractCmd
 {
-    private final GameCharacter activeCharacter;
+  public static final long SOBER_UP_DELAY_MS = 30_000;
 
-    public SoberUpCmd(GameCharacter activeCharacter)
+  private final GameCharacter activeCharacter;
+  private final int chatId;
+
+  public SoberUpCmd(GameCharacter activeCharacter, int chatId)
+  {
+    this.activeCharacter = activeCharacter;
+    this.chatId = chatId;
+  }
+
+  @Override
+  public void execute()
+  {
+    Stats stats = activeCharacter.getStats();
+    if (stats.getDrunkeness() != 0)
     {
-        this.activeCharacter = activeCharacter;
+      CommandDelegate.execute(new SendMessageCmd(chatId, "You sober up a bit."));
+      stats.setDrunkeness(Math.max(0, stats.getDrunkeness() - 1));
     }
 
-    @Override
-    public void execute()
-    {
-        if (activeCharacter.getStats().getDrunkeness() <= 0)
-        {
-            activeCharacter.getStats().setDrunkeness(0);
-            return;
-        }
-
-        CommandDelegate.execute(new SendMessageCmd(activeCharacter.getPlayedBy().getChatId(), "You sober up a bit."));
-        activeCharacter.getStats().setDrunkeness(activeCharacter.getStats().getDrunkeness() - 1);
-
-        if (activeCharacter.getStats().getDrunkeness() > 0)
-        {
-            CommandDelegate.execute(new RunLaterCmd(10_000, new SoberUpCmd(activeCharacter)));
-        }
-    }
+    RunLaterCmd nextSoberUp = new RunLaterCmd(SOBER_UP_DELAY_MS, new SoberUpCmd(activeCharacter, chatId));
+    CommandDelegate.execute(nextSoberUp);
+  }
 }
