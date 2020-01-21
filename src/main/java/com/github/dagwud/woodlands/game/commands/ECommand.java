@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.BuyDrinksCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.LeaveItemsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.RetrieveItemsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.ShortRestCmd;
 import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
@@ -34,6 +35,7 @@ public enum ECommand
     JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
     BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
     SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
+    LEAVE_ITEMS("Leave items", true, (character, chatId) -> new LeaveItemsCmd(character)),
     RETRIEVE_ITEMS("Retrieve Items", true, (character, chatId) -> new RetrieveItemsCmd(character)),
     ;
 
@@ -76,5 +78,12 @@ public enum ECommand
     public AbstractCmd build(GameCharacter character, int chatId)
     {
         return commandBuilder.build(character, chatId);
+    }
+
+
+    @Override
+    public String toString()
+    {
+        return this.name;
     }
 }
