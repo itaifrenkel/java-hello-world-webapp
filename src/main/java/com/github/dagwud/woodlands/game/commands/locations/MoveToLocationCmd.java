@@ -43,7 +43,7 @@ public class MoveToLocationCmd extends AbstractCmd
     if (location == ELocation.MOUNTAIN || location == ELocation.VILLAGE || location == Location.WOODLANDS)
     {
       // location requires whole party to move as one:
-      if (!allAtSameLocation(characterToMove.getParty())
+      if (!allAtSameLocation(characterToMove.getParty()))
       {
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " until all party members are in the same place");
         CommandDelegate.execute(cmd);
@@ -72,6 +72,15 @@ public class MoveToLocationCmd extends AbstractCmd
       showMenuForLocation(location, characterToMove.getPlayedBy().getPlayerState());
       handleLocationEntry(location, characterToMove.getPlayedBy().getPlayerState());
     }
+  }
+
+  private boolean areAllAtSameLocation(Party party)
+  {
+    for (GameCharacter member : party.getMembers())
+    {
+      locations.add(member.getLocation());
+    }
+    return locations.size() == 1
   }
 
   private void showMenuForLocation(ELocation location, PlayerState playerState)
