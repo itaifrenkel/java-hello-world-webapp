@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.AcceptInputCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
 public class CommandFactory
@@ -43,12 +44,17 @@ public class CommandFactory
         int chatId = telegramUpdate.message.chat.id;
         ECommand by = ECommand.by(cmd);
 
-        if (by != null && (!by.isMenuCmd() || playerState.getCurrentMenu().containsOption(cmd)))
+        if (by != null && (!by.isMenuCmd() || isValidMenuOption(cmd, playerState.getCurrentMenu())))
         {
             return by.build(playerState.getActiveCharacter(), chatId);
         }
 
         return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");
+    }
+
+    private boolean isValidMenuOption(String cmd, GameMenu currentMenu)
+    {
+        return currentMenu != null && currentMenu.containsOption(cmd);
     }
 
 }
