@@ -35,7 +35,7 @@ public enum ECommand
     JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
     BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
     SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
-    LEAVE_ITEMS("Leave items", true, (character, chatId) -> new LeaveItemsCmd(character)),
+    LEAVE_ITEMS("Leave Items", true, (character, chatId) -> new LeaveItemsCmd(character)),
     RETRIEVE_ITEMS("Retrieve Items", true, (character, chatId) -> new RetrieveItemsCmd(character)),
     ;
 
@@ -79,7 +79,6 @@ public enum ECommand
     {
         return commandBuilder.build(character, chatId);
     }
-
 
     @Override
     public String toString()
