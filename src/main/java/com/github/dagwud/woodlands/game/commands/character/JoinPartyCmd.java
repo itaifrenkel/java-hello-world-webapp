@@ -23,21 +23,21 @@ public class JoinPartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (alreadyInParty(joiner, partyName))
+    {
+      SendMessageCmd send = new SendMessageCmd(joiner.getPlayedBy().getChatId(), "You're already in that party!");
+      CommandDelegate.execute(send);
+      return;
+    }
+
     if (null != joiner.getParty())
     {
-      if (joiner.getParty().getName().equals(partyName))
-      {
-        SendMessageCmd send = new SendMessageCmd(joiner.getPlayedBy().getChatId(), "You're already in that party!");
-        CommandDelegate.execute(send);
-        return;
-      }
-      
       LeavePartyCmd leave = new LeavePartyCmd(joiner, joiner.getParty());
       CommandDelegate.execute(leave);
     }
 
     Party party = PartyRegistry.lookup(partyName);
-    if (null != party.getLeader() && party.getLeader().getLocation() != ELocation.VILLAGE_SQUARE)
+    if (!isPartyInTheVillage(party))
     {
       SendMessageCmd send = new SendMessageCmd(joiner.getPlayedBy().getChatId(), "You can't join that party - it's not in the Village");
       CommandDelegate.execute(send);
@@ -46,6 +46,7 @@ public class JoinPartyCmd extends AbstractCmd
       CommandDelegate.execute(partyMsg);
       return;
     }
+
     joiner.setParty(party);
     party.addMember(joiner);
 
@@ -54,6 +55,20 @@ public class JoinPartyCmd extends AbstractCmd
       SendPartyMessageCmd welcome = new SendPartyMessageCmd(party, joiner.getName() + " has joined " + partyName + "!");
       CommandDelegate.execute(welcome);
     }
+  }
+
+  private boolean isPartyInTheVillage(Party party)
+  {
+    if (null == party.getLeader())
+    {
+      return true;
+    }
+    return party.getLeader().getLocation() == ELocation.VILLAGE_SQUARE;
+  }
+
+  private boolean alreadyInParty(GameCharacter joiner, String partyNameToJoin)
+  {
+    return null != joiner.getParty() && joiner.getParty().getName().equals(partyNameToJoin);
   }
 
 }
