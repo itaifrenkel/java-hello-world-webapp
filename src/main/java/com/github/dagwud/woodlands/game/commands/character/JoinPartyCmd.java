@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.RequireAlivePrerequisite;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
@@ -16,6 +17,8 @@ public class JoinPartyCmd extends AbstractCmd
 
   public JoinPartyCmd(GameCharacter joiner, String partyName)
   {
+    super(new RequireAlivePrerequisite(joiner),
+            new AlreadyInPartyPrerequisite(joiner, partyName));
     this.joiner = joiner;
     this.partyName = partyName;
   }
@@ -23,13 +26,6 @@ public class JoinPartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (alreadyInParty(joiner, partyName))
-    {
-      SendMessageCmd send = new SendMessageCmd(joiner.getPlayedBy().getChatId(), "You're already in that party!");
-      CommandDelegate.execute(send);
-      return;
-    }
-
     if (null != joiner.getParty())
     {
       LeavePartyCmd leave = new LeavePartyCmd(joiner, joiner.getParty());
@@ -64,11 +60,6 @@ public class JoinPartyCmd extends AbstractCmd
       return true;
     }
     return party.getLeader().getLocation() == ELocation.VILLAGE_SQUARE;
-  }
-
-  private boolean alreadyInParty(GameCharacter joiner, String partyNameToJoin)
-  {
-    return null != joiner.getParty() && joiner.getParty().getName().equals(partyNameToJoin);
   }
 
 }

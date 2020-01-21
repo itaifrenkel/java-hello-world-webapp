@@ -9,7 +9,10 @@ public class CommandDelegate
   {
     try
     {
-      cmd.execute();
+      if (cmd.verifyPrerequisites())
+      {
+        cmd.execute();
+      }
     }
     catch (Exception e)
     {
