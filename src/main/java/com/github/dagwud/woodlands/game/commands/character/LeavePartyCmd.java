@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.CommandDelegate;
 
 public class LeavePartyCmd extends AbstractCmd
 {
