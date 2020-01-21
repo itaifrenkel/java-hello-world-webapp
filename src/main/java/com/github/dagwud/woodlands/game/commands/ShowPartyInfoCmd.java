@@ -31,8 +31,9 @@ public class ShowPartyInfoCmd extends AbstractCmd
       Stats stats = member.getStats();
       message.append(member.getName()).append(": ")
               .append("❤️").append(stats.getHitPoints()).append(" / ").append(stats.getMaxHitPoints())
-              .append("\n").append("✨")
-              .append(stats.getMana()).append(" / ").append(stats.getMaxMana());
+              .append(", ").append("✨")
+              .append(stats.getMana()).append(" / ").append(stats.getMaxMana())
+              .append(" - ").append(member.getLocation().getDisplayName());
     }
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message.toString());

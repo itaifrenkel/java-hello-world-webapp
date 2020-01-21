@@ -28,4 +28,9 @@ public enum ELocation
   {
     return menu;
   }
+
+  public String getDisplayName()
+  {
+    return displayName;
+  }
 }
