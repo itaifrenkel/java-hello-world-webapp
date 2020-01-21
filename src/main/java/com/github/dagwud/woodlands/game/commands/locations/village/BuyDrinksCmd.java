@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ public class BuyDrinksCmd extends AbstractCmd
 
   public BuyDrinksCmd(int chatId, GameCharacter activeCharacter)
   {
+    super(new AbleToActPrerequisite(activeCharacter));
     this.chatId = chatId;
     this.activeCharacter = activeCharacter;
   }

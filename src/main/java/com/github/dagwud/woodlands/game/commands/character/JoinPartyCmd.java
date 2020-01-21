@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.prerequisites.RequireAlivePrerequisite;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
@@ -17,7 +17,7 @@ public class JoinPartyCmd extends AbstractCmd
 
   public JoinPartyCmd(GameCharacter joiner, String partyName)
   {
-    super(new RequireAlivePrerequisite(joiner),
+    super(new AbleToActPrerequisite(joiner),
             new AlreadyInPartyPrerequisite(joiner, partyName));
     this.joiner = joiner;
     this.partyName = partyName;

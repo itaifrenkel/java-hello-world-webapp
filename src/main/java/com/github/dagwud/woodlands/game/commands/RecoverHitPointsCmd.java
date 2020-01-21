@@ -21,10 +21,7 @@ public class RecoverHitPointsCmd extends AbstractCmd
     character.getStats().setHitPoints(character.getStats().getHitPoints() + hitPointsRecovered);
     if (character.getStats().getHitPoints() > 0)
     {
-      if (character.getStats().getState() == EState.UNCONSCIOUS || character.getStats().getState() == EState.DEAD)
-      {
-        character.getStats().setState(EState.ALIVE);
-      }
+      character.getStats().setState(EState.ALIVE);
     }
   }
 }

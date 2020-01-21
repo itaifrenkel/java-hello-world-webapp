@@ -20,6 +20,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
   EncounterRoundCmd(int chatId, Encounter encounter, int delayBetweenRoundsMS)
   {
+    super(new EncounterNotEndedPrerequisite(encounter));
     this.chatId = chatId;
     this.encounter = encounter;
     this.delayBetweenRoundsMS = delayBetweenRoundsMS;
@@ -28,11 +29,6 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (encounter.isEnded())
-    {
-      return;
-    }
-
     encounter.incrementBattleRound();
     List<DamageInflicted> roundActivity = new LinkedList<>();
 

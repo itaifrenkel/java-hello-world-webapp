@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EndEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -24,6 +25,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
   public MoveToLocationCmd(GameCharacter characterToMove, ELocation location)
   {
+    super(new AbleToActPrerequisite(characterToMove));
     this.characterToMove = characterToMove;
     this.location = location;
   }
@@ -31,22 +33,6 @@ public class MoveToLocationCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    int chatId = characterToMove.getPlayedBy().getChatId();
-
-    if (!characterToMove.isSetupComplete())
-    {
-      SendMessageCmd cmd = new SendMessageCmd(chatId,"You need to create a character first. Please use /new");
-      CommandDelegate.execute(cmd);
-      return;
-    }
-
-    if (characterToMove.getStats().getState() != EState.ALIVE)
-    {
-      SendMessageCmd cmd = new SendMessageCmd(chatId, "You're " + characterToMove.getStats().getState().name().toLowerCase() + "; you can't do anything");
-      CommandDelegate.execute(cmd);
-      return;
-    }
-
     if (allMoveTogether(location))
     {
       // location requires whole party to move as one:

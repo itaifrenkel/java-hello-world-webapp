@@ -8,7 +8,7 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class PeriodicSoberUpCmd extends AbstractCmd
 {
-  public static final long SOBER_UP_DELAY_MS = 30_000;
+  private static final long SOBER_UP_DELAY_MS = 30_000;
 
   private final GameCharacter character;
   private final int chatId;

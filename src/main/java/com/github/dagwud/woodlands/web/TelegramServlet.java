@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.web;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
@@ -66,8 +67,8 @@ public class TelegramServlet extends HttpServlet
     PlayerState playerState = GameStatesRegistry.lookup(chatId);
     synchronized (GameStatesRegistry.lookup(chatId))
     {
-      AbstractCmd instruction = CommandFactory.instance().create(update, playerState);
-      instruction.execute();
+      AbstractCmd cmd = CommandFactory.instance().create(update, playerState);
+      CommandDelegate.execute(cmd);
     }
   }
 

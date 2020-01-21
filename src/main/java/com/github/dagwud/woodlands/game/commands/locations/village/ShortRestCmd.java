@@ -4,6 +4,8 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class ShortRestCmd extends AbstractCmd
@@ -13,6 +15,7 @@ public class ShortRestCmd extends AbstractCmd
 
   public ShortRestCmd(int chatId, GameCharacter activeCharacter)
   {
+    super(new AbleToActPrerequisite(activeCharacter));
     this.chatId = chatId;
     this.activeCharacter = activeCharacter;
   }
@@ -20,11 +23,9 @@ public class ShortRestCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    activeCharacter.getStats().setState(EState.RESTING);
     AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, activeCharacter);
-    if (chatId > 0)
-    {
-      restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
-    }
+    restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
     CommandDelegate.execute(restCompletedCmd);
 
     SendMessageCmd echo = new SendMessageCmd(chatId, "You're resting.");
