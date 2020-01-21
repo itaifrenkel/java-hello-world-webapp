@@ -29,10 +29,13 @@ public class SendMessageCmd extends AbstractCmd
     public void execute() throws IOException
     {
         PlayerState currentPlayerStateLookup = GameStatesRegistry.lookup(chatId);
-        Stats stats = currentPlayerStateLookup.getPlayer().getPlayerState().getActiveCharacter().getStats();
 
-        String newMessage = drunkFucate(message, stats);
-
+        String newMessage = message;
+        if (currentPlayerStateLookup.getPlayer().getPlayerState() != null)
+        {
+            Stats stats = currentPlayerStateLookup.getPlayer().getPlayerState().getActiveCharacter().getStats();
+            newMessage = drunkFucate(message, stats);
+        }
         MessagingFactory.create().sender().sendMessage(chatId, newMessage, replyMarkup);
     }
 
