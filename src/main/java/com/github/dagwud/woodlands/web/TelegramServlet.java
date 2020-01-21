@@ -61,6 +61,7 @@ public class TelegramServlet extends HttpServlet
 
     // todo verify request came from telegram - token in request
     String text = determineText(update);
+    System.out.println(summarizeIncomingMessage(update));
 
     PlayerState playerState = GameStatesRegistry.lookup(chatId);
     synchronized (GameStatesRegistry.lookup(chatId))
@@ -68,6 +69,23 @@ public class TelegramServlet extends HttpServlet
       AbstractCmd instruction = CommandFactory.instance().create(update, playerState);
       instruction.execute();
     }
+  }
+
+  private String summarizeIncomingMessage(Update update)
+  {
+    if (null == update)
+    {
+      return "NULL update received";
+    }
+    if (null == update.message)
+    {
+      return "NULL Message received";
+    }
+    if (update.message.from == null)
+    {
+      return "Update message FROM NULL";
+    }
+    return update.message.from.username + " says: \"" + update.message.text + "\"";
   }
 
   @Override
