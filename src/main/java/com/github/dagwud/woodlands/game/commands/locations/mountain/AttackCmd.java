@@ -85,6 +85,10 @@ public class AttackCmd extends AbstractCmd
     int modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
     int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
     int drunkennessPenalty = determineDrunkennessModifier(attacker);
+    if (drunkennessPenalty > 0)
+    {
+      weaponBoost = Math.min(0, weaponBoost);
+    }
     int defenderDefenceRating = defender.getStats().getDefenceRating();
     if (naturalRoll.getTotal() + modifier + weaponBoost - drunkennessPenalty >= defenderDefenceRating)
     {
