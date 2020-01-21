@@ -12,6 +12,7 @@ import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,7 +39,7 @@ public class MoveToLocationCmd extends AbstractCmd
       return;
     }
 
-    if (allMoveTogether(this.location))
+    if (allMoveTogether(location))
     {
       // location requires whole party to move as one:
       if (!allAtSameLocation(characterToMove.getParty()))
@@ -55,16 +56,12 @@ public class MoveToLocationCmd extends AbstractCmd
 
     endActiveEncounter();
 
-    if (allMoveTogether(this.location))
+    if (allMoveTogether(location))
     {
-      for (GameCharacter character : characterToMove.getParty().getMembers())
-      {
-        doMove(character, location);
-      }
+      doMove(characterToMove.getParty().getMembers(), location);
     }
     else
     {
-      // players can move individually:
       doMove(characterToMove, location);
     }
   }
@@ -72,6 +69,14 @@ public class MoveToLocationCmd extends AbstractCmd
   private boolean allMoveTogether(ELocation moveTo)
   {
     return moveTo == ELocation.MOUNTAIN || moveTo == ELocation.VILLAGE_SQUARE || moveTo == ELocation.WOODLANDS;
+  }
+
+  private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo)
+  {
+    for (GameCharacter character : charactersToMove)
+    {
+      doMove(character, moveTo);
+    }
   }
 
   private void doMove(GameCharacter characterToMove, ELocation moveTo)
