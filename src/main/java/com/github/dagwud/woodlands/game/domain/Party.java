@@ -35,6 +35,11 @@ public class Party
     members.add(joiner);
   }
 
+  public void removeMember(GameMember leaver) 
+  {
+    members.remove(leaver);
+  }
+  
   public List<GameCharacter> getMembers()
   {
     // quick and easy synchronization protection:
