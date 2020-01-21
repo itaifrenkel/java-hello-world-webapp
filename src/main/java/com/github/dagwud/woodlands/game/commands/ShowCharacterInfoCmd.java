@@ -13,7 +13,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
   private final int chatId;
   private final GameCharacter character;
 
-  public ShowCharacterInfoCmd(int chatId, GameCharacter character)
+  ShowCharacterInfoCmd(int chatId, GameCharacter character)
   {
     this.chatId = chatId;
     this.character = character;

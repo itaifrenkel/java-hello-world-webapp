@@ -49,11 +49,16 @@ public class Party
 
   public boolean isLedBy(GameCharacter activeCharacter)
   {
-    return members.iterator().next() == activeCharacter;
+    return getLeader() == activeCharacter;
   }
 
   public boolean isPrivateParty()
   {
     return getName().startsWith("_");
+  }
+
+  public GameCharacter getLeader()
+  {
+    return members.iterator().next();
   }
 }

@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 
@@ -36,6 +37,15 @@ public class JoinPartyCmd extends AbstractCmd
     }
 
     Party party = PartyRegistry.lookup(partyName);
+    if (party.getLeader().getLocation() != ELocation.VILLAGE_SQUARE)
+    {
+      SendMessageCmd send = new SendMessageCmd(joiner.getPlayedBy().getChatId(), "You can't join that party - it's not in the Village");
+      CommandDelegate.execute(send);
+
+      SendPartyMessageCmd partyMsg = new SendPartyMessageCmd(party, joiner.getName() + " wants to join, but can only do so when you're in the Village");
+      CommandDelegate.execute(partyMsg);
+      return;
+    }
     joiner.setParty(party);
     party.addMember(joiner);
 
