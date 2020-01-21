@@ -95,7 +95,7 @@ public class AttackCmd extends AbstractCmd
 
   private int determineDrunkennessModifier(IFighter attacker)
   {
-    return Math.min(attacker.getStats().getDrunkeness(), 5);
+    return Math.min(attacker.getStats().getDrunkeness() / 2, 3);
   }
 
   DamageInflicted getDamageInflicted()
