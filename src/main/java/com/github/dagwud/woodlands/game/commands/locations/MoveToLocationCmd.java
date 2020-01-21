@@ -39,18 +39,38 @@ public class MoveToLocationCmd extends AbstractCmd
       return;
     }
 
-    for (GameCharacter character : characterToMove.getParty().getMembers())
+
+    if (location == ELocation.MOUNTAIN || location == ELocation.VILLAGE || location == Location.WOODLANDS)
     {
-      character.setLocation(location);
+      // location requires whole party to move as one:
+      if (!allAtSameLocation(characterToMove.getParty())
+      {
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " until all party members are in the same place");
+        CommandDelegate.execute(cmd);
+        return;
+      }
+      for (GameCharacter character : characterToMove.getParty().getMembers())
+      {
+        character.setLocation(location);
+      }
+      SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "You are now at " + location);
+      CommandDelegate.execute(cmd);
+
+      for (GameCharacter character : characterToMove.getParty().getMembers())
+      {
+        showMenuForLocation(location, character.getPlayedBy().getPlayerState());
+        handleLocationEntry(location, character.getPlayedBy().getPlayerState());
+      }
     }
-
-    SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "You are now at " + location);
-    CommandDelegate.execute(cmd);
-
-    for (GameCharacter character : characterToMove.getParty().getMembers())
+    else
     {
-      showMenuForLocation(location, character.getPlayedBy().getPlayerState());
-      handleLocationEntry(location, character.getPlayedBy().getPlayerState());
+      // players can move individually:
+      characterToMove.setLocation(location);
+      SendPartyMessageCmd c = new SendPartyMessageCmd(characterToMove.getParty(), characterToMove.getName() + " is now at " + location);
+      CommandDelegate.execute(c);
+
+      showMenuForLocation(location, characterToMove.getPlayedBy().getPlayerState());
+      handleLocationEntry(location, characterToMove.getPlayedBy().getPlayerState());
     }
   }
 
