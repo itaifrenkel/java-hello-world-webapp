@@ -71,9 +71,11 @@ public class AttackCmd extends AbstractCmd
 
   private EHitStatus rollForHit(IFighter attacker, Weapon attackWith, IFighter defender)
   {
+    int drunkennessPenalty = determineDrunkennessModifier(attacker);
+   
     DiceRollCmd naturalRoll = new DiceRollCmd(1, 20);
     CommandDelegate.execute(naturalRoll);
-    if (naturalRoll.getTotal() == 1)
+    if (naturalRoll.getTotal() <= 1 + drunkennessPenalty)
     {
       return EHitStatus.MISS;
     }
@@ -84,7 +86,7 @@ public class AttackCmd extends AbstractCmd
 
     int modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
     int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
-    int drunkennessPenalty = determineDrunkennessModifier(attacker);
+    
     int defenderDefenceRating = defender.getStats().getDefenceRating();
     if (naturalRoll.getTotal() + modifier + weaponBoost - drunkennessPenalty >= defenderDefenceRating)
     {
@@ -95,7 +97,7 @@ public class AttackCmd extends AbstractCmd
 
   private int determineDrunkennessModifier(IFighter attacker)
   {
-    return Math.min(attacker.getStats().getDrunkeness(), 5);
+    return Math.min(attacker.getStats().getDrunkeness() / 2, 4);
   }
 
   DamageInflicted getDamageInflicted()

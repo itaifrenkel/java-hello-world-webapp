@@ -47,7 +47,7 @@ public class MoveToLocationCmd extends AbstractCmd
     if (location == ELocation.MOUNTAIN || location == ELocation.VILLAGE_SQUARE || location == ELocation.WOODLANDS)
     {
       // location requires whole party to move as one:
-      if (!allAtSameLocation(characterToMove.getParty()))
+      if (location != ELocation.VILLAGE_SQUARE && !allAtSameLocation(characterToMove.getParty()))
       {
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " until all party members are in the same place");
         CommandDelegate.execute(cmd);
