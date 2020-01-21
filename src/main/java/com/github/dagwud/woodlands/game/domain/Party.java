@@ -35,9 +35,10 @@ public class Party
     members.add(joiner);
   }
 
-  public void removeMember(GameMember leaver) 
+  public void removeMember(GameCharacter leaver) 
   {
     members.remove(leaver);
+    leaver.setParty(null);
   }
   
   public List<GameCharacter> getMembers()
