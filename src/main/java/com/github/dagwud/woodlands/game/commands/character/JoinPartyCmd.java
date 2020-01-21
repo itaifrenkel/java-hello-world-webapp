@@ -23,6 +23,13 @@ public class JoinPartyCmd extends AbstractCmd
   {
     if (null != joiner.getParty())
     {
+      if (joiner.getParty().getName().equals(partyName))
+      {
+        SendMessageCmd send = new SendMessageCmd(joiner.getPlayedBy().getChatId(), "You're already in that party!");
+        CommandDelegate.execute(send);
+        return;
+      }
+      
       LeavePartyCmd leave = new LeavePartyCmd(joiner, joiner.getParty());
       CommandDelegate.execute(leave);
     }
