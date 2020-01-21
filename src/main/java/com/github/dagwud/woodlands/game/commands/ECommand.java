@@ -22,6 +22,7 @@ public enum ECommand
     START("/start", false, (character, chatId) -> new StartCmd(GameStatesRegistry.lookup(chatId), chatId)),
     NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character.getPlayedBy())),
     ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
+    PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
 
     THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
     THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
