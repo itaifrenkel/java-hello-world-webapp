@@ -17,6 +17,10 @@ public class Stats
   private int agility;
   private int constitution;
   private int defenceRating;
+
+  // thus endeth the serious stats and begin the fun stats
+  private int drunkeness;
+
   private Map<String, Integer> weaponBonusHit = new HashMap<>();
   private Map<String, Integer> weaponBonusDamage = new HashMap<>();
   private EState state;
@@ -144,5 +148,15 @@ public class Stats
   public void setDefenceRating(int defenceRating)
   {
     this.defenceRating = defenceRating;
+  }
+
+  public int getDrunkeness()
+  {
+    return drunkeness;
+  }
+
+  public void setDrunkeness(int drunkeness)
+  {
+    this.drunkeness = drunkeness;
   }
 }
