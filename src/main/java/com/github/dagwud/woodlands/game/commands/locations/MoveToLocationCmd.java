@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.locations.mountain.EndEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -30,12 +31,6 @@ public class MoveToLocationCmd extends AbstractCmd
   {
     int chatId = characterToMove.getPlayedBy().getChatId();
 
-    if (characterToMove.getParty().getActiveEncounter() != null)
-    {
-      characterToMove.getParty().getActiveEncounter().end();
-      characterToMove.getParty().setActiveEncounter(null);
-    }
-
     if (!characterToMove.isSetupComplete())
     {
       SendMessageCmd cmd = new SendMessageCmd(chatId,"You need to create a character first. Please use /new");
@@ -43,6 +38,7 @@ public class MoveToLocationCmd extends AbstractCmd
       return;
     }
 
+    endActiveEncounter();
 
     if (location == ELocation.MOUNTAIN || location == ELocation.VILLAGE_SQUARE || location == ELocation.WOODLANDS)
     {
@@ -53,10 +49,7 @@ public class MoveToLocationCmd extends AbstractCmd
         CommandDelegate.execute(cmd);
         return;
       }
-      for (GameCharacter character : characterToMove.getParty().getMembers())
-      {
-        character.setLocation(location);
-      }
+      moveAllCharacters(characterToMove.getParty(), location);
       SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "You are now at " + location);
       CommandDelegate.execute(cmd);
 
@@ -75,6 +68,23 @@ public class MoveToLocationCmd extends AbstractCmd
 
       showMenuForLocation(location, characterToMove.getPlayedBy().getPlayerState());
       handleLocationEntry(location, characterToMove.getPlayedBy().getPlayerState());
+    }
+  }
+
+  private void moveAllCharacters(Party party, ELocation moveTo)
+  {
+    for (GameCharacter character : party.getMembers())
+    {
+      character.setLocation(moveTo);
+    }
+  }
+
+  private void endActiveEncounter()
+  {
+    if (characterToMove.getParty().getActiveEncounter() != null)
+    {
+      EndEncounterCmd cmd = new EndEncounterCmd(characterToMove.getParty().getActiveEncounter());
+      CommandDelegate.execute(cmd);
     }
   }
 

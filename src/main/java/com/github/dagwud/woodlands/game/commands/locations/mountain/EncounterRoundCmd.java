@@ -52,7 +52,6 @@ public class EncounterRoundCmd extends AbstractCmd
     }
     else
     {
-      encounter.end();
       if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
       {
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
@@ -63,6 +62,8 @@ public class EncounterRoundCmd extends AbstractCmd
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated!");
         CommandDelegate.execute(cmd);
       }
+      EndEncounterCmd end = new EndEncounterCmd(encounter);
+      CommandDelegate.execute(end);
     }
   }
 
