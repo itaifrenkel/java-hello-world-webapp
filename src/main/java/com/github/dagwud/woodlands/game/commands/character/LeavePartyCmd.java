@@ -21,7 +21,7 @@ public class LeavePartyCmd extends AbstractCmd
   {
     if (!party.isPrivateParty())
     {
-      new SendPartyMessageCmd(party, character.getName() + " has left " + party.getName());
+      CommandDelegate.execute(new SendPartyMessageCmd(party, character.getName() + " has left " + party.getName()));
     }
     party.removeMember(character);    
   }
