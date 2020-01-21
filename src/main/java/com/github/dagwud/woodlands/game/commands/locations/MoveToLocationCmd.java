@@ -38,9 +38,7 @@ public class MoveToLocationCmd extends AbstractCmd
       return;
     }
 
-    endActiveEncounter();
-
-    if (location == ELocation.MOUNTAIN || location == ELocation.VILLAGE_SQUARE || location == ELocation.WOODLANDS)
+    if (allMoveTogether(this.location))
     {
       // location requires whole party to move as one:
       if (location != ELocation.VILLAGE_SQUARE && !allAtSameLocation(characterToMove.getParty()))
@@ -49,34 +47,38 @@ public class MoveToLocationCmd extends AbstractCmd
         CommandDelegate.execute(cmd);
         return;
       }
-      moveAllCharacters(characterToMove.getParty(), location);
-      SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "You are now at " + location);
-      CommandDelegate.execute(cmd);
+    }
 
+    endActiveEncounter();
+
+    if (allMoveTogether(this.location))
+    {
       for (GameCharacter character : characterToMove.getParty().getMembers())
       {
-        showMenuForLocation(location, character.getPlayedBy().getPlayerState());
-        handleLocationEntry(location, character.getPlayedBy().getPlayerState());
+        doMove(character, location);
       }
     }
     else
     {
       // players can move individually:
-      characterToMove.setLocation(location);
-      SendPartyMessageCmd c = new SendPartyMessageCmd(characterToMove.getParty(), characterToMove.getName() + " is now at " + location);
-      CommandDelegate.execute(c);
-
-      showMenuForLocation(location, characterToMove.getPlayedBy().getPlayerState());
-      handleLocationEntry(location, characterToMove.getPlayedBy().getPlayerState());
+      doMove(characterToMove, location);
     }
   }
 
-  private void moveAllCharacters(Party party, ELocation moveTo)
+  private boolean allMoveTogether(ELocation moveTo)
   {
-    for (GameCharacter character : party.getMembers())
-    {
-      character.setLocation(moveTo);
-    }
+    return moveTo == ELocation.MOUNTAIN || moveTo == ELocation.VILLAGE_SQUARE || moveTo == ELocation.WOODLANDS;
+  }
+
+  private void doMove(GameCharacter characterToMove, ELocation moveTo)
+  {
+    characterToMove.setLocation(moveTo);
+
+    SendMessageCmd c = new SendMessageCmd(characterToMove.getPlayedBy().getChatId(), "You are now at " + location);
+    CommandDelegate.execute(c);
+
+    showMenuForLocation(moveTo, characterToMove.getPlayedBy().getPlayerState());
+    handleLocationEntry(moveTo, characterToMove.getPlayedBy().getPlayerState());
   }
 
   private void endActiveEncounter()
