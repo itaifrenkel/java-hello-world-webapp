@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.character.CreateShadowPlayerCmd;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.character.SpawnCharacterCmd;
@@ -62,9 +61,6 @@ public class DoPlayerSetupCmd extends SuspendableCmd
 
     SpawnCharacterCmd cmd = new SpawnCharacterCmd(getPlayerState().getPlayer().getChatId(), characterName, ECharacterClass.of(characterClass));
     CommandDelegate.execute(cmd);
-
-    JoinPartyCmd join = new JoinPartyCmd(cmd.getSpawned(), "TestParty");
-    CommandDelegate.execute(join);
 
     //todo for testing
     if (characterName.startsWith("Dagwud") && !characterName.equals("Dagwud"))

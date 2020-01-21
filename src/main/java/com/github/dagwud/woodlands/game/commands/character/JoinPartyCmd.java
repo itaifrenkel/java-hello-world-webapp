@@ -1,11 +1,8 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PartyRegistry;
-import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
@@ -24,11 +21,21 @@ public class JoinPartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (null != joiner.getParty())
+    {
+      LeavePartyCmd leave = new LeavePartyCmd(joiner, joiner.getParty());
+      CommandDelegate.execute(leave);
+    }
+
     Party party = PartyRegistry.lookup(partyName);
     joiner.setParty(party);
     party.addMember(joiner);
 
-    SendPartyMessageCmd welcome = new SendPartyMessageCmd(party, joiner.getName() + " has joined " + partyName + "!");
-    CommandDelegate.execute(welcome);
+    if (!party.isPrivateParty())
+    {
+      SendPartyMessageCmd welcome = new SendPartyMessageCmd(party, joiner.getName() + " has joined " + partyName + "!");
+      CommandDelegate.execute(welcome);
+    }
   }
+
 }

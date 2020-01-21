@@ -32,7 +32,8 @@ public class CreateCharacterCmd extends AbstractCmd
     CommandDelegate.execute(cmd);
     character.setSetupComplete(true);
 
-    JoinPartyCmd join = new JoinPartyCmd(character, characterName);
+    // Join a private party for just this character by default:
+    JoinPartyCmd join = new JoinPartyCmd(character, "_" + characterName);
     CommandDelegate.execute(join);
 
     createdCharacter = character;

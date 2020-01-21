@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
@@ -16,12 +17,14 @@ import static org.junit.Assert.*;
 
 public class MainTest
 {
+  private static int playerCount = 1;
+
   @Test
   public void testPlayerSetupRequired() throws Exception
   {
-    startBot();
+    PlayerState playerState = startBot();
     Update update;
-    update = createUpdate("The Inn");
+    update = createUpdate("The Inn", playerState);
     new TelegramServlet().processTelegramUpdate(update);
   }
 
@@ -29,7 +32,7 @@ public class MainTest
   public void testPlayerSetup() throws Exception
   {
     PlayerState playerState = startBot();
-    initPlayer();
+    initPlayer(playerState);
 
     assertEquals("TestUser", playerState.getActiveCharacter().getName());
     assertEquals(ECharacterClass.WIZARD, playerState.getActiveCharacter().getCharacterClass());
@@ -49,14 +52,14 @@ public class MainTest
   public void testWeapon() throws Exception
   {
     PlayerState playerState = startBot();
-    initPlayer();
+    initPlayer(playerState);
 
     Update update;
-    update = createUpdate("The Inn");
+    update = createUpdate("The Inn", playerState);
     new TelegramServlet().processTelegramUpdate(update);
-    update = createUpdate("Retrieve Items");
+    update = createUpdate("Retrieve Items", playerState);
     new TelegramServlet().processTelegramUpdate(update);
-    update = createUpdate("/me");
+    update = createUpdate("/me", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertNotNull(playerState.getActiveCharacter().getCarrying().getCarriedLeft());
     assertNull(playerState.getActiveCharacter().getCarrying().getCarriedRight());
@@ -66,14 +69,14 @@ public class MainTest
   public void testMenuBlocksDisallowedOptions() throws Exception
   {
     PlayerState playerState = startBot();
-    initPlayer();
+    initPlayer(playerState);
 
     Update update;
-    update = createUpdate("The Inn");
+    update = createUpdate("The Inn", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.INN, playerState.getActiveCharacter().getLocation());
 
-    update = createUpdate("The Mountain"); // not allowed to jump straight
+    update = createUpdate("The Mountain", playerState); // not allowed to jump straig,ht
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.INN, playerState.getActiveCharacter().getLocation());
   }
@@ -82,18 +85,18 @@ public class MainTest
   public void testMenuBlocksAllowsValidOptions() throws Exception
   {
     PlayerState playerState = startBot();
-    initPlayer();
+    initPlayer(playerState);
 
     Update update;
-    update = createUpdate("The Inn");
+    update = createUpdate("The Inn", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.INN, playerState.getActiveCharacter().getLocation());
 
-    update = createUpdate("Village Square");
+    update = createUpdate("Village Square", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.VILLAGE_SQUARE, playerState.getActiveCharacter().getLocation());
 
-    update = createUpdate("The Inn");
+    update = createUpdate("The Inn", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.INN, playerState.getActiveCharacter().getLocation());
   }
@@ -102,12 +105,12 @@ public class MainTest
   public void testDrink() throws Exception
   {
     PlayerState playerState = startBot();
-    initPlayer();
+    initPlayer(playerState);
 
     Update update;
-    update = createUpdate("The Tavern");
+    update = createUpdate("The Tavern", playerState);
     new TelegramServlet().processTelegramUpdate(update);
-    update = createUpdate("Buy Drinks");
+    update = createUpdate("Buy Drinks", playerState);
     new TelegramServlet().processTelegramUpdate(update);
   }
 
@@ -115,71 +118,117 @@ public class MainTest
   public void testDamageAndShortRest() throws Exception
   {
     PlayerState playerState = startBot();
-    initPlayer();
+    initPlayer(playerState);
 
     Update update;
     assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());
     assertEquals(ELocation.VILLAGE_SQUARE, playerState.getActiveCharacter().getLocation());
 
-    update = createUpdate("The Tavern");
+    update = createUpdate("The Tavern", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.TAVERN, playerState.getActiveCharacter().getLocation());
 
-    update = createUpdate("Buy Drinks");
+    update = createUpdate("Buy Drinks", playerState);
     while (playerState.getActiveCharacter().getStats().getHitPoints() > 5)
     {
       new TelegramServlet().processTelegramUpdate(update);
     }
     assertEquals(5, playerState.getActiveCharacter().getStats().getHitPoints());
 
-    update = createUpdate("Village Square");
+    update = createUpdate("Village Square", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.VILLAGE_SQUARE, playerState.getActiveCharacter().getLocation());
 
-    update = createUpdate("The Inn");
+    update = createUpdate("The Inn", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.INN, playerState.getActiveCharacter().getLocation());
 
-    update = createUpdate("Short Rest");
+    update = createUpdate("Short Rest", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());
   }
 
+  @Test
+  public void testStartInOwnParty() throws Exception
+  {
+    PlayerState playerState = startBot();
+    initPlayer(playerState);
+
+    assertNotNull(playerState.getActiveCharacter().getParty());
+    assertEquals(1, playerState.getActiveCharacter().getParty().getMembers().size());
+    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
+
+    PlayerState playerState2 = startBot();
+    initPlayer(playerState2);
+    assertNotNull(playerState2.getActiveCharacter().getParty());
+    assertEquals(1, playerState2.getActiveCharacter().getParty().getMembers().size());
+    assertSame(playerState2.getActiveCharacter(), playerState2.getActiveCharacter().getParty().getMembers().get(0));
+
+    assertEquals(1, playerState.getActiveCharacter().getParty().getMembers().size());
+    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
+  }
+
+  @Test
+  public void testJoinParty() throws Exception
+  {
+    PlayerState playerState = startBot();
+    initPlayer(playerState);
+
+    assertNotNull(playerState.getActiveCharacter().getParty());
+    assertEquals(1, playerState.getActiveCharacter().getParty().getMembers().size());
+    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
+
+    PlayerState playerState2 = startBot();
+    initPlayer(playerState2);
+    Update update = createUpdate("Join a Party", playerState2);
+    new TelegramServlet().processTelegramUpdate(update);
+
+    Update update2 = createUpdate(playerState.getActiveCharacter().getParty().getName(), playerState2);
+    new TelegramServlet().processTelegramUpdate(update2);
+
+    Party party = playerState.getActiveCharacter().getParty();
+    assertSame(party, playerState.getActiveCharacter().getParty());
+    assertSame(party, playerState2.getActiveCharacter().getParty());
+    assertEquals(2, party.getMembers().size());
+    assertSame(playerState.getActiveCharacter(), party.getMembers().get(0));
+    assertSame(playerState2.getActiveCharacter(), party.getMembers().get(1));
+  }
 
   private PlayerState startBot() throws Exception
   {
     MessagingFactory.create(new SimulatorSender());
 
     GameStatesRegistry.reset();
-    PlayerState playerState = GameStatesRegistry.lookup(-1);
+    PlayerState playerState = GameStatesRegistry.lookup(-1 * playerCount);
+    playerCount++;
     Update update;
-    update = createUpdate("/start");
+    update = createUpdate("/start", playerState);
     new TelegramServlet().processTelegramUpdate(update);
-    update = createUpdate("/new");
+    update = createUpdate("/new", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     return playerState;
   }
 
-  private Update createUpdate(String messageText)
+  private Update createUpdate(String messageText, PlayerState playerState)
   {
     Update u = new Update();
     u.message = new Message();
     u.message.text = messageText;
     u.message.chat = new Chat();
-    u.message.chat.id = -1;
+    u.message.chat.id = playerState.getPlayer().getChatId();
     return u;
   }
 
-  private void initPlayer() throws Exception
+  private void initPlayer(PlayerState playerState) throws Exception
   {
     Update update;
 
-    update = createUpdate("TestUser");
-    System.out.println("TestUser");
+    update = createUpdate("TestUser" + playerState.getPlayer().getChatId(), playerState);
+    System.out.println("TestUser" + playerState.getPlayer().getChatId());
     new TelegramServlet().processTelegramUpdate(update);
 
     // suspends to ask for player class
-    update = createUpdate("Wizard");
+    update = createUpdate("Wizard", playerState);
     System.out.println("Wizard");
     new TelegramServlet().processTelegramUpdate(update);
   }

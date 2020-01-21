@@ -45,4 +45,9 @@ public class Party
   {
     return members.iterator().next() == activeCharacter;
   }
+
+  public boolean isPrivateParty()
+  {
+    return getName().startsWith("_");
+  }
 }

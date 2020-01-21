@@ -74,11 +74,6 @@ public class GameCharacter implements IFighter
     return carrying;
   }
 
-  public void setCarrying(CarriedItems carrying)
-  {
-    this.carrying = carrying;
-  }
-
   public Party getParty()
   {
     return party;
