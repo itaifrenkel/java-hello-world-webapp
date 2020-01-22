@@ -16,4 +16,7 @@ public class Difficulty
 
   @SerializedName("hit-points-max")
   public int maximumHitPoints;
+
+  @SerializedName("xp-reward")
+  public int experienceReward;
 }
