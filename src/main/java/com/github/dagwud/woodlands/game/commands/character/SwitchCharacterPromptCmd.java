@@ -75,7 +75,7 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
     List<GameCharacter> inactiveCharacters = player.getInactiveCharacters();
     for (int i = 0; i < inactiveCharacters.size(); i++)
     {
-      characters[i] = inactiveCharacters.get(i).getName();
+      characters[i] = inactiveCharacters.get(i).summary();
     }
     return characters;
   }
