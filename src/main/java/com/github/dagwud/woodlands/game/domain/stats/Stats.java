@@ -9,6 +9,7 @@ import java.util.Map;
 public class Stats
 {
   private int level;
+  private int experience;
   private int hitPoints;
   private int maxHitPoints;
   private int mana;
@@ -158,5 +159,15 @@ public class Stats
   public void setDrunkeness(int drunkeness)
   {
     this.drunkeness = drunkeness;
+  }
+
+  public int getExperience()
+  {
+    return experience;
+  }
+
+  public void setExperience(int experience)
+  {
+    this.experience = experience;
   }
 }
