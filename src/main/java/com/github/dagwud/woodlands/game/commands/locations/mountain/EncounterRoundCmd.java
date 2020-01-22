@@ -57,6 +57,9 @@ public class EncounterRoundCmd extends AbstractCmd
       {
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated!");
         CommandDelegate.execute(cmd);
+
+        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
+        CommandDelegate.execute(win);
       }
       EndEncounterCmd end = new EndEncounterCmd(encounter);
       CommandDelegate.execute(end);
