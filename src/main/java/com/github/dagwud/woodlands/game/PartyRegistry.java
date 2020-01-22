@@ -2,6 +2,8 @@ package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.domain.Party;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,5 +46,10 @@ public class PartyRegistry
       return;
     }
     instance = new PartyRegistry();
+  }
+
+  public static Collection<Party> listNames()
+  {
+    return Collections.unmodifiableCollection(instance().parties.values());
   }
 }
