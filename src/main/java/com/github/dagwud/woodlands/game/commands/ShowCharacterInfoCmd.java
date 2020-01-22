@@ -27,6 +27,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
 
     String message = character.getName() + " " +
             "(L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
+            "Experience: " + character.getStats().getExperience() + "\n" +
             "Location: " + character.getLocation() + "\n" +
             "\n" +
             "❤️: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
