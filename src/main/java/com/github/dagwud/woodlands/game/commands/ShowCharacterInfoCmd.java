@@ -33,7 +33,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
             "❤️: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
             "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
             "Strength: " + stats.getStrength() + "\n" +
-            "Agility: " + sta ts.getAgility() + "\n" +
+            "Agility: " + stats.getAgility() + "\n" +
             "Constitution: " + stats.getConstitution() + "\n" +
             "Equipped:\n" +
             "• " + describeItem(carrying.getCarriedLeft()) + "\n" +
