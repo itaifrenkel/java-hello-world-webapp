@@ -11,50 +11,50 @@ import com.github.dagwud.woodlands.gson.telegram.Update;
 
 public class CommandFactory
 {
-    private static CommandFactory instance;
+  private static CommandFactory instance;
 
-    public static CommandFactory instance()
+  public static CommandFactory instance()
+  {
+    if (null == instance)
     {
-        if (null == instance)
-        {
-            createInstance();
-        }
-        return instance;
+      createInstance();
+    }
+    return instance;
+  }
+
+  private synchronized static void createInstance()
+  {
+    if (instance != null)
+    {
+      return;
+    }
+    instance = new CommandFactory();
+  }
+
+  public AbstractCmd create(Update telegramUpdate, PlayerState playerState)
+  {
+    String cmd = telegramUpdate.message.text;
+
+    SuspendableCmd waiting = playerState.getWaitingForInputCmd();
+    if (waiting != null)
+    {
+      return new AcceptInputCmd(waiting, cmd);
     }
 
-    private synchronized static void createInstance()
+    int chatId = telegramUpdate.message.chat.id;
+    ECommand by = ECommand.by(cmd);
+
+    if (by != null && (!by.isMenuCmd() || isValidMenuOption(cmd, playerState.getCurrentMenu())))
     {
-        if (instance != null)
-        {
-            return;
-        }
-        instance = new CommandFactory();
+      return by.build(playerState.getActiveCharacter(), chatId);
     }
 
-    public AbstractCmd create(Update telegramUpdate, PlayerState playerState)
-    {
-        String cmd = telegramUpdate.message.text;
+    return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");
+  }
 
-        SuspendableCmd waiting = playerState.getWaitingForInputCmd();
-        if (waiting != null)
-        {
-            return new AcceptInputCmd(waiting, cmd);
-        }
-
-        int chatId = telegramUpdate.message.chat.id;
-        ECommand by = ECommand.by(cmd);
-
-        if (by != null && (!by.isMenuCmd() || isValidMenuOption(cmd, playerState.getCurrentMenu())))
-        {
-            return by.build(playerState.getActiveCharacter(), chatId);
-        }
-
-        return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");
-    }
-
-    private boolean isValidMenuOption(String cmd, GameMenu currentMenu)
-    {
-        return currentMenu != null && currentMenu.containsOption(cmd);
-    }
+  private boolean isValidMenuOption(String cmd, GameMenu currentMenu)
+  {
+    return currentMenu != null && currentMenu.containsOption(cmd);
+  }
 
 }
