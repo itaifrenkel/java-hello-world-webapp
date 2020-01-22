@@ -38,7 +38,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
             "• " + describeItem(carrying.getCarriedLeft()) + "\n" +
             "• " + describeItem(carrying.getCarriedRight()) + "\n" +
             "Carrying:\n" +
-            describeInactiveItems(carrying);
+            describeInactiveItems(carrying) + "\n\n" +
             skilledWith();
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);

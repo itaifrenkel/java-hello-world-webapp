@@ -28,7 +28,7 @@ public class InventoryCmd extends AbstractCmd
     b.append("You are carrying:").append("\n");
     for (String itemInfo : buildItemsList())
     {
-      b.append("• ").append(itemInfo).append("\n");
+      b.append(itemInfo).append("\n");
     }
     SendMessageCmd cmd = new SendMessageCmd(chatId, b.toString());
     CommandDelegate.execute(cmd);
@@ -39,17 +39,21 @@ public class InventoryCmd extends AbstractCmd
     Collection<String> itemsList = new ArrayList<>();
     if (character.getCarrying().getCarriedLeft() != null)
     {
-      itemsList.add(character.getCarrying().getCarriedLeft().name + " (drop: /dL)");
+      itemsList.add("• " + character.getCarrying().getCarriedLeft().name + " (drop: /dL)");
     }
     if (character.getCarrying().getCarriedRight() != null)
     {
-      itemsList.add(character.getCarrying().getCarriedRight().name + " (drop: /dR)");
+      itemsList.add("• " + character.getCarrying().getCarriedRight().name + " (drop: /dR)");
+    }
+    if (!itemsList.isEmpty())
+    {
+      itemsList.add("——————————————————");
     }
     List<Weapon> carriedInactive = character.getCarrying().getCarriedInactive();
     for (int i = 0; i < carriedInactive.size(); i++)
     {
       Weapon weapon = carriedInactive.get(i);
-      itemsList.add(weapon.name + " (drop: /d" + i + ")");
+      itemsList.add("• " + weapon.name + " (drop: /d" + i + "; equip: /e" + i + ")");
     }
     return itemsList;
   }
