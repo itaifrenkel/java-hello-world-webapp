@@ -46,6 +46,13 @@ public class DoPlayerSetupCmd extends SuspendableCmd
   private void receiveCharacterNameAndPromptForClass(String capturedInput)
   {
     characterName = capturedInput;
+    if (!characterName.matches("[a-zA-Z0-9 _()*?!&-']+"))
+    {
+      SendMessageCmd err = new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "That's not an allowed name. Try a boring name, like 'Ken'");
+      CommandDelegate.execute(err);
+      super.undoCurrentPhase();
+      return;
+    }
 
     SendMessageCmd ack = new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "Very well. So shall you be known.");
     CommandDelegate.execute(ack);

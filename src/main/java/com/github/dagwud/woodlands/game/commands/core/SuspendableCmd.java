@@ -42,4 +42,9 @@ public abstract class SuspendableCmd extends AbstractCmd
   {
     return playerState;
   }
+
+  protected void undoCurrentPhase()
+  {
+    nextPhaseToRun--;
+  }
 }
