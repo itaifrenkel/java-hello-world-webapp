@@ -21,6 +21,14 @@ public class RetrieveItemsCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    Weapon chosenWeapon = chooseWeapon();
+
+    character.getCarrying().getCarriedInactive().add(chosenWeapon);
+    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You pick up a "+ chosenWeapon.name + " " + chosenWeapon.getIcon() + determineDamageText(chosenWeapon)));
+  }
+
+  private Weapon chooseWeapon()
+  {
     Weapon chosenWeapon = null;
     while (chosenWeapon == null)
     {
@@ -32,17 +40,7 @@ public class RetrieveItemsCmd extends AbstractCmd
         chosenWeapon = null; // try again
       }
     }
-
-    if (character.getCarrying().getCarriedLeft() == null)
-    {
-      character.getCarrying().setCarriedLeft(chosenWeapon);
-    }
-    else
-    {
-      character.getCarrying().setCarriedRight(chosenWeapon);
-    }
-
-    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You pick up a "+ chosenWeapon.name + " " + chosenWeapon.getIcon() + determineDamageText(chosenWeapon)));
+    return chosenWeapon;
   }
 
   private String determineDamageText(Weapon carrying)

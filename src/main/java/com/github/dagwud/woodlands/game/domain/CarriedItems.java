@@ -2,10 +2,14 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarriedItems
 {
   private Weapon carriedLeft;
   private Weapon carriedRight;
+  private List<Weapon> carriedInactive = new ArrayList<>();
 
   public Weapon getCarriedLeft()
   {
@@ -26,4 +30,10 @@ public class CarriedItems
   {
     this.carriedRight = carriedRight;
   }
+
+  public List<Weapon> getCarriedInactive()
+  {
+    return carriedInactive;
+  }
+
 }

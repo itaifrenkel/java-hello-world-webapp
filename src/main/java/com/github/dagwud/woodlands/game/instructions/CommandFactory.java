@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.AcceptInputCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.DropItemCmd;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
@@ -47,6 +48,13 @@ public class CommandFactory
     if (by != null && (!by.isMenuCmd() || isValidMenuOption(cmd, playerState.getCurrentMenu())))
     {
       return by.build(playerState.getActiveCharacter(), chatId);
+    }
+
+    if (cmd.matches("/d[LR0-9]+"))
+    {
+      // Drop:
+      String dropIndex = cmd.substring("/d".length());
+      return new DropItemCmd(playerState.getActiveCharacter(), chatId, dropIndex);
     }
 
     return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");

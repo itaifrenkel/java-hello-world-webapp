@@ -34,13 +34,34 @@ public class ShowCharacterInfoCmd extends AbstractCmd
             "Strength: " + stats.getStrength() + "\n" +
             "Agility: " + stats.getAgility() + "\n" +
             "Constitution: " + stats.getConstitution() + "\n" +
-            "Carrying:\n" +
+            "Equipped:\n" +
             "• " + describeItem(carrying.getCarriedLeft()) + "\n" +
-            "• " + describeItem(carrying.getCarriedRight()) + "\n\n" +
+            "• " + describeItem(carrying.getCarriedRight()) + "\n" +
+            "Carrying:\n" +
+            describeInactiveItems(carrying);
             skilledWith();
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);
     CommandDelegate.execute(cmd);
+  }
+
+  private String describeItem(Weapon carrying)
+  {
+    if (carrying == null)
+    {
+      return "nothing";
+    }
+    return carrying.name + " " + carrying.getIcon() + determineDamageText(carrying);
+  }
+
+  private String describeInactiveItems(CarriedItems carrying)
+  {
+    StringBuilder b = new StringBuilder();
+    for (Weapon weapon : carrying.getCarriedInactive())
+    {
+      b.append("• ").append(describeItem(weapon)).append("\n");
+    }
+    return b.toString();
   }
 
   private String skilledWith()
@@ -59,15 +80,6 @@ public class ShowCharacterInfoCmd extends AbstractCmd
       b.append(weapon);
     }
     return b.toString();
-  }
-
-  private String describeItem(Weapon carrying)
-  {
-    if (carrying == null)
-    {
-      return "nothing";
-    }
-    return carrying.name + " " + carrying.getIcon() + determineDamageText(carrying);
   }
 
   private String determineDamageText(Weapon carrying)

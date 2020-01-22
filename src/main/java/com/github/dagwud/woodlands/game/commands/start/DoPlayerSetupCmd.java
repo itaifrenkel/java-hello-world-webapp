@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.CreateShadowPlayerCmd;
-import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.character.SpawnCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;

@@ -1,8 +1,6 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.PlayerState;
-import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.BuyDrinksCmd;
@@ -24,6 +22,7 @@ public enum ECommand
     NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character.getPlayedBy())),
     ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
     PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
+    INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
 
     THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
     THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
