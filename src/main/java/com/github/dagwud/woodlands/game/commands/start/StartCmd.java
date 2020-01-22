@@ -14,6 +14,7 @@ public class StartCmd extends AbstractCmd
 
   public StartCmd(PlayerState playerState, int chatId)
   {
+    super(new NoActiveCharacterPrerequisite(playerState.getPlayer()));
     this.playerState = playerState;
     this.chatId = chatId;
   }
