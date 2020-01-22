@@ -61,7 +61,7 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
   {
     for (GameCharacter inactiveCharacter : player.getInactiveCharacters())
     {
-      if (inactiveCharacter.getName().equals(capturedInput))
+      if (inactiveCharacter.summary().equals(capturedInput))
       {
         return inactiveCharacter;
       }
