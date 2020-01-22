@@ -17,72 +17,73 @@ import java.util.Map;
 
 public enum ECommand
 {
-    HELP("/help", false, (character, chatId) -> new ShowHelpCmd(chatId)),
-    START("/start", false, (character, chatId) -> new StartCmd(GameStatesRegistry.lookup(chatId), chatId)),
-    NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character.getPlayedBy())),
-    ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
-    PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
-    PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
-    INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
+  HELP("/help", false, (character, chatId) -> new ShowHelpCmd(chatId)),
+  START("/start", false, (character, chatId) -> new StartCmd(GameStatesRegistry.lookup(chatId), chatId)),
+  NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character.getPlayedBy())),
+  ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
+  PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
+  PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
+  INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
 
-    THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
-    THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
-    THE_VILLAGE("The Village", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
-    VILLAGE_SQUARE("Village Square", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
-    THE_MOUNTAIN("The Mountain", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.MOUNTAIN)),
-    THE_WOODLANDS("The Woodlands", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.WOODLANDS)),
+  THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
+  THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
+  THE_VILLAGE("The Village", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
+  VILLAGE_SQUARE("Village Square", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
+  THE_MOUNTAIN("The Mountain", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.MOUNTAIN)),
+  THE_WOODLANDS("The Woodlands", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.WOODLANDS)),
 
-    JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
-    BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
-    SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
-    LEAVE_ITEMS("Leave Items", true, (character, chatId) -> new LeaveItemsCmd(character)),
-    RETRIEVE_ITEMS("Retrieve Items", true, (character, chatId) -> new RetrieveItemsCmd(character)),
-    ;
+  JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
+  BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
+  SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
+  LEAVE_ITEMS("Leave Items", true, (character, chatId) -> new LeaveItemsCmd(character)),
+  RETRIEVE_ITEMS("Retrieve Items", true, (character, chatId) -> new RetrieveItemsCmd(character)),
+  ;
 
-    ECommand(String name, boolean menuCmd, ICommandBuilder commandBuilder)
+
+  ECommand(String name, boolean menuCmd, ICommandBuilder commandBuilder)
+  {
+    this.name = name;
+    this.menuCmd = menuCmd;
+    this.commandBuilder = commandBuilder;
+  }
+
+  private static final Map<String, ECommand> COMMANDS = new HashMap<>();
+
+  static
+  {
+    for (ECommand value : ECommand.values())
     {
-        this.name = name;
-        this.menuCmd = menuCmd;
-        this.commandBuilder = commandBuilder;
+      COMMANDS.put(value.name, value);
     }
+  }
 
-    private static final Map<String, ECommand> COMMANDS = new HashMap<>();
+  public static ECommand by(String name)
+  {
+    return COMMANDS.get(name);
+  }
 
-    static
-    {
-        for (ECommand value : ECommand.values())
-        {
-            COMMANDS.put(value.name, value);
-        }
-    }
+  private String name;
+  private boolean menuCmd;
+  private ICommandBuilder commandBuilder;
 
-    public static ECommand by(String name)
-    {
-        return COMMANDS.get(name);
-    }
+  public boolean isMenuCmd()
+  {
+    return menuCmd;
+  }
 
-    private String name;
-    private boolean menuCmd;
-    private ICommandBuilder commandBuilder;
+  public boolean matches(String name)
+  {
+    return this.name.equalsIgnoreCase(name);
+  }
 
-    public boolean isMenuCmd()
-    {
-        return menuCmd;
-    }
+  public AbstractCmd build(GameCharacter character, int chatId)
+  {
+    return commandBuilder.build(character, chatId);
+  }
 
-    public boolean matches(String name)
-    {
-        return this.name.equalsIgnoreCase(name);
-    }
-
-    public AbstractCmd build(GameCharacter character, int chatId)
-    {
-        return commandBuilder.build(character, chatId);
-    }
-
-    @Override
-    public String toString()
-    {
-        return this.name;
-    }
+  @Override
+  public String toString()
+  {
+    return this.name;
+  }
 }
