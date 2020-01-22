@@ -20,9 +20,9 @@ public class ListPartiesCmd extends AbstractCmd
   public void execute()
   {
     StringBuilder b = new StringBuilder();
-    for (Party listName : PartyRegistry.listNames())
+    for (Party party : PartyRegistry.listNames())
     {
-      b.append("- ").append(listName);
+      b.append("- ").append(party.getName());
     }
     SendMessageCmd cmd = new SendMessageCmd(chatId, b.toString());
     CommandDelegate.execute(cmd);
