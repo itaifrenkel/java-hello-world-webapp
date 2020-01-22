@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
+import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -42,6 +43,16 @@ public class EncounterRoundCmd extends AbstractCmd
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.toString());
     CommandDelegate.execute(status);
 
+    GameCharacter inDanger = getAnyPlayerInDanger();
+    if (inDanger != null)
+    {
+      SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getParty(), inDanger.getName() + " is in danger - retreating to The Village");
+      CommandDelegate.execute(msg);
+
+      MoveToLocationCmd cmd = new MoveToLocationCmd(inDanger, ELocation.VILLAGE_SQUARE);
+      CommandDelegate.execute(cmd);
+    }
+
     if (encounter.getEnemy().getStats().getState() == EState.ALIVE && anyPlayerCharactersStillAlive(encounter))
     {
       scheduleNextRound();
@@ -61,6 +72,19 @@ public class EncounterRoundCmd extends AbstractCmd
       EndEncounterCmd end = new EndEncounterCmd(encounter);
       CommandDelegate.execute(end);
     }
+  }
+
+  private GameCharacter getAnyPlayerInDanger()
+  {
+    for (GameCharacter member : encounter.getParty().getMembers())
+    {
+      double hpPerc = ((double) member.getStats().getHitPoints()) / ((double) member.getStats().getMaxHitPoints());
+      if (hpPerc <= 0.1)
+      {
+        return member;
+      }
+    }
+    return null;
   }
 
   private boolean anyPlayerCharactersStillAlive(Encounter encounter)
