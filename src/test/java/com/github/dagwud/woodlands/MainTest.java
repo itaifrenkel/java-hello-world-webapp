@@ -155,16 +155,16 @@ public class MainTest
     initPlayer(playerState);
 
     assertNotNull(playerState.getActiveCharacter().getParty());
-    assertEquals(1, playerState.getActiveCharacter().getParty().getMembers().size());
+    assertEquals(1, playerState.getActiveCharacter().getParty().size());
     assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
 
     PlayerState playerState2 = startBot();
     initPlayer(playerState2);
     assertNotNull(playerState2.getActiveCharacter().getParty());
-    assertEquals(1, playerState2.getActiveCharacter().getParty().getMembers().size());
+    assertEquals(1, playerState2.getActiveCharacter().getParty().size());
     assertSame(playerState2.getActiveCharacter(), playerState2.getActiveCharacter().getParty().getMembers().get(0));
 
-    assertEquals(1, playerState.getActiveCharacter().getParty().getMembers().size());
+    assertEquals(1, playerState.getActiveCharacter().getParty().size());
     assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
   }
 
@@ -175,7 +175,7 @@ public class MainTest
     initPlayer(playerState);
 
     assertNotNull(playerState.getActiveCharacter().getParty());
-    assertEquals(1, playerState.getActiveCharacter().getParty().getMembers().size());
+    assertEquals(1, playerState.getActiveCharacter().getParty().size());
     assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
 
     PlayerState playerState2 = startBot();
@@ -189,7 +189,7 @@ public class MainTest
     Party party = playerState.getActiveCharacter().getParty();
     assertSame(party, playerState.getActiveCharacter().getParty());
     assertSame(party, playerState2.getActiveCharacter().getParty());
-    assertEquals(2, party.getMembers().size());
+    assertEquals(2, party.size());
     assertSame(playerState.getActiveCharacter(), party.getMembers().get(0));
     assertSame(playerState2.getActiveCharacter(), party.getMembers().get(1));
   }

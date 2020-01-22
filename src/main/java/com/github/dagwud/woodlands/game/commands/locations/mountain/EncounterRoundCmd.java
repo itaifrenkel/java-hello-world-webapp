@@ -5,7 +5,6 @@ import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -30,6 +29,56 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    List<DamageInflicted> roundActivity = doFighting();
+    StringBuilder summary = buildRoundSummary(roundActivity);
+    SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.toString());
+    CommandDelegate.execute(status);
+
+    GameCharacter inDanger = getAnyPlayerInDanger();
+    if (inDanger != null)
+    {
+      if (encounter.getParty().capableOfRetreat())
+      {
+        RetreatCmd retreat = new RetreatCmd(inDanger);
+        CommandDelegate.execute(retreat);
+      }
+      else
+      {
+        TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(encounter.getParty());
+        CommandDelegate.execute(killall);
+      }
+    }
+
+    if (encounter.getEnemy().getStats().getState() != EState.ALIVE || !anyPlayerCharactersStillAlive(encounter))
+    {
+      EndEncounterCmd end = new EndEncounterCmd(encounter);
+      CommandDelegate.execute(end);
+    }
+
+    if (!encounter.isEnded())
+    {
+      scheduleNextRound();
+    }
+    else
+    {
+      if (!encounter.getParty().canAct())
+      {
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
+        CommandDelegate.execute(cmd);
+      }
+      else if (encounter.getEnemy().getStats().getState() == EState.DEAD)
+      {
+        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
+        CommandDelegate.execute(win);
+
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
+        CommandDelegate.execute(cmd);
+      }
+    }
+  }
+
+  private List<DamageInflicted> doFighting()
+  {
     encounter.incrementBattleRound();
     List<DamageInflicted> roundActivity = new LinkedList<>();
 
@@ -38,43 +87,7 @@ public class EncounterRoundCmd extends AbstractCmd
       doAttack(partyMember, roundActivity);
     }
     doAttack(encounter.getEnemy(), roundActivity);
-
-    StringBuilder summary = buildRoundSummary(roundActivity);
-    SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.toString());
-    CommandDelegate.execute(status);
-
-    GameCharacter inDanger = getAnyPlayerInDanger();
-    if (inDanger != null)
-    {
-      SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getParty(), inDanger.getName() + " is in danger - retreating to The Village");
-      CommandDelegate.execute(msg);
-
-      MoveToLocationCmd cmd = new MoveToLocationCmd(inDanger, ELocation.VILLAGE_SQUARE);
-      CommandDelegate.execute(cmd);
-    }
-
-    if (encounter.getEnemy().getStats().getState() == EState.ALIVE && anyPlayerCharactersStillAlive(encounter))
-    {
-      scheduleNextRound();
-    }
-    else
-    {
-      if (encounter.getEnemy().getStats().getState() == EState.ALIVE)
-      {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
-        CommandDelegate.execute(cmd);
-      }
-      else
-      {
-        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
-        CommandDelegate.execute(win);
-
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
-        CommandDelegate.execute(cmd);
-      }
-      EndEncounterCmd end = new EndEncounterCmd(encounter);
-      CommandDelegate.execute(end);
-    }
+    return roundActivity;
   }
 
   private GameCharacter getAnyPlayerInDanger()

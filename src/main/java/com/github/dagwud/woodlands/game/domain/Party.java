@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Party
@@ -69,5 +68,28 @@ public class Party
       return null;
     }
     return members.iterator().next();
+  }
+
+  public boolean capableOfRetreat()
+  {
+    return countConscious() >= (0.5 * size());
+  }
+
+  public boolean canAct()
+  {
+    return countConscious() > 0;
+  }
+
+  private int countConscious()
+  {
+    int conscious = 0;
+    for (GameCharacter member : getMembers())
+    {
+      if (member.getStats().getState() == EState.ALIVE)
+      {
+        conscious++;
+      }
+    }
+    return conscious;
   }
 }

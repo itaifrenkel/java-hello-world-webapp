@@ -15,7 +15,10 @@ public class EndEncounterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    encounter.end();
-    encounter.getParty().setActiveEncounter(null);
+    if (encounter != null)
+    {
+      encounter.end();
+      encounter.getParty().setActiveEncounter(null);
+    }
   }
 }

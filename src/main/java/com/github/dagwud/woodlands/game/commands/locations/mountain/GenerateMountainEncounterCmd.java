@@ -3,11 +3,13 @@ package com.github.dagwud.woodlands.game.commands.locations.mountain;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.commands.core.*;
+import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
@@ -25,6 +27,12 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
   {
     // You've left the mountain; encounter no longer happens:
     if (playerState.getActiveCharacter().getLocation() != ELocation.MOUNTAIN)
+    {
+      return;
+    }
+
+    // Party is all dead:
+    if (!playerState.getActiveCharacter().getParty().canAct())
     {
       return;
     }
