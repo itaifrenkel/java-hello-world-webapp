@@ -82,7 +82,7 @@ public class EncounterRoundCmd extends AbstractCmd
     for (GameCharacter member : encounter.getParty().getMembers())
     {
       double hpPerc = ((double) member.getStats().getHitPoints()) / ((double) member.getStats().getMaxHitPoints());
-      if (hpPerc <= 0.1)
+      if (hpPerc <= 0.2)
       {
         return member;
       }
