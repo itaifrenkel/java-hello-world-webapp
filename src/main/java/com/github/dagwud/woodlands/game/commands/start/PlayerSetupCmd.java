@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.CommandPrerequisite;
 import com.github.dagwud.woodlands.game.domain.Player;
 
 public class PlayerSetupCmd extends AbstractCmd
@@ -19,5 +20,10 @@ public class PlayerSetupCmd extends AbstractCmd
   {
     DoPlayerSetupCmd cmd = new DoPlayerSetupCmd(player);
     CommandDelegate.execute(cmd);
+  }
+
+  public Player getPlayer()
+  {
+    return player;
   }
 }

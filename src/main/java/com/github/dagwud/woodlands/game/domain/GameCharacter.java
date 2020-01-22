@@ -88,4 +88,9 @@ public class GameCharacter extends Fighter
   {
     return playedBy;
   }
+
+  public boolean isActive()
+  {
+    return this == getPlayedBy().getActiveCharacter();
+  }
 }

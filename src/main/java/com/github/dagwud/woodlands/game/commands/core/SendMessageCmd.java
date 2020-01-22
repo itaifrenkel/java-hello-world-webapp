@@ -33,8 +33,11 @@ public class SendMessageCmd extends AbstractCmd
         String newMessage = message;
         if (currentPlayerStateLookup.getPlayer().getPlayerState() != null)
         {
-            Stats stats = currentPlayerStateLookup.getPlayer().getPlayerState().getActiveCharacter().getStats();
-            newMessage = drunkFucate(message, stats);
+            if (currentPlayerStateLookup.getPlayer().getActiveCharacter() != null)
+            {
+                Stats stats = currentPlayerStateLookup.getPlayer().getActiveCharacter().getStats();
+                newMessage = drunkFucate(message, stats);
+            }
         }
         MessagingFactory.create().sender().sendMessage(chatId, newMessage, replyMarkup);
     }
