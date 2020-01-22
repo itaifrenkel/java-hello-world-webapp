@@ -21,22 +21,29 @@ public class ShowPartyInfoCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    String message = buildMessage();
+
+    SendMessageCmd cmd = new SendMessageCmd(chatId, message);
+    CommandDelegate.execute(cmd);
+  }
+
+  private String buildMessage()
+  {
+    if (character.getParty().isPrivateParty())
+    {
+      return "You're not part of a party";
+    }
+
     StringBuilder message = new StringBuilder();
+    message.append(character.getParty().getName()).append(":");
     for (GameCharacter member : character.getParty().getMembers())
     {
       if (message.length() > 0)
       {
         message.append("\n");
       }
-      Stats stats = member.getStats();
-      message.append(member.getName()).append(": ")
-              .append("❤️").append(stats.getHitPoints()).append(" / ").append(stats.getMaxHitPoints())
-              .append(", ").append("✨")
-              .append(stats.getMana()).append(" / ").append(stats.getMaxMana())
-              .append(" - ").append(member.getLocation().getDisplayName());
+      message.append(member.summary()).append(" - ").append(member.getLocation().getDisplayName());
     }
-
-    SendMessageCmd cmd = new SendMessageCmd(chatId, message.toString());
-    CommandDelegate.execute(cmd);
+    return message.toString();
   }
 }

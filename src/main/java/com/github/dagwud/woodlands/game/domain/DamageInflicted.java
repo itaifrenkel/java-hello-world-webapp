@@ -11,11 +11,11 @@ public class DamageInflicted
   private final Weapon inflictedWith;
   private final int baseDamage;
   private final int bonusDamage;
-  private final IFighter attacker;
-  private final IFighter defender;
+  private final Fighter attacker;
+  private final Fighter defender;
   private EHitStatus hitStatus;
 
-  public DamageInflicted(IFighter attacker, Weapon inflictedWith, EHitStatus hitStatus, int baseDamage, IFighter defender, int bonusDamage)
+  public DamageInflicted(Fighter attacker, Weapon inflictedWith, EHitStatus hitStatus, int baseDamage, Fighter defender, int bonusDamage)
   {
     this.attacker = attacker;
     this.inflictedWith = inflictedWith;
@@ -45,12 +45,12 @@ public class DamageInflicted
     return bonusDamage;
   }
 
-  private IFighter getAttacker()
+  private Fighter getAttacker()
   {
     return attacker;
   }
 
-  private IFighter getDefender()
+  private Fighter getDefender()
   {
     return defender;
   }

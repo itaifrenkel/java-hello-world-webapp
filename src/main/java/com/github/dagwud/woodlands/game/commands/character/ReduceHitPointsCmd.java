@@ -4,14 +4,14 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
 import com.github.dagwud.woodlands.game.commands.battle.KnockUnconsciousCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.domain.IFighter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 
 public class ReduceHitPointsCmd extends AbstractCmd
 {
-  private final IFighter character;
+  private final Fighter character;
   private final int reduceBy;
 
-  public ReduceHitPointsCmd(IFighter character, int reduceBy)
+  public ReduceHitPointsCmd(Fighter character, int reduceBy)
   {
     this.character = character;
     this.reduceBy = reduceBy;

@@ -6,7 +6,6 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.*;
-import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.LinkedList;
@@ -115,9 +114,9 @@ public class EncounterRoundCmd extends AbstractCmd
     return false;
   }
 
-  private void doAttack(IFighter attacker, List<DamageInflicted> roundActivity)
+  private void doAttack(Fighter attacker, List<DamageInflicted> roundActivity)
   {
-    IFighter defender = determineDefender(attacker);
+    Fighter defender = determineDefender(attacker);
     if (attacker.getStats().getState() == EState.ALIVE && defender.getStats().getState() == EState.ALIVE)
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
@@ -130,7 +129,7 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
-  private IFighter determineDefender(IFighter attacker)
+  private Fighter determineDefender(Fighter attacker)
   {
     if (attacker instanceof GameCharacter)
     {
@@ -148,7 +147,7 @@ public class EncounterRoundCmd extends AbstractCmd
     return members.get(0);
   }
 
-  private DamageInflicted doAttack(IFighter attacker, Weapon attackWith, IFighter defender)
+  private DamageInflicted doAttack(Fighter attacker, Weapon attackWith, Fighter defender)
   {
     AttackCmd attack = new AttackCmd(attacker, attackWith, defender);
     CommandDelegate.execute(attack);
@@ -182,25 +181,10 @@ public class EncounterRoundCmd extends AbstractCmd
             .append("—————————");
     for (GameCharacter member : encounter.getParty().getMembers())
     {
-      b.append("\n").append(buildCharacterSummaryLine(member.getName(), member.getStats()));
+      b.append("\n").append("• ").append(member.summary());
     }
-    b.append("\n").append(buildCharacterSummaryLine(encounter.getEnemy().name, encounter.getEnemy().getStats()));
+    b.append("\n").append("• ").append(encounter.getEnemy().summary());
     return b.toString();
-  }
-
-  private String buildCharacterSummaryLine(String characterName, Stats stats)
-  {
-    if (stats.getState() == EState.DEAD)
-    {
-      return "• " + characterName + ": ☠️dead";
-    }
-    String msg = "• " + characterName
-            + ": ❤️" + stats.getHitPoints() + "/" + stats.getMaxHitPoints();
-    if (stats.getMaxMana() != 0)
-    {
-      msg += ", ✨" + stats.getMana() + "/" + stats.getMaxMana();
-    }
-    return msg;
   }
 
   private void scheduleNextRound()

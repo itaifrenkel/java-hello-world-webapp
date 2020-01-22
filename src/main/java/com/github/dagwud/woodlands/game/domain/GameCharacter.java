@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
-public class GameCharacter implements IFighter
+public class GameCharacter extends Fighter
 {
   private final Player playedBy;
   private String name;

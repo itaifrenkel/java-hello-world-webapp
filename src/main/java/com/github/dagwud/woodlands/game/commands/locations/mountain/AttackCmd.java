@@ -4,19 +4,17 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.IFighter;
-import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class AttackCmd extends AbstractCmd
 {
-  private final IFighter attacker;
-  private final IFighter defender;
+  private final Fighter attacker;
+  private final Fighter defender;
   private final Weapon weaponUsed;
   private DamageInflicted damageInflicted;
 
-  AttackCmd(IFighter attacker, Weapon weaponUsed, IFighter defender)
+  AttackCmd(Fighter attacker, Weapon weaponUsed, Fighter defender)
   {
     this.attacker = attacker;
     this.weaponUsed = weaponUsed;
@@ -69,7 +67,7 @@ public class AttackCmd extends AbstractCmd
             damageDone, defender, criticalHitDamage + bonusDamage + drunkStrengthDamage);
   }
 
-  private EHitStatus rollForHit(IFighter attacker, Weapon attackWith, IFighter defender)
+  private EHitStatus rollForHit(Fighter attacker, Weapon attackWith, Fighter defender)
   {
     int drunkennessPenalty = determineDrunkennessModifier(attacker);
    
@@ -95,7 +93,7 @@ public class AttackCmd extends AbstractCmd
     return EHitStatus.MISS;
   }
 
-  private int determineDrunkennessModifier(IFighter attacker)
+  private int determineDrunkennessModifier(Fighter attacker)
   {
     return Math.min(attacker.getStats().getDrunkeness() / 2, 4);
   }

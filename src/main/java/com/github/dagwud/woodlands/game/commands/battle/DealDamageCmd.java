@@ -4,14 +4,14 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.ReduceHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
-import com.github.dagwud.woodlands.game.domain.IFighter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 
 public class DealDamageCmd extends AbstractCmd
 {
   private final DamageInflicted damageInflicted;
-  private final IFighter inflictedOn;
+  private final Fighter inflictedOn;
 
-  public DealDamageCmd(DamageInflicted damageInflicted, IFighter inflictedOn)
+  public DealDamageCmd(DamageInflicted damageInflicted, Fighter inflictedOn)
   {
     this.damageInflicted = damageInflicted;
     this.inflictedOn = inflictedOn;

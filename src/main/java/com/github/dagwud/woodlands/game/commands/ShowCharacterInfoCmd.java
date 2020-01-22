@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
+import java.util.Map;
+
 public class ShowCharacterInfoCmd extends AbstractCmd
 {
   private final int chatId;
@@ -52,7 +54,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     {
       return "nothing";
     }
-    return carrying.name + " " + carrying.getIcon() + determineDamageText(carrying);
+    return carrying.summary(character);
   }
 
   private String describeInactiveItems(CarriedItems carrying)
@@ -71,27 +73,15 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     b.append("Skilled with: ");
 
     boolean first = true;
-    for (String weapon : character.getStats().getWeaponBonusDamage().keySet())
+    for (Map.Entry<String, Integer> bonus : character.getStats().getWeaponBonusDamage().entrySet())
     {
       if (!first)
       {
         b.append(", ");
       }
       first = false;
-      b.append(weapon);
+      b.append(bonus.getKey()).append(" (+").append(bonus.getValue()).append(")");
     }
     return b.toString();
-  }
-
-  private String determineDamageText(Weapon carrying)
-  {
-    int bonusDamage = character.getStats().getWeaponBonusDamage(carrying);
-
-    String damageText = carrying.damage.determineAverageRoll();
-    if (bonusDamage != 0)
-    {
-      damageText += " +" + bonusDamage;
-    }
-    return damageText;
   }
 }

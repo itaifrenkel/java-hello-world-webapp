@@ -1,14 +1,14 @@
 package com.github.dagwud.woodlands.gson.game;
 
 import com.github.dagwud.woodlands.game.domain.CarriedItems;
-import com.github.dagwud.woodlands.game.domain.IFighter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 import com.github.dagwud.woodlands.game.items.UnknownWeaponException;
 import com.google.gson.annotations.SerializedName;
 
-public class Creature implements IFighter
+public class Creature extends Fighter
 {
   public String name;
 
