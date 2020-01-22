@@ -52,6 +52,11 @@ public class Party
     return getLeader() == activeCharacter;
   }
 
+  public int size()
+  {
+    return members.size();
+  }
+
   public boolean isPrivateParty()
   {
     return getName().startsWith("_");
