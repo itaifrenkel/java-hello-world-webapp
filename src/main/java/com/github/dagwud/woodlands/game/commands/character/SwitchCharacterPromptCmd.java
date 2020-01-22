@@ -40,6 +40,10 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
 
   private void switchTo(String capturedInput)
   {
+    if (capturedInput.equals("Cancel"))
+    {
+      return;
+    }
     GameCharacter switchTo = findCharacter(capturedInput);
     Player player = getPlayerState().getPlayer();
     if (switchTo == null)
@@ -71,12 +75,13 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
 
   private String[] buildCharactersList(Player player)
   {
-    String[] characters = new String[player.getInactiveCharacters().size()];
+    String[] characters = new String[player.getInactiveCharacters().size() + 1];
     List<GameCharacter> inactiveCharacters = player.getInactiveCharacters();
     for (int i = 0; i < inactiveCharacters.size(); i++)
     {
       characters[i] = inactiveCharacters.get(i).summary();
     }
+    characters[characters.length - 1] = "Cancel";
     return characters;
   }
 }
