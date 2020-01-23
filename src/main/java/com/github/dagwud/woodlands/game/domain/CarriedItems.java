@@ -36,4 +36,19 @@ public class CarriedItems
     return carriedInactive;
   }
 
+  public int countTotalCarried()
+  {
+    int total = 0;
+    if (carriedLeft != null)
+    {
+      total++;
+    }
+
+    if (carriedRight != null)
+    {
+      total++;
+    }
+    total += carriedInactive.size();
+    return total;
+  }
 }
