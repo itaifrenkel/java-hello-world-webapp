@@ -21,6 +21,13 @@ public class RetrieveItemsCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    int maxAllowedItems = 7 + character.getStats().getLevel();
+    if (character.getCarrying().countTotalCarried() >= maxAllowedItems)
+    {
+      CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You can't carry any more"));
+      return;
+    }
+
     Weapon chosenWeapon = chooseWeapon();
 
     character.getCarrying().getCarriedInactive().add(chosenWeapon);
