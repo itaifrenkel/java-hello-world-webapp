@@ -6,11 +6,12 @@ public class ExplorerInitialStats extends InitialStats
   {
     shortRestDice = 8;
     initialStrength = 13;
-    initialStrengthModifier = 1;
+    initialStrengthModifier = 1 + strengthBoost;
     initialAgility = 9;
-    initialAgilityModifier = 1;
+    initialAgilityModifier = 1 + agilityBoost;
     initialConstitution = 14;
-    initialConstitutionModifier = 2;
+    constitutionBoost = 2;
+    initialConstitutionModifier = 2 + constitutionBoost;
     initialIntelligenceUnused = 15;
     initialIntelligenceModifierUnused = 2;
     initialWisdomUnused = 16;

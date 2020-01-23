@@ -6,11 +6,12 @@ public class TricksterInitialStats extends InitialStats
   {
     shortRestDice = 8;
     initialStrength = 11;
-    initialStrengthModifier = 0;
+    initialStrengthModifier = 0 + strengthBoost;
     initialAgility = 16;
-    initialAgilityModifier = 3;
+    agilityBoost = 2;
+    initialAgilityModifier = 3 + agilityBoost;
     initialConstitution = 14;
-    initialConstitutionModifier = 2;
+    initialConstitutionModifier = 2 + constitutionBoost;
     initialIntelligenceUnused = 15;
     initialIntelligenceModifierUnused = 2;
     initialWisdomUnused = 9;

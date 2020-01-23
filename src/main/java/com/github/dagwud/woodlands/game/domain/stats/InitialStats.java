@@ -7,10 +7,13 @@ public abstract class InitialStats
 {
   int shortRestDice;
   int initialStrength;
+  int strengthBoost;
   int initialStrengthModifier;
   int initialAgility;
+  int agilityBoost;
   int initialAgilityModifier;
   int initialConstitution;
+  int constitutionBoost;
   int initialConstitutionModifier;
   int initialIntelligenceUnused;
   int initialIntelligenceModifierUnused;
@@ -45,14 +48,19 @@ public abstract class InitialStats
     return initialStrength;
   }
 
-  public int getInitialStrengthModifier()
+  public int getStrengthBoost()
   {
-    return initialStrengthModifier;
+    return strengthBoost;
   }
 
   public int getInitialAgility()
   {
     return initialAgility;
+  }
+
+  public int getAgilityBoost()
+  {
+    return agilityBoost;
   }
 
   public int getInitialAgilityModifier()
@@ -63,6 +71,11 @@ public abstract class InitialStats
   public int getInitialConstitution()
   {
     return initialConstitution;
+  }
+
+  public int getConstitutionBoost()
+  {
+    return constitutionBoost;
   }
 
   public int getInitialConstitutionModifier()

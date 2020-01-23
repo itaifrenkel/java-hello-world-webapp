@@ -6,11 +6,12 @@ public class GeneralInitialStats extends InitialStats
   {
     shortRestDice = 8;
     initialStrength = 16;
-    initialStrengthModifier = 3;
+    strengthBoost = 3;
+    initialStrengthModifier = 3 + strengthBoost;
     initialAgility = 14;
-    initialAgilityModifier = 2;
+    initialAgilityModifier = 2 + agilityBoost;
     initialConstitution = 15;
-    initialConstitutionModifier = 2;
+    initialConstitutionModifier = 2 + constitutionBoost;
     initialIntelligenceUnused = 11;
     initialIntelligenceModifierUnused = 0;
     initialWisdomUnused = 13;

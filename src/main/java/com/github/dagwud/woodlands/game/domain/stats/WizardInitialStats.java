@@ -6,11 +6,12 @@ public class WizardInitialStats extends InitialStats
   {
     shortRestDice = 6;
     initialStrength = 9;
-    initialStrengthModifier = 1;
+    initialStrengthModifier = 1 + strengthBoost;
     initialAgility = 14;
-    initialAgilityModifier = 2;
+    agilityBoost = 2;
+    initialAgilityModifier = 2 + agilityBoost;
     initialConstitution = 15;
-    initialConstitutionModifier = 2;
+    initialConstitutionModifier = 2 + constitutionBoost;
     initialIntelligenceUnused = 16;
     initialIntelligenceModifierUnused = 3;
     initialWisdomUnused = 13;

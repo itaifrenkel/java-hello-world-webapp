@@ -6,11 +6,12 @@ public class DruidInitialStats extends InitialStats
   {
     shortRestDice = 8;
     initialStrength = 11;
-    initialStrengthModifier = 0;
+    strengthBoost = 2;
+    initialStrengthModifier = 0 + strengthBoost;
     initialAgility = 14;
-    initialAgilityModifier = 2;
+    initialAgilityModifier = 2+ agilityBoost;
     initialConstitution = 15;
-    initialConstitutionModifier = 2;
+    initialConstitutionModifier = 2 + constitutionBoost;
     initialIntelligenceUnused = 9;
     initialIntelligenceModifierUnused = 1;
     initialWisdomUnused = 16;

@@ -6,11 +6,12 @@ public class BrawlerInitialStats extends InitialStats
   {
     shortRestDice = 12;
     initialStrength = 16;
-    initialStrengthModifier = 3;
+    initialStrengthModifier = 3 + strengthBoost;
     initialAgility = 14;
-    initialAgilityModifier = 2;
+    initialAgilityModifier = 2 + agilityBoost;
     initialConstitution = 15;
-    initialConstitutionModifier = 2;
+    constitutionBoost = 2;
+    initialConstitutionModifier = 2 + constitutionBoost;
     initialIntelligenceUnused = 9;
     initialIntelligenceModifierUnused = 1;
     initialWisdomUnused = 13;
