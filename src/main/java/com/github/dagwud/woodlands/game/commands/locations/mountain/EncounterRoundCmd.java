@@ -65,7 +65,7 @@ public class EncounterRoundCmd extends AbstractCmd
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
         CommandDelegate.execute(cmd);
       }
-      else if (encounter.getEnemy().getStats().getState() == EState.DEAD)
+      else if (encounter.getEnemy().getStats().getState() != EState.ALIVE)
       {
         DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
         CommandDelegate.execute(win);
