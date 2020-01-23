@@ -83,7 +83,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
 
   private Encounter createEncounter(Party party)
   {
-    SpawnCreatureCmd cmd = new SpawnCreatureCmd();
+    SpawnCreatureCmd cmd = new SpawnCreatureCmd(4);
     CommandDelegate.execute(cmd);
     Creature creature = cmd.getSpawnedCreature();
 

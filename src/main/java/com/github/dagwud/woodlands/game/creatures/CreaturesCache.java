@@ -29,14 +29,23 @@ public class CreaturesCache
     return creatures;
   }
 
-  public Creature pickRandom()
+  public Creature pickRandom(int minDifficulty, int maxDifficulty)
   {
-    int index = (int) (Math.random() * creatures.size());
-    Iterator<Creature> it = creatures.values().iterator();
-    for (int i = 0; i < index; i++)
+    Creature picked = null;
+    while (picked == null)
     {
-      it.next();
+      int index = (int) (Math.random() * creatures.size());
+      Iterator<Creature> it = creatures.values().iterator();
+      for (int i = 0; i < index; i++)
+      {
+        it.next();
+      }
+      picked = it.next();
+      if (picked.difficulty > maxDifficulty || picked.difficulty < minDifficulty)
+      {
+        picked = null; // pick again
+      }
     }
-    return it.next();
+    return picked;
   }
 }

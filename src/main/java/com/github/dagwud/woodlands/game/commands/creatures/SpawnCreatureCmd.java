@@ -10,12 +10,18 @@ import com.github.dagwud.woodlands.gson.game.Difficulty;
 
 public class SpawnCreatureCmd extends AbstractCmd
 {
+  private final int maxDifficulty;
   private Creature spawnedCreature;
+
+  public SpawnCreatureCmd(int maxDifficulty)
+  {
+    this.maxDifficulty = maxDifficulty;
+  }
 
   @Override
   public void execute()
   {
-    Creature template = CreaturesCacheFactory.instance().getCache().pickRandom();
+    Creature template = CreaturesCacheFactory.instance().getCache().pickRandom(0, maxDifficulty);
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(template.difficulty);
 
     Stats stats = new Stats();
