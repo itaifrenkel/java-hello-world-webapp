@@ -14,9 +14,9 @@ public class Stats
   private int maxHitPoints;
   private int mana;
   private int maxMana;
-  private int strength;
-  private int agility;
-  private int constitution;
+  private Stat strength;
+  private Stat agility;
+  private Stat constitution;
   private int defenceRating;
 
   // thus endeth the serious stats and begin the fun stats
@@ -76,34 +76,34 @@ public class Stats
     this.maxMana = maxMana;
   }
 
-  public int getStrength()
+  public Stat getStrength()
   {
     return strength;
   }
 
-  public void setStrength(int strength)
+  public void setStrength(int strength, int bonus)
   {
-    this.strength = strength;
+    this.strength = new Stat(strength, bonus);
   }
 
-  public int getAgility()
+  public Stat getAgility()
   {
     return agility;
   }
 
-  public void setAgility(int agility)
+  public void setAgility(int agility, int bonus)
   {
-    this.agility = agility;
+    this.agility = new Stat(agility, bonus);
   }
 
-  public int getConstitution()
+  public Stat getConstitution()
   {
     return constitution;
   }
 
-  public void setConstitution(int constitution)
+  public void setConstitution(int constitution, int bonus)
   {
-    this.constitution = constitution;
+    this.constitution = new Stat(constitution, bonus);
   }
 
   public int getWeaponBonusHit(Weapon weapon)

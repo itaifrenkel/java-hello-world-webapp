@@ -19,7 +19,7 @@ public class RollShortRestCmd extends AbstractCmd
   public void execute()
   {
     int diceroll = roll(character.getStats().getLevel(), character.getCharacterClass().getInitialStats().getShortRestDice());
-    int boostFromConstitution = (int) (Math.floor((character.getStats().getConstitution() - 10) / 2.0));
+    int boostFromConstitution = (int) (Math.floor((character.getStats().getConstitution().total() - 10) / 2.0));
     int newHitPoints = (character.getStats().getHitPoints() + diceroll + boostFromConstitution);
     if (newHitPoints > character.getStats().getMaxHitPoints())
     {

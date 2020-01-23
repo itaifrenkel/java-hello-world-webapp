@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.stats.Stat;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class AttackCmd extends AbstractCmd
@@ -82,11 +83,11 @@ public class AttackCmd extends AbstractCmd
       return EHitStatus.CRITICAL_HIT;
     }
 
-    int modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
+    Stat modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
     int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
     
     int defenderDefenceRating = defender.getStats().getDefenceRating();
-    if (naturalRoll.getTotal() + modifier + weaponBoost - drunkennessPenalty >= defenderDefenceRating)
+    if (naturalRoll.getTotal() + modifier.total() + weaponBoost - drunkennessPenalty >= defenderDefenceRating)
     {
       return EHitStatus.HIT;
     }
