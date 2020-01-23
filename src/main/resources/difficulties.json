@@ -1,5 +1,9 @@
 {
   "difficulties": [
+    { "difficulty": 0, "defensive": 11, "proficiency": 2, "hit-points-min": 11, "hit-points-max": 25, "xp-reward": 5},
+    { "difficulty": 0.125, "defensive": 12, "proficiency": 2, "hit-points-min": 26, "hit-points-max": 40, "xp-reward": 25},
+    { "difficulty": 0.25, "defensive": 12, "proficiency": 2, "hit-points-min": 41, "hit-points-max": 55, "xp-reward": 50},
+    { "difficulty": 0.5, "defensive": 12, "proficiency": 2, "hit-points-min": 56, "hit-points-max": 70, "xp-reward": 100},
     { "difficulty": 1, "defensive": 13, "proficiency": 2, "hit-points-min": 71, "hit-points-max": 85, "xp-reward": 200},
     { "difficulty": 2, "defensive": 13, "proficiency": 2, "hit-points-min": 86, "hit-points-max": 100, "xp-reward": 450},
     { "difficulty": 3, "defensive": 13, "proficiency": 2, "hit-points-min": 101, "hit-points-max": 115, "xp-reward": 700},
