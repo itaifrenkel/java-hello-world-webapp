@@ -51,7 +51,7 @@ public class SpawnCharacterCmd extends AbstractCmd
     this.spawned = character;
   }
 
-  GameCharacter getSpawned()
+  public GameCharacter getSpawned()
   {
     return spawned;
   }
