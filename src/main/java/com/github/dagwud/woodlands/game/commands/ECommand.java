@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.commands.character.ChangeNamePromptCmd;
 import com.github.dagwud.woodlands.game.commands.character.SwitchCharacterPromptCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
@@ -38,7 +39,8 @@ public enum ECommand
   SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
   LEAVE_ITEMS("Leave Items", true, (character, chatId) -> new LeaveItemsCmd(character)),
   RETRIEVE_ITEMS("Retrieve Items", true, (character, chatId) -> new RetrieveItemsCmd(character)),
-  SWITCH_CHARACTERS("Switch Characters", true, (character, chatId) -> new SwitchCharacterPromptCmd(character.getPlayedBy()))
+  SWITCH_CHARACTERS("Switch Characters", true, (character, chatId) -> new SwitchCharacterPromptCmd(character.getPlayedBy())),
+  CHANGE_NAME("Change Name", true, (character, chatId) -> new ChangeNamePromptCmd(character.getPlayedBy()))
   ;
 
 
