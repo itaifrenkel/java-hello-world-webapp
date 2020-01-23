@@ -42,7 +42,7 @@ public class MainTest
     assertEquals(2, playerState.getActiveCharacter().getStats().getMana());
     assertEquals(3, playerState.getActiveCharacter().getStats().getMaxMana());
     assertEquals(9, playerState.getActiveCharacter().getStats().getStrength());
-    assertEquals(14, playerState.getActiveCharacter().getStats().getAgility());
+    assertEquals(14 + 2, playerState.getActiveCharacter().getStats().getAgility());
     assertEquals(15, playerState.getActiveCharacter().getStats().getConstitution());
 
     assertEquals(ELocation.VILLAGE_SQUARE, playerState.getActiveCharacter().getLocation());
@@ -61,8 +61,9 @@ public class MainTest
     new TelegramServlet().processTelegramUpdate(update);
     update = createUpdate("/me", playerState);
     new TelegramServlet().processTelegramUpdate(update);
-    assertNotNull(playerState.getActiveCharacter().getCarrying().getCarriedLeft());
+    assertNull(playerState.getActiveCharacter().getCarrying().getCarriedLeft());
     assertNull(playerState.getActiveCharacter().getCarrying().getCarriedRight());
+    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
   }
 
   @Test
