@@ -18,6 +18,11 @@ public class EnterTheMountainCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (!playerState.getActiveCharacter().getParty().isLedBy(playerState.getActiveCharacter()))
+    {
+      return;
+    }
+
     RunLaterCmd cmd = new RunLaterCmd(Settings.DELAY_BETWEEN_ENCOUNTERS_MS,
             new GenerateMountainEncounterCmd(playerState));
     CommandDelegate.execute(cmd);

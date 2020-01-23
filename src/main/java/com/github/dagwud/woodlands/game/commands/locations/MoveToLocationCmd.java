@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EndEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.EState;
@@ -111,13 +112,16 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private void handleLocationEntry(ELocation location, PlayerState playerState)
   {
-    if (playerState.getActiveCharacter().getParty().isLedBy(playerState.getActiveCharacter()))
+    if (location == ELocation.MOUNTAIN)
     {
-      if (location == ELocation.MOUNTAIN)
-      {
-        EnterTheMountainCmd cmd = new EnterTheMountainCmd(playerState);
-        CommandDelegate.execute(cmd);
-      }
+      EnterTheMountainCmd cmd = new EnterTheMountainCmd(playerState);
+      CommandDelegate.execute(cmd);
+    }
+
+    if (location == ELocation.VILLAGE_SQUARE)
+    {
+      EnterTheVillageCmd cmd = new EnterTheVillageCmd(playerState.getActiveCharacter());
+      CommandDelegate.execute(cmd);
     }
   }
 }
