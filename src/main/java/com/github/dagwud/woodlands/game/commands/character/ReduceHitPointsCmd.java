@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
 import com.github.dagwud.woodlands.game.commands.battle.KnockUnconsciousCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.Creature;
+import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class ReduceHitPointsCmd extends AbstractCmd
 {
