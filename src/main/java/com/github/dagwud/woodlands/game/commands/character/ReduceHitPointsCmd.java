@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
 import com.github.dagwud.woodlands.game.commands.battle.KnockUnconsciousCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.Creature;
 
 public class ReduceHitPointsCmd extends AbstractCmd
 {
@@ -25,7 +26,7 @@ public class ReduceHitPointsCmd extends AbstractCmd
 
     if (character.getStats().getHitPoints() <= 0)
     {
-      if (character.getStats().getHitPoints() < -character.getStats().getMaxHitPoints())
+      if (character instanceof Creature || character.getStats().getHitPoints() < -character.getStats().getMaxHitPoints())
       {
         // instant death:
         DeathCmd cmd = new DeathCmd(character);
