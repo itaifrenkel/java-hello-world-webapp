@@ -24,7 +24,7 @@ public class DefeatCreatureCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    int difficultyLevel = creatureDefeated.difficulty;
+    double difficultyLevel = creatureDefeated.difficulty;
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(difficultyLevel);
     int reward = difficulty.experienceReward;
     int rewardPerCharacter = Math.floorDiv(reward, victoriousParty.size());

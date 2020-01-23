@@ -1,5 +1,38 @@
 {
   "creatures": [
+    {"name": "Badger", "difficulty": 0, "weapon-left": "Bite-0"},
+    {"name": "Frog", "difficulty": 0, "weapon-left": "Bite-0"},
+    {"name": "Crab", "difficulty": 0, "weapon-left": "Bite-0"},
+    {"name": "Owl", "difficulty": 0, "weapon-left": "Bite-0"},
+    {"name": "Goat", "difficulty": 0, "weapon-left": "Bite-0"},
+    {"name": "Fire Beetle", "difficulty": 0, "weapon-left": "Bite-0"},
+
+    {"name":  "Camel", "difficulty": 0.125, "weapon-left": "Bite-1_8"},
+    {"name":  "Poisonous Snake", "difficulty":  0.125, "weapon-left":  "Bite-1_8"},
+    {"name":  "Pony", "difficulty":  0.125, "weapon-left":  "Bite-1_8"},
+    {"name":  "Scorpion", "difficulty":  0.125, "weapon-left":  "Bite-1_8"},
+    {"name":  "Big Spider", "difficulty":  0.125, "weapon-left":  "Bite-1_8"},
+    {"name":  "Hog", "difficulty":  0.125, "weapon-left":  "Bite-1_8"},
+
+    {"name":  "Boa Constrictor", "difficulty": 0.25, "weapon-left": "Bite-1_4"},
+    {"name":  "Giant Frog", "difficulty":  0.25, "weapon-left":  "Bite-1_4"},
+    {"name":  "Wolf Spider", "difficulty":  0.25, "weapon-left":  "Bite-1_4"},
+    {"name":  "Stray Dog", "difficulty":  0.25, "weapon-left":  "Bite-1_4"},
+    {"name":  "Walking Skeleton", "difficulty":  0.25, "weapon-left":  "Bite-1_4"},
+
+    {"name": "Panther", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Pixie", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Ape", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Crocodile", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Leprechaun", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Wasp King", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Lizard Man", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Orc", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Warhorse", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Harpy", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Hippogriff", "difficulty": 0.5, "weapon-left": "Bite-1_2"},
+    {"name": "Lion", "difficulty":0.5, "weapon-left":"Bite-1_2"},
+
     {"name":  "Viper", "difficulty": 1, "weapon-left": "Bite-4"},
     {"name":  "Giant Rat", "difficulty": 1, "weapon-left": "Bite-4"},
     {"name":  "Snake", "difficulty": 1, "weapon-left": "Bite-4"},

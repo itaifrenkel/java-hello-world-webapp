@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Difficulty
 {
-  public int difficulty;
+  public double difficulty;
 
   @SerializedName("defensive")
   public int defensiveRating;

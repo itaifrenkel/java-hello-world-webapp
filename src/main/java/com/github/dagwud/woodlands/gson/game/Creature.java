@@ -12,7 +12,7 @@ public class Creature extends Fighter
 {
   public String name;
 
-  public int difficulty;
+  public double difficulty;
 
   @SerializedName("weapon-left")
   public String weaponLeft;
