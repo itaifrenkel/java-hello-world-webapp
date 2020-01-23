@@ -78,6 +78,11 @@ public class EncounterRoundCmd extends AbstractCmd
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
         CommandDelegate.execute(cmd);
       }
+      else
+      {
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "Evan is really smart.... enemy " + encounter.getEnemy().name + " is " + encounter.getEnemy().getStats().getState());
+        CommandDelegate.execute(cmd);
+      }
     }
   }
 
