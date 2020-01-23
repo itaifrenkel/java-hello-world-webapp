@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.AcceptInputCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.DropItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.EquipItemCmd;
