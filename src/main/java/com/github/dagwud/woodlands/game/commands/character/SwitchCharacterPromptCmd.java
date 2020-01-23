@@ -1,13 +1,11 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
+import com.github.dagwud.woodlands.game.domain.menu.InnMenu;
 
 import java.util.List;
 
@@ -44,6 +42,7 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
     {
       return;
     }
+
     GameCharacter switchTo = findCharacter(capturedInput);
     Player player = getPlayerState().getPlayer();
     if (switchTo == null)
@@ -59,6 +58,9 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
 
     SendMessageCmd msg = new SendMessageCmd(player.getChatId(), "Now playing as " + switchTo.getName() + " the " + switchTo.getCharacterClass());
     CommandDelegate.execute(msg);
+
+    ShowMenuCmd showMenuCmd = new ShowMenuCmd(new InnMenu(), player.getPlayerState());
+    CommandDelegate.execute(showMenuCmd);
   }
 
   private GameCharacter findCharacter(String capturedInput)
