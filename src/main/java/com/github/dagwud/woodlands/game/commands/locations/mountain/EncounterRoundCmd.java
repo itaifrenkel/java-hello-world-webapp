@@ -46,6 +46,11 @@ public class EncounterRoundCmd extends AbstractCmd
         TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(encounter.getParty());
         CommandDelegate.execute(killall);
       }
+      
+      EndEncounterCmd end = new EndEncounterCmd(encounter);
+      CommandDelegate.execute(end);
+      
+      return;
     }
 
     if (encounter.getEnemy().getStats().getState() != EState.ALIVE || !anyPlayerCharactersStillAlive(encounter))
