@@ -14,9 +14,9 @@ public class Stats
   private int maxHitPoints;
   private int mana;
   private int maxMana;
-  private Stat strength;
-  private Stat agility;
-  private Stat constitution;
+  private Stat strength = new Stat();
+  private Stat agility = new Stat();
+  private Stat constitution = new Stat();
   private int defenceRating;
 
   // thus endeth the serious stats and begin the fun stats

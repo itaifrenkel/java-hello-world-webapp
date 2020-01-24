@@ -5,6 +5,11 @@ public class Stat
   private int base;
   private int bonus;
 
+  Stat()
+  {
+    this(0, 0);
+  }
+
   Stat(int base, int bonus)
   {
     this.base = base;
