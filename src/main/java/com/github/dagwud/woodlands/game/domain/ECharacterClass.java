@@ -2,6 +2,9 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.stats.*;
 
+import java.util.Collection;
+import java.util.Collections;
+
 public enum ECharacterClass
 {
   GENERAL("General", new GeneralInitialStats()),
@@ -34,5 +37,10 @@ public enum ECharacterClass
   public String toString()
   {
     return displayName;
+  }
+
+  public Collection<? extends SpellCast> castPassives()
+  {
+    return Collections.emptyList();
   }
 }

@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    List<SpellCast> spellsActivity = doPassiveAbilities();
     List<DamageInflicted> roundActivity = doFighting();
     StringBuilder summary = buildRoundSummary(roundActivity);
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.toString());
@@ -84,6 +86,16 @@ public class EncounterRoundCmd extends AbstractCmd
         CommandDelegate.execute(cmd);
       }
     }
+  }
+
+  private List<SpellCast> doPassiveAbilities()
+  {
+    List<SpellCast> cast = new ArrayList<>();
+    for (GameCharacter member : encounter.getParty().getMembers())
+    {
+      cast.addAll(member.getCharacterClass().castPassives());
+    }
+    return cast;
   }
 
   private List<DamageInflicted> doFighting()

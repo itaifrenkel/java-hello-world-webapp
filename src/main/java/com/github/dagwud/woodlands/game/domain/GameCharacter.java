@@ -2,20 +2,21 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
-public class GameCharacter extends Fighter
+public abstract class GameCharacter extends Fighter
 {
   private final Player playedBy;
+  private final ECharacterClass characterClass;
   private String name;
-  private ECharacterClass characterClass;
   private Stats stats;
   private ELocation location;
   private CarriedItems carrying = new CarriedItems();
   private boolean setupComplete;
   private Party party;
 
-  public GameCharacter(Player playedBy)
+  public GameCharacter(Player playedBy, ECharacterClass characterClass)
   {
     this.playedBy = playedBy;
+    this.characterClass = characterClass;
   }
 
   public ELocation getLocation()
@@ -41,11 +42,6 @@ public class GameCharacter extends Fighter
   public ECharacterClass getCharacterClass()
   {
     return characterClass;
-  }
-
-  public void setCharacterClass(ECharacterClass characterClass)
-  {
-    this.characterClass = characterClass;
   }
 
   public void setLocation(ELocation location)

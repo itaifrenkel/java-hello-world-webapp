@@ -26,8 +26,6 @@ public class PlayerSetupCmd extends AbstractCmd
     Player player = new Player(chatId, GameStatesRegistry.lookup(chatId));
     PlayerState playerState = player.getPlayerState();
     playerState.setPlayer(player);
-    playerState.getPlayer().setActiveCharacter(new GameCharacter(player));
-    playerState.getPlayer().getActiveCharacter().setSetupComplete(false);
 
     DoPlayerSetupCmd cmd = new DoPlayerSetupCmd(player);
     CommandDelegate.execute(cmd);

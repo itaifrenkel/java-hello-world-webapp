@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.domain.Brawler;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
@@ -23,9 +24,8 @@ public class CreateCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    GameCharacter character = new GameCharacter(player);
+    GameCharacter character = GameCharacterFactory.create(characterClass, player);
     character.setName(characterName);
-    character.setCharacterClass(characterClass);
 
     InitCharacterStatsCmd cmd = new InitCharacterStatsCmd(character);
     CommandDelegate.execute(cmd);
