@@ -42,6 +42,32 @@ public class AttackCmd extends AbstractCmd
     }
   }
 
+  private EHitStatus rollForHit(Fighter attacker, Weapon attackWith, Fighter defender)
+  {
+    int drunkennessPenalty = determineDrunkennessModifier(attacker);
+
+    DiceRollCmd naturalRoll = new DiceRollCmd(1, 20);
+    CommandDelegate.execute(naturalRoll);
+    if (naturalRoll.getTotal() <= 1 + drunkennessPenalty)
+    {
+      return EHitStatus.MISS;
+    }
+    if (naturalRoll.getTotal() == 20)
+    {
+      return EHitStatus.CRITICAL_HIT;
+    }
+
+    Stat modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
+    int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
+
+    int defenderDefenceRating = defender.getStats().getDefenceRating();
+    if (naturalRoll.getTotal() + modifier.total() + weaponBoost - drunkennessPenalty >= defenderDefenceRating)
+    {
+      return EHitStatus.HIT;
+    }
+    return EHitStatus.MISS;
+  }
+
   private void rollForDamage(EHitStatus hitStatus)
   {
     DiceRollCmd rollDamage = new DiceRollCmd(weaponUsed.damage.diceCount, weaponUsed.damage.diceFaces);
@@ -66,32 +92,6 @@ public class AttackCmd extends AbstractCmd
 
     damageInflicted = new DamageInflicted(attacker, weaponUsed, hitStatus,
             damageDone, defender, criticalHitDamage + bonusDamage + drunkStrengthDamage);
-  }
-
-  private EHitStatus rollForHit(Fighter attacker, Weapon attackWith, Fighter defender)
-  {
-    int drunkennessPenalty = determineDrunkennessModifier(attacker);
-   
-    DiceRollCmd naturalRoll = new DiceRollCmd(1, 20);
-    CommandDelegate.execute(naturalRoll);
-    if (naturalRoll.getTotal() <= 1 + drunkennessPenalty)
-    {
-      return EHitStatus.MISS;
-    }
-    if (naturalRoll.getTotal() == 20)
-    {
-      return EHitStatus.CRITICAL_HIT;
-    }
-
-    Stat modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
-    int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
-    
-    int defenderDefenceRating = defender.getStats().getDefenceRating();
-    if (naturalRoll.getTotal() + modifier.total() + weaponBoost - drunkennessPenalty >= defenderDefenceRating)
-    {
-      return EHitStatus.HIT;
-    }
-    return EHitStatus.MISS;
   }
 
   private int determineDrunkennessModifier(Fighter attacker)
