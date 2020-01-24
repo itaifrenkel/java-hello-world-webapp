@@ -21,7 +21,7 @@ public enum ECommand
 {
   HELP("/help", false, (character, chatId) -> new ShowHelpCmd(chatId)),
   START("/start", false, (character, chatId) -> new StartCmd(GameStatesRegistry.lookup(chatId), chatId)),
-  NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character.getPlayedBy())),
+  NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character == null ? null : character.getPlayedBy(), chatId)),
   ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
   PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),

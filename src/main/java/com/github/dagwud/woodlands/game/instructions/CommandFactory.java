@@ -65,7 +65,7 @@ public class CommandFactory
       return new EquipItemCmd(playerState.getActiveCharacter(), chatId, dropIndex);
     }
 
-    if (playerState.getActiveCharacter().getParty() != null)
+    if (playerState.getActiveCharacter() != null && playerState.getActiveCharacter().getParty() != null)
     {
       return new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), 
           playerState.getActiveCharacter().getName() + " says \"" + cmd + "\"");

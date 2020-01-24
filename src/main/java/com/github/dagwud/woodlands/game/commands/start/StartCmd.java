@@ -22,11 +22,6 @@ public class StartCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Player player = new Player(chatId, playerState);
-    playerState.setPlayer(player);
-    playerState.getPlayer().setActiveCharacter(new GameCharacter(player));
-    playerState.getPlayer().getActiveCharacter().setSetupComplete(false);
-
     ShowHelpCmd cmd = new ShowHelpCmd(chatId);
     CommandDelegate.execute(cmd);
   }

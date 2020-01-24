@@ -18,7 +18,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
 
   ShowCharacterInfoCmd(int chatId, GameCharacter character)
   {
-    super(new CharacterIsSetUpPrecondition(character));
+    super(new CharacterIsSetUpPrecondition(chatId, character));
     this.chatId = chatId;
     this.character = character;
   }

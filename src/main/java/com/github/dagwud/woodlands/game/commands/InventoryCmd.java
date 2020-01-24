@@ -18,7 +18,7 @@ public class InventoryCmd extends AbstractCmd
 
   InventoryCmd(int chatId, GameCharacter character)
   {
-    super(new CharacterIsSetUpPrecondition(character));
+    super(new CharacterIsSetUpPrecondition(chatId, character));
     this.chatId = chatId;
     this.character = character;
   }
