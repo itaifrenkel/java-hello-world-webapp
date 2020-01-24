@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -15,8 +16,9 @@ public class InventoryCmd extends AbstractCmd
   private final int chatId;
   private GameCharacter character;
 
-  public InventoryCmd(int chatId, GameCharacter character)
+  InventoryCmd(int chatId, GameCharacter character)
   {
+    super(new CharacterIsSetUpPrecondition(character));
     this.chatId = chatId;
     this.character = character;
   }
