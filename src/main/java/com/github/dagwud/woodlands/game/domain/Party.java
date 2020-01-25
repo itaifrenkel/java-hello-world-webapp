@@ -49,6 +49,19 @@ public class Party
     return new ArrayList<>(members);
   }
 
+  public List<GameCharacter> activeCharacters()
+  {
+    List<GameCharacter> active = new ArrayList<>(members.size());
+    for (GameCharacter member : members)
+    {
+      if (member.isActive())
+      {
+        active.add(member);
+      }
+    }
+    return active;
+  }
+
   public boolean isLedBy(GameCharacter activeCharacter)
   {
     return getLeader() == activeCharacter;
