@@ -59,7 +59,9 @@ public class JoinPartyCmd extends AbstractCmd
     {
       return true;
     }
-    return party.getLeader().getLocation() == ELocation.VILLAGE_SQUARE;
+    return party.getLeader().getLocation() == ELocation.VILLAGE_SQUARE
+      || party.getLeader().getLocation() == ELocation.INN
+      || party.getLeader().getLocation() == ELocation.TAVERN;
   }
 
 }
