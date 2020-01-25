@@ -1,7 +1,5 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.game.domain.EState;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,14 +40,8 @@ public class Party
     members.remove(leaver);
     leaver.setParty(null);
   }
-  
-  public List<GameCharacter> getMembers()
-  {
-    // quick and easy synchronization protection:
-    return new ArrayList<>(members);
-  }
 
-  public List<GameCharacter> activeCharacters()
+  public List<GameCharacter> getActiveMembers()
   {
     List<GameCharacter> active = new ArrayList<>(members.size());
     for (GameCharacter member : members)
@@ -112,7 +104,7 @@ public class Party
   private int countConscious()
   {
     int conscious = 0;
-    for (GameCharacter member : getMembers())
+    for (GameCharacter member : getActiveMembers())
     {
       if (member.isActive() && member.getStats().getState() == EState.ALIVE)
       {

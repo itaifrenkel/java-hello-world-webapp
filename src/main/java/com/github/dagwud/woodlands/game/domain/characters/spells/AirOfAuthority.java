@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
@@ -30,7 +29,7 @@ public class AirOfAuthority extends Spell
   @Override
   public void cast()
   {
-    for (GameCharacter target : getCaster().getParty().activeCharacters())
+    for (GameCharacter target : getCaster().getParty().getActiveMembers())
     {
       int buffAmount = rollBuff(target);
       if (buffAmount != 0)

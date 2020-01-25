@@ -23,7 +23,7 @@ public class TooManyUnconsciousCmd extends AbstractCmd
     SendPartyMessageCmd msg = new SendPartyMessageCmd(party, message);
     CommandDelegate.execute(msg);
 
-    for (GameCharacter member : party.getMembers())
+    for (GameCharacter member : party.getActiveMembers())
     {
       DeathCmd cmd = new DeathCmd(member);
       CommandDelegate.execute(cmd);

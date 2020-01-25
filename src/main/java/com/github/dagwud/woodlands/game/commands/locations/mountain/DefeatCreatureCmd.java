@@ -28,7 +28,7 @@ public class DefeatCreatureCmd extends AbstractCmd
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(difficultyLevel);
     int reward = difficulty.experienceReward;
     int rewardPerCharacter = Math.floorDiv(reward, victoriousParty.size());
-    for (GameCharacter member : victoriousParty.getMembers())
+    for (GameCharacter member : victoriousParty.getActiveMembers())
     {
       GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
       CommandDelegate.execute(cmd);
