@@ -24,6 +24,7 @@ public class BrawlerInitialStats extends InitialStats
     initialSpeedUnused = 30;
     initialHitPoints = 14;
     initialHitDice = "1d12";
+    initialRestDiceFaces = 12;
     weaponMasteryBonusHit.put("Warrior Club", 5);
     weaponMasteryBonusDamage.put("Warrior Club", 3);
     weaponMasteryBonusHit.put("Hand Axe", 5);
