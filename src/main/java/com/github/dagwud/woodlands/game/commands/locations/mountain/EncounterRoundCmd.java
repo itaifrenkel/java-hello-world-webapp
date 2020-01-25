@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.WaitCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -31,6 +32,11 @@ public class EncounterRoundCmd extends AbstractCmd
   public void execute()
   {
     List<Spell> spellsActivity = doPassiveAbilities();
+    if (!spellsActivity.isEmpty())
+    {
+      WaitCmd wait = new WaitCmd(1000);
+      CommandDelegate.execute(wait);
+    }
     List<DamageInflicted> roundActivity = doFighting();
     expirePassiveAbilities(spellsActivity);
 

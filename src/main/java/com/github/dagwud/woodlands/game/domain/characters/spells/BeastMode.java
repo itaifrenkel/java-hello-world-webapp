@@ -20,7 +20,7 @@ public class BeastMode extends Spell
   @Override
   public boolean shouldCast()
   {
-    BigDecimal PERCENT_CHANCE_PER_LEVEL = new BigDecimal("50"); //todo 5
+    BigDecimal PERCENT_CHANCE_PER_LEVEL = new BigDecimal("5");
     BigDecimal level = new BigDecimal(brawler.getStats().getLevel());
     ChanceCalculatorCmd cmd = new ChanceCalculatorCmd(PERCENT_CHANCE_PER_LEVEL.multiply(level));
     CommandDelegate.execute(cmd);

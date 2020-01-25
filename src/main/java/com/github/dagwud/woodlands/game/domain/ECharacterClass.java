@@ -7,12 +7,12 @@ import java.util.Collections;
 
 public enum ECharacterClass
 {
-  GENERAL("General", new GeneralInitialStats()),
   TRICKSTER("Trickster", new TricksterInitialStats()),
   EXPLORER("Explorer", new ExplorerInitialStats()),
   BRAWLER("Brawler", new BrawlerInitialStats()),
   WIZARD("Wizard", new WizardInitialStats()),
-  DRUID("Druid", new DruidInitialStats());
+  DRUID("Druid", new DruidInitialStats()),
+  GENERAL("General", new GeneralInitialStats());
 
   private final InitialStats initialStats;
   private final String displayName;
