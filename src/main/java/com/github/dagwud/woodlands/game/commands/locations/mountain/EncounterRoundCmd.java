@@ -181,7 +181,7 @@ public class EncounterRoundCmd extends AbstractCmd
       return encounter.getEnemy();
     }
     List<GameCharacter> members = encounter.getParty().getActiveMembers();
-    for (int i = members.size() - 1; i >= 0; i--)
+    for (int i = 0; i < members.size(); i++)
     {
       GameCharacter member = members.get(i);
       if (member.getStats().getState() == EState.ALIVE)
