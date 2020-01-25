@@ -4,9 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
-import com.github.dagwud.woodlands.game.domain.CarriedItems;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class ShowPartyInfoCmd extends AbstractCmd
 {
@@ -38,7 +36,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
 
     StringBuilder message = new StringBuilder();
     message.append(character.getParty().getName()).append(":");
-    for (GameCharacter member : character.getParty().getMembers())
+    for (GameCharacter member : character.getParty().getActiveMembers())
     {
       if (message.length() > 0)
       {

@@ -18,7 +18,7 @@ public class SendPartyMessageCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    for (GameCharacter member : party.getMembers())
+    for (GameCharacter member : party.getActiveMembers())
     {
       SendMessageCmd send = new SendMessageCmd(member.getPlayedBy().getChatId(), message);
       CommandDelegate.execute(send);

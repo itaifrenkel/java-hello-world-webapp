@@ -157,16 +157,16 @@ public class MainTest
 
     assertNotNull(playerState.getActiveCharacter().getParty());
     assertEquals(1, playerState.getActiveCharacter().getParty().size());
-    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
+    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getActiveMembers().get(0));
 
     PlayerState playerState2 = startBot();
     initPlayer(playerState2);
     assertNotNull(playerState2.getActiveCharacter().getParty());
     assertEquals(1, playerState2.getActiveCharacter().getParty().size());
-    assertSame(playerState2.getActiveCharacter(), playerState2.getActiveCharacter().getParty().getMembers().get(0));
+    assertSame(playerState2.getActiveCharacter(), playerState2.getActiveCharacter().getParty().getActiveMembers().get(0));
 
     assertEquals(1, playerState.getActiveCharacter().getParty().size());
-    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
+    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getActiveMembers().get(0));
   }
 
   @Test
@@ -177,7 +177,7 @@ public class MainTest
 
     assertNotNull(playerState.getActiveCharacter().getParty());
     assertEquals(1, playerState.getActiveCharacter().getParty().size());
-    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getMembers().get(0));
+    assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getActiveMembers().get(0));
 
     PlayerState playerState2 = startBot();
     initPlayer(playerState2);
@@ -191,8 +191,8 @@ public class MainTest
     assertSame(party, playerState.getActiveCharacter().getParty());
     assertSame(party, playerState2.getActiveCharacter().getParty());
     assertEquals(2, party.size());
-    assertSame(playerState.getActiveCharacter(), party.getMembers().get(0));
-    assertSame(playerState2.getActiveCharacter(), party.getMembers().get(1));
+    assertSame(playerState.getActiveCharacter(), party.getActiveMembers().get(0));
+    assertSame(playerState2.getActiveCharacter(), party.getActiveMembers().get(1));
   }
 
   private PlayerState startBot() throws Exception

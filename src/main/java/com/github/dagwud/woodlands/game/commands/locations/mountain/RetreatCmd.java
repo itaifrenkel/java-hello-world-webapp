@@ -46,7 +46,7 @@ public class RetreatCmd extends AbstractCmd
 
   private GameCharacter findActiveCharacter(Party party)
   {
-    for (GameCharacter member : party.getMembers())
+    for (GameCharacter member : party.getActiveMembers())
     {
       if (member.getStats().getState() == EState.ALIVE)
       {

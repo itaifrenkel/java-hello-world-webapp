@@ -51,7 +51,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
       }
     }
 
-    ChanceCalculatorCmd chance = new ChanceCalculatorCmd(Settings.PERCENT_CHANGE_OF_ENCOUNTER);
+    ChanceCalculatorCmd chance = new ChanceCalculatorCmd(playerState.getActiveCharacter().getParty().getPercentChanceOfEncounter());
     CommandDelegate.execute(chance);
 
     if (!chance.getResult())

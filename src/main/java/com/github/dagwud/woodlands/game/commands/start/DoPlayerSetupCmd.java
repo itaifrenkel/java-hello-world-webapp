@@ -73,10 +73,14 @@ public class DoPlayerSetupCmd extends SuspendableCmd
     if (characterName.startsWith("Dagwud") && !characterName.equals("Dagwud"))
     {
       int numShadows = Integer.parseInt(characterName.substring("Dagwud".length()));
+      characterName = "Dagwud";
       for (int i = 0; i < numShadows; i++)
       {
-        CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100, "Shadow " + (i + 1) + " " + characterName, getPlayerState().getPlayer().getActiveCharacter());
-        RunLaterCmd delayed = new RunLaterCmd(3000, shadow);
+        ECharacterClass shadowClass = ECharacterClass.values()[i];
+        CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100 - i,
+                "Shadow" + (i + 1),
+                getPlayerState().getPlayer().getActiveCharacter(), shadowClass);
+        RunLaterCmd delayed = new RunLaterCmd(700 * (i + 1), shadow);
         CommandDelegate.execute(delayed);
       }
     }

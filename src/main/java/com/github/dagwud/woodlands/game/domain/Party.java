@@ -1,7 +1,8 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.game.domain.EState;
+import com.github.dagwud.woodlands.game.Settings;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,12 @@ public class Party
   private List<GameCharacter> members = new ArrayList<>(4);
   private String name;
   private Encounter encounter;
+  private BigDecimal percentChanceOfEncounter;
+
+  public Party()
+  {
+    percentChanceOfEncounter = Settings.DEFAULT_PERCENT_CHANCE_OF_ENCOUNTER;
+  }
 
   public void setName(String name)
   {
@@ -42,14 +49,8 @@ public class Party
     members.remove(leaver);
     leaver.setParty(null);
   }
-  
-  public List<GameCharacter> getMembers()
-  {
-    // quick and easy synchronization protection:
-    return new ArrayList<>(members);
-  }
 
-  public List<GameCharacter> activeCharacters()
+  public List<GameCharacter> getActiveMembers()
   {
     List<GameCharacter> active = new ArrayList<>(members.size());
     for (GameCharacter member : members)
@@ -112,7 +113,7 @@ public class Party
   private int countConscious()
   {
     int conscious = 0;
-    for (GameCharacter member : getMembers())
+    for (GameCharacter member : getActiveMembers())
     {
       if (member.isActive() && member.getStats().getState() == EState.ALIVE)
       {
@@ -120,5 +121,15 @@ public class Party
       }
     }
     return conscious;
+  }
+
+  public BigDecimal getPercentChanceOfEncounter()
+  {
+    return percentChanceOfEncounter;
+  }
+
+  public void setPercentChanceOfEncounter(BigDecimal percentChanceOfEncounter)
+  {
+    this.percentChanceOfEncounter = percentChanceOfEncounter;
   }
 }

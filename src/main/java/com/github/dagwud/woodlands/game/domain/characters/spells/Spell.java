@@ -17,12 +17,12 @@ public abstract class Spell
   public abstract void cast();
   public abstract void expire();
 
-  public final String buildSpellDescription()
+  public String buildSpellDescription()
   {
     return caster.getName() + " ✨ " + spellName;
   }
 
-  protected GameCharacter getCaster()
+  GameCharacter getCaster()
   {
     return caster;
   }

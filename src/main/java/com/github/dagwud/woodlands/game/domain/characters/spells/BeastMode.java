@@ -6,12 +6,12 @@ import com.github.dagwud.woodlands.game.domain.characters.Brawler;
 
 import java.math.BigDecimal;
 
-public class BeastModeAbility extends Spell
+public class BeastMode extends Spell
 {
   private Brawler brawler;
   private int boost;
 
-  public BeastModeAbility(Brawler castOn)
+  public BeastMode(Brawler castOn)
   {
     super("Beast Mode", castOn);
     this.brawler = castOn;
@@ -20,7 +20,7 @@ public class BeastModeAbility extends Spell
   @Override
   public boolean shouldCast()
   {
-    BigDecimal PERCENT_CHANCE_PER_LEVEL = new BigDecimal("50"); //todo 5
+    BigDecimal PERCENT_CHANCE_PER_LEVEL = new BigDecimal("5");
     BigDecimal level = new BigDecimal(brawler.getStats().getLevel());
     ChanceCalculatorCmd cmd = new ChanceCalculatorCmd(PERCENT_CHANCE_PER_LEVEL.multiply(level));
     CommandDelegate.execute(cmd);

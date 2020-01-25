@@ -11,7 +11,6 @@ import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMoun
 import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 
@@ -53,7 +52,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
     if (allMoveTogether(location))
     {
-      doMove(characterToMove.getParty().getMembers(), location);
+      doMove(characterToMove.getParty().getActiveMembers(), location);
     }
     else
     {
@@ -97,7 +96,7 @@ public class MoveToLocationCmd extends AbstractCmd
   private boolean allAtSameLocation(Party party)
   {
     Set<ELocation> locations = new HashSet<>();
-    for (GameCharacter member : party.getMembers())
+    for (GameCharacter member : party.getActiveMembers())
     {
       locations.add(member.getLocation());
     }

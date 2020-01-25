@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.WaitCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -31,6 +32,11 @@ public class EncounterRoundCmd extends AbstractCmd
   public void execute()
   {
     List<Spell> spellsActivity = doPassiveAbilities();
+    if (!spellsActivity.isEmpty())
+    {
+      WaitCmd wait = new WaitCmd(1000);
+      CommandDelegate.execute(wait);
+    }
     List<DamageInflicted> roundActivity = doFighting();
     expirePassiveAbilities(spellsActivity);
 
@@ -102,7 +108,7 @@ public class EncounterRoundCmd extends AbstractCmd
   private List<Spell> doPassiveAbilities()
   {
     List<Spell> toCast = new ArrayList<>();
-    for (GameCharacter member : encounter.getParty().getMembers())
+    for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
       toCast.addAll(member.castPassives());
     }
@@ -120,7 +126,7 @@ public class EncounterRoundCmd extends AbstractCmd
     encounter.incrementBattleRound();
     List<DamageInflicted> roundActivity = new LinkedList<>();
 
-    for (GameCharacter partyMember : encounter.getParty().getMembers())
+    for (GameCharacter partyMember : encounter.getParty().getActiveMembers())
     {
       doAttack(partyMember, roundActivity);
     }
@@ -130,7 +136,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private GameCharacter getAnyPlayerInDanger()
   {
-    for (GameCharacter member : encounter.getParty().getMembers())
+    for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
       double hpPerc = ((double) member.getStats().getHitPoints()) / ((double) member.getStats().getMaxHitPoints());
       if (hpPerc <= 0.2)
@@ -143,7 +149,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private boolean anyPlayerCharactersStillAlive(Encounter encounter)
   {
-    for (GameCharacter member : encounter.getParty().getMembers())
+    for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
       if (member.getStats().getState() == EState.ALIVE)
       {
@@ -174,7 +180,7 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       return encounter.getEnemy();
     }
-    List<GameCharacter> members = encounter.getParty().getMembers();
+    List<GameCharacter> members = encounter.getParty().getActiveMembers();
     for (int i = members.size() - 1; i >= 0; i--)
     {
       GameCharacter member = members.get(i);
@@ -224,7 +230,7 @@ public class EncounterRoundCmd extends AbstractCmd
     StringBuilder b = new StringBuilder();
     b.append("Stats after round ").append(encounter.getBattleRound()).append("\n")
             .append("—————————");
-    for (GameCharacter member : encounter.getParty().getMembers())
+    for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
       b.append("\n").append("• ").append(member.summary());
     }

@@ -6,6 +6,8 @@ import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequi
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.domain.characters.Explorer;
+import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 public class LeavePartyCmd extends AbstractCmd
 {
@@ -22,6 +24,11 @@ public class LeavePartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (character instanceof Explorer)
+    {
+      ((Explorer)character).getSpiritOfAdventure().expire();
+    }
+
     if (!party.isPrivateParty())
     {
       CommandDelegate.execute(new SendPartyMessageCmd(party, character.getName() + " has left " + party.getName()));
