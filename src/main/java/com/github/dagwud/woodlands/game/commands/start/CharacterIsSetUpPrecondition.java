@@ -4,7 +4,6 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.CommandPrerequisite;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.sun.javafx.sg.prism.NGAmbientLight;
 
 public class CharacterIsSetUpPrecondition implements CommandPrerequisite
 {
