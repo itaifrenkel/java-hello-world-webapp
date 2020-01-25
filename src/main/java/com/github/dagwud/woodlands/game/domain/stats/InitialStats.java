@@ -27,6 +27,9 @@ public abstract class InitialStats
   int initialSpeedUnused;
   int initialHitPoints;
   String initialHitDice;
+  int initialRestPoints = 1;
+  int initialRestPointsMax = 1;
+  int initialRestDiceFace;
 
   // todo map string -> enum for weapon
   final Map<String, Integer> weaponMasteryBonusHit;
@@ -141,6 +144,21 @@ public abstract class InitialStats
   public String getInitialHitDice()
   {
     return initialHitDice;
+  }
+
+  public int getInitialRestPoints()
+  {
+    return initialRestPoints;
+  }
+  
+  public int getInitialRestPointsMax()
+  {
+    return initialRestPointsMax;
+  }
+
+  public int getInitialRestDiceFaces()
+  {
+    return initialRestDicaeFaces;
   }
 
   public Map<String, Integer> getWeaponMasteryBonusHit()
