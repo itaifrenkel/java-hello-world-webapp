@@ -21,4 +21,9 @@ public abstract class Spell
   {
     return caster.getName() + " ✨ " + spellName;
   }
+
+  protected GameCharacter getCaster()
+  {
+    return caster;
+  }
 }
