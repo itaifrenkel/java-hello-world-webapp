@@ -70,7 +70,7 @@ public class Party
     while (it.hasNext)
     {
       GameCharacter member = it.next();
-      if (member.getStats().getState != EState.INACTIVE)
+      if (member.isActive())
       {
         return member;
       }
