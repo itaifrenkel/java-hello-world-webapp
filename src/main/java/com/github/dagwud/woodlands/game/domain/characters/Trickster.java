@@ -20,4 +20,12 @@ public class Trickster extends GameCharacter
   {
     return Collections.emptyList();
   }
+
+  @Override
+  public int determineMaxAllowedItems()
+  {
+    // Loot bag
+    return super.determineMaxAllowedItems() + 2 * getStats().getLevel();
+  }
+
 }
