@@ -24,6 +24,7 @@ public class DruidInitialStats extends InitialStats
     initialSpeedUnused = 30;
     initialHitPoints = 10;
     initialHitDice = "1d8";
+    initialRestDiceFaces = 8;
     weaponMasteryBonusHit.put("Scimitar", 4);
     weaponMasteryBonusDamage.put("Scimitar", 2);
     weaponMasteryBonusHit.put("Dagger", 4);
