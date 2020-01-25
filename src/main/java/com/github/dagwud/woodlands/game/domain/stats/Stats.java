@@ -19,12 +19,14 @@ public class Stats
   private Stat constitution = new Stat();
   private int defenceRating;
 
-  // thus endeth the serious stats and begin the fun stats
-  private int drunkeness;
+  private int criticalStrikeChanceBonus;
 
   private Map<String, Integer> weaponBonusHit = new HashMap<>();
   private Map<String, Integer> weaponBonusDamage = new HashMap<>();
   private EState state;
+
+  // thus endeth the serious stats and begin the fun stats
+  private int drunkeness;
 
   public int getLevel()
   {
@@ -169,5 +171,15 @@ public class Stats
   public void setExperience(int experience)
   {
     this.experience = experience;
+  }
+
+  public int getCriticalStrikeChanceBonus()
+  {
+    return criticalStrikeChanceBonus;
+  }
+
+  public void setCriticalStrikeChanceBonus(int criticalStrikeChanceBonus)
+  {
+    this.criticalStrikeChanceBonus = criticalStrikeChanceBonus;
   }
 }

@@ -1,6 +1,9 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
+
+import java.util.Collection;
 
 public abstract class GameCharacter extends Fighter
 {
@@ -89,4 +92,6 @@ public abstract class GameCharacter extends Fighter
   {
     return this == getPlayedBy().getActiveCharacter();
   }
+
+  public abstract Collection<? extends Spell> castPassives();
 }

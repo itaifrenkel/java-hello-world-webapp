@@ -52,7 +52,7 @@ public class AttackCmd extends AbstractCmd
     {
       return EHitStatus.MISS;
     }
-    if (naturalRoll.getTotal() == 20)
+    if (naturalRoll.getTotal() >= 20 - attacker.getStats().getCriticalStrikeChanceBonus())
     {
       return EHitStatus.CRITICAL_HIT;
     }

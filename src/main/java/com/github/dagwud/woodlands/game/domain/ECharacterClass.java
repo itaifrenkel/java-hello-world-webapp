@@ -39,8 +39,4 @@ public enum ECharacterClass
     return displayName;
   }
 
-  public Collection<? extends SpellCast> castPassives()
-  {
-    return Collections.emptyList();
-  }
 }

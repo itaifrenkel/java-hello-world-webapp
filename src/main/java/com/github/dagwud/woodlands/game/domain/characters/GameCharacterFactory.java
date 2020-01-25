@@ -1,6 +1,7 @@
-package com.github.dagwud.woodlands.game.commands.character;
+package com.github.dagwud.woodlands.game.domain.characters;
 
 import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.characters.*;
 
 public abstract class GameCharacterFactory
 {

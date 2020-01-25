@@ -21,6 +21,16 @@ public class Stat
     return base + bonus;
   }
 
+  public void addBonus(int bonusAmount)
+  {
+    this.bonus += bonusAmount;
+  }
+
+  public void removeBonus(int bonusAmount)
+  {
+    this.bonus -= bonusAmount;
+  }
+
   @Override
   public String toString()
   {

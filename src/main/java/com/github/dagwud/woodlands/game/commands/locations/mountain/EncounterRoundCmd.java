@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.ArrayList;
@@ -29,10 +30,12 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    List<SpellCast> spellsActivity = doPassiveAbilities();
+    List<Spell> spellsActivity = doPassiveAbilities();
     List<DamageInflicted> roundActivity = doFighting();
-    StringBuilder summary = buildRoundSummary(roundActivity);
-    SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.toString());
+    expirePassiveAbilities(spellsActivity);
+
+    String summary = buildRoundSummary(spellsActivity, roundActivity);
+    SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary);
     CommandDelegate.execute(status);
 
     GameCharacter inDanger = getAnyPlayerInDanger();
@@ -88,14 +91,28 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
-  private List<SpellCast> doPassiveAbilities()
+  private void expirePassiveAbilities(List<Spell> spellsActivity)
   {
-    List<SpellCast> cast = new ArrayList<>();
+    for (Spell spell : spellsActivity)
+    {
+      spell.expire();
+    }
+  }
+
+  private List<Spell> doPassiveAbilities()
+  {
+    List<Spell> toCast = new ArrayList<>();
     for (GameCharacter member : encounter.getParty().getMembers())
     {
-      cast.addAll(member.getCharacterClass().castPassives());
+      toCast.addAll(member.castPassives());
     }
-    return cast;
+
+    for (Spell spellToCast : toCast)
+    {
+      spellToCast.cast();
+    }
+
+    return toCast;
   }
 
   private List<DamageInflicted> doFighting()
@@ -180,20 +197,26 @@ public class EncounterRoundCmd extends AbstractCmd
     return damageInflicted;
   }
 
-  private StringBuilder buildRoundSummary(List<DamageInflicted> roundActivity)
+  private String buildRoundSummary(List<Spell> spells, List<DamageInflicted> damage)
   {
-    StringBuilder description = new StringBuilder();
-    description.append("⚔️ Battle Round #").append(encounter.getBattleRound()).append(": ⚔️\n")
+    StringBuilder summary = new StringBuilder();
+    summary.append("⚔️ Battle Round #").append(encounter.getBattleRound()).append(": ⚔️\n")
             .append("———————————");
-    for (DamageInflicted damageInflicted : roundActivity)
+
+    for (Spell spell : spells)
+    {
+      summary.append("\n").append(spell.buildSpellDescription());
+    }
+
+    for (DamageInflicted damageInflicted : damage)
     {
       if (damageInflicted.getHitStatus() != EHitStatus.DO_NOTHING)
       {
-        description.append("\n").append(damageInflicted.buildDamageDescription());
+        summary.append("\n").append(damageInflicted.buildDamageDescription());
       }
     }
-    description.append("\n\n").append(buildBattleStatsSummary());
-    return description;
+    summary.append("\n\n").append(buildBattleStatsSummary());
+    return summary.toString();
   }
 
   private String buildBattleStatsSummary()
