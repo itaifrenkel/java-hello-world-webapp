@@ -23,6 +23,7 @@ public class GeneralInitialStats extends InitialStats
     initialInitiative = 2;
     initialSpeedUnused = 30;
     initialHitPoints = 12;
+    initialRestDiceFaces = 10;
     initialHitDice = "1d10";
     weaponMasteryBonusHit.put("Battle Axe", 5);
     weaponMasteryBonusDamage.put("Battle Axe", 3);
