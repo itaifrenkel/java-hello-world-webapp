@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.domain.stats.EState;
+import com.github.dagwud.woodlands.domain.EState;
 
 import java.util.ArrayList;
 import java.util.Iterator;
