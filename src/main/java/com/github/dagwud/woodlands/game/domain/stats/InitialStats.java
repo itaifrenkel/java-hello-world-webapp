@@ -29,7 +29,7 @@ public abstract class InitialStats
   String initialHitDice;
   int initialRestPoints = 1;
   int initialRestPointsMax = 1;
-  int initialRestDiceFace;
+  int initialRestDiceFaces;
 
   // todo map string -> enum for weapon
   final Map<String, Integer> weaponMasteryBonusHit;
@@ -158,7 +158,7 @@ public abstract class InitialStats
 
   public int getInitialRestDiceFaces()
   {
-    return initialRestDicaeFaces;
+    return initialRestDiceFaces;
   }
 
   public Map<String, Integer> getWeaponMasteryBonusHit()
