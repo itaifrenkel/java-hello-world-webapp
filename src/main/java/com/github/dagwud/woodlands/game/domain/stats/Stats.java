@@ -18,6 +18,9 @@ public class Stats
   private Stat agility = new Stat();
   private Stat constitution = new Stat();
   private int defenceRating;
+  private int restPoints;
+  private int restPointsMax;
+  private int restDiceFace;
 
   private int criticalStrikeChanceBonus;
 
