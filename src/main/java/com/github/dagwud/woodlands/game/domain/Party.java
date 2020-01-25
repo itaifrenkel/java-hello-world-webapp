@@ -56,7 +56,15 @@ public class Party
 
   public int size()
   {
-    return members.size();
+    int count = 0;
+    for (GameCharacter c : members)
+    {
+      if (c.isActive())
+      {
+        count++;
+      }
+    }
+    return count;
   }
 
   public boolean isPrivateParty()
@@ -67,7 +75,7 @@ public class Party
   public GameCharacter getLeader()
   {
     Iterator<GameCharacter> it = members.iterator();
-    while (it.hasNext)
+    while (it.hasNext())
     {
       GameCharacter member = it.next();
       if (member.isActive())
@@ -93,7 +101,7 @@ public class Party
     int conscious = 0;
     for (GameCharacter member : getMembers())
     {
-      if (member.getStats().getState() == EState.ALIVE)
+      if (member.isActive() && member.getStats().getState() == EState.ALIVE)
       {
         conscious++;
       }
