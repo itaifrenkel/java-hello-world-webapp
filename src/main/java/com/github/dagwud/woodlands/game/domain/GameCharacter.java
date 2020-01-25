@@ -68,6 +68,11 @@ public abstract class GameCharacter extends Fighter
     return setupComplete;
   }
 
+  public int determineMaxAllowedItems()
+  {
+    maxAllowedItems = 7 + getStats().getLevel();
+  }
+
   public CarriedItems getCarrying()
   {
     return carrying;
