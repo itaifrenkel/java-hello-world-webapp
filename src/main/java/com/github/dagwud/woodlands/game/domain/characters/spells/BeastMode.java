@@ -6,12 +6,12 @@ import com.github.dagwud.woodlands.game.domain.characters.Brawler;
 
 import java.math.BigDecimal;
 
-public class BeastModeAbility extends Spell
+public class BeastMode extends Spell
 {
   private Brawler brawler;
   private int boost;
 
-  public BeastModeAbility(Brawler castOn)
+  public BeastMode(Brawler castOn)
   {
     super("Beast Mode", castOn);
     this.brawler = castOn;

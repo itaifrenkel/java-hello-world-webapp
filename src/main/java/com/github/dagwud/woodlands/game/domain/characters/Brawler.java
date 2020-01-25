@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game.domain.characters;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
-import com.github.dagwud.woodlands.game.domain.characters.spells.BeastModeAbility;
+import com.github.dagwud.woodlands.game.domain.characters.spells.BeastMode;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class Brawler extends GameCharacter
   public Collection<? extends Spell> castPassives()
   {
     Collection<Spell> cast = new ArrayList<>();
-    cast.add(new BeastModeAbility(this));
+    cast.add(new BeastMode(this));
     cast.removeIf(spellCast -> !spellCast.shouldCast());
     return cast;
   }
