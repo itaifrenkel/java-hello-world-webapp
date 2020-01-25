@@ -20,7 +20,6 @@ public class Stats
   private int defenceRating;
 
   private int criticalStrikeChanceBonus;
-  private int maxItemsCarried;
 
   private Map<String, Integer> weaponBonusHit = new HashMap<>();
   private Map<String, Integer> weaponBonusDamage = new HashMap<>();
@@ -182,15 +181,5 @@ public class Stats
   public void setCriticalStrikeChanceBonus(int criticalStrikeChanceBonus)
   {
     this.criticalStrikeChanceBonus = criticalStrikeChanceBonus;
-  }
-
-  public int getMaxItemsCarried()
-  {
-    return maxItemsCarried;
-  }
-
-  public void setMaxItemsCarried(int maxItemsCarried)
-  {
-    this.maxItemsCarried = maxItemsCarried;
   }
 }
