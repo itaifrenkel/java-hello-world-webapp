@@ -1,6 +1,9 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.domain.EState;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Party
@@ -53,7 +56,15 @@ public class Party
 
   public int size()
   {
-    return members.size();
+    int count = 0;
+    for (GameCharacter c : members)
+    {
+      if (c.isActive())
+      {
+        count++;
+      }
+    }
+    return count;
   }
 
   public boolean isPrivateParty()
@@ -63,11 +74,16 @@ public class Party
 
   public GameCharacter getLeader()
   {
-    if (!members.iterator().hasNext())
+    Iterator<GameCharacter> it = members.iterator();
+    while (it.hasNext())
     {
-      return null;
+      GameCharacter member = it.next();
+      if (member.isActive())
+      {
+        return member;
+      }
     }
-    return members.iterator().next();
+   return null;
   }
 
   public boolean capableOfRetreat()
@@ -85,7 +101,7 @@ public class Party
     int conscious = 0;
     for (GameCharacter member : getMembers())
     {
-      if (member.getStats().getState() == EState.ALIVE)
+      if (member.isActive() && member.getStats().getState() == EState.ALIVE)
       {
         conscious++;
       }
