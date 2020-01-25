@@ -1,5 +1,8 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.Settings;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,6 +12,12 @@ public class Party
   private List<GameCharacter> members = new ArrayList<>(4);
   private String name;
   private Encounter encounter;
+  private BigDecimal percentChanceOfEncounter;
+
+  public Party()
+  {
+    percentChanceOfEncounter = Settings.DEFAULT_PERCENT_CHANCE_OF_ENCOUNTER;
+  }
 
   public void setName(String name)
   {
@@ -112,5 +121,15 @@ public class Party
       }
     }
     return conscious;
+  }
+
+  public BigDecimal getPercentChanceOfEncounter()
+  {
+    return percentChanceOfEncounter;
+  }
+
+  public void setPercentChanceOfEncounter(BigDecimal percentChanceOfEncounter)
+  {
+    this.percentChanceOfEncounter = percentChanceOfEncounter;
   }
 }
