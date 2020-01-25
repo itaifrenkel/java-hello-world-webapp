@@ -23,6 +23,7 @@ public class ExplorerInitialStats extends InitialStats
     initialInitiative = 1;
     initialSpeedUnused = 30;
     initialHitPoints = 10;
+    initialRestDiceFaces = 8;
     initialHitDice = "1d8";
     weaponMasteryBonusHit.put("Mace", 3);
     weaponMasteryBonusDamage.put("Mace", 1);
