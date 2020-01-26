@@ -72,7 +72,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
     //todo for testing
     if (characterName.startsWith("Dagwud") && !characterName.equals("Dagwud"))
     {
-      Sting shadows = characterName.substring("Dagwudl.length());
+      Sting shadows = characterName.substring("Dagwud".length());
       characterName = "Dagwud";
       for (char c : shadows)
       {
