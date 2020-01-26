@@ -28,7 +28,7 @@ public abstract class Fighter
 
   private String healthIcon(Stats stats)
   {
-    BigDecimal perc = new BigDecimal(stats.getHitPoints()).divide(stats.getMaxHitPoints());
+    BigDecimal perc = new BigDecimal(stats.getHitPoints()).divide(new BigDecimal(stats.getMaxHitPoints()));
     if (perc.compareTo(new BigDecimal("0.8")) >= 0)
     {
       return "💚";
