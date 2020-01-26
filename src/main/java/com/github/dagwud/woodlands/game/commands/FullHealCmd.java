@@ -19,7 +19,11 @@ public class FullHealCmd extends AbstractCmd
   public void execute()
   {
     int heal = character.getStats().getMaxHitPoints() - character.getStats().getHitPoints();
-    RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, heal);
-    CommandDelegate.execute(cmd);
+    RecoverHitPointsCmd hpCmd = new RecoverHitPointsCmd(character, heal);
+    CommandDelegate.execute(hpCmd);
+
+    int mana = character.getStats().getMaxMana() - character.getStats().getMana();
+    RecoverManaCmd manaCmd = new RecoverManaCmd(character, mana);
+    CommandDelegate.execute(manaCmd);
   }
 }
