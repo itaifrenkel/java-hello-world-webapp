@@ -13,7 +13,6 @@ public abstract class Spell
     this.caster = caster;
   }
 
-  public abstract boolean shouldCast();
   public abstract void cast();
   public abstract void expire();
 

@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.WaitCmd;
 import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -31,7 +32,7 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    List<Spell> spellsActivity = doPassiveAbilities();
+    List<BattleRoundSpell> spellsActivity = doPassiveAbilities();
     if (!spellsActivity.isEmpty())
     {
       WaitCmd wait = new WaitCmd(1000);
@@ -97,7 +98,7 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
-  private void expirePassiveAbilities(List<Spell> spellsActivity)
+  private void expirePassiveAbilities(List<BattleRoundSpell> spellsActivity)
   {
     for (Spell spell : spellsActivity)
     {
@@ -105,20 +106,22 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
-  private List<Spell> doPassiveAbilities()
+  private List<BattleRoundSpell> doPassiveAbilities()
   {
-    List<Spell> toCast = new ArrayList<>();
+    List<BattleRoundSpell> passives = new ArrayList<>();
     for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
-      toCast.addAll(member.castPassives());
+      passives.addAll(member.getPassives());
     }
 
-    for (Spell spellToCast : toCast)
+    passives.removeIf(p -> !p.shouldCast());
+
+    for (BattleRoundSpell spellToCast : passives)
     {
       spellToCast.cast();
     }
 
-    return toCast;
+    return passives;
   }
 
   private List<DamageInflicted> doFighting()
@@ -181,9 +184,8 @@ public class EncounterRoundCmd extends AbstractCmd
       return encounter.getEnemy();
     }
     List<GameCharacter> members = encounter.getParty().getActiveMembers();
-    for (int i = 0; i < members.size(); i++)
+    for (GameCharacter member : members)
     {
-      GameCharacter member = members.get(i);
       if (member.getStats().getState() == EState.ALIVE)
       {
         return member;
@@ -203,7 +205,7 @@ public class EncounterRoundCmd extends AbstractCmd
     return damageInflicted;
   }
 
-  private String buildRoundSummary(List<Spell> spells, List<DamageInflicted> damage)
+  private String buildRoundSummary(List<? extends Spell> spells, List<DamageInflicted> damage)
   {
     StringBuilder summary = new StringBuilder();
     summary.append("⚔️ Battle Round #").append(encounter.getBattleRound()).append(": ⚔️\n")

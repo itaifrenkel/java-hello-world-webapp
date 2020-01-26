@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.domain.characters.Explorer;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 public class LeavePartyCmd extends AbstractCmd
@@ -24,9 +25,9 @@ public class LeavePartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (character instanceof Explorer)
+    for (PartySpell partySpell : character.getPartySpells())
     {
-      ((Explorer)character).getSpiritOfAdventure().expire();
+      partySpell.expire();
     }
 
     if (!party.isPrivateParty())

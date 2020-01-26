@@ -10,7 +10,7 @@ import com.github.dagwud.woodlands.game.domain.characters.General;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AirOfAuthority extends Spell
+public class AirOfAuthority extends BattleRoundSpell
 {
   private Map<GameCharacter, Integer> buffs;
 

@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.characters.Explorer;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 
 public class JoinPartyCmd extends AbstractCmd
 {
@@ -47,15 +48,15 @@ public class JoinPartyCmd extends AbstractCmd
     joiner.setParty(party);
     party.addMember(joiner);
 
-    if (joiner instanceof Explorer)
-    {
-      ((Explorer)joiner).getSpiritOfAdventure().cast();
-    }
-
     if (!party.isPrivateParty())
     {
       SendPartyMessageCmd welcome = new SendPartyMessageCmd(party, joiner.getName() + " has joined " + partyName + "!");
       CommandDelegate.execute(welcome);
+    }
+
+    for (PartySpell partySpell : joiner.getPartySpells())
+    {
+      partySpell.cast();
     }
   }
 

@@ -3,11 +3,12 @@ package com.github.dagwud.woodlands.game.domain.characters;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
+import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.BeastMode;
-import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class Brawler extends GameCharacter
 {
@@ -17,12 +18,15 @@ public class Brawler extends GameCharacter
   }
 
   @Override
-  public Collection<? extends Spell> castPassives()
+  public Collection<BattleRoundSpell> getPassives()
   {
-    Collection<Spell> cast = new ArrayList<>();
-    cast.add(new BeastMode(this));
-    cast.removeIf(spellCast -> !spellCast.shouldCast());
-    return cast;
+    return Collections.singleton(new BeastMode(this));
+  }
+
+  @Override
+  public Collection<PartySpell> getPartySpells()
+  {
+    return Collections.emptyList();
   }
 
 }
