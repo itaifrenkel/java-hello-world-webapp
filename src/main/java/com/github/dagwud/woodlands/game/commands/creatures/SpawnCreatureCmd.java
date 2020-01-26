@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.game.creatures.DifficultyCacheFactory;
 import com.github.dagwud.woodlands.game.domain.EState;
+import com.github.dagwud.woodlands.game.domain.characters.spells.BeastMode;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Difficulty;
@@ -33,6 +34,8 @@ public class SpawnCreatureCmd extends AbstractCmd
 
     spawnedCreature = new Creature(template);
     spawnedCreature.setStats(stats);
+
+    spawnedCreature.getSpellAbilities().register(new BeastMode(spawnedCreature));
   }
 
   private int chooseRandomInRange(int minInclusive, int maxInclusive)

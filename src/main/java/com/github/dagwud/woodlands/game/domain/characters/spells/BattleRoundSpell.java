@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 /**
@@ -7,7 +8,7 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
  */
 public abstract class BattleRoundSpell extends Spell
 {
-  BattleRoundSpell(String spellName, GameCharacter caster)
+  BattleRoundSpell(String spellName, Fighter caster)
   {
     super(spellName, caster);
   }

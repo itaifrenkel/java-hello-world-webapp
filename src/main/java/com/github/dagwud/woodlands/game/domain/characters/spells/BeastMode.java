@@ -2,15 +2,18 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.characters.Brawler;
 
 import java.math.BigDecimal;
 
 public class BeastMode extends BattleRoundSpell
 {
+  private static final BigDecimal PERCENT_CHANCE_PER_LEVEL = new BigDecimal("5");
+
   private int boost;
 
-  public BeastMode(Brawler caster)
+  public BeastMode(Fighter caster)
   {
     super("Beast Mode", caster);
   }
@@ -18,7 +21,6 @@ public class BeastMode extends BattleRoundSpell
   @Override
   public boolean shouldCast()
   {
-    BigDecimal PERCENT_CHANCE_PER_LEVEL = new BigDecimal("5");
     BigDecimal level = new BigDecimal(getCaster().getStats().getLevel());
     ChanceCalculatorCmd cmd = new ChanceCalculatorCmd(PERCENT_CHANCE_PER_LEVEL.multiply(level));
     CommandDelegate.execute(cmd);

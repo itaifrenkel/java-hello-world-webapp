@@ -1,13 +1,14 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public abstract class Spell
 {
   private final String spellName;
-  private final GameCharacter caster;
+  private final Fighter caster;
 
-  Spell(String spellName, GameCharacter caster)
+  Spell(String spellName, Fighter caster)
   {
     this.spellName = spellName;
     this.caster = caster;
@@ -21,7 +22,7 @@ public abstract class Spell
     return caster.getName() + " ✨ " + spellName;
   }
 
-  GameCharacter getCaster()
+  Fighter getCaster()
   {
     return caster;
   }

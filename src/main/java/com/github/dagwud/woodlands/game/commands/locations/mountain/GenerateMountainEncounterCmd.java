@@ -90,6 +90,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
     Encounter encounter = new Encounter();
     encounter.setParty(party);
     encounter.setEnemy(creature);
+
     return encounter;
   }
 

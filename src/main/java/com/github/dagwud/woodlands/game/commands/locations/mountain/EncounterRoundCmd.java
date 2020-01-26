@@ -109,9 +109,9 @@ public class EncounterRoundCmd extends AbstractCmd
   private List<BattleRoundSpell> doPassiveAbilities()
   {
     List<BattleRoundSpell> passives = new ArrayList<>();
-    for (GameCharacter member : encounter.getParty().getActiveMembers())
+    for (Fighter member : encounter.getAllFighters())
     {
-      passives.addAll(member.getPassives());
+      passives.addAll(member.getSpellAbilities().getPassives());
     }
 
     passives.removeIf(p -> !p.shouldCast());

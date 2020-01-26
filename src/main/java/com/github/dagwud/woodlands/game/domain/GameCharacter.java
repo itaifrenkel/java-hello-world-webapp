@@ -1,10 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
+import com.github.dagwud.woodlands.game.domain.spells.SpellAbilities;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
-
-import java.util.Collection;
 
 public abstract class GameCharacter extends Fighter
 {
@@ -98,8 +95,4 @@ public abstract class GameCharacter extends Fighter
   {
     return this == getPlayedBy().getActiveCharacter();
   }
-
-  public abstract Collection<BattleRoundSpell> getPassives();
-
-  public abstract Collection<PartySpell> getPartySpells();
 }

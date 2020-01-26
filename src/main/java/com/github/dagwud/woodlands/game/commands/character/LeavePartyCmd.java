@@ -25,7 +25,7 @@ public class LeavePartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    for (PartySpell partySpell : character.getPartySpells())
+    for (PartySpell partySpell : character.getSpellAbilities().getPartySpells())
     {
       partySpell.expire();
     }

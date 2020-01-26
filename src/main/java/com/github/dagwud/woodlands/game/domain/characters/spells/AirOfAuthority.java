@@ -95,4 +95,10 @@ public class AirOfAuthority extends BattleRoundSpell
     }
     return 0;
   }
+
+  @Override
+  General getCaster()
+  {
+    return (General) super.getCaster();
+  }
 }

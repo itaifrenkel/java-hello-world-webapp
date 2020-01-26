@@ -1,11 +1,14 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.domain.spells.SpellAbilities;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public abstract class Fighter
 {
+  private SpellAbilities spellAbilities;
+
   public abstract String getName();
 
   public abstract Stats getStats();
@@ -48,5 +51,14 @@ public abstract class Fighter
       return "❤️";
     }
     return "💔";
+  }
+
+  public SpellAbilities getSpellAbilities()
+  {
+    if (spellAbilities == null)
+    {
+      spellAbilities = new SpellAbilities();
+    }
+    return spellAbilities;
   }
 }

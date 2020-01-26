@@ -18,18 +18,6 @@ public class Trickster extends GameCharacter
   }
 
   @Override
-  public Collection<BattleRoundSpell> getPassives()
-  {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public Collection<PartySpell> getPartySpells()
-  {
-    return Collections.emptyList();
-  }
-
-  @Override
   public int determineMaxAllowedItems()
   {
     // Loot bag

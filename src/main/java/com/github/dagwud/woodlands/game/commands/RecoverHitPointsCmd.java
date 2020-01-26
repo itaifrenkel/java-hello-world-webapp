@@ -3,25 +3,32 @@ package com.github.dagwud.woodlands.game.commands;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 
 public class RecoverHitPointsCmd extends AbstractCmd
 {
-  private final Fighter character;
+  private final Fighter target;
   private final int hitPointsRecovered;
 
-  public RecoverHitPointsCmd(Fighter character, int hitPointsRecovered)
+  public RecoverHitPointsCmd(Fighter target, int hitPointsRecovered)
   {
-    this.character = character;
+    this.target = target;
     this.hitPointsRecovered = hitPointsRecovered;
   }
 
   @Override
   public void execute()
   {
-    character.getStats().setHitPoints(character.getStats().getHitPoints() + hitPointsRecovered);
-    if (character.getStats().getHitPoints() > 0)
+    target.getStats().setHitPoints(target.getStats().getHitPoints() + hitPointsRecovered);
+    if (target.getStats().getHitPoints() > 0)
     {
-      character.getStats().setState(EState.ALIVE);
+      target.getStats().setState(EState.ALIVE);
+
+      for (PartySpell partySpell : target.getSpellAbilities().getPartySpells())
+      {
+        partySpell.expire();
+      }
     }
   }
 }
