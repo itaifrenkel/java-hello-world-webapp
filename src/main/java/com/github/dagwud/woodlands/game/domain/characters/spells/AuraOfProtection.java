@@ -33,7 +33,7 @@ public class AuraOfProtection extends BattleRoundSpell
   {
     for (GameCharacter target : getCaster().getParty().getActiveMembers())
     {
-      target.getStats().setDefenceRating(target.getStats().getDefenceRating() + buffAmount);
+      target.getStats().setDefenceRating(target.getStats().getDefenceRating() + BUFF_AMOUNT);
       buffs.put(target, BUFF_AMOUNT);
 
       SendMessageCmd cmd = new SendMessageCmd(target.getPlayedBy().getChatId(), getCaster().getName() + " buffed your defences by +" + BUFF_AMOUNT);
