@@ -18,7 +18,7 @@ public abstract class Fighter
     {
       return getName() + ": ☠️dead";
     }
-    String message = getName() + ": " + heathIcon(stats) + stats.getHitPoints() + " / " + stats.getMaxHitPoints();
+    String message = getName() + ": " + healthIcon(stats) + stats.getHitPoints() + " / " + stats.getMaxHitPoints();
     if (stats.getMaxMana() != 0)
     {
       message += ", ✨" + stats.getMana() + "/" + stats.getMaxMana();
