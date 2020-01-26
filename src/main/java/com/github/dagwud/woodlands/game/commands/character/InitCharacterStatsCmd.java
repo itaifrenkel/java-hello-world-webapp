@@ -34,7 +34,7 @@ public class InitCharacterStatsCmd extends AbstractCmd
     stats.setAgility(classStats.getInitialAgility(), classStats.getAgilityBoost());
     stats.setConstitution(classStats.getInitialConstitution(), classStats.getConstitutionBoost());
 
-    stats.setWeaponBonusHit(classStats.getWeaponMasteryBonusDamage());
+    stats.setWeaponBonusHit(classStats.getWeaponMasteryBonusHit());
     stats.setWeaponBonusDamage(classStats.getWeaponMasteryBonusDamage());
 
     character.setStats(stats);
