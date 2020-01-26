@@ -123,7 +123,7 @@ public class Stats
 
   public int getWeaponBonusDamage(Weapon weapon)
   {
-    return weaponBonusDamage.getOrDefault(weapon.name, 0);
+    return determineProficiency() + weaponBonusDamage.getOrDefault(weapon.name, 0);
   }
 
   public void setWeaponBonusDamage(Map<String, Integer> weaponBonusDamage)
@@ -184,5 +184,10 @@ public class Stats
   public void setCriticalStrikeChanceBonus(int criticalStrikeChanceBonus)
   {
     this.criticalStrikeChanceBonus = criticalStrikeChanceBonus;
+  }
+
+  private int determineProficiency()
+  {
+    return Math.floorDiv(getLevel() + 8, 4);
   }
 }
