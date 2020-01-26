@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class AuraOfProtection extends BattleRoundSpell
 {
-  private static final int BUFF_AMOUNT = 10;
+  private static final int BUFF_AMOUNT = 20;
 
   private Map<GameCharacter, Integer> buffs;
 
