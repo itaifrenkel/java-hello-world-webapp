@@ -23,7 +23,6 @@ public class WizardInitialStats extends InitialStats
     initialInitiative = 2;
     initialSpeedUnused = 30;
     initialHitPoints = 8;
-    initialHitDice = "1d6";
     initialRestDiceFaces = 6;
     weaponMasteryBonusHit.put("Staff", 1);
     weaponMasteryBonusDamage.put("Staff", 2);

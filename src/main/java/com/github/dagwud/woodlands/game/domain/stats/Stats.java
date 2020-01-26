@@ -190,4 +190,39 @@ public class Stats
   {
     return Math.floorDiv(getLevel() + 8, 4);
   }
+
+  public int getRestPoints()
+  {
+    return restPoints;
+  }
+
+  public void setRestPoints(int restPoints)
+  {
+    this.restPoints = restPoints;
+  }
+
+  public int getRestPointsMax()
+  {
+    return restPointsMax;
+  }
+
+  public void setRestPointsMax(int restPointsMax)
+  {
+    this.restPointsMax = restPointsMax;
+  }
+
+  public int getRestDiceFace()
+  {
+    return restDiceFace;
+  }
+
+  public void setRestDiceFace(int restDiceFace)
+  {
+    this.restDiceFace = restDiceFace;
+  }
+
+  public int getConstitutionModifier()
+  {
+    return Math.floorDiv(getConstitution().total() - 10, 2);
+  }
 }

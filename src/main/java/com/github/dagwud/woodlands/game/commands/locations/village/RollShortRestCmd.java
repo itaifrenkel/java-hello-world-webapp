@@ -3,7 +3,9 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class RollShortRestCmd extends AbstractCmd
 {
@@ -18,14 +20,23 @@ public class RollShortRestCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    int diceroll = roll(character.getStats().getLevel(), character.getCharacterClass().getInitialStats().getShortRestDice());
-    int boostFromConstitution = (int) (Math.floor((character.getStats().getConstitution().total() - 10) / 2.0));
-    int newHitPoints = (character.getStats().getHitPoints() + diceroll + boostFromConstitution);
-    if (newHitPoints > character.getStats().getMaxHitPoints())
+    Stats stats = character.getStats();
+    if (stats.getRestPoints() <= 0)
     {
-      newHitPoints = character.getStats().getMaxHitPoints();
+      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need a full rest\n\nTODO this is not yet implemented, so for now we'll let it slide");
+      CommandDelegate.execute(cmd);
+      stats.setRestPoints(1); //todo because long rest not yet implemented - needs to be removed, and at this point should abort the short rest
     }
-    recoveredHitPoints = newHitPoints - character.getStats().getHitPoints();
+    int diceroll = roll(stats.getLevel(), stats.getRestDiceFace());
+    int boostFromConstitution = (int) (Math.floor((stats.getConstitution().total() - 10) / 2.0));
+    int newHitPoints = (stats.getHitPoints() + diceroll + boostFromConstitution);
+    if (newHitPoints > stats.getMaxHitPoints())
+    {
+      newHitPoints = stats.getMaxHitPoints();
+    }
+    recoveredHitPoints = newHitPoints - stats.getHitPoints();
+
+    stats.setRestPoints(stats.getRestPoints() - 1);
   }
 
   private int roll(int diceCount, int diceFaces)

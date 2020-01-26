@@ -37,6 +37,10 @@ public class InitCharacterStatsCmd extends AbstractCmd
     stats.setWeaponBonusHit(classStats.getWeaponMasteryBonusHit());
     stats.setWeaponBonusDamage(classStats.getWeaponMasteryBonusDamage());
 
+    stats.setRestPointsMax(classStats.getInitialRestPointsMax());
+    stats.setRestPoints(classStats.getInitialRestPoints());
+    stats.setRestDiceFace(classStats.getShortRestDice());
+
     character.setStats(stats);
   }
 }

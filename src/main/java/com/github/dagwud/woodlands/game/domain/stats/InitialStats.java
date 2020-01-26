@@ -26,7 +26,6 @@ public abstract class InitialStats
   int initialInitiative;
   int initialSpeedUnused;
   int initialHitPoints;
-  String initialHitDice;
   int initialRestPoints = 1;
   int initialRestPointsMax = 1;
   int initialRestDiceFaces;
@@ -66,11 +65,6 @@ public abstract class InitialStats
     return agilityBoost;
   }
 
-  public int getInitialAgilityModifier()
-  {
-    return initialAgilityModifier;
-  }
-
   public int getInitialConstitution()
   {
     return initialConstitution;
@@ -81,69 +75,9 @@ public abstract class InitialStats
     return constitutionBoost;
   }
 
-  public int getInitialConstitutionModifier()
-  {
-    return initialConstitutionModifier;
-  }
-
-  public int getInitialIntelligenceUnused()
-  {
-    return initialIntelligenceUnused;
-  }
-
-  public int getInitialIntelligenceModifierUnused()
-  {
-    return initialIntelligenceModifierUnused;
-  }
-
-  public int getInitialWisdomUnused()
-  {
-    return initialWisdomUnused;
-  }
-
-  public int getInitialWisdomModifierUnused()
-  {
-    return initialWisdomModifierUnused;
-  }
-
-  public int getInitialCharismaUnused()
-  {
-    return initialCharismaUnused;
-  }
-
-  public int getInitialCharismaModifierUnused()
-  {
-    return initialCharismaModifierUnused;
-  }
-
-  public int getInitialProficiencyBonus()
-  {
-    return initialProficiencyBonus;
-  }
-
-  public int getInitialArmorClass()
-  {
-    return initialArmorClass;
-  }
-
-  public int getInitialInitiative()
-  {
-    return initialInitiative;
-  }
-
-  public int getInitialSpeedUnused()
-  {
-    return initialSpeedUnused;
-  }
-
   public int getInitialHitPoints()
   {
     return initialHitPoints;
-  }
-
-  public String getInitialHitDice()
-  {
-    return initialHitDice;
   }
 
   public int getInitialRestPoints()

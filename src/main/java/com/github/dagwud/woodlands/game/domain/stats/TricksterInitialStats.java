@@ -23,7 +23,6 @@ public class TricksterInitialStats extends InitialStats
     initialInitiative = 3;
     initialSpeedUnused = 30;
     initialHitPoints = 10;
-    initialHitDice = "1d8";
     initialRestDiceFaces = 8;
     weaponMasteryBonusHit.put("Katana", 5);
     weaponMasteryBonusDamage.put("Katana", 3);

@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.character.ChangeNamePromptCmd;
+import com.github.dagwud.woodlands.game.commands.character.LevelUpCmd;
 import com.github.dagwud.woodlands.game.commands.character.SwitchCharacterPromptCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
@@ -28,6 +29,8 @@ public enum ECommand
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
   INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
+
+  LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)), //todo remove!
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),

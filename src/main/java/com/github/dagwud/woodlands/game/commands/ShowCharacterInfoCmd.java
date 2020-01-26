@@ -33,8 +33,9 @@ public class ShowCharacterInfoCmd extends AbstractCmd
             "(L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
             "Experience: " + character.getStats().getExperience() + "\n" +
             "Location: " + character.getLocation() + "\n" +
+            "Short Rests Available: " + character.getStats().getRestPoints() + "/" + character.getStats().getRestPointsMax() + "\n" +
             "\n" +
-            "❤️: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
+            "❤: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
             "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
             "Strength: " + stats.getStrength() + "\n" +
             "Agility: " + stats.getAgility() + "\n" +

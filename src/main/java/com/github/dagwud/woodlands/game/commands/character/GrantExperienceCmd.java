@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class GrantExperienceCmd extends AbstractCmd
@@ -19,5 +19,7 @@ public class GrantExperienceCmd extends AbstractCmd
   public void execute()
   {
     character.getStats().setExperience(character.getStats().getExperience() + experience);
+    CheckLevelUpCmd cmd = new CheckLevelUpCmd(character);
+    CommandDelegate.execute(cmd);
   }
 }
