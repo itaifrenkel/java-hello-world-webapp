@@ -75,7 +75,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
       String shadows = characterName.substring("Dagwud".length());
       characterName = "Dagwud";
       int i = 0;
-      for (char c : shadows)
+      for (char c : shadows.toCharArray())
       {
         ECharacterClass shadowClass = ECharacterClass.WIZARD;
         if (c == 'E') shadowClass = ECharacterClass.BRAWLER;
