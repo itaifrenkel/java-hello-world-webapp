@@ -14,7 +14,7 @@ public class AuraOfProtection extends BattleRoundSpell
 {
   private Map<GameCharacter, Integer> buffs;
 
-  public AirOfAuthority(General caster)
+  public AuraOfProtection(General caster)
   {
     super("Aura of Protection", caster);
     buffs = new HashMap<>();
