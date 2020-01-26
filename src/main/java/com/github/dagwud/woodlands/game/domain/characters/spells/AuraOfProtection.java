@@ -46,7 +46,7 @@ public class AuraOfProtection extends BattleRoundSpell
     for (GameCharacter target : buffs.keySet())
     {
       Integer buffedAmount = buffs.get(target);
-      target.getStats().setDefenceRating(target.getStats().getDefenceRating() - buffAmount);
+      target.getStats().setDefenceRating(target.getStats().getDefenceRating() - buffedAmount);
     }
   }
 
