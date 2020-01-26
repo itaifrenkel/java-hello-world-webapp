@@ -78,9 +78,9 @@ public class DoPlayerSetupCmd extends SuspendableCmd
       for (char c : shadows.toCharArray())
       {
         ECharacterClass shadowClass = ECharacterClass.WIZARD;
-        if (c == 'E') shadowClass = ECharacterClass.BRAWLER;
-        if (c == 'B') shadowClass = ECharacterClass.DRUID;
-        if (c == 'D') shadowClass = ECharacterClass.GENERAL;
+        if (c == 'B') shadowClass = ECharacterClass.BRAWLER;
+        if (c == 'D') shadowClass = ECharacterClass.DRUID;
+        if (c == 'G') shadowClass = ECharacterClass.GENERAL;
         if (c == 'E') shadowClass = ECharacterClass.EXPLORER;
         if (c == 'T') shadowClass = ECharacterClass.TRICKSTER;
         CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100 - i,
