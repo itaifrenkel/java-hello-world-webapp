@@ -77,9 +77,6 @@ public class MoveToLocationCmd extends AbstractCmd
   {
     characterToMove.setLocation(moveTo);
 
-    SendMessageCmd c = new SendMessageCmd(characterToMove.getPlayedBy().getChatId(), "You are now at " + location);
-    CommandDelegate.execute(c);
-
     showMenuForLocation(moveTo, characterToMove.getPlayedBy().getPlayerState());
     handleLocationEntry(moveTo, characterToMove.getPlayedBy().getPlayerState());
   }
