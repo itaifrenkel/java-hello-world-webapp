@@ -40,7 +40,7 @@ public class CreateShadowPlayerCmd extends AbstractCmd
     CommandDelegate.execute(shadowJoin);
 
     SendPartyMessageCmd info = new SendPartyMessageCmd(spawned.getParty(),
-            spawned.getName() + " has been given: " + spawned.getCarrying().getCarriedLeft().summary(spawned));
+            spawned.getName() + " (" + spawned.getCharacterClass() + ") has been given: " + spawned.getCarrying().getCarriedLeft().summary(spawned));
     CommandDelegate.execute(info);
   }
 
