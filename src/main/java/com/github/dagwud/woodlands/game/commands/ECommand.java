@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.character.ChangeNamePromptCmd;
 import com.github.dagwud.woodlands.game.commands.character.SwitchCharacterPromptCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.BuyDrinksCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.LeaveItemsCmd;
@@ -26,6 +27,7 @@ public enum ECommand
   PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
   INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
+  LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
