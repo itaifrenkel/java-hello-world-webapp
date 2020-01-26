@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public abstract class Fighter
 {
@@ -28,7 +29,8 @@ public abstract class Fighter
 
   private String healthIcon(Stats stats)
   {
-    BigDecimal perc = new BigDecimal(stats.getHitPoints()).divide(new BigDecimal(stats.getMaxHitPoints()));
+    BigDecimal perc = new BigDecimal(stats.getHitPoints())
+        .divide(new BigDecimal(stats.getMaxHitPoints()), 3, RoundingMode.HALF_DOWN);
     if (perc.compareTo(new BigDecimal("0.8")) >= 0)
     {
       return "💚";
