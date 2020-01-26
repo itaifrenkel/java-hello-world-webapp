@@ -27,7 +27,7 @@ public class RecoverHitPointsCmd extends AbstractCmd
 
       for (PartySpell partySpell : target.getSpellAbilities().getPartySpells())
       {
-        partySpell.expire();
+        partySpell.cast();
       }
     }
   }
