@@ -41,8 +41,6 @@ public class SwitchCharacterCmd extends AbstractCmd
       }
     }
 
-    wasActive.getStats().setState(EState.INACTIVE);
-
     player.getInactiveCharacters().remove(toActivate);
     player.setActiveCharacter(toActivate);
   }
