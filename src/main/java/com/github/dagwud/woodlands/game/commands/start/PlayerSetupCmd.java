@@ -23,7 +23,7 @@ public class PlayerSetupCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Player player = new Player(chatId, GameStatesRegistry.lookup(chatId));
+    Player player = GameStatesRegistry.lookup(chatId).getPlayer();
     PlayerState playerState = player.getPlayerState();
     playerState.setPlayer(player);
 
