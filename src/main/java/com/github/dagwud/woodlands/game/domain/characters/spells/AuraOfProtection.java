@@ -12,6 +12,8 @@ import java.util.Map;
 
 public class AuraOfProtection extends BattleRoundSpell
 {
+  private static final int BUFF_AMOUNT = 5;
+
   private Map<GameCharacter, Integer> buffs;
 
   public AuraOfProtection(GameCharacter caster)
@@ -31,11 +33,10 @@ public class AuraOfProtection extends BattleRoundSpell
   {
     for (GameCharacter target : getCaster().getParty().getActiveMembers())
     {
-      int buffAmount = 1;
       target.getStats().setDefenceRating(target.getStats().getDefenceRating() + buffAmount);
-      buffs.put(target, buffAmount);
+      buffs.put(target, BUFF_AMOUNT);
 
-      SendMessageCmd cmd = new SendMessageCmd(target.getPlayedBy().getChatId(), getCaster().getName() + " buffed your defences by +" + buffAmount);
+      SendMessageCmd cmd = new SendMessageCmd(target.getPlayedBy().getChatId(), getCaster().getName() + " buffed your defences by +" + BUFF_AMOUNT);
       CommandDelegate.execute(cmd);
     }
   }
