@@ -74,6 +74,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
     {
       Sting shadows = characterName.substring("Dagwud".length());
       characterName = "Dagwud";
+      int i = 0;
       for (char c : shadows)
       {
         ECharacterClass shadowClass = ECharacterClass.WIZZARD;
@@ -87,6 +88,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
                 getPlayerState().getPlayer().getActiveCharacter(), shadowClass);
         RunLaterCmd delayed = new RunLaterCmd(700 * (i + 1), shadow);
         CommandDelegate.execute(delayed);
+        i++;
       }
     }
 
