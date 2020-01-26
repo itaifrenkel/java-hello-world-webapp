@@ -72,12 +72,12 @@ public class DoPlayerSetupCmd extends SuspendableCmd
     //todo for testing
     if (characterName.startsWith("Dagwud") && !characterName.equals("Dagwud"))
     {
-      Sting shadows = characterName.substring("Dagwud".length());
+      String shadows = characterName.substring("Dagwud".length());
       characterName = "Dagwud";
       int i = 0;
       for (char c : shadows)
       {
-        ECharacterClass shadowClass = ECharacterClass.WIZZARD;
+        ECharacterClass shadowClass = ECharacterClass.WIZARD;
         if (c == 'E') shadowClass = ECharacterClass.BRAWLER;
         if (c == 'B') shadowClass = ECharacterClass.DRUID;
         if (c == 'D') shadowClass = ECharacterClass.GENERAL;
