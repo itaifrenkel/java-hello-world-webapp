@@ -28,7 +28,7 @@ public class SwitchCharacterCmd extends AbstractCmd
       {
         return;
       } 
-      if (toActivate.getStats().getState() != EState.INACTIVE)
+      if (toActivate.getStats().getState() != EState.ALIVE)
       {
         SendMessageCmd err = new SendMessageCmd(player.getChatId(), toActivate.getName() + " is " + toActivate.getStats().getState());
         CommandDelegate.execute(err);
