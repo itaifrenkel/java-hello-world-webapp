@@ -21,12 +21,6 @@ public class RollShortRestCmd extends AbstractCmd
   public void execute()
   {
     Stats stats = character.getStats();
-    if (stats.getRestPoints() <= 0)
-    {
-      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need a full rest\n\nTODO this is not yet implemented, so for now we'll let it slide");
-      CommandDelegate.execute(cmd);
-      stats.setRestPoints(1); //todo because long rest not yet implemented - needs to be removed, and at this point should abort the short rest
-    }
     int diceroll = roll(stats.getLevel(), stats.getRestDiceFace());
     int boostFromConstitution = (int) (Math.floor((stats.getConstitution().total() - 10) / 2.0));
     int newHitPoints = (stats.getHitPoints() + diceroll + boostFromConstitution);

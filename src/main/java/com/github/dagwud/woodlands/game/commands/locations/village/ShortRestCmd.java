@@ -7,24 +7,33 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class ShortRestCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameCharacter activeCharacter;
+  private final GameCharacter character;
 
-  public ShortRestCmd(int chatId, GameCharacter activeCharacter)
+  public ShortRestCmd(int chatId, GameCharacter character)
   {
-    super(new AbleToActPrerequisite(activeCharacter));
+    super(new AbleToActPrerequisite(character));
     this.chatId = chatId;
-    this.activeCharacter = activeCharacter;
+    this.character = character;
   }
 
   @Override
   public void execute()
   {
-    activeCharacter.getStats().setState(EState.RESTING);
-    AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, activeCharacter);
+    Stats stats = character.getStats();
+    if (stats.getRestPoints() <= 0)
+    {
+      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need a full rest\nThis is not yet implemented, so for now we'll let it slide");
+      CommandDelegate.execute(cmd);
+      stats.setRestPoints(1); //todo because long rest not yet implemented - needs to be removed, and at this point should abort the short rest
+    }
+
+    stats.setState(EState.RESTING);
+    AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, character);
     restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
     CommandDelegate.execute(restCompletedCmd);
 
