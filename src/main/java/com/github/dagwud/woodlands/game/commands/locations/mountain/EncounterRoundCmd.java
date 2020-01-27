@@ -109,7 +109,7 @@ public class EncounterRoundCmd extends AbstractCmd
     List<SingleCastSpell> spellsCast = new ArrayList<>(2);
     for (GameCharacter caster : encounter.getParty().getActiveMembers())
     {
-      if (caster.getSpellAbilities().hasPreparedSpell())
+      while (caster.getSpellAbilities().hasPreparedSpell())
       {
         SingleCastSpell spell = caster.getSpellAbilities().popPrepared();
         spell.cast();
