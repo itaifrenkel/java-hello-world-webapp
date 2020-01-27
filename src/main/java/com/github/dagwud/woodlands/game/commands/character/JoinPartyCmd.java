@@ -56,7 +56,7 @@ public class JoinPartyCmd extends AbstractCmd
 
     for (PartySpell partySpell : joiner.getSpellAbilities().getPartySpells())
     {
-      partySpell.cast();
+      CommandDelegate.execute(new CastSpellCmd(partySpell));
     }
   }
 

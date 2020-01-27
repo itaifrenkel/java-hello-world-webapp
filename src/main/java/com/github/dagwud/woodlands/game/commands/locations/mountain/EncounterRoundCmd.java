@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations.mountain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
+import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
@@ -11,6 +12,7 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpel
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
+import com.google.gson.internal.$Gson$Preconditions;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -112,7 +114,8 @@ public class EncounterRoundCmd extends AbstractCmd
       while (caster.getSpellAbilities().hasPreparedSpell())
       {
         SingleCastSpell spell = caster.getSpellAbilities().popPrepared();
-        spell.cast();
+        CastSpellCmd cast = new CastSpellCmd(spell);
+        CommandDelegate.execute(cast);
         spellsCast.add(spell);
       }
     }
@@ -139,7 +142,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
     for (BattleRoundSpell spellToCast : passives)
     {
-      spellToCast.cast();
+      CommandDelegate.execute(new CastSpellCmd(spellToCast));
     }
 
     if (!passives.isEmpty())
