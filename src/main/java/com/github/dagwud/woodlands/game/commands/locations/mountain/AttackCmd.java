@@ -71,7 +71,7 @@ public class AttackCmd extends AbstractCmd
   {
     DiceRollCmd rollDamage = new DiceRollCmd(weaponUsed.damage.diceCount, weaponUsed.damage.diceFaces);
     CommandDelegate.execute(rollDamage);
-    int damageDone = rollDamage.getTotal();
+    int baseDamage = rollDamage.getTotal();
 
     int criticalHitDamage = 0;
     if (hitStatus == EHitStatus.CRITICAL_HIT)
@@ -89,8 +89,15 @@ public class AttackCmd extends AbstractCmd
       drunkStrengthDamage = attacker.getStats().determineDrunkenStrength();
     }
 
+    int damageMultiplier = attacker.getStats().getDamageMultiplier();
+    if (damageMultiplier != 1)
+    {
+      baseDamage = baseDamage * damageMultiplier;
+      bonusDamage = bonusDamage * damageMultiplier;
+    }
+
     damageInflicted = new DamageInflicted(attacker, weaponUsed, hitStatus,
-            damageDone, defender, criticalHitDamage + bonusDamage + drunkStrengthDamage);
+            baseDamage, defender, criticalHitDamage + bonusDamage + drunkStrengthDamage);
   }
 
   DamageInflicted getDamageInflicted()

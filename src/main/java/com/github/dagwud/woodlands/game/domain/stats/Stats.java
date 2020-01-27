@@ -23,6 +23,7 @@ public class Stats
   private int restDiceFace;
   private int hitBoost;
 
+  private int damageMultiplier = 1;
   private int criticalStrikeChanceBonus;
 
   private Map<String, Integer> weaponBonusHit = new HashMap<>();
@@ -245,5 +246,15 @@ public class Stats
   public int determineDrunkenStrength()
   {
     return Math.min(getDrunkeness() / 2, 4);
+  }
+
+  public int getDamageMultiplier()
+  {
+    return damageMultiplier;
+  }
+
+  public void setDamageMultiplier(int damageMultiplier)
+  {
+    this.damageMultiplier = damageMultiplier;
   }
 }

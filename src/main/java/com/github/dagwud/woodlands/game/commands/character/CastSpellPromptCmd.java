@@ -39,6 +39,8 @@ public class CastSpellPromptCmd extends AbstractCmd
         return new SneakAttack(character);
       case GENERAL:
         return new ArmyOfPeasants(character);
+      case BRAWLER:
+        return new KnuckleDuster(character);
       default:
         SendMessageCmd cmd = new SendMessageCmd(chatId, "No spells are available for " + character.getCharacterClass() + " (yet))");
         CommandDelegate.execute(cmd);
