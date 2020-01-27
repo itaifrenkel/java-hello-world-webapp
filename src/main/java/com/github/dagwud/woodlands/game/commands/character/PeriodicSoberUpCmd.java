@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.SoberUpCmd;
+import com.github.dagwud.woodlands.game.domain.EStatus;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class PeriodicSoberUpCmd extends AbstractCmd
@@ -25,8 +26,11 @@ public class PeriodicSoberUpCmd extends AbstractCmd
     SoberUpCmd cmd = new SoberUpCmd(character, chatId);
     CommandDelegate.execute(cmd);
 
-    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, chatId);
-    RunLaterCmd next = new RunLaterCmd(Settings.SOBER_UP_DELAY_MS, periodicSoberUp);
-    CommandDelegate.execute(next);
+    if (character.getStatus() != EStatus.DEAD)
+    {
+      PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, chatId);
+      RunLaterCmd next = new RunLaterCmd(Settings.SOBER_UP_DELAY_MS, periodicSoberUp);
+      CommandDelegate.execute(next);
+    }
   }
 }
