@@ -34,8 +34,6 @@ public class SpawnCreatureCmd extends AbstractCmd
 
     spawnedCreature = new Creature(template);
     spawnedCreature.setStats(stats);
-
-    spawnedCreature.getSpellAbilities().register(new BeastMode(spawnedCreature));
   }
 
   private int chooseRandomInRange(int minInclusive, int maxInclusive)
