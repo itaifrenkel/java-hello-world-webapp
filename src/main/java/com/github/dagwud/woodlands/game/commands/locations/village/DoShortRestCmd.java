@@ -29,7 +29,7 @@ public class DoShortRestCmd extends AbstractCmd
     CommandDelegate.execute(cmd);
 
     RecoverManaCmd mana = new RecoverManaCmd(character, 1);
-    CommandDelegate.execute(mana)
+    CommandDelegate.execute(mana);
 
     soberUp();
 
