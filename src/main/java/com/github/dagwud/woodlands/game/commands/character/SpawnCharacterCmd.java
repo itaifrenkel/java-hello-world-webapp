@@ -7,7 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 
 public class SpawnCharacterCmd extends AbstractCmd
@@ -15,7 +15,7 @@ public class SpawnCharacterCmd extends AbstractCmd
   private int chatId;
   private final String characterName;
   private final ECharacterClass characterClass;
-  private GameCharacter spawned;
+  private PlayerCharacter spawned;
 
   public SpawnCharacterCmd(int chatId, String characterName, ECharacterClass characterClass)
   {
@@ -31,7 +31,7 @@ public class SpawnCharacterCmd extends AbstractCmd
 
     CreateCharacterCmd create = new CreateCharacterCmd(player, characterName, characterClass);
     CommandDelegate.execute(create);
-    GameCharacter character = create.getCreatedCharacter();
+    PlayerCharacter character = create.getCreatedCharacter();
 
     SwitchCharacterCmd makeActive = new SwitchCharacterCmd(player, character);
     CommandDelegate.execute(makeActive);
@@ -48,7 +48,7 @@ public class SpawnCharacterCmd extends AbstractCmd
     this.spawned = character;
   }
 
-  public GameCharacter getSpawned()
+  public PlayerCharacter getSpawned()
   {
     return spawned;
   }

@@ -2,8 +2,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.*;
-import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.menu.InnMenu;
 
@@ -43,7 +42,7 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
       return;
     }
 
-    GameCharacter switchTo = findCharacter(capturedInput);
+    PlayerCharacter switchTo = findCharacter(capturedInput);
     Player player = getPlayerState().getPlayer();
     if (switchTo == null)
     {
@@ -63,9 +62,9 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
     CommandDelegate.execute(showMenuCmd);
   }
 
-  private GameCharacter findCharacter(String capturedInput)
+  private PlayerCharacter findCharacter(String capturedInput)
   {
-    for (GameCharacter inactiveCharacter : player.getInactiveCharacters())
+    for (PlayerCharacter inactiveCharacter : player.getInactiveCharacters())
     {
       if (inactiveCharacter.summary().equals(capturedInput))
       {
@@ -78,7 +77,7 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
   private String[] buildCharactersList(Player player)
   {
     String[] characters = new String[player.getInactiveCharacters().size() + 1];
-    List<GameCharacter> inactiveCharacters = player.getInactiveCharacters();
+    List<PlayerCharacter> inactiveCharacters = player.getInactiveCharacters();
     for (int i = 0; i < inactiveCharacters.size(); i++)
     {
       characters[i] = inactiveCharacters.get(i).summary();

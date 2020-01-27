@@ -5,13 +5,14 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class ShowPartyInfoCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  ShowPartyInfoCmd(int chatId, GameCharacter character)
+  ShowPartyInfoCmd(int chatId, PlayerCharacter character)
   {
     super(new CharacterIsSetUpPrecondition(chatId, character));
     this.chatId = chatId;

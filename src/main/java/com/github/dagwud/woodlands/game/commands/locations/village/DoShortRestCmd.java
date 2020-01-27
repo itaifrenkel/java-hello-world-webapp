@@ -4,15 +4,14 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.locations.village.RollShortRestCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class DoShortRestCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  DoShortRestCmd(int chatId, GameCharacter character)
+  DoShortRestCmd(int chatId, PlayerCharacter character)
   {
     this.chatId = chatId;
     this.character = character;

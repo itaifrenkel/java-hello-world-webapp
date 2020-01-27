@@ -6,10 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
-import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Party;
-import com.github.dagwud.woodlands.game.domain.characters.Explorer;
+import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 
 public class JoinPartyCmd extends AbstractCmd
@@ -35,14 +32,18 @@ public class JoinPartyCmd extends AbstractCmd
     }
 
     Party party = PartyRegistry.lookup(partyName);
-    if (!isPartyInTheVillage(party))
+    if (joiner instanceof PlayerCharacter)
     {
-      SendMessageCmd send = new SendMessageCmd(joiner.getPlayedBy().getChatId(), "You can't join that party - it's not in the Village");
-      CommandDelegate.execute(send);
+      PlayerCharacter character = (PlayerCharacter) joiner;
+      if (!isPartyInTheVillage(party))
+      {
+        SendMessageCmd send = new SendMessageCmd(character.getPlayedBy().getChatId(), "You can't join that party - it's not in the Village");
+        CommandDelegate.execute(send);
 
-      SendPartyMessageCmd partyMsg = new SendPartyMessageCmd(party, joiner.getName() + " wants to join, but can only do so when you're in the Village");
-      CommandDelegate.execute(partyMsg);
-      return;
+        SendPartyMessageCmd partyMsg = new SendPartyMessageCmd(party, character.getName() + " wants to join, but can only do so when you're in the Village");
+        CommandDelegate.execute(partyMsg);
+        return;
+      }
     }
 
     joiner.setParty(party);

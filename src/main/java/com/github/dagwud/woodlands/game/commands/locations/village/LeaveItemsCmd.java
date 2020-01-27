@@ -3,13 +3,13 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class LeaveItemsCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  public LeaveItemsCmd(GameCharacter character)
+  public LeaveItemsCmd(PlayerCharacter character)
   {
     this.character = character;
   }

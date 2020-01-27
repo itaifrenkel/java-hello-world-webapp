@@ -6,9 +6,7 @@ import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequi
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.domain.characters.Explorer;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
-import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 public class LeavePartyCmd extends AbstractCmd
 {

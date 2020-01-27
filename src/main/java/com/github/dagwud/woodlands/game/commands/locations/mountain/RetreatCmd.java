@@ -8,9 +8,9 @@ import com.github.dagwud.woodlands.game.domain.*;
 
 public class RetreatCmd extends AbstractCmd
 {
-  private final GameCharacter inDanger;
+  private final PlayerCharacter inDanger;
 
-  RetreatCmd(GameCharacter inDanger)
+  RetreatCmd(PlayerCharacter inDanger)
   {
     this.inDanger = inDanger;
   }
@@ -30,7 +30,7 @@ public class RetreatCmd extends AbstractCmd
     CommandDelegate.execute(cmd);
   }
 
-  private String buildRetreatMessage(GameCharacter inDanger, GameCharacter retreater)
+  private String buildRetreatMessage(PlayerCharacter inDanger, GameCharacter retreater)
   {
     Party party = inDanger.getParty();
     if (party.isPrivateParty())

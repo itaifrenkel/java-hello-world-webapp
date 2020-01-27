@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 
@@ -21,7 +21,7 @@ public class PlayerState
   }
 
   // for convenience:
-  public GameCharacter getActiveCharacter()
+  public PlayerCharacter getActiveCharacter()
   {
     return getPlayer().getActiveCharacter();
   }

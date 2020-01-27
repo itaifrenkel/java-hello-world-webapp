@@ -2,14 +2,14 @@ package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class GrantExperienceCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
   private final int experience;
 
-  public GrantExperienceCmd(GameCharacter character, int experience)
+  public GrantExperienceCmd(PlayerCharacter character, int experience)
   {
     this.character = character;
     this.experience = experience;

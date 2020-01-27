@@ -9,8 +9,8 @@ public class Player
 {
   private final int chatId;
   private final PlayerState playerState;
-  private GameCharacter activeCharacter;
-  private List<GameCharacter> inactiveCharacters = new ArrayList<>();
+  private PlayerCharacter activeCharacter;
+  private List<PlayerCharacter> inactiveCharacters = new ArrayList<>();
 
   public Player(int chatId, PlayerState state)
   {
@@ -23,12 +23,12 @@ public class Player
     return chatId;
   }
 
-  public GameCharacter getActiveCharacter()
+  public PlayerCharacter getActiveCharacter()
   {
     return activeCharacter;
   }
 
-  public void setActiveCharacter(GameCharacter activeCharacter)
+  public void setActiveCharacter(PlayerCharacter activeCharacter)
   {
     this.activeCharacter = activeCharacter;
   }
@@ -38,7 +38,7 @@ public class Player
     return playerState;
   }
 
-  public List<GameCharacter> getInactiveCharacters()
+  public List<PlayerCharacter> getInactiveCharacters()
   {
     return inactiveCharacters;
   }

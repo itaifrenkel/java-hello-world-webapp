@@ -4,30 +4,39 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.CommandPrerequisite;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class AbleToActPrerequisite implements CommandPrerequisite
 {
-  private final GameCharacter character;
+  private final Fighter fighter;
 
-  public AbleToActPrerequisite(GameCharacter character)
+  public AbleToActPrerequisite(Fighter character)
   {
-    this.character = character;
+    this.fighter = character;
   }
 
   @Override
   public boolean verify()
   {
-    if (!character.isSetupComplete())
+    if (fighter instanceof PlayerCharacter)
     {
-      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(),"You need to create a character first. Please use /new");
-      CommandDelegate.execute(cmd);
-      return false;
+      PlayerCharacter character = (PlayerCharacter) fighter;
+      if (!character.isSetupComplete())
+      {
+        SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need to create a character first. Please use /new");
+        CommandDelegate.execute(cmd);
+        return false;
+      }
     }
-    if (character.getStats().getState() != EState.ALIVE)
+    if (fighter.getStats().getState() != EState.ALIVE)
     {
-      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You're " + character.getStats().getState().name().toLowerCase() + "; you can't do anything");
-      CommandDelegate.execute(cmd);
+      if (fighter instanceof PlayerCharacter)
+      {
+        PlayerCharacter character = (PlayerCharacter) fighter;
+        SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You're " + character.getStats().getState().name().toLowerCase() + "; you can't do anything");
+        CommandDelegate.execute(cmd);
+      }
       return false;
     }
     return true;

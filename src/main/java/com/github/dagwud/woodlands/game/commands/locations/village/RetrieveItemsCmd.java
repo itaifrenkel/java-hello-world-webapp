@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -11,9 +11,9 @@ import java.util.List;
 
 public class RetrieveItemsCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  public RetrieveItemsCmd(GameCharacter character)
+  public RetrieveItemsCmd(PlayerCharacter character)
   {
     this.character = character;
   }

@@ -4,19 +4,18 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.ReduceHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
-import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.math.BigDecimal;
 
 public class BuyDrinksCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameCharacter activeCharacter;
+  private final PlayerCharacter activeCharacter;
 
-  public BuyDrinksCmd(int chatId, GameCharacter activeCharacter)
+  public BuyDrinksCmd(int chatId, PlayerCharacter activeCharacter)
   {
     super(new AbleToActPrerequisite(activeCharacter));
     this.chatId = chatId;

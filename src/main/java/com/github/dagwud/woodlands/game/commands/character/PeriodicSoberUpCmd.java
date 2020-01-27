@@ -6,14 +6,14 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.SoberUpCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class PeriodicSoberUpCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
   private final int chatId;
 
-  PeriodicSoberUpCmd(GameCharacter character, int chatId)
+  PeriodicSoberUpCmd(PlayerCharacter character, int chatId)
   {
     this.character = character;
     this.chatId = chatId;

@@ -2,15 +2,13 @@ package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-
-import java.util.logging.Level;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class CheckLevelUpCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  CheckLevelUpCmd(GameCharacter character)
+  CheckLevelUpCmd(PlayerCharacter character)
   {
     this.character = character;
   }

@@ -4,14 +4,14 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class LookCmd extends AbstractCmd
 {
   private final ELocation location;
   private final int chatId;
 
-  public LookCmd(int chatId, GameCharacter character)
+  public LookCmd(int chatId, PlayerCharacter character)
   {
     this.chatId = chatId;
     this.location = character.getLocation();

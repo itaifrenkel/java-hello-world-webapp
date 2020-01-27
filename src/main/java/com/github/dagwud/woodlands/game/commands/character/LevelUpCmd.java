@@ -6,14 +6,14 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class LevelUpCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  public LevelUpCmd(int chatId, GameCharacter character)
+  public LevelUpCmd(int chatId, PlayerCharacter character)
   {
     this.chatId = chatId;
     this.character = character;

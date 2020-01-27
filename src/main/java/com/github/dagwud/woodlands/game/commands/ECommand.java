@@ -15,7 +15,7 @@ import com.github.dagwud.woodlands.game.commands.locations.village.ShortRestCmd;
 import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
 import com.github.dagwud.woodlands.game.commands.start.StartCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,7 +89,7 @@ public enum ECommand
     return this.name.equalsIgnoreCase(name);
   }
 
-  public AbstractCmd build(GameCharacter character, int chatId)
+  public AbstractCmd build(PlayerCharacter character, int chatId)
   {
     return commandBuilder.build(character, chatId);
   }

@@ -4,8 +4,6 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.CommandPrerequisite;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 
 public class PlayerSetupCmd extends AbstractCmd

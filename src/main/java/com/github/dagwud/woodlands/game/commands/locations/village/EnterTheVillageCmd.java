@@ -4,13 +4,13 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class EnterTheVillageCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  public EnterTheVillageCmd(GameCharacter character)
+  public EnterTheVillageCmd(PlayerCharacter character)
   {
     this.character = character;
   }

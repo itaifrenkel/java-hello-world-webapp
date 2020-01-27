@@ -5,13 +5,13 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EndEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
-import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 
 import java.util.Collection;
@@ -77,8 +77,12 @@ public class MoveToLocationCmd extends AbstractCmd
   {
     characterToMove.setLocation(moveTo);
 
-    showMenuForLocation(moveTo, characterToMove.getPlayedBy().getPlayerState());
-    handleLocationEntry(moveTo, characterToMove.getPlayedBy().getPlayerState());
+    if (characterToMove instanceof PlayerCharacter)
+    {
+      PlayerCharacter character = (PlayerCharacter) characterToMove;
+      showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
+      handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
+    }
   }
 
   private void endActiveEncounter()

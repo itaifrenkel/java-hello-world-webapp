@@ -2,15 +2,15 @@ package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.game.domain.stats.InitialStats;
 
 public class InitCharacterStatsCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  public InitCharacterStatsCmd(GameCharacter character)
+  public InitCharacterStatsCmd(PlayerCharacter character)
   {
     this.character = character;
   }
@@ -18,7 +18,7 @@ public class InitCharacterStatsCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Stats stats = new Stats();
+    Stats stats = character.getStats();
     stats.setLevel(1);
     stats.setState(EState.ALIVE);
 
@@ -40,7 +40,5 @@ public class InitCharacterStatsCmd extends AbstractCmd
     stats.setRestPointsMax(classStats.getInitialRestPointsMax());
     stats.setRestPoints(classStats.getInitialRestPoints());
     stats.setRestDiceFace(classStats.getShortRestDice());
-
-    character.setStats(stats);
   }
 }

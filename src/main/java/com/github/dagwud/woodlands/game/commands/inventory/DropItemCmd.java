@@ -3,16 +3,16 @@ package com.github.dagwud.woodlands.game.commands.inventory;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class DropItemCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
   private final int chatId;
   private final String dropIndex;
 
-  public DropItemCmd(GameCharacter character, int chatId, String dropIndex)
+  public DropItemCmd(PlayerCharacter character, int chatId, String dropIndex)
   {
     this.character = character;
     this.chatId = chatId;

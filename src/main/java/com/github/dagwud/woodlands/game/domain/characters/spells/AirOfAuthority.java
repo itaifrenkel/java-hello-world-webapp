@@ -3,8 +3,9 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.ECharacterClass;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
 
 import java.util.HashMap;
@@ -37,8 +38,12 @@ public class AirOfAuthority extends BattleRoundSpell
         target.getStats().getStrength().addBonus(buffAmount);
         buffs.put(target, buffAmount);
 
-        SendMessageCmd cmd = new SendMessageCmd(target.getPlayedBy().getChatId(), getCaster().getName() + " buffed your strength by +" + buffAmount);
-        CommandDelegate.execute(cmd);
+        if (target instanceof PlayerCharacter)
+        {
+          SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter)target).getPlayedBy().getChatId(),
+                  getCaster().getName() + " buffed your strength by +" + buffAmount);
+          CommandDelegate.execute(cmd);
+        }
       }
     }
   }
@@ -72,8 +77,14 @@ public class AirOfAuthority extends BattleRoundSpell
     return Math.min(roll1.getTotal(), roll2.getTotal());
   }
 
-  private int determineBuffDiceFaces(GameCharacter target)
+  private int determineBuffDiceFaces(GameCharacter targetChar)
   {
+    if (!(targetChar instanceof PlayerCharacter))
+    {
+      // NPCs don't get buffed:
+      return 0;
+    }
+    PlayerCharacter target = (PlayerCharacter) targetChar;
     if (target.getCharacterClass() == ECharacterClass.TRICKSTER)
     {
       return 6;

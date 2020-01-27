@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 
 public class SendPartyMessageCmd extends AbstractCmd
@@ -18,7 +18,7 @@ public class SendPartyMessageCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    for (GameCharacter member : party.getActiveMembers())
+    for (PlayerCharacter member : party.getActivePlayerCharacters())
     {
       SendMessageCmd send = new SendMessageCmd(member.getPlayedBy().getChatId(), message);
       CommandDelegate.execute(send);

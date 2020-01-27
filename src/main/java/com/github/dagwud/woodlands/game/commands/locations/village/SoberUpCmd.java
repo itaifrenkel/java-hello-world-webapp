@@ -4,15 +4,15 @@ import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class SoberUpCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
   private final int chatId;
 
-  public SoberUpCmd(GameCharacter character, int chatId)
+  public SoberUpCmd(PlayerCharacter character, int chatId)
   {
     this.character = character;
     this.chatId = chatId;

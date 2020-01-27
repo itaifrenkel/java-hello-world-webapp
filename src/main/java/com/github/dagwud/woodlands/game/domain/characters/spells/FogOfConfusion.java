@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class FogOfConfusion extends SingleCastSpell
@@ -8,7 +8,7 @@ public class FogOfConfusion extends SingleCastSpell
   private static final int HIT_CHANCE_PENALTY = 10002;
   private Creature target;
 
-  public FogOfConfusion(GameCharacter caster)
+  public FogOfConfusion(PlayerCharacter caster)
   {
     super("Fog of Confusion", caster);
   }
@@ -27,8 +27,8 @@ public class FogOfConfusion extends SingleCastSpell
   }
 
   @Override
-  GameCharacter getCaster()
+  PlayerCharacter getCaster()
   {
-    return (GameCharacter) super.getCaster();
+    return (PlayerCharacter) super.getCaster();
   }
 }

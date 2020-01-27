@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.gson.game;
 
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.google.gson.annotations.SerializedName;
 
 public class Weapon
@@ -29,12 +29,12 @@ public class Weapon
     return ranged ? RANGED_ICON : MELEE_ICON;
   }
 
-  public String summary(GameCharacter carrier)
+  public String summary(PlayerCharacter carrier)
   {
     return name + " " + getIcon() + determineDamageText(carrier);
   }
 
-  private String determineDamageText(GameCharacter carrier)
+  private String determineDamageText(PlayerCharacter carrier)
   {
     int bonusDamage = carrier.getStats().getWeaponBonusDamage(this);
 

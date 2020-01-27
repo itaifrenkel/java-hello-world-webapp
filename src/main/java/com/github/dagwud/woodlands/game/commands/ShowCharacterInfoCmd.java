@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 import com.github.dagwud.woodlands.game.domain.CarriedItems;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -14,9 +14,9 @@ import java.util.Map;
 public class ShowCharacterInfoCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  ShowCharacterInfoCmd(int chatId, GameCharacter character)
+  ShowCharacterInfoCmd(int chatId, PlayerCharacter character)
   {
     super(new CharacterIsSetUpPrecondition(chatId, character));
     this.chatId = chatId;

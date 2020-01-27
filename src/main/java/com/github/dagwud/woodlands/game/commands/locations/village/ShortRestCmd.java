@@ -6,15 +6,15 @@ import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class ShortRestCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  public ShortRestCmd(int chatId, GameCharacter character)
+  public ShortRestCmd(int chatId, PlayerCharacter character)
   {
     super(new AbleToActPrerequisite(character));
     this.chatId = chatId;

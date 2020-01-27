@@ -12,7 +12,6 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpel
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
-import com.google.gson.internal.$Gson$Preconditions;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -45,7 +44,7 @@ public class EncounterRoundCmd extends AbstractCmd
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary);
     CommandDelegate.execute(status);
 
-    GameCharacter inDanger = getAnyPlayerInDanger();
+    PlayerCharacter inDanger = getAnyPlayerInDanger();
     if (inDanger != null)
     {
       if (encounter.getParty().capableOfRetreat())
@@ -167,9 +166,9 @@ public class EncounterRoundCmd extends AbstractCmd
     return roundActivity;
   }
 
-  private GameCharacter getAnyPlayerInDanger()
+  private PlayerCharacter getAnyPlayerInDanger()
   {
-    for (GameCharacter member : encounter.getParty().getActiveMembers())
+    for (PlayerCharacter member : encounter.getParty().getActivePlayerCharacters())
     {
       double hpPerc = ((double) member.getStats().getHitPoints()) / ((double) member.getStats().getMaxHitPoints());
       if (hpPerc <= 0.2)
@@ -182,7 +181,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private boolean anyPlayerCharactersStillAlive(Encounter encounter)
   {
-    for (GameCharacter member : encounter.getParty().getActiveMembers())
+    for (PlayerCharacter member : encounter.getParty().getActivePlayerCharacters())
     {
       if (member.getStats().getState() == EState.ALIVE)
       {
@@ -209,7 +208,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private Fighter determineDefender(Fighter attacker)
   {
-    if (attacker instanceof GameCharacter)
+    if (attacker instanceof PlayerCharacter)
     {
       return encounter.getEnemy();
     }

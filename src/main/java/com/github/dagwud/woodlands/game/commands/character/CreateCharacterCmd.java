@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.characters.GameCharacterFactory;
 
@@ -11,7 +11,7 @@ public class CreateCharacterCmd extends AbstractCmd
 {
   private final String characterName;
   private final ECharacterClass characterClass;
-  private GameCharacter createdCharacter;
+  private PlayerCharacter createdCharacter;
   private Player player;
 
   CreateCharacterCmd(Player player, String characterName, ECharacterClass characterClass)
@@ -24,7 +24,7 @@ public class CreateCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    GameCharacter character = GameCharacterFactory.create(characterClass, player);
+    PlayerCharacter character = GameCharacterFactory.create(characterClass, player);
     character.setName(characterName);
 
     InitCharacterStatsCmd cmd = new InitCharacterStatsCmd(character);
@@ -38,7 +38,7 @@ public class CreateCharacterCmd extends AbstractCmd
     createdCharacter = character;
   }
 
-  GameCharacter getCreatedCharacter()
+  PlayerCharacter getCreatedCharacter()
   {
     return createdCharacter;
   }

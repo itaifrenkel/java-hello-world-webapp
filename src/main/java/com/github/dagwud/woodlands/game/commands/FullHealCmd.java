@@ -2,14 +2,14 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class FullHealCmd extends AbstractCmd
 {
   private final int chatId;
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  FullHealCmd(int chatId, GameCharacter character)
+  FullHealCmd(int chatId, PlayerCharacter character)
   {
     this.chatId = chatId;
     this.character = character;

@@ -4,7 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.GrantExperienceCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.creatures.DifficultyCacheFactory;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Difficulty;
@@ -28,7 +28,7 @@ public class DefeatCreatureCmd extends AbstractCmd
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(difficultyLevel);
     int reward = difficulty.experienceReward;
     int rewardPerCharacter = Math.floorDiv(reward, victoriousParty.size());
-    for (GameCharacter member : victoriousParty.getActiveMembers())
+    for (PlayerCharacter member : victoriousParty.getActivePlayerCharacters())
     {
       GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
       CommandDelegate.execute(cmd);

@@ -4,11 +4,11 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class PromptJoinPartyCmd extends SuspendableCmd
 {
-  PromptJoinPartyCmd(GameCharacter character)
+  PromptJoinPartyCmd(PlayerCharacter character)
   {
     super(character.getPlayedBy().getPlayerState(), 2);
   }

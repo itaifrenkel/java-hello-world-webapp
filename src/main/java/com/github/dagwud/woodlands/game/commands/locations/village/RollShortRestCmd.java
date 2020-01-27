@@ -3,16 +3,15 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class RollShortRestCmd extends AbstractCmd
 {
-  private final GameCharacter character;
+  private final PlayerCharacter character;
   private int recoveredHitPoints;
 
-  RollShortRestCmd(GameCharacter character)
+  RollShortRestCmd(PlayerCharacter character)
   {
     this.character = character;
   }

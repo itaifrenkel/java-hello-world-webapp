@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.characters;
 
 import com.github.dagwud.woodlands.game.domain.*;
-import com.github.dagwud.woodlands.game.domain.characters.*;
 
 public abstract class GameCharacterFactory
 {
@@ -9,7 +8,7 @@ public abstract class GameCharacterFactory
   {
   }
 
-  public static GameCharacter create(ECharacterClass characterClass, Player player)
+  public static PlayerCharacter create(ECharacterClass characterClass, Player player)
   {
     switch (characterClass)
     {

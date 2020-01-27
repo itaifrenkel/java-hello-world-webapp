@@ -1,21 +1,20 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
-import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 /**
  * Spell that gives benefits to whichever party the caster is part of
  */
 public abstract class PartySpell extends Spell
 {
-  PartySpell(String spellName, GameCharacter caster)
+  PartySpell(String spellName, PlayerCharacter caster)
   {
     super(spellName, caster);
   }
 
   @Override
-  GameCharacter getCaster()
+  PlayerCharacter getCaster()
   {
-    return (GameCharacter) super.getCaster();
+    return (PlayerCharacter) super.getCaster();
   }
 }

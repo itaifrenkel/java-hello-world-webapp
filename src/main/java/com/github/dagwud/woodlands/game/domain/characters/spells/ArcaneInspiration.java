@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +10,9 @@ import java.util.Map;
 public class ArcaneInspiration extends PartySpell
 {
   private static final int MANA_BOOST = 1;
-  private Map<GameCharacter, Integer> boosted;
+  private Map<PlayerCharacter, Integer> boosted;
 
-  public ArcaneInspiration(GameCharacter caster)
+  public ArcaneInspiration(PlayerCharacter caster)
   {
     super("Arcane Inspiration", caster);
     boosted = new HashMap<>();
@@ -21,7 +21,7 @@ public class ArcaneInspiration extends PartySpell
   @Override
   public void cast()
   {
-    for (GameCharacter target : getCaster().getParty().getActiveMembers())
+    for (PlayerCharacter target : getCaster().getParty().getActivePlayerCharacters())
     {
       int initial = getCaster().getStats().getMaxMana();
       target.getStats().setMaxMana(initial + MANA_BOOST);
@@ -39,7 +39,7 @@ public class ArcaneInspiration extends PartySpell
   @Override
   public void expire()
   {
-    for (GameCharacter character : boosted.keySet())
+    for (PlayerCharacter character : boosted.keySet())
     {
       character.getStats().setMaxMana(character.getStats().getMaxMana() - MANA_BOOST);
       if (character.getStats().getMana() > character.getStats().getMaxMana())

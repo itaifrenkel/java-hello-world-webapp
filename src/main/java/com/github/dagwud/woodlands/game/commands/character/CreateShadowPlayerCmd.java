@@ -6,16 +6,16 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.EquipItemCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.RetrieveItemsCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class CreateShadowPlayerCmd extends AbstractCmd
 {
-  private final GameCharacter shadowOfCharacter;
+  private final PlayerCharacter shadowOfCharacter;
   private final String shadowName;
   private final int chatId;
   private final ECharacterClass shadowClass;
 
-  public CreateShadowPlayerCmd(int chatId, String shadowName, GameCharacter shadowOfCharacter, ECharacterClass shadowClass)
+  public CreateShadowPlayerCmd(int chatId, String shadowName, PlayerCharacter shadowOfCharacter, ECharacterClass shadowClass)
   {
     this.chatId = chatId;
     this.shadowName = shadowName;
@@ -28,7 +28,7 @@ public class CreateShadowPlayerCmd extends AbstractCmd
   {
     SpawnCharacterCmd cmd = new SpawnCharacterCmd(chatId, shadowName, shadowClass);
     CommandDelegate.execute(cmd);
-    GameCharacter spawned = cmd.getSpawned();
+    PlayerCharacter spawned = cmd.getSpawned();
 
     RetrieveItemsCmd equipShadowLeft = new RetrieveItemsCmd(spawned);
     CommandDelegate.execute(equipShadowLeft);

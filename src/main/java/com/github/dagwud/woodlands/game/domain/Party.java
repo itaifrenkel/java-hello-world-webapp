@@ -4,7 +4,6 @@ import com.github.dagwud.woodlands.game.Settings;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class Party
     members.add(joiner);
   }
 
-  public void removeMember(GameCharacter leaver) 
+  public void removeMember(GameCharacter leaver)
   {
     members.remove(leaver);
     leaver.setParty(null);
@@ -64,7 +63,20 @@ public class Party
     return active;
   }
 
-  public boolean isLedBy(GameCharacter activeCharacter)
+  public List<PlayerCharacter> getActivePlayerCharacters()
+  {
+    List<PlayerCharacter> active = new ArrayList<>();
+    for (GameCharacter activeMember : getActiveMembers())
+    {
+      if (activeMember instanceof PlayerCharacter)
+      {
+        active.add((PlayerCharacter)activeMember);
+      }
+    }
+    return active;
+  }
+
+  public boolean isLedBy(PlayerCharacter activeCharacter)
   {
     return getLeader() == activeCharacter;
   }

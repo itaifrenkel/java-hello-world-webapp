@@ -1,11 +1,9 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.characters.General;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +14,7 @@ public class AuraOfProtection extends BattleRoundSpell
 
   private Map<GameCharacter, Integer> buffs;
 
-  public AuraOfProtection(GameCharacter caster)
+  public AuraOfProtection(PlayerCharacter caster)
   {
     super("Aura of Protection", caster);
     buffs = new HashMap<>();
@@ -36,8 +34,12 @@ public class AuraOfProtection extends BattleRoundSpell
       target.getStats().setDefenceRating(target.getStats().getDefenceRating() + BUFF_AMOUNT);
       buffs.put(target, BUFF_AMOUNT);
 
-      SendMessageCmd cmd = new SendMessageCmd(target.getPlayedBy().getChatId(), getCaster().getName() + " buffed your defences by +" + BUFF_AMOUNT);
-      CommandDelegate.execute(cmd);
+      if (target instanceof PlayerCharacter)
+      {
+        SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter)target).getPlayedBy().getChatId(),
+                getCaster().getName() + " buffed your defences by +" + BUFF_AMOUNT);
+        CommandDelegate.execute(cmd);
+      }
     }
   }
 
@@ -52,8 +54,8 @@ public class AuraOfProtection extends BattleRoundSpell
   }
 
   @Override
-  GameCharacter getCaster()
+  PlayerCharacter getCaster()
   {
-    return (GameCharacter) super.getCaster();
+    return (PlayerCharacter) super.getCaster();
   }
 }

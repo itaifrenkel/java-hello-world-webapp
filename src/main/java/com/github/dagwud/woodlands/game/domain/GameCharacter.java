@@ -1,23 +1,20 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.game.domain.spells.SpellAbilities;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public abstract class GameCharacter extends Fighter
 {
-  private final Player playedBy;
-  private final ECharacterClass characterClass;
-  private String name;
-  private Stats stats;
-  private ELocation location;
-  private CarriedItems carrying = new CarriedItems();
-  private boolean setupComplete;
+  private final Stats stats;
+  private final CarriedItems carrying;
   private Party party;
+  private String name;
+  private ELocation location;
 
-  public GameCharacter(Player playedBy, ECharacterClass characterClass)
+  public GameCharacter()
   {
-    this.playedBy = playedBy;
-    this.characterClass = characterClass;
+    stats = new Stats();
+    stats.setState(EState.ALIVE);
+    carrying = new CarriedItems();
   }
 
   public ELocation getLocation()
@@ -25,11 +22,7 @@ public abstract class GameCharacter extends Fighter
     return location;
   }
 
-  public void setStats(Stats stats)
-  {
-    this.stats = stats;
-  }
-
+  @Override
   public String getName()
   {
     return name;
@@ -40,40 +33,15 @@ public abstract class GameCharacter extends Fighter
     this.name = name;
   }
 
-  public ECharacterClass getCharacterClass()
-  {
-    return characterClass;
-  }
-
-  public void setLocation(ELocation location)
-  {
-    this.location = location;
-  }
-
   @Override
   public Stats getStats()
   {
     return stats;
   }
 
-  public void setSetupComplete(boolean setupComplete)
+  public void setLocation(ELocation location)
   {
-    this.setupComplete = setupComplete;
-  }
-
-  public boolean isSetupComplete()
-  {
-    return setupComplete;
-  }
-
-  public int determineMaxAllowedItems()
-  {
-    return 7 + getStats().getLevel();
-  }
-
-  public CarriedItems getCarrying()
-  {
-    return carrying;
+    this.location = location;
   }
 
   public Party getParty()
@@ -86,13 +54,11 @@ public abstract class GameCharacter extends Fighter
     this.party = party;
   }
 
-  public Player getPlayedBy()
-  {
-    return playedBy;
-  }
+  public abstract boolean isActive();
 
-  public boolean isActive()
+  @Override
+  public CarriedItems getCarrying()
   {
-    return this == getPlayedBy().getActiveCharacter();
+    return carrying;
   }
 }

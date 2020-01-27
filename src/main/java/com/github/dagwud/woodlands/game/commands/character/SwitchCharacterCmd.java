@@ -4,15 +4,15 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 
 public class SwitchCharacterCmd extends AbstractCmd
 {
   private final Player player;
-  private final GameCharacter toActivate;
+  private final PlayerCharacter toActivate;
 
-  SwitchCharacterCmd(Player player, GameCharacter toActivate)
+  SwitchCharacterCmd(Player player, PlayerCharacter toActivate)
   {
     this.player = player;
     this.toActivate = toActivate;
@@ -21,7 +21,7 @@ public class SwitchCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    GameCharacter wasActive = player.getActiveCharacter();
+    PlayerCharacter wasActive = player.getActiveCharacter();
     if (wasActive != null)
     {
       if (wasActive == toActivate)

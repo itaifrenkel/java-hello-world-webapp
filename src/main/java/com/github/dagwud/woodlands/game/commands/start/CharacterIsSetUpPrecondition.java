@@ -3,14 +3,14 @@ package com.github.dagwud.woodlands.game.commands.start;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.CommandPrerequisite;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class CharacterIsSetUpPrecondition implements CommandPrerequisite
 {
   private final int chatId;
-  private final GameCharacter character;
+  private final PlayerCharacter character;
 
-  public CharacterIsSetUpPrecondition(int chatId, GameCharacter character)
+  public CharacterIsSetUpPrecondition(int chatId, PlayerCharacter character)
   {
     this.chatId = chatId;
     this.character = character;
