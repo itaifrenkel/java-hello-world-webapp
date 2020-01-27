@@ -49,6 +49,7 @@ public class SpellAbilities
 
   public void prepare(SingleCastSpell spell)
   {
+    preparedSpells.clear();
     preparedSpells.addLast(spell);
   }
 

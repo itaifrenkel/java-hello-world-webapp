@@ -7,6 +7,7 @@ public class DamageInflicted
 {
   private static final String MISSED_ICON = "\uD83D\uDE48";
   private static final String CRITICAL_HIT_ICON = "\uD83C\uDFAF";
+  private static final String SPELL_HIT_ICON = "✨";
 
   private final Weapon inflictedWith;
   private final int baseDamage;
@@ -69,6 +70,15 @@ public class DamageInflicted
             inflictedWith.getIcon() +
             baseDamage + (bonusDamage != 0 ? "+" + bonusDamage : "") +
             " → " + defender.getName()
-            + (hitStatus == EHitStatus.CRITICAL_HIT ? " (" + CRITICAL_HIT_ICON + ")" : "");
+            + hitIcon(hitStatus);
+  }
+
+  private String hitIcon(EHitStatus hitStatus)
+  {
+    if (hitStatus == EHitStatus.CRITICAL_HIT)
+    {
+      return " (" + CRITICAL_HIT_ICON + ")";
+    }
+    return "";
   }
 }

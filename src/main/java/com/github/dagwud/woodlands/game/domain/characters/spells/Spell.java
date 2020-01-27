@@ -18,7 +18,7 @@ public abstract class Spell
 
   public String buildSpellDescription()
   {
-    return caster.getName() + " ✨ " + spellName;
+    return caster.getName() + " ✨" + spellName;
   }
 
   Fighter getCaster()
