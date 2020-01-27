@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
+import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -27,11 +28,16 @@ public class DoShortRestCmd extends AbstractCmd
     RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, hitPointsRecovered);
     CommandDelegate.execute(cmd);
 
-    SendMessageCmd echo = new SendMessageCmd(chatId, "You rested and recovered ❤️" + hitPointsRecovered + ". " +
-            "Now at ❤️" + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints());
-    CommandDelegate.execute(echo);
+    RecoverManaCmd mana = new RecoverManaCmd(character, 1);
+    CommandDelegate.execute(mana)
 
     soberUp();
+
+    SendMessageCmd echo = new SendMessageCmd(chatId, "You rested and recovered ❤️" + hitPointsRecovered +
+            " and ✨" + manaRecovered + ". " +
+            "Now at ❤️" + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints() +
+            ", ✨" + character.getStats().getMana() + "/" + character.getStats().getMaxMana());
+    CommandDelegate.execute(echo);
   }
 
   private void soberUp()
