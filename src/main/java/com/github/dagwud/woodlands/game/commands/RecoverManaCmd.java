@@ -10,7 +10,7 @@ public class RecoverManaCmd extends AbstractCmd
   private final Fighter target;
   private final int manaRecovered;
 
-  RecoverManaCmd(Fighter target, int manaRecovered)
+  public RecoverManaCmd(Fighter target, int manaRecovered)
   {
     this.target = target;
     this.manaRecovered = manaRecovered;
@@ -19,6 +19,7 @@ public class RecoverManaCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    target.getStats().setMana(target.getStats().getMana() + manaRecovered);
+    int newMana = Math.min(target.getStats().getMana() + manaRecovered, target.getStats().getMaxMana());
+    target.getStats().setMana(newMana);
   }
 }
