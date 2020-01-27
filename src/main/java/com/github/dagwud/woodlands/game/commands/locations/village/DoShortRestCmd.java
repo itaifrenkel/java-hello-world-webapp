@@ -28,6 +28,7 @@ public class DoShortRestCmd extends AbstractCmd
     RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, hitPointsRecovered);
     CommandDelegate.execute(cmd);
 
+    int manaRecovered = 1;
     RecoverManaCmd mana = new RecoverManaCmd(character, manaRecovered);
     CommandDelegate.execute(mana);
 
