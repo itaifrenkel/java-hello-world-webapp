@@ -33,14 +33,16 @@ public class CastSpellPromptCmd extends AbstractCmd
   {
     switch (character.getCharacterClass())
     {
-      case DRUID:
-        return new FogOfConfusion(character);
-      case TRICKSTER:
-        return new SneakAttack(character);
-      case GENERAL:
-        return new ArmyOfPeasants(character);
       case BRAWLER:
         return new KnuckleDuster(character);
+      case DRUID:
+        return new FogOfConfusion(character);
+      case GENERAL:
+        return new ArmyOfPeasants(character);
+      case TRICKSTER:
+        return new SneakAttack(character);
+      case WIZARD:
+        return new FlameAttack(character);
       default:
         SendMessageCmd cmd = new SendMessageCmd(chatId, "No spells are available for " + character.getCharacterClass() + " (yet))");
         CommandDelegate.execute(cmd);
