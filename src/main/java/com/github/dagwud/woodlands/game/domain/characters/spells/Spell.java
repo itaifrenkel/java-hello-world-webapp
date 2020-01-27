@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public abstract class Spell
 {
@@ -25,5 +24,10 @@ public abstract class Spell
   Fighter getCaster()
   {
     return caster;
+  }
+
+  public String getSpellName()
+  {
+    return spellName;
   }
 }

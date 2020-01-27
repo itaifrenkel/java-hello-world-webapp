@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.WaitCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -32,16 +33,13 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    List<BattleRoundSpell> spellsActivity = doPassiveAbilities();
-    if (!spellsActivity.isEmpty())
-    {
-      WaitCmd wait = new WaitCmd(1000);
-      CommandDelegate.execute(wait);
-    }
+    List<BattleRoundSpell> passivesActivity = doPassiveAbilities();
+    List<SingleCastSpell> spellsActivity = doPreparedSpells();
     List<DamageInflicted> roundActivity = doFighting();
-    expirePassiveAbilities(spellsActivity);
+    expireSpells(spellsActivity);
+    expirePassiveAbilities(passivesActivity);
 
-    String summary = buildRoundSummary(spellsActivity, roundActivity);
+    String summary = buildRoundSummary(roundActivity, passivesActivity, spellsActivity);
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary);
     CommandDelegate.execute(status);
 
@@ -98,6 +96,29 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
+  private void expireSpells(List<SingleCastSpell> spellsActivity)
+  {
+    for (SingleCastSpell spell : spellsActivity)
+    {
+      spell.expire();
+    }
+  }
+
+  private List<SingleCastSpell> doPreparedSpells()
+  {
+    List<SingleCastSpell> spellsCast = new ArrayList<>(2);
+    for (GameCharacter caster : encounter.getParty().getActiveMembers())
+    {
+      if (caster.getSpellAbilities().hasPreparedSpell())
+      {
+        SingleCastSpell spell = caster.getSpellAbilities().popPrepared();
+        spell.cast();
+        spellsCast.add(spell);
+      }
+    }
+    return spellsCast;
+  }
+
   private void expirePassiveAbilities(List<BattleRoundSpell> spellsActivity)
   {
     for (Spell spell : spellsActivity)
@@ -119,6 +140,12 @@ public class EncounterRoundCmd extends AbstractCmd
     for (BattleRoundSpell spellToCast : passives)
     {
       spellToCast.cast();
+    }
+
+    if (!passives.isEmpty())
+    {
+      WaitCmd wait = new WaitCmd(1000);
+      CommandDelegate.execute(wait);
     }
 
     return passives;
@@ -205,15 +232,18 @@ public class EncounterRoundCmd extends AbstractCmd
     return damageInflicted;
   }
 
-  private String buildRoundSummary(List<? extends Spell> spells, List<DamageInflicted> damage)
+  private String buildRoundSummary(List<DamageInflicted> damage, List<? extends Spell>... spellGroups)
   {
     StringBuilder summary = new StringBuilder();
     summary.append("⚔️ Battle Round #").append(encounter.getBattleRound()).append(": ⚔️\n")
             .append("———————————");
 
-    for (Spell spell : spells)
+    for (List<? extends Spell> spells : spellGroups)
     {
-      summary.append("\n").append(spell.buildSpellDescription());
+      for (Spell spell : spells)
+      {
+        summary.append("\n").append(spell.buildSpellDescription());
+      }
     }
 
     for (DamageInflicted damageInflicted : damage)

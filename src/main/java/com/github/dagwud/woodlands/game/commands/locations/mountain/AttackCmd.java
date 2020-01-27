@@ -44,11 +44,10 @@ public class AttackCmd extends AbstractCmd
 
   private EHitStatus rollForHit(Fighter attacker, Weapon attackWith, Fighter defender)
   {
-    int drunkennessPenalty = determineDrunkennessModifier(attacker);
-
     DiceRollCmd naturalRoll = new DiceRollCmd(1, 20);
     CommandDelegate.execute(naturalRoll);
-    if (naturalRoll.getTotal() <= 1 + drunkennessPenalty)
+
+    if (naturalRoll.getTotal() + attacker.getStats().determineHitChanceBoost() <= 1)
     {
       return EHitStatus.MISS;
     }
@@ -61,7 +60,7 @@ public class AttackCmd extends AbstractCmd
     int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
 
     int defenderDefenceRating = defender.getStats().getDefenceRating();
-    if (naturalRoll.getTotal() + modifier.total() + weaponBoost - drunkennessPenalty >= defenderDefenceRating)
+    if (naturalRoll.getTotal() + modifier.total() + weaponBoost - attacker.getStats().determineHitChanceBoost() >= defenderDefenceRating)
     {
       return EHitStatus.HIT;
     }
@@ -87,16 +86,11 @@ public class AttackCmd extends AbstractCmd
     if (!weaponUsed.ranged)
     {
       // Drunken strength:
-      drunkStrengthDamage = determineDrunkennessModifier(attacker);
+      drunkStrengthDamage = attacker.getStats().determineDrunkenStrength();
     }
 
     damageInflicted = new DamageInflicted(attacker, weaponUsed, hitStatus,
             damageDone, defender, criticalHitDamage + bonusDamage + drunkStrengthDamage);
-  }
-
-  private int determineDrunkennessModifier(Fighter attacker)
-  {
-    return Math.min(attacker.getStats().getDrunkeness() / 2, 4);
   }
 
   DamageInflicted getDamageInflicted()

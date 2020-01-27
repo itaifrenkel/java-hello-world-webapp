@@ -7,6 +7,6 @@ public class MountainMenu extends GameMenu
   public MountainMenu()
   {
     setPrompt("This is the Mountain");
-    setOptions(ECommand.VILLAGE_SQUARE);
+    setOptions(ECommand.VILLAGE_SQUARE, ECommand.CAST_A_SPELL);
   }
 }

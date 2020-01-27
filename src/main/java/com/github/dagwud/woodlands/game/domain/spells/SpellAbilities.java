@@ -3,20 +3,22 @@ package com.github.dagwud.woodlands.game.domain.spells;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 public class SpellAbilities
 {
   private Collection<BattleRoundSpell> passives;
   private Collection<PartySpell> partySpells;
+  private Deque<SingleCastSpell> preparedSpells;
 
   public SpellAbilities()
   {
     this.passives = new ArrayList<>(1);
     this.partySpells = new ArrayList<>(1);
+    preparedSpells = new LinkedList<>();
   }
 
   public Collection<BattleRoundSpell> getPassives()
@@ -43,5 +45,20 @@ public class SpellAbilities
     {
       throw new WoodlandsRuntimeException("Unknown spell type: " + spell.getClass());
     }
+  }
+
+  public void prepare(SingleCastSpell spell)
+  {
+    preparedSpells.addLast(spell);
+  }
+
+  public boolean hasPreparedSpell()
+  {
+    return !preparedSpells.isEmpty();
+  }
+
+  public SingleCastSpell popPrepared()
+  {
+    return preparedSpells.pop();
   }
 }

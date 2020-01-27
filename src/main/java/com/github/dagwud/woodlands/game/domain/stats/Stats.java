@@ -21,6 +21,7 @@ public class Stats
   private int restPoints;
   private int restPointsMax;
   private int restDiceFace;
+  private int hitBoost;
 
   private int criticalStrikeChanceBonus;
 
@@ -224,5 +225,25 @@ public class Stats
   public int getConstitutionModifier()
   {
     return Math.floorDiv(getConstitution().total() - 10, 2);
+  }
+
+  public int getHitBoost()
+  {
+    return hitBoost;
+  }
+
+  public void setHitBoost(int hitBoost)
+  {
+    this.hitBoost = hitBoost;
+  }
+
+  public int determineHitChanceBoost()
+  {
+    return Math.min(getDrunkeness() / 2, 4) + hitBoost;
+  }
+
+  public int determineDrunkenStrength()
+  {
+    return Math.min(getDrunkeness() / 2, 4);
   }
 }
