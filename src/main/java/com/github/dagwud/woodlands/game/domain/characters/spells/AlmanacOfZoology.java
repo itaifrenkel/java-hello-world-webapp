@@ -1,19 +1,14 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class KnuckleDuster extends SingleCastSpell
+public class AlmanacOfZoology extends SingleCastSpell
 {
-  private static final double DAMAGE_MULTIPLIER = 2;
+  private static final double DAMAGE_MULTIPLIER = 1.4;
 
-  public KnuckleDuster(PlayerCharacter caster)
+  public AlmanacOfZoology(PlayerCharacter caster)
   {
-    super("Knuckle Duster", caster);
+    super("Almanac of Zoology", caster);
   }
 
   @Override

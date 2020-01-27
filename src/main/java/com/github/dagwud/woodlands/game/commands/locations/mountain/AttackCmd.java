@@ -89,11 +89,11 @@ public class AttackCmd extends AbstractCmd
       drunkStrengthDamage = attacker.getStats().determineDrunkenStrength();
     }
 
-    int damageMultiplier = attacker.getStats().getDamageMultiplier();
-    if (damageMultiplier != 1)
+    double damageMultiplier = attacker.getStats().getDamageMultiplier();
+    if (damageMultiplier != 1d)
     {
-      baseDamage = baseDamage * damageMultiplier;
-      bonusDamage = bonusDamage * damageMultiplier;
+      baseDamage = (int) Math.floor(damageMultiplier * baseDamage);
+      bonusDamage = (int) Math.floor(damageMultiplier * bonusDamage);
     }
 
     damageInflicted = new DamageInflicted(attacker, weaponUsed, hitStatus,

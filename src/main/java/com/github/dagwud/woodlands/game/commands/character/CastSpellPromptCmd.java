@@ -37,6 +37,8 @@ public class CastSpellPromptCmd extends AbstractCmd
         return new KnuckleDuster(character);
       case DRUID:
         return new FogOfConfusion(character);
+      case EXPLORER:
+        return new AlmanacOfZoology(character);
       case GENERAL:
         return new ArmyOfPeasants(character);
       case TRICKSTER:
