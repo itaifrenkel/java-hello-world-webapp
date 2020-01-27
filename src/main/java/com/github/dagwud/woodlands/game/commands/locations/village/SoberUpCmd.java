@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.locations.village;
 
+import com.github.dagwud.woodlands.game.domain.EStatus;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -20,7 +21,7 @@ public class SoberUpCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (!character.isActive())
+    if (!character.isActive() || character.getStats().getState() == EState.DEAD)
     {
       return;
     }
