@@ -6,6 +6,7 @@ public abstract class Spell
 {
   private final String spellName;
   private final Fighter caster;
+  private boolean isCast;
 
   Spell(String spellName, Fighter caster)
   {
@@ -14,6 +15,7 @@ public abstract class Spell
   }
 
   public abstract void cast();
+
   public abstract void expire();
 
   public String buildSpellDescription()
@@ -32,4 +34,14 @@ public abstract class Spell
   }
 
   public abstract int getManaCost();
+
+  public boolean isCast()
+  {
+    return isCast;
+  }
+
+  public void setCast(boolean cast)
+  {
+    isCast = cast;
+  }
 }

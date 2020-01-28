@@ -4,6 +4,8 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.battle.OrderFightersCmd;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
+import com.github.dagwud.woodlands.game.commands.character.ExpireSpellCmd;
+import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
@@ -103,10 +105,8 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private void expireSpells(List<SingleCastSpell> spellsActivity)
   {
-    for (SingleCastSpell spell : spellsActivity)
-    {
-      spell.expire();
-    }
+    ExpireSpellsCmd expireAll = new ExpireSpellsCmd(spellsActivity);
+    CommandDelegate.execute(expireAll);
   }
 
   private List<SingleCastSpell> doPreparedSpells(List<Fighter> fighters)
@@ -127,10 +127,8 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private void expirePassiveAbilities(List<BattleRoundSpell> spellsActivity)
   {
-    for (Spell spell : spellsActivity)
-    {
-      spell.expire();
-    }
+    ExpireSpellsCmd expireAll = new ExpireSpellsCmd(spellsActivity);
+    CommandDelegate.execute(expireAll);
   }
 
   private List<BattleRoundSpell> doPassiveAbilities(List<Fighter> fighters)

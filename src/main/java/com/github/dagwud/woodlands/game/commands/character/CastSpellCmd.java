@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 public class CastSpellCmd extends AbstractCmd
@@ -18,6 +19,11 @@ public class CastSpellCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (spell.isCast())
+    {
+      throw new WoodlandsRuntimeException(spell.getSpellName() + " has already been cast");
+    }
+
     int mana = spell.getCaster().getStats().getMana();
     if (mana < spell.getManaCost())
     {
@@ -31,5 +37,6 @@ public class CastSpellCmd extends AbstractCmd
     }
     spell.getCaster().getStats().setMana(mana);
     spell.cast();
+    spell.setCast(true);
   }
 }

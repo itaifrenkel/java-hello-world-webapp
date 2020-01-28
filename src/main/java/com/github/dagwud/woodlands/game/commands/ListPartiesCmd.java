@@ -27,7 +27,7 @@ public class ListPartiesCmd extends AbstractCmd
       b.append("> ").append(party.getName())
           .append(" (").append(party.size()).append(")")
           .append(" - ").append(party.getLeader() == null ? "NoLeader" : party.getLeader().getLocation()).append(")\n");
-      for (GameCharacter c : party.getActiveMembers()
+      for (GameCharacter c : party.getActiveMembers())
       {
         b.append(" ").append(c.getName());
       }
