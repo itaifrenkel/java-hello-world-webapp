@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations.mountain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
+import com.github.dagwud.woodlands.game.commands.battle.OrderFightersCmd;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.domain.*;
@@ -95,20 +96,9 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private List<Fighter> buildOrderOfFight(Collection<Fighter> fighters)
   {
-    List<FighterAgilityRoll> order = new ArrayList<>(fighters.size());
-    for (Fighter fighter : encounter.getAllFighters())
-    {
-      FighterAgilityRoll r = new FighterAgilityRoll(fighter);
-      order.add(r);
-    }
-    order.sort(Comparator.comparingInt(FighterAgilityRoll::getAgilityRoll).reversed());
-
-    List<Fighter> orderedFighters = new ArrayList<>(order.size());
-    for (FighterAgilityRoll o : order)
-    {
-      orderedFighters.add(o.getFighter());
-    }
-    return orderedFighters;
+    OrderFightersCmd cmd = new OrderFightersCmd(fighters);
+    CommandDelegate.execute(cmd);
+    return cmd.getOrderedFighters();
   }
 
   private void expireSpells(List<SingleCastSpell> spellsActivity)
