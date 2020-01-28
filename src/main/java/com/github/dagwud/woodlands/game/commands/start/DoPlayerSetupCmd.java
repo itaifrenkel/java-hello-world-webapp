@@ -66,7 +66,18 @@ public class DoPlayerSetupCmd extends SuspendableCmd
   {
     characterClass = capturedInput;
 
-    SpawnCharacterCmd cmd = new SpawnCharacterCmd(getPlayerState().getPlayer().getChatId(), characterName, ECharacterClass.of(characterClass));
+    ECharacterClass charClass;
+    try
+    {
+      charClass = ECharacterClass.of(characterClass);
+    }
+    catch (IllegalArgumentException e)
+    {
+      super.rejectCapturedInput();
+      return;
+    }
+
+    SpawnCharacterCmd cmd = new SpawnCharacterCmd(getPlayerState().getPlayer().getChatId(), characterName, charClass);
     CommandDelegate.execute(cmd);
 
     //todo for testing
