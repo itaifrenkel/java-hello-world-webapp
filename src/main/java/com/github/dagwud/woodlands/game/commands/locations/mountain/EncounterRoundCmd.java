@@ -3,19 +3,14 @@ package com.github.dagwud.woodlands.game.commands.locations.mountain;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.WaitCmd;
+import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class EncounterRoundCmd extends AbstractCmd
 {
@@ -34,9 +29,10 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    List<BattleRoundSpell> passivesActivity = doPassiveAbilities();
-    List<SingleCastSpell> spellsActivity = doPreparedSpells();
-    List<DamageInflicted> roundActivity = doFighting();
+    List<Fighter> order = buildOrderOfFight(encounter.getAllFighters());
+    List<BattleRoundSpell> passivesActivity = doPassiveAbilities(order);
+    List<SingleCastSpell> spellsActivity = doPreparedSpells(order);
+    List<DamageInflicted> roundActivity = doFighting(order);
     expireSpells(spellsActivity);
     expirePassiveAbilities(passivesActivity);
 
@@ -97,6 +93,24 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
+  private List<Fighter> buildOrderOfFight(Collection<Fighter> fighters)
+  {
+    List<FighterAgilityRoll> order = new ArrayList<>(fighters.size());
+    for (Fighter fighter : encounter.getAllFighters())
+    {
+      FighterAgilityRoll r = new FighterAgilityRoll(fighter);
+      order.add(r);
+    }
+    order.sort(Comparator.comparingInt(FighterAgilityRoll::getAgilityRoll).reversed());
+
+    List<Fighter> orderedFighters = new ArrayList<>(order.size());
+    for (FighterAgilityRoll o : order)
+    {
+      orderedFighters.add(o.getFighter());
+    }
+    return orderedFighters;
+  }
+
   private void expireSpells(List<SingleCastSpell> spellsActivity)
   {
     for (SingleCastSpell spell : spellsActivity)
@@ -105,10 +119,10 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
-  private List<SingleCastSpell> doPreparedSpells()
+  private List<SingleCastSpell> doPreparedSpells(List<Fighter> fighters)
   {
     List<SingleCastSpell> spellsCast = new ArrayList<>(2);
-    for (GameCharacter caster : encounter.getParty().getActiveMembers())
+    for (Fighter caster : fighters)
     {
       while (caster.getSpellAbilities().hasPreparedSpell())
       {
@@ -129,10 +143,10 @@ public class EncounterRoundCmd extends AbstractCmd
     }
   }
 
-  private List<BattleRoundSpell> doPassiveAbilities()
+  private List<BattleRoundSpell> doPassiveAbilities(List<Fighter> fighters)
   {
     List<BattleRoundSpell> passives = new ArrayList<>();
-    for (Fighter member : encounter.getAllFighters())
+    for (Fighter member : fighters)
     {
       passives.addAll(member.getSpellAbilities().getPassives());
     }
@@ -153,12 +167,12 @@ public class EncounterRoundCmd extends AbstractCmd
     return passives;
   }
 
-  private List<DamageInflicted> doFighting()
+  private List<DamageInflicted> doFighting(List<Fighter> fighters)
   {
     encounter.incrementBattleRound();
     List<DamageInflicted> roundActivity = new LinkedList<>();
 
-    for (GameCharacter partyMember : encounter.getParty().getActiveMembers())
+    for (Fighter partyMember : fighters)
     {
       doAttack(partyMember, roundActivity);
     }
@@ -278,4 +292,5 @@ public class EncounterRoundCmd extends AbstractCmd
     RunLaterCmd nextEncounter = new RunLaterCmd(delayBetweenRoundsMS, nextRoundCmd);
     CommandDelegate.execute(nextEncounter);
   }
+
 }
