@@ -13,7 +13,7 @@ public class Stats
   private int hitPoints;
   private int maxHitPoints;
   private int mana;
-  private int maxMana;
+  private Stat maxMana = new Stat();
   private Stat strength = new Stat();
   private Stat agility = new Stat();
   private Stat constitution = new Stat();
@@ -73,12 +73,12 @@ public class Stats
     this.mana = mana;
   }
 
-  public int getMaxMana()
+  public Stat getMaxMana()
   {
     return maxMana;
   }
 
-  public void setMaxMana(int maxMana)
+  public void setMaxMana(Stat maxMana)
   {
     this.maxMana = maxMana;
   }

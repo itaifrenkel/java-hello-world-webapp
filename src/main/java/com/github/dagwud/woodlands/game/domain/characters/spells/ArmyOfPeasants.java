@@ -2,11 +2,10 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Peasant;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.Collection;
 
@@ -42,8 +41,14 @@ public class ArmyOfPeasants extends SingleCastSpell
   }
 
   @Override
-  PlayerCharacter getCaster()
+  public PlayerCharacter getCaster()
   {
     return (PlayerCharacter) super.getCaster();
+  }
+
+  @Override
+  public int getManaCost()
+  {
+    return 0;
   }
 }

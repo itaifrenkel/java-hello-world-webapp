@@ -108,8 +108,14 @@ public class AirOfAuthority extends BattleRoundSpell
   }
 
   @Override
-  General getCaster()
+  public General getCaster()
   {
     return (General) super.getCaster();
+  }
+
+  @Override
+  public int getManaCost()
+  {
+    return 0;
   }
 }

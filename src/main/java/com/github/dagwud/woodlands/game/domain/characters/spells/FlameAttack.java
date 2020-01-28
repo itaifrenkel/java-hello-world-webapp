@@ -52,8 +52,14 @@ public class FlameAttack extends SingleCastSpell
   }
 
   @Override
-  PlayerCharacter getCaster()
+  public PlayerCharacter getCaster()
   {
     return (PlayerCharacter) super.getCaster();
+  }
+
+  @Override
+  public int getManaCost()
+  {
+    return 0;
   }
 }

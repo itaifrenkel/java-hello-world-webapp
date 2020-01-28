@@ -1,11 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class KnuckleDuster extends SingleCastSpell
 {
@@ -26,5 +21,11 @@ public class KnuckleDuster extends SingleCastSpell
   public void expire()
   {
     getCaster().getStats().setDamageMultiplier(Math.floor(getCaster().getStats().getDamageMultiplier() / DAMAGE_MULTIPLIER));
+  }
+
+  @Override
+  public int getManaCost()
+  {
+    return 0;
   }
 }

@@ -25,11 +25,6 @@ public class RecoverHitPointsCmd extends AbstractCmd
     if (target.getStats().getHitPoints() > 0)
     {
       target.getStats().setState(EState.ALIVE);
-
-      for (PartySpell partySpell : target.getSpellAbilities().getPartySpells())
-      {
-        CommandDelegate.execute(new CastSpellCmd(partySpell));
-      }
     }
   }
 }

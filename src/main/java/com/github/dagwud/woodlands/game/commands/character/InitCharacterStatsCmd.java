@@ -28,7 +28,7 @@ public class InitCharacterStatsCmd extends AbstractCmd
     stats.setMaxHitPoints(classStats.getInitialHitPoints());
 
     stats.setMana(2);
-    stats.setMaxMana(3);
+    stats.getMaxMana().setBase(3);
 
     stats.setStrength(classStats.getInitialStrength(), classStats.getStrengthBoost());
     stats.setAgility(classStats.getInitialAgility(), classStats.getAgilityBoost());

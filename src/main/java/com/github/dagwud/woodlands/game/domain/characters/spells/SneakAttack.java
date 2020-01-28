@@ -52,8 +52,14 @@ public class SneakAttack extends SingleCastSpell
   }
 
   @Override
-  PlayerCharacter getCaster()
+  public PlayerCharacter getCaster()
   {
     return (PlayerCharacter) super.getCaster();
+  }
+
+  @Override
+  public int getManaCost()
+  {
+    return 0;
   }
 }

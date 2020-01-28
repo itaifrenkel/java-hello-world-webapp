@@ -39,4 +39,10 @@ public class BeastMode extends BattleRoundSpell
   {
     getCaster().getStats().setCriticalStrikeChanceBonus(getCaster().getStats().getCriticalStrikeChanceBonus() - boost);
   }
+
+  @Override
+  public int getManaCost()
+  {
+    return 0;
+  }
 }

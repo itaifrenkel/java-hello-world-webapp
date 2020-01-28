@@ -21,7 +21,7 @@ public abstract class Spell
     return caster.getName() + " ✨" + spellName;
   }
 
-  Fighter getCaster()
+  public Fighter getCaster()
   {
     return caster;
   }
@@ -30,4 +30,6 @@ public abstract class Spell
   {
     return spellName;
   }
+
+  public abstract int getManaCost();
 }

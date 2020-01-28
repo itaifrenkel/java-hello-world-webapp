@@ -1,9 +1,7 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 
 public class RecoverManaCmd extends AbstractCmd
 {
@@ -19,7 +17,7 @@ public class RecoverManaCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    int newMana = Math.min(target.getStats().getMana() + manaRecovered, target.getStats().getMaxMana());
+    int newMana = Math.min(target.getStats().getMana() + manaRecovered, target.getStats().getMaxMana().total());
     target.getStats().setMana(newMana);
   }
 }

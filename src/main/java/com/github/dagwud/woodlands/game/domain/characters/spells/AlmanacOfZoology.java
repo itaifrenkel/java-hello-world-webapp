@@ -22,4 +22,10 @@ public class AlmanacOfZoology extends SingleCastSpell
   {
     getCaster().getStats().setDamageMultiplier(Math.floor(getCaster().getStats().getDamageMultiplier() / DAMAGE_MULTIPLIER));
   }
+
+  @Override
+  public int getManaCost()
+  {
+    return 0;
+  }
 }

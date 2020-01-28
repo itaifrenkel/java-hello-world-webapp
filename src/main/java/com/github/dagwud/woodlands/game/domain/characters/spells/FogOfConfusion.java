@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class FogOfConfusion extends SingleCastSpell
 {
-  private static final int HIT_CHANCE_PENALTY = 10002;
+  private static final int HIT_CHANCE_PENALTY = 10000;
   private Creature target;
 
   public FogOfConfusion(PlayerCharacter caster)
@@ -27,8 +27,14 @@ public class FogOfConfusion extends SingleCastSpell
   }
 
   @Override
-  PlayerCharacter getCaster()
+  public PlayerCharacter getCaster()
   {
     return (PlayerCharacter) super.getCaster();
+  }
+
+  @Override
+  public int getManaCost()
+  {
+    return 0;
   }
 }

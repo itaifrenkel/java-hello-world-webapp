@@ -23,8 +23,7 @@ public class ArcaneInspiration extends PartySpell
   {
     for (PlayerCharacter target : getCaster().getParty().getActivePlayerCharacters())
     {
-      int initial = getCaster().getStats().getMaxMana();
-      target.getStats().setMaxMana(initial + MANA_BOOST);
+      target.getStats().getMaxMana().addBonus(MANA_BOOST);
       boosted.put(target, MANA_BOOST);
 
       if (target != getCaster())
@@ -41,10 +40,10 @@ public class ArcaneInspiration extends PartySpell
   {
     for (PlayerCharacter character : boosted.keySet())
     {
-      character.getStats().setMaxMana(character.getStats().getMaxMana() - MANA_BOOST);
-      if (character.getStats().getMana() > character.getStats().getMaxMana())
+      character.getStats().getMaxMana().removeBonus(MANA_BOOST);
+      if (character.getStats().getMana() > character.getStats().getMaxMana().getBase())
       {
-        character.getStats().setMana(character.getStats().getMaxMana());
+        character.getStats().setMana(character.getStats().getMaxMana().getBase());
       }
 
       SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(),

@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 /**
  * Spell that gives benefits to whichever party the caster is part of
  */
-public abstract class PartySpell extends Spell
+public abstract class PartySpell extends PassiveSpell
 {
   PartySpell(String spellName, PlayerCharacter caster)
   {
@@ -13,7 +13,7 @@ public abstract class PartySpell extends Spell
   }
 
   @Override
-  PlayerCharacter getCaster()
+  public PlayerCharacter getCaster()
   {
     return (PlayerCharacter) super.getCaster();
   }
