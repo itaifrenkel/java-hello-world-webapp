@@ -160,11 +160,10 @@ public class EncounterRoundCmd extends AbstractCmd
     encounter.incrementBattleRound();
     List<DamageInflicted> roundActivity = new LinkedList<>();
 
-    for (Fighter partyMember : fighters)
+    for (Fighter fighter : fighters)
     {
-      doAttack(partyMember, roundActivity);
+      doAttack(fighter, roundActivity);
     }
-    doAttack(encounter.getEnemy(), roundActivity);
     return roundActivity;
   }
 
