@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
@@ -13,6 +14,7 @@ public class CastSpellCmd extends AbstractCmd
 
   public CastSpellCmd(Spell spell)
   {
+    super(new AbleToActPrerequisite(spell.getCaster()));
     this.spell = spell;
   }
 

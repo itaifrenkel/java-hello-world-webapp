@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.characters.spells.*;
@@ -14,6 +15,7 @@ public class CastSpellPromptCmd extends AbstractCmd
 
   public CastSpellPromptCmd(int chatId, PlayerCharacter character)
   {
+    super(new AbleToActPrerequisite(character));
     this.chatId = chatId;
     this.character = character;
   }
