@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.web;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.commands.ShutdownWarningCmd;
+import com.github.dagwud.woodlands.game.ShutdownHookThread;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.instructions.CommandFactory;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
@@ -21,9 +21,17 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "TelegramServlet", urlPatterns = "/telegram")
 public class TelegramServlet extends HttpServlet
 {
+  private static boolean shutdownHookRegisterd = false;
+
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
   {
+    if (!shutdownHookRegisterd)
+    {
+      Runtime.getRuntime().addShutdownHook(new ShutdownHookThread());
+      shutdownHookRegisterd = true;
+    }
+
     Update update = null;
     try
     {
@@ -115,10 +123,4 @@ public class TelegramServlet extends HttpServlet
     return callback.message.chat.id;
   }
 
-  @Override
-  public void destroy()
-  {
-    ShutdownWarningCmd cmd = new ShutdownWarningCmd();
-    CommandDelegate.execute(cmd);
-  }
 }
