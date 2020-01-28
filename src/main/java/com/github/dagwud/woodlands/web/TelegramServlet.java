@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.web;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.commands.ShutdownWarningCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.instructions.CommandFactory;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
@@ -31,11 +32,10 @@ public class TelegramServlet extends HttpServlet
     }
     catch (Exception e)
     {
-      Throwable t = e;
-      t.printStackTrace();
+      e.printStackTrace();
       if (update != null)
       {
-        sendStackTraceIfPossible(update, t);
+        sendStackTraceIfPossible(update, e);
       }
     }
   }
@@ -115,4 +115,10 @@ public class TelegramServlet extends HttpServlet
     return callback.message.chat.id;
   }
 
+  @Override
+  public void destroy()
+  {
+    ShutdownWarningCmd cmd = new ShutdownWarningCmd();
+    CommandDelegate.execute(cmd);
+  }
 }

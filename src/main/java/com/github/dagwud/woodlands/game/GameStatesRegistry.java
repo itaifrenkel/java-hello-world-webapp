@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +26,11 @@ public class GameStatesRegistry
       registry.gameStatesByCharacter.put(chatId, playerStateForChat);
     }
     return registry.gameStatesByCharacter.get(chatId);
+  }
+
+  public static Collection<PlayerState> allPlayerStates()
+  {
+    return Collections.unmodifiableCollection(instance().gameStatesByCharacter.values());
   }
 
   public static void reset()
