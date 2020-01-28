@@ -30,7 +30,7 @@ public class PartyRegistry
     return registry.parties.get(partyName);
   }
 
-  private static PartyRegistry instance()
+  public static PartyRegistry instance()
   {
     if (null == instance)
     {
@@ -51,5 +51,10 @@ public class PartyRegistry
   public static Collection<Party> listNames()
   {
     return Collections.unmodifiableCollection(instance().parties.values());
+  }
+
+  public static void reload(PartyRegistry partyRegistry)
+  {
+    instance = partyRegistry;
   }
 }

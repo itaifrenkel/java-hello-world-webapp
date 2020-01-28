@@ -1,5 +1,9 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.commands.PersistWorldCmd;
+import com.github.dagwud.woodlands.game.commands.RetrieveWorldCmd;
+
+import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -38,7 +42,7 @@ public class GameStatesRegistry
     instance = null;
   }
 
-  private static GameStatesRegistry instance()
+  public static GameStatesRegistry instance()
   {
     if (null == instance)
     {
@@ -53,6 +57,15 @@ public class GameStatesRegistry
     {
       return;
     }
+    if (new File(PersistWorldCmd.GAME_STATE_FILE).exists())
+    {
+      CommandDelegate.execute(new RetrieveWorldCmd());
+    }
     instance = new GameStatesRegistry();
+  }
+
+  public static void reload(GameStatesRegistry gameState)
+  {
+    instance = gameState;
   }
 }
