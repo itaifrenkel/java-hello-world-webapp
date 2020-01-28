@@ -47,9 +47,6 @@ public class ShutdownWarningCmd extends AbstractCmd
       SendMessageCmd msg = new SendMessageCmd(character.getPlayedBy().getChatId(), "You can feel changes coming in the breeze. Best you head back to the Village to take shelter");
       CommandDelegate.execute(msg);
     }
-
-    PersistWorldCmd cmd = new PersistWorldCmd();
-    CommandDelegate.execute(cmd);
   }
 
   private boolean shouldRetreat(PlayerCharacter character)

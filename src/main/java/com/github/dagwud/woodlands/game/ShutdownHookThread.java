@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.commands.PersistWorldCmd;
 import com.github.dagwud.woodlands.game.commands.ShutdownWarningCmd;
 
 public class ShutdownHookThread extends Thread
@@ -9,7 +10,12 @@ public class ShutdownHookThread extends Thread
   {
     try
     {
+      System.out.println("Shutdown hook invoked; retreating characters to safe space...");
       CommandDelegate.execute(new ShutdownWarningCmd());
+      System.out.println("Pesisting world...");
+      PersistWorldCmd cmd = new PersistWorldCmd();
+      CommandDelegate.execute(cmd);
+      System.out.println("Ready for safe shutdown.");
     }
     catch (Exception e)
     {
