@@ -75,7 +75,7 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
   {
     Encounter encounter = createEncounter(playerState.getActiveCharacter().getParty());
 
-    String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + ")";
+    String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + "):\n" + encounter.getEnemy().summary();
     SendPartyMessageCmd msg = new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), message);
     CommandDelegate.execute(msg);
     return encounter;
