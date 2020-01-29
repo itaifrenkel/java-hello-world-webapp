@@ -30,10 +30,16 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
 
     GameStatesRegistry gameState = read(PersistWorldCmd.GAME_STATE_FILE);
-    GameStatesRegistry.reload(gameState);
+    if (null != gameState)
+    {
+      GameStatesRegistry.reload(gameState);
+    }
 
     PartyRegistry partyRegistry = read(PersistWorldCmd.PARTY_REGISTRY_FILE);
-    PartyRegistry.reload(partyRegistry);
+    if (null != partyRegistry)
+    {
+      PartyRegistry.reload(partyRegistry);
+    }
 
     System.out.println("Successfully restored world!");
 
@@ -61,9 +67,13 @@ public class RetrieveWorldCmd extends AbstractCmd
     return objectNames;
   }
 
-  private <T> T read(String file) throws IOException
+  private <T> T read(String fileName) throws IOException
   {
-    download(file);
+    File file = download(fileName);
+    if (file == null)
+    {
+      return null;
+    }
     try (FileInputStream in = new FileInputStream(file))
     {
       try (ObjectInputStream is = new ObjectInputStream(in))
@@ -74,14 +84,15 @@ public class RetrieveWorldCmd extends AbstractCmd
         }
         catch (ClassNotFoundException e)
         {
-          throw new IOException("Error restoring " + file, e);
+          throw new IOException("Error restoring " + fileName, e);
         }
       }
     }
   }
 
-  private void download(String fileName) throws IOException
+  private File download(String fileName) throws IOException
   {
+    File file = new File(fileName);
     System.out.format("Downloading %s from S3 bucket %s...\n", fileName, Settings.S3_BUCKET_NAME);
     final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
     try
@@ -89,7 +100,7 @@ public class RetrieveWorldCmd extends AbstractCmd
       S3Object o = s3.getObject(Settings.S3_BUCKET_NAME, fileName);
       try (S3ObjectInputStream s3is = o.getObjectContent())
       {
-        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
+        try (FileOutputStream fos = new FileOutputStream(file))
         {
           byte[] read_buf = new byte[1024];
           int read_len;
@@ -100,11 +111,13 @@ public class RetrieveWorldCmd extends AbstractCmd
         }
       }
       retrieved = true;
+      return file;
     }
     catch (AmazonServiceException e)
     {
       System.err.println(e.getErrorMessage());
     }
+    return null;
   }
 
   public boolean retrieved()
