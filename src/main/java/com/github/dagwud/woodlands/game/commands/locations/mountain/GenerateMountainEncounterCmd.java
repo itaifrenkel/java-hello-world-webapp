@@ -12,6 +12,8 @@ import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.gson.game.Weapon;
+
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
