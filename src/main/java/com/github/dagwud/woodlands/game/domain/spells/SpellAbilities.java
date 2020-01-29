@@ -6,9 +6,10 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class SpellAbilities
+public class SpellAbilities implements Serializable
 {
   private Collection<BattleRoundSpell> passives;
   private Collection<PartySpell> partySpells;

@@ -1,15 +1,14 @@
 package com.github.dagwud.woodlands.game;
 
-import com.github.dagwud.woodlands.game.commands.PersistWorldCmd;
 import com.github.dagwud.woodlands.game.commands.RetrieveWorldCmd;
 
-import java.io.File;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameStatesRegistry
+public class GameStatesRegistry implements Serializable
 {
   private static GameStatesRegistry instance;
   private final Map<Integer, PlayerState> gameStatesByCharacter = new HashMap<>();

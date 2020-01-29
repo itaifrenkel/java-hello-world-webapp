@@ -5,7 +5,9 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 
-public class PlayerState
+import java.io.Serializable;
+
+public class PlayerState implements Serializable
 {
   private Player player;
   private SuspendableCmd waitingForInputCmd;

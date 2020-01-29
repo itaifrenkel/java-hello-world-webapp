@@ -48,7 +48,8 @@ public class RetrieveWorldCmd extends AbstractCmd
   {
     List<String> objectNames = new ArrayList<>(2);
 
-    final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
+    System.out.println("Checking for persisted world...");
+    final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     ListObjectsV2Result result = s3.listObjectsV2(Settings.S3_BUCKET_NAME);
     List<S3ObjectSummary> objects = result.getObjectSummaries();
     System.out.format("Objects in S3 bucket %s:\n", Settings.S3_BUCKET_NAME);

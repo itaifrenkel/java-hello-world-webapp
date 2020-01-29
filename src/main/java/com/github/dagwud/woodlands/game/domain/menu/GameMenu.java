@@ -2,7 +2,9 @@ package com.github.dagwud.woodlands.game.domain.menu;
 
 import com.github.dagwud.woodlands.game.commands.ECommand;
 
-public class GameMenu
+import java.io.Serializable;
+
+public class GameMenu implements Serializable
 {
   private String prompt;
   private ECommand[] options;

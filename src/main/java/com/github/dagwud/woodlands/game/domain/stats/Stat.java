@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.stats;
 
-public class Stat
+import java.io.Serializable;
+
+public class Stat implements Serializable
 {
   private int base;
   private int bonus;

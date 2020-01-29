@@ -2,12 +2,13 @@ package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.domain.Party;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PartyRegistry
+public class PartyRegistry implements Serializable
 {
   private static PartyRegistry instance;
   private final Map<String, Party> parties = new HashMap<>();

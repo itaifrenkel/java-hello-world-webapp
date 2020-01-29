@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
+import com.amazonaws.regions.Regions;
+
 import java.math.BigDecimal;
 
 public class Settings
@@ -10,4 +12,5 @@ public class Settings
   public static final long SOBER_UP_DELAY_MS = 60_000;
   public static final int ADMIN_CHAT = 750694421;
   public static final String S3_BUCKET_NAME = "woodlands-state";
+  public static final Regions S3_REGION = Regions.EU_WEST_2;
 }

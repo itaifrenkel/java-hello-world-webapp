@@ -2,10 +2,11 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarriedItems
+public class CarriedItems implements Serializable
 {
   private Weapon carriedLeft;
   private Weapon carriedRight;

@@ -2,10 +2,11 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.gson.game.Creature;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Encounter
+public class Encounter implements Serializable
 {
   private Party party;
   private Creature enemy;

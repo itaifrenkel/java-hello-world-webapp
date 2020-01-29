@@ -4,7 +4,9 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.google.gson.annotations.SerializedName;
 
-public class Weapon
+import java.io.Serializable;
+
+public class Weapon implements Serializable
 {
   private static final String MELEE_ICON = "\u2694"; // crossed swords
   private static final String RANGED_ICON = "\ud83c\udff9"; // bow and arrow

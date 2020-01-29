@@ -3,10 +3,11 @@ package com.github.dagwud.woodlands.game.domain.stats;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Stats
+public class Stats implements Serializable
 {
   private int level;
   private int experience;

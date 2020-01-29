@@ -2,10 +2,11 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.PlayerState;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player
+public class Player implements Serializable
 {
   private final int chatId;
   private final PlayerState playerState;

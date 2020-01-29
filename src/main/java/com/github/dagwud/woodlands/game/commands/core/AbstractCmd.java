@@ -1,10 +1,11 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public abstract class AbstractCmd
+public abstract class AbstractCmd implements Serializable
 {
   private Collection<CommandPrerequisite> prerequisites;
 

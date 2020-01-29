@@ -9,6 +9,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 
 import java.io.*;
+import java.util.Set;
 
 public class PersistObjectCmd extends AbstractCmd
 {
@@ -27,7 +28,7 @@ public class PersistObjectCmd extends AbstractCmd
     System.out.println("Persisting object " + name + "...");
     File tmp = writeObject(object);
     System.out.format("Uploading %s to S3 bucket %s...\n", tmp, Settings.S3_BUCKET_NAME);
-    final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
+    final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     try
     {
       s3.putObject(Settings.S3_BUCKET_NAME, name, tmp);
@@ -46,7 +47,7 @@ public class PersistObjectCmd extends AbstractCmd
 
   private File writeObject(Object object) throws IOException
   {
-    File file = File.createTempFile("s3", "ser");
+    File file = File.createTempFile("s3_upload", "ser");
     try (FileOutputStream fos = new FileOutputStream(file))
     {
       try (ObjectOutputStream oos = new ObjectOutputStream(fos))

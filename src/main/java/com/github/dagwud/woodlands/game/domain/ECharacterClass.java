@@ -2,10 +2,11 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.stats.*;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
-public enum ECharacterClass
+public enum ECharacterClass implements Serializable
 {
   TRICKSTER("Trickster", new TricksterInitialStats()),
   EXPLORER("Explorer", new ExplorerInitialStats()),

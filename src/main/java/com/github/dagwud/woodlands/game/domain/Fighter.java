@@ -2,12 +2,14 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.spells.SpellAbilities;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Fighter
+public abstract class Fighter implements Serializable
 {
   private SpellAbilities spellAbilities;
 

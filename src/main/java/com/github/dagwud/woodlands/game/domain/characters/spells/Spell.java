@@ -2,7 +2,9 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.domain.Fighter;
 
-public abstract class Spell
+import java.io.Serializable;
+
+public abstract class Spell implements Serializable
 {
   private final String spellName;
   private final Fighter caster;

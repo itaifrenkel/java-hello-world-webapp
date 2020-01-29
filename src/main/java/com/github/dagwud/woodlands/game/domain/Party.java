@@ -2,12 +2,13 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.Settings;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Party
+public class Party implements Serializable
 {
   private List<GameCharacter> members = new ArrayList<>(4);
   private String name;
