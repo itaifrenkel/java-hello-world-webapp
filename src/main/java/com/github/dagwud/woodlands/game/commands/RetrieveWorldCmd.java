@@ -94,7 +94,7 @@ public class RetrieveWorldCmd extends AbstractCmd
   {
     File file = new File(fileName);
     System.out.format("Downloading %s from S3 bucket %s...\n", fileName, Settings.S3_BUCKET_NAME);
-    final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
+    final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     try
     {
       S3Object o = s3.getObject(Settings.S3_BUCKET_NAME, fileName);
