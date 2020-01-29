@@ -2,7 +2,9 @@ package com.github.dagwud.woodlands.gson.game;
 
 import com.github.dagwud.woodlands.game.commands.invocation.Variables;
 
-public class CharacterClass
+import java.io.Serializable;
+
+public class CharacterClass implements Serializable
 {
   public String name;
 

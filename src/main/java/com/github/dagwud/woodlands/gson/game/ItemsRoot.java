@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.gson.game;
 
-public class ItemsRoot
+import java.io.Serializable;
+
+public class ItemsRoot implements Serializable
 {
   public Weapon[] weapons;
 }

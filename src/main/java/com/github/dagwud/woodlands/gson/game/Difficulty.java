@@ -2,7 +2,9 @@ package com.github.dagwud.woodlands.gson.game;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Difficulty
+import java.io.Serializable;
+
+public class Difficulty implements Serializable
 {
   public double difficulty;
 

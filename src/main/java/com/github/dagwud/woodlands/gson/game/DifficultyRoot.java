@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.gson.game;
 
-public class DifficultyRoot
+import java.io.Serializable;
+
+public class DifficultyRoot implements Serializable
 {
   public Difficulty[] difficulties;
 }

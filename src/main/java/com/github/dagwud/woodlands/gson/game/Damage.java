@@ -2,9 +2,10 @@ package com.github.dagwud.woodlands.gson.game;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Damage
+public class Damage implements Serializable
 {
   @SerializedName("dice_count")
   public int diceCount;

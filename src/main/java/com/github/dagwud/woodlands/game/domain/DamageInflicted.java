@@ -3,7 +3,9 @@ package com.github.dagwud.woodlands.game.domain;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EHitStatus;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
-public class DamageInflicted
+import java.io.Serializable;
+
+public class DamageInflicted implements Serializable
 {
   private static final String MISSED_ICON = "\uD83D\uDE48";
   private static final String CRITICAL_HIT_ICON = "\uD83C\uDFAF";

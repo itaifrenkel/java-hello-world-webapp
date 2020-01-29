@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.gson.game;
 
-public class CreaturesRoot
+import java.io.Serializable;
+
+public class CreaturesRoot implements Serializable
 {
   public Creature[] creatures;
 }
