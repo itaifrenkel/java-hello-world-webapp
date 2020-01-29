@@ -28,7 +28,7 @@ public class AbleToActPrerequisite implements CommandPrerequisite
         return false;
       }
     }
-    if (!fighter.isCounscious())
+    if (!fighter.isConscious())
     {
       if (fighter instanceof PlayerCharacter)
       {

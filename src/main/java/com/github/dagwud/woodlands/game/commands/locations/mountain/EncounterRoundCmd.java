@@ -62,7 +62,7 @@ public class EncounterRoundCmd extends AbstractCmd
       return;
     }
 
-    if (encounter.getEnemy().isCounscious() || !anyPlayerCharactersStillAlive(encounter))
+    if (encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
     {
       EndEncounterCmd end = new EndEncounterCmd(encounter);
       CommandDelegate.execute(end);
@@ -79,7 +79,7 @@ public class EncounterRoundCmd extends AbstractCmd
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
         CommandDelegate.execute(cmd);
       }
-      else if (!encounter.getEnemy().isCounscious())
+      else if (!encounter.getEnemy().isConscious())
       {
         DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
         CommandDelegate.execute(win);
@@ -178,7 +178,7 @@ public class EncounterRoundCmd extends AbstractCmd
   {
     for (PlayerCharacter member : encounter.getParty().getActivePlayerCharacters())
     {
-      if (member.isCounscious())
+      if (member.isConscious())
       {
         return true;
       }
@@ -189,12 +189,12 @@ public class EncounterRoundCmd extends AbstractCmd
   private void doAttack(Fighter attacker, List<DamageInflicted> roundActivity)
   {
     Fighter defender = determineDefender(attacker);
-    if (attacker.isCounscious() && defender.isCounscious())
+    if (attacker.isConscious() && defender.isConscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
       roundActivity.add(damage);
     }
-    if (attacker.isCounscious() && defender.isCounscious())
+    if (attacker.isConscious() && defender.isConscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);
       roundActivity.add(damage);
@@ -210,7 +210,7 @@ public class EncounterRoundCmd extends AbstractCmd
     List<GameCharacter> members = encounter.getParty().getActiveMembers();
     for (GameCharacter member : members)
     {
-      if (member.isCounscious())
+      if (member.isConscious())
       {
         return member;
       }

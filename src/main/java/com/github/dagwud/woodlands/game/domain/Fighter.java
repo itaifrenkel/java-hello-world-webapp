@@ -62,7 +62,7 @@ public abstract class Fighter
     return spellAbilities;
   }
 
-  public boolean isCounscious()
+  public boolean isConscious()
   {
     return getStats().getState() == EState.ALIVE;
   }
