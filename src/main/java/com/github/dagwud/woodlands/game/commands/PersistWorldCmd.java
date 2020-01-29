@@ -15,7 +15,7 @@ public class PersistWorldCmd extends AbstractCmd
   static final String PARTY_REGISTRY_FILE = "PartyRegistry.ser";
 
   @Override
-  public void execute() throws Exception
+  public void execute()
   {
     GameStatesRegistry gameState = GameStatesRegistry.instance();
     persist(gameState, GAME_STATE_FILE);
@@ -25,7 +25,7 @@ public class PersistWorldCmd extends AbstractCmd
     System.out.println("Successfully persisted world!");
   }
 
-  private void persist(Object object, String file) throws IOException
+  private void persist(Object object, String fileName)
   {
     try (FileOutputStream out = new FileOutputStream(file))
     {
