@@ -1,13 +1,9 @@
 package com.github.dagwud.woodlands.game.commands;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 public class PersistWorldCmd extends AbstractCmd
 {
@@ -27,12 +23,7 @@ public class PersistWorldCmd extends AbstractCmd
 
   private void persist(Object object, String fileName)
   {
-    try (FileOutputStream out = new FileOutputStream(file))
-    {
-      try (ObjectOutputStream os = new ObjectOutputStream(out))
-      {
-        os.writeObject(object);
-      }
-    }
+    PersistObjectCmd persist = new PersistObjectCmd(fileName, object);
+    CommandDelegate.execute(persist);
   }
 }
