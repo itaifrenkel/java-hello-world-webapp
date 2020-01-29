@@ -62,7 +62,7 @@ public class EncounterRoundCmd extends AbstractCmd
       return;
     }
 
-    if (encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
+    if (!encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
     {
       EndEncounterCmd end = new EndEncounterCmd(encounter);
       CommandDelegate.execute(end);
