@@ -84,10 +84,12 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
     {
       if (carriedLeft != null)
       {
+        message += ", ";
         message += carriedLeft.summary(encounter.getEnemy());
       }
       if (carriedRight != null)
       {
+        message += ", ";
         message += carriedRight.summary(encounter.getEnemy());
       }
     }
