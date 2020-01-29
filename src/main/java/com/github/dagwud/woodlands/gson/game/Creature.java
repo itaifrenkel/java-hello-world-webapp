@@ -2,11 +2,15 @@ package com.github.dagwud.woodlands.gson.game;
 
 import com.github.dagwud.woodlands.game.domain.CarriedItems;
 import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 import com.github.dagwud.woodlands.game.items.UnknownWeaponException;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.internal.$Gson$Preconditions;
+
+import java.util.*;
 
 public class Creature extends Fighter
 {
@@ -19,6 +23,9 @@ public class Creature extends Fighter
 
   @SerializedName("weapon-right")
   public String weaponRight;
+
+  @SerializedName("fight-mode")
+  public String fightMode = "RANDOM";
 
   private Stats stats;
   private CarriedItems carriedItems;
@@ -81,4 +88,30 @@ public class Creature extends Fighter
   {
     this.stats = stats;
   }
+
+  @Override
+  public Fighter chooseFighterToAttack(Collection<Fighter> members)
+  {
+    List<Fighter> targets = new ArrayList<>(members);
+    targets.removeIf(f -> !(f instanceof GameCharacter));
+    targets.removeIf(f -> !f.isConscious());
+
+    switch (fightMode)
+    {
+      case "RANDOM":
+        Collections.shuffle(targets);
+        return targets.get(0);
+      case "STRONGEST":
+        targets.sort(Comparator.comparingInt(o1 -> o1.getStats().getStrength().total()));
+        return targets.get(targets.size() - 1);
+      case "WEAKEST":
+        targets.sort(Comparator.comparingInt(o -> o.getStats().getStrength().total()));
+        return targets.get(0);
+      case "DEFAULT":
+        return targets.get(0);
+      default:
+        throw new WoodlandsRuntimeException("Unknown fight mode '" + fightMode + "'");
+    }
+  }
+
 }

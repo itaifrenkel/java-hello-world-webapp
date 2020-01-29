@@ -4,6 +4,8 @@ import com.github.dagwud.woodlands.game.domain.spells.SpellAbilities;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collection;
+import java.util.List;
 
 public abstract class Fighter
 {
@@ -71,4 +73,6 @@ public abstract class Fighter
   {
     return getStats().getState() == EState.DEAD;
   }
+
+  public abstract Fighter chooseFighterToAttack(Collection<Fighter> fighters);
 }

@@ -1,6 +1,9 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
+import com.github.dagwud.woodlands.gson.game.Creature;
+
+import java.util.Collection;
 
 public abstract class GameCharacter extends Fighter
 {
@@ -62,4 +65,16 @@ public abstract class GameCharacter extends Fighter
     return carrying;
   }
 
+  @Override
+  public Fighter chooseFighterToAttack(Collection<Fighter> fighters)
+  {
+    for (Fighter fighter : fighters)
+    {
+      if (fighter instanceof Creature)
+      {
+        return fighter;
+      }
+    }
+    throw new WoodlandsRuntimeException("Nobody to fight");
+  }
 }
