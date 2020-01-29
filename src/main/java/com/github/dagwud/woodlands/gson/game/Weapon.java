@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.gson.game;
 
+import com.github.dagwud.woodlands.game.domain.fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.google.gson.annotations.SerializedName;
 
