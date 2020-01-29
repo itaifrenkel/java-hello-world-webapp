@@ -15,6 +15,7 @@ public class DamageInflicted
   private final Fighter attacker;
   private final Fighter defender;
   private EHitStatus hitStatus;
+  private boolean killingBlow;
 
   public DamageInflicted(Fighter attacker, Weapon inflictedWith, EHitStatus hitStatus, int baseDamage, Fighter defender, int bonusDamage)
   {
@@ -70,7 +71,8 @@ public class DamageInflicted
             inflictedWith.getIcon() +
             baseDamage + (bonusDamage != 0 ? "+" + bonusDamage : "") +
             " → " + defender.getName()
-            + hitIcon(hitStatus);
+            + hitIcon(hitStatus)
+            + (isKillingBlow() ? "☠️" : "");
   }
 
   private String hitIcon(EHitStatus hitStatus)
@@ -80,5 +82,15 @@ public class DamageInflicted
       return " (" + CRITICAL_HIT_ICON + ")";
     }
     return "";
+  }
+
+  public boolean isKillingBlow()
+  {
+    return killingBlow;
+  }
+
+  public void setKillingBlow(boolean killingBlow)
+  {
+    this.killingBlow = killingBlow;
   }
 }
