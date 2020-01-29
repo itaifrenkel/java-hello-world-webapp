@@ -57,11 +57,12 @@ public class GameStatesRegistry
     {
       return;
     }
-    if (new File(PersistWorldCmd.GAME_STATE_FILE).exists())
+    RetrieveWorldCmd cmd = new RetrieveWorldCmd();
+    CommandDelegate.execute(cmd);
+    if (!cmd.retrieved())
     {
-      CommandDelegate.execute(new RetrieveWorldCmd());
+      instance = new GameStatesRegistry();
     }
-    instance = new GameStatesRegistry();
   }
 
   public static void reload(GameStatesRegistry gameState)

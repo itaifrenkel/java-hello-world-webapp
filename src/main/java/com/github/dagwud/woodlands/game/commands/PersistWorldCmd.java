@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 
 public class PersistWorldCmd extends AbstractCmd
 {
-  public static final String GAME_STATE_FILE = "GameState.ser";
+  static final String GAME_STATE_FILE = "GameState.ser";
   static final String PARTY_REGISTRY_FILE = "PartyRegistry.ser";
 
   @Override

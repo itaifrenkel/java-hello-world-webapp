@@ -9,4 +9,5 @@ public class Settings
   public static final BigDecimal DEFAULT_PERCENT_CHANCE_OF_ENCOUNTER = new BigDecimal("50");
   public static final long SOBER_UP_DELAY_MS = 60_000;
   public static final int ADMIN_CHAT = 750694421;
+  public static final String S3_BUCKET_NAME = "woodlands-state";
 }
