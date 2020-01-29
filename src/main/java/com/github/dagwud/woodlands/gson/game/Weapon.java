@@ -32,7 +32,12 @@ public class Weapon
 
   public String summary(Fighter carrier)
   {
-    return name + " " + getIcon() + determineDamageText(carrier);
+    return summary(carrier, true);
+  }
+
+  public String summary(Fighter carrier, boolean includeName)
+  {
+    return (includeName ? name + " " : "") + getIcon() + determineDamageText(carrier);
   }
 
   private String determineDamageText(Fighter carrier)
