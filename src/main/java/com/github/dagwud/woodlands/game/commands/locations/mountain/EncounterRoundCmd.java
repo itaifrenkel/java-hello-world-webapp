@@ -272,6 +272,9 @@ public class EncounterRoundCmd extends AbstractCmd
     EncounterRoundCmd nextRoundCmd = new EncounterRoundCmd(chatId, encounter, delayBetweenRoundsMS);
     RunLaterCmd nextEncounter = new RunLaterCmd(delayBetweenRoundsMS, nextRoundCmd);
     CommandDelegate.execute(nextEncounter);
+
+    SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getParty(), "Next round of battle in " + (delayBetweenRoundsMS/1000) + " seconds");
+    CommandDelegate.execute(msg);
   }
 
 }

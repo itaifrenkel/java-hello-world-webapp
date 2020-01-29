@@ -12,6 +12,8 @@ import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.gson.game.Weapon;
+
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
@@ -75,7 +77,23 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
   {
     Encounter encounter = createEncounter(playerState.getActiveCharacter().getParty());
 
-    String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + ")";
+    String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + "):\n" + encounter.getEnemy().summary();
+    Weapon carriedLeft = encounter.getEnemy().getCarrying().getCarriedLeft();
+    Weapon carriedRight = encounter.getEnemy().getCarrying().getCarriedRight();
+    if (carriedLeft != null || carriedRight != null)
+    {
+      if (carriedLeft != null)
+      {
+        message += ", ";
+        message += carriedLeft.summary(encounter.getEnemy());
+      }
+      if (carriedRight != null)
+      {
+        message += ", ";
+        message += carriedRight.summary(encounter.getEnemy());
+      }
+    }
+
     SendPartyMessageCmd msg = new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), message);
     CommandDelegate.execute(msg);
     return encounter;

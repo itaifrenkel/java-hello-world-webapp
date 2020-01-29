@@ -43,6 +43,11 @@ public class AirOfAuthority extends BattleRoundSpell
           SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter)target).getPlayedBy().getChatId(),
                   getCaster().getName() + " buffed your strength by +" + buffAmount);
           CommandDelegate.execute(cmd);
+
+          SendMessageCmd casterMsg = new SendMessageCmd(getCaster().getPlayedBy().getChatId(),
+                  "You buffed " + target.getName() + "'s strength by +" + buffAmount);
+          CommandDelegate.execute(casterMsg);
+
         }
       }
     }
