@@ -26,7 +26,7 @@ public class ReduceHitPointsCmd extends AbstractCmd
 
     if (character.getStats().getHitPoints() <= 0)
     {
-      if (character instanceof Creature || character.getStats().getHitPoints() < -character.getStats().getMaxHitPoints())
+      if (!(character instanceof PlayerCharacter) || character.getStats().getHitPoints() < -character.getStats().getMaxHitPoints())
       {
         // instant death:
         DeathCmd cmd = new DeathCmd(character);
