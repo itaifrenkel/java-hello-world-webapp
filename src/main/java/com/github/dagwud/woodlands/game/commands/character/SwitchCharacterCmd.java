@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 
@@ -28,7 +27,7 @@ public class SwitchCharacterCmd extends AbstractCmd
       {
         return;
       } 
-      if (toActivate.getStats().getState() != EState.ALIVE)
+      if (!toActivate.isCounscious())
       {
         SendMessageCmd err = new SendMessageCmd(player.getChatId(), toActivate.getName() + " is " + toActivate.getStats().getState());
         CommandDelegate.execute(err);

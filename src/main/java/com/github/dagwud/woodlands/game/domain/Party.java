@@ -128,7 +128,7 @@ public class Party
     int conscious = 0;
     for (GameCharacter member : getActiveMembers())
     {
-      if (member.isActive() && member.getStats().getState() == EState.ALIVE)
+      if (member.isActive() && member.isCounscious())
       {
         conscious++;
       }

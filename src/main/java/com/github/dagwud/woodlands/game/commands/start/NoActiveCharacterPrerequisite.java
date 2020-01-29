@@ -19,7 +19,7 @@ public class NoActiveCharacterPrerequisite implements CommandPrerequisite
   @Override
   public boolean verify()
   {
-    if (player != null && player.getActiveCharacter() != null && player.getActiveCharacter().isSetupComplete() && player.getActiveCharacter().getStats().getState() != EState.DEAD)
+    if (player != null && player.getActiveCharacter() != null && player.getActiveCharacter().isSetupComplete() && !player.getActiveCharacter().isDead())
     {
       if (player.getActiveCharacter().getLocation() == ELocation.INN)
       {

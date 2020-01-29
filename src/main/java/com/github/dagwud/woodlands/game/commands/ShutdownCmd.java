@@ -1,12 +1,12 @@
-package com.github.dagwud.woodlands.game;
+package com.github.dagwud.woodlands.game.commands;
 
-import com.github.dagwud.woodlands.game.commands.PersistWorldCmd;
-import com.github.dagwud.woodlands.game.commands.ShutdownWarningCmd;
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 
-public class ShutdownHookThread extends Thread
+public class ShutdownCmd extends AbstractCmd
 {
   @Override
-  public void run()
+  public void execute()
   {
     try
     {

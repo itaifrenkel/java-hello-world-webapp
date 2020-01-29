@@ -9,8 +9,9 @@ public abstract class NonPlayerCharacter extends GameCharacter
     this.ownedBy = ownedBy;
   }
 
+  @Override
   public boolean isActive()
   {
-    return getStats().getState() == EState.ALIVE;
+    return !isDead();
   }
 }

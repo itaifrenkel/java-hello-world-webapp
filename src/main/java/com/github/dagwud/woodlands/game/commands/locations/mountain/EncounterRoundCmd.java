@@ -4,7 +4,6 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.battle.OrderFightersCmd;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
-import com.github.dagwud.woodlands.game.commands.character.ExpireSpellCmd;
 import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.domain.*;
@@ -63,7 +62,7 @@ public class EncounterRoundCmd extends AbstractCmd
       return;
     }
 
-    if (encounter.getEnemy().getStats().getState() != EState.ALIVE || !anyPlayerCharactersStillAlive(encounter))
+    if (encounter.getEnemy().isCounscious() || !anyPlayerCharactersStillAlive(encounter))
     {
       EndEncounterCmd end = new EndEncounterCmd(encounter);
       CommandDelegate.execute(end);
@@ -80,17 +79,12 @@ public class EncounterRoundCmd extends AbstractCmd
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
         CommandDelegate.execute(cmd);
       }
-      else if (encounter.getEnemy().getStats().getState() != EState.ALIVE)
+      else if (!encounter.getEnemy().isCounscious())
       {
         DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
         CommandDelegate.execute(win);
 
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
-        CommandDelegate.execute(cmd);
-      }
-      else
-      {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "Evan is really smart.... enemy " + encounter.getEnemy().name + " is " + encounter.getEnemy().getStats().getState());
         CommandDelegate.execute(cmd);
       }
     }
@@ -184,7 +178,7 @@ public class EncounterRoundCmd extends AbstractCmd
   {
     for (PlayerCharacter member : encounter.getParty().getActivePlayerCharacters())
     {
-      if (member.getStats().getState() == EState.ALIVE)
+      if (member.isCounscious())
       {
         return true;
       }
@@ -195,12 +189,12 @@ public class EncounterRoundCmd extends AbstractCmd
   private void doAttack(Fighter attacker, List<DamageInflicted> roundActivity)
   {
     Fighter defender = determineDefender(attacker);
-    if (attacker.getStats().getState() == EState.ALIVE && defender.getStats().getState() == EState.ALIVE)
+    if (attacker.isCounscious() && defender.isCounscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
       roundActivity.add(damage);
     }
-    if (attacker.getStats().getState() == EState.ALIVE && defender.getStats().getState() == EState.ALIVE)
+    if (attacker.isCounscious() && defender.isCounscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);
       roundActivity.add(damage);
@@ -216,7 +210,7 @@ public class EncounterRoundCmd extends AbstractCmd
     List<GameCharacter> members = encounter.getParty().getActiveMembers();
     for (GameCharacter member : members)
     {
-      if (member.getStats().getState() == EState.ALIVE)
+      if (member.isCounscious())
       {
         return member;
       }

@@ -18,7 +18,7 @@ public class RetreatCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    GameCharacter retreater = inDanger.getStats().getState() == EState.ALIVE ? inDanger : findActiveCharacter(inDanger.getParty());
+    GameCharacter retreater = inDanger.isCounscious() ? inDanger : findActiveCharacter(inDanger.getParty());
     String message = buildRetreatMessage(inDanger, retreater);
     SendPartyMessageCmd msg = new SendPartyMessageCmd(inDanger.getParty(), message);
     CommandDelegate.execute(msg);
@@ -48,7 +48,7 @@ public class RetreatCmd extends AbstractCmd
   {
     for (GameCharacter member : party.getActiveMembers())
     {
-      if (member.getStats().getState() == EState.ALIVE)
+      if (member.isCounscious())
       {
         return member;
       }

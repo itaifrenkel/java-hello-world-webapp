@@ -21,7 +21,7 @@ public class SoberUpCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (!character.isActive() || character.getStats().getState() == EState.DEAD)
+    if (!character.isActive() || character.isDead())
     {
       return;
     }

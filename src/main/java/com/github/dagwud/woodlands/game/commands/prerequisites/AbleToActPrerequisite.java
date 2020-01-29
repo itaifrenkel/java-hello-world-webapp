@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.commands.prerequisites;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.CommandPrerequisite;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -29,7 +28,7 @@ public class AbleToActPrerequisite implements CommandPrerequisite
         return false;
       }
     }
-    if (fighter.getStats().getState() != EState.ALIVE)
+    if (!fighter.isCounscious())
     {
       if (fighter instanceof PlayerCharacter)
       {
