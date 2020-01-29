@@ -29,12 +29,12 @@ public class Weapon
     return ranged ? RANGED_ICON : MELEE_ICON;
   }
 
-  public String summary(PlayerCharacter carrier)
+  public String summary(Fighter carrier)
   {
     return name + " " + getIcon() + determineDamageText(carrier);
   }
 
-  private String determineDamageText(PlayerCharacter carrier)
+  private String determineDamageText(Fighter carrier)
   {
     int bonusDamage = carrier.getStats().getWeaponBonusDamage(this);
 
