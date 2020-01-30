@@ -8,7 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.NonPlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 
 public class DeathCmd extends AbstractCmd
@@ -29,8 +29,8 @@ public class DeathCmd extends AbstractCmd
 
     if (target instanceof NonPlayerCharacter)
     {
-      PlayerCharacter owner = ((NonPlayerCharacter)target).getOwnedBy();
-      CommandDelegate.execute(new SendMessageCmd(owner.getPlayedBy().getChatId(), target.getName() + " has died"));
+      Player owner = ((NonPlayerCharacter)target).getOwnedBy();
+      CommandDelegate.execute(new SendMessageCmd(owner.getChatId(), target.getName() + " has died"));
     }
   }
 }
