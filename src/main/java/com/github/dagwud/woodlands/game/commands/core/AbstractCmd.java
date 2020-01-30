@@ -26,9 +26,11 @@ public abstract class AbstractCmd implements Serializable
     {
       if (!prerequisite.verify())
       {
+        System.out.println("Command " + getClass().getSimpleName() + " skipped: false result from " + prerequisite.getClass().getSimpleName());
         return false;
       }
     }
+    System.out.println("Command " + getClass().getSimpleName());
     return true;
   }
 
