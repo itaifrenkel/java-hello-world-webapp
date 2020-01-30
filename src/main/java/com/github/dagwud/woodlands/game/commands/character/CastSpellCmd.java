@@ -41,7 +41,7 @@ public class CastSpellCmd extends AbstractCmd
     spell.cast();
     spell.setCast(true);
 
-    SendMessageCmd success = new SendMessageCmd(((PlayerCharacter)spell.getCaster().getPlayedBy()).getChatId(), "You cast " + spell.buildSpellDescription());
+    SendMessageCmd success = new SendMessageCmd(((PlayerCharacter)spell.getCaster()).getPlayedBy().getChatId(), "You cast " + spell.buildSpellDescription());
     CommandDelegate.execute(success);
   }
 }
