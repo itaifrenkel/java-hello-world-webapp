@@ -23,7 +23,7 @@ public class CastSpellCmd extends AbstractCmd
   {
     if (spell.isCast())
     {
-      throw new WoodlandsRuntimeException(spell.getSpellName() + " has already been cast");
+      System.err.println("WARNING: " + spell.getSpellName() + " has already been cast");
     }
 
     int mana = spell.getCaster().getStats().getMana();
