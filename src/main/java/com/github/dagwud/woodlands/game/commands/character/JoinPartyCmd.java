@@ -25,6 +25,8 @@ public class JoinPartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    System.out.println(joiner.getName() + " joining " + partyName);
+
     if (null != joiner.getParty())
     {
       LeavePartyCmd leave = new LeavePartyCmd(joiner, joiner.getParty());
