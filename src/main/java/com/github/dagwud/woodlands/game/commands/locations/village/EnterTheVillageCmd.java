@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.locations.village;
 
+import com.github.dagwud.woodlands.game.commands.FullHealCmd;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
@@ -18,6 +19,12 @@ public class EnterTheVillageCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (character.getName().startsWith("Shadow") && character.getPlayedBy().getChatId() == -1)
+    {
+      // todo for testing with shadow players
+      CommandDelegate.execute(new FullHealCmd(-1, character));
+    }
+
     if (character.getStats().getHitPoints() == 0)
     {
       RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, 1);
