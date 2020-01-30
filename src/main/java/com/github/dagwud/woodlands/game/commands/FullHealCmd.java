@@ -9,7 +9,7 @@ public class FullHealCmd extends AbstractCmd
   private final int chatId;
   private final PlayerCharacter character;
 
-  FullHealCmd(int chatId, PlayerCharacter character)
+  public FullHealCmd(int chatId, PlayerCharacter character)
   {
     this.chatId = chatId;
     this.character = character;
