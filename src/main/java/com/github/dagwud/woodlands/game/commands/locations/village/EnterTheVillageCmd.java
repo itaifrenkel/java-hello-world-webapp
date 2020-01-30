@@ -19,7 +19,7 @@ public class EnterTheVillageCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (character.getName().startsWith("Shadow") && character.getPlayedBy().getChatId() == -1)
+    if (character.getName().startsWith("Shadow") && character.getPlayedBy().getChatId() <= -1)
     {
       // todo for testing with shadow players
       CommandDelegate.execute(new FullHealCmd(-1, character));
