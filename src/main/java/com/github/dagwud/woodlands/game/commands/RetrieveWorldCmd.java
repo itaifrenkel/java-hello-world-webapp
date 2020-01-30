@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -23,7 +24,16 @@ public class RetrieveWorldCmd extends AbstractCmd
   @Override
   public void execute() throws Exception
   {
-    List<String> objectNames = list();
+    List<String> objectNames;
+    try
+    {
+      objectNames = list();
+    }
+    catch (SdkClientException e)
+    {
+      e.printStackTrace();
+      objectNames = new ArrayList<>();
+    }
     if (!objectNames.contains(PersistWorldCmd.GAME_STATE_FILE))
     {
       return;
