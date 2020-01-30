@@ -40,5 +40,8 @@ public class CastSpellCmd extends AbstractCmd
     spell.getCaster().getStats().setMana(mana);
     spell.cast();
     spell.setCast(true);
+
+    SendMessageCmd success = new SendMessageCmd(character.getPlayedBy().getChatId(), "You cast " + spell.buildSpellDescription());
+    CommandDelegate.execute(success);
   }
 }
