@@ -14,4 +14,9 @@ public abstract class NonPlayerCharacter extends GameCharacter
   {
     return !isDead();
   }
+
+  public Player getOwnedBy()
+  {
+    return ownedBy;
+  }
 }
