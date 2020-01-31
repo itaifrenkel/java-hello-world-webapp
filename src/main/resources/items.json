@@ -1,7 +1,7 @@
 {
   "weapons": [
     {"name": "nothing", "damage": {"dice_count": 0,"dice_faces": 0}, "ranged":false, "prevent_spawning":true, "custom_icon": ""},
-
+    {"name": "Pitchfork", "damage":  {"dice_count": 1, "dice_faces": 1}, "ranged": false, "prevent_spawning": true},
     {"name": "Small Bite", "damage":  {"dice_count": 1, "dice_faces": 0}, "ranged": false, "prevent_spawning": true},
     {"name": "Bite (soft)", "damage":  {"dice_count": 1, "dice_faces": 1}, "ranged": false, "prevent_spawning": true},
     {"name": "Bite (med)", "damage":  {"dice_count": 2, "dice_faces": 2}, "ranged": false, "prevent_spawning": true},
