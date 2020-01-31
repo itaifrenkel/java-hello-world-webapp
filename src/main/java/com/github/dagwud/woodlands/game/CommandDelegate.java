@@ -12,6 +12,7 @@ public class CommandDelegate
       if (cmd.verifyPrerequisites())
       {
         cmd.execute();
+        System.out.println(cmd);
       }
     }
     catch (Exception e)
