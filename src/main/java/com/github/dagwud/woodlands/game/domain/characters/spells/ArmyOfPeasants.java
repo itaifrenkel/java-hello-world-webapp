@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Peasant;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
+import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
+import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class ArmyOfPeasants extends SingleCastSpell
 {
@@ -31,6 +33,9 @@ public class ArmyOfPeasants extends SingleCastSpell
       String name = "Peasant #" + (i + 1) + " (" + getCaster().getName() + ")";
       Peasant peasant = new Peasant(getCaster().getPlayedBy(), 1, name);
       peasant.setLocation(getCaster().getLocation());
+      Weapon weapon = ItemsCacheFactory.instance().getCache().findWeapon("Pitchfork");
+      peasant.getCarrying().setCarriedLeft(weapon);
+
       JoinPartyCmd cmd = new JoinPartyCmd(peasant, getCaster().getParty().getName());
       CommandDelegate.execute(cmd);
 
