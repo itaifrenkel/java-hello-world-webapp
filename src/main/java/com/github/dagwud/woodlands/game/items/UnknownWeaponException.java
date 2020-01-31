@@ -1,8 +1,8 @@
 package com.github.dagwud.woodlands.game.items;
 
-import com.github.dagwud.woodlands.game.WoodlandsException;
+import com.github.dagwud.woodlands.game.WoodlandsRuntimeException;
 
-public class UnknownWeaponException extends WoodlandsException
+public class UnknownWeaponException extends WoodlandsRuntimeException
 {
   UnknownWeaponException(String message)
   {
