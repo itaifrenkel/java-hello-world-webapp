@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.commands.admin.KillPromptCmd;
+import com.github.dagwud.woodlands.game.commands.admin.ResetCmd;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellPromptCmd;
 import com.github.dagwud.woodlands.game.commands.character.ChangeNamePromptCmd;
 import com.github.dagwud.woodlands.game.commands.character.LevelUpCmd;
@@ -28,12 +30,14 @@ public enum ECommand
   NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character == null ? null : character.getPlayedBy(), chatId)),
   ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
   PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
-  PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
   INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
 
+  PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
   CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)), //todo remove!
   CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(chatId, character)), //todo remove!
+  KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
+  RESET("/reset", false, (character, chatId) -> new ResetCmd()),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
