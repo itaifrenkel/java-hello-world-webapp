@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Party implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private List<GameCharacter> members = new ArrayList<>(4);
   private String name;
   private Encounter encounter;

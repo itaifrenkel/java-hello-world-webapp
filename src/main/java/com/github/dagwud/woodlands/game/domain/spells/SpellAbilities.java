@@ -11,6 +11,8 @@ import java.util.*;
 
 public class SpellAbilities implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private Collection<BattleRoundSpell> passives;
   private Collection<PartySpell> partySpells;
   private Deque<SingleCastSpell> preparedSpells;

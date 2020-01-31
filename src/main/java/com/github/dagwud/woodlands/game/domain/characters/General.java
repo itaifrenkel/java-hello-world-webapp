@@ -5,7 +5,6 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.AirOfAuthority;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 public class General extends PlayerCharacter
 {

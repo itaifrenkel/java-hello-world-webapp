@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 public class Weapon implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private static final String MELEE_ICON = "\u2694"; // crossed swords
   private static final String RANGED_ICON = "\ud83c\udff9"; // bow and arrow
 

@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 public class PlayerState implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private Player player;
   private SuspendableCmd waitingForInputCmd;
   private GameMenu currentMenu;

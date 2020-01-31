@@ -8,6 +8,8 @@ import java.util.List;
 
 public class CarriedItems implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private Weapon carriedLeft;
   private Weapon carriedRight;
   private List<Weapon> carriedInactive = new ArrayList<>();

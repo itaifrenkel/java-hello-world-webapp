@@ -15,6 +15,8 @@ public enum ECharacterClass implements Serializable
   DRUID("Druid", new DruidInitialStats()),
   GENERAL("General", new GeneralInitialStats());
 
+  private static final long serialVersionUID = 1L;
+
   private final InitialStats initialStats;
   private final String displayName;
 

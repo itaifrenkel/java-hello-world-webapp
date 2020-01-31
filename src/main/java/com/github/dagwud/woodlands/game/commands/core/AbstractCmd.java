@@ -7,6 +7,8 @@ import java.util.Collections;
 
 public abstract class AbstractCmd implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private Collection<CommandPrerequisite> prerequisites;
 
   public AbstractCmd()

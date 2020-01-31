@@ -7,6 +7,8 @@ import java.text.DecimalFormat;
 
 public class Damage implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   @SerializedName("dice_count")
   public int diceCount;
 

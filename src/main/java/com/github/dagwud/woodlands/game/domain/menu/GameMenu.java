@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 public class GameMenu implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private String prompt;
   private ECommand[] options;
 

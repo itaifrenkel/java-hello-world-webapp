@@ -8,6 +8,8 @@ import java.util.Collection;
 
 public class Encounter implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private Party party;
   private Creature enemy;
   private boolean ended;

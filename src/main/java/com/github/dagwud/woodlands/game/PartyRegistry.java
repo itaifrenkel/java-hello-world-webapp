@@ -10,6 +10,8 @@ import java.util.Map;
 
 public class PartyRegistry implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private static PartyRegistry instance;
   private final Map<String, Party> parties = new HashMap<>();
 

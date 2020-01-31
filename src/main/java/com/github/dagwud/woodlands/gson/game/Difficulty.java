@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 public class Difficulty implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   public double difficulty;
 
   @SerializedName("defensive")

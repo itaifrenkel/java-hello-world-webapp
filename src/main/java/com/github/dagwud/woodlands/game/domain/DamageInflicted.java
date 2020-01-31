@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 public class DamageInflicted implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private static final String MISSED_ICON = "\uD83D\uDE48";
   private static final String CRITICAL_HIT_ICON = "\uD83C\uDFAF";
   private static final String SPELL_HIT_ICON = "✨";

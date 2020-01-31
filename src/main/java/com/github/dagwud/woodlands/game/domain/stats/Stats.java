@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class Stats implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private int level;
   private int experience;
   private int hitPoints;

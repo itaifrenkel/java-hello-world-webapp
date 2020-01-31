@@ -11,6 +11,8 @@ import java.util.List;
 
 public abstract class Fighter implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private SpellAbilities spellAbilities;
 
   public abstract String getName();
