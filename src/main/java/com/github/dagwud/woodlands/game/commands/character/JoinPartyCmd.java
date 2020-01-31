@@ -50,6 +50,7 @@ public class JoinPartyCmd extends AbstractCmd
 
     joiner.setParty(party);
     party.addMember(joiner);
+    joiner.setLocation(party.getLeader().getLocation());
 
     if (!party.isPrivateParty())
     {
