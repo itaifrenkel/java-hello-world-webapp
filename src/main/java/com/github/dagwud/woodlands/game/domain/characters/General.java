@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.AirOfAuthority;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class General extends PlayerCharacter
 {
@@ -25,5 +26,10 @@ public class General extends PlayerCharacter
   public int countActivePeasants()
   {
     return (int) peasants.stream().filter(NonPlayerCharacter::isActive).count();
+  }
+
+  public void clearDeadPeasants()
+  {
+    peasants.removeIf(peasant -> !peasant.isActive());
   }
 }
