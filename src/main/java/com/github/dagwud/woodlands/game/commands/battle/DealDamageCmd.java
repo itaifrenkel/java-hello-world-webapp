@@ -26,9 +26,6 @@ public class DealDamageCmd extends AbstractCmd
     ReduceHitPointsCmd cmd = new ReduceHitPointsCmd(inflictedOn, totalDamageInflicted);
     CommandDelegate.execute(cmd);
 
-    if (inflictedOn.isDead() && !wasDead)
-    {
-      damageInflicted.setKillingBlow(true);
-    }
+    damageInflicted.setKillingBlow(inflictedOn.isDead() && !wasDead);
   }
 }
