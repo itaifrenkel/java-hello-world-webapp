@@ -33,4 +33,12 @@ public class LeavePartyCmd extends AbstractCmd
     party.removeMember(character);    
   }
 
+  @Override
+  public String toString()
+  {
+    return "LeavePartyCmd{" +
+            "character=" + character +
+            ", party=" + party +
+            '}';
+  }
 }

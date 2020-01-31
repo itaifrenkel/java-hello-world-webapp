@@ -267,4 +267,12 @@ public class EncounterRoundCmd extends AbstractCmd
     CommandDelegate.execute(msg);
   }
 
+  @Override
+  public String toString()
+  {
+    return "EncounterRoundCmd{" +
+            "chatId=" + chatId +
+            ", encounter=" + encounter +
+            '}';
+  }
 }

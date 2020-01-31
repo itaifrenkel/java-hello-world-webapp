@@ -74,4 +74,12 @@ public class JoinPartyCmd extends AbstractCmd
       || party.getLeader().getLocation() == ELocation.TAVERN;
   }
 
+  @Override
+  public String toString()
+  {
+    return "JoinPartyCmd{" +
+            "partyName='" + partyName + '\'' +
+            ", joiner=" + joiner +
+            '}';
+  }
 }

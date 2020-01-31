@@ -41,4 +41,12 @@ public class CastSpellCmd extends AbstractCmd
     spell.cast();
     spell.setCast(true);
   }
+
+  @Override
+  public String toString()
+  {
+    return "CastSpellCmd{" +
+            "spell=" + spell +
+            '}';
+  }
 }

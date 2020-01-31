@@ -104,4 +104,13 @@ public class AttackCmd extends AbstractCmd
   {
     return damageInflicted;
   }
+
+  @Override
+  public String toString()
+  {
+    return "AttackCmd{" +
+            "attacker=" + attacker +
+            ", defender=" + defender +
+            '}';
+  }
 }

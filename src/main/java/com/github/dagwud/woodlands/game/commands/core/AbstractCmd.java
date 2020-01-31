@@ -30,9 +30,14 @@ public abstract class AbstractCmd implements Serializable
         return false;
       }
     }
-    System.out.println("Command " + getClass().getSimpleName());
     return true;
   }
 
   public abstract void execute() throws Exception;
+
+  @Override
+  public String toString()
+  {
+    return getClass().getSimpleName();
+  }
 }

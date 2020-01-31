@@ -23,4 +23,13 @@ public class RunLaterCmd extends AbstractCmd
     // using an EJB container, so this seems ok.
     new Thread(task).start();
   }
+
+  @Override
+  public String toString()
+  {
+    return "RunLaterCmd{" +
+            "delayMS=" + delayMS +
+            ", cmdToRun=" + cmdToRun +
+            '}';
+  }
 }

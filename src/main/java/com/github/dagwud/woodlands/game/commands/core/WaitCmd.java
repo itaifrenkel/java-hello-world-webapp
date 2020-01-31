@@ -14,4 +14,12 @@ public class WaitCmd extends AbstractCmd
   {
     Thread.sleep(delayMS);
   }
+
+  @Override
+  public String toString()
+  {
+    return "WaitCmd{" +
+            "delayMS=" + delayMS +
+            '}';
+  }
 }

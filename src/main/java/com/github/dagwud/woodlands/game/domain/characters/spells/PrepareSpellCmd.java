@@ -19,4 +19,13 @@ public class PrepareSpellCmd extends AbstractCmd
   {
     caster.getSpellAbilities().prepare(spell);
   }
+
+  @Override
+  public String toString()
+  {
+    return "PrepareSpellCmd{" +
+            "caster=" + caster +
+            ", spell=" + spell +
+            '}';
+  }
 }

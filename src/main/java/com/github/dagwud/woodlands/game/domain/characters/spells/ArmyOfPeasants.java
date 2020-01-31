@@ -2,17 +2,14 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
-import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Peasant;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-
-import java.util.Collection;
+import com.github.dagwud.woodlands.game.domain.characters.General;
 
 public class ArmyOfPeasants extends SingleCastSpell
 {
-  Collection<Fighter> peasants;
-
   public ArmyOfPeasants(PlayerCharacter character)
   {
     super("Army of Peasants", character);
@@ -21,12 +18,23 @@ public class ArmyOfPeasants extends SingleCastSpell
   @Override
   public void cast()
   {
-    for (int i = 0; i < determineNumberOfPeasants(); i++)
+    int peasantsAllowed = determineNumberOfPeasants();
+    if (getCaster().countActivePeasants() >= peasantsAllowed)
+    {
+      SendMessageCmd msg = new SendMessageCmd(getCaster().getPlayedBy().getChatId(), "You don't command enough respoect to command more peasants");
+      CommandDelegate.execute(msg);
+      return;
+    }
+
+    for (int i = getCaster().countActivePeasants(); i < peasantsAllowed; i++)
     {
       String name = "Peasant #" + (i + 1) + " (" + getCaster().getName() + ")";
-      GameCharacter peasant = new Peasant(getCaster().getPlayedBy(), 1, name);
+      Peasant peasant = new Peasant(getCaster().getPlayedBy(), 1, name);
+      peasant.setLocation(getCaster().getLocation());
       JoinPartyCmd cmd = new JoinPartyCmd(peasant, getCaster().getParty().getName());
       CommandDelegate.execute(cmd);
+
+      getCaster().getPeasants().add(peasant);
     }
   }
 
@@ -41,9 +49,9 @@ public class ArmyOfPeasants extends SingleCastSpell
   }
 
   @Override
-  public PlayerCharacter getCaster()
+  public General getCaster()
   {
-    return (PlayerCharacter) super.getCaster();
+    return (General) super.getCaster();
   }
 
   @Override

@@ -74,4 +74,13 @@ public class SendMessageCmd extends AbstractCmd
 
         return message;
     }
+
+    @Override
+    public String toString()
+    {
+        return "SendMessageCmd{" +
+                "chatId=" + chatId +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
