@@ -20,11 +20,13 @@ public class DealDamageCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    boolean wasDead = inflictedOn.isDead();
+
     int totalDamageInflicted = damageInflicted.getBaseDamage() + damageInflicted.getBonusDamage();
     ReduceHitPointsCmd cmd = new ReduceHitPointsCmd(inflictedOn, totalDamageInflicted);
     CommandDelegate.execute(cmd);
 
-    if (!inflictedOn.isDead())
+    if (inflictedOn.isDead() && !wasDead)
     {
       damageInflicted.setKillingBlow(true);
     }

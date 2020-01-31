@@ -86,7 +86,7 @@ public class DamageInflicted implements Serializable
     return "";
   }
 
-  public boolean isKillingBlow()
+  private boolean isKillingBlow()
   {
     return killingBlow;
   }
