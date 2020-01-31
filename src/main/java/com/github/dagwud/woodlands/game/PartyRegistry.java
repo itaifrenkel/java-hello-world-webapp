@@ -61,6 +61,6 @@ public class PartyRegistry implements Serializable
 
   public static void reset()
   {
-    instance = null;
+    instance = new PartyRegistry();
   }
 }

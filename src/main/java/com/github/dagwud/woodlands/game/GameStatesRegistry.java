@@ -38,7 +38,7 @@ public class GameStatesRegistry implements Serializable
 
   public static void reset()
   {
-    instance = null;
+    instance = new GameStatesRegistry();
   }
 
   public static GameStatesRegistry instance()
