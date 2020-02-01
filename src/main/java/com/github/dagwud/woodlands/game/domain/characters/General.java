@@ -41,14 +41,6 @@ public class General extends PlayerCharacter
 
   public void clearDeadPeasants()
   {
-    for (Peasant peasant : peasants)
-    {
-      if (peasant.isDead())
-      {
-        LeavePartyCmd cmd = new LeavePartyCmd(peasant, getParty());
-        CommandDelegate.execute(cmd);
-      }
-    }
     peasants.removeIf(Fighter::isDead);
   }
 }
