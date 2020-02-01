@@ -5,6 +5,9 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.log.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ShowLogsCmd extends AbstractCmd
 {
   private final int chatId;
@@ -17,11 +20,14 @@ public class ShowLogsCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    for (String log : Logger.getLogs())
+    List<String> dump = new ArrayList<>(Logger.getLogs());
+    for (String log : dump)
     {
       SendMessageCmd msg = new SendMessageCmd(chatId, log);
       CommandDelegate.execute(msg);
     }
     Logger.clear();
+    SendMessageCmd msg = new SendMessageCmd(chatId, "---end---");
+    CommandDelegate.execute(msg);
   }
 }

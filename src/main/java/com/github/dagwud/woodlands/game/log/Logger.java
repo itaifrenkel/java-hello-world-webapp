@@ -54,7 +54,7 @@ public class Logger
       try (PrintStream ps = new PrintStream(out))
       {
         e.printStackTrace(ps);
-        getInstance().logs.add(ps.toString());
+        getInstance().logs.add(out.toString());
       }
     }
     catch (IOException ex)
