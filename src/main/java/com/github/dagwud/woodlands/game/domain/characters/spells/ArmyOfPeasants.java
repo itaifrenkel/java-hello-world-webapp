@@ -23,7 +23,7 @@ public class ArmyOfPeasants extends SingleCastSpell
   {
     int peasantsAllowed = determineNumberOfPeasants();
     int summoned = 0;
-    for (int i = getCaster().countActivePeasants(); i < peasantsAllowed; i++)
+    for (int i = getCaster().countAlivePeasants(); i < peasantsAllowed; i++)
     {
       String name = "Peasant #" + (i + 1) + " (" + getCaster().getName() + ")";
       Peasant peasant = new Peasant(getCaster().getPlayedBy(), 1, name);

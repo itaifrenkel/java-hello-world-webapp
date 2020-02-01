@@ -14,7 +14,7 @@ public class LeavePartyCmd extends AbstractCmd
   private final GameCharacter character;
   private final Party party;
 
-  LeavePartyCmd(GameCharacter character, Party party)
+  public LeavePartyCmd(GameCharacter character, Party party)
   {
     super(new AbleToActPrerequisite(character));
     this.character = character;

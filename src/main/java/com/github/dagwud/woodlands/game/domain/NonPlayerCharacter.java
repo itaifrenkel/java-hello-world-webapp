@@ -13,7 +13,7 @@ public abstract class NonPlayerCharacter extends GameCharacter
   @Override
   public boolean isActive()
   {
-    return !isDead();
+    return true;
   }
 
   public Player getOwnedBy()

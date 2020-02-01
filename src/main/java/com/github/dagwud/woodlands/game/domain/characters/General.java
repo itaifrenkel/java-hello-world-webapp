@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.characters;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.character.LeavePartyCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.AirOfAuthority;
 
@@ -24,13 +26,29 @@ public class General extends PlayerCharacter
     return peasants;
   }
 
-  public int countActivePeasants()
+  public int countAlivePeasants()
   {
-    return (int) peasants.stream().filter(NonPlayerCharacter::isActive).count();
+    int count = 0;
+    for (Peasant peasant : peasants)
+    {
+      if (!peasant.isDead())
+      {
+        count++;
+      }
+    }
+    return count;
   }
 
   public void clearDeadPeasants()
   {
-    peasants.removeIf(peasant -> !peasant.isActive());
+    for (Peasant peasant : peasants)
+    {
+      if (peasant.isDead())
+      {
+        LeavePartyCmd cmd = new LeavePartyCmd(peasant, getParty());
+        CommandDelegate.execute(cmd);
+      }
+    }
+    peasants.removeIf(Fighter::isDead);
   }
 }
