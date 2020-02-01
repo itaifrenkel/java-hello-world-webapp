@@ -62,6 +62,10 @@ public class Party implements Serializable
       {
         active.add(member);
       }
+      else
+      {
+        System.out.println("INACTIVE: " + member);
+      }
     }
     return active;
   }

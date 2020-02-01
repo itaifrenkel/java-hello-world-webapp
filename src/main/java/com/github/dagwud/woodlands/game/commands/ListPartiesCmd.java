@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 
+import com.github.dagwud.woodlands.game.*;
 
 public class ListPartiesCmd extends AbstractCmd
 {
@@ -27,14 +28,27 @@ public class ListPartiesCmd extends AbstractCmd
       b.append(party.getName())
           .append(" (").append(party.size())
           .append(") - ")
-          .append(party.getLeader() == null ? "NoLeader" : party.getLeader().getLocation())
-          .append(":\n");
+          .append(party.getLeader() == null ? "No leader" : "🎖" + party.getLeader().getName())
+          .append("\n");
       for (GameCharacter c : party.getActiveMembers())
       {
-        b.append(" * ").append(c.summary()).append("\n");
+        b.append(" • ").append(c.summary())
+            .append(" (").append(c.getStats().getState()).append(")")
+            .append(" @ ").append(c.getLocation())
+            .append(" [").append(c.hashCode()).append("]")
+            .append("\n");
       }
       b.append("\n");
     }
+
+    b.append("\nAll Players:\n");
+    for (PlayerState p : GameStatesRegistry.allPlayerStates())
+    {
+      b.append(" • ").append(p.getPlayer().getChatId())
+          .append(" - ").append(p.getPlayer().getActiveCharacter().getName())
+          .append("\n");
+    }
+
     SendMessageCmd cmd = new SendMessageCmd(chatId, b.toString());
     CommandDelegate.execute(cmd);
   }
