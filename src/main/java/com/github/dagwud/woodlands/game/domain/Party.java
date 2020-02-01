@@ -154,7 +154,7 @@ public class Party implements Serializable
 
   public void removeDeadNPCs()
   {
-    Collection<NonPlayerCharacter> toRemove = new ArrayList<1>();
+    Collection<NonPlayerCharacter> toRemove = new ArrayList<>(1);
     for (GameCharacter member : members)
     {
       if (member instanceof NonPlayerCharacter && member.isDead())
