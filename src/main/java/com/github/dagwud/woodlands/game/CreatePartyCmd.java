@@ -21,7 +21,7 @@ public class CreatePartyCmd extends AbstractCmd
     createdParty = party;
   }
 
-  public Party getCreatedParty()
+  Party getCreatedParty()
   {
     return createdParty;
   }
