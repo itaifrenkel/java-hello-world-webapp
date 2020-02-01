@@ -35,6 +35,7 @@ public class ListPartiesCmd extends AbstractCmd
         b.append(" • ").append(c.summary())
             .append(" (").append(c.getStats().getState()).append(")")
             .append(" @ ").append(c.getLocation())
+            .append(" ").append(c)
             .append("\n");
       }
       b.append("\n");
