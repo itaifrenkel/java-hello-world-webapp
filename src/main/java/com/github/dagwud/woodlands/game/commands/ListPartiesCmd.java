@@ -33,6 +33,7 @@ public class ListPartiesCmd extends AbstractCmd
       for (GameCharacter c : party.getActiveMembers())
       {
         b.append(" • ").append(c.summary())
+            .append(" (").append(c.getStats().getState()).append(")")
             .append(" @ ").append(c.getLocation())
             .append("\n");
       }
