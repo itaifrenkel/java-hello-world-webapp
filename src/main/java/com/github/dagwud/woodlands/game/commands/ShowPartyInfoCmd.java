@@ -44,7 +44,6 @@ public class ShowPartyInfoCmd extends AbstractCmd
         message.append("\n");
       }
       message.append(member.summary()).append(" - ").append(member.getLocation().getDisplayName());
-      message.append(" [").append(member.hashCode()).append("]");
     }
     return message.toString();
   }
