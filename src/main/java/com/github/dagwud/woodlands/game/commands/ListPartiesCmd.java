@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 
+import com.github.dagwud.woodlands.game.*;
 
 public class ListPartiesCmd extends AbstractCmd
 {
