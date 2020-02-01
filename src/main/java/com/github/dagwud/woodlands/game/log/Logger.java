@@ -72,4 +72,9 @@ public class Logger
   {
     return Collections.unmodifiableList(getInstance().logs);
   }
+
+  public static void clear()
+  {
+    getInstance().logs.clear();
+  }
 }

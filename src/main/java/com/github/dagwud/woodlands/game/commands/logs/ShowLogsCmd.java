@@ -22,5 +22,6 @@ public class ShowLogsCmd extends AbstractCmd
       SendMessageCmd msg = new SendMessageCmd(chatId, log);
       CommandDelegate.execute(msg);
     }
+    Logger.clear();
   }
 }
