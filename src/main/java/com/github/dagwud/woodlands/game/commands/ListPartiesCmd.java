@@ -42,7 +42,7 @@ public class ListPartiesCmd extends AbstractCmd
     b.append("\nAll Players:\n");
     for (PlayerState p : GameStatesRegistry.allPlayerStates())
     {
-      b.append(" • ").append(p.getActiveCharacter().getName())
+      b.append(" • ").append(p.getChatId())
           .append(" - ").append(p.getActiveCharacter().getName())
           .append("\n");
     }
