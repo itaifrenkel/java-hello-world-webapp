@@ -38,7 +38,7 @@ public class ListPartiesCmd extends AbstractCmd
     }
 
     b.append("\nAll Players:\n");
-    for (PlayerState p : GameStateRegistry.allPlayerStates())
+    for (PlayerState p : GameStatesRegistry.allPlayerStates())
     {
       b.append(p.getActiveCharacter().getName())
           .append(" - ").append(p.getActiveCharacter().getName())
