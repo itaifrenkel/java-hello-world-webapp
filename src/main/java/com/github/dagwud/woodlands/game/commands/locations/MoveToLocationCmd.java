@@ -76,7 +76,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private void doMove(GameCharacter characterToMove, ELocation moveTo)
   {
-    Logger.log("Moving " + characterToMove + " to " + moveTo);
+    Logger.info("Moving " + characterToMove + " to " + moveTo);
     characterToMove.setLocation(moveTo);
 
     if (characterToMove instanceof PlayerCharacter)

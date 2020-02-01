@@ -5,7 +5,6 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.RetrieveWorldCmd;
 import com.github.dagwud.woodlands.game.commands.ShutdownCmd;
-import com.github.dagwud.woodlands.game.commands.ShutdownWarningCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.instructions.CommandFactory;
 import com.github.dagwud.woodlands.game.log.Logger;
@@ -42,7 +41,7 @@ public class TelegramServlet extends HttpServlet
     }
     catch (Exception e)
     {
-      e.printStackTrace();
+      Logger.logError(e);
       if (update != null)
       {
         sendStackTraceIfPossible(update, e);
@@ -72,7 +71,7 @@ public class TelegramServlet extends HttpServlet
 
     // todo verify request came from telegram - token in request
     String text = determineText(update);
-    Logger.log(summarizeIncomingMessage(update));
+    Logger.info(summarizeIncomingMessage(update));
 
     PlayerState playerState = GameStatesRegistry.lookup(chatId);
     synchronized (GameStatesRegistry.lookup(chatId))

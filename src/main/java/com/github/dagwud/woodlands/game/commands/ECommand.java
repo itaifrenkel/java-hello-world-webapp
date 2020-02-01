@@ -14,6 +14,7 @@ import com.github.dagwud.woodlands.game.commands.locations.village.BuyDrinksCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.LeaveItemsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.RetrieveItemsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.ShortRestCmd;
+import com.github.dagwud.woodlands.game.commands.logs.ShowLogsCmd;
 import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
 import com.github.dagwud.woodlands.game.commands.start.StartCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
@@ -38,6 +39,7 @@ public enum ECommand
   CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(chatId, character)), //todo remove!
   KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
   RESET("/reset", false, (character, chatId) -> new ResetCmd()),
+  LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),

@@ -226,12 +226,12 @@ public class MainTest
     Update update;
 
     update = createUpdate("TestUser" + playerState.getPlayer().getChatId(), playerState);
-    Logger.log("TestUser" + playerState.getPlayer().getChatId());
+    Logger.info("TestUser" + playerState.getPlayer().getChatId());
     new TelegramServlet().processTelegramUpdate(update);
 
     // suspends to ask for player class
     update = createUpdate("Wizard", playerState);
-    Logger.log("Wizard");
+    Logger.info("Wizard");
     new TelegramServlet().processTelegramUpdate(update);
   }
 

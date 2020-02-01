@@ -30,7 +30,7 @@ public abstract class AbstractCmd implements Serializable
     {
       if (!prerequisite.verify())
       {
-        Logger.log("Command " + getClass().getSimpleName() + " skipped: false result from " + prerequisite.getClass().getSimpleName());
+        Logger.info("Command " + getClass().getSimpleName() + " skipped: false result from " + prerequisite.getClass().getSimpleName());
         return false;
       }
     }

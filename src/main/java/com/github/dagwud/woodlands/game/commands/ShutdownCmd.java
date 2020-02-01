@@ -11,17 +11,17 @@ public class ShutdownCmd extends AbstractCmd
   {
     try
     {
-      Logger.log("Shutdown hook invoked; retreating characters to safe space...");
+      Logger.info("Shutdown hook invoked; retreating characters to safe space...");
       CommandDelegate.execute(new ShutdownWarningCmd());
-      Logger.log("Pesisting world...");
+      Logger.info("Pesisting world...");
       PersistWorldCmd cmd = new PersistWorldCmd();
       CommandDelegate.execute(cmd);
-      Logger.log("Ready for safe shutdown.");
+      Logger.info("Ready for safe shutdown.");
     }
     catch (Exception e)
     {
-      System.err.println("Error in asynchronous (shutdown) thread. Logging it here to avoid losing it");
-      e.printStackTrace();
+      Logger.error("Error in asynchronous (shutdown) thread. Logging it here to avoid losing it");
+      Logger.logError(e);
     }
   }
 }

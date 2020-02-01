@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
@@ -32,7 +31,7 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
     catch (SdkClientException e)
     {
-      e.printStackTrace();
+      Logger.logError(e);
       objectNames = new ArrayList<>();
     }
     if (!objectNames.contains(PersistWorldCmd.GAME_STATE_FILE))
@@ -60,7 +59,7 @@ public class RetrieveWorldCmd extends AbstractCmd
       PartyRegistry.instance();
     }
 
-    Logger.log("Successfully restored world!");
+    Logger.info("Successfully restored world!");
 
     for (PlayerState player : GameStatesRegistry.allPlayerStates())
     {
@@ -73,7 +72,7 @@ public class RetrieveWorldCmd extends AbstractCmd
   {
     List<String> objectNames = new ArrayList<>(2);
 
-    Logger.log("Checking for persisted world...");
+    Logger.info("Checking for persisted world...");
     final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     ListObjectsV2Result result = s3.listObjectsV2(Settings.S3_BUCKET_NAME);
     List<S3ObjectSummary> objects = result.getObjectSummaries();
@@ -81,7 +80,7 @@ public class RetrieveWorldCmd extends AbstractCmd
     for (S3ObjectSummary os : objects)
     {
       objectNames.add(os.getKey());
-      Logger.log("* " + os.getKey());
+      Logger.info("* " + os.getKey());
     }
     return objectNames;
   }
@@ -134,7 +133,7 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
     catch (AmazonServiceException e)
     {
-      System.err.println(e.getErrorMessage());
+      Logger.error(e.getErrorMessage());
     }
     return null;
   }

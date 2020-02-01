@@ -19,7 +19,7 @@ import com.github.dagwud.woodlands.game.log.Logger;
     PartyRegistry partyRegistry = PartyRegistry.instance();
     persist(partyRegistry, PARTY_REGISTRY_FILE);
 
-    Logger.log("Successfully persisted world!");
+    Logger.info("Successfully persisted world!");
   }
 
   private void persist(Object object, String fileName)

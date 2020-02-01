@@ -13,7 +13,7 @@ public class CommandDelegate
       if (cmd.verifyPrerequisites())
       {
         cmd.execute();
-        Logger.log(cmd.toString());
+        Logger.info(cmd.toString());
       }
     }
     catch (Exception e)

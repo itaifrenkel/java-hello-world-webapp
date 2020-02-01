@@ -22,7 +22,7 @@ public class TelegramMessageSender extends TelegramHelper implements IMessageSen
     }
     else
     {
-      Logger.log("SEND MESSAGE: " + params);
+      Logger.info("SEND MESSAGE: " + params);
     }
   }
 

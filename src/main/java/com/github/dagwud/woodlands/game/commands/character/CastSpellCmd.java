@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequi
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 public class CastSpellCmd extends AbstractCmd
 {
@@ -23,7 +24,7 @@ public class CastSpellCmd extends AbstractCmd
   {
     if (spell.isCast())
     {
-      System.err.println("WARNING: " + spell.getSpellName() + " has already been cast");
+      Logger.error("WARNING: " + spell.getSpellName() + " has already been cast");
     }
 
     int mana = spell.getCaster().getStats().getMana();

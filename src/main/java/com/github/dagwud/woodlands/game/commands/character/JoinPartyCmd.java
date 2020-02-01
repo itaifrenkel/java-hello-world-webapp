@@ -26,7 +26,7 @@ public class JoinPartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Logger.log(joiner.getName() + " joining " + partyName);
+    Logger.info(joiner.getName() + " joining " + partyName);
 
     if (null != joiner.getParty())
     {

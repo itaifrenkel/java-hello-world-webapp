@@ -37,7 +37,7 @@ public class AbleToActPrerequisite implements CommandPrerequisite
         SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You're " + character.getStats().getState().name().toLowerCase() + "; you can't do anything");
         CommandDelegate.execute(cmd);
       }
-      Logger.log("Prerequisite failed: " + fighter.getName() + " is unconscious");
+      Logger.info("Prerequisite failed: " + fighter.getName() + " is unconscious");
       return false;
     }
     return true;

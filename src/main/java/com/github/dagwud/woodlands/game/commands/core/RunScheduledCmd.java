@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.Settings;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.util.concurrent.Callable;
 
@@ -27,7 +28,7 @@ public class RunScheduledCmd implements Callable<String>
     }
     catch (Exception e)
     {
-      System.err.println("WARNING: Exception in asynchronous thread; can't be thrown to caller so logging it here:");
+      Logger.error("WARNING: Exception in asynchronous thread; can't be thrown to caller so logging it here:");
       try
       {
         SendMessageCmd adminInfo = new SendMessageCmd(Settings.ADMIN_CHAT, "Exception in asynchronous thread");
@@ -39,7 +40,7 @@ public class RunScheduledCmd implements Callable<String>
       {
         // oh well.
       }
-      e.printStackTrace();
+      Logger.logError(e);
       throw e;
     }
   }

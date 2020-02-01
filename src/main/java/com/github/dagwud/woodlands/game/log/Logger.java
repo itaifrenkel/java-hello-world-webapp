@@ -1,6 +1,10 @@
 package com.github.dagwud.woodlands.game.log;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Logger
@@ -16,7 +20,7 @@ public class Logger
     logs = new ArrayList<>();
   }
 
-  public static void log(String message)
+  public static void info(String message)
   {
     getInstance().logs.add(message);
     while (getInstance().logs.size() > MAX_LOG)
@@ -41,5 +45,31 @@ public class Logger
       return;
     }
     instance = new Logger();
+  }
+
+  public static void logError(Exception e)
+  {
+    try (ByteArrayOutputStream out = new ByteArrayOutputStream())
+    {
+      try (PrintStream ps = new PrintStream(out))
+      {
+        e.printStackTrace(ps);
+        getInstance().logs.add(ps.toString());
+      }
+    }
+    catch (IOException ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+
+  public static void error(String message)
+  {
+    info("*" + message + "*");
+  }
+
+  public static List<String> getLogs()
+  {
+    return Collections.unmodifiableList(getInstance().logs);
   }
 }
