@@ -17,19 +17,23 @@ public class EndEncounterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (encounter != null)
+    if (encounter == null)
     {
-      encounter.end();
-      encounter.getParty().setActiveEncounter(null);
+      return;
+    }
 
-      for (PlayerCharacter playerCharacter : encounter.getParty().getActivePlayerCharacters())
+    encounter.end();
+    encounter.getParty().setActiveEncounter(null);
+
+    for (PlayerCharacter playerCharacter : encounter.getParty().getActivePlayerCharacters())
+    {
+      if (playerCharacter instanceof General)
       {
-        if (playerCharacter instanceof General)
-        {
-          General general = (General) playerCharacter;
-          general.clearDeadPeasants();
-        }
+        General general = (General) playerCharacter;
+        general.clearDeadPeasants();
       }
     }
+
+    encounter.getParty().removeDeadNPCs();
   }
 }

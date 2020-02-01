@@ -5,9 +5,7 @@ import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Party implements Serializable
 {
@@ -152,5 +150,21 @@ public class Party implements Serializable
   public void setPercentChanceOfEncounter(BigDecimal percentChanceOfEncounter)
   {
     this.percentChanceOfEncounter = percentChanceOfEncounter;
+  }
+
+  public void removeDeadNPCs()
+  {
+    Collection<NonPlayerCharacter> toRemove = new ArrayList<1>();
+    for (GameCharacter member : members)
+    {
+      if (member instanceof NonPlayerCharacter && member.isDead())
+      {
+        toRemove.add((NonPlayerCharacter) member);
+      }
+    }
+    for (NonPlayerCharacter nonPlayerCharacter : toRemove)
+    {
+      removeMember(nonPlayerCharacter);
+    }
   }
 }
