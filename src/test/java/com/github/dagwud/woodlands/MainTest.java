@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.log.Logger;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
@@ -225,12 +226,12 @@ public class MainTest
     Update update;
 
     update = createUpdate("TestUser" + playerState.getPlayer().getChatId(), playerState);
-    System.out.println("TestUser" + playerState.getPlayer().getChatId());
+    Logger.log("TestUser" + playerState.getPlayer().getChatId());
     new TelegramServlet().processTelegramUpdate(update);
 
     // suspends to ask for player class
     update = createUpdate("Wizard", playerState);
-    System.out.println("Wizard");
+    Logger.log("Wizard");
     new TelegramServlet().processTelegramUpdate(update);
   }
 

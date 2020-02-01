@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.telegram;
 
+import com.github.dagwud.woodlands.game.log.Logger;
 import com.github.dagwud.woodlands.game.messaging.IMessageSender;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class TelegramMessageSender extends TelegramHelper implements IMessageSen
     }
     else
     {
-      System.out.println("SEND MESSAGE: " + params);
+      Logger.log("SEND MESSAGE: " + params);
     }
   }
 

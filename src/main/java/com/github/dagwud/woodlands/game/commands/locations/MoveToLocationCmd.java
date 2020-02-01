@@ -13,6 +13,7 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -75,7 +76,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private void doMove(GameCharacter characterToMove, ELocation moveTo)
   {
-    System.out.println("Moving " + characterToMove + " to " + moveTo);
+    Logger.log("Moving " + characterToMove + " to " + moveTo);
     characterToMove.setLocation(moveTo);
 
     if (characterToMove instanceof PlayerCharacter)

@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.Settings;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -64,7 +65,7 @@ public class Party implements Serializable
       }
       else
       {
-        System.out.println("INACTIVE: " + member);
+        Logger.log("INACTIVE: " + member);
       }
     }
     return active;

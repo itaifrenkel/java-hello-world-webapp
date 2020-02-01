@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.ShutdownCmd;
 import com.github.dagwud.woodlands.game.commands.ShutdownWarningCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.instructions.CommandFactory;
+import com.github.dagwud.woodlands.game.log.Logger;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 import com.github.dagwud.woodlands.gson.adapter.GsonHelper;
 import com.github.dagwud.woodlands.gson.telegram.CallbackQuery;
@@ -71,7 +72,7 @@ public class TelegramServlet extends HttpServlet
 
     // todo verify request came from telegram - token in request
     String text = determineText(update);
-    System.out.println(summarizeIncomingMessage(update));
+    Logger.log(summarizeIncomingMessage(update));
 
     PlayerState playerState = GameStatesRegistry.lookup(chatId);
     synchronized (GameStatesRegistry.lookup(chatId))

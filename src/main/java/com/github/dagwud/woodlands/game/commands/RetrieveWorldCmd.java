@@ -12,6 +12,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class RetrieveWorldCmd extends AbstractCmd
       PartyRegistry.instance();
     }
 
-    System.out.println("Successfully restored world!");
+    Logger.log("Successfully restored world!");
 
     for (PlayerState player : GameStatesRegistry.allPlayerStates())
     {
@@ -72,7 +73,7 @@ public class RetrieveWorldCmd extends AbstractCmd
   {
     List<String> objectNames = new ArrayList<>(2);
 
-    System.out.println("Checking for persisted world...");
+    Logger.log("Checking for persisted world...");
     final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     ListObjectsV2Result result = s3.listObjectsV2(Settings.S3_BUCKET_NAME);
     List<S3ObjectSummary> objects = result.getObjectSummaries();
@@ -80,7 +81,7 @@ public class RetrieveWorldCmd extends AbstractCmd
     for (S3ObjectSummary os : objects)
     {
       objectNames.add(os.getKey());
-      System.out.println("* " + os.getKey());
+      Logger.log("* " + os.getKey());
     }
     return objectNames;
   }

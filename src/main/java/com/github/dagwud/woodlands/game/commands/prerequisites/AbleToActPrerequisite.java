@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.core.CommandPrerequisite;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 public class AbleToActPrerequisite implements CommandPrerequisite
 {
@@ -36,7 +37,7 @@ public class AbleToActPrerequisite implements CommandPrerequisite
         SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You're " + character.getStats().getState().name().toLowerCase() + "; you can't do anything");
         CommandDelegate.execute(cmd);
       }
-      System.out.println("Prerequisite failed: " + fighter.getName() + " is unconscious");
+      Logger.log("Prerequisite failed: " + fighter.getName() + " is unconscious");
       return false;
     }
     return true;

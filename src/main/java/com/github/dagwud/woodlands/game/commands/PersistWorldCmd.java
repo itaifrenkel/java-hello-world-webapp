@@ -4,8 +4,9 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.log.Logger;
 
-public class PersistWorldCmd extends AbstractCmd
+ public class PersistWorldCmd extends AbstractCmd
 {
   static final String GAME_STATE_FILE = "GameState.ser";
   static final String PARTY_REGISTRY_FILE = "PartyRegistry.ser";
@@ -18,7 +19,7 @@ public class PersistWorldCmd extends AbstractCmd
     PartyRegistry partyRegistry = PartyRegistry.instance();
     persist(partyRegistry, PARTY_REGISTRY_FILE);
 
-    System.out.println("Successfully persisted world!");
+    Logger.log("Successfully persisted world!");
   }
 
   private void persist(Object object, String fileName)

@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.CommandException;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 public class CommandDelegate
 {
@@ -12,7 +13,7 @@ public class CommandDelegate
       if (cmd.verifyPrerequisites())
       {
         cmd.execute();
-        System.out.println(cmd);
+        Logger.log(cmd.toString());
       }
     }
     catch (Exception e)

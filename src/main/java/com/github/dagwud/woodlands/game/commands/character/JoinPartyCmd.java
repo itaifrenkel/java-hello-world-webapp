@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 public class JoinPartyCmd extends AbstractCmd
 {
@@ -25,7 +26,7 @@ public class JoinPartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    System.out.println(joiner.getName() + " joining " + partyName);
+    Logger.log(joiner.getName() + " joining " + partyName);
 
     if (null != joiner.getParty())
     {

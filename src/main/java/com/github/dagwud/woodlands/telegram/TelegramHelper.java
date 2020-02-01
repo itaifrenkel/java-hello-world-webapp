@@ -18,7 +18,7 @@ abstract class TelegramHelper
   {
     String endpoint = buildTelegramURL(method);
     String url = encode(endpoint, params);
-    //System.out.println("CALL: " + url);
+    //Logger.log("CALL: " + url);
     callURL(url);
   }
 

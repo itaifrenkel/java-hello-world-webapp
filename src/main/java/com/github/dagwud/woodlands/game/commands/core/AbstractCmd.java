@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
+import com.github.dagwud.woodlands.game.log.Logger;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +30,7 @@ public abstract class AbstractCmd implements Serializable
     {
       if (!prerequisite.verify())
       {
-        System.out.println("Command " + getClass().getSimpleName() + " skipped: false result from " + prerequisite.getClass().getSimpleName());
+        Logger.log("Command " + getClass().getSimpleName() + " skipped: false result from " + prerequisite.getClass().getSimpleName());
         return false;
       }
     }
