@@ -35,6 +35,15 @@ public class ListPartiesCmd extends AbstractCmd
       }
       b.append("\n");
     }
+
+    b.append("\nAll Players:\n");
+    for (PlayerState p : GameStateRegistry.allPlayerStates())
+    {
+      b.append(p.getActiveCharacter().getName())
+          .append(" - ").append(p.getActiveCharacter().getName())
+          .append("\n");
+    }
+
     SendMessageCmd cmd = new SendMessageCmd(chatId, b.toString());
     CommandDelegate.execute(cmd);
   }
