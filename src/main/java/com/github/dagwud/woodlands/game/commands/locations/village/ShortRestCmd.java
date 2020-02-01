@@ -11,6 +11,8 @@ import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class ShortRestCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private final PlayerCharacter character;
 

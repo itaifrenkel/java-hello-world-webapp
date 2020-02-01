@@ -6,11 +6,12 @@ import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 
 public class KnockUnconsciousCmd extends AbstractCmd
 {
-  private final Fighter target;
+   private static final long serialVersionUID = 1L;
+
+   private final Fighter target;
 
   public KnockUnconsciousCmd(Fighter target)
   {

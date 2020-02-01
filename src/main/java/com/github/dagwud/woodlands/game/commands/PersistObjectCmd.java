@@ -12,6 +12,8 @@ import java.io.*;
 
 public class PersistObjectCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final String name;
   private final Object object;
 

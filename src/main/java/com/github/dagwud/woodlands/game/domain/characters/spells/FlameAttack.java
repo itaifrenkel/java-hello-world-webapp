@@ -12,6 +12,8 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class FlameAttack extends SingleCastSpell
 {
+  private static final long serialVersionUID = 1L;
+
   private DamageInflicted damageInflicted;
 
   public FlameAttack(PlayerCharacter caster)

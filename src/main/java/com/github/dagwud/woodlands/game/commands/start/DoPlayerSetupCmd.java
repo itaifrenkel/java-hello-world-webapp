@@ -13,6 +13,8 @@ import com.github.dagwud.woodlands.game.domain.Player;
 
 public class DoPlayerSetupCmd extends SuspendableCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private String characterName;
   private String characterClass;
 

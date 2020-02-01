@@ -21,6 +21,8 @@ import java.util.Set;
 
 public class MoveToLocationCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final GameCharacter characterToMove;
   private final ELocation location;
 

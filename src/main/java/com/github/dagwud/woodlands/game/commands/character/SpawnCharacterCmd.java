@@ -12,6 +12,8 @@ import com.github.dagwud.woodlands.game.domain.Player;
 
 public class SpawnCharacterCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private int chatId;
   private final String characterName;
   private final ECharacterClass characterClass;

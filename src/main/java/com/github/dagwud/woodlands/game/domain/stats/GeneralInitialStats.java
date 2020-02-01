@@ -2,6 +2,8 @@ package com.github.dagwud.woodlands.game.domain.stats;
 
 public class GeneralInitialStats extends InitialStats
 {
+  private static final long serialVersionUID = 1L;
+
   public GeneralInitialStats()
   {
     shortRestDice = 8;

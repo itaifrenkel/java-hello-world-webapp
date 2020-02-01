@@ -11,6 +11,8 @@ import com.github.dagwud.woodlands.gson.game.Difficulty;
 
 public class DefeatCreatureCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Party victoriousParty;
   private final Creature creatureDefeated;
   private int experienceGrantedPerPlayer;

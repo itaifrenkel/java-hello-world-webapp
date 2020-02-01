@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.domain.Player;
 
 public class PlayerSetupCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Player player;
   private final int chatId;
 

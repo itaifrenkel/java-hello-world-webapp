@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class ArcaneInspiration extends PartySpell
 {
+  private static final long serialVersionUID = 1L;
+
   private static final int MANA_BOOST = 1;
   private Map<PlayerCharacter, Integer> boosted;
 

@@ -6,6 +6,8 @@ import com.github.dagwud.woodlands.game.log.Logger;
 
 public class ShutdownCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   @Override
   public void execute()
   {

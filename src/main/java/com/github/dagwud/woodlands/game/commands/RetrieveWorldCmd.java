@@ -19,6 +19,8 @@ import java.util.List;
 
 public class RetrieveWorldCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private boolean retrieved;
 
   @Override

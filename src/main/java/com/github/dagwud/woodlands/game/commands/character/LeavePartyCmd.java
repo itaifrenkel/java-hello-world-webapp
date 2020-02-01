@@ -6,10 +6,11 @@ import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequi
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 
 public class LeavePartyCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final GameCharacter character;
   private final Party party;
 
@@ -30,7 +31,7 @@ public class LeavePartyCmd extends AbstractCmd
     {
       CommandDelegate.execute(new SendPartyMessageCmd(party, character.getName() + " has left " + party.getName()));
     }
-    party.removeMember(character);    
+    party.removeMember(character);
   }
 
   @Override

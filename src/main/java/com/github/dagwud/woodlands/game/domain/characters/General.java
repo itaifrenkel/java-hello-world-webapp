@@ -8,6 +8,8 @@ import java.util.Collection;
 
 public class General extends PlayerCharacter
 {
+  private static final long serialVersionUID = 1L;
+
   private Collection<Peasant> peasants;
 
   General(Player playedBy)

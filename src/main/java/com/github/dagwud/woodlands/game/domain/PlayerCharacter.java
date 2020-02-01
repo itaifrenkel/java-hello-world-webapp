@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.domain;
 
 public abstract class PlayerCharacter extends GameCharacter
 {
+  private static final long serialVersionUID = 1L;
   private final Player playedBy;
   private final ECharacterClass characterClass;
   private boolean setupComplete;

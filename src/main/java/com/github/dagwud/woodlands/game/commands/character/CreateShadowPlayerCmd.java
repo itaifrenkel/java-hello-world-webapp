@@ -10,6 +10,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class CreateShadowPlayerCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final PlayerCharacter shadowOfCharacter;
   private final String shadowName;
   private final int chatId;

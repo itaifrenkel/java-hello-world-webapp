@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.AuraOfProtectio
 
 class Wizard extends PlayerCharacter
 {
+  private static final long serialVersionUID = 1L;
+
   Wizard(Player playedBy)
   {
     super(playedBy, ECharacterClass.WIZARD);

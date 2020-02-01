@@ -6,6 +6,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class FullHealCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private final PlayerCharacter character;
 

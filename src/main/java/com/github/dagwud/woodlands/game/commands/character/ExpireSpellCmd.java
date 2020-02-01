@@ -5,6 +5,8 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 public class ExpireSpellCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private Spell spell;
 
   ExpireSpellCmd(Spell spell)

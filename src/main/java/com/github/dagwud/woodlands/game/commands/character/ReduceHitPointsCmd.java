@@ -6,10 +6,11 @@ import com.github.dagwud.woodlands.game.commands.battle.KnockUnconsciousCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class ReduceHitPointsCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Fighter character;
   private final int reduceBy;
 

@@ -15,6 +15,8 @@ import java.util.Collection;
 
 public class ShutdownWarningCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   @Override
   public void execute()
   {

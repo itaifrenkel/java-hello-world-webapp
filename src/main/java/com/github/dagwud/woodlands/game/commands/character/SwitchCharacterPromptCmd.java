@@ -10,6 +10,8 @@ import java.util.List;
 
 public class SwitchCharacterPromptCmd extends SuspendableCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Player player;
 
   public SwitchCharacterPromptCmd(Player player)

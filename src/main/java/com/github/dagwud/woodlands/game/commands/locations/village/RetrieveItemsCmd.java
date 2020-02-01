@@ -11,6 +11,8 @@ import java.util.List;
 
 public class RetrieveItemsCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final PlayerCharacter character;
 
   public RetrieveItemsCmd(PlayerCharacter character)
@@ -31,7 +33,7 @@ public class RetrieveItemsCmd extends AbstractCmd
     Weapon chosenWeapon = chooseWeapon();
 
     character.getCarrying().getCarriedInactive().add(chosenWeapon);
-    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You pick up a "+ chosenWeapon.name + " " + chosenWeapon.getIcon() + determineDamageText(chosenWeapon)));
+    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You pick up a " + chosenWeapon.name + " " + chosenWeapon.getIcon() + determineDamageText(chosenWeapon)));
   }
 
   private Weapon chooseWeapon()

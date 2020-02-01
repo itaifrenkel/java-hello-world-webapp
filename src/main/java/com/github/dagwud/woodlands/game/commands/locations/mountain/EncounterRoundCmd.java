@@ -16,6 +16,8 @@ import java.util.*;
 
 public class EncounterRoundCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private final Encounter encounter;
   private final int delayBetweenRoundsMS;
@@ -62,10 +64,10 @@ public class EncounterRoundCmd extends AbstractCmd
         TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(encounter.getParty());
         CommandDelegate.execute(killall);
       }
-      
+
       EndEncounterCmd end = new EndEncounterCmd(encounter);
       CommandDelegate.execute(end);
-      
+
       return;
     }
 
@@ -263,7 +265,7 @@ public class EncounterRoundCmd extends AbstractCmd
     RunLaterCmd nextEncounter = new RunLaterCmd(delayBetweenRoundsMS, nextRoundCmd);
     CommandDelegate.execute(nextEncounter);
 
-    SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getParty(), "Next round of battle in " + (delayBetweenRoundsMS/1000) + " seconds");
+    SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getParty(), "Next round of battle in " + (delayBetweenRoundsMS / 1000) + " seconds");
     CommandDelegate.execute(msg);
   }
 

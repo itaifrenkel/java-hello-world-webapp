@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class KnuckleDuster extends SingleCastSpell
 {
+  private static final long serialVersionUID = 1L;
   private static final double DAMAGE_MULTIPLIER = 2;
 
   public KnuckleDuster(PlayerCharacter caster)

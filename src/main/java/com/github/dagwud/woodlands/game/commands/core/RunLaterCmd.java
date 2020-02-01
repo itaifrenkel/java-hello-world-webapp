@@ -5,6 +5,8 @@ import java.util.concurrent.FutureTask;
 
 public class RunLaterCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final long delayMS;
   private final AbstractCmd cmdToRun;
 

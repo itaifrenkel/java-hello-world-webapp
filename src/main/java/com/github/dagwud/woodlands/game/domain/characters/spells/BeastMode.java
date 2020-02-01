@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 
 public class BeastMode extends BattleRoundSpell
 {
+  private static final long serialVersionUID = 1L;
   private static final BigDecimal PERCENT_CHANCE_PER_LEVEL = new BigDecimal("5");
 
   private int boost;

@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class LookCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final ELocation location;
   private final int chatId;
 

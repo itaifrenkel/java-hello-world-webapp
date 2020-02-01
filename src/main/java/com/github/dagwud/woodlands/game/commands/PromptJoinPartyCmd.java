@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class PromptJoinPartyCmd extends SuspendableCmd
 {
+  private static final long serialVersionUID = 1L;
+
   PromptJoinPartyCmd(PlayerCharacter character)
   {
     super(character.getPlayedBy().getPlayerState(), 2);

@@ -7,6 +7,8 @@ import java.util.List;
 
 public class ChoiceCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private final String prompt;
   private final Object[] options;

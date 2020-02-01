@@ -9,7 +9,9 @@ import com.github.dagwud.woodlands.game.domain.menu.InnMenu;
 
 public class ChangeNamePromptCmd extends SuspendableCmd
 {
-    private final Player player;
+   private static final long serialVersionUID = 1L;
+
+   private final Player player;
 
     public ChangeNamePromptCmd(Player player)
     {

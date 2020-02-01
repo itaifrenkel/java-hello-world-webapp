@@ -1,4 +1,4 @@
- package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
@@ -6,8 +6,10 @@ import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.log.Logger;
 
- public class PersistWorldCmd extends AbstractCmd
+public class PersistWorldCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   static final String GAME_STATE_FILE = "GameState.ser";
   static final String PARTY_REGISTRY_FILE = "PartyRegistry.ser";
 

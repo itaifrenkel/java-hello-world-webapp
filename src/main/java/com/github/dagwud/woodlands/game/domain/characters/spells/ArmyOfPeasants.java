@@ -11,6 +11,8 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class ArmyOfPeasants extends SingleCastSpell
 {
+  private static final long serialVersionUID = 1L;
+
   public ArmyOfPeasants(PlayerCharacter character)
   {
     super("Army of Peasants", character);

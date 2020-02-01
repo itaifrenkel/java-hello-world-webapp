@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 
 public class StartCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private final PlayerState playerState;
 

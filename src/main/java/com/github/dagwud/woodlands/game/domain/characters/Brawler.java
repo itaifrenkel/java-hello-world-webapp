@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.BeastMode;
 
 public class Brawler extends PlayerCharacter
 {
+  private static final long serialVersionUID = 1L;
+
   Brawler(Player playedBy)
   {
     super(playedBy, ECharacterClass.BRAWLER);

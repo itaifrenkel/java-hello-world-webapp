@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.domain.characters.General;
 
 public class EndEncounterCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Encounter encounter;
 
   public EndEncounterCmd(Encounter encounter)

@@ -6,6 +6,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class GrantExperienceCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final PlayerCharacter character;
   private final int experience;
 

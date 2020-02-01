@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 
 public class DealDamageCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final DamageInflicted damageInflicted;
   private final Fighter inflictedOn;
 

@@ -6,6 +6,8 @@ import com.github.dagwud.woodlands.game.domain.Player;
 
 public class Trickster extends PlayerCharacter
 {
+  private static final long serialVersionUID = 1L;
+
   Trickster(Player playedBy)
   {
     super(playedBy, ECharacterClass.TRICKSTER);

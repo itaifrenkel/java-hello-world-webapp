@@ -6,6 +6,8 @@ import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 
 public class ShowMenuCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final GameMenu menu;
   private final PlayerState playerState;
 

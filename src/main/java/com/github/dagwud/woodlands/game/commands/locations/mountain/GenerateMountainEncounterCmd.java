@@ -17,6 +17,8 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final PlayerState playerState;
 
   GenerateMountainEncounterCmd(PlayerState playerState)

@@ -4,6 +4,8 @@ import com.github.dagwud.woodlands.game.commands.ECommand;
 
 public class VillageMenu extends GameMenu
 {
+  private static final long serialVersionUID = 1L;
+
   public VillageMenu()
   {
     setPrompt("You are at The Village");

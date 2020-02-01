@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class AirOfAuthority extends BattleRoundSpell
 {
+  private static final long serialVersionUID = 1L;
+
   private Map<GameCharacter, Integer> buffs;
 
   public AirOfAuthority(General caster)
@@ -40,7 +42,7 @@ public class AirOfAuthority extends BattleRoundSpell
 
         if (target instanceof PlayerCharacter)
         {
-          SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter)target).getPlayedBy().getChatId(),
+          SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
                   getCaster().getName() + " buffed your strength by +" + buffAmount);
           CommandDelegate.execute(cmd);
 

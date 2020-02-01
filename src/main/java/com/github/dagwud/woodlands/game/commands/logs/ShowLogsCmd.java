@@ -10,6 +10,8 @@ import java.util.List;
 
 public class ShowLogsCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
 
   public ShowLogsCmd(int chatId)

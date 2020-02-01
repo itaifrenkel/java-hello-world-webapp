@@ -13,6 +13,8 @@ import java.util.List;
 
 public class InventoryCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private PlayerCharacter character;
 

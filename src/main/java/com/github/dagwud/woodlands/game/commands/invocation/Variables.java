@@ -4,6 +4,8 @@ import java.util.*;
 
 public class Variables extends HashMap<String, String>
 {
+  private static final long serialVersionUID = 1L;
+
   private final String contextName;
 
   public Variables()

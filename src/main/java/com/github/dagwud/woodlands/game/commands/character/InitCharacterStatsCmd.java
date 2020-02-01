@@ -8,9 +8,11 @@ import com.github.dagwud.woodlands.game.domain.stats.InitialStats;
 
 public class InitCharacterStatsCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final PlayerCharacter character;
 
-  public InitCharacterStatsCmd(PlayerCharacter character)
+  InitCharacterStatsCmd(PlayerCharacter character)
   {
     this.character = character;
   }

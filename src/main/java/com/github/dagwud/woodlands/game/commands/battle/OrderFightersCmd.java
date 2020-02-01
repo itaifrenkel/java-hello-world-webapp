@@ -11,6 +11,8 @@ import java.util.List;
 
 public class OrderFightersCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Collection<Fighter> unOrdered;
   private List<Fighter> orderedFighters;
 

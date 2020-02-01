@@ -5,6 +5,8 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 
 public class RecoverManaCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Fighter target;
   private final int manaRecovered;
 

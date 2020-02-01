@@ -7,6 +7,7 @@ import java.util.Collection;
 
 public abstract class GameCharacter extends Fighter
 {
+  private static final long serialVersionUID = 1L;
   private final Stats stats;
   private final CarriedItems carrying;
   private Party party;

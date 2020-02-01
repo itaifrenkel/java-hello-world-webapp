@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 
 public class ChanceCalculatorCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private static final BigDecimal ONE_HUNDRED = new BigDecimal("100");
   private final BigDecimal chancePercent;
   private boolean result;

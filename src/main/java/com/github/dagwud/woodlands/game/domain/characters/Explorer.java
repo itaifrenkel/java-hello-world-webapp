@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.SpiritOfAdventu
 
 public class Explorer extends PlayerCharacter
 {
+  private static final long serialVersionUID = 1L;
+
   Explorer(Player playedBy)
   {
     super(playedBy, ECharacterClass.EXPLORER);

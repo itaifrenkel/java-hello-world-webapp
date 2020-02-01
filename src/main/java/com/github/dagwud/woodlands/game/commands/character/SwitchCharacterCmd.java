@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.domain.Player;
 
 public class SwitchCharacterCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Player player;
   private final PlayerCharacter toActivate;
 
@@ -26,7 +28,7 @@ public class SwitchCharacterCmd extends AbstractCmd
       if (wasActive == toActivate)
       {
         return;
-      } 
+      }
       if (!toActivate.isConscious())
       {
         SendMessageCmd err = new SendMessageCmd(player.getChatId(), toActivate.getName() + " is " + toActivate.getStats().getState());

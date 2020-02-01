@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.ArcaneInspirati
 
 class Druid extends PlayerCharacter
 {
+  private static final long serialVersionUID = 1L;
+
   Druid(Player playedBy)
   {
     super(playedBy, ECharacterClass.DRUID);

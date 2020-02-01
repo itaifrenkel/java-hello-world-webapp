@@ -5,12 +5,13 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 public class CastSpellCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private Spell spell;
 
   public CastSpellCmd(Spell spell)

@@ -8,12 +8,12 @@ import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 import com.github.dagwud.woodlands.game.items.UnknownWeaponException;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.internal.$Gson$Preconditions;
 
 import java.util.*;
 
 public class Creature extends Fighter
 {
+  private static final long serialVersionUID = 1L;
   public String name;
 
   public double difficulty;

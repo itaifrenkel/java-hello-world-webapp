@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
  */
 public abstract class PartySpell extends PassiveSpell
 {
+  private static final long serialVersionUID = 1L;
+
   PartySpell(String spellName, PlayerCharacter caster)
   {
     super(spellName, caster);

@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class ShowCharacterInfoCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private final PlayerCharacter character;
 

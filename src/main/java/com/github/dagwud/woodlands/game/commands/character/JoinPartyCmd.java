@@ -12,6 +12,8 @@ import com.github.dagwud.woodlands.game.log.Logger;
 
 public class JoinPartyCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final String partyName;
   private final GameCharacter joiner;
 
@@ -76,8 +78,8 @@ public class JoinPartyCmd extends AbstractCmd
       return true;
     }
     return party.getLeader().getLocation() == ELocation.VILLAGE_SQUARE
-      || party.getLeader().getLocation() == ELocation.INN
-      || party.getLeader().getLocation() == ELocation.TAVERN;
+            || party.getLeader().getLocation() == ELocation.INN
+            || party.getLeader().getLocation() == ELocation.TAVERN;
   }
 
   @Override

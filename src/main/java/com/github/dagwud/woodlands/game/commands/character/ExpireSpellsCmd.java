@@ -9,6 +9,8 @@ import java.util.Collection;
 
 public class ExpireSpellsCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private Collection<? extends Spell> spells;
 
   public ExpireSpellsCmd(Collection<? extends Spell> spells)

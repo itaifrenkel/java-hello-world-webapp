@@ -4,6 +4,8 @@ import com.github.dagwud.woodlands.game.PlayerState;
 
 public abstract class SuspendableCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final PlayerState playerState;
   private final int numberOfPhases;
   private int nextPhaseToRun;

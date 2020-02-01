@@ -4,6 +4,8 @@ import com.github.dagwud.woodlands.game.commands.ECommand;
 
 public class InnMenu extends GameMenu
 {
+  private static final long serialVersionUID = 1L;
+
   public InnMenu()
   {
     setPrompt("This is the inn");

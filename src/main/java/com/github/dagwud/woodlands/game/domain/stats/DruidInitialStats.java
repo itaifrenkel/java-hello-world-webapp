@@ -2,6 +2,8 @@ package com.github.dagwud.woodlands.game.domain.stats;
 
 public class DruidInitialStats extends InitialStats
 {
+  private static final long serialVersionUID = 1L;
+
   public DruidInitialStats()
   {
     shortRestDice = 8;
@@ -9,7 +11,7 @@ public class DruidInitialStats extends InitialStats
     strengthBoost = 2;
     initialStrengthModifier = 0 + strengthBoost;
     initialAgility = 14;
-    initialAgilityModifier = 2+ agilityBoost;
+    initialAgilityModifier = 2 + agilityBoost;
     initialConstitution = 15;
     initialConstitutionModifier = 2 + constitutionBoost;
     initialIntelligenceUnused = 9;

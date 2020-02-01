@@ -13,6 +13,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class ListPartiesCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
 
   ListPartiesCmd(int chatId)
@@ -28,15 +30,15 @@ public class ListPartiesCmd extends AbstractCmd
     for (Party party : PartyRegistry.listNames())
     {
       b.append(party.getName())
-          .append(" (").append(party.size()).append(") - ")
-          .append(party.getLeader() == null ? "No leader" : "🎖" + party.getLeader().getName())
-          .append("\n");
+              .append(" (").append(party.size()).append(") - ")
+              .append(party.getLeader() == null ? "No leader" : "🎖" + party.getLeader().getName())
+              .append("\n");
       for (GameCharacter c : party.getActiveMembers())
       {
         b.append(" • ").append(c.summary())
-            .append(" (").append(c.getStats().getState()).append(")")
-            .append(" @ ").append(c.getLocation())
-            .append("\n");
+                .append(" (").append(c.getStats().getState()).append(")")
+                .append(" @ ").append(c.getLocation())
+                .append("\n");
       }
       b.append("\n");
     }

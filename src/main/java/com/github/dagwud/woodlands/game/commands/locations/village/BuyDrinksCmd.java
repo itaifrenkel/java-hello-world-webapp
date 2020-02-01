@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 
 public class BuyDrinksCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private final PlayerCharacter activeCharacter;
 

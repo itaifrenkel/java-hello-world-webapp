@@ -4,6 +4,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class AlmanacOfZoology extends SingleCastSpell
 {
+  private static final long serialVersionUID = 1L;
+
   private static final double DAMAGE_MULTIPLIER = 1.4;
 
   public AlmanacOfZoology(PlayerCharacter caster)

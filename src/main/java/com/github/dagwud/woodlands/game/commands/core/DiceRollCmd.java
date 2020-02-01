@@ -2,6 +2,8 @@ package com.github.dagwud.woodlands.game.commands.core;
 
 public class DiceRollCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int diceCount;
   private final int diceFaces;
   private int total;

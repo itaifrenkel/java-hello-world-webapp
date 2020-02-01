@@ -10,6 +10,8 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class AttackCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Fighter attacker;
   private final Fighter defender;
   private final Weapon weaponUsed;

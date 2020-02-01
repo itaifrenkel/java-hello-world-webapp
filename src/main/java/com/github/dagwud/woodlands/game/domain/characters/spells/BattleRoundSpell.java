@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
  */
 public abstract class BattleRoundSpell extends Spell
 {
+  private static final long serialVersionUID = 1L;
+
   BattleRoundSpell(String spellName, Fighter caster)
   {
     super(spellName, caster);

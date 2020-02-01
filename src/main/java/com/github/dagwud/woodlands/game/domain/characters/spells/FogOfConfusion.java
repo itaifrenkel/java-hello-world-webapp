@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class FogOfConfusion extends SingleCastSpell
 {
+  private static final long serialVersionUID = 1L;
   private static final int HIT_CHANCE_PENALTY = 10000;
   private Creature target;
 

@@ -9,6 +9,8 @@ import com.github.dagwud.woodlands.game.domain.characters.GameCharacterFactory;
 
 public class CreateCharacterCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final String characterName;
   private final ECharacterClass characterClass;
   private PlayerCharacter createdCharacter;

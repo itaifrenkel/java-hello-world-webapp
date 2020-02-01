@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class RollShortRestCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final PlayerCharacter character;
   private int recoveredHitPoints;
 

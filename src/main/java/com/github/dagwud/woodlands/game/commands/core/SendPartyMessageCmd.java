@@ -6,6 +6,8 @@ import com.github.dagwud.woodlands.game.domain.Party;
 
 public class SendPartyMessageCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Party party;
   private final String message;
 

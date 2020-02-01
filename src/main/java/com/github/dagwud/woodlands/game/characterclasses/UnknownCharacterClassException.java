@@ -4,7 +4,7 @@ import com.github.dagwud.woodlands.game.WoodlandsException;
 
 class UnknownCharacterClassException extends WoodlandsException
 {
-  UnknownCharacterClassException(String message)
+   UnknownCharacterClassException(String message)
   {
     super(message);
   }
