@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.PlayerState;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Player implements Serializable
@@ -44,5 +45,13 @@ public class Player implements Serializable
   public List<PlayerCharacter> getInactiveCharacters()
   {
     return inactiveCharacters;
+  }
+
+  public List<PlayerCharacter> getAllCharacters()
+  {
+    List<PlayerCharacter> all = new ArrayList<>(getInactiveCharacters().size() + 1);
+    all.add(getActiveCharacter());
+    all.addAll(getInactiveCharacters());
+    return Collections.unmodifiableList(all);
   }
 }
