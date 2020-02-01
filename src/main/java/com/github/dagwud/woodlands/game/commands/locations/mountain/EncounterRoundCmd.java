@@ -229,7 +229,7 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       for (Spell spell : spells)
       {
-        summary.append("\n").append(spell.buildSpellDescription());
+        summary.append("\n").append(spell.getCaster().getName()).append(" ").append(spell.buildSpellDescription());
       }
     }
 

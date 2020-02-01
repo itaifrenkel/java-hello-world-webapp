@@ -14,10 +14,11 @@ public class FogOfConfusion extends SingleCastSpell
   }
 
   @Override
-  public void cast()
+  public boolean cast()
   {
     target = getCaster().getParty().getActiveEncounter().getEnemy();
     target.getStats().setHitBoost(target.getStats().getHitBoost() - HIT_CHANCE_PENALTY);
+    return true;
   }
 
   @Override

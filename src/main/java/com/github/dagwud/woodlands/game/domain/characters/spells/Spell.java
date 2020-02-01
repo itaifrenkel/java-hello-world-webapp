@@ -18,13 +18,13 @@ public abstract class Spell implements Serializable
     this.caster = caster;
   }
 
-  public abstract void cast();
+  public abstract boolean cast();
 
   public abstract void expire();
 
   public String buildSpellDescription()
   {
-    return caster.getName() + " ✨" + spellName;
+    return "✨" + spellName;
   }
 
   public Fighter getCaster()

@@ -19,7 +19,7 @@ public class ArcaneInspiration extends PartySpell
   }
 
   @Override
-  public void cast()
+  public boolean cast()
   {
     for (PlayerCharacter target : getCaster().getParty().getActivePlayerCharacters())
     {
@@ -33,6 +33,7 @@ public class ArcaneInspiration extends PartySpell
         CommandDelegate.execute(cmd);
       }
     }
+    return true;
   }
 
   @Override

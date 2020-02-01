@@ -27,7 +27,7 @@ public class AuraOfProtection extends BattleRoundSpell
   }
 
   @Override
-  public void cast()
+  public boolean cast()
   {
     for (GameCharacter target : getCaster().getParty().getActiveMembers())
     {
@@ -41,6 +41,7 @@ public class AuraOfProtection extends BattleRoundSpell
         CommandDelegate.execute(cmd);
       }
     }
+    return true;
   }
 
   @Override

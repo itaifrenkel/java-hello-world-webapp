@@ -12,9 +12,10 @@ public class AlmanacOfZoology extends SingleCastSpell
   }
 
   @Override
-  public void cast()
+  public boolean cast()
   {
     getCaster().getStats().setDamageMultiplier(getCaster().getStats().getDamageMultiplier() * DAMAGE_MULTIPLIER);
+    return true;
   }
 
   @Override

@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Peasant;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
@@ -18,16 +17,10 @@ public class ArmyOfPeasants extends SingleCastSpell
   }
 
   @Override
-  public void cast()
+  public boolean cast()
   {
     int peasantsAllowed = determineNumberOfPeasants();
-    if (getCaster().countActivePeasants() >= peasantsAllowed)
-    {
-      SendMessageCmd msg = new SendMessageCmd(getCaster().getPlayedBy().getChatId(), "You don't command enough respoect to command more peasants");
-      CommandDelegate.execute(msg);
-      return;
-    }
-
+    int summoned = 0;
     for (int i = getCaster().countActivePeasants(); i < peasantsAllowed; i++)
     {
       String name = "Peasant #" + (i + 1) + " (" + getCaster().getName() + ")";
@@ -40,7 +33,17 @@ public class ArmyOfPeasants extends SingleCastSpell
       CommandDelegate.execute(cmd);
 
       getCaster().getPeasants().add(peasant);
+
+      summoned++;
     }
+
+    if (summoned == 0)
+    {
+      SendMessageCmd msg = new SendMessageCmd(getCaster().getPlayedBy().getChatId(), "You don't command enough respect to summon more peasants");
+      CommandDelegate.execute(msg);
+      return false;
+    }
+    return true;
   }
 
   private int determineNumberOfPeasants()

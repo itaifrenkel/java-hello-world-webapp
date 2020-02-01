@@ -17,7 +17,7 @@ public class SpiritOfAdventure extends PartySpell
   }
 
   @Override
-  public void cast()
+  public boolean cast()
   {
     BigDecimal initial = getCaster().getParty().getPercentChanceOfEncounter();
     getCaster().getParty().setPercentChanceOfEncounter(initial.multiply(CHANCE_OF_ENCOUNTER_MODIFIER));
@@ -26,6 +26,7 @@ public class SpiritOfAdventure extends PartySpell
       SendPartyMessageCmd cmd = new SendPartyMessageCmd(getCaster().getParty(), getCaster().getName() + " is boosting the chance of encounters for " + getCaster().getParty().getName());
       CommandDelegate.execute(cmd);
     }
+    return true;
   }
 
   @Override

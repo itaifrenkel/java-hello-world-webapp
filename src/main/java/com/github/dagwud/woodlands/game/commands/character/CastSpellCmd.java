@@ -39,11 +39,13 @@ public class CastSpellCmd extends AbstractCmd
       return;
     }
     spell.getCaster().getStats().setMana(mana);
-    spell.cast();
-    spell.setCast(true);
+    if (spell.cast())
+    {
+      spell.setCast(true);
 
-    SendMessageCmd success = new SendMessageCmd(((PlayerCharacter)spell.getCaster()).getPlayedBy().getChatId(), "You cast " + spell.buildSpellDescription());
-    CommandDelegate.execute(success);
+      SendMessageCmd success = new SendMessageCmd(((PlayerCharacter) spell.getCaster()).getPlayedBy().getChatId(), "You cast " + spell.buildSpellDescription());
+      CommandDelegate.execute(success);
+    }
   }
 
   @Override

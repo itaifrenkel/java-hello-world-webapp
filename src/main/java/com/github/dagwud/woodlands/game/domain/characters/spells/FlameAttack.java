@@ -20,7 +20,7 @@ public class FlameAttack extends SingleCastSpell
   }
 
   @Override
-  public void cast()
+  public boolean cast()
   {
     Creature target = getCaster().getParty().getActiveEncounter().getEnemy();
     DiceRollCmd roll = new DiceRollCmd(getCaster().getStats().getLevel(), 8);
@@ -29,6 +29,7 @@ public class FlameAttack extends SingleCastSpell
 
     DealDamageCmd damageCmd = new DealDamageCmd(damageInflicted, target);
     CommandDelegate.execute(damageCmd);
+    return true;
   }
 
   private DamageInflicted generateDamage(Fighter attacker, int totalDamage, Fighter target)

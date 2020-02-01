@@ -28,7 +28,7 @@ public class AirOfAuthority extends BattleRoundSpell
   }
 
   @Override
-  public void cast()
+  public boolean cast()
   {
     for (GameCharacter target : getCaster().getParty().getActiveMembers())
     {
@@ -51,6 +51,7 @@ public class AirOfAuthority extends BattleRoundSpell
         }
       }
     }
+    return true;
   }
 
   @Override

@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
 import com.github.dagwud.woodlands.gson.telegram.Update;
+import com.github.dagwud.woodlands.gson.telegram.User;
 import com.github.dagwud.woodlands.web.TelegramServlet;
 
 import java.util.Scanner;
@@ -37,6 +38,7 @@ public class SuperSimulator9000WithAdvancedAI
         u.message.text = messageText;
         u.message.chat = new Chat();
         u.message.chat.id = -1;
+        u.message.from = new User();
         return u;
     }
 }
