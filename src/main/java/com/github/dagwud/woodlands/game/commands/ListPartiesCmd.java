@@ -51,11 +51,11 @@ public class ListPartiesCmd extends AbstractCmd
 
       for (PlayerCharacter character : player.getAllCharacters())
       {
-        b.append("   ").append(character.isActive() ? "⚫" : "•").append(" ").append(character.getName())
+        b.append("   • ").append(character.getName())
                 .append(" - ").append(character.getName());
-        if (character.isActive())
+        if (!character.isActive())
         {
-          b.append(" (active)");
+          b.append(" (inactive)");
         }
         b.append("\n");
       }
