@@ -32,7 +32,7 @@ public class ListPartiesCmd extends AbstractCmd
           .append("\n");
       for (GameCharacter c : party.getActiveMembers())
       {
-        b.append(" * ").append(c.summary())
+        b.append(" • ").append(c.summary())
             .append(" @ ").append(c.getLocation())
             .append("\n");
       }
@@ -42,7 +42,7 @@ public class ListPartiesCmd extends AbstractCmd
     b.append("\nAll Players:\n");
     for (PlayerState p : GameStatesRegistry.allPlayerStates())
     {
-      b.append(p.getActiveCharacter().getName())
+      b.append(" • ").append(p.getActiveCharacter().getName())
           .append(" - ").append(p.getActiveCharacter().getName())
           .append("\n");
     }
