@@ -34,12 +34,17 @@ public class ShortRestCmd extends AbstractCmd
       stats.setRestPoints(1); //todo because long rest not yet implemented - needs to be removed, and at this point should abort the short rest
     }
 
-    stats.setState(EState.RESTING);
-    AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, character);
-    restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
-    CommandDelegate.execute(restCompletedCmd);
-
-    SendMessageCmd echo = new SendMessageCmd(chatId, "You're resting.");
-    CommandDelegate.execute(echo);
+    for (GameCharacter member : character.getParty().getActivePlayerCharacters())
+    {
+      if (member.getStats().getHitPoints() < member.getStats().getMaxHitPoints())
+      {
+        stats.setState(EState.RESTING);
+        AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, character);
+        restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
+        CommandDelegate.execute(restCompletedCmd);
+        SendMessageCmd echo = new SendMessageCmd(chatId, "You're resting" + (member != character ? " (initiated by " + character.getName() + ")" : ""));
+        CommandDelegate.execute(echo);
+      }
+    }
   }
 }
