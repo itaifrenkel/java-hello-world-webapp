@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
+import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 
 import java.io.Serializable;
