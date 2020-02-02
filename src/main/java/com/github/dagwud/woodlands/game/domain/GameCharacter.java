@@ -29,7 +29,7 @@ public abstract class GameCharacter extends Fighter
   @Override
   public String getName()
   {
-    return name + Integer.toHexString(hashCode()).substring(4);
+    return name + "[" + Integer.toHexString(hashCode()).substring(4) + "]";
   }
 
   public void setName(String name)
