@@ -174,7 +174,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
     for (Fighter fighter : fighters)
     {
-      doAttack(fighter, roundActivity);
+      roundActivity.addAll(doAttack(fighter));
     }
     return roundActivity;
   }
@@ -204,19 +204,27 @@ public class EncounterRoundCmd extends AbstractCmd
     return false;
   }
 
-  private void doAttack(Fighter attacker, List<DamageInflicted> roundActivity)
+  private List<DamageInflicted> doAttack(Fighter attacker)
   {
+    List<DamageInflicted> roundActivity = new ArrayList<>();
     Fighter defender = attacker.chooseFighterToAttack(encounter.getAllFighters());
     if (attacker.isConscious() && defender.isConscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
-      roundActivity.add(damage);
+      if (damage.getHitType() != EHitType.DO_NOTHING)
+      {
+        roundActivity.add(damage);
+      }
     }
     if (attacker.isConscious() && defender.isConscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);
-      roundActivity.add(damage);
+      if (damage.getHitType() != EHitType.DO_NOTHING)
+      {
+        roundActivity.add(damage);
+      }
     }
+    return roundActivity;
   }
 
   private DamageInflicted doAttack(Fighter attacker, Weapon attackWith, Fighter defender)
