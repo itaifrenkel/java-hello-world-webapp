@@ -45,7 +45,7 @@ public class ShortRestCmd extends AbstractCmd
       Stats stats = member.getStats();
       if (stats.getHitPoints() < stats.getMaxHitPoints())
       {
-        if (stats.getRestPoints() > 0)
+        if (stats.getRestPoints() > 0 || true /*todo see above*/)
         {
           stats.setState(EState.RESTING);
           AbstractCmd restCompletedCmd = new DoShortRestCmd(member.getPlayedBy().getChatId(), member);
