@@ -18,8 +18,6 @@ public class PersistWorldCmd extends AbstractCmd
   {
     GameStatesRegistry gameState = GameStatesRegistry.instance();
     persist(gameState, GAME_STATE_FILE);
-    PartyRegistry partyRegistry = PartyRegistry.instance();
-    persist(partyRegistry, PARTY_REGISTRY_FILE);
 
     Logger.info("Successfully persisted world!");
   }

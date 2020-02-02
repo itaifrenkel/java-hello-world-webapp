@@ -12,10 +12,9 @@ public class PartyRegistry implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private static PartyRegistry instance;
   private final Map<String, Party> parties = new HashMap<>();
 
-  private PartyRegistry()
+  PartyRegistry()
   {
   }
 
@@ -35,20 +34,7 @@ public class PartyRegistry implements Serializable
 
   public static PartyRegistry instance()
   {
-    if (null == instance)
-    {
-      createInstance();
-    }
-    return instance;
-  }
-
-  private synchronized static void createInstance()
-  {
-    if (null != instance)
-    {
-      return;
-    }
-    instance = new PartyRegistry();
+    return GameStatesRegistry.instance().getPartyRegistry();
   }
 
   public static Collection<Party> listNames()
@@ -56,13 +42,4 @@ public class PartyRegistry implements Serializable
     return Collections.unmodifiableCollection(instance().parties.values());
   }
 
-  public static void reload(PartyRegistry partyRegistry)
-  {
-    instance = partyRegistry;
-  }
-
-  public static void reset()
-  {
-    instance = new PartyRegistry();
-  }
 }

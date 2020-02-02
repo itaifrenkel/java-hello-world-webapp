@@ -15,9 +15,11 @@ public class GameStatesRegistry implements Serializable
 
   private static GameStatesRegistry instance;
   private final Map<Integer, PlayerState> gameStatesByCharacter = new HashMap<>();
+  private PartyRegistry partyRegistry;
 
   private GameStatesRegistry()
   {
+    partyRegistry = new PartyRegistry();
   }
 
   public static PlayerState lookup(int chatId)
@@ -74,5 +76,10 @@ public class GameStatesRegistry implements Serializable
   public static void reload(GameStatesRegistry gameState)
   {
     instance = gameState;
+  }
+
+  public PartyRegistry getPartyRegistry()
+  {
+    return partyRegistry;
   }
 }

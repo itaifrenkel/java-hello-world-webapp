@@ -51,16 +51,6 @@ public class RetrieveWorldCmd extends AbstractCmd
       GameStatesRegistry.instance();
     }
 
-    PartyRegistry partyRegistry = read(PersistWorldCmd.PARTY_REGISTRY_FILE);
-    if (null != partyRegistry)
-    {
-      PartyRegistry.reload(partyRegistry);
-    }
-    else
-    {
-      PartyRegistry.instance();
-    }
-
     Logger.info("Successfully restored world!");
 
     for (PlayerState player : GameStatesRegistry.allPlayerStates())
