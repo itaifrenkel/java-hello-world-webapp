@@ -51,7 +51,7 @@ public class FlameAttack extends SingleCastSpell
   @Override
   public String buildSpellDescription()
   {
-    if (damageInflicted == null)
+    if (!isCast())
     {
       return super.buildSpellDescription();
     }
