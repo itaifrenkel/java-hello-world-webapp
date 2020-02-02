@@ -28,9 +28,9 @@ public class ShortRestCmd extends AbstractCmd
   {
     if (character.getStats().getRestPoints() <= 0)
     {
-      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need a full rest\nThis is not yet implemented, so for now we'll let it slide. You've been granted a free bonus short rest");
+      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need a full rest\nThis is not yet implemented, so for now we'll let it slide. You've been granted a free bonus short rest. You can use it now");
       CommandDelegate.execute(cmd);
-      stats.setRestPoints(1); //todo because long rest not yet implemented - needs to be removed, and at this point should abort the short rest
+      character.getStats().setRestPoints(1); //todo because long rest not yet implemented - needs to be removed, and at this point should abort the short rest
       return;
     }
 
