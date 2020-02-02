@@ -39,7 +39,7 @@ public class CastSpellCmd extends AbstractCmd
       }
       return;
     }
-    spell.getCaster().getStats().setMana(mana);
+    spell.getCaster().getStats().setMana(mana - spell.getManaCost());
     if (spell.cast())
     {
       spell.setCast(true);
