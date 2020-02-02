@@ -29,7 +29,7 @@ public class GameStatesRegistry implements Serializable
       CommandDelegate.execute(cmd);
 
       PlayerState playerStateForChat = cmd.getCreatedPlayerState();
-      if (registry.gameStatesByCharacter.containsKey(chatId)
+      if (registry.gameStatesByCharacter.containsKey(chatId))
       {
         throw new WoodlandsRuntimeException("Duplicate players for chat " + chatId);
       }
