@@ -197,26 +197,16 @@ public class EncounterRoundCmd extends AbstractCmd
 
   private void doAttack(Fighter attacker, List<DamageInflicted> roundActivity)
   {
-    boolean didAnything = false;
     Fighter defender = attacker.chooseFighterToAttack(encounter.getAllFighters());
     if (attacker.isConscious() && defender.isConscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
       roundActivity.add(damage);
-      didAnything = true;
     }
     if (attacker.isConscious() && defender.isConscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);
       roundActivity.add(damage);
-      didAnything = true;
-    }
-
-    if (!didAnything)
-    {
-      // add a "did nothing" entry
-      DamageInflicted nothing = doAttack(attacker, null, defender);
-      roundActivity.add(nothing);
     }
   }
 
