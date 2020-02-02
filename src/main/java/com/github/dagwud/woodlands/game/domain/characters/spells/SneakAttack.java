@@ -14,8 +14,6 @@ public class SneakAttack extends SingleCastSpell
 {
   private static final long serialVersionUID = 1L;
 
-  private DamageInflicted damageInflicted;
-
   public SneakAttack(PlayerCharacter caster)
   {
     super("Sneak Attack", caster);
@@ -27,9 +25,9 @@ public class SneakAttack extends SingleCastSpell
     Creature target = getCaster().getParty().getActiveEncounter().getEnemy();
     DiceRollCmd roll = new DiceRollCmd(getCaster().getStats().getLevel(), 8);
     CommandDelegate.execute(roll);
-    damageInflicted = generateDamage(getCaster(), roll.getTotal(), target);
+    setDamageInflicted(generateDamage(getCaster(), roll.getTotal(), target));
 
-    DealDamageCmd damageCmd = new DealDamageCmd(damageInflicted, target);
+    DealDamageCmd damageCmd = new DealDamageCmd(getDamageInflicted(), target);
     CommandDelegate.execute(damageCmd);
     return true;
   }
@@ -49,12 +47,6 @@ public class SneakAttack extends SingleCastSpell
   }
 
   @Override
-  public String buildSpellDescription()
-  {
-    return damageInflicted.buildDamageDescription();
-  }
-
-  @Override
   public PlayerCharacter getCaster()
   {
     return (PlayerCharacter) super.getCaster();
@@ -63,6 +55,6 @@ public class SneakAttack extends SingleCastSpell
   @Override
   public int getManaCost()
   {
-    return 0;
+    return 1;
   }
 }
