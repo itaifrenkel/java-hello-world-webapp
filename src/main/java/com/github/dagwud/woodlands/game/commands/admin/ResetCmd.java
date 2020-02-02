@@ -16,6 +16,5 @@ public class ResetCmd extends AbstractCmd
   public void execute()
   {
     GameStatesRegistry.reset();
-    PartyRegistry.reset();
   }
 }
