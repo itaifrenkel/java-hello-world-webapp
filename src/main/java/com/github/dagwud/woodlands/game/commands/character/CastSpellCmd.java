@@ -29,7 +29,7 @@ public class CastSpellCmd extends AbstractCmd
     }
 
     int mana = spell.getCaster().getStats().getMana();
-    int manaCost = 1;
+    int manaCost = spell.getManaCost();
     if (mana < manaCost)
     {
       if (spell.getCaster() instanceof PlayerCharacter)
