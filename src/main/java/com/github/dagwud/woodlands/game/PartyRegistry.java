@@ -39,7 +39,8 @@ public class PartyRegistry implements Serializable
 
   public static Collection<Party> listNames()
   {
-    return Collections.unmodifiableCollection(instance().parties.values());
+    Map<String, Party> parties = instance().parties;
+    return Collections.unmodifiableCollection(parties.values());
   }
 
 }

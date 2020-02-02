@@ -78,7 +78,7 @@ public class GameStatesRegistry implements Serializable
     instance = gameState;
   }
 
-  public PartyRegistry getPartyRegistry()
+  PartyRegistry getPartyRegistry()
   {
     return partyRegistry;
   }
