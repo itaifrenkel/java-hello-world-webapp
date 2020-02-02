@@ -27,7 +27,7 @@ public class FlameAttack extends SingleCastSpell
     CommandDelegate.execute(roll);
     setDamageInflicted(generateDamage(getCaster(), roll.getTotal(), target));
 
-    DealDamageCmd damageCmd = new DealDamageCmd(damageInflicted, target);
+    DealDamageCmd damageCmd = new DealDamageCmd(getDamageInflicted(), target);
     CommandDelegate.execute(damageCmd);
     return true;
   }
