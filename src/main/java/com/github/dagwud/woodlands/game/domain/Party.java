@@ -28,7 +28,7 @@ public class Party implements Serializable
 
   public String getName()
   {
-    return name;
+    return name + "[" + Integer.toHexString(hashCode()).substring(3) + "]";
   }
 
   public void setActiveEncounter(Encounter encounter)
