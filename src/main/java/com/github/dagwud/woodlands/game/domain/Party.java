@@ -62,12 +62,7 @@ public class Party implements Serializable
       {
         active.add(member);
       }
-      else
-      {
-        Logger.info("INACTIVE: " + member);
-      }
     }
-    Logger.info("Active: " + active);
     return active;
   }
 
