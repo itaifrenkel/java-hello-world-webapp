@@ -65,7 +65,7 @@ public class GameStatesRegistry implements Serializable
     }
     RetrieveWorldCmd cmd = new RetrieveWorldCmd();
     CommandDelegate.execute(cmd);
-    if (!cmd.retrieved())
+    if (!cmd.retrieved() && null == instance)
     {
       instance = new GameStatesRegistry();
     }
