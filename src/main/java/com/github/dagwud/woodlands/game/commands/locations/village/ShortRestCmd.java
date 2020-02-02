@@ -26,24 +26,28 @@ public class ShortRestCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Stats stats = character.getStats();
-    if (stats.getRestPoints() <= 0)
+    if (character.getStats().getRestPoints() <= 0)
     {
-      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need a full rest\nThis is not yet implemented, so for now we'll let it slide");
+      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need a full rest\nThis is not yet implemented, so for now we'll let it slide. You've been granted a free bonus short rest");
       CommandDelegate.execute(cmd);
       stats.setRestPoints(1); //todo because long rest not yet implemented - needs to be removed, and at this point should abort the short rest
+      return;
     }
 
-    for (GameCharacter member : character.getParty().getActivePlayerCharacters())
+    for (PlayerCharacter member : character.getParty().getActivePlayerCharacters())
     {
-      if (member.getStats().getHitPoints() < member.getStats().getMaxHitPoints())
+      Stats stats = member.getStats();
+      if (stats.getHitPoints() < stats.getMaxHitPoints())
       {
-        stats.setState(EState.RESTING);
-        AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, character);
-        restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
-        CommandDelegate.execute(restCompletedCmd);
-        SendMessageCmd echo = new SendMessageCmd(chatId, "You're resting" + (member != character ? " (initiated by " + character.getName() + ")" : ""));
-        CommandDelegate.execute(echo);
+        if (stats.getRestPoints() > 0)
+        {
+          stats.setState(EState.RESTING);
+          AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, character);
+          restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
+          CommandDelegate.execute(restCompletedCmd);
+          SendMessageCmd echo = new SendMessageCmd(chatId, "You're resting" + (member != character ? " (initiated by " + character.getName() + ")" : ""));
+          CommandDelegate.execute(echo);
+        }
       }
     }
   }
