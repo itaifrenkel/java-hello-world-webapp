@@ -29,7 +29,8 @@ public class CastSpellCmd extends AbstractCmd
     }
 
     int mana = spell.getCaster().getStats().getMana();
-    if (mana < spell.getManaCost())
+    int manaCost = 1;
+    if (mana < manaCost)
     {
       if (spell.getCaster() instanceof PlayerCharacter)
       {
@@ -39,10 +40,10 @@ public class CastSpellCmd extends AbstractCmd
       }
       return;
     }
-    spell.getCaster().getStats().setMana(mana - spell.getManaCost());
     if (spell.cast())
     {
       spell.setCast(true);
+      spell.getCaster().getStats().setMana(mana - manaCost);
 
       SendMessageCmd success = new SendMessageCmd(((PlayerCharacter) spell.getCaster()).getPlayedBy().getChatId(), "You cast " + spell.buildSpellDescription());
       CommandDelegate.execute(success);
