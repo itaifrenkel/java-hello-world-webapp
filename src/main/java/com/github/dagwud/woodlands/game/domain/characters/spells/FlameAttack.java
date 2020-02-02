@@ -14,8 +14,6 @@ public class FlameAttack extends SingleCastSpell
 {
   private static final long serialVersionUID = 1L;
 
-  private DamageInflicted damageInflicted;
-
   public FlameAttack(PlayerCharacter caster)
   {
     super("Flame Attack", caster);
@@ -27,7 +25,7 @@ public class FlameAttack extends SingleCastSpell
     Creature target = getCaster().getParty().getActiveEncounter().getEnemy();
     DiceRollCmd roll = new DiceRollCmd(getCaster().getStats().getLevel(), 8);
     CommandDelegate.execute(roll);
-    damageInflicted = generateDamage(getCaster(), roll.getTotal(), target);
+    setDamageInflicted(generateDamage(getCaster(), roll.getTotal(), target));
 
     DealDamageCmd damageCmd = new DealDamageCmd(damageInflicted, target);
     CommandDelegate.execute(damageCmd);
@@ -55,7 +53,7 @@ public class FlameAttack extends SingleCastSpell
     {
       return super.buildSpellDescription();
     }
-    return damageInflicted.buildDamageDescription();
+    return getDamageInflicted().buildDamageDescription();
   }
 
   @Override
