@@ -42,10 +42,10 @@ public class ShortRestCmd extends AbstractCmd
         if (stats.getRestPoints() > 0)
         {
           stats.setState(EState.RESTING);
-          AbstractCmd restCompletedCmd = new DoShortRestCmd(chatId, character);
+          AbstractCmd restCompletedCmd = new DoShortRestCmd(member.getPlayedBy().getChatId(), member);
           restCompletedCmd = new RunLaterCmd(10000, restCompletedCmd);
           CommandDelegate.execute(restCompletedCmd);
-          SendMessageCmd echo = new SendMessageCmd(chatId, "You're resting" + (member != character ? " (initiated by " + character.getName() + ")" : ""));
+          SendMessageCmd echo = new SendMessageCmd(member.getPlayedBy().getChatId(), "You're resting" + (member != character ? " (initiated by " + character.getName() + ")" : ""));
           CommandDelegate.execute(echo);
         }
       }
