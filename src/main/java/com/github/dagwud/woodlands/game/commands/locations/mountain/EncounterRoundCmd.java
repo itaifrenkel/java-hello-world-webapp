@@ -211,7 +211,7 @@ public class EncounterRoundCmd extends AbstractCmd
     if (attacker.isConscious() && defender.isConscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
-      if (damage.getHitStatus() != EHitType.DO_NOTHING)
+      if (damage.getHitStatus() != EHitStatus.DO_NOTHING)
       {
         roundActivity.add(damage);
       }
@@ -219,7 +219,7 @@ public class EncounterRoundCmd extends AbstractCmd
     if (attacker.isConscious() && defender.isConscious())
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);
-      if (damage.getHitStatus() != EHitType.DO_NOTHING)
+      if (damage.getHitStatus() != EHitStatus.DO_NOTHING)
       {
         roundActivity.add(damage);
       }
