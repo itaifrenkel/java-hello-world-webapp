@@ -224,6 +224,11 @@ public class EncounterRoundCmd extends AbstractCmd
         roundActivity.add(damage);
       }
     }
+
+    if (roundActivity.isEmpty())
+    {
+      // add a "does nothing" entry:
+      roundActivity.add(doAttack(attacker, null, defender));
     return roundActivity;
   }
 
