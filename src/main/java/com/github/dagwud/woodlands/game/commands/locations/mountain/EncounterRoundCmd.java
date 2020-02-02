@@ -33,6 +33,8 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    List<DamageInflicted> roundActivity = new ArrayList<>();
+
     // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
     // to spells like Army of Peasants)
     List<Fighter> passivesOrder = buildOrderOfFight(encounter.getAllFighters());
@@ -40,9 +42,16 @@ public class EncounterRoundCmd extends AbstractCmd
 
     List<Fighter> spellOrder = buildOrderOfFight(encounter.getAllFighters());
     List<SingleCastSpell> spellsActivity = doPreparedSpells(spellOrder);
+    for (Spell cast : spellsActivity)
+    {
+      if (null != cast.getDamageInflicted())
+      {
+        roundActivity.add(cast.getDamageInflicted());
+      }
+    }
 
     List<Fighter> fightOrder = buildOrderOfFight(encounter.getAllFighters());
-    List<DamageInflicted> roundActivity = doFighting(fightOrder);
+    roundActivity.addAll(doFighting(fightOrder));
 
     expireSpells(spellsActivity);
     expirePassiveAbilities(passivesActivity);
