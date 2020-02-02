@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.commands.RetrieveWorldCmd;
+import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 
 import java.io.Serializable;
 import java.util.Collection;
