@@ -47,16 +47,6 @@ public class FlameAttack extends SingleCastSpell
   }
 
   @Override
-  public String buildSpellDescription()
-  {
-    if (!isCast())
-    {
-      return super.buildSpellDescription();
-    }
-    return getDamageInflicted().buildDamageDescription();
-  }
-
-  @Override
   public PlayerCharacter getCaster()
   {
     return (PlayerCharacter) super.getCaster();
