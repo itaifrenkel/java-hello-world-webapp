@@ -53,7 +53,7 @@ public class FlameAttack extends SingleCastSpell
   {
     if (damageInflicted == null)
     {
-      return "not cast";
+      return super.buildSpellDescription();
     }
     return damageInflicted.buildDamageDescription();
   }
@@ -67,6 +67,6 @@ public class FlameAttack extends SingleCastSpell
   @Override
   public int getManaCost()
   {
-    return 0;
+    return 1;
   }
 }
