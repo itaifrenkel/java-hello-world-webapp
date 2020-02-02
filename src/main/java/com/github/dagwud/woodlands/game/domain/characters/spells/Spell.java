@@ -11,6 +11,7 @@ public abstract class Spell implements Serializable
   private final String spellName;
   private final Fighter caster;
   private boolean isCast;
+  private DamageInflicted damageInflicted;
 
   Spell(String spellName, Fighter caster)
   {
@@ -48,4 +49,15 @@ public abstract class Spell implements Serializable
   {
     isCast = cast;
   }
+
+  public DamageInflicted getDamageInflicted()
+  {
+    return damageInflicted;
+  }
+
+  public void setDamageInflicted(DamageInflicted damageInflicted)
+  {
+    this.damageInflicted = damageInflicted;
+  }
+
 }
