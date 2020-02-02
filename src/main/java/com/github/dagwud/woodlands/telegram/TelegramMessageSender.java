@@ -20,10 +20,6 @@ public class TelegramMessageSender extends TelegramHelper implements IMessageSen
     {
       callTelegram("sendMessage", params);
     }
-    else
-    {
-      Logger.info("SEND MESSAGE: " + params);
-    }
   }
 
 }
