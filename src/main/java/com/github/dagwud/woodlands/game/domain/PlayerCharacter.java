@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.log.Logger;
+
 public abstract class PlayerCharacter extends GameCharacter
 {
   private static final long serialVersionUID = 1L;
@@ -40,6 +42,8 @@ public abstract class PlayerCharacter extends GameCharacter
 
   public boolean isActive()
   {
-    return this == getPlayedBy().getActiveCharacter();
+    boolean isActive = this == getPlayedBy().getActiveCharacter();
+    Logger.info(this + " - " + (isActive ? "" : "in") + "active on " + getPlayedBy());
+    return isActive;
   }
 }
