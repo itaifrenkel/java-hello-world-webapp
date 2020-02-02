@@ -23,8 +23,11 @@ public class EnterTheVillageCmd extends AbstractCmd
   {
     if (character.getName().startsWith("Shadow") && character.getPlayedBy().getChatId() <= -1)
     {
-      // todo for testing with shadow players
-      CommandDelegate.execute(new FullHealCmd(-1, character));
+      if (!character.isDead())
+      {
+        // todo for testing with shadow players
+        CommandDelegate.execute(new FullHealCmd(-1, character));
+      }
     }
 
     if (character.getStats().getHitPoints() == 0)
