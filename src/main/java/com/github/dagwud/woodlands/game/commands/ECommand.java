@@ -36,7 +36,7 @@ public enum ECommand
 
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
   CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)), //todo remove!
-  CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(chatId, character)), //todo remove!
+  CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(character)), //todo remove!
   KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
   RESET("/reset", false, (character, chatId) -> new ResetCmd()),
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
