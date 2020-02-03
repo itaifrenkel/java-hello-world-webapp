@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.stats.Stat;
+import com.github.dagwud.woodlands.gson.game.Shield;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class AttackCmd extends AbstractCmd
@@ -61,12 +62,27 @@ public class AttackCmd extends AbstractCmd
     Stat modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
     int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
 
-    int defenderDefenceRating = defender.getStats().getDefenceRating();
+    int defenderDefenceRating = defender.getStats().getBaseDefenceRating() + defender.getStats().getDefenceRatingBoost();
+    defenderDefenceRating += countShieldsDefence(defender);
     if (naturalRoll.getTotal() + modifier.total() + weaponBoost - attacker.getStats().determineHitChanceBoost() >= defenderDefenceRating)
     {
       return EHitStatus.HIT;
     }
     return EHitStatus.MISS;
+  }
+
+  private int countShieldsDefence(Fighter defender)
+  {
+    int shieldStrength = 0;
+    if (defender.getCarrying().getCarriedLeft() instanceof Shield)
+    {
+      shieldStrength += ((Shield) defender.getCarrying().getCarriedLeft()).strength;
+    }
+    if (defender.getCarrying().getCarriedRight() instanceof Shield)
+    {
+      shieldStrength += ((Shield) defender.getCarrying().getCarriedRight()).strength;
+    }
+    return shieldStrength;
   }
 
   private void rollForDamage(EHitStatus hitStatus)

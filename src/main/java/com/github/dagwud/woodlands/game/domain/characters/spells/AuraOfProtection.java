@@ -34,7 +34,7 @@ public class AuraOfProtection extends BattleRoundSpell
     {
       if (target != getCaster())
       {
-        target.getStats().setDefenceRating(target.getStats().getDefenceRating() + BUFF_AMOUNT);
+        target.getStats().setDefenceRatingBoost(target.getStats().getDefenceRatingBoost() + BUFF_AMOUNT);
         buffs.put(target, BUFF_AMOUNT);
 
         if (target instanceof PlayerCharacter)
@@ -54,7 +54,7 @@ public class AuraOfProtection extends BattleRoundSpell
     for (GameCharacter target : buffs.keySet())
     {
       Integer buffedAmount = buffs.get(target);
-      target.getStats().setDefenceRating(target.getStats().getDefenceRating() - buffedAmount);
+      target.getStats().setDefenceRatingBoost(target.getStats().getDefenceRatingBoost() - buffedAmount);
     }
   }
 

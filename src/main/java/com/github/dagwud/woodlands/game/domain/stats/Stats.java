@@ -20,7 +20,6 @@ public class Stats implements Serializable
   private Stat strength = new Stat();
   private Stat agility = new Stat();
   private Stat constitution = new Stat();
-  private int defenceRating;
   private int restPoints;
   private int restPointsMax;
   private int restDiceFace;
@@ -35,6 +34,7 @@ public class Stats implements Serializable
 
   // thus endeth the serious stats and begin the fun stats
   private int drunkeness;
+  private int defenceRatingBoost;
 
   public int getLevel()
   {
@@ -101,6 +101,11 @@ public class Stats implements Serializable
     return agility;
   }
 
+  public int getAgilityModifier()
+  {
+    return Math.floorDiv(getAgility().total() - 10, 2);
+  }
+
   public void setAgility(int agility, int bonus)
   {
     this.agility = new Stat(agility, bonus);
@@ -151,14 +156,9 @@ public class Stats implements Serializable
     this.state = state;
   }
 
-  public int getDefenceRating()
+  public int getBaseDefenceRating()
   {
-    return defenceRating;
-  }
-
-  public void setDefenceRating(int defenceRating)
-  {
-    this.defenceRating = defenceRating;
+    return 10 + getAgilityModifier();
   }
 
   public int getDrunkeness()
@@ -259,5 +259,15 @@ public class Stats implements Serializable
   public void setDamageMultiplier(double damageMultiplier)
   {
     this.damageMultiplier = damageMultiplier;
+  }
+
+  public int getDefenceRatingBoost()
+  {
+    return defenceRatingBoost;
+  }
+
+  public void setDefenceRatingBoost(int defenceRatingBoost)
+  {
+    this.defenceRatingBoost = defenceRatingBoost;
   }
 }

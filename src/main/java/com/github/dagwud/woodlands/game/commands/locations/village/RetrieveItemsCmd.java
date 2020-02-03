@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
+import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.List;
 
