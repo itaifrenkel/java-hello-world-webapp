@@ -54,4 +54,13 @@ public class Player implements Serializable
     all.addAll(getInactiveCharacters());
     return Collections.unmodifiableList(all);
   }
+
+  public void remove(GameCharacter character)
+  {
+    if (activeCharacter == character)
+    {
+      activeCharacter = null;
+    }
+    getInactiveCharacters().remove(character);
+  }
 }
