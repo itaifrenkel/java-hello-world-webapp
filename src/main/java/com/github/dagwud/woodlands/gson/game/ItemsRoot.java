@@ -7,4 +7,5 @@ public class ItemsRoot implements Serializable
   private static final long serialVersionUID = 1L;
 
   public Weapon[] weapons;
+  public Shield[] shields;
 }

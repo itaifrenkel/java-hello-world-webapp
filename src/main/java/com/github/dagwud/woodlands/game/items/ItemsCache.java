@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.items;
 
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.gson.game.ItemsRoot;
+import com.github.dagwud.woodlands.gson.game.Shield;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.*;
@@ -8,23 +10,25 @@ import java.util.*;
 public class ItemsCache
 {
   private final Map<String, Weapon> weapons;
+  private final Map<String, Shield> shields;
 
   ItemsCache(ItemsRoot root)
   {
-    this.weapons = cacheWeapons(root);
+    this.weapons = cache(root.weapons);
+    this.shields = cache(root.shields);
   }
 
-  private Map<String, Weapon> cacheWeapons(ItemsRoot root)
+  private <T extends Item> Map<String, T> cache(T[] cacheFrom)
   {
-    Map<String, Weapon> weapons = new HashMap<>();
-    if (root.weapons != null)
+    Map<String, T> cacheTo = new HashMap<>();
+    if (cacheFrom != null)
     {
-      for (Weapon weapon : root.weapons)
+      for (T object : cacheFrom)
       {
-        weapons.put(weapon.getName(), weapon);
+        cacheTo.put(object.getName(), object);
       }
     }
-    return weapons;
+    return cacheTo;
   }
 
   public Weapon findWeapon(String name) throws UnknownWeaponException
@@ -40,5 +44,10 @@ public class ItemsCache
   public List<Weapon> getWeapons()
   {
     return new ArrayList<>(weapons.values());
+  }
+
+  public List<Shield> getShields()
+  {
+    return new ArrayList<>(shields.values());
   }
 }
