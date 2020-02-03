@@ -1,8 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import java.io.Serializable;
-
-public abstract class Item implements Serializable
+public abstract class Item extends GameObject
 {
   private static final long serialVersionUID = 1L;
 

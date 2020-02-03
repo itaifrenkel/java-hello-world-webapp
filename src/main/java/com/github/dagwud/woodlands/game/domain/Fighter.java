@@ -9,13 +9,11 @@ import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Fighter implements Serializable
+public abstract class Fighter extends GameObject
 {
   private static final long serialVersionUID = 1L;
 
   private SpellAbilities spellAbilities;
-
-  public abstract String getName();
 
   public abstract Stats getStats();
 
