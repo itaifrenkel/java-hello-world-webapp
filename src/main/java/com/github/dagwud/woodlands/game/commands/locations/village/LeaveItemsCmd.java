@@ -22,13 +22,13 @@ public class LeaveItemsCmd extends AbstractCmd
     StringBuilder response = new StringBuilder();
     if (character.getCarrying().getCarriedLeft() != null)
     {
-      response.append("You drop a ").append(character.getCarrying().getCarriedLeft().name).append(" from your left hand. ");
+      response.append("You drop a ").append(character.getCarrying().getCarriedLeft().getName()).append(" from your left hand. ");
       character.getCarrying().setCarriedLeft(null);
     }
 
     if (character.getCarrying().getCarriedRight() != null)
     {
-      response.append("You drop a ").append(character.getCarrying().getCarriedRight().name).append(" from your right hand. ");
+      response.append("You drop a ").append(character.getCarrying().getCarriedRight().getName()).append(" from your right hand. ");
       character.getCarrying().setCarriedRight(null);
     }
 

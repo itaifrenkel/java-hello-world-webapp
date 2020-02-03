@@ -51,7 +51,7 @@ public class DropItemCmd extends AbstractCmd
 
     if (dropped != null)
     {
-      SendMessageCmd cmd = new SendMessageCmd(chatId, "You dropped " + dropped.name);
+      SendMessageCmd cmd = new SendMessageCmd(chatId, "You dropped " + dropped.getName());
       CommandDelegate.execute(cmd);
     }
     else

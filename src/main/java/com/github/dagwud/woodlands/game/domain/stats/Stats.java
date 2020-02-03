@@ -118,7 +118,7 @@ public class Stats implements Serializable
 
   public int getWeaponBonusHit(Weapon weapon)
   {
-    return weaponBonusHit.getOrDefault(weapon.name, 0);
+    return weaponBonusHit.getOrDefault(weapon.getName(), 0);
   }
 
   public void setWeaponBonusHit(Map<String, Integer> weaponBonusHit)
@@ -128,7 +128,7 @@ public class Stats implements Serializable
 
   public int getWeaponBonusDamage(Weapon weapon)
   {
-    return determineProficiency() + weaponBonusDamage.getOrDefault(weapon.name, 0);
+    return determineProficiency() + weaponBonusDamage.getOrDefault(weapon.getName(), 0);
   }
 
   public void setWeaponBonusDamage(Map<String, Integer> weaponBonusDamage)

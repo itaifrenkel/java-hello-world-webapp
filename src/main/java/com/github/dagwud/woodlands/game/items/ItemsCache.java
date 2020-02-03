@@ -21,7 +21,7 @@ public class ItemsCache
     {
       for (Weapon weapon : root.weapons)
       {
-        weapons.put(weapon.name, weapon);
+        weapons.put(weapon.getName(), weapon);
       }
     }
     return weapons;
