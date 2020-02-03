@@ -12,7 +12,7 @@ abstract class PassiveSpell extends Spell
   }
 
   @Override
-  public int getManaCost()
+  public final int getManaCost()
   {
     return 0;
   }
