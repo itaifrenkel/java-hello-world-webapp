@@ -105,7 +105,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
       }
     }
 
-    JoinPartyCmd testing = new JoinPartyCmd(cmd.getSpawned(), "BetaParty");
+    JoinPartyCmd testing = new JoinPartyCmd(cmd.getSpawned(), "BetterBetaParty");
     CommandDelegate.execute(testing);
   }
 }
