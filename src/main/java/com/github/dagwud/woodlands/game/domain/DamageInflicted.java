@@ -66,7 +66,7 @@ public class DamageInflicted implements Serializable
     if (hitStatus == EHitStatus.DO_NOTHING)
     {
       return attacker.getName() + " " +
-          attacker.isDead() ? "☠️" :"😴") +
+          (attacker.isDead() ? "☠️" :"😴") +
           " did nothing";
     }
     if (hitStatus == EHitStatus.MISS)
