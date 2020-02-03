@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.admin.KillPromptCmd;
 import com.github.dagwud.woodlands.game.commands.admin.RemovePromptCmd;
 import com.github.dagwud.woodlands.game.commands.admin.ResetCmd;
+import com.github.dagwud.woodlands.game.commands.admin.ResurrectPromptCmd;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellPromptCmd;
 import com.github.dagwud.woodlands.game.commands.character.ChangeNamePromptCmd;
 import com.github.dagwud.woodlands.game.commands.character.LevelUpCmd;
@@ -39,6 +40,7 @@ public enum ECommand
   CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)), //todo remove!
   CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(character)), //todo remove!
   KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
+  RESURRECT("/resurrect", false, (character, chatId) -> new ResurrectPromptCmd(chatId, character)),
   REMOVE("/rm", false, (character, chatId) -> new RemovePromptCmd(chatId, character)),
   RESET("/reset", false, (character, chatId) -> new ResetCmd()),
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
