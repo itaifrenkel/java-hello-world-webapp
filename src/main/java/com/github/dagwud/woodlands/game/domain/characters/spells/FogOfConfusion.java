@@ -37,6 +37,6 @@ public class FogOfConfusion extends SingleCastSpell
   @Override
   public int getManaCost()
   {
-    return 0;
+    return 1;
   }
 }
