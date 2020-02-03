@@ -42,8 +42,6 @@ public abstract class PlayerCharacter extends GameCharacter
 
   public boolean isActive()
   {
-    boolean isActive = this == getPlayedBy().getActiveCharacter();
-    Logger.info(this + " - " + (isActive ? "" : "in") + "active on " + getPlayedBy());
-    return isActive;
+    return this == getPlayedBy().getActiveCharacter();
   }
 }
