@@ -13,4 +13,5 @@ public class Settings
   public static final int ADMIN_CHAT = 750694421;
   public static final String S3_BUCKET_NAME = "woodlands-state";
   public static final Regions S3_REGION = Regions.EU_WEST_2;
+  public static final String AUTO_JOIN_PARTY_NAME = "BetaParty";
 }

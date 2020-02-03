@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.character.CreateShadowPlayerCmd;
 import com.github.dagwud.woodlands.game.commands.character.SpawnCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
@@ -105,7 +106,10 @@ public class DoPlayerSetupCmd extends SuspendableCmd
       }
     }
 
-    JoinPartyCmd testing = new JoinPartyCmd(cmd.getSpawned(), "BetterBetaParty");
-    CommandDelegate.execute(testing);
+    if (Settings.AUTO_JOIN_PARTY_NAME != null)
+    {
+      JoinPartyCmd testing = new JoinPartyCmd(cmd.getSpawned(), Settings.AUTO_JOIN_PARTY_NAME);
+      CommandDelegate.execute(testing);
+    }
   }
 }
