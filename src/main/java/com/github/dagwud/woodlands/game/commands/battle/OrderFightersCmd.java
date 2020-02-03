@@ -52,7 +52,7 @@ public class OrderFightersCmd extends AbstractCmd
     FighterAgilityRoll(Fighter fighter)
     {
       this.fighter = fighter;
-      if (fighter.canAct())
+      if (fighter.isConscious())
       {
         DiceRollCmd cmd = new DiceRollCmd(1, 20);
         cmd.execute();
