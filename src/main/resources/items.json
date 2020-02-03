@@ -44,12 +44,12 @@
     {"name":  "Longbow", "damage": {"dice_count": 1,"dice_faces": 8}, "ranged": true},
     {"name":  "Throwing Knife", "damage": {"dice_count": 1,"dice_faces": 8}, "ranged": true},
 
-    {"name": "Mace", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":false},
-    {"name": "Battle Axe", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":false},
-    {"name": "Poison Dagger", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":false},
-    {"name": "Cat o' Nine Tails", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":true},
-    {"name": "Pistol", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":true},
-    {"name": "Shuriken", "damage": {"dice_count": 1,"dice_faces": "10"},"ranged":true},
+    {"name": "Mace", "damage": {"dice_count": 1,"dice_faces": 10},"ranged":false},
+    {"name": "Battle Axe", "damage": {"dice_count": 1,"dice_faces": 10},"ranged":false},
+    {"name": "Poison Dagger", "damage": {"dice_count": 1,"dice_faces": 10},"ranged":false},
+    {"name": "Cat o' Nine Tails", "damage": {"dice_count": 1,"dice_faces": 10},"ranged":true},
+    {"name": "Pistol", "damage": {"dice_count": 1,"dice_faces": 10},"ranged":true},
+    {"name": "Shuriken", "damage": {"dice_count": 1,"dice_faces": 10},"ranged":true},
 
 
     {"name": "Flanged Mace", "damage": {"dice_count": 1,"dice_faces": 12},"ranged":false},
