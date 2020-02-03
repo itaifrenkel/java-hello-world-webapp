@@ -10,9 +10,9 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
-import com.github.dagwud.woodlands.gson.game.Weapon;
 
 
 public class GenerateMountainEncounterCmd extends AbstractCmd
@@ -80,8 +80,8 @@ public class GenerateMountainEncounterCmd extends AbstractCmd
     Encounter encounter = createEncounter(playerState.getActiveCharacter().getParty());
 
     String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + "):\n" + encounter.getEnemy().summary();
-    Weapon carriedLeft = encounter.getEnemy().getCarrying().getCarriedLeft();
-    Weapon carriedRight = encounter.getEnemy().getCarrying().getCarriedRight();
+    Item carriedLeft = encounter.getEnemy().getCarrying().getCarriedLeft();
+    Item carriedRight = encounter.getEnemy().getCarrying().getCarriedRight();
     if (carriedLeft != null || carriedRight != null)
     {
       if (carriedLeft != null)

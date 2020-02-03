@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.domain.Item;
 
 public class Shield extends Item
 {
-  private static final long serialVersionUUID = 1L;
+  private static final long serialVersionUID = 1L;
 
   public String name;
   public int strength;
@@ -23,8 +23,14 @@ public class Shield extends Item
   }
 
   @Override
-  public String summary(Fighter carrier)
+  public String summary(Fighter carrier, boolean includeName)
   {
-    return carrier.getName() + " " + getIcon() + getName();
+    return (includeName ? getName() + " " : "") + getIcon() + statsSummary(carrier);
+  }
+
+  @Override
+  public String statsSummary(Fighter carrier)
+  {
+    return String.valueOf(strength);
   }
 }

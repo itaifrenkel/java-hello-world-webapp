@@ -3,9 +3,9 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
-import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.List;
 
@@ -30,37 +30,26 @@ public class RetrieveItemsCmd extends AbstractCmd
       return;
     }
 
-    Weapon chosenWeapon = chooseWeapon();
+    Item chosenItem = chooseItem();
 
-    character.getCarrying().getCarriedInactive().add(chosenWeapon);
-    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You pick up a " + chosenWeapon.getName() + " " + chosenWeapon.getIcon() + determineDamageText(chosenWeapon)));
+    character.getCarrying().getCarriedInactive().add(chosenItem);
+    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You pick up a " + chosenItem.getName() + " " + chosenItem.getIcon() + chosenItem.statsSummary(character)));
   }
 
-  private Weapon chooseWeapon()
+  private Item chooseItem()
   {
-    Weapon chosenWeapon = null;
-    while (chosenWeapon == null)
+    Item chosenItem = null;
+    while (chosenItem == null)
     {
-      List<Weapon> allWeapons = ItemsCacheFactory.instance().getCache().getWeapons();
-      int rand = (int) (Math.random() * allWeapons.size());
-      chosenWeapon = allWeapons.get(rand);
-      if (chosenWeapon.preventSpawning)
+      List<Item> allItems = ItemsCacheFactory.instance().getCache().getAllItems();
+      int rand = (int) (Math.random() * allItems.size());
+      chosenItem = allItems.get(rand);
+      if (chosenItem.preventSpawning)
       {
-        chosenWeapon = null; // try again
+        chosenItem = null; // try again
       }
     }
-    return chosenWeapon;
+    return chosenItem;
   }
 
-  private String determineDamageText(Weapon carrying)
-  {
-    int bonusDamage = character.getStats().getWeaponBonusDamage(carrying);
-
-    String damageText = carrying.damage.determineAverageRoll();
-    if (bonusDamage != 0)
-    {
-      damageText += " +" + bonusDamage;
-    }
-    return damageText;
-  }
 }

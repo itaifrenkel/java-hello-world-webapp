@@ -233,9 +233,13 @@ public class EncounterRoundCmd extends AbstractCmd
     return roundActivity;
   }
 
-  private DamageInflicted doAttack(Fighter attacker, Weapon attackWith, Fighter defender)
+  private DamageInflicted doAttack(Fighter attacker, Item attackWith, Fighter defender)
   {
-    AttackCmd attack = new AttackCmd(attacker, attackWith, defender);
+    if (!(attackWith instanceof Weapon))
+    {
+      return new DamageInflicted(attacker, null, EHitStatus.DO_NOTHING, 0, defender, 0);
+    }
+    AttackCmd attack = new AttackCmd(attacker, (Weapon)attackWith, defender);
     CommandDelegate.execute(attack);
     DamageInflicted damageInflicted = attack.getDamageInflicted();
 

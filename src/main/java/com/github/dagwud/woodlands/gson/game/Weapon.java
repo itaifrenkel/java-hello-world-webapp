@@ -2,10 +2,7 @@ package com.github.dagwud.woodlands.gson.game;
 
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.Item;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 
 public class Weapon extends Item
 {
@@ -23,9 +20,6 @@ public class Weapon extends Item
   @SerializedName(value = "custom_icon")
   public String customIcon;
 
-  @SerializedName(value = "prevent_spawning")
-  public boolean preventSpawning;
-
   @Override
   public String getName()
   {
@@ -42,18 +36,13 @@ public class Weapon extends Item
     return ranged ? RANGED_ICON : MELEE_ICON;
   }
 
-  @Override
-  public String summary(Fighter carrier)
-  {
-    return summary(carrier, true);
-  }
-
   public String summary(Fighter carrier, boolean includeName)
   {
-    return (includeName ? getName() + " " : "") + getIcon() + determineDamageText(carrier);
+    return (includeName ? getName() + " " : "") + getIcon() + statsSummary(carrier);
   }
 
-  private String determineDamageText(Fighter carrier)
+  @Override
+  public String statsSummary(Fighter carrier)
   {
     int bonusDamage = carrier.getStats().getWeaponBonusDamage(this);
 

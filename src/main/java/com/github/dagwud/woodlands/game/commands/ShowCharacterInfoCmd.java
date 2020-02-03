@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 import com.github.dagwud.woodlands.game.domain.CarriedItems;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -53,7 +54,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     CommandDelegate.execute(cmd);
   }
 
-  private String describeItem(Weapon carrying)
+  private String describeItem(Item carrying)
   {
     if (carrying == null)
     {
@@ -65,7 +66,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
   private String describeInactiveItems(CarriedItems carrying)
   {
     StringBuilder b = new StringBuilder();
-    for (Weapon weapon : carrying.getCarriedInactive())
+    for (Item weapon : carrying.getCarriedInactive())
     {
       b.append("• ").append(describeItem(weapon)).append("\n");
     }

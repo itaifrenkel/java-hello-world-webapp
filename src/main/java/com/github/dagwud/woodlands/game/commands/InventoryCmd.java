@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -53,10 +54,10 @@ public class InventoryCmd extends AbstractCmd
     {
       itemsList.add("——————————————————");
     }
-    List<Weapon> carriedInactive = character.getCarrying().getCarriedInactive();
+    List<Item> carriedInactive = character.getCarrying().getCarriedInactive();
     for (int i = 0; i < carriedInactive.size(); i++)
     {
-      Weapon weapon = carriedInactive.get(i);
+      Item weapon = carriedInactive.get(i);
       itemsList.add("• " + weapon.summary(character) + " (drop: /d" + i + "; equip: /e" + i + ")");
     }
     return itemsList;

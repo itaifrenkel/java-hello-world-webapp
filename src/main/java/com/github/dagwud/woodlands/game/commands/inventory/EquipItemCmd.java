@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.inventory;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -24,7 +25,7 @@ public class EquipItemCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Weapon toEquip;
+    Item toEquip;
     try
     {
       int index = Integer.parseInt(dropIndex);
@@ -67,7 +68,7 @@ public class EquipItemCmd extends AbstractCmd
     {
       return;
     }
-    Weapon move = character.getCarrying().getCarriedRight();
+    Item move = character.getCarrying().getCarriedRight();
     character.getCarrying().getCarriedInactive().add(move);
     character.getCarrying().setCarriedRight(null);
   }

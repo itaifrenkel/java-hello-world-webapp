@@ -3,8 +3,8 @@ package com.github.dagwud.woodlands.game.commands.inventory;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class DropItemCmd extends AbstractCmd
 {
@@ -24,7 +24,7 @@ public class DropItemCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Weapon dropped = null;
+    Item dropped;
     if (dropIndex.equals("L"))
     {
       dropped = character.getCarrying().getCarriedLeft();

@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.items;
 
 import com.github.dagwud.woodlands.game.Cache;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.gson.game.ItemsRoot;
 import com.github.dagwud.woodlands.gson.game.Shield;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -30,13 +31,11 @@ public class ItemsCache extends Cache
     return found;
   }
 
-  public List<Weapon> getWeapons()
+  public List<Item> getAllItems()
   {
-    return new ArrayList<>(weapons.values());
-  }
-
-  public List<Shield> getShields()
-  {
-    return new ArrayList<>(shields.values());
+    List<Item> items = new ArrayList<>();
+    items.addAll(weapons.values());
+    items.addAll(shields.values());
+    return items;
   }
 }
