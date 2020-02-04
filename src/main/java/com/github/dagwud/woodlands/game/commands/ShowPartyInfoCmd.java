@@ -47,11 +47,16 @@ public class ShowPartyInfoCmd extends AbstractCmd
         message.append("\n");
       }
       String state = member.getStats().getState() == EState.ALIVE ? "" : " (" + member.getStats().getState() + ")";
+      String charClass = "";
+      if (member instanceof PlayerCharacter)
+      {
+        charClass = ((PlayerCharacter)member).getCharacterClass() + " ";
+      }
       message.append(member.summary())
           .append(" - ")
           .append("L").append(member.getStats().getLevel()).append(" ")
-          .append(member.getCharacterClass())
-          .append(" at ").append(member.getLocation().getDisplayName())
+          .append(charClass)
+          .append("at ").append(member.getLocation().getDisplayName())
           .append(state);
     }
     return message.toString();
