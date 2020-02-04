@@ -57,8 +57,6 @@ public class AttackCmd extends AbstractCmd
     }
     if (naturalRoll.getTotal() >= 20 - attacker.getStats().getCriticalStrikeChanceBonus())
     {
- Logger.info("CRIT: " + attacker.getName() + " rolled " + naturalRoll.getTotal() + " and boosted " +
-    attacker.getStats().getCriticalStrikeChanceBonus());
       return EHitStatus.CRITICAL_HIT;
     }
 
