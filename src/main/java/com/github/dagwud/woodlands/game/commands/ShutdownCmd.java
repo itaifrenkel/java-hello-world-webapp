@@ -22,6 +22,7 @@ public class ShutdownCmd extends AbstractCmd
     }
     catch (Exception e)
     {
+e.printStackTrace();
       Logger.error("Error in asynchronous (shutdown) thread. Logging it here to avoid losing it");
       Logger.logError(e);
     }
