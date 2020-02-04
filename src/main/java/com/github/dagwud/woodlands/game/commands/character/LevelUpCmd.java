@@ -3,13 +3,14 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
+import com.github.dagwud.woodlands.game.commands.admin.AdminCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
-public class LevelUpCmd extends AbstractCmd
+public class LevelUpCmd extends AdminCmd
 {
   private static final long serialVersionUID = 1L;
 
@@ -18,6 +19,7 @@ public class LevelUpCmd extends AbstractCmd
 
   public LevelUpCmd(int chatId, PlayerCharacter character)
   {
+    super(chatId);
     this.chatId = chatId;
     this.character = character;
   }

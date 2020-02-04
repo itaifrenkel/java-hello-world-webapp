@@ -37,12 +37,12 @@ public enum ECommand
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
 
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
-  CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)), //todo remove!
-  CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(character)), //todo remove!
+  CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)),
+  CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(chatId, character)),
   KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
   RESURRECT("/resurrect", false, (character, chatId) -> new ResurrectPromptCmd(chatId, character)),
   REMOVE("/rm", false, (character, chatId) -> new RemovePromptCmd(chatId, character)),
-  RESET("/reset", false, (character, chatId) -> new ResetCmd()),
+  RESET("/reset", false, (character, chatId) -> new ResetCmd(chatId)),
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),

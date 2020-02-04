@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.logs;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.admin.AdminCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.log.Logger;
@@ -8,7 +9,7 @@ import com.github.dagwud.woodlands.game.log.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowLogsCmd extends AbstractCmd
+public class ShowLogsCmd extends AdminCmd
 {
   private static final long serialVersionUID = 1L;
 
@@ -16,6 +17,7 @@ public class ShowLogsCmd extends AbstractCmd
 
   public ShowLogsCmd(int chatId)
   {
+    super(chatId);
     this.chatId = chatId;
   }
 

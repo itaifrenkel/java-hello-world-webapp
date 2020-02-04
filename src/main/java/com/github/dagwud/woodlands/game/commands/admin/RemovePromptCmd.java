@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.admin;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
 import com.github.dagwud.woodlands.game.commands.character.LeavePartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -28,6 +29,13 @@ public class RemovePromptCmd extends SuspendableCmd
   @Override
   protected void executePart(int phaseToExecute, String capturedInput)
   {
+    if (getPlayerState().getPlayer().getChatId() != Settings.ADMIN_CHAT)
+    {
+      SendMessageCmd notAdmin = new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "You're not an admin. Go away.");
+      CommandDelegate.execute(notAdmin);
+      return;
+    }
+
     switch (phaseToExecute)
     {
       case 0:

@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.admin;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.FullHealCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
@@ -42,14 +43,21 @@ public class ResurrectPromptCmd extends SuspendableCmd
 
   private void resurrect(String name)
   {
-    StringBuilder done = new StringBuilder("Killing off...\n");
+    if (getPlayerState().getPlayer().getChatId() != Settings.ADMIN_CHAT)
+    {
+      SendMessageCmd notAdmin = new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "You're not an admin. Go away.");
+      CommandDelegate.execute(notAdmin);
+      return;
+    }
+
+    StringBuilder done = new StringBuilder("Resurrecting...\n");
     for (Party party : PartyRegistry.listNames())
     {
       for (GameCharacter character : party.getActiveMembers())
       {
         if (character.getName().equalsIgnoreCase(name))
         {
-          FullHealCmd cmd = new FullHealCmd(character);
+          FullHealCmd cmd = new FullHealCmd(chatId, character);
           CommandDelegate.execute(cmd);
 
           done.append("Resurrected ").append(character.getName())

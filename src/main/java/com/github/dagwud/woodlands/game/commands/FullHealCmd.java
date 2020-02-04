@@ -1,18 +1,20 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.admin.AdminCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
-public class FullHealCmd extends AbstractCmd
+public class FullHealCmd extends AdminCmd
 {
   private static final long serialVersionUID = 1L;
 
   private final GameCharacter character;
 
-  public FullHealCmd(GameCharacter character)
+  public FullHealCmd(int chatId, GameCharacter character)
   {
+    super(chatId);
     this.character = character;
   }
 

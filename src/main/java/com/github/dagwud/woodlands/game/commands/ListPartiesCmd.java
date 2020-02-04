@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
+import com.github.dagwud.woodlands.game.commands.admin.AdminCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -11,7 +12,7 @@ import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
-public class ListPartiesCmd extends AbstractCmd
+public class ListPartiesCmd extends AdminCmd
 {
   private static final long serialVersionUID = 1L;
 
@@ -19,6 +20,7 @@ public class ListPartiesCmd extends AbstractCmd
 
   ListPartiesCmd(int chatId)
   {
+    super(chatId);
     this.chatId = chatId;
   }
 

@@ -1,10 +1,9 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PartyRegistry;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -13,8 +12,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class KillPromptCmd extends SuspendableCmd
 {
-   private static final long serialVersionUID = 1L;
-   private final int chatId;
+  private static final long serialVersionUID = 1L;
+  private final int chatId;
 
   public KillPromptCmd(int chatId, PlayerCharacter character)
   {
@@ -44,6 +43,12 @@ public class KillPromptCmd extends SuspendableCmd
 
   private void kill(String name)
   {
+    if (getPlayerState().getPlayer().getChatId() != Settings.ADMIN_CHAT)
+    {
+      SendMessageCmd notAdmin = new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "You're not an admin. Go away.");
+      CommandDelegate.execute(notAdmin);
+      return;
+    }
     StringBuilder done = new StringBuilder("Killing off...\n");
     for (Party party : PartyRegistry.listNames())
     {
