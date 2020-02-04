@@ -42,7 +42,7 @@
     {"name": "Night Terror", "difficulty": 6, "weapon-left": "Sword", "fight-mode": "STRONGEST"},
     {"name": "Cursed Unicorn", "difficulty": 6, "weapon-left": "Sword", "fight-mode": "SLOWEST"},
     {"name": "Souleater", "difficulty": 6, "weapon-left": "Sword", "fight-mode": "WEAKEST"},
-    {"name": "Demonspawn", "difficulty": 7, "weapon-left": "Sword"} , "fight-mode": "FASTEST"},
+    {"name": "Demonspawn", "difficulty": 7, "weapon-left": "Sword", "fight-mode": "FASTEST"},
     {"name": "Petty Thug", "difficulty": 1, "weapon-left": "Sword", "fight-mode": "STRONGEST"},
     {"name": "Thug", "difficulty": 2, "weapon-left": "Sword", "fight-mode": "RANDOM"},
     {"name": "Dragoon", "difficulty": 4, "weapon-left": "Sword", "fight-mode": "SLOWEST"},
