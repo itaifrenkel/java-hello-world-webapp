@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -45,7 +46,10 @@ public class ShowPartyInfoCmd extends AbstractCmd
       {
         message.append("\n");
       }
-      message.append(member.summary()).append(" - ").append(member.getLocation().getDisplayName());
+      String state = member.getStats().getState() == EState.ALIVE ? "" : " (" + member.getStats().getState() + ")";
+      message.append(member.summary())
+          .append(" - ").append(member.getLocation().getDisplayName())
+          .append(state);
     }
     return message.toString();
   }
