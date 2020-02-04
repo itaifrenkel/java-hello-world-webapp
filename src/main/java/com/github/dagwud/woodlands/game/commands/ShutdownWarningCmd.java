@@ -24,7 +24,7 @@ public class ShutdownWarningCmd extends AbstractCmd
     for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
       PlayerCharacter character = playerState.getPlayer().getActiveCharacter();
-      if (shouldRetreat(character))
+      if (character != null && shouldRetreat(character))
       {
         toRetreat.add(character);
       }
@@ -54,11 +54,9 @@ public class ShutdownWarningCmd extends AbstractCmd
   {
     if (character.getStats().getState() == EState.ALIVE)
     {
-      if (character.getLocation() != ELocation.VILLAGE_SQUARE)
-      {
-        return true;
-      }
+      return character.getLocation() != ELocation.VILLAGE_SQUARE;
     }
+
     return false;
   }
 }

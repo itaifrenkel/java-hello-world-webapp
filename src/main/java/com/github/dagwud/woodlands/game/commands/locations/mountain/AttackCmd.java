@@ -31,7 +31,7 @@ public class AttackCmd extends AbstractCmd
   {
     if (weaponUsed == null)
     {
-      damageInflicted = new DamageInflicted(attacker, weaponUsed, EHitStatus.DO_NOTHING, 0, defender, 0);
+      damageInflicted = new DamageInflicted(attacker, null, EHitStatus.DO_NOTHING, 0, defender, 0);
       return;
     }
 
@@ -67,10 +67,12 @@ public class AttackCmd extends AbstractCmd
 
     int defenderDefenceRating = defender.getStats().getBaseDefenceRating() + defender.getStats().getDefenceRatingBoost();
     defenderDefenceRating += countShieldsDefence(defender);
-    if (naturalRoll.getTotal() + modifier.total() + weaponBoost - attacker.getStats().determineHitChanceBoost() >= defenderDefenceRating)
+
+    if (naturalRoll.getTotal() + modifier.total() + weaponBoost + attacker.getStats().determineHitChanceBoost() >= defenderDefenceRating)
     {
       return EHitStatus.HIT;
     }
+
     return EHitStatus.MISS;
   }
 
