@@ -51,9 +51,11 @@ public class Player implements Serializable
   {
     if (activeCharacter == null) System.out.println(chatId + " has null active character");
 
-
     List<PlayerCharacter> all = new ArrayList<>(getInactiveCharacters().size() + 1);
-    all.add(getActiveCharacter());
+    if (getActiveCharacter() != null)
+    {
+      all.add(getActiveCharacter());
+    }
     all.addAll(getInactiveCharacters());
     return Collections.unmodifiableList(all);
   }
