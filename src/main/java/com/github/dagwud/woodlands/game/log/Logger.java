@@ -23,6 +23,7 @@ public class Logger
   public static void info(String message)
   {
     getInstance().logs.add(message);
+    System.out.println(message);
     while (getInstance().logs.size() > MAX_LOG)
     {
       getInstance().logs.remove(0);
