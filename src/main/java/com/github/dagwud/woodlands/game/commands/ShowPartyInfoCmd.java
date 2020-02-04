@@ -48,7 +48,10 @@ public class ShowPartyInfoCmd extends AbstractCmd
       }
       String state = member.getStats().getState() == EState.ALIVE ? "" : " (" + member.getStats().getState() + ")";
       message.append(member.summary())
-          .append(" - ").append(member.getLocation().getDisplayName())
+          .append(" - ")
+          .append("L").append(member.getStats().getLevel()).append(" ")
+          .append(member.getCharacterClass())
+          .append(" at ").append(member.getLocation().getDisplayName())
           .append(state);
     }
     return message.toString();
