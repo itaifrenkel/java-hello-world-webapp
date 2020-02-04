@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.stats.Stat;
 import com.github.dagwud.woodlands.gson.game.Shield;
 import com.github.dagwud.woodlands.gson.game.Weapon;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 public class AttackCmd extends AbstractCmd
 {
@@ -56,7 +57,7 @@ public class AttackCmd extends AbstractCmd
     }
     if (naturalRoll.getTotal() >= 20 - attacker.getStats().getCriticalStrikeChanceBonus())
     {
-System.out.println("CRIT: " + attacker.getName() + " rolled " + naturalRoll.getTotal() + " and boosted " +
+ Logger.info("CRIT: " + attacker.getName() + " rolled " + naturalRoll.getTotal() + " and boosted " +
     attacker.getStats().getCriticalStrikeChanceBonus());
       return EHitStatus.CRITICAL_HIT;
     }
