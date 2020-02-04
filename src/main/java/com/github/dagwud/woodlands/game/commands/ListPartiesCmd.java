@@ -53,13 +53,6 @@ public class ListPartiesCmd extends AdminCmd
 
       for (PlayerCharacter character : player.getAllCharacters())
       {
-//todo data fix for bad /rm :
-        if (character.getStats() == null)
-        {
-          System.out.println("BAD: " + character.getName());
-        }
-
-
         b.append("   • ").append(character.getName())
                 .append(" - ").append(character.getName());
         if (!character.isActive())
