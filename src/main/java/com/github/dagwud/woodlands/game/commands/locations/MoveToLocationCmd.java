@@ -49,6 +49,13 @@ public class MoveToLocationCmd extends AbstractCmd
           return;
         }
       }
+
+      if (anyResting(characterToMove.getParty())
+      {
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " while some party members are resting");
+        CommandDelegate.execute(cmd);
+        return;
+      }
     }
 
     endActiveEncounter();
@@ -106,6 +113,18 @@ public class MoveToLocationCmd extends AbstractCmd
       locations.add(member.getLocation());
     }
     return locations.size() == 1;
+  }
+
+  private void anyResting(Party party)
+  {
+    for (GameCharacter member : party.getActiveMembers())
+    {
+      if (member.getStats().getState() == EState.RESTING)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 
   private void showMenuForLocation(ELocation location, PlayerState playerState)
