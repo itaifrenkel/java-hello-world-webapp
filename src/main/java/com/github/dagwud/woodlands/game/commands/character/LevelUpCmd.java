@@ -10,7 +10,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
-public class LevelUpCmd extends AdminCmd
+public class LevelUpCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,6 @@ public class LevelUpCmd extends AdminCmd
 
   public LevelUpCmd(int chatId, PlayerCharacter character)
   {
-    super(chatId);
     this.chatId = chatId;
     this.character = character;
   }
