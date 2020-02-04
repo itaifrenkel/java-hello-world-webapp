@@ -39,11 +39,11 @@ public class MoveToLocationCmd extends AbstractCmd
   {
     if (allMoveTogether(location))
     {
-      // location requires whole party to move as one:
-      if (!allAtSameLocation(characterToMove.getParty()))
+      // except for The Village - individual players can go in and out of the Inn/Tavern/etc. independently:
+      if (location != ELocation.VILLAGE_SQUARE)
       {
-        // except for The Village - individual players can go in and out of the Inn/Tavern/etc. independently:
-        if (location != ELocation.VILLAGE_SQUARE)
+        // location requires whole party to move as one:
+        if (!allAtSameLocation(characterToMove.getParty()))
         {
           SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " until all party members are in the same place");
           CommandDelegate.execute(cmd);
