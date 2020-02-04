@@ -49,12 +49,19 @@ public class ListPartiesCmd extends AdminCmd
     for (PlayerState p : GameStatesRegistry.allPlayerStates())
     {
       Player player = p.getPlayer();
-      b.append(" • ").append(player.getChatId()).append("\n");
+      b.append(" • Chat ").append(player.getChatId()).append(": ");
 
+      if (player.getAllCharacters().isEmpty())
+      {
+        b.append("no characters").append("\n");
+      }
+      else
+      {
+        b.append("\n");
+      }
       for (PlayerCharacter character : player.getAllCharacters())
       {
-        b.append("   • ").append(character.getName())
-                .append(" - ").append(character.getName());
+        b.append("   • ").append(character.getName());
         if (!character.isActive())
         {
           b.append(" (inactive)");
