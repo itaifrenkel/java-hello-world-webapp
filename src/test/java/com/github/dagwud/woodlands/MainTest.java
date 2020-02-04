@@ -114,6 +114,36 @@ public class MainTest
     assertEquals(0, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
   }
 
+  @Test
+  public void testGiveItemPlayerIsCarryingTooMuch() throws Exception
+  {
+    PlayerState playerState = startBot();
+    initPlayer(playerState);
+
+    PlayerState playerState2 = startBot(false);
+    initPlayer(playerState2);
+
+    processCommand(playerState, "The Inn");
+    processCommand(playerState2, "The Inn");
+    processCommand(playerState, "Retrieve Items");
+
+    int maxItemsForTwo = playerState2.getActiveCharacter().getStats().getLevel() + 7;
+    for (int i = 0; i < maxItemsForTwo; i++)
+    {
+      processCommand(playerState2, "Retrieve Items");
+    }
+
+    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(maxItemsForTwo, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
+
+    processCommand(playerState, "/give");
+    processCommand(playerState, playerState2.getActiveCharacter().getName());
+    processCommand(playerState, "/g0");
+
+    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(maxItemsForTwo, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
+  }
+
   private void processCommand(PlayerState playerState, String messageText) throws Exception
   {
     System.out.println("Saying: " + messageText);

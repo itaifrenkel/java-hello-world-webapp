@@ -86,7 +86,17 @@ public class GiveItemCmd extends SuspendableCmd
     if (!(gameCharacter instanceof PlayerCharacter))
     {
       rejectCapturedInput();
+
       SendMessageCmd cmd = new SendMessageCmd(player.getChatId(), "That player is either not in this room, not in this party, or exists only in your head.");
+      CommandDelegate.execute(cmd);
+      return;
+    }
+
+    if (maxedOut((PlayerCharacter) gameCharacter))
+    {
+      rejectCapturedInput();
+
+      SendMessageCmd cmd = new SendMessageCmd(player.getChatId(), "That player already has too much stuff - don't be an enabler.");
       CommandDelegate.execute(cmd);
       return;
     }
@@ -103,6 +113,12 @@ public class GiveItemCmd extends SuspendableCmd
     }
     SendMessageCmd cmd = new SendMessageCmd(player.getChatId(), b.toString());
     CommandDelegate.execute(cmd);
+  }
+
+  private boolean maxedOut(PlayerCharacter character)
+  {
+    int maxAllowedItems = character.determineMaxAllowedItems();
+    return (character.getCarrying().countTotalCarried() >= maxAllowedItems);
   }
 
   private List<String> getInactiveItemList()
