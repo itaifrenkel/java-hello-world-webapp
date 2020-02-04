@@ -35,16 +35,16 @@ public class MainTest
     PlayerState playerState = startBot();
     initPlayer(playerState);
 
-    assertEquals("TestUser"+playerState.getPlayer().getChatId(), playerState.getActiveCharacter().getName());
+    assertEquals("TestUser" + playerState.getPlayer().getChatId(), playerState.getActiveCharacter().getName());
     assertEquals(ECharacterClass.WIZARD, playerState.getActiveCharacter().getCharacterClass());
     assertEquals(1, playerState.getActiveCharacter().getStats().getLevel());
     assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());
     assertEquals(8, playerState.getActiveCharacter().getStats().getMaxHitPoints());
     assertEquals(2, playerState.getActiveCharacter().getStats().getMana());
-    assertEquals(3, playerState.getActiveCharacter().getStats().getMaxMana());
-    assertEquals(9, playerState.getActiveCharacter().getStats().getStrength());
-    assertEquals(14 + 2, playerState.getActiveCharacter().getStats().getAgility());
-    assertEquals(15, playerState.getActiveCharacter().getStats().getConstitution());
+    assertEquals(3, playerState.getActiveCharacter().getStats().getMaxMana().total());
+    assertEquals(9, playerState.getActiveCharacter().getStats().getStrength().total());
+    assertEquals(14 + 2, playerState.getActiveCharacter().getStats().getAgility().total());
+    assertEquals(15, playerState.getActiveCharacter().getStats().getConstitution().total());
 
     assertEquals(ELocation.VILLAGE_SQUARE, playerState.getActiveCharacter().getLocation());
   }
@@ -176,17 +176,22 @@ public class MainTest
     PlayerState playerState = startBot();
     initPlayer(playerState);
 
+    Update joinPrompt1 = createUpdate("Join a Party", playerState);
+    new TelegramServlet().processTelegramUpdate(joinPrompt1);
+    Update join1 = createUpdate("junit", playerState);
+    new TelegramServlet().processTelegramUpdate(join1);
+
     assertNotNull(playerState.getActiveCharacter().getParty());
     assertEquals(1, playerState.getActiveCharacter().getParty().size());
     assertSame(playerState.getActiveCharacter(), playerState.getActiveCharacter().getParty().getActiveMembers().get(0));
 
-    PlayerState playerState2 = startBot();
+    PlayerState playerState2 = startBot(false);
     initPlayer(playerState2);
-    Update update = createUpdate("Join a Party", playerState2);
-    new TelegramServlet().processTelegramUpdate(update);
 
-    Update update2 = createUpdate(playerState.getActiveCharacter().getParty().getName(), playerState2);
-    new TelegramServlet().processTelegramUpdate(update2);
+    Update jointPrompt2 = createUpdate("Join a Party", playerState2);
+    new TelegramServlet().processTelegramUpdate(jointPrompt2);
+    Update join2 = createUpdate(playerState.getActiveCharacter().getParty().getName(), playerState2);
+    new TelegramServlet().processTelegramUpdate(join2);
 
     Party party = playerState.getActiveCharacter().getParty();
     assertSame(party, playerState.getActiveCharacter().getParty());
@@ -198,9 +203,17 @@ public class MainTest
 
   private PlayerState startBot() throws Exception
   {
+    return startBot(true);
+  }
+
+  private PlayerState startBot(boolean reset) throws Exception
+  {
     MessagingFactory.create(new SimulatorSender());
 
-    GameStatesRegistry.reset();
+    if (reset)
+    {
+      GameStatesRegistry.reset();
+    }
     PlayerState playerState = GameStatesRegistry.lookup(-1 * playerCount);
     playerCount++;
     Update update;
