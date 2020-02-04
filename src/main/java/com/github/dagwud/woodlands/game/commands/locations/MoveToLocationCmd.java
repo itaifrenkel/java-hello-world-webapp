@@ -11,6 +11,7 @@ import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVilla
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.log.Logger;
@@ -115,7 +116,7 @@ public class MoveToLocationCmd extends AbstractCmd
     return locations.size() == 1;
   }
 
-  private void anyResting(Party party)
+  private boolean anyResting(Party party)
   {
     for (GameCharacter member : party.getActiveMembers())
     {
