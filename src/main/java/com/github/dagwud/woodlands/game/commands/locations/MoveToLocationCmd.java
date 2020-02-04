@@ -49,13 +49,12 @@ public class MoveToLocationCmd extends AbstractCmd
           CommandDelegate.execute(cmd);
           return;
         }
-      }
-
-      if (anyResting(characterToMove.getParty()))
-      {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " while some party members are resting");
-        CommandDelegate.execute(cmd);
-        return;
+        if (anyResting(characterToMove.getParty()))
+        {
+          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " while some party members are resting");
+          CommandDelegate.execute(cmd);
+          return;
+        }
       }
     }
 
