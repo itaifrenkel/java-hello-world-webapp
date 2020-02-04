@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.inventory;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Item;
@@ -50,8 +51,10 @@ public class GiveItemCmd extends SuspendableCmd
     if (itemName.matches("/g[0-9]+"))
     {
       String giveIndex = itemName.substring("/g".length());
-      if (giveIndex.equals("ogetyourownweapon"))
+
+      if (giveIndex.equals("ogetyourownitem"))
       {
+        resetMenu();
         return;
       }
 
@@ -79,6 +82,7 @@ public class GiveItemCmd extends SuspendableCmd
   {
     if (capturedInput.equals("Cancel"))
     {
+      resetMenu();
       return;
     }
 
@@ -115,6 +119,12 @@ public class GiveItemCmd extends SuspendableCmd
     CommandDelegate.execute(cmd);
   }
 
+  private void resetMenu()
+  {
+    ShowMenuCmd showMenuCmd = new ShowMenuCmd(player.getActiveCharacter().getLocation().getMenu(), player.getPlayerState());
+    CommandDelegate.execute(showMenuCmd);
+  }
+
   private boolean maxedOut(PlayerCharacter character)
   {
     int maxAllowedItems = character.determineMaxAllowedItems();
@@ -132,7 +142,7 @@ public class GiveItemCmd extends SuspendableCmd
       Item weapon = carriedInactive.get(i);
       itemsList.add("• " + weapon.summary(character) + " (give: /g" + i + ")");
     }
-    itemsList.add("• You know what? I'm good (give: /gogetyourownweapon)");
+    itemsList.add("• You know what? I'm good (give: /gogetyourownitem)");
 
     return itemsList;
   }
