@@ -50,7 +50,7 @@ public class MoveToLocationCmd extends AbstractCmd
         }
       }
 
-      if (anyResting(characterToMove.getParty())
+      if (anyResting(characterToMove.getParty()))
       {
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " while some party members are resting");
         CommandDelegate.execute(cmd);
