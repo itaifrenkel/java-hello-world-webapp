@@ -243,7 +243,7 @@ public class Stats implements Serializable
 
   public int determineHitChanceBoost()
   {
-    return Math.min(getDrunkeness() / 2, 4) + hitBoost;
+    return hitBoost - (getDrunkeness() / 2);
   }
 
   public int determineDrunkenStrength()
