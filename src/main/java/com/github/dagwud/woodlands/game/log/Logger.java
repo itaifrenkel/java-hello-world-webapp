@@ -50,6 +50,7 @@ public class Logger
 
   public static void logError(Exception e)
   {
+    e.printStackTrace();
     try (ByteArrayOutputStream out = new ByteArrayOutputStream())
     {
       try (PrintStream ps = new PrintStream(out))
