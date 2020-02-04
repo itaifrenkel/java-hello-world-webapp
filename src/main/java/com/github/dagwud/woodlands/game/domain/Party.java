@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -163,5 +162,21 @@ public class Party implements Serializable
     {
       removeMember(nonPlayerCharacter);
     }
+  }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Party party = (Party) o;
+    return Objects.equals(name, party.name);
+  }
+
+  @Override
+  public int hashCode()
+  {
+
+    return Objects.hash(name);
   }
 }

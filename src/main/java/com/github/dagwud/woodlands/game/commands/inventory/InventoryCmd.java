@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands;
+package com.github.dagwud.woodlands.game.commands.inventory;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
@@ -19,7 +19,7 @@ public class InventoryCmd extends AbstractCmd
   private final int chatId;
   private PlayerCharacter character;
 
-  InventoryCmd(int chatId, PlayerCharacter character)
+  public InventoryCmd(int chatId, PlayerCharacter character)
   {
     super(new CharacterIsSetUpPrecondition(chatId, character));
     this.chatId = chatId;
