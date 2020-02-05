@@ -63,6 +63,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
     if (allMoveTogether(location))
     {
+      CommandDelegate.execute(new SendPartyMessageCmd(characterToMove.getParty(), characterToMove.getName() + " leads you to " + location));
       doMove(characterToMove.getParty().getActiveMembers(), location);
     }
     else
@@ -86,7 +87,6 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private void doMove(GameCharacter characterToMove, ELocation moveTo)
   {
-    Logger.info("Moving " + characterToMove.getName() + " to " + moveTo);
     characterToMove.setLocation(moveTo);
 
     if (characterToMove instanceof PlayerCharacter)
