@@ -20,7 +20,7 @@ public class EncounterRoundCmd extends AbstractCmd
   private final Encounter encounter;
   private final int delayBetweenRoundsMS;
 
-  EncounterRoundCmd(int chatId, Encounter encounter, int delayBetweenRoundsMS)
+  public EncounterRoundCmd(int chatId, Encounter encounter, int delayBetweenRoundsMS)
   {
     super(new EncounterNotEndedPrerequisite(encounter));
     this.chatId = chatId;
