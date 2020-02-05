@@ -52,12 +52,11 @@ public class ShowPartyInfoCmd extends AbstractCmd
       {
         charClass = ((PlayerCharacter)member).getCharacterClass() + " ";
       }
-      message.append(member.summary())
-          .append(" - ")
-          .append("L").append(member.getStats().getLevel()).append(" ")
-          .append(charClass)
+      message.append(member.getName()).append(":\n")
+          .append(" • L").append(member.getStats().getLevel()).append(" ").append(charClass)
           .append("at ").append(member.getLocation().getDisplayName())
-          .append(state);
+          .append(state).append("\n")
+          .append(" •").append(member.summary(false)).append("\n");
     }
     return message.toString();
   }
