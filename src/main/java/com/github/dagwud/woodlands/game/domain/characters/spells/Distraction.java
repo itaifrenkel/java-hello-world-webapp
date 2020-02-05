@@ -31,7 +31,8 @@ public class Distraction extends BattleRoundSpell
     Creature target = caster.getParty().getActiveEncounter().getEnemy();
 
     int hitBoost = target.getStats().getHitBoost();
-    int change = caster.getStats().getLevel();
+
+    int change = (int) Math.min(Math.floor((double)caster.getStats().getLevel() / 3.0), 7);
 
     debuffs.put(target, change);
 
