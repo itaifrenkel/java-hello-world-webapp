@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.battle.EndEncounterCmd;
+import com.github.dagwud.woodlands.game.commands.locations.deepwoods.woodlands.EnterDeepWoodsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.woodlands.EnterTheWoodlandsCmd;
@@ -143,6 +144,11 @@ public class MoveToLocationCmd extends AbstractCmd
     if (location == ELocation.WOODLANDS)
     {
       CommandDelegate.execute(new EnterTheWoodlandsCmd(playerState));
+    }
+
+    if (location == ELocation.DEEP_WOODS)
+    {
+      CommandDelegate.execute(new EnterDeepWoodsCmd(playerState));
     }
 
     if (location == ELocation.VILLAGE_SQUARE)

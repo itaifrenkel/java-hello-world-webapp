@@ -9,6 +9,6 @@ public class WoodlandsMenu extends GameMenu
   public WoodlandsMenu()
   {
     setPrompt("This is the woodlands");
-    setOptions(ECommand.VILLAGE_SQUARE, ECommand.CAST_A_SPELL);
+    setOptions(ECommand.VILLAGE_SQUARE, ECommand.CAST_A_SPELL, ECommand.DEEP_WOODS);
   }
 }
