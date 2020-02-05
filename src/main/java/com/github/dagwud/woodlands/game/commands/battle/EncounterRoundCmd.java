@@ -67,18 +67,19 @@ public class EncounterRoundCmd extends AbstractCmd
         {
           RetreatCmd retreat = new RetreatCmd(inDanger);
           CommandDelegate.execute(retreat);
+          return;
         }
       }
       else
       {
         TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(encounter.getParty());
         CommandDelegate.execute(killall);
+
+        EndEncounterCmd end = new EndEncounterCmd(encounter);
+        CommandDelegate.execute(end);
+
+        return;
       }
-
-      EndEncounterCmd end = new EndEncounterCmd(encounter);
-      CommandDelegate.execute(end);
-
-      return;
     }
 
     if (!encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
