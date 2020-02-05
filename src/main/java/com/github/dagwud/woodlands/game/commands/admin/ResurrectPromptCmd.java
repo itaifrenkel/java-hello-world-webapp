@@ -51,7 +51,7 @@ public class ResurrectPromptCmd extends SuspendableCmd
     }
 
     StringBuilder done = new StringBuilder("Resurrecting...\n");
-    for (Party party : PartyRegistry.listNames())
+    for (Party party : PartyRegistry.listAllParties())
     {
       for (GameCharacter character : party.getActiveMembers())
       {

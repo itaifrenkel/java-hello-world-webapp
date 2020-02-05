@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.commands.admin;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
 import com.github.dagwud.woodlands.game.commands.character.LeavePartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
@@ -58,7 +57,7 @@ public class RemovePromptCmd extends SuspendableCmd
     StringBuilder done = new StringBuilder("Vanishing characters...\n");
 
     List<GameCharacter> toRemove = new ArrayList<>();
-    for (Party party : PartyRegistry.listNames())
+    for (Party party : PartyRegistry.listAllParties())
     {
       for (GameCharacter character : party.getActiveMembers())
       {

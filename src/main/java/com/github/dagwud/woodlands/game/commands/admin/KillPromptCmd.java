@@ -50,7 +50,7 @@ public class KillPromptCmd extends SuspendableCmd
       return;
     }
     StringBuilder done = new StringBuilder("Killing off...\n");
-    for (Party party : PartyRegistry.listNames())
+    for (Party party : PartyRegistry.listAllParties())
     {
       for (GameCharacter character : party.getActiveMembers())
       {
