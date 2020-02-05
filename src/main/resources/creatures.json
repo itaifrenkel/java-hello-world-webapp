@@ -51,7 +51,7 @@
     {"name":  "Giant Snake", "difficulty": 5, "weapon-left": "l5", "fight-mode":  "SLOWEST"},
     {"name":  "Giant Spider", "difficulty": 6, "weapon-left": "l6", "fight-mode":  "STRONGEST"},
     {"name":  "Armoured Boar", "difficulty": 6, "weapon-left": "l6", "fight-mode":  "RANDOM"},
-    {"name":  "Killer Rabbit of Caerbannog", "difficulty": 8, "weapon-left": "Bite-10", "weapon-right": "Bite-10", "fight-mode":  "STRONGEST"},
+    {"name":  "Killer Rabbit of Caerbannog", "difficulty": 9, "weapon-left": "l9l", "weapon-right": "l9r", "fight-mode":  "STRONGEST"},
 
     {"name": "Gargoyle", "difficulty": 3, "weapon-left": "Hand Axe", "fight-mode":  "SLOWEST"},
     {"name": "Cyclops", "difficulty": 3, "weapon-left": "Scimitar", "fight-mode":  "SLOWEST"},
@@ -62,9 +62,9 @@
     {"name": "Gorgon", "difficulty": 4, "weapon-left": "l4", "fight-mode":  "SLOWEST"},
     {"name": "Siren", "difficulty": 5, "weapon-left": "l5", "fight-mode":  "WEAKEST"},
     {"name": "Chimera", "difficulty": 5, "weapon-left": "l5", "fight-mode":  "FASTEST"},
-    {"name": "Hydra", "difficulty": 5, "weapon-left": "l5", "fight-mode":  "STRONGEST"},
     {"name": "Minotaur", "difficulty": 6, "weapon-left": "l6", "fight-mode":  "STRONGEST"},
     {"name": "Valkyrie", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode":  "FASTEST"},
+    {"name": "Hydra", "difficulty": 9, "weapon-left": "l9l", "weapon-right": "l9r", "fight-mode":  "STRONGEST"},
 
     {"name": "Orc Peasant", "difficulty": 1, "weapon-left": "Brick", "fight-mode":  "SLOWEST"},
     {"name": "Goblin", "difficulty": 2, "weapon-left": "Dagger", "fight-mode":  "WEAKEST"},
@@ -76,8 +76,9 @@
     {"name": "Goblin Assassin", "difficulty": 6, "weapon-left": "l6", "fight-mode":  "STRONGEST"},
     {"name": "Orc Chieftain", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode":  "STRONGEST"},
     {"name": "Elvish Assassin", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode":  "FASTEST"},
-    {"name": "Rock Golem", "difficulty": 8, "weapon-left": "Mace", "weapon-right": "Battle Axe", "fight-mode":  "SLOWEST"},
- 
+    {"name": "Rock Golem", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode":  "SLOWEST"},
+    {"name": "Orc Assassin", "difficulty": 9, "weapon-left": "l9l", "weapon-right": "l9r", "fight-mode":  "STRONGEST"},
+
 
     {"name": "Troll", "difficulty": 3, "weapon-left": "Staff", "fight-mode": "STRONGEST"},
     {"name": "Bridge Troll", "difficulty": 3, "weapon-left": "Staff", "fight-mode": "SLOWEST"},
@@ -85,7 +86,8 @@
     {"name": "Ogre", "difficulty": 6, "weapon-left": "Sword", "fight-mode": "RANDOM"},
     {"name": "Cyclops Ogre", "difficulty": 6, "weapon-left": "l6", "fight-mode": "WEAKEST"},
     {"name": "Enraged Ogre", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode": "FASTEST"},
-    {"name": "Three-Eyed Ogre", "difficulty": 8, "weapon-left": "Sword", "fight-mode": "STRONGEST"},
+    {"name": "Three-Eyed Ogre", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "STRONGEST"},
+    {"name": "Troll Mage", "difficulty": 9, "weapon-left": "l9l", "weapon-right": "l9r", "fight-mode": "SLOWEST"},
 
     {"name": "Gnome", "difficulty": 1, "weapon-left": "Sword", "fight-mode": "WEAKEST"},
     {"name": "Pixie", "difficulty": 2, "weapon-left": "Sword", "fight-mode": "SLOWEST"},
@@ -98,15 +100,15 @@
     {"name": "Banshee", "difficulty": 6, "weapon-left": "l6", "fight-mode": "SLOWEST"},
     {"name": "Changeling", "difficulty": 6, "weapon-left": "l6", "fight-mode": "STRONGEST"},
     {"name": "Basilisk", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode": "SLOWEST"},
-    {"name": "Sasquatch", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode": "RANDOM"},
-    {"name": "Lich", "difficulty": 8, "weapon-left": "Sword", "fight-mode": "WEAKEST"},
+    {"name": "Lich", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "WEAKEST"},
+    {"name": "Sasquatch", "difficulty": 9, "weapon-left": "l9l", "weapon-right": "l9r", "fight-mode": "RANDOM"},
 
     {"name": "Baby Dragon", "difficulty": 5, "weapon-left": "l5", "fight-mode": "FASTEST"},
     {"name": "Dragon", "difficulty": 6, "weapon-left": "l6", "fight-mode": "STRONGEST"},
     {"name": "Short-Tailed Dragon", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode": "SLOWEST"},
-    {"name": "Ironwing Dragon", "difficulty": 8, "weapon-left": "Sword", "fight-mode": "WEAKEST"},
-    {"name": "Anglewing Dragon", "difficulty": 8, "weapon-left": "Sword", "fight-mode": "RANDOM"},
-    {"name": "Dragon Rider", "difficulty": 9, "weapon-left": "Sword", "fight-mode": "FASTEST"},
+    {"name": "Ironwing Dragon", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "WEAKEST"},
+    {"name": "Anglewing Dragon", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "RANDOM"},
+    {"name": "Dragon Rider", "difficulty": 9, "weapon-left": "l9l", "weapon-right": "l9r", "fight-mode": "FASTEST"},
     {"name": "Celestial Dragon", "difficulty": 10, "weapon-left": "Sword", "fight-mode": "STRONGEST"},
     {"name": "Yellow Reaper Dragon", "difficulty": 12, "weapon-left": "Sword", "fight-mode": "SLOWEST"},
     {"name": "Shadowling", "difficulty": 2, "weapon-left": "Sword", "fight-mode": "RANDOM"},
@@ -129,7 +131,7 @@
     {"name": "Aztec Warrior", "difficulty": 5, "weapon-left": "l5", "weapon-right": "Katar", "fight-mode": "WEAKEST"},
     {"name": "Kingsman", "difficulty": 6, "weapon-left": "l6", "fight-mode": "STRONGEST"},
     {"name": "Spartan Warrior", "difficulty": 6, "weapon-left": "l6", "fight-mode": "FASTEST"},
-    {"name": "Axe Murderer", "difficulty": 8, "weapon-left": "Sword", "fight-mode": "WEAKEST"},
+    {"name": "Axe Murderer", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "WEAKEST"},
     {"name": "Warlord", "difficulty": 10, "weapon-left":  "Sword", "fight-mode": "SLOWEST"}
 
   ]
