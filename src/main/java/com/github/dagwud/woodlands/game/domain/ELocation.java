@@ -17,7 +17,9 @@ public enum ELocation
           "Apart from the guard, who looks permanently annoyed, the patrons of The Raven are all smiles - with the largest being the one plastered over the face of the barman.\n\n" +
           "\"Long journey?\" he asks jovially, though something about his demeanor suggests he’s not that interested in your journey so much as how many coins are in your pocket."),
 
-  MOUNTAIN("The Mountain", new MountainMenu(), "You see stuff, but I can't tell you what it is"),
+  MOUNTAIN("The Mountain", new MountainMenu(), "The Mountain overlooks the Village, and is home to a variety of small creatures. As such it has become something of a proving ground, where many adventurers home their skills and practice basics.\n\n" +
+          "It’s also a generally safe space as long as you’re not alone - tradition dictates that because this is a training area, any adventurer who falls in a fight will be carried back to the Village by their comrades. However, being knocked unconscious while alone does bring the risk that your body may be set upon by the inhabitants of the mountain.\n\n" +
+          "As such, it’s best to travel in a group."),
 
   WOODLANDS("The Woodlands", new WoodlandsMenu(), "There's stuff to be seen.");
 
