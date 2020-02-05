@@ -55,10 +55,10 @@ public class DefeatCreatureCmd extends AbstractCmd
         PlayerCharacter p = (PlayerCharacter)c;
         if (p.isActive())
         {
-          int levelDiff = (int)p.getDifficulty() - defeated.getStats().getLevel();
+          int levelDiff = p.getStats().getLevel() - ((int)defeated.difficulty);
           if (levelDiff >= 5)
           {
-            SendMessageCmd msg = new SendMessageCmd(p.getPlayedBy().getChatId(), "That's not exactly a fair fight; you don't qualify for an experience boost for defeating " + defeated.getName() + " (L" + defeated.getDifficulty() + ")");
+            SendMessageCmd msg = new SendMessageCmd(p.getPlayedBy().getChatId(), "That's not exactly a fair fight; you don't qualify for an experience boost for defeating " + defeated.getName() + " (L" + defeated.difficulty + ")");
             CommandDelegate.execute(msg); 
           }
           else
