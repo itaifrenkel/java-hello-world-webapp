@@ -45,7 +45,7 @@ public class DefeatCreatureCmd extends AbstractCmd
     experienceGrantedPerPlayer = rewardPerCharacter;
   }
 
-  private List<PlayerCharacter> findVictorious(Party party, Creature defeated)
+  private List<PlayerCharacter> findVictors(Party party, Creature defeated)
   {
     List<PlayerCharacter> victors = new ArrayList<>();
     for (GameCharacter c : party.getActiveMembers())
@@ -58,7 +58,7 @@ public class DefeatCreatureCmd extends AbstractCmd
           int levelDiff = p.getStats().getLevel() - defeated.getStats().getLevel();
           if (levelDiff < 5)
           {
-            SendMessageCmd msg = new SendMessageCmd(c.getPlayedBy().getChatId(), "That's not exactly a fair fight; you don't qualify for an experience boost for defeating " + defeated.getName() + " (L" + defeated.getStats().getLevel() + ")");
+            SendMessageCmd msg = new SendMessageCmd(p.getPlayedBy().getChatId(), "That's not exactly a fair fight; you don't qualify for an experience boost for defeating " + defeated.getName() + " (L" + defeated.getStats().getLevel() + ")");
             CommandDelegate.execute(msg); 
           }
           else
