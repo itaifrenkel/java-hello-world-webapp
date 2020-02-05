@@ -56,7 +56,7 @@ public class DefeatCreatureCmd extends AbstractCmd
         if (p.isActive())
         {
           int levelDiff = p.getStats().getLevel() - defeated.getStats().getLevel();
-          if (levelDiff < 5)
+          if (levelDiff >= 5)
           {
             SendMessageCmd msg = new SendMessageCmd(p.getPlayedBy().getChatId(), "That's not exactly a fair fight; you don't qualify for an experience boost for defeating " + defeated.getName() + " (L" + defeated.getStats().getLevel() + ")");
             CommandDelegate.execute(msg); 
