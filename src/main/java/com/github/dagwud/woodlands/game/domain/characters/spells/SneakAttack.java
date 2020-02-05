@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
-import com.github.dagwud.woodlands.game.commands.locations.mountain.EHitStatus;
+import com.github.dagwud.woodlands.game.commands.battle.EHitStatus;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;

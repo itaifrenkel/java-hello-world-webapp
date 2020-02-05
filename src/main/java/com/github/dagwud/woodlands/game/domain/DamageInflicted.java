@@ -1,6 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.game.commands.locations.mountain.EHitStatus;
+import com.github.dagwud.woodlands.game.commands.battle.EHitStatus;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.io.Serializable;

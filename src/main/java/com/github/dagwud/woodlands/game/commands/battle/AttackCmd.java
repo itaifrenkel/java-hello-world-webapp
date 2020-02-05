@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands.locations.mountain;
+package com.github.dagwud.woodlands.game.commands.battle;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
@@ -8,7 +8,6 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.stats.Stat;
 import com.github.dagwud.woodlands.gson.game.Shield;
 import com.github.dagwud.woodlands.gson.game.Weapon;
-import com.github.dagwud.woodlands.game.log.Logger;
 
 public class AttackCmd extends AbstractCmd
 {

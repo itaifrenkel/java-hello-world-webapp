@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands.locations.mountain;
+package com.github.dagwud.woodlands.game.commands.battle;
 
 public enum EHitStatus
 {

@@ -1,8 +1,6 @@
-package com.github.dagwud.woodlands.game.commands.locations.mountain;
+package com.github.dagwud.woodlands.game.commands.battle;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
-import com.github.dagwud.woodlands.game.commands.battle.OrderFightersCmd;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.*;
