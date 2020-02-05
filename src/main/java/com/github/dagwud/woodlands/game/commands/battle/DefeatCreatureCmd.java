@@ -29,13 +29,41 @@ public class DefeatCreatureCmd extends AbstractCmd
     double difficultyLevel = creatureDefeated.difficulty;
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(difficultyLevel);
     int reward = difficulty.experienceReward;
-    int rewardPerCharacter = Math.floorDiv(reward, victoriousParty.size());
-    for (PlayerCharacter member : victoriousParty.getActivePlayerCharacters())
+
+    List<PlayerCharacter> victoriousPlayers = findVictors(victoriousParty, creatureDefeated);
+    int rewardPerCharacter = Math.floorDiv(reward, victoriousPlayers.size());
+    for (PlayerCharacter member : victoriousPlayers)
     {
       GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
       CommandDelegate.execute(cmd);
     }
     experienceGrantedPerPlayer = rewardPerCharacter;
+  }
+
+  private List<PlayerCharacter> findVictorious(Party party, Creature defeated)
+  {
+    List<PlayerCharacter> victors = new ArrayList<>();
+    for (GameCharacter c : party.getActiveMembers())
+    {
+      if (c instanceof PlayerCharacter)
+      {
+        PlayerCharacter p = (PlayerCharacter)c;
+        if (p.isActive())
+        {
+          int levelDiff = p.getStats().getLevel() - defeated.getStats().getLevel();
+          if (levelDiff < 5)
+          {
+            SendMessageCmd msg = new SendMessageCmd(c.getPlayedBy().getChatId(), "That's not exactly a fair fight; you don't qualify for an experience boost for defeating " + defeated.getName() + " (L" + defeated.getStats().getLevel() + ")");
+            CommandDelegate.execute(msg); 
+          }
+          else
+          {
+            victors.add(p);
+          }
+        }
+      }
+    }
+    return victors;
   }
 
   public int getExperienceGrantedPerPlayer()
