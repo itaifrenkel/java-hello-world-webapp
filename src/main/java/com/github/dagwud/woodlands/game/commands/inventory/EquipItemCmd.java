@@ -68,8 +68,10 @@ public class EquipItemCmd extends AbstractCmd
     {
       return;
     }
-    Item move = character.getCarrying().getCarriedRight();
-    character.getCarrying().getCarriedInactive().add(move);
-    character.getCarrying().setCarriedRight(null);
+    Item moveL = character.getCarrying().getCarriedLeft();
+    Item moveR = character.getCarrying().getCarriedRight();
+    character.getCarrying().getCarriedInactive().add(moveR);
+    character.getCarrying().setCarriedRight(moveL);
+    character.getCarrying().setCarriedLeft(null);
   }
 }
