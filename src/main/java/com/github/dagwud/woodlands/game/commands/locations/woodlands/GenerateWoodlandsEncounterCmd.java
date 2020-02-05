@@ -13,7 +13,7 @@ public class GenerateWoodlandsEncounterCmd extends GenerateEncounterCmd
 
   GenerateWoodlandsEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.MOUNTAIN, 4);
+    super(playerState, ELocation.WOODLANDS, 4);
   }
 
   public void scheduleNextEncounter()

@@ -7,13 +7,13 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 
-public class EnterWoodlandsCmd extends AbstractCmd
+public class EnterTheWoodlandsCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
   private final PlayerState playerState;
 
-  public EnterWoodlandsCmd(PlayerState playerState)
+  public EnterTheWoodlandsCmd(PlayerState playerState)
   {
     super(new CharacterIsSetUpPrecondition(playerState.getPlayer().getChatId(), playerState.getActiveCharacter()));
     this.playerState = playerState;
