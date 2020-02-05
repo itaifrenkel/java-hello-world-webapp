@@ -52,7 +52,9 @@ public class AttackCmd extends AbstractCmd
 
     if (naturalRoll.getTotal() + attacker.getStats().determineHitChanceBoost() <= 1)
     {
-System.out.println(attacker.getName() + " natural miss");
+System.out.println(attacker.getName() + " natural miss - " + naturalRoll.getTotal() + " + bonus " + attacker.getStats().determineHitChanceBoost());
+      return EHitStatus.MISS;
+
       return EHitStatus.MISS;
     }
     if (naturalRoll.getTotal() >= 20 - attacker.getStats().getCriticalStrikeChanceBonus())
