@@ -75,7 +75,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private boolean allMoveTogether(ELocation moveTo)
   {
-    return moveTo == ELocation.MOUNTAIN || moveTo == ELocation.VILLAGE_SQUARE || moveTo == ELocation.WOODLANDS;
+    return moveTo == ELocation.MOUNTAIN || moveTo == ELocation.VILLAGE_SQUARE || moveTo == ELocation.WOODLANDS || moveTo == ELocation.DEEP_WOODS;
   }
 
   private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo)
