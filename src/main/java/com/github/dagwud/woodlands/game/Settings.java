@@ -23,5 +23,5 @@ public class Settings
   public static final int MOUNTAIN_MAX_DIFFICULTY = 2;
 
   public static final int WOODLANDS_MIN_DIFFICULTY = 2;
-  public static final int WOODLANDS_MAX_DIFFICULTY = 4;
+  public static final int WOODLANDS_MAX_DIFFICULTY = 6;
 }
