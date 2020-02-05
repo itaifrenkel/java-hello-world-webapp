@@ -64,7 +64,7 @@
     {"name": "Chimera", "difficulty": 5, "weapon-left": "l5", "fight-mode":  "FASTEST"},
     {"name": "Hydra", "difficulty": 5, "weapon-left": "l5", "fight-mode":  "STRONGEST"},
     {"name": "Minotaur", "difficulty": 6, "weapon-left": "l6", "fight-mode":  "STRONGEST"},
-    {"name": "Valkyrie", "difficulty": 7, "weapon-left": "l7", "weapon-right": l7", "fight-mode":  "FASTEST"},
+    {"name": "Valkyrie", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode":  "FASTEST"},
 
     {"name": "Orc Peasant", "difficulty": 1, "weapon-left": "Brick", "fight-mode":  "SLOWEST"},
     {"name": "Goblin", "difficulty": 2, "weapon-left": "Dagger", "fight-mode":  "WEAKEST"},
