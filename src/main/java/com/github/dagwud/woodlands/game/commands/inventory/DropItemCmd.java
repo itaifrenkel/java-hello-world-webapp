@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.inventory;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -53,6 +54,9 @@ public class DropItemCmd extends AbstractCmd
     {
       SendMessageCmd cmd = new SendMessageCmd(chatId, "You dropped " + dropped.getName());
       CommandDelegate.execute(cmd);
+
+      InventoryCmd inv = new InventoryCmd(chatId, character);
+      CommandDelegate.execute(inv);
     }
     else
     {
