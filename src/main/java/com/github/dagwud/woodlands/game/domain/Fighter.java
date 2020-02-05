@@ -21,12 +21,18 @@ public abstract class Fighter extends GameObject
 
   public String summary()
   {
+    return summary(true);
+  }
+
+  public String summary(boolean showName)
+  {
+    String name = (showName ? getName() + ": " : "");
     Stats stats = getStats();
     if (stats.getState() == EState.DEAD)
     {
-      return getName() + ": ☠️dead";
+      return name + "☠️dead";
     }
-    String message = getName() + ": " + healthIcon(stats) + stats.getHitPoints() + " / " + stats.getMaxHitPoints();
+    String message = name + healthIcon(stats) + stats.getHitPoints() + " / " + stats.getMaxHitPoints();
     if (stats.getMaxMana().total() != 0)
     {
       message += ", ✨" + stats.getMana() + "/" + stats.getMaxMana();
