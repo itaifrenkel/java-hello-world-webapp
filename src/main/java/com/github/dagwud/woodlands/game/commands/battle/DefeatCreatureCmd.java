@@ -3,11 +3,16 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.GrantExperienceCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.creatures.DifficultyCacheFactory;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Difficulty;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class DefeatCreatureCmd extends AbstractCmd
 {
