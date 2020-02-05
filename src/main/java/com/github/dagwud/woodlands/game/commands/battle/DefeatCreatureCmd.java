@@ -36,7 +36,7 @@ public class DefeatCreatureCmd extends AbstractCmd
     int reward = difficulty.experienceReward;
 
     List<PlayerCharacter> victoriousPlayers = findVictors(victoriousParty, creatureDefeated);
-    int rewardPerCharacter = Math.floorDiv(reward, victoriousPlayers.size());
+    int rewardPerCharacter = victoriousPlayers.isEmpty() ? 0 : Math.floorDiv(reward, victoriousPlayers.size());
     for (PlayerCharacter member : victoriousPlayers)
     {
       GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
