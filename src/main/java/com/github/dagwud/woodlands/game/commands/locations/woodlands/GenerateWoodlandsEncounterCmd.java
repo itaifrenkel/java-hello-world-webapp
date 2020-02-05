@@ -13,7 +13,7 @@ public class GenerateWoodlandsEncounterCmd extends GenerateEncounterCmd
 
   GenerateWoodlandsEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.WOODLANDS, 4);
+    super(playerState, ELocation.WOODLANDS, Settings.WOODLANDS_MIN_DIFFICULTY, Settings.WOODLANDS_MAX_DIFFICULTY);
   }
 
   public void scheduleNextEncounter()

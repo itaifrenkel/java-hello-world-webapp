@@ -13,7 +13,7 @@ public class GenerateMountainEncounterCmd extends GenerateEncounterCmd
 
   GenerateMountainEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.MOUNTAIN, 2);
+    super(playerState, ELocation.MOUNTAIN, Settings.MOUNTAIN_MIN_DIFFICULTY, Settings.MOUNTAIN_MAX_DIFFICULTY);
   }
 
   @Override

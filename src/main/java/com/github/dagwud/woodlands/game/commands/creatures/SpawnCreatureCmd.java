@@ -12,18 +12,20 @@ public class SpawnCreatureCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
+  private final int minDifficulty;
   private final int maxDifficulty;
   private Creature spawnedCreature;
 
-  public SpawnCreatureCmd(int maxDifficulty)
+  public SpawnCreatureCmd(int minDifficulty, int maxDifficulty)
   {
+    this.minDifficulty = minDifficulty;
     this.maxDifficulty = maxDifficulty;
   }
 
   @Override
   public void execute()
   {
-    Creature template = CreaturesCacheFactory.instance().getCache().pickRandom(0, maxDifficulty);
+    Creature template = CreaturesCacheFactory.instance().getCache().pickRandom(minDifficulty, maxDifficulty);
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(template.difficulty);
 
     Stats stats = new Stats();
