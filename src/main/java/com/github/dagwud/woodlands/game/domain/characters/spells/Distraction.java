@@ -27,6 +27,11 @@ public class Distraction extends BattleRoundSpell
   @Override
   public boolean cast()
   {
+// TODO HACK TO MAKE IT LESS OVERPOWERING UNTIL WE MAKE IT AN ACTIVE SPELL
+if (Math.random() * 10 != 4) // a 1 in 10 chance
+{
+return false;
+}
     Trickster caster = getCaster();
     Creature target = caster.getParty().getActiveEncounter().getEnemy();
 
