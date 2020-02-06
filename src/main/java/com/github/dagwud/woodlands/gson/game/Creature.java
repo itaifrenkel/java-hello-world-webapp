@@ -13,6 +13,9 @@ import java.util.*;
 
 public class Creature extends Fighter
 {
+  public static final String CREATURE_TYPE_DRAGON = "dragon";
+  public static final String CREATURE_TYPE_NORMAL = "normal";
+
   private static final long serialVersionUID = 1L;
   public String name;
 
@@ -26,6 +29,9 @@ public class Creature extends Fighter
 
   @SerializedName("fight-mode")
   public String fightMode = "RANDOM";
+
+  @SerializedName("creature-type")
+  public String creatureType;
 
   private Stats stats;
   private CarriedItems carriedItems;

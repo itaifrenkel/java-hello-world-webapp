@@ -53,6 +53,7 @@ public enum ECommand
   THE_MOUNTAIN("The Mountain", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.MOUNTAIN)),
   THE_WOODLANDS("The Woodlands", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.WOODLANDS)),
   DEEP_WOODS("Deep Woods", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.DEEP_WOODS)),
+  THE_GORGE("The Gorge", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.THE_GORGE)),
 
   CAST_A_SPELL("Cast Spell", true, (character, chatId) -> new CastSpellPromptCmd(chatId, character)),
 

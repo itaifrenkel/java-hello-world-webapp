@@ -9,6 +9,6 @@ public class DeepWoodsMenu extends GameMenu
   public DeepWoodsMenu()
   {
     setPrompt("This is the Deep Woods");
-    setOptions(ECommand.THE_WOODLANDS, ECommand.CAST_A_SPELL);
+    setOptions(ECommand.THE_WOODLANDS, ECommand.THE_GORGE, ECommand.CAST_A_SPELL);
   }
 }

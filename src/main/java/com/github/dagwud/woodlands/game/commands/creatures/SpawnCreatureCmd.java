@@ -14,18 +14,29 @@ public class SpawnCreatureCmd extends AbstractCmd
 
   private final int minDifficulty;
   private final int maxDifficulty;
+  private final String creatureType;
   private Creature spawnedCreature;
 
-  public SpawnCreatureCmd(int minDifficulty, int maxDifficulty)
+  public SpawnCreatureCmd(int minDifficulty, int maxDifficulty, String creatureType)
   {
     this.minDifficulty = minDifficulty;
     this.maxDifficulty = maxDifficulty;
+    this.creatureType = creatureType;
   }
 
   @Override
   public void execute()
   {
-    Creature template = CreaturesCacheFactory.instance().getCache().pickRandom(minDifficulty, maxDifficulty);
+    Creature template = null;
+    while (template == null)
+    {
+      template = CreaturesCacheFactory.instance().getCache().pickRandom(minDifficulty, maxDifficulty);
+      if (creatureType != null && !creatureType.equalsIgnoreCase(template.creatureType))
+      {
+        template = null; // try again
+      }
+    }
+
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(template.difficulty);
 
     Stats stats = new Stats();

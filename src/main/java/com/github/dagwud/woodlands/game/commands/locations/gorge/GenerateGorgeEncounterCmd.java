@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands.locations.woodlands;
+package com.github.dagwud.woodlands.game.commands.locations.gorge;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
@@ -8,18 +8,18 @@ import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
-public class GenerateWoodlandsEncounterCmd extends GenerateEncounterCmd
+public class GenerateGorgeEncounterCmd extends GenerateEncounterCmd
 {
   private static final long serialVersionUID = 1L;
 
-  GenerateWoodlandsEncounterCmd(PlayerState playerState)
+  GenerateGorgeEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.WOODLANDS, Settings.WOODLANDS_MIN_DIFFICULTY, Settings.WOODLANDS_MAX_DIFFICULTY, Creature.CREATURE_TYPE_NORMAL);
+    super(playerState, ELocation.THE_GORGE, Settings.THE_GORGE_MIN_DIFFICULTY, Settings.THE_GORGE_MAX_DIFFICULTY, Creature.CREATURE_TYPE_DRAGON);
   }
 
   public void scheduleNextEncounter()
   {
-    RunLaterCmd nextEncounter = new RunLaterCmd(Settings.DELAY_BETWEEN_ENCOUNTERS_MS, new GenerateWoodlandsEncounterCmd(getPlayerState()));
+    RunLaterCmd nextEncounter = new RunLaterCmd(Settings.DELAY_BETWEEN_ENCOUNTERS_MS, new GenerateGorgeEncounterCmd(getPlayerState()));
     CommandDelegate.execute(nextEncounter);
   }
 }

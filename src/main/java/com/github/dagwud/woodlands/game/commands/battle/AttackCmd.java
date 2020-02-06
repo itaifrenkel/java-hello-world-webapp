@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.stats.Stat;
+import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Shield;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -50,6 +51,10 @@ public class AttackCmd extends AbstractCmd
     DiceRollCmd naturalRoll = new DiceRollCmd(1, 20);
     CommandDelegate.execute(naturalRoll);
 
+    if (isDragon(defender) && !attackWith.ranged)
+    {
+      return EHitStatus.MISS;
+    }
     if (naturalRoll.getTotal() + attacker.getStats().determineHitChanceBoost() <= 1)
     {
 System.out.println(attacker.getName() + " natural miss - " + naturalRoll.getTotal() + " + bonus " + attacker.getStats().determineHitChanceBoost());
@@ -73,6 +78,16 @@ System.out.println(attacker.getName() + " natural miss - " + naturalRoll.getTota
 
 System.out.println(attacker.getName() + " miss: " + naturalRoll.getTotal() + "+" + modifier.total() + "+" + weaponBoost + "+" + attacker.getStats().determineHitChanceBoost() + " >= " + defenderDefenceRating);
     return EHitStatus.MISS;
+  }
+
+  private boolean isDragon(Fighter defender)
+  {
+    if (!(defender instanceof Creature))
+    {
+      return false;
+    }
+    Creature creature = (Creature) defender;
+    return creature.creatureType.equalsIgnoreCase(Creature.CREATURE_TYPE_DRAGON);
   }
 
   private int countShieldsDefence(Fighter defender)

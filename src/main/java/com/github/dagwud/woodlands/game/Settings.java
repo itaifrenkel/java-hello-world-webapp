@@ -27,4 +27,8 @@ public class Settings
 
   public static final int DEEP_WOODS_MIN_DIFFICULTY = 7;
   public static final int DEEP_WOODS_MAX_DIFFICULTY = 9;
+
+  // Any difficulty - but only dragons:
+  public static final int THE_GORGE_MIN_DIFFICULTY = Integer.MIN_VALUE;
+  public static final int THE_GORGE_MAX_DIFFICULTY = Integer.MAX_VALUE;
 }

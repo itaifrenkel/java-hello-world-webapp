@@ -6,7 +6,8 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.battle.EndEncounterCmd;
-import com.github.dagwud.woodlands.game.commands.locations.deepwoods.woodlands.EnterDeepWoodsCmd;
+import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWoodsCmd;
+import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.woodlands.EnterTheWoodlandsCmd;
@@ -16,7 +17,6 @@ import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
-import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -75,7 +75,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private boolean allMoveTogether(ELocation moveTo)
   {
-    return moveTo == ELocation.MOUNTAIN || moveTo == ELocation.VILLAGE_SQUARE || moveTo == ELocation.WOODLANDS || moveTo == ELocation.DEEP_WOODS;
+    return moveTo != ELocation.INN && moveTo != ELocation.TAVERN;
   }
 
   private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo)
@@ -145,12 +145,14 @@ public class MoveToLocationCmd extends AbstractCmd
     {
       CommandDelegate.execute(new EnterTheWoodlandsCmd(playerState));
     }
-
     if (location == ELocation.DEEP_WOODS)
     {
       CommandDelegate.execute(new EnterDeepWoodsCmd(playerState));
     }
-
+    if (location == ELocation.THE_GORGE)
+    {
+      CommandDelegate.execute(new EnterTheGorgeCmd(playerState));
+    }
     if (location == ELocation.VILLAGE_SQUARE)
     {
       CommandDelegate.execute(new EnterTheVillageCmd(playerState.getActiveCharacter()));

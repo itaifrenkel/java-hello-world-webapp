@@ -23,7 +23,10 @@ public enum ELocation
 
   WOODLANDS("The Woodlands", new WoodlandsMenu(), false, "There's stuff to be seen."),
 
-  DEEP_WOODS("Deep Woods", new DeepWoodsMenu(), false, "Not much is known about the deep woods...");
+  DEEP_WOODS("Deep Woods", new DeepWoodsMenu(), false, "Not much is known about the deep woods..."),
+
+  THE_GORGE("The Gorge", new GorgeMenu(), false, "Here be dragons. Dragons can't be attacked with melee weapons - only ranged ones!");
+
 
   private final String displayName;
   private final GameMenu menu;

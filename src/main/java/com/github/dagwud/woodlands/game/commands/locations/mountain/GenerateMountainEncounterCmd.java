@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.battle.GenerateEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class GenerateMountainEncounterCmd extends GenerateEncounterCmd
 {
@@ -13,7 +14,7 @@ public class GenerateMountainEncounterCmd extends GenerateEncounterCmd
 
   GenerateMountainEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.MOUNTAIN, Settings.MOUNTAIN_MIN_DIFFICULTY, Settings.MOUNTAIN_MAX_DIFFICULTY);
+    super(playerState, ELocation.MOUNTAIN, Settings.MOUNTAIN_MIN_DIFFICULTY, Settings.MOUNTAIN_MAX_DIFFICULTY, Creature.CREATURE_TYPE_NORMAL);
   }
 
   @Override

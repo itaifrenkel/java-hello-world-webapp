@@ -21,13 +21,15 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   private final ELocation location;
   private final int minDifficulty;
   private final int maxDifficulty;
+  private String creatureType;
 
-  public GenerateEncounterCmd(PlayerState playerState, ELocation location, int minDifficulty, int maxDifficulty)
+  public GenerateEncounterCmd(PlayerState playerState, ELocation location, int minDifficulty, int maxDifficulty, String creatureType)
   {
     this.playerState = playerState;
     this.location = location;
     this.minDifficulty = minDifficulty;
     this.maxDifficulty = maxDifficulty;
+    this.creatureType = creatureType;
   }
 
   @Override
@@ -83,7 +85,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
   private Encounter createEncounter(Party party)
   {
-    SpawnCreatureCmd cmd = new SpawnCreatureCmd(minDifficulty, maxDifficulty);
+    SpawnCreatureCmd cmd = new SpawnCreatureCmd(minDifficulty, maxDifficulty, creatureType);
     CommandDelegate.execute(cmd);
     Creature creature = cmd.getSpawnedCreature();
 
