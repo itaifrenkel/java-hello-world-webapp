@@ -39,6 +39,13 @@ public class PartyRegistry implements Serializable
 
   public static Collection<Party> listAllParties()
   {
+if (parties.containsKey(null))
+{
+  parties.put("FIXEDNULL", parties.get(null));
+  parties.remove(null);
+System.out.println("fixed a null party");
+}
+
     Map<String, Party> parties = instance().parties;
     return Collections.unmodifiableCollection(parties.values());
   }
