@@ -28,7 +28,7 @@ public class Distraction extends BattleRoundSpell
   public boolean cast()
   {
 // TODO HACK TO MAKE IT LESS OVERPOWERING UNTIL WE MAKE IT AN ACTIVE SPELL
-if (Math.random() * 10 != 4) // a 1 in 10 chance
+if (Math.random() * 20 != 4) // a 1 in 20 chance
 {
 return false;
 }
