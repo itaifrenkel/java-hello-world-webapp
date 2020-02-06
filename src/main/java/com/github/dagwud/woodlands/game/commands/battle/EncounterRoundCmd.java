@@ -63,7 +63,7 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       if (encounter.getParty().capableOfRetreat())
       {
-        if (inDanger.getLocation() != ELocation.DEEP_WOODS)
+        if (inDanger.getLocation().isAutoRetreat())
         {
           RetreatCmd retreat = new RetreatCmd(inDanger);
           CommandDelegate.execute(retreat);
