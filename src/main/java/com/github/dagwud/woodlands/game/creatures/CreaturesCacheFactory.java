@@ -36,6 +36,11 @@ public class CreaturesCacheFactory
     }
   }
 
+  public static synchronized void invalidate()
+  {
+    instance = null;
+  }
+
   public CreaturesCache getCache()
   {
     return cache;

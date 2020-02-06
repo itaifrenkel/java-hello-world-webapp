@@ -45,6 +45,7 @@ public enum ECommand
   SETPARTY("/setparty", false, (character, chatId) -> new AdminChangePartyCmd(chatId, character)),
   RESET("/reset", false, (character, chatId) -> new ResetCmd(chatId)),
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
+  CREATURE_CACHE("/cachecreature", false, ((character, chatId) -> new InvalidateCreatureCacheCmd(chatId))),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
