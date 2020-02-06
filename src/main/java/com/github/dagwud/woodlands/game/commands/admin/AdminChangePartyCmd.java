@@ -49,7 +49,6 @@ public class AdminChangePartyCmd extends SuspendableCmd
 
     SendMessageCmd msg = new SendMessageCmd(chatId, "Party name?");
     CommandDelegate.execute(msg);
-    rejectCapturedInput();
   }
 
   private void acceptPartyName(String capturedInput)
