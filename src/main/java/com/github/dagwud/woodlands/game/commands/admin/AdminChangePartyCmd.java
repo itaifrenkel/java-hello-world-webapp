@@ -67,7 +67,7 @@ public class AdminChangePartyCmd extends SuspendableCmd
   {
     for (Party party : PartyRegistry.listAllParties())
     {
-      if (null != party && party.getName().equalsIgnoreCase(capturedInput))
+      if (null != party && capturedInput.equalsIgnoreCase(party.getName()))
       {
         partyToJoin = party.getName();
         return;
