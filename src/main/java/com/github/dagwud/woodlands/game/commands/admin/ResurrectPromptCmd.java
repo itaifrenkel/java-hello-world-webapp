@@ -52,7 +52,7 @@ public class ResurrectPromptCmd extends SuspendableCmd
 
     for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
-      resurrect(playerState.getPlayer().getActiveCharacter(), name);
+      done.append(resurrect(playerState.getPlayer().getActiveCharacter(), name));
       for (PlayerCharacter inactiveCharacter : playerState.getPlayer().getInactiveCharacters())
       {
         done.append(resurrect(inactiveCharacter, name));
