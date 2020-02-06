@@ -1,8 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.PartyRegistry;
-import com.github.dagwud.woodlands.game.Settings;
+import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.FullHealCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
@@ -51,20 +49,29 @@ public class ResurrectPromptCmd extends SuspendableCmd
     }
 
     StringBuilder done = new StringBuilder("Resurrecting...\n");
-    for (Party party : PartyRegistry.listAllParties())
+
+    for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
-      for (GameCharacter character : party.getAllMembers())
+      resurrect(playerState.getPlayer().getActiveCharacter(), name);
+      for (PlayerCharacter inactiveCharacter : playerState.getPlayer().getInactiveCharacters())
       {
-        if (character.getName().equalsIgnoreCase(name))
-        {
-          String msg = resurrect(party, character);
-          done.append(msg).append("\n");
-        }
+        done.append(resurrect(inactiveCharacter, name));
       }
     }
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, done.toString());
     CommandDelegate.execute(cmd);
+  }
+
+  private String resurrect(PlayerCharacter character, String name)
+  {
+    StringBuilder b = new StringBuilder();
+    if (character.getName().equalsIgnoreCase(name))
+    {
+      String msg = resurrect(character.getParty(), character);
+      b.append(msg).append("\n");
+    }
+    return b.toString();
   }
 
   private String resurrect(Party party, GameCharacter character)
