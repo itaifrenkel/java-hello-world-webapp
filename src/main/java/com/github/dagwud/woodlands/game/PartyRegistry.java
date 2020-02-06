@@ -39,10 +39,10 @@ public class PartyRegistry implements Serializable
 
   public static Collection<Party> listAllParties()
   {
-if (parties.containsKey(null))
+if (instance().parties.containsKey(null))
 {
-  parties.put("FIXEDNULL", parties.get(null));
-  parties.remove(null);
+  instance().parties.put("FIXEDNULL", instance().parties.get(null));
+  instance().parties.remove(null);
 System.out.println("fixed a null party");
 }
 
