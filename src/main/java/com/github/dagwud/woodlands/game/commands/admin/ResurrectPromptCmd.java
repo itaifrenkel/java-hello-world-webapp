@@ -53,20 +53,35 @@ public class ResurrectPromptCmd extends SuspendableCmd
     StringBuilder done = new StringBuilder("Resurrecting...\n");
     for (Party party : PartyRegistry.listAllParties())
     {
-      for (GameCharacter character : party.getActiveMembers())
+      for (GameCharacter character : party.getAllMembers())
       {
         if (character.getName().equalsIgnoreCase(name))
         {
-          FullHealCmd cmd = new FullHealCmd(chatId, character);
-          CommandDelegate.execute(cmd);
-
-          done.append("Resurrected ").append(character.getName())
-                  .append(" in party ").append(party.getName()).append("\n");
+          String msg = resurrect(party, character);
+          done.append(msg).append("\n");
         }
       }
     }
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, done.toString());
     CommandDelegate.execute(cmd);
+  }
+
+  private String resurrect(Party party, GameCharacter character)
+  {
+    FullHealCmd cmd = new FullHealCmd(chatId, character);
+    CommandDelegate.execute(cmd);
+
+    if (character instanceof PlayerCharacter)
+    {
+      PlayerCharacter playerCharacter = (PlayerCharacter) character;
+      if (playerCharacter.getPlayedBy().getActiveCharacter() == null)
+      {
+        playerCharacter.getPlayedBy().setActiveCharacter(playerCharacter);
+      }
+    }
+
+    return "Resurrected " + character.getName() +
+            " in party " + party.getName();
   }
 }

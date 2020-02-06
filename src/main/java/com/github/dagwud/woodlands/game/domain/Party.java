@@ -52,6 +52,11 @@ public class Party implements Serializable
     leaver.setParty(null);
   }
 
+  public List<GameCharacter> getAllMembers()
+  {
+    return Collections.unmodifiableList(members);
+  }
+
   public List<GameCharacter> getActiveMembers()
   {
     List<GameCharacter> active = new ArrayList<>(members.size());
