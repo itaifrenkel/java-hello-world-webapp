@@ -73,6 +73,10 @@ public class AdminChangePartyCmd extends SuspendableCmd
         PlayerCharacter character = playerState.getActiveCharacter();
         if (character != null && character.getName().equalsIgnoreCase(joiner))
         {
+
+if (character.getParty().getName()==null)
+ character.getParty().setName("NotNull");
+
           JoinPartyCmd join = new JoinPartyCmd(character, partyToJoin);
           CommandDelegate.execute(join);
 
