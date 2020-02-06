@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class EnterTheVillageCmd extends AbstractCmd
@@ -21,7 +22,7 @@ public class EnterTheVillageCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (character.getStats().getHitPoints() == 0)
+    if (character.getStats().getHitPoints() == 0 && character.getStats().getState() != EState.DEAD)
     {
       RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, 1);
       CommandDelegate.execute(cmd);
