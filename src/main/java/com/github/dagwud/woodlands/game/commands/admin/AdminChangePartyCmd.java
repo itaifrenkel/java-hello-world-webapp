@@ -25,14 +25,14 @@ public class AdminChangePartyCmd extends SuspendableCmd
     switch (phaseToExecute)
     {
       case 0:
-        promptForCharacterName();
+        //promptForCharacterName();
         break;
       case 1:
-        acceptCharacterNameAndPromptForParty(capturedInput);
+        //acceptCharacterNameAndPromptForParty(capturedInput);
         break;
       case 2:
-        acceptPartyName(capturedInput);
-        changeParty();
+        //acceptPartyName(capturedInput);
+        //changeParty();
         break;
     }
   }
