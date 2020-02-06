@@ -11,7 +11,7 @@ import java.util.Map;
 public class AuraOfProtection extends BattleRoundSpell
 {
   private static final long serialVersionUID = 1L;
-  private static final int BUFF_AMOUNT = 4;
+  private static final int BUFF_AMOUNT = 1;
 
   private Map<GameCharacter, Integer> buffs;
 
