@@ -84,6 +84,7 @@ System.out.println(attacker.getName() + " miss: " + naturalRoll.getTotal() + "+"
   {
     if (!(defender instanceof Creature))
     {
+      System.out.println(defender.getName() + " is not a dragon - " + defender.getClass().getSimpleName());
       return false;
     }
     Creature creature = (Creature) defender;
