@@ -1,12 +1,10 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Party;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PartyRegistry implements Serializable
 {
@@ -39,20 +37,21 @@ public class PartyRegistry implements Serializable
 
   public static Collection<Party> listAllParties()
   {
-if (instance().parties.containsKey(null))
-{
-  instance().parties.put("FIXEDNULL", instance().parties.get(null));
-  instance().parties.remove(null);
-System.out.println("fixed a null party");
-}
-for (Party p : instance().parties.values())
-{
- if (p.getName()==null) p.setName("notnull");
-}//desperation
-
-
+    instance().datafix();
     Map<String, Party> parties = instance().parties;
     return Collections.unmodifiableCollection(parties.values());
+  }
+
+  private void datafix()
+  {
+    for (Party value : parties.values())
+    {
+      if (value.getName() == null)
+      {
+        SendMessageCmd admin = new SendMessageCmd(Settings.ADMIN_CHAT, "A null-named party was fixed");
+        CommandDelegate.execute(admin);
+      }
+    }
   }
 
 }
