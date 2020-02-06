@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.commands.creatures;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.game.creatures.DifficultyCacheFactory;
 import com.github.dagwud.woodlands.game.Settings;
@@ -28,25 +30,7 @@ public class SpawnCreatureCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Creature template = null;
-    int attempts = 0;
-    while (template == null)
-    {
-      template = CreaturesCacheFactory.instance().getCache().pickRandom(minDifficulty, maxDifficulty);
-      if (creatureType != null && !creatureType.equalsIgnoreCase(template.creatureType))
-      {
-        if (attempts < 100)
-        {
-          template = null; // try again
-        }
-        else
-        {
-          SendMessageCmd err = new SendMessageCmd(Settings.ADMIN_CHAT, "Unable to find any creatures of type '" + creatureType + "'");
-          CommandDelegate.execute(err);
-        }
-      }
-    }
-
+    Creature template = chooseCreature();
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(template.difficulty);
 
     Stats stats = new Stats();
@@ -58,6 +42,28 @@ public class SpawnCreatureCmd extends AbstractCmd
 
     spawnedCreature = new Creature(template);
     spawnedCreature.setStats(stats);
+  }
+
+  private Creature chooseCreature()
+  {
+    Creature template = null;
+    int attempts = 0;
+    while (template == null)
+    {
+      template = CreaturesCacheFactory.instance().getCache().pickRandom(minDifficulty, maxDifficulty);
+      if (creatureType != null && !creatureType.equalsIgnoreCase(template.creatureType))
+      {
+        if (attempts >= 100)
+        {
+          SendMessageCmd err = new SendMessageCmd(Settings.ADMIN_CHAT, "Unable to find any creatures of type '" + creatureType + "'");
+          CommandDelegate.execute(err);
+          return template;
+        }
+        template = null; // try again
+        attempts++;
+      }
+    }
+    return template;
   }
 
   private int chooseRandomInRange(int minInclusive, int maxInclusive)
