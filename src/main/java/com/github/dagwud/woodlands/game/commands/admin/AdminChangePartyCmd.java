@@ -47,7 +47,7 @@ public class AdminChangePartyCmd extends SuspendableCmd
   {
     for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
-      if (party != null)
+      if (playerState != null)
       {
         PlayerCharacter character = playerState.getActiveCharacter();
         if (character != null && character.getName().equalsIgnoreCase(capturedInput))
