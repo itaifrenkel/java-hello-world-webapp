@@ -87,7 +87,7 @@ System.out.println(attacker.getName() + " miss: " + naturalRoll.getTotal() + "+"
       return false;
     }
     Creature creature = (Creature) defender;
-    return creature.creatureType.equalsIgnoreCase(Creature.CREATURE_TYPE_DRAGON);
+    return creature.creatureType != null && creature.creatureType.equalsIgnoreCase(Creature.CREATURE_TYPE_DRAGON);
   }
 
   private int countShieldsDefence(Fighter defender)
