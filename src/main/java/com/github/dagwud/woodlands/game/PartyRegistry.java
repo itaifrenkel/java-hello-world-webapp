@@ -45,6 +45,11 @@ if (instance().parties.containsKey(null))
   instance().parties.remove(null);
 System.out.println("fixed a null party");
 }
+for (Party p : instance().parties.values())
+{
+ if (p.getName()==null) p.setName("notnull");
+}//desperation
+
 
     Map<String, Party> parties = instance().parties;
     return Collections.unmodifiableCollection(parties.values());
