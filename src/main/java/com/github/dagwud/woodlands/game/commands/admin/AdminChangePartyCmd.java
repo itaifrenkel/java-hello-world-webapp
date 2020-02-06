@@ -48,7 +48,7 @@ public class AdminChangePartyCmd extends SuspendableCmd
     joiner = capturedInput;
 
     SendMessageCmd msg = new SendMessageCmd(chatId, "Party name?");
-    CommandDelegate.execute(err);
+    CommandDelegate.execute(msg);
     rejectCapturedInput();
   }
 
@@ -71,7 +71,7 @@ public class AdminChangePartyCmd extends SuspendableCmd
       if (playerState != null)
       {
         PlayerCharacter character = playerState.getActiveCharacter();
-        if (character != null && character.getName().equalsIgnoreCase(capturedInput))
+        if (character != null && character.getName().equalsIgnoreCase(joiner))
         {
           JoinPartyCmd join = new JoinPartyCmd(character, partyToJoin);
           CommandDelegate.execute(join);
