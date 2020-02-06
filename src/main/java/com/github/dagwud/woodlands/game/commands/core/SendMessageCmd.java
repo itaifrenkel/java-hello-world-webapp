@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
@@ -38,43 +39,16 @@ public class SendMessageCmd extends AbstractCmd
       if (currentPlayerStateLookup.getPlayer().getActiveCharacter() != null)
       {
         Stats stats = currentPlayerStateLookup.getPlayer().getActiveCharacter().getStats();
-        newMessage = drunkFucate(message, stats);
+
+        if (stats != null)
+        {
+          DrunkUpMessageCmd cmd = new DrunkUpMessageCmd(newMessage, stats.getDrunkeness());
+          CommandDelegate.execute(cmd);
+          newMessage = cmd.getMessage();
+        }
       }
     }
     MessagingFactory.create().sender().sendMessage(chatId, newMessage, replyMarkup);
-  }
-
-  private String drunkFucate(String message, Stats stats)
-  {
-    if (stats == null)
-    {
-      return message;
-    }
-
-    int drunkeness = stats.getDrunkeness();
-
-    if (drunkeness > 2)
-    {
-      message = message.replaceAll("s", "ss");
-    }
-    if (drunkeness > 3)
-    {
-      message = message.replaceAll("c", "s");
-    }
-    if (drunkeness > 4)
-    {
-      message = message.replaceAll("s", "SH");
-    }
-    if (drunkeness > 6)
-    {
-      message = message.replaceAll("s", "sh").toUpperCase();
-    }
-    if (drunkeness > 8)
-    {
-      message = message.replaceAll("\\.", "!").toUpperCase();
-    }
-
-    return message;
   }
 
   @Override
