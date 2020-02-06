@@ -11,7 +11,7 @@ public class AdminChangePartyCmd extends SuspendableCmd
 {
   private final int chatId;
   private String partyToJoin;
-  private PlayerCharacter joiner;
+  private String joiner;
 
   public AdminChangePartyCmd(int chatId, PlayerCharacter character)
   {
@@ -25,14 +25,14 @@ public class AdminChangePartyCmd extends SuspendableCmd
     switch (phaseToExecute)
     {
       case 0:
-        //promptForCharacterName();
+        promptForCharacterName();
         break;
       case 1:
-        //acceptCharacterNameAndPromptForParty(capturedInput);
+        acceptCharacterNameAndPromptForParty(capturedInput);
         break;
       case 2:
-        //acceptPartyName(capturedInput);
-        //changeParty();
+        acceptPartyName(capturedInput);
+        changeParty();
         break;
     }
   }
@@ -45,38 +45,16 @@ public class AdminChangePartyCmd extends SuspendableCmd
 
   private void acceptCharacterNameAndPromptForParty(String capturedInput)
   {
-    for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
-    {
-      if (playerState != null)
-      {
-        PlayerCharacter character = playerState.getActiveCharacter();
-        if (character != null && character.getName().equalsIgnoreCase(capturedInput))
-        {
-          joiner = character;
-          return;
-        }
-      }
-    }
+    joiner = capturedInput;
 
-    SendMessageCmd err = new SendMessageCmd(chatId, "That's not a recognized character name");
+    SendMessageCmd msg = new SendMessageCmd(chatId, "Party name?");
     CommandDelegate.execute(err);
     rejectCapturedInput();
   }
 
   private void acceptPartyName(String capturedInput)
   {
-    for (Party party : PartyRegistry.listAllParties())
-    {
-      if (null != party && capturedInput.equalsIgnoreCase(party.getName()))
-      {
-        partyToJoin = party.getName();
-        return;
-      }
-    }
-
-    SendMessageCmd err = new SendMessageCmd(chatId, "That's not a known party");
-    CommandDelegate.execute(err);
-    rejectCapturedInput();
+    partyName = capturedInput;
   }
 
   private void changeParty()
@@ -87,7 +65,21 @@ public class AdminChangePartyCmd extends SuspendableCmd
       CommandDelegate.execute(err);
       return;
     }
-    JoinPartyCmd join = new JoinPartyCmd(joiner, partyToJoin);
-    CommandDelegate.execute(join);
+
+    for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
+    {
+      if (playerState != null)
+      {
+        PlayerCharacter character = playerState.getActiveCharacter();
+        if (character != null && character.getName().equalsIgnoreCase(capturedInput))
+        {
+          JoinPartyCmd join = new JoinPartyCmd(character, partyToJoin);
+          CommandDelegate.execute(join);
+
+          SendMessageCmd ok = new SendMessageCmd(chatId, "Moving " + character.getName());
+          CommandDelegate.execute(ok);
+        }
+      }
+    }
   }
 }
