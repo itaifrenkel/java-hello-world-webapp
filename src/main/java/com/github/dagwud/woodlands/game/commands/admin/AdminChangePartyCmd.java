@@ -54,7 +54,7 @@ public class AdminChangePartyCmd extends SuspendableCmd
 
   private void acceptPartyName(String capturedInput)
   {
-    partyName = capturedInput;
+    partyToJoin = capturedInput;
   }
 
   private void changeParty()
