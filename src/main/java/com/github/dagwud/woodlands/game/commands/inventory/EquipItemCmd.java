@@ -50,6 +50,9 @@ public class EquipItemCmd extends AbstractCmd
       character.getCarrying().getCarriedInactive().remove(toEquip);
       SendMessageCmd cmd = new SendMessageCmd(chatId, "Done.");
       CommandDelegate.execute(cmd);
+
+      InventoryCmd inv = new InventoryCmd(chatId, character);
+      CommandDelegate.execute(inv);
     }
     else
     {
