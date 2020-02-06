@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 
-import com.github.dagwud.woodlands.game.commands.MoveToLocationCmd;
+import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
