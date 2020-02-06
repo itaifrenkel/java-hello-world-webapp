@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.creatures;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.game.creatures.DifficultyCacheFactory;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Creature;
@@ -28,12 +29,21 @@ public class SpawnCreatureCmd extends AbstractCmd
   public void execute()
   {
     Creature template = null;
+    int attempts = 0;
     while (template == null)
     {
       template = CreaturesCacheFactory.instance().getCache().pickRandom(minDifficulty, maxDifficulty);
       if (creatureType != null && !creatureType.equalsIgnoreCase(template.creatureType))
       {
-        template = null; // try again
+        if (attempts < 100)
+        {
+          template = null; // try again
+        }
+        else
+        {
+          SendMessageCmd err = new SendMessageCmd(Settings.ADMIN_CHAT, "Unable to find any creatures of type '" + creatureType + "'");
+          CommandDelegate.execute(err);
+        }
       }
     }
 
