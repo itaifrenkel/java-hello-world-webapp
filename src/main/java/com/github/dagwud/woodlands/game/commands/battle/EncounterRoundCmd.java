@@ -260,13 +260,13 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       for (Spell spell : spells)
       {
-        summary.append("\n").append(spell.getCaster().getName()).append(" ").append(spell.buildSpellDescription());
+        summary.append("\n").append("• ").append(spell.getCaster().getName()).append(" ").append(spell.buildSpellDescription());
       }
     }
 
     for (DamageInflicted damageInflicted : damage)
     {
-      summary.append("\n").append(damageInflicted.buildDamageDescription());
+      summary.append("\n").append("• ").append(damageInflicted.buildDamageDescription());
     }
     summary.append("\n\n").append(buildBattleStatsSummary());
     return summary.toString();
