@@ -28,6 +28,9 @@ public class ShutdownWarningCmd extends AbstractCmd
       {
         toRetreat.add(character);
       }
+
+      SendMessageCmd msg = new SendMessageCmd(character.getPlayedBy().getChatId(), "You can feel changes coming in the breeze. Best you head back to the Village to take shelter");
+      CommandDelegate.execute(msg);
     }
 
     for (PlayerCharacter character : toRetreat)
@@ -41,12 +44,6 @@ public class ShutdownWarningCmd extends AbstractCmd
       {
         // Do NOT let this stop us retreating characters
       }
-    }
-
-    for (PlayerCharacter character : toRetreat)
-    {
-      SendMessageCmd msg = new SendMessageCmd(character.getPlayedBy().getChatId(), "You can feel changes coming in the breeze. Best you head back to the Village to take shelter");
-      CommandDelegate.execute(msg);
     }
   }
 
