@@ -53,6 +53,7 @@ public class AttackCmd extends AbstractCmd
 
     if (isDragon(defender) && !attackWith.ranged)
     {
+System.out.println(attacker.getName() + " miss - dragon attacked with melee weapon " + attackWith.summary(attacker));
       return EHitStatus.MISS;
     }
     if (naturalRoll.getTotal() + attacker.getStats().determineHitChanceBoost() <= 1)
@@ -84,7 +85,6 @@ System.out.println(attacker.getName() + " miss: " + naturalRoll.getTotal() + "+"
   {
     if (!(defender instanceof Creature))
     {
-      System.out.println(defender.getName() + " is not a dragon - " + defender.getClass().getSimpleName());
       return false;
     }
     Creature creature = (Creature) defender;

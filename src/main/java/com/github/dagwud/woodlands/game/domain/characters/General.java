@@ -1,9 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.characters;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.character.LeavePartyCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.AirOfAuthority;
+import com.github.dagwud.woodlands.game.domain.characters.spells.ArmyOfPeasants;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +16,8 @@ public class General extends PlayerCharacter
   General(Player playedBy)
   {
     super(playedBy, ECharacterClass.GENERAL);
-    getSpellAbilities().register(new AirOfAuthority(this));
+    getSpellAbilities().register(new AirOfAuthority(this)); // passive
+    getSpellAbilities().register(new ArmyOfPeasants(this)); // active
     peasants = new ArrayList<>(4);
   }
 

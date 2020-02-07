@@ -1,13 +1,15 @@
 package com.github.dagwud.woodlands.game.domain.spells;
 
-import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PassivePartySpell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
-import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class SpellAbilities implements Serializable
 {
@@ -15,13 +17,15 @@ public class SpellAbilities implements Serializable
 
   private Collection<PassiveBattleRoundSpell> passives;
   private Collection<PassivePartySpell> passivePartySpells;
+  private Collection<SingleCastSpell> knownActiveSpell;
   private Deque<SingleCastSpell> preparedSpells;
 
   public SpellAbilities()
   {
-    this.passives = new ArrayList<>(1);
-    this.passivePartySpells = new ArrayList<>(1);
+    passives = new ArrayList<>(1);
+    passivePartySpells = new ArrayList<>(1);
     preparedSpells = new LinkedList<>();
+    knownActiveSpell = new ArrayList<>(2);
   }
 
   public Collection<PassiveBattleRoundSpell> getPassives()
@@ -34,20 +38,26 @@ public class SpellAbilities implements Serializable
     return passivePartySpells;
   }
 
-  public void register(Spell spell)
+  public void register(PassiveSpell spell)
   {
-    if (spell instanceof PassiveBattleRoundSpell)
-    {
-      passives.add((PassiveBattleRoundSpell) spell);
-    }
-    else if (spell instanceof PassivePartySpell)
+    if (spell instanceof PassivePartySpell)
     {
       passivePartySpells.add((PassivePartySpell) spell);
     }
     else
     {
-      throw new WoodlandsRuntimeException("Unknown spell type: " + spell.getClass());
+      passives.add((PassiveBattleRoundSpell) spell);
     }
+  }
+
+  public void register(PassivePartySpell spell)
+  {
+    passivePartySpells.add(spell);
+  }
+
+  public void register(SingleCastSpell spell)
+  {
+    knownActiveSpell.add((SingleCastSpell)spell);
   }
 
   public void prepare(SingleCastSpell spell)
@@ -59,6 +69,11 @@ public class SpellAbilities implements Serializable
   public boolean hasPreparedSpell()
   {
     return !preparedSpells.isEmpty();
+  }
+
+  public Collection<SingleCastSpell> getKnownActiveSpell()
+  {
+    return knownActiveSpell;
   }
 
   public SingleCastSpell popPrepared()

@@ -6,7 +6,7 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Distraction extends PassiveBattleRoundSpell
+public class Distraction extends SingleCastSpell
 {
   private static final long serialVersionUID = 1L;
 
@@ -19,19 +19,8 @@ public class Distraction extends PassiveBattleRoundSpell
   }
 
   @Override
-  public boolean shouldCast()
-  {
-    return true;
-  }
-
-  @Override
   public boolean cast()
   {
-// TODO HACK TO MAKE IT LESS OVERPOWERING UNTIL WE MAKE IT AN ACTIVE SPELL
-if (Math.random() * 20 != 4) // a 1 in 20 chance
-{
-return false;
-}
     Trickster caster = getCaster();
     Creature target = caster.getParty().getActiveEncounter().getEnemy();
 
@@ -60,6 +49,12 @@ return false;
   public Trickster getCaster()
   {
     return (Trickster) super.getCaster();
+  }
+
+  @Override
+  public int getManaCost()
+  {
+    return 1;
   }
 
 }

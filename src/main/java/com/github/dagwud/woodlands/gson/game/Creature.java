@@ -46,6 +46,8 @@ public class Creature extends Fighter
     this.name = template.name;
     this.difficulty = template.difficulty;
     this.weaponLeft = template.weaponLeft;
+    this.fightMode = template.fightMode;
+    this.creatureType = template.creatureType;
   }
 
   @Override

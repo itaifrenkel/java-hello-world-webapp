@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.character.ReduceHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class DealDamageCmd extends AbstractCmd
 {

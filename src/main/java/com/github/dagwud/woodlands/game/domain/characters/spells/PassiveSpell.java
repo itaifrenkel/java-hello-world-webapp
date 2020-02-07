@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.domain.Fighter;
 
-abstract class PassiveSpell extends Spell
+public abstract class PassiveSpell extends Spell
 {
   private static final long serialVersionUID = 1L;
 

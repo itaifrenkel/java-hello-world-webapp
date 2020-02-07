@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Distraction;
+import com.github.dagwud.woodlands.game.domain.characters.spells.SneakAttack;
 
 public class Trickster extends PlayerCharacter
 {
@@ -13,8 +14,8 @@ public class Trickster extends PlayerCharacter
   {
     super(playedBy, ECharacterClass.TRICKSTER);
 
-    getSpellAbilities().register(new Distraction(this));
-
+    getSpellAbilities().register(new Distraction(this)); // active
+    getSpellAbilities().register(new SneakAttack(this)); // active
   }
 
   @Override

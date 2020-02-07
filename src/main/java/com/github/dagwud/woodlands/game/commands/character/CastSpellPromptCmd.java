@@ -5,8 +5,11 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
-import com.github.dagwud.woodlands.game.domain.characters.spells.*;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PrepareSpellCmd;
+import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 public class CastSpellPromptCmd extends AbstractCmd
 {
@@ -35,24 +38,14 @@ public class CastSpellPromptCmd extends AbstractCmd
 
   private SingleCastSpell prepareSpell(PlayerCharacter character)
   {
-    switch (character.getCharacterClass())
+    Collection<SingleCastSpell> spellOptions = character.getSpellAbilities().getKnownActiveSpell();
+    int toCastIndex = (int) (Math.random() * spellOptions.size());
+    Iterator<SingleCastSpell> it = spellOptions.iterator();
+    SingleCastSpell toCast = null;
+    for (int i = 0; i <= toCastIndex; i++)
     {
-      case BRAWLER:
-        return new KnuckleDuster(character);
-      case DRUID:
-        return new FogOfConfusion(character);
-      case EXPLORER:
-        return new AlmanacOfZoology(character);
-      case GENERAL:
-        return new ArmyOfPeasants(character);
-      case TRICKSTER:
-        return new SneakAttack(character);
-      case WIZARD:
-        return new FlameAttack(character);
-      default:
-        SendMessageCmd cmd = new SendMessageCmd(chatId, "No spells are available for " + character.getCharacterClass() + " (yet))");
-        CommandDelegate.execute(cmd);
-        throw new WoodlandsRuntimeException("Unsupported");
+      toCast = it.next();
     }
+    return toCast;
   }
 }
