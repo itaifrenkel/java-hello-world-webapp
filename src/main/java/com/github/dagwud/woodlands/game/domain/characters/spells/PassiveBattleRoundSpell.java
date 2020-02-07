@@ -5,11 +5,11 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 /**
  * Spell that applies for the length of a single round of battle
  */
-public abstract class BattleRoundSpell extends Spell
+public abstract class PassiveBattleRoundSpell extends PassiveSpell
 {
   private static final long serialVersionUID = 1L;
 
-  BattleRoundSpell(String spellName, Fighter caster)
+  PassiveBattleRoundSpell(String spellName, Fighter caster)
   {
     super(spellName, caster);
   }

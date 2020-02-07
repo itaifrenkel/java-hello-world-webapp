@@ -24,7 +24,7 @@ public class LeavePartyCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    ExpireSpellsCmd expireAll = new ExpireSpellsCmd(character.getSpellAbilities().getPartySpells());
+    ExpireSpellsCmd expireAll = new ExpireSpellsCmd(character.getSpellAbilities().getPassivePartySpells());
     CommandDelegate.execute(expireAll);
 
     if (!party.isPrivateParty())

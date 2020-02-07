@@ -1,8 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.spells;
 
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
-import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PassivePartySpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
@@ -13,36 +13,36 @@ public class SpellAbilities implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private Collection<BattleRoundSpell> passives;
-  private Collection<PartySpell> partySpells;
+  private Collection<PassiveBattleRoundSpell> passives;
+  private Collection<PassivePartySpell> passivePartySpells;
   private Deque<SingleCastSpell> preparedSpells;
 
   public SpellAbilities()
   {
     this.passives = new ArrayList<>(1);
-    this.partySpells = new ArrayList<>(1);
+    this.passivePartySpells = new ArrayList<>(1);
     preparedSpells = new LinkedList<>();
   }
 
-  public Collection<BattleRoundSpell> getPassives()
+  public Collection<PassiveBattleRoundSpell> getPassives()
   {
     return passives;
   }
 
-  public Collection<PartySpell> getPartySpells()
+  public Collection<PassivePartySpell> getPassivePartySpells()
   {
-    return partySpells;
+    return passivePartySpells;
   }
 
   public void register(Spell spell)
   {
-    if (spell instanceof BattleRoundSpell)
+    if (spell instanceof PassiveBattleRoundSpell)
     {
-      passives.add((BattleRoundSpell) spell);
+      passives.add((PassiveBattleRoundSpell) spell);
     }
-    else if (spell instanceof PartySpell)
+    else if (spell instanceof PassivePartySpell)
     {
-      partySpells.add((PartySpell) spell);
+      passivePartySpells.add((PassivePartySpell) spell);
     }
     else
     {

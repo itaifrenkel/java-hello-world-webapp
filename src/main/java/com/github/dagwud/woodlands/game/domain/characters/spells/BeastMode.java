@@ -6,7 +6,7 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 
 import java.math.BigDecimal;
 
-public class BeastMode extends BattleRoundSpell
+public class BeastMode extends PassiveBattleRoundSpell
 {
   private static final long serialVersionUID = 1L;
   private static final BigDecimal PERCENT_CHANCE_PER_LEVEL = new BigDecimal("5");
@@ -41,9 +41,4 @@ public class BeastMode extends BattleRoundSpell
     getCaster().getStats().setCriticalStrikeChanceBonus(getCaster().getStats().getCriticalStrikeChanceBonus() - boost);
   }
 
-  @Override
-  public int getManaCost()
-  {
-    return 0;
-  }
 }

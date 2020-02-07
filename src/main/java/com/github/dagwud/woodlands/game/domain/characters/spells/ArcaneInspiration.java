@@ -7,7 +7,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ArcaneInspiration extends PartySpell
+public class ArcaneInspiration extends PassivePartySpell
 {
   private static final long serialVersionUID = 1L;
 

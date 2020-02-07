@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.domain.*;
-import com.github.dagwud.woodlands.game.domain.characters.spells.BattleRoundSpell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -36,7 +36,7 @@ public class EncounterRoundCmd extends AbstractCmd
     // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
     // to spells like Army of Peasants)
     List<Fighter> passivesOrder = buildOrderOfFight(encounter.getAllFighters());
-    List<BattleRoundSpell> passivesActivity = doPassiveAbilities(passivesOrder);
+    List<PassiveBattleRoundSpell> passivesActivity = doPassiveAbilities(passivesOrder);
 
     List<Fighter> spellOrder = buildOrderOfFight(encounter.getAllFighters());
     List<SingleCastSpell> spellsActivity = doPreparedSpells(spellOrder);
@@ -139,15 +139,15 @@ public class EncounterRoundCmd extends AbstractCmd
     return spellsCast;
   }
 
-  private void expirePassiveAbilities(List<BattleRoundSpell> spellsActivity)
+  private void expirePassiveAbilities(List<PassiveBattleRoundSpell> spellsActivity)
   {
     ExpireSpellsCmd expireAll = new ExpireSpellsCmd(spellsActivity);
     CommandDelegate.execute(expireAll);
   }
 
-  private List<BattleRoundSpell> doPassiveAbilities(List<Fighter> fighters)
+  private List<PassiveBattleRoundSpell> doPassiveAbilities(List<Fighter> fighters)
   {
-    List<BattleRoundSpell> passives = new ArrayList<>();
+    List<PassiveBattleRoundSpell> passives = new ArrayList<>();
     for (Fighter member : fighters)
     {
       passives.addAll(member.getSpellAbilities().getPassives());
@@ -155,7 +155,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
     passives.removeIf(p -> !p.shouldCast());
 
-    for (BattleRoundSpell spellToCast : passives)
+    for (PassiveBattleRoundSpell spellToCast : passives)
     {
       CommandDelegate.execute(new CastSpellCmd(spellToCast));
     }

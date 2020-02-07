@@ -8,7 +8,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuraOfProtection extends BattleRoundSpell
+public class AuraOfProtection extends PassiveBattleRoundSpell
 {
   private static final long serialVersionUID = 1L;
   private static final int BUFF_AMOUNT = 1;
@@ -62,11 +62,5 @@ public class AuraOfProtection extends BattleRoundSpell
   public PlayerCharacter getCaster()
   {
     return (PlayerCharacter) super.getCaster();
-  }
-
-  @Override
-  public int getManaCost()
-  {
-    return 0;
   }
 }

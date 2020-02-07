@@ -6,7 +6,7 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Distraction extends BattleRoundSpell
+public class Distraction extends PassiveBattleRoundSpell
 {
   private static final long serialVersionUID = 1L;
 
@@ -62,9 +62,4 @@ return false;
     return (Trickster) super.getCaster();
   }
 
-  @Override
-  public int getManaCost()
-  {
-    return 0;
-  }
 }

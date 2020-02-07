@@ -11,7 +11,7 @@ import com.github.dagwud.woodlands.game.domain.characters.General;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AirOfAuthority extends BattleRoundSpell
+public class AirOfAuthority extends PassiveBattleRoundSpell
 {
   private static final long serialVersionUID = 1L;
 
@@ -116,9 +116,4 @@ public class AirOfAuthority extends BattleRoundSpell
     return (General) super.getCaster();
   }
 
-  @Override
-  public int getManaCost()
-  {
-    return 0;
-  }
 }

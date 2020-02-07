@@ -7,7 +7,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class SpiritOfAdventure extends PartySpell
+public class SpiritOfAdventure extends PassivePartySpell
 {
   private static final long serialVersionUID = 1L;
   private static final BigDecimal CHANCE_OF_ENCOUNTER_MODIFIER = new BigDecimal("1.5");

@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PartySpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 import java.util.Collection;
