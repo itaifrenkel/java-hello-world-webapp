@@ -109,11 +109,17 @@ public class Creature extends Fighter
       case "RANDOM":
         Collections.shuffle(targets);
         return targets.get(0);
-      case "STRONGEST":
+      case "HEALTHIEST":
         targets.sort(Comparator.comparingInt(o1 -> o1.getStats().getHitPoints()));
         return targets.get(targets.size() - 1);
-      case "WEAKEST":
+      case "SICKEST":
         targets.sort(Comparator.comparingInt(o -> o.getStats().getHitPoints()));
+        return targets.get(0);
+      case "STRONGEST":
+        targets.sort(Comparator.comparing(o -> o.getStats().getStrength().total()));
+        return targets.get(targets.size() - 1);
+      case "WEAKEST":
+        targets.sort(Comparator.comparing(o -> o.getStats().getStrength().total()));
         return targets.get(0);
       case "DEFAULT":
         return targets.get(0);
