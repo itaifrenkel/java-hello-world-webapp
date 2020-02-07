@@ -30,5 +30,7 @@ public class FullHealCmd extends AdminCmd
     int mana = character.getStats().getMaxMana().getBase() - character.getStats().getMana();
     RecoverManaCmd manaCmd = new RecoverManaCmd(character, mana);
     CommandDelegate.execute(manaCmd);
+
+    character.getStats().setDrunkenness(0);
   }
 }
