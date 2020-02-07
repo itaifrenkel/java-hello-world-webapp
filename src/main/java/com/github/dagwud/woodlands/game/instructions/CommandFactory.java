@@ -1,12 +1,9 @@
 package com.github.dagwud.woodlands.game.instructions;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.*;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.AcceptInputCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.commands.inventory.DropItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.EquipItemCmd;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
@@ -67,8 +64,11 @@ public class CommandFactory
 
     if (playerState.getActiveCharacter() != null && playerState.getActiveCharacter().getParty() != null)
     {
-      return new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), 
-          playerState.getActiveCharacter().getName() + " says \"" + cmd + "\"");
+      DrunkUpMessageCmd drunkUpMessageCmd = new DrunkUpMessageCmd(cmd, playerState.getActiveCharacter().getStats().getDrunkeness());
+      CommandDelegate.execute(drunkUpMessageCmd);
+      String message = playerState.getActiveCharacter().getName() + " says \"" + drunkUpMessageCmd.getMessage() + "\"";
+      return new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(),
+              message);
     }
 
     return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");
