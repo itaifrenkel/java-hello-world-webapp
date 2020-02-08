@@ -19,15 +19,24 @@ public class PartyRegistry implements Serializable
   public static Party lookup(String partyName)
   {
     PartyRegistry registry = instance();
-    if (!registry.parties.containsKey(partyName))
+    String lowerName = partyName.toLowerCase();
+
+    // little bit of trickery to not break the game
+    if (!registry.parties.containsKey(partyName) && !registry.parties.containsKey(lowerName))
     {
       CreatePartyCmd cmd = new CreatePartyCmd(partyName);
       CommandDelegate.execute(cmd);
 
       Party party = cmd.getCreatedParty();
-      registry.parties.put(partyName, party);
+      registry.parties.put(lowerName, party);
     }
-    return registry.parties.get(partyName);
+
+    if (!lowerName.equals(partyName) && registry.parties.containsKey(partyName))
+    {
+      registry.fix(partyName);
+    }
+
+    return registry.parties.get(lowerName);
   }
 
   public static PartyRegistry instance()
@@ -44,14 +53,38 @@ public class PartyRegistry implements Serializable
 
   private void datafix()
   {
-    for (Party value : parties.values())
+    List<String> fixName = new ArrayList<>();
+    for (Map.Entry<String, Party> partyEntry : parties.entrySet())
     {
+      Party value = partyEntry.getValue();
+      String key = partyEntry.getKey();
+
       if (value.getName() == null)
       {
+        if (key != null)
+        {
+          value.setName(key);
+        }
         SendMessageCmd admin = new SendMessageCmd(Settings.ADMIN_CHAT, "A null-named party was fixed");
         CommandDelegate.execute(admin);
       }
+      if (key != null && !key.equals(key.toLowerCase()))
+      {
+        fixName.add(key);
+      }
     }
+
+    for (String name : fixName)
+    {
+      fix(name);
+    }
+
+  }
+
+  private void fix(String name)
+  {
+    Party party = parties.remove(name);
+    parties.put(name.toLowerCase(), party);
   }
 
 }

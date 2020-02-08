@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.menu;
 
+import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.ECommand;
 
 import java.io.Serializable;
@@ -41,5 +42,10 @@ public class GameMenu implements Serializable
       }
     }
     return false;
+  }
+
+  public ECommand[] produceOptions(PlayerState playerState)
+  {
+    return getOptions();
   }
 }
