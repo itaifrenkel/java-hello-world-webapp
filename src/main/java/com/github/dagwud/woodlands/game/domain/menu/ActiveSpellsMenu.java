@@ -15,13 +15,14 @@ public abstract class ActiveSpellsMenu extends GameMenu
     Collection<SingleCastSpell> knownActiveSpell = playerState.getActiveCharacter().getSpellAbilities().getKnownActiveSpell();
     String[] spells = new String[strings.length + knownActiveSpell.size()];
 
-    System.arraycopy(strings, 0, spells, 0, strings.length);
-
     Iterator<SingleCastSpell> iterator = knownActiveSpell.iterator();
-    for (int i = strings.length; i < strings.length + knownActiveSpell.size(); i++)
+    for (int i = 0; i < knownActiveSpell.size(); i++)
     {
       spells[i] = iterator.next().getSpellName();
     }
+
+    System.arraycopy(strings, 0, spells, knownActiveSpell.size(), strings.length);
+
     return spells;
   }
 }
