@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 
 public abstract class SuspendableCmd extends AbstractCmd
@@ -20,6 +21,14 @@ public abstract class SuspendableCmd extends AbstractCmd
   @Override
   public final void execute()
   {
+    if ("/cancel".equals(capturedInput))
+    {
+      playerState.setWaitingForInputCmd(null);
+      SendMessageCmd sendMessageCmd = new SendMessageCmd(playerState.getPlayer().getChatId(), "Cancelled.");
+      CommandDelegate.execute(sendMessageCmd);
+      return;
+    }
+
     executePart(nextPhaseToRun, capturedInput);
     if (nextPhaseToRun == 0)
     {
