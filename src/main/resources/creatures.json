@@ -109,8 +109,8 @@
     {"name": "Ironwing Dragon", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "WEAKEST", "creature-type":  "dragon"},
     {"name": "Anglewing Dragon", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "RANDOM", "creature-type":  "dragon"},
     {"name": "Dragon Rider", "difficulty": 9, "weapon-left": "l9l", "weapon-right": "l9r", "fight-mode": "HEALTHIEST", "creature-type":  "dragon"},
-    {"name": "Celestial Dragon", "difficulty": 10, "weapon-left": "Sword", "fight-mode": "STRONGEST", "creature-type":  "dragon"},
-    {"name": "Yellow Reaper Dragon", "difficulty": 12, "weapon-left": "Sword", "fight-mode": "SICKEST", "creature-type":  "dragon"},
+    {"name": "Celestial Dragon", "difficulty": 10, "weapon-left": "l10l", "weapon-right": "l10r", "fight-mode": "STRONGEST", "creature-type":  "dragon"},
+    {"name": "Yellow Reaper Dragon", "difficulty": 12, "weapon-left": "l10l", "weapon-right": "l10r", "fight-mode": "SICKEST", "creature-type":  "dragon"},
 
     {"name": "Shadowling", "difficulty": 2, "weapon-left": "Sword", "fight-mode": "RANDOM", "creature-type":  "normal"},
     {"name": "Dark Ranger", "difficulty": 3, "weapon-left": "Staff", "fight-mode": "WEAKEST", "creature-type":  "normal"},
@@ -133,7 +133,7 @@
     {"name": "Kingsman", "difficulty": 6, "weapon-left": "l6", "fight-mode": "STRONGEST", "creature-type":  "normal"},
     {"name": "Spartan Warrior", "difficulty": 6, "weapon-left": "l6", "fight-mode": "HEALTHIEST", "creature-type":  "normal"},
     {"name": "Axe Murderer", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "WEAKEST", "creature-type":  "normal"},
-    {"name": "Warlord", "difficulty": 10, "weapon-left":  "Sword", "fight-mode": "SICKEST", "creature-type":  "normal"}
+    {"name": "Warlord", "difficulty": 10, "weapon-left": "l10l", "weapon-right": "l10r", "fight-mode": "SICKEST", "creature-type":  "normal"}
 
   ]
 }
