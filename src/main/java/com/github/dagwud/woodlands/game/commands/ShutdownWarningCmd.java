@@ -35,14 +35,17 @@ public class ShutdownWarningCmd extends AbstractCmd
 
     for (PlayerCharacter character : toRetreat)
     {
-      try
+      if (character.getLocation() != ELocation.VILLAGE_SQUARE)
       {
-        MoveToLocationCmd move = new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE);
-        CommandDelegate.execute(move);
-      }
-      catch (Exception e)
-      {
-        // Do NOT let this stop us retreating characters
+        try
+        {
+          MoveToLocationCmd move = new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE);
+          CommandDelegate.execute(move);
+        }
+        catch (Exception e)
+        {
+          // Do NOT let this stop us retreating characters
+        }
       }
     }
   }
