@@ -3,10 +3,13 @@ package com.github.dagwud.woodlands.game.instructions;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.*;
+import com.github.dagwud.woodlands.game.commands.character.CastSpellPromptCmd;
 import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.commands.inventory.DropItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.EquipItemCmd;
+import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
+import com.github.dagwud.woodlands.game.domain.spells.SpellAbilities;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 
 public class CommandFactory
@@ -42,9 +45,23 @@ public class CommandFactory
     }
 
     int chatId = telegramUpdate.message.chat.id;
+
+    if (playerState.getActiveCharacter() != null)
+    {
+      // check if the player is trying to use a spell
+      SpellAbilities spellAbilities = playerState.getActiveCharacter().getSpellAbilities();
+      for (SingleCastSpell singleCastSpell : spellAbilities.getKnownActiveSpell())
+      {
+        if (cmd.equals(singleCastSpell.getSpellName()) && isValidMenuOption(cmd, playerState.getCurrentMenu(), playerState))
+        {
+          return new CastSpellPromptCmd(chatId, playerState.getActiveCharacter(), singleCastSpell);
+        }
+      }
+    }
+
     ECommand by = ECommand.by(cmd);
 
-    if (by != null && (!by.isMenuCmd() || isValidMenuOption(cmd, playerState.getCurrentMenu())))
+    if (by != null && (!by.isMenuCmd() || isValidMenuOption(cmd, playerState.getCurrentMenu(), playerState)))
     {
       return by.build(playerState.getActiveCharacter(), chatId);
     }
@@ -68,15 +85,15 @@ public class CommandFactory
       CommandDelegate.execute(drunkUpMessageCmd);
       String message = playerState.getActiveCharacter().getName() + " says \"" + drunkUpMessageCmd.getMessage() + "\"";
       return new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(),
-              message);
+          message);
     }
 
     return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");
   }
 
-  private boolean isValidMenuOption(String cmd, GameMenu currentMenu)
+  private boolean isValidMenuOption(String cmd, GameMenu currentMenu, PlayerState playerState)
   {
-    return currentMenu != null && currentMenu.containsOption(cmd);
+    return currentMenu != null && currentMenu.containsOption(cmd, playerState);
   }
 
 }

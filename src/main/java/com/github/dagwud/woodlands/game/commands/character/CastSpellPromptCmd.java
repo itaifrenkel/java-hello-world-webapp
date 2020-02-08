@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequi
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PrepareSpellCmd;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -17,6 +18,7 @@ public class CastSpellPromptCmd extends AbstractCmd
 
   private final int chatId;
   private final PlayerCharacter character;
+  private SingleCastSpell spell;
 
   public CastSpellPromptCmd(int chatId, PlayerCharacter character)
   {
@@ -25,10 +27,19 @@ public class CastSpellPromptCmd extends AbstractCmd
     this.character = character;
   }
 
+  public CastSpellPromptCmd(int chatId, PlayerCharacter character, SingleCastSpell spell)
+  {
+    super(new AbleToActPrerequisite(character));
+    this.chatId = chatId;
+    this.character = character;
+    this.spell = spell;
+  }
+
   @Override
   public void execute()
   {
-    SingleCastSpell spell = prepareSpell(character);
+    SingleCastSpell spell = this.spell != null ? this.spell : prepareSpell(character);
+
     PrepareSpellCmd cmd = new PrepareSpellCmd(character, spell);
     CommandDelegate.execute(cmd);
 

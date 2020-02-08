@@ -32,11 +32,11 @@ public class GameMenu implements Serializable
     this.options = options;
   }
 
-  public boolean containsOption(String option)
+  public boolean containsOption(String option, PlayerState playerState)
   {
-    for (ECommand opt : options)
+    for (String opt : produceOptions(playerState))
     {
-      if (opt.matches(option))
+      if (opt.equalsIgnoreCase(option))
       {
         return true;
       }
@@ -44,8 +44,17 @@ public class GameMenu implements Serializable
     return false;
   }
 
-  public ECommand[] produceOptions(PlayerState playerState)
+  public String[] produceOptions(PlayerState playerState)
   {
-    return getOptions();
+    ECommand[] options = getOptions();
+    String[] strings = new String[options.length];
+
+    for (int i = 0; i < options.length; i++)
+    {
+      ECommand option = options[i];
+      strings[i] = option.toString();
+    }
+
+    return strings;
   }
 }

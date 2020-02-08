@@ -137,25 +137,23 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private void handleLocationEntry(ELocation location, PlayerState playerState)
   {
-    if (location == ELocation.MOUNTAIN)
+    switch (location)
     {
-      CommandDelegate.execute(new EnterTheMountainCmd(playerState));
-    }
-    if (location == ELocation.WOODLANDS)
-    {
-      CommandDelegate.execute(new EnterTheWoodlandsCmd(playerState));
-    }
-    if (location == ELocation.DEEP_WOODS)
-    {
-      CommandDelegate.execute(new EnterDeepWoodsCmd(playerState));
-    }
-    if (location == ELocation.THE_GORGE)
-    {
-      CommandDelegate.execute(new EnterTheGorgeCmd(playerState));
-    }
-    if (location == ELocation.VILLAGE_SQUARE)
-    {
-      CommandDelegate.execute(new EnterTheVillageCmd(playerState.getActiveCharacter()));
+      case MOUNTAIN:
+        CommandDelegate.execute(new EnterTheMountainCmd(playerState));
+        break;
+      case WOODLANDS:
+        CommandDelegate.execute(new EnterTheWoodlandsCmd(playerState));
+        break;
+      case DEEP_WOODS:
+        CommandDelegate.execute(new EnterDeepWoodsCmd(playerState));
+        break;
+      case THE_GORGE:
+        CommandDelegate.execute(new EnterTheGorgeCmd(playerState));
+        break;
+      case VILLAGE_SQUARE:
+        CommandDelegate.execute(new EnterTheVillageCmd(playerState.getActiveCharacter()));
+        break;
     }
   }
 }
