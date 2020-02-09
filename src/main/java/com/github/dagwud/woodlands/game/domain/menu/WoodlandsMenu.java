@@ -8,7 +8,7 @@ public class WoodlandsMenu extends ActiveSpellsMenu
 
   public WoodlandsMenu()
   {
-    setPrompt("This is the woodlands");
+    setPrompt("<i>This is the woodlands</i>");
     setOptions(ECommand.VILLAGE_SQUARE, ECommand.DEEP_WOODS);
   }
 }
