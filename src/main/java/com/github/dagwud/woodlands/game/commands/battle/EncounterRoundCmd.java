@@ -280,9 +280,9 @@ public class EncounterRoundCmd extends AbstractCmd
             .append("—————————");
     for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
-      b.append("\n").append("• ").append(member.summary());
+      b.append("\n").append(bullet(member)).append(member.summary());
     }
-    b.append("\n").append("• ").append(encounter.getEnemy().summary());
+    b.append("\n").append(bullet(encounter.getEnemy())).append(encounter.getEnemy().summary());
     return b.toString();
   }
 
