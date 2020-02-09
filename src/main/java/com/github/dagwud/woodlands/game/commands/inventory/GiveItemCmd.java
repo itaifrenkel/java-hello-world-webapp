@@ -70,8 +70,7 @@ public class GiveItemCmd extends SuspendableCmd
 
         resetMenu();
         return;
-      }
-      catch (NumberFormatException ex)
+      } catch (NumberFormatException ex)
       {
         // let it fall through
       }
@@ -90,6 +89,16 @@ public class GiveItemCmd extends SuspendableCmd
     }
 
     GameCharacter gameCharacter = findCharacter(capturedInput);
+
+    if (gameCharacter != null && gameCharacter.getName().equalsIgnoreCase(player.getActiveCharacter().getName()))
+    {
+      rejectCapturedInput();
+
+      SendMessageCmd cmd = new SendMessageCmd(player.getChatId(), "No karma for giving to yourself.");
+      CommandDelegate.execute(cmd);
+      return;
+    }
+
     if (!(gameCharacter instanceof PlayerCharacter))
     {
       rejectCapturedInput();
