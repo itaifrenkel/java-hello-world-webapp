@@ -8,7 +8,7 @@ public class DeepWoodsMenu extends ActiveSpellsMenu
 
   public DeepWoodsMenu()
   {
-    setPrompt("This is the Deep Woods");
+    setPrompt("<i>This is the Deep Woods</i>");
     setOptions(ECommand.THE_WOODLANDS, ECommand.THE_GORGE);
   }
 }
