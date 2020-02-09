@@ -260,13 +260,13 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       for (Spell spell : spells)
       {
-        summary.append("\n").append("• ").append(spell.getCaster().getName()).append(" ").append(spell.buildSpellDescription());
+        summary.append("\n").append(bullet(spell.getCaster())).append(spell.getCaster().getName()).append(" ").append(spell.buildSpellDescription());
       }
     }
 
     for (DamageInflicted damageInflicted : damage)
     {
-      summary.append("\n").append("• ").append(damageInflicted.buildDamageDescription());
+      summary.append("\n").append(bullet(damage.getInflictedBy())).append(damageInflicted.buildDamageDescription());
     }
     summary.append("\n\n").append(buildBattleStatsSummary());
     return summary.toString();
@@ -293,6 +293,11 @@ public class EncounterRoundCmd extends AbstractCmd
 
     SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getParty(), "Next round of battle in " + (delayBetweenRoundsMS / 1000) + " seconds");
     CommandDelegate.execute(msg);
+  }
+
+  private String bullet(Fighter fighter)
+  {
+    return (fighter instanceof Creature) ? "🔸" : "🔹";
   }
 
   @Override
