@@ -254,8 +254,7 @@ public class EncounterRoundCmd extends AbstractCmd
   private String buildRoundSummary(List<DamageInflicted> damage, List<? extends Spell>... spellGroups)
   {
     StringBuilder summary = new StringBuilder();
-    summary.append("⚔️ <u>Battle Round #").append(encounter.getBattleRound()).append(":</u> ⚔️\n")
-            .append("———————————");
+    summary.append("⚔️ <u>Battle Round #").append(encounter.getBattleRound()).append(":</u> ⚔️\n");
 
     for (List<? extends Spell> spells : spellGroups)
     {
@@ -276,8 +275,7 @@ public class EncounterRoundCmd extends AbstractCmd
   private String buildBattleStatsSummary()
   {
     StringBuilder b = new StringBuilder();
-    b.append("<u>Stats after round ").append(encounter.getBattleRound()).append("</u>\n")
-            .append("—————————");
+    b.append("<u>Stats after round ").append(encounter.getBattleRound()).append("</u>\n");
     for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
       b.append("\n").append(bullet(member)).append(member.summary());
