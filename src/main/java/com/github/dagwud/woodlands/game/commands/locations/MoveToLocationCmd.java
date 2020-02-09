@@ -64,12 +64,11 @@ public class MoveToLocationCmd extends AbstractCmd
 
     if (allMoveTogether(location))
     {
-      CommandDelegate.execute(new SendPartyMessageCmd(characterToMove.getParty(), "<i>" + characterToMove.getName() + " leads you to " + location + "</i>"));
-      doMove(characterToMove.getParty().getActiveMembers(), location);
+      doMove(characterToMove.getParty().getActiveMembers(), location, characterToMove);
     }
     else
     {
-      doMove(characterToMove, location);
+      doMove(characterToMove, location, characyerToMove);
     }
   }
 
@@ -78,23 +77,27 @@ public class MoveToLocationCmd extends AbstractCmd
     return moveTo != ELocation.INN && moveTo != ELocation.TAVERN;
   }
 
-  private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo)
+  private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo, GameCharacter movedBy)
   {
     for (GameCharacter character : charactersToMove)
     {
-      doMove(character, moveTo);
+      doMove(character, moveTo, movedBy);
     }
   }
 
-  private void doMove(GameCharacter characterToMove, ELocation moveTo)
+  private void doMove(GameCharacter characterToMove, ELocation moveTo, GameCharacter movedBy)
   {
-    characterToMove.setLocation(moveTo);
-
-    if (characterToMove instanceof PlayerCharacter)
+    if (characterToMove.getLocation() != moveTo)
     {
-      PlayerCharacter character = (PlayerCharacter) characterToMove;
-      showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
-      handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
+      CommandDelegate.execute(new SendMessageCmd(characterToMove.getPlayedBy().getChatId(), "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
+      characterToMove.setLocation(moveTo);
+
+      if (characterToMove instanceof PlayerCharacter)
+      {
+        PlayerCharacter character = (PlayerCharacter) characterToMove;
+        showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
+        handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
+      }
     }
   }
 
