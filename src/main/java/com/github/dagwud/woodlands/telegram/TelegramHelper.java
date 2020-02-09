@@ -63,6 +63,7 @@ abstract class TelegramHelper
     Map<String, String> params = new HashMap<>();
     params.put("chat_id", String.valueOf(chatId));
     params.put("text", message);
+    params.put("parse_mode", "Markdown");
     if (null != replyMarkup)
     {
       params.put("reply_markup", replyMarkup);
