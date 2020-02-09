@@ -267,7 +267,7 @@ public class EncounterRoundCmd extends AbstractCmd
 
     for (DamageInflicted damageInflicted : damage)
     {
-      summary.append("\n").append(bullet(damage.getInflictedBy())).append(damageInflicted.buildDamageDescription());
+      summary.append("\n").append(bullet(damage.getAttacker())).append(damageInflicted.buildDamageDescription());
     }
     summary.append("\n\n").append(buildBattleStatsSummary());
     return summary.toString();
