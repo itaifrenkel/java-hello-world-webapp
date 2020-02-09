@@ -97,7 +97,7 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       if (!encounter.getParty().canAct())
       {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "<b>You have been defeated!</b>");
         CommandDelegate.execute(cmd);
       }
       else if (!encounter.getEnemy().isConscious())
@@ -254,7 +254,7 @@ public class EncounterRoundCmd extends AbstractCmd
   private String buildRoundSummary(List<DamageInflicted> damage, List<? extends Spell>... spellGroups)
   {
     StringBuilder summary = new StringBuilder();
-    summary.append("⚔️ Battle Round #").append(encounter.getBattleRound()).append(": ⚔️\n")
+    summary.append("⚔️ <u>Battle Round #").append(encounter.getBattleRound()).append(":</u> ⚔️\n")
             .append("———————————");
 
     for (List<? extends Spell> spells : spellGroups)
@@ -276,7 +276,7 @@ public class EncounterRoundCmd extends AbstractCmd
   private String buildBattleStatsSummary()
   {
     StringBuilder b = new StringBuilder();
-    b.append("Stats after round ").append(encounter.getBattleRound()).append("\n")
+    b.append("<u>Stats after round ").append(encounter.getBattleRound()).append("</u>\n")
             .append("—————————");
     for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
