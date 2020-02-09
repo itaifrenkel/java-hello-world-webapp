@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
@@ -89,12 +90,12 @@ public class MoveToLocationCmd extends AbstractCmd
   {
     if (characterToMove.getLocation() != moveTo)
     {
-      CommandDelegate.execute(new SendMessageCmd(characterToMove.getPlayedBy().getChatId(), "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
       characterToMove.setLocation(moveTo);
 
       if (characterToMove instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) characterToMove;
+        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
         showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
         handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
       }
