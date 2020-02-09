@@ -41,6 +41,8 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
   {
     if (capturedInput.equals("Cancel"))
     {
+      resetMenu(player);
+
       return;
     }
 
@@ -60,6 +62,11 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
     SendMessageCmd msg = new SendMessageCmd(player.getChatId(), "Now playing as " + switchTo.getName() + " the " + switchTo.getCharacterClass());
     CommandDelegate.execute(msg);
 
+    resetMenu(player);
+  }
+
+  private void resetMenu(Player player)
+  {
     ShowMenuCmd showMenuCmd = new ShowMenuCmd(new InnMenu(), player.getPlayerState());
     CommandDelegate.execute(showMenuCmd);
   }
