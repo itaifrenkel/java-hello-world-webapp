@@ -3,15 +3,17 @@ package com.github.dagwud.woodlands.game.domain;
 import com.github.dagwud.woodlands.game.domain.spells.SpellAbilities;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collection;
-import java.util.List;
 
 public abstract class Fighter extends GameObject
 {
   private static final long serialVersionUID = 1L;
+  private static final BigDecimal EIGHTY_PER_CENT = new BigDecimal("0.8");
+  private static final BigDecimal SIXTY_FIVE_PER_CENT = new BigDecimal("0.65");
+  private static final BigDecimal FORTY_PER_CENT = new BigDecimal("0.45");
+  private static final BigDecimal TWENTY_PER_CENT = new BigDecimal("0.2");
 
   private SpellAbilities spellAbilities;
 
@@ -44,19 +46,19 @@ public abstract class Fighter extends GameObject
   {
     BigDecimal perc = new BigDecimal(stats.getHitPoints())
         .divide(new BigDecimal(stats.getMaxHitPoints()), 3, RoundingMode.HALF_DOWN);
-    if (perc.compareTo(new BigDecimal("0.8")) >= 0)
+    if (perc.compareTo(EIGHTY_PER_CENT) >= 0)
     {
       return "💚";
     }
-    if (perc.compareTo(new BigDecimal("0.65")) >= 0)
+    if (perc.compareTo(SIXTY_FIVE_PER_CENT) >= 0)
     {
       return "💛";
     }
-    if (perc.compareTo(new BigDecimal("0.45")) >= 0)
+    if (perc.compareTo(FORTY_PER_CENT) >= 0)
     {
       return "🧡";
     }
-    if (perc.compareTo(new BigDecimal("0.2")) >= 0)
+    if (perc.compareTo(TWENTY_PER_CENT) >= 0)
     {
       return "❤️";
     }

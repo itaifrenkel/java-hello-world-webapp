@@ -67,6 +67,8 @@ public class GiveItemCmd extends SuspendableCmd
         partyMember.getCarrying().getCarriedInactive().add(weapon);
         CommandDelegate.execute(new SendMessageCmd(player.getChatId(), "You give the " + weapon.getName() + " to " + partyMember.getName()));
         CommandDelegate.execute(new SendMessageCmd(partyMember.getPlayedBy().getChatId(), player.getActiveCharacter().getName() + " give you a " + weapon.getName() + " - what a sweetie."));
+
+        resetMenu();
         return;
       }
       catch (NumberFormatException ex)
@@ -76,6 +78,7 @@ public class GiveItemCmd extends SuspendableCmd
     }
 
     CommandDelegate.execute(new SendMessageCmd(player.getChatId(), "Look, if you aren't going to take this seriously let's just not do it at all."));
+    resetMenu();
   }
 
   private void getItem(String capturedInput)
