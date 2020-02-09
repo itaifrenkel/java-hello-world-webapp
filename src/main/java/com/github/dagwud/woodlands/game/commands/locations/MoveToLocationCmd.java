@@ -69,7 +69,7 @@ public class MoveToLocationCmd extends AbstractCmd
     }
     else
     {
-      doMove(characterToMove, location, characyerToMove);
+      doMove(characterToMove, location, characterToMove);
     }
   }
 
