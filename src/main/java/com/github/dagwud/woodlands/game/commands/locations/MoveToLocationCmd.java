@@ -47,13 +47,13 @@ public class MoveToLocationCmd extends AbstractCmd
         // location requires whole party to move as one:
         if (!allAtSameLocation(characterToMove.getParty()))
         {
-          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " until all party members are in the same place");
+          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "__Can't go to " + location + " until all party members are in the same place__");
           CommandDelegate.execute(cmd);
           return;
         }
         if (anyResting(characterToMove.getParty()))
         {
-          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " while some party members are resting");
+          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "__Can't go to " + location + " while some party members are resting__");
           CommandDelegate.execute(cmd);
           return;
         }
@@ -64,7 +64,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
     if (allMoveTogether(location))
     {
-      CommandDelegate.execute(new SendPartyMessageCmd(characterToMove.getParty(), characterToMove.getName() + " leads you to " + location));
+      CommandDelegate.execute(new SendPartyMessageCmd(characterToMove.getParty(), "__" + characterToMove.getName() + " leads you to " + location + "__"));
       doMove(characterToMove.getParty().getActiveMembers(), location);
     }
     else
