@@ -8,7 +8,7 @@ public class MountainMenu extends ActiveSpellsMenu
 
   public MountainMenu()
   {
-    setPrompt("This is the Mountain");
+    setPrompt("<i>This is the Mountain</i>");
     setOptions(ECommand.VILLAGE_SQUARE);
   }
 }
