@@ -8,7 +8,7 @@ public class GorgeMenu extends ActiveSpellsMenu
 
   public GorgeMenu()
   {
-    setPrompt("This is the Gorge. Here be dragons!");
+    setPrompt("<i>This is the Gorge. Here be dragons!</i>");
     setOptions(ECommand.DEEP_WOODS);
   }
 }
