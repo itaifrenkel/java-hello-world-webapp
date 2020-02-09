@@ -44,7 +44,7 @@ public class ShortRestCmd extends AbstractCmd
     for (PlayerCharacter member : character.getParty().getActivePlayerCharacters())
     {
       Stats stats = member.getStats();
-      if (stats.getHitPoints() < stats.getMaxHitPoints() || stats.getMana() < stats.getMaxMana())
+      if (stats.getHitPoints() < stats.getMaxHitPoints() || stats.getMana().total() < stats.getMaxMana().total())
       {
         if (stats.getRestPoints() > 0 || true /*todo see above*/)
         {
