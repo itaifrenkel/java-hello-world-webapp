@@ -88,17 +88,21 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private void doMove(GameCharacter characterToMove, ELocation moveTo, GameCharacter movedBy)
   {
-    if (characterToMove.getLocation() != moveTo)
+    if (characterToMove.getLocation() == moveTo)
     {
-      characterToMove.setLocation(moveTo);
+      return;
+    }
+    characterToMove.setLocation(moveTo);
 
-      if (characterToMove instanceof PlayerCharacter)
+    if (characterToMove instanceof PlayerCharacter)
+    {
+      PlayerCharacter character = (PlayerCharacter) characterToMove;
+      if (characterToMove != movedBy)
       {
-        PlayerCharacter character = (PlayerCharacter) characterToMove;
         CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
-        showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
-        handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
       }
+      showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
+      handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
     }
   }
 
