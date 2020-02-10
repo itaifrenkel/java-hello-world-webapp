@@ -43,13 +43,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
             "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
             "Strength: " + stats.getStrength() + "\n" +
             "Agility: " + stats.getAgility() + "\n" +
-            "Constitution: " + stats.getConstitution() + "\n" +
-            "Equipped:\n" +
-            "• " + describeItem(carrying.getCarriedLeft()) + "\n" +
-            "• " + describeItem(carrying.getCarriedRight()) + "\n" +
-            "Carrying:\n" +
-            describeInactiveItems(carrying) + "\n\n" +
-            skilledWith();
+            "Constitution: " + stats.getConstitution();
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);
     CommandDelegate.execute(cmd);
@@ -100,7 +94,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     StringBuilder b = new StringBuilder("Recent Victories:").append("\n");
     for (Fighter f : character.getRecentlyDefeated())
     {
-      b.append("• ").append(f.getName()).append("\n");
+      b.append("• ").append(f.summary()).append("\n");
     }
     return b.toString();
   }
