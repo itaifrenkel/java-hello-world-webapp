@@ -41,6 +41,13 @@ public class DefeatCreatureCmd extends AbstractCmd
     {
       GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
       CommandDelegate.execute(cmd);
+
+      //todo should probably be a command
+      member.getRecentlyDefeated().add(creatureDefeated);
+      while (member.getRecentlyDefeated().size() > 10)
+      {
+        member.getRecentlyDefeated().remove(0);
+      }
     }
     experienceGrantedPerPlayer = rewardPerCharacter;
   }
