@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Levels;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
@@ -33,25 +35,49 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     CarriedItems carrying = character.getCarrying();
 
     String message = character.getName() + " " +
-            "(L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
-            "Experience: " + character.getStats().getExperience() + "\n" +
-            "Location: " + character.getLocation() + "\n" +
-            "Short Rests Available: " + character.getStats().getRestPoints() + "/" + character.getStats().getRestPointsMax() + "\n" +
-            "\n" +
-            "❤: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
-            "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
-            "Strength: " + stats.getStrength() + "\n" +
-            "Agility: " + stats.getAgility() + "\n" +
-            "Constitution: " + stats.getConstitution() + "\n" +
-            "Equipped:\n" +
-            "• " + describeItem(carrying.getCarriedLeft()) + "\n" +
-            "• " + describeItem(carrying.getCarriedRight()) + "\n" +
-            "Carrying:\n" +
-            describeInactiveItems(carrying) + "\n\n" +
-            skilledWith();
+        "(L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
+        "Experience: " + character.getStats().getExperience() + "\n" +
+        produceProgress(character.getStats().getExperience()) + "\n" +
+        "Location: " + character.getLocation() + "\n" +
+        "Short Rests Available: " + character.getStats().getRestPoints() + "/" + character.getStats().getRestPointsMax() + "\n" +
+        "\n" +
+        "❤: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
+        "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
+        "Strength: " + stats.getStrength() + "\n" +
+        "Agility: " + stats.getAgility() + "\n" +
+        "Constitution: " + stats.getConstitution() + "\n" +
+        "Equipped:\n" +
+        "• " + describeItem(carrying.getCarriedLeft()) + "\n" +
+        "• " + describeItem(carrying.getCarriedRight()) + "\n" +
+        "Carrying:\n" +
+        describeInactiveItems(carrying) + "\n\n" +
+        skilledWith();
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);
     CommandDelegate.execute(cmd);
+  }
+
+  private String produceProgress(int experience)
+  {
+    int currentLevel = Levels.determineLevel(experience);
+    int nextLevel = Levels.determineExperience( currentLevel + 1);
+    int fullBars = (int) Math.floor((double) experience / (double) nextLevel * (double) Settings.PROGRESS_BARS_FOR_EXPERIENCE);
+
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < Settings.PROGRESS_BARS_FOR_EXPERIENCE; i++)
+    {
+      if (i < fullBars)
+      {
+        result.append("█");
+      } else
+      {
+        result.append("-");
+      }
+    }
+
+    result.append(" (").append(nextLevel - experience).append(" points to go)");
+
+    return result.toString();
   }
 
   private String describeItem(Item carrying)

@@ -12,6 +12,8 @@ public class Settings
   public static final long SOBER_UP_DELAY_MS = 60_000;
   public static final long SHORT_REST_DURATION_MS = 60_000 * 5;
 
+  public static final int PROGRESS_BARS_FOR_EXPERIENCE = 10;
+
   public static final int ADMIN_CHAT = 750694421;
 
   public static final String S3_BUCKET_NAME = "woodlands-state";
