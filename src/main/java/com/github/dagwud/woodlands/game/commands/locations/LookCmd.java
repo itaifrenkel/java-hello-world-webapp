@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class LookCmd extends AbstractCmd
@@ -28,6 +29,21 @@ public class LookCmd extends AbstractCmd
   {
     SendMessageCmd cmd = new SendMessageCmd(chatId, location.getLookText());
     CommandDelegate.execute(cmd);
+
+    StringBuilder otherPartyMembersHere = new StringBuilder();
+    for (GameCharacter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
+    {
+      if (activeMember != playerState.getActiveCharacter() && activeMember.getLocation() == location)
+      {
+        otherPartyMembersHere.append(activeMember.getName()).append(", ");
+      }
+    }
+
+    if (otherPartyMembersHere.length() != 0)
+    {
+      SendMessageCmd partyMembersCmd = new SendMessageCmd(chatId, "Other party members here: \n" + otherPartyMembersHere.substring(0, otherPartyMembersHere.length() - 2));
+      CommandDelegate.execute(partyMembersCmd);
+    }
 
     ShowMenuCmd showMenuCmd = new ShowMenuCmd(location.getMenu(), playerState);
     CommandDelegate.execute(showMenuCmd);
