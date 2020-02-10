@@ -59,6 +59,21 @@ public class EncounterRoundCmd extends AbstractCmd
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary);
     CommandDelegate.execute(status);
 
+    if (!encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
+    {
+      if (!encounter.getEnemy().isConscious())
+      {
+        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
+        CommandDelegate.execute(win);
+
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
+        CommandDelegate.execute(cmd);
+      }
+
+      EndEncounterCmd end = new EndEncounterCmd(encounter);
+      CommandDelegate.execute(end);
+    }
+
     PlayerCharacter inDanger = getAnyPlayerInDanger();
     if (inDanger != null)
     {
@@ -83,12 +98,6 @@ public class EncounterRoundCmd extends AbstractCmd
       }
     }
 
-    if (!encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
-    {
-      EndEncounterCmd end = new EndEncounterCmd(encounter);
-      CommandDelegate.execute(end);
-    }
-
     if (!encounter.isEnded())
     {
       scheduleNextRound();
@@ -98,14 +107,6 @@ public class EncounterRoundCmd extends AbstractCmd
       if (!encounter.getParty().canAct())
       {
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "<b>You have been defeated!</b>");
-        CommandDelegate.execute(cmd);
-      }
-      else if (!encounter.getEnemy().isConscious())
-      {
-        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
-        CommandDelegate.execute(win);
-
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
         CommandDelegate.execute(cmd);
       }
     }
