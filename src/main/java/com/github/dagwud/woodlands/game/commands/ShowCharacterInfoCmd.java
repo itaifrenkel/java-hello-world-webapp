@@ -45,6 +45,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
             "Strength: " + stats.getStrength() + "\n" +
             "Agility: " + stats.getAgility() + "\n" +
             "Constitution: " + stats.getConstitution() + "\n" +
+            "\n" +
             buildRecent();
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);
