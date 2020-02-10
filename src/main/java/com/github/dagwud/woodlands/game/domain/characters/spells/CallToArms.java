@@ -104,6 +104,12 @@ public class CallToArms extends SingleCastSpell
   }
 
   @Override
+  public int getManaCost()
+  {
+    return 1;
+  }
+
+  @Override
   public General getCaster()
   {
     return (General) super.getCaster();
