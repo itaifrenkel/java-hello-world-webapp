@@ -98,6 +98,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
       if (f instanceof Creature)
       {
         b.append(" (L").append(((Creature)f).difficulty).append(")");
+      }
       b.append("\n");
     }
     return b.toString();
