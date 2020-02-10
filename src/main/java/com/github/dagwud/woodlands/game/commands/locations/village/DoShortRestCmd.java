@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 
@@ -27,6 +28,11 @@ public class DoShortRestCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (character.getStats().getState() == EState.DEAD)
+    {
+      return;
+    }
+
     RollShortRestCmd roll = new RollShortRestCmd(character);
     CommandDelegate.execute(roll);
 
