@@ -44,13 +44,11 @@ public class ShowCharacterInfoCmd extends AbstractCmd
             "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
             "Strength: " + stats.getStrength() + "\n" +
             "Agility: " + stats.getAgility() + "\n" +
-            "Constitution: " + stats.getConstitution();
+            "Constitution: " + stats.getConstitution() + "\n" +
+            buildRecent();
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);
     CommandDelegate.execute(cmd);
-
-    SendMessageCmd recent = new SendMessageCmd(chatId, buildRecent());
-    CommandDelegate.execute(recent);
   }
 
   private String describeItem(Item carrying)
