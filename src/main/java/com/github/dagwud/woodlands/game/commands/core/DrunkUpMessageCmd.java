@@ -41,6 +41,13 @@ public class DrunkUpMessageCmd extends AbstractCmd
     {
       message = message.replaceAll("\\.", "!").toUpperCase();
     }
+
+    message = message.replaceAll("<B>", "<b>");
+    message = message.replaceAll("</B>", "</b>");
+    message = message.replaceAll("<I>", "<i>");
+    message = message.replaceAll("</I>", "</i>");
+    message = message.replaceAll("<U>", "<u>");
+    message = message.replaceAll("</U>", "</u>");
   }
 
   public String getMessage()
