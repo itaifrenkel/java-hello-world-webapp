@@ -52,6 +52,9 @@ public class ShowCharacterInfoCmd extends AbstractCmd
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);
     CommandDelegate.execute(cmd);
+
+    SendMessageCmd recent = new SendMessageCmd(chatId, buildRecent());
+    CommandDelegate.execute(recent);
   }
 
   private String describeItem(Item carrying)
@@ -87,6 +90,16 @@ public class ShowCharacterInfoCmd extends AbstractCmd
       }
       first = false;
       b.append(bonus.getKey()).append(" (+").append(bonus.getValue()).append(")");
+    }
+    return b.toString();
+  }
+
+  private String buildRecent()
+  {
+    StringBuilder b = new StringBuilder("Recent Victories:").append("\n");
+    for (Fighter f : character.getRecentlyDefeated())
+    {
+      b.append("• ").append(f.getName()).append("\n");
     }
     return b.toString();
   }
