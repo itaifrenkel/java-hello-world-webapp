@@ -55,4 +55,5 @@ public abstract class PlayerCharacter extends GameCharacter
       recentlyDefeated = new ArrayList<>();
     }
     return recentlyDefeated;
+  }
 }
