@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.log.Logger;
+import java.util.List;
+import java.util.ArrayList;
 
 public abstract class PlayerCharacter extends GameCharacter
 {
@@ -8,6 +10,7 @@ public abstract class PlayerCharacter extends GameCharacter
   private final Player playedBy;
   private final ECharacterClass characterClass;
   private boolean setupComplete;
+  private List<Fighter> recentlyDefeated;
 
   public PlayerCharacter(Player playedBy, ECharacterClass characterClass)
   {
@@ -44,4 +47,12 @@ public abstract class PlayerCharacter extends GameCharacter
   {
     return this == getPlayedBy().getActiveCharacter();
   }
+
+  public List<Fighter> getRecentlyDefeated()
+  {
+    if (recentlyDefeated == null)
+    {
+      recentlyDefeated = new ArrayList<>();
+    }
+    return recentlyDefeated;
 }
