@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 import com.github.dagwud.woodlands.game.domain.CarriedItems;
 import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Weapon;
