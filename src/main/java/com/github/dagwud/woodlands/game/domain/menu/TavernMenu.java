@@ -8,7 +8,7 @@ public class TavernMenu extends GameMenu
 
   public TavernMenu()
   {
-    setPrompt("This is the Tavern");
+    setPrompt("<i>This is the Tavern</i>");
     setOptions(ECommand.BUY_DRINKS, ECommand.VILLAGE_SQUARE);
   }
 }

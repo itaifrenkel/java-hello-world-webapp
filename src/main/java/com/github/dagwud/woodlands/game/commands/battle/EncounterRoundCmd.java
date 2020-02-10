@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
+import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.*;
@@ -58,6 +59,21 @@ public class EncounterRoundCmd extends AbstractCmd
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary);
     CommandDelegate.execute(status);
 
+    if (!encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
+    {
+      if (!encounter.getEnemy().isConscious())
+      {
+        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
+        CommandDelegate.execute(win);
+
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
+        CommandDelegate.execute(cmd);
+      }
+
+      EndEncounterCmd end = new EndEncounterCmd(encounter);
+      CommandDelegate.execute(end);
+    }
+
     PlayerCharacter inDanger = getAnyPlayerInDanger();
     if (inDanger != null)
     {
@@ -82,12 +98,6 @@ public class EncounterRoundCmd extends AbstractCmd
       }
     }
 
-    if (!encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
-    {
-      EndEncounterCmd end = new EndEncounterCmd(encounter);
-      CommandDelegate.execute(end);
-    }
-
     if (!encounter.isEnded())
     {
       scheduleNextRound();
@@ -96,15 +106,7 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       if (!encounter.getParty().canAct())
       {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "You have been defeated!");
-        CommandDelegate.execute(cmd);
-      }
-      else if (!encounter.getEnemy().isConscious())
-      {
-        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
-        CommandDelegate.execute(win);
-
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "<b>You have been defeated!</b>");
         CommandDelegate.execute(cmd);
       }
     }
@@ -253,20 +255,19 @@ public class EncounterRoundCmd extends AbstractCmd
   private String buildRoundSummary(List<DamageInflicted> damage, List<? extends Spell>... spellGroups)
   {
     StringBuilder summary = new StringBuilder();
-    summary.append("⚔️ Battle Round #").append(encounter.getBattleRound()).append(": ⚔️\n")
-            .append("———————————");
+    summary.append("⚔️ <u>Battle Round #").append(encounter.getBattleRound()).append(":</u> ⚔️\n");
 
     for (List<? extends Spell> spells : spellGroups)
     {
       for (Spell spell : spells)
       {
-        summary.append("\n").append("• ").append(spell.getCaster().getName()).append(" ").append(spell.buildSpellDescription());
+        summary.append("\n").append(bullet(spell.getCaster())).append(spell.getCaster().getName()).append(" ").append(spell.buildSpellDescription());
       }
     }
 
     for (DamageInflicted damageInflicted : damage)
     {
-      summary.append("\n").append("• ").append(damageInflicted.buildDamageDescription());
+      summary.append("\n").append(bullet(damageInflicted.getAttacker())).append(damageInflicted.buildDamageDescription());
     }
     summary.append("\n\n").append(buildBattleStatsSummary());
     return summary.toString();
@@ -275,13 +276,12 @@ public class EncounterRoundCmd extends AbstractCmd
   private String buildBattleStatsSummary()
   {
     StringBuilder b = new StringBuilder();
-    b.append("Stats after round ").append(encounter.getBattleRound()).append("\n")
-            .append("—————————");
+    b.append("<u>Stats after round ").append(encounter.getBattleRound()).append("</u>\n");
     for (GameCharacter member : encounter.getParty().getActiveMembers())
     {
-      b.append("\n").append("• ").append(member.summary());
+      b.append("\n").append(bullet(member)).append(member.summary());
     }
-    b.append("\n").append("• ").append(encounter.getEnemy().summary());
+    b.append("\n").append(bullet(encounter.getEnemy())).append(encounter.getEnemy().summary());
     return b.toString();
   }
 
@@ -293,6 +293,11 @@ public class EncounterRoundCmd extends AbstractCmd
 
     SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getParty(), "Next round of battle in " + (delayBetweenRoundsMS / 1000) + " seconds");
     CommandDelegate.execute(msg);
+  }
+
+  private String bullet(Fighter fighter)
+  {
+    return (fighter instanceof Creature) ? "🔸" : "🔹";
   }
 
   @Override

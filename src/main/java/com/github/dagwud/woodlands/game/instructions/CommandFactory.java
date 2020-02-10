@@ -83,7 +83,7 @@ public class CommandFactory
     {
       DrunkUpMessageCmd drunkUpMessageCmd = new DrunkUpMessageCmd(cmd, playerState.getActiveCharacter().getStats().getDrunkeness());
       CommandDelegate.execute(drunkUpMessageCmd);
-      String message = playerState.getActiveCharacter().getName() + " says \"" + drunkUpMessageCmd.getMessage() + "\"";
+      String message = "<b>" + playerState.getActiveCharacter().getName() + " says \"" + drunkUpMessageCmd.getMessage() + "\"</b>";
       return new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(),
           message);
     }

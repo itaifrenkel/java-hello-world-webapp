@@ -67,7 +67,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
       if (!chance.getResult())
       {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(playerState.getPlayer().getActiveCharacter().getParty(), "Time passes. You keep moving. Nothing interesting happens.");
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(playerState.getPlayer().getActiveCharacter().getParty(), "<i>Time passes. You keep moving. Nothing interesting happens.</i>");
         CommandDelegate.execute(cmd);
         scheduleNextEncounter();
         return;
@@ -101,7 +101,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   {
     Encounter encounter = createEncounter(playerState.getActiveCharacter().getParty());
 
-    String message = "You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + "):\n" + encounter.getEnemy().summary();
+    String message = "<b>You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + "):</b>\n" + encounter.getEnemy().summary();
     Item carriedLeft = encounter.getEnemy().getCarrying().getCarriedLeft();
     Item carriedRight = encounter.getEnemy().getCarrying().getCarriedRight();
     if (carriedLeft != null || carriedRight != null)

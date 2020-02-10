@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
@@ -47,13 +48,13 @@ public class MoveToLocationCmd extends AbstractCmd
         // location requires whole party to move as one:
         if (!allAtSameLocation(characterToMove.getParty()))
         {
-          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " until all party members are in the same place");
+          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "<i>Can't go to " + location + " until all party members are in the same place</i>");
           CommandDelegate.execute(cmd);
           return;
         }
         if (anyResting(characterToMove.getParty()))
         {
-          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "Can't go to " + location + " while some party members are resting");
+          SendPartyMessageCmd cmd = new SendPartyMessageCmd(characterToMove.getParty(), "<i>Can't go to " + location + " while some party members are resting</i>");
           CommandDelegate.execute(cmd);
           return;
         }
@@ -64,12 +65,11 @@ public class MoveToLocationCmd extends AbstractCmd
 
     if (allMoveTogether(location))
     {
-      CommandDelegate.execute(new SendPartyMessageCmd(characterToMove.getParty(), characterToMove.getName() + " leads you to " + location));
-      doMove(characterToMove.getParty().getActiveMembers(), location);
+      doMove(characterToMove.getParty().getActiveMembers(), location, characterToMove);
     }
     else
     {
-      doMove(characterToMove, location);
+      doMove(characterToMove, location, characterToMove);
     }
   }
 
@@ -78,21 +78,29 @@ public class MoveToLocationCmd extends AbstractCmd
     return moveTo != ELocation.INN && moveTo != ELocation.TAVERN;
   }
 
-  private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo)
+  private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo, GameCharacter movedBy)
   {
     for (GameCharacter character : charactersToMove)
     {
-      doMove(character, moveTo);
+      doMove(character, moveTo, movedBy);
     }
   }
 
-  private void doMove(GameCharacter characterToMove, ELocation moveTo)
+  private void doMove(GameCharacter characterToMove, ELocation moveTo, GameCharacter movedBy)
   {
+    if (characterToMove.getLocation() == moveTo)
+    {
+      return;
+    }
     characterToMove.setLocation(moveTo);
 
     if (characterToMove instanceof PlayerCharacter)
     {
       PlayerCharacter character = (PlayerCharacter) characterToMove;
+      if (characterToMove != movedBy)
+      {
+        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
+      }
       showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
       handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
     }

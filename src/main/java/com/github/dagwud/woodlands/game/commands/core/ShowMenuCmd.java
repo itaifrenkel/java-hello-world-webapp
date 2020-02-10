@@ -20,8 +20,11 @@ public class ShowMenuCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    ChoiceCmd cmd = new ChoiceCmd(playerState.getPlayer().getChatId(), menu.getPrompt(), menu.produceOptions(playerState));
-    CommandDelegate.execute(cmd);
-    playerState.setCurrentMenu(menu);
+    if (playerState.getCurrentMenu() != menu)
+    {
+      ChoiceCmd cmd = new ChoiceCmd(playerState.getPlayer().getChatId(), menu.getPrompt(), menu.produceOptions(playerState));
+      CommandDelegate.execute(cmd);
+      playerState.setCurrentMenu(menu);
+    }
   }
 }

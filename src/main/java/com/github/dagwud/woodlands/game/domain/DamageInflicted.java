@@ -51,7 +51,7 @@ public class DamageInflicted implements Serializable
     return bonusDamage;
   }
 
-  private Fighter getAttacker()
+  public Fighter getAttacker()
   {
     return attacker;
   }

@@ -37,13 +37,13 @@ public class RetreatCmd extends AbstractCmd
     Party party = inDanger.getParty();
     if (party.isPrivateParty())
     {
-      return "You're getting dangerously hurt, and decide to fall back to the village";
+      return "<b>You're getting dangerously hurt, and decide to fall back to the village</b>";
     }
     if (inDanger == retreater)
     {
-      return inDanger.getName() + " sounds the retreat; " + party.getName() + " falls back to The Village";
+      return "<i>" + inDanger.getName() + " sounds the retreat; " + party.getName() + " falls back to The Village</i>";
     }
-    return inDanger.getName() + " is badly wounded so " + retreater.getName() + " sounds the retreat; " + party.getName() + " falls back to The Village";
+    return "<i>" + inDanger.getName() + " is badly wounded so " + retreater.getName() + " sounds the retreat; " + party.getName() + " falls back to The Village</i>";
   }
 
   private GameCharacter findActiveCharacter(Party party)

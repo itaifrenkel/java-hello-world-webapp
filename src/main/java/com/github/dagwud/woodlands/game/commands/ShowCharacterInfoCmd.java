@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 import com.github.dagwud.woodlands.game.domain.CarriedItems;
 import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -35,23 +37,19 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     CarriedItems carrying = character.getCarrying();
 
     String message = character.getName() + " " +
-        "(L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
-        "Experience: " + character.getStats().getExperience() + "\n" +
+            "(L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
+            "Experience: " + character.getStats().getExperience() + "\n" +
         produceProgress(character.getStats().getExperience()) + "\n" +
-        "Location: " + character.getLocation() + "\n" +
-        "Short Rests Available: " + character.getStats().getRestPoints() + "/" + character.getStats().getRestPointsMax() + "\n" +
-        "\n" +
-        "❤: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
-        "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
-        "Strength: " + stats.getStrength() + "\n" +
-        "Agility: " + stats.getAgility() + "\n" +
-        "Constitution: " + stats.getConstitution() + "\n" +
-        "Equipped:\n" +
-        "• " + describeItem(carrying.getCarriedLeft()) + "\n" +
-        "• " + describeItem(carrying.getCarriedRight()) + "\n" +
-        "Carrying:\n" +
-        describeInactiveItems(carrying) + "\n\n" +
-        skilledWith();
+            "Location: " + character.getLocation() + "\n" +
+            "Short Rests Available: " + character.getStats().getRestPoints() + "/" + character.getStats().getRestPointsMax() + "\n" +
+            "\n" +
+            "❤: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
+            "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
+            "Strength: " + stats.getStrength() + "\n" +
+            "Agility: " + stats.getAgility() + "\n" +
+            "Constitution: " + stats.getConstitution() + "\n" +
+            "\n" +
+            buildRecent();
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, message);
     CommandDelegate.execute(cmd);
@@ -113,6 +111,21 @@ public class ShowCharacterInfoCmd extends AbstractCmd
       }
       first = false;
       b.append(bonus.getKey()).append(" (+").append(bonus.getValue()).append(")");
+    }
+    return b.toString();
+  }
+
+  private String buildRecent()
+  {
+    StringBuilder b = new StringBuilder("Recent Victories:").append("\n");
+    for (Fighter f : character.getRecentlyDefeated())
+    {
+      b.append("• ").append(f.getName());
+      if (f instanceof Creature)
+      {
+        b.append(" (L").append(((Creature)f).difficulty).append(")");
+      }
+      b.append("\n");
     }
     return b.toString();
   }

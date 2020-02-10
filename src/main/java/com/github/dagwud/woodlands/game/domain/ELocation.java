@@ -21,7 +21,7 @@ public enum ELocation
           "It’s also a generally safe space as long as you’re not alone - tradition dictates that because this is a training area, any adventurer who falls in a fight will be carried back to the Village by their comrades. However, being knocked unconscious while alone does bring the risk that your body may be set upon by the inhabitants of the mountain.\n\n" +
           "As such, it’s best to travel in a group."),
 
-  WOODLANDS("The Woodlands", new WoodlandsMenu(), false, "There's stuff to be seen."),
+  WOODLANDS("The Woodlands", new WoodlandsMenu(), true /* todo just until it doesn't keep killing us... need a better mechanism */, "There's stuff to be seen."),
 
   DEEP_WOODS("Deep Woods", new DeepWoodsMenu(), false, "Not much is known about the deep woods..."),
 
