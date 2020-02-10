@@ -94,7 +94,11 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     StringBuilder b = new StringBuilder("Recent Victories:").append("\n");
     for (Fighter f : character.getRecentlyDefeated())
     {
-      b.append("• ").append(f.summary()).append("\n");
+      b.append("• ").append(f.getName());
+      if (f instanceof Creature)
+      {
+        b.append(" (L").append(((Creature)f).difficulty).append(")");
+      b.append("\n");
     }
     return b.toString();
   }
