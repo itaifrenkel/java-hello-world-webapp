@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.domain.characters;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.AirOfAuthority;
 import com.github.dagwud.woodlands.game.domain.characters.spells.ArmyOfPeasants;
+import com.github.dagwud.woodlands.game.domain.characters.spells.CallToArms;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +19,7 @@ public class General extends PlayerCharacter
     super(playedBy, ECharacterClass.GENERAL);
     getSpellAbilities().register(new AirOfAuthority(this)); // passive
     getSpellAbilities().register(new ArmyOfPeasants(this)); // active
+    getSpellAbilities().register(new CallToArms(this)); // active
     peasants = new ArrayList<>(4);
   }
 
