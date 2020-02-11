@@ -24,12 +24,12 @@ public class ReduceHitPointsCmd extends AbstractCmd
   public void execute()
   {
     int newHP = character.getStats().getHitPoints() - reduceBy;
-    newHP = Math.min(newHP, character.getStats().getMaxHitPointsTEMP().total());
+    newHP = Math.min(newHP, character.getStats().getMaxHitPoints().total());
     character.getStats().setHitPoints(newHP);
 
     if (character.getStats().getHitPoints() <= 0)
     {
-      if (!(character instanceof PlayerCharacter) || newHP < -character.getStats().getMaxHitPointsTEMP().total())
+      if (!(character instanceof PlayerCharacter) || newHP < -character.getStats().getMaxHitPoints().total())
       {
         // instant death:
         DeathCmd cmd = new DeathCmd(character);

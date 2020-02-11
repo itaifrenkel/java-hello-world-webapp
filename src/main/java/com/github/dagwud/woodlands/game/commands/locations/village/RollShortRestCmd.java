@@ -25,9 +25,9 @@ public class RollShortRestCmd extends AbstractCmd
     int diceroll = roll(stats.getLevel(), stats.getRestDiceFace());
     int boostFromConstitution = (int) (Math.floor((stats.getConstitution().total() - 10) / 2.0));
     int newHitPoints = (stats.getHitPoints() + diceroll + boostFromConstitution);
-    if (newHitPoints > stats.getMaxHitPointsTEMP().total())
+    if (newHitPoints > stats.getMaxHitPoints().total())
     {
-      newHitPoints = stats.getMaxHitPointsTEMP().total();
+      newHitPoints = stats.getMaxHitPoints().total();
     }
     recoveredHitPoints = newHitPoints - stats.getHitPoints();
 

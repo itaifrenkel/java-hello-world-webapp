@@ -34,7 +34,7 @@ public abstract class Fighter extends GameObject
     {
       return name + "☠️dead";
     }
-    String message = name + healthIcon(stats) + stats.getHitPoints() + " / " + stats.getMaxHitPointsTEMP();
+    String message = name + healthIcon(stats) + stats.getHitPoints() + " / " + stats.getMaxHitPoints();
     if (stats.getMaxMana().total() != 0)
     {
       message += ", ✨" + stats.getMana() + "/" + stats.getMaxMana();
@@ -45,7 +45,7 @@ public abstract class Fighter extends GameObject
   private String healthIcon(Stats stats)
   {
     BigDecimal perc = new BigDecimal(stats.getHitPoints())
-        .divide(new BigDecimal(stats.getMaxHitPointsTEMP().total()), 3, RoundingMode.HALF_DOWN);
+        .divide(new BigDecimal(stats.getMaxHitPoints().total()), 3, RoundingMode.HALF_DOWN);
     if (perc.compareTo(EIGHTY_PER_CENT) >= 0)
     {
       return "💚";

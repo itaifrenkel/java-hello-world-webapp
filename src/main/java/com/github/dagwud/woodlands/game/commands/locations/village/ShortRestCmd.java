@@ -35,7 +35,7 @@ public class ShortRestCmd extends AbstractCmd
       return;
     }
 
-    if (character.getStats().getHitPoints() == character.getStats().getMaxHitPointsTEMP().total()
+    if (character.getStats().getHitPoints() == character.getStats().getMaxHitPoints().total()
             && character.getStats().getMana() == character.getStats().getMaxMana().total())
     {
       SendMessageCmd cmd = new SendMessageCmd(chatId, "You have initiated a short rest for your party");
@@ -45,7 +45,7 @@ public class ShortRestCmd extends AbstractCmd
     for (PlayerCharacter member : character.getParty().getActivePlayerCharacters())
     {
       Stats stats = member.getStats();
-      if (!member.isDead() && stats.getHitPoints() < stats.getMaxHitPointsTEMP().total() || stats.getMana() < stats.getMaxMana().total())
+      if (!member.isDead() && stats.getHitPoints() < stats.getMaxHitPoints().total() || stats.getMana() < stats.getMaxMana().total())
       {
         if (stats.getRestPoints() > 0 || true /*todo see above*/)
         {

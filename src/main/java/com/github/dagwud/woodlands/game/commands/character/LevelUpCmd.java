@@ -44,7 +44,7 @@ public class LevelUpCmd extends AbstractCmd
     DiceRollCmd roll = new DiceRollCmd(1, character.getStats().getRestDiceFace());
     CommandDelegate.execute(roll);
     int hpToGain = roll.getTotal() + character.getStats().getConstitutionModifier();
-    character.getStats().getMaxHitPointsTEMP().setBase(character.getStats().getMaxHitPointsTEMP().getBase() + hpToGain);
+    character.getStats().getMaxHitPoints().setBase(character.getStats().getMaxHitPoints().getBase() + hpToGain);
 
     RecoverHitPointsCmd hpCmd = new RecoverHitPointsCmd(character, hpToGain);
     CommandDelegate.execute(hpCmd);

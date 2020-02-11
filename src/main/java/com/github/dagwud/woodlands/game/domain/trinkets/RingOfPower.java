@@ -14,14 +14,14 @@ public class RingOfPower extends Trinket
   @Override
   public void equip(Fighter fighter)
   {
-    fighter.getStats().getMaxHitPointsTEMP().addBonus(MAX_HP_BOOST);
+    fighter.getStats().getMaxHitPoints().addBonus(MAX_HP_BOOST);
     RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(fighter, MAX_HP_BOOST);
     CommandDelegate.execute(cmd);
 
     if (fighter instanceof PlayerCharacter)
     {
       PlayerCharacter p = (PlayerCharacter) fighter;
-      String msg = "You feel a rush of power as you put on the ring. Your maximum HP has been boosted to ❤" + fighter.getStats().getMaxHitPointsTEMP().total();
+      String msg = "You feel a rush of power as you put on the ring. Your maximum HP has been boosted to ❤" + fighter.getStats().getMaxHitPoints().total();
       CommandDelegate.execute(new SendMessageCmd(p.getPlayedBy().getChatId(), msg));
     }
   }
@@ -29,7 +29,7 @@ public class RingOfPower extends Trinket
   @Override
   public void unequip(Fighter fighter)
   {
-    fighter.getStats().getMaxHitPointsTEMP().removeBonus(MAX_HP_BOOST);
+    fighter.getStats().getMaxHitPoints().removeBonus(MAX_HP_BOOST);
     ReduceHitPointsCmd cmd = new ReduceHitPointsCmd(fighter, 0); // causes a check that you're not over your maximum
     CommandDelegate.execute(cmd);
 
