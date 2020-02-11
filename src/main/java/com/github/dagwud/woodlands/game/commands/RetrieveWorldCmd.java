@@ -73,7 +73,6 @@ public class RetrieveWorldCmd extends AbstractCmd
 
   private void patch(PlayerCharacter character)
   {
-    CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched " + character.getName() + ": " + character.getStats().getMaxHitPoints().total()));
   }
 
   private List<String> list()
