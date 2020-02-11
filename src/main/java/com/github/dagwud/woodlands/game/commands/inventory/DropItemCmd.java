@@ -7,13 +7,15 @@ import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 
+import java.util.List;
+
 public class DropItemCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
   private final PlayerCharacter character;
   private final int chatId;
-  private final String dropIndex;
+  private String dropIndex;
 
   public DropItemCmd(PlayerCharacter character, int chatId, String dropIndex)
   {
@@ -24,7 +26,7 @@ public class DropItemCmd extends AbstractCmd
 
   @Override
   public void execute()
-  {
+  
     Item dropped;
     if (dropIndex.equals("L"))
     {
