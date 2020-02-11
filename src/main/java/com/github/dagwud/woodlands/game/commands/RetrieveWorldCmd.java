@@ -75,7 +75,7 @@ public class RetrieveWorldCmd extends AbstractCmd
   {
     if (character.getName().equals("Dagwud"))
     {
-      character.getStats().getMaxHitPoints().removeBonus(-56);
+      //character.getStats().getMaxHitPoints().removeBonus(-56);
     }
   }
 
