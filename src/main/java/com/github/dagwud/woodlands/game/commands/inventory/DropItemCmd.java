@@ -31,11 +31,13 @@ public class DropItemCmd extends AbstractCmd
     if (dropIndex.equals("L"))
     {
       dropped = character.getCarrying().getCarriedLeft();
+      CommandDelegate.execute(new UnequipItemCmd(character, dropped));
       character.getCarrying().setCarriedLeft(null);
     }
     else if (dropIndex.equals("R"))
     {
       dropped = character.getCarrying().getCarriedRight();
+      CommandDelegate.execute(new UnequipItemCmd(character, dropped));
       character.getCarrying().setCarriedRight(null);
     }
     else 
@@ -55,6 +57,7 @@ public class DropItemCmd extends AbstractCmd
       {
         int index = Integer.parseInt(dropIndex);
         dropped = from.get(index);
+        CommandDelegate.execute(new UnequipItemCmd(character, dropped));
         from.remove(index);
       }
       catch (NumberFormatException | IndexOutOfBoundsException e)
@@ -67,8 +70,6 @@ public class DropItemCmd extends AbstractCmd
     {
       SendMessageCmd cmd = new SendMessageCmd(chatId, "You dropped " + dropped.getName());
       CommandDelegate.execute(cmd);
-
-      CommandDelegate.execute(new UnequipItemCmd(character, dropped));
 
       InventoryCmd inv = new InventoryCmd(chatId, character);
       CommandDelegate.execute(inv);
