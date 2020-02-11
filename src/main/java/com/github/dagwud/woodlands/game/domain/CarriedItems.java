@@ -10,6 +10,7 @@ public class CarriedItems implements Serializable
 
   private Item carriedLeft;
   private Item carriedRight;
+  private List<Item> worn;
   private List<Item> carriedInactive = new ArrayList<>();
 
   public Item getCarriedLeft()
@@ -32,6 +33,15 @@ public class CarriedItems implements Serializable
     this.carriedRight = carriedRight;
   }
 
+  public List<Item> getWorn()
+  {
+    if (null == worn)
+    {
+      worn = new ArrayList<>();
+    }
+    return worn;
+  }
+
   public List<Item> getCarriedInactive()
   {
     return carriedInactive;
@@ -49,7 +59,10 @@ public class CarriedItems implements Serializable
     {
       total++;
     }
+
+    total += getWorn().size();
     total += carriedInactive.size();
+
     return total;
   }
 }
