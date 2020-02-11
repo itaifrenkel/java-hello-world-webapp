@@ -34,6 +34,7 @@ public abstract class PlayerCharacter extends GameCharacter
     return setupComplete;
   }
 
+  @Override
   public int determineMaxAllowedItems()
   {
     int base = 7 + getStats().getLevel();
