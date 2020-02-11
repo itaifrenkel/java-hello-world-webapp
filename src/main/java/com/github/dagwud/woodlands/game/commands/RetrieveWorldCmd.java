@@ -13,6 +13,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stat;
+import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
@@ -73,9 +74,9 @@ public class RetrieveWorldCmd extends AbstractCmd
 
   private void patch(PlayerCharacter character)
   {
-    if (character.getName().equals("Dagwud"))
+    if (character.getStats().getState() == EState.RESTING)
     {
-      //character.getStats().getMaxHitPoints().removeBonus(-56);
+      character.getStats().setState(EState.ALIVE);
     }
   }
 
