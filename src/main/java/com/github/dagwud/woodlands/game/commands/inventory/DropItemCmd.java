@@ -36,13 +36,24 @@ public class DropItemCmd extends AbstractCmd
       dropped = character.getCarrying().getCarriedRight();
       character.getCarrying().setCarriedRight(null);
     }
-    else
+    else 
     {
+      List<Item> from;
+      if (dropIndex.startsWith("W"))
+      {
+        from = character.getCarrying().getWorn();
+        dropIndex = dropIndex.substr(1);
+      }
+      else
+      {
+        from = character.getCarrying().getCarriedInactive();
+      }
+
       try
       {
         int index = Integer.parseInt(dropIndex);
-        dropped = character.getCarrying().getCarriedInactive().get(index);
-        character.getCarrying().getCarriedInactive().remove(index);
+        dropped = from.get(index);
+        from.remove(index);
       }
       catch (NumberFormatException | IndexOutOfBoundsException e)
       {
