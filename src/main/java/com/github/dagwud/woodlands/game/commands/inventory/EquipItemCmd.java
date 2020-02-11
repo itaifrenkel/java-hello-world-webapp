@@ -46,14 +46,21 @@ public class EquipItemCmd extends AbstractCmd
       return;
     }
 
-    makeSpace();
-    if (character.getCarrying().getCarriedLeft() == null)
+    if (toEquip instanceof Trinket)
     {
-      character.getCarrying().setCarriedLeft(toEquip);
+      character.getCarrying().getWorn().add(toEquip);
     }
     else
     {
-      character.getCarrying().setCarriedRight(toEquip);
+      makeSpace();
+      if (character.getCarrying().getCarriedLeft() == null)
+      {
+        character.getCarrying().setCarriedLeft(toEquip);
+      }
+      else
+      {
+        character.getCarrying().setCarriedRight(toEquip);
+      }
     }
     handleEquip(toEquip);
     character.getCarrying().getCarriedInactive().remove(toEquip);
