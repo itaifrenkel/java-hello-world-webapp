@@ -14,7 +14,7 @@ public class Stats implements Serializable
   private int level;
   private int experience;
   private int hitPoints;
-  private Stat maxHitPoints;
+  private Stat maxHitPoints = new Stat();
   private int mana;
   private Stat maxMana = new Stat();
   private Stat strength = new Stat();
