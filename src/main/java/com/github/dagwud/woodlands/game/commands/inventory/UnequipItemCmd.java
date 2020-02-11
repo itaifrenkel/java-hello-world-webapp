@@ -19,11 +19,13 @@ public class UnequipItemCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (toUnequip instanceof Trinket)
+    if (character.getCarrying().isWorn(item))
     {
-      Trinket trinket = (Trinket) toUnequip;
-      trinket.unequip(character);
+      if (toUnequip instanceof Trinket)
+      {
+        Trinket trinket = (Trinket) toUnequip;
+        trinket.unequip(character);
+      }
     }
-
   }
 }
