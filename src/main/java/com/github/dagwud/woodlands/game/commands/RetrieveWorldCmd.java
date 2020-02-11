@@ -73,6 +73,10 @@ public class RetrieveWorldCmd extends AbstractCmd
 
   private void patch(PlayerCharacter character)
   {
+    if (character.getName().equals("Dagwud"))
+    {
+      character.getStats().getMaxHitPoints().removeBonus(-56);
+    }
   }
 
   private List<String> list()
