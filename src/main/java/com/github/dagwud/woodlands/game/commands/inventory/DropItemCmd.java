@@ -44,7 +44,7 @@ public class DropItemCmd extends AbstractCmd
       if (dropIndex.startsWith("W"))
       {
         from = character.getCarrying().getWorn();
-        dropIndex = dropIndex.substr(1);
+        dropIndex = dropIndex.substring(1);
       }
       else
       {
