@@ -42,6 +42,11 @@ public class CarriedItems implements Serializable
     return worn;
   }
 
+  public boolean isWorn(Item item)
+  {
+    return getWorn().contains(item);
+  }
+
   public List<Item> getCarriedInactive()
   {
     return carriedInactive;
