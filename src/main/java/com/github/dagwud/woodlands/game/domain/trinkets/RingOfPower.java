@@ -11,6 +11,8 @@ public class RingOfPower extends Trinket
 {
   private static final int MAX_HP_BOOST = 4;
 
+  private static final long serialVersionUID = 1L;
+
   @Override
   public void equip(Fighter fighter)
   {
