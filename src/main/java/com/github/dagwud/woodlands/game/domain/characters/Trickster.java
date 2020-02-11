@@ -22,7 +22,7 @@ public class Trickster extends PlayerCharacter
   public int determineMaxAllowedItems()
   {
     // Loot bag
-    return super.determineMaxAllowedItems() + 2 * getStats().getLevel();
+    return super.determineMaxAllowedItems() + 3;
   }
 
 }
