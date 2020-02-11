@@ -26,7 +26,7 @@ public class DropItemCmd extends AbstractCmd
 
   @Override
   public void execute()
-  
+  {
     Item dropped;
     if (dropIndex.equals("L"))
     {
