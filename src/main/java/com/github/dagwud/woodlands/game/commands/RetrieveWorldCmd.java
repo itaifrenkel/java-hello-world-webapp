@@ -11,6 +11,8 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.DropItemCmd;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stat;
 import com.github.dagwud.woodlands.game.domain.EState;
@@ -77,6 +79,14 @@ public class RetrieveWorldCmd extends AbstractCmd
     if (character.getStats().getState() == EState.RESTING)
     {
       character.getStats().setState(EState.ALIVE);
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: un-rested " + character.getName()));
+    }
+
+    int dropCount = character.getCarrying().countTotalCarried() - character.determineMaxAllowedItems();
+    for (int i = 0; i < dropCount; i++)
+    {
+      CommandDelegate.execute(new DropItemCmd(character, character.getPlayedBy().getChatId(), "0"));
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: dropped from " + character.getName()));
     }
   }
 
