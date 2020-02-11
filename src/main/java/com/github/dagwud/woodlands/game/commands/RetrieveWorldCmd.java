@@ -9,13 +9,11 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.github.dagwud.woodlands.game.*;
+import com.github.dagwud.woodlands.game.commands.admin.PatchCharacterCmd;
+import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.inventory.DropItemCmd;
-import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.stats.Stat;
-import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
@@ -58,35 +56,12 @@ public class RetrieveWorldCmd extends AbstractCmd
 
     Logger.info("Successfully restored world!");
 
-    for (PlayerState allPlayerState : GameStatesRegistry.allPlayerStates())
-    {
-      patch(allPlayerState.getPlayer().getActiveCharacter());
-      for (PlayerCharacter inactiveCharacter : allPlayerState.getPlayer().getInactiveCharacters())
-      {
-        patch(inactiveCharacter);
-      }
-    }
+    CommandDelegate.execute(new PatchWorldCmd());
 
     for (PlayerState player : GameStatesRegistry.allPlayerStates())
     {
       SendMessageCmd cmd = new SendMessageCmd(player.getPlayer().getChatId(), "The air has cleared, and the world seems... different somehow.");
       CommandDelegate.execute(cmd);
-    }
-  }
-
-  private void patch(PlayerCharacter character)
-  {
-    if (character.getStats().getState() == EState.RESTING)
-    {
-      character.getStats().setState(EState.ALIVE);
-      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: un-rested " + character.getName()));
-    }
-
-    int dropCount = character.getCarrying().countTotalCarried() - character.determineMaxAllowedItems();
-    for (int i = 0; i < dropCount; i++)
-    {
-      CommandDelegate.execute(new DropItemCmd(character, character.getPlayedBy().getChatId(), "0"));
-      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: dropped from " + character.getName()));
     }
   }
 
