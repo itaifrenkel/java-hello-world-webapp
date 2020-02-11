@@ -36,7 +36,7 @@ class WardOfAlacrity extends Trinket
 
   String produceEquipMessage(Fighter fighter)
   {
-    return "The ward makes you feel vibrant and energetic. You feel a sense of purpose and a swiftness of body.";
+    return "The ward makes you feel vibrant and energetic. You feel a sense of purpose and a swiftness of body. Your agility is now " + fighter.getStats().getAgility();
   }
 
   @Override

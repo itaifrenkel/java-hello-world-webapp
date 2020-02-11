@@ -1,7 +1,5 @@
 package com.github.dagwud.woodlands.game.domain.trinkets;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 
 public class LootBag extends Trinket
