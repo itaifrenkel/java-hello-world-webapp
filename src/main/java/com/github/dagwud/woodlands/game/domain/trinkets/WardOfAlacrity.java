@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 class WardOfAlacrity extends Trinket
 {
+  private static final long serialVersionUID = 1L;
   private static final int BOOST_AMOUNT = 1;
 
   @Override
