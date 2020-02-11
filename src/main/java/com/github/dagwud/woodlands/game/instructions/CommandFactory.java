@@ -66,7 +66,7 @@ public class CommandFactory
       return by.build(playerState.getActiveCharacter(), chatId);
     }
 
-    if (cmd.matches("/d[LR0-9]+"))
+    if (cmd.matches("/d[LRW0-9]+"))
     {
       // Drop:
       String dropIndex = cmd.substring("/d".length());
