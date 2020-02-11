@@ -50,6 +50,11 @@ public class InventoryCmd extends AbstractCmd
     {
       itemsList.add("• " + character.getCarrying().getCarriedRight().summary(character) + " (drop: /dR)");
     }
+    for (int i = 0; i < character.getWorn().size(); i++)
+    {
+      Item item = character.getWorn().get(i);
+      itemsList.add("• " + item.summary(character) + " (drop: /dw" + i + ")");
+    }
     if (!itemsList.isEmpty())
     {
       itemsList.add("——————————————————");
@@ -57,8 +62,8 @@ public class InventoryCmd extends AbstractCmd
     List<Item> carriedInactive = character.getCarrying().getCarriedInactive();
     for (int i = 0; i < carriedInactive.size(); i++)
     {
-      Item weapon = carriedInactive.get(i);
-      itemsList.add("• " + weapon.summary(character) + " (drop: /d" + i + "; equip: /e" + i + ")");
+      Item inactive = carriedInactive.get(i);
+      itemsList.add("• " + inactive.summary(character) + " (drop: /d" + i + "; equip: /e" + i + ")");
     }
     return itemsList;
   }
