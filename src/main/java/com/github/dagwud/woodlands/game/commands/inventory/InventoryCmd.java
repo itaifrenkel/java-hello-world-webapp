@@ -50,9 +50,9 @@ public class InventoryCmd extends AbstractCmd
     {
       itemsList.add("• " + character.getCarrying().getCarriedRight().summary(character) + " (drop: /dR)");
     }
-    for (int i = 0; i < character.getWorn().size(); i++)
+    for (int i = 0; i < character.getCarrying().getWorn().size(); i++)
     {
-      Item item = character.getWorn().get(i);
+      Item item = character.getCarrying().getWorn().get(i);
       itemsList.add("• " + item.summary(character) + " (drop: /dw" + i + ")");
     }
     if (!itemsList.isEmpty())
