@@ -10,6 +10,7 @@ public abstract class Trinket extends Item
   static final String BEADS_ICON = "\uD83D\uDCFF";
   static final String AMULET_ICON = "\uD83D\uDC8E";
   static final String WARD_ICON = "\uD83D\uDD2E";
+  protected static final String POTION_ICON = "\uD83E\uDDEA";
 
   public String name;
   public String icon = "";

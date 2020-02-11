@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.trinkets;
 
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
+import com.github.dagwud.woodlands.game.domain.trinkets.consumable.*;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,11 @@ public class TrinketFactory
     trinkets.add(AmuletOfProtection.class);
     trinkets.add(WardOfAlacrity.class);
     trinkets.add(LootBag.class);
+
+    trinkets.add(LesserHealingPotion.class);
+    trinkets.add(GreaterHealingPotion.class);
+    trinkets.add(LesserManaPotion.class);
+    trinkets.add(GreaterManaPotion.class);
   }
 
   public static TrinketFactory instance()

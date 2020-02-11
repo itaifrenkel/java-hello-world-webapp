@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
+import com.github.dagwud.woodlands.game.domain.trinkets.consumable.ConsumableTrinket;
 
 public class EquipItemCmd extends AbstractCmd
 {
@@ -48,7 +49,10 @@ public class EquipItemCmd extends AbstractCmd
 
     if (toEquip instanceof Trinket)
     {
-      character.getCarrying().getWorn().add(toEquip);
+      if (!(toEquip instanceof ConsumableTrinket))
+      {
+        character.getCarrying().getWorn().add(toEquip);
+      }
     }
     else
     {
