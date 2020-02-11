@@ -14,7 +14,6 @@ public class Stats implements Serializable
   private int level;
   private int experience;
   private int hitPoints;
-  public int maxHitPoints;
   public Stat maxHitPointsTEMP;
   private int mana;
   private Stat maxMana = new Stat();
@@ -55,16 +54,6 @@ public class Stats implements Serializable
   public void setHitPoints(int hitPoints)
   {
     this.hitPoints = hitPoints;
-  }
-
-  public int getMaxHitPoints()
-  {
-    return maxHitPoints;
-  }
-
-  public void setMaxHitPoints(int maxHitPoints)
-  {
-    this.maxHitPoints = maxHitPoints;
   }
 
   public Stat getMaxHitPointsTEMP()
