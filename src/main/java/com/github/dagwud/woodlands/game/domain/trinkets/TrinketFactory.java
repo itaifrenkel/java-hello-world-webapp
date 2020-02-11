@@ -22,6 +22,7 @@ public class TrinketFactory
 
     trinkets.add(LesserHealingPotion.class);
     trinkets.add(GreaterHealingPotion.class);
+    trinkets.add(MassiveHealingPotion.class);
     trinkets.add(LesserManaPotion.class);
     trinkets.add(GreaterManaPotion.class);
   }
