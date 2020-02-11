@@ -14,7 +14,7 @@ public class Stat implements Serializable
     this(0, 0);
   }
 
-  Stat(int base, int bonus)
+  public Stat(int base, int bonus)
   {
     this.base = base;
     this.bonus = bonus;

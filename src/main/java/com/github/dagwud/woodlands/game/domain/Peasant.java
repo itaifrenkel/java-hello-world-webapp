@@ -9,6 +9,6 @@ public class Peasant extends NonPlayerCharacter
     super(ownedBy);
     setName(name);
     getStats().setHitPoints(hitPoints);
-    getStats().getMaxHitPoints().setBase(hitPoints);
+    getStats().getMaxHitPointsTEMP().setBase(hitPoints);
   }
 }

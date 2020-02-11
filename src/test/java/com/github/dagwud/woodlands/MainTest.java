@@ -39,7 +39,7 @@ public class MainTest
     assertEquals(ECharacterClass.WIZARD, playerState.getActiveCharacter().getCharacterClass());
     assertEquals(1, playerState.getActiveCharacter().getStats().getLevel());
     assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());
-    assertEquals(8, playerState.getActiveCharacter().getStats().getMaxHitPoints());
+    assertEquals(8, playerState.getActiveCharacter().getStats().getMaxHitPointsTEMP());
     assertEquals(2, playerState.getActiveCharacter().getStats().getMana());
     assertEquals(3, playerState.getActiveCharacter().getStats().getMaxMana().total());
     assertEquals(9, playerState.getActiveCharacter().getStats().getStrength().total());

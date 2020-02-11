@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.admin.AdminCmd;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
@@ -23,7 +22,7 @@ public class FullHealCmd extends AdminCmd
   {
     character.getStats().setState(EState.ALIVE);
 
-    int heal = character.getStats().getMaxHitPoints().total() - character.getStats().getHitPoints();
+    int heal = character.getStats().getMaxHitPointsTEMP().total() - character.getStats().getHitPoints();
     RecoverHitPointsCmd hpCmd = new RecoverHitPointsCmd(character, heal);
     CommandDelegate.execute(hpCmd);
 

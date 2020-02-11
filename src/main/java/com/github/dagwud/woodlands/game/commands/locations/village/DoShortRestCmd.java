@@ -48,7 +48,7 @@ public class DoShortRestCmd extends AbstractCmd
 
     SendMessageCmd echo = new SendMessageCmd(chatId, "<b>You recovered ❤" + hitPointsRecovered +
             " and ✨" + manaRecovered + ".</b> " +
-            "Now at ❤" + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints() +
+            "Now at ❤" + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPointsTEMP() +
             ", ✨" + character.getStats().getMana() + "/" + character.getStats().getMaxMana());
     CommandDelegate.execute(echo);
 

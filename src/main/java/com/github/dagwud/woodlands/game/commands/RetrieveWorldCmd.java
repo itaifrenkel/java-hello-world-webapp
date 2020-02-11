@@ -11,6 +11,8 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.stats.Stat;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
@@ -53,10 +55,29 @@ public class RetrieveWorldCmd extends AbstractCmd
 
     Logger.info("Successfully restored world!");
 
+    for (PlayerState allPlayerState : GameStatesRegistry.allPlayerStates())
+    {
+      patch(allPlayerState.getPlayer().getActiveCharacter());
+      for (PlayerCharacter inactiveCharacter : allPlayerState.getPlayer().getInactiveCharacters())
+      {
+        patch(inactiveCharacter);
+      }
+    }
+
     for (PlayerState player : GameStatesRegistry.allPlayerStates())
     {
       SendMessageCmd cmd = new SendMessageCmd(player.getPlayer().getChatId(), "The air has cleared, and the world seems... different somehow.");
       CommandDelegate.execute(cmd);
+    }
+  }
+
+  private void patch(PlayerCharacter character)
+  {
+    if (character.getStats().maxHitPointsTEMP == null)
+    {
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patching " + character.getName() + "..."));
+      character.getStats().maxHitPointsTEMP = new Stat(character.getStats().getHitPoints(), 0);
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched " + character.getName() + ".`"));
     }
   }
 

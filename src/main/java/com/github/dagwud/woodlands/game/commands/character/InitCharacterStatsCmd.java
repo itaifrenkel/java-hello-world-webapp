@@ -27,7 +27,7 @@ public class InitCharacterStatsCmd extends AbstractCmd
     InitialStats classStats = character.getCharacterClass().getInitialStats();
 
     stats.setHitPoints(classStats.getInitialHitPoints());
-    stats.getMaxHitPoints().setBase(classStats.getInitialHitPoints());
+    stats.getMaxHitPointsTEMP().setBase(classStats.getInitialHitPoints());
 
     stats.setMana(2);
     stats.getMaxMana().setBase(3);

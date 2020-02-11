@@ -21,7 +21,7 @@ public class RecoverHitPointsCmd extends AbstractCmd
   public void execute()
   {
     int newHP = target.getStats().getHitPoints() + hitPointsRecovered;
-    newHP = Math.min(newHP, target.getStats().getMaxHitPoints().total());
+    newHP = Math.min(newHP, target.getStats().getMaxHitPointsTEMP().total());
     target.getStats().setHitPoints(newHP);
     if (target.getStats().getHitPoints() > 0)
     {

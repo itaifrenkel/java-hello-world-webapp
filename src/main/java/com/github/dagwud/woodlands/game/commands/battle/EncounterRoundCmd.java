@@ -187,7 +187,7 @@ public class EncounterRoundCmd extends AbstractCmd
   {
     for (PlayerCharacter member : encounter.getParty().getActivePlayerCharacters())
     {
-      double hpPerc = ((double) member.getStats().getHitPoints()) / ((double) member.getStats().getMaxHitPoints().total());
+      double hpPerc = ((double) member.getStats().getHitPoints()) / ((double) member.getStats().getMaxHitPointsTEMP().total());
       if (!member.isDead() && hpPerc <= 0.2)
       {
         return member;

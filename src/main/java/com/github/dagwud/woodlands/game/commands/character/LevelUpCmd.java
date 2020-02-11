@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
-import com.github.dagwud.woodlands.game.commands.admin.AdminCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -45,7 +44,7 @@ public class LevelUpCmd extends AbstractCmd
     DiceRollCmd roll = new DiceRollCmd(1, character.getStats().getRestDiceFace());
     CommandDelegate.execute(roll);
     int hpToGain = roll.getTotal() + character.getStats().getConstitutionModifier();
-    character.getStats().getMaxHitPoints().setBase(character.getStats().getMaxHitPoints().getBase() + hpToGain);
+    character.getStats().getMaxHitPointsTEMP().setBase(character.getStats().getMaxHitPointsTEMP().getBase() + hpToGain);
 
     RecoverHitPointsCmd hpCmd = new RecoverHitPointsCmd(character, hpToGain);
     CommandDelegate.execute(hpCmd);
