@@ -35,7 +35,7 @@ public class InventoryCmd extends AbstractCmd
     {
       b.append(itemInfo).append("\n");
     }
-    b.append("Max carry capacity: ")
+    b.append("Max carry capacity: ");
     b.append(character.determineMaxAllowedItems()).append(" items");
     SendMessageCmd cmd = new SendMessageCmd(chatId, b.toString());
     CommandDelegate.execute(cmd);
