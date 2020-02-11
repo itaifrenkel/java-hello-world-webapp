@@ -1,14 +1,14 @@
 package com.github.dagwud.woodlands.game.domain.trinkets;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
-import com.github.dagwud.woodlands.game.commands.character.ReduceHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 abstract class DefenceBoostTrinket extends Trinket
 {
+  private static final long serialVersionUID = 1L;
+
   @Override
   public void equip(Fighter fighter)
   {

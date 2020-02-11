@@ -9,6 +9,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 abstract class PowerBoostTrinket extends Trinket
 {
+  private static final long serialVersionUID = 1L;
+
   @Override
   public void equip(Fighter fighter)
   {
