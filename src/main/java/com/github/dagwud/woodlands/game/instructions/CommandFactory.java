@@ -76,7 +76,7 @@ public class CommandFactory
     {
       // Equip:
       String dropIndex = cmd.substring("/e".length());
-      return new EquipItemCmd(playerState.getActiveCharacter(), chatId, dropIndex);
+      return new EquipItemCmd(playerState.getActiveCharacter(), chatId, dropIndex, true);
     }
 
     if (playerState.getActiveCharacter() != null && playerState.getActiveCharacter().getParty() != null)

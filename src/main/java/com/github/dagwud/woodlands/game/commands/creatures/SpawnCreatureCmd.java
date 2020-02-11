@@ -36,7 +36,7 @@ public class SpawnCreatureCmd extends AbstractCmd
     Stats stats = new Stats();
     int hitPoints = chooseRandomInRange(difficulty.minimumHitPoints, difficulty.maximumHitPoints);
     stats.setHitPoints(hitPoints);
-    stats.setMaxHitPoints(hitPoints);
+    stats.getMaxHitPoints().setBase(hitPoints);
     stats.setStrength(16, 0);
     stats.setAgility(16, 0);
     stats.setDefenceRatingBoost(difficulty.defensiveRating);

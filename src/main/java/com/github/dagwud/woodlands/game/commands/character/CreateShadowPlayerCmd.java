@@ -35,7 +35,7 @@ public class CreateShadowPlayerCmd extends AbstractCmd
     RetrieveItemsCmd equipShadowLeft = new RetrieveItemsCmd(spawned);
     CommandDelegate.execute(equipShadowLeft);
 
-    EquipItemCmd equip = new EquipItemCmd(spawned, chatId, "0");
+    EquipItemCmd equip = new EquipItemCmd(spawned, chatId, "0", false);
     CommandDelegate.execute(equip);
 
     JoinPartyCmd shadowJoin = new JoinPartyCmd(spawned, shadowOfCharacter.getParty().getName());

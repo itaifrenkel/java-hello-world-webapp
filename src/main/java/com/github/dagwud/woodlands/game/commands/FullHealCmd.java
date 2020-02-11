@@ -23,7 +23,7 @@ public class FullHealCmd extends AdminCmd
   {
     character.getStats().setState(EState.ALIVE);
 
-    int heal = character.getStats().getMaxHitPoints() - character.getStats().getHitPoints();
+    int heal = character.getStats().getMaxHitPoints().total() - character.getStats().getHitPoints();
     RecoverHitPointsCmd hpCmd = new RecoverHitPointsCmd(character, heal);
     CommandDelegate.execute(hpCmd);
 

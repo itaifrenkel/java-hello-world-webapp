@@ -5,27 +5,72 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.gson.game.Weapon;
+import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 
 public class EquipItemCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
   private final PlayerCharacter character;
+  private Item toEquip;
   private final int chatId;
   private final String dropIndex;
+  private final boolean showInventoryAfter;
 
-  public EquipItemCmd(PlayerCharacter character, int chatId, String equipIndex)
+  public EquipItemCmd(PlayerCharacter character, int chatId, String equipIndex, boolean showInventoryAfter)
   {
     this.character = character;
     this.chatId = chatId;
     this.dropIndex = equipIndex;
+    this.showInventoryAfter = showInventoryAfter;
+  }
+
+  public EquipItemCmd(PlayerCharacter character, int chatId, Item toEquip, boolean showInventoryAfter)
+  {
+    this.character = character;
+    this.chatId = chatId;
+    this.toEquip = toEquip;
+    this.dropIndex = null;
+    this.showInventoryAfter = showInventoryAfter;
   }
 
   @Override
   public void execute()
   {
-    Item toEquip;
+    determineItemToEquip();
+
+    if (toEquip == null)
+    {
+      SendMessageCmd cmd = new SendMessageCmd(chatId, "That's not a valid option");
+      CommandDelegate.execute(cmd);
+      return;
+    }
+
+    makeSpace();
+    if (character.getCarrying().getCarriedLeft() == null)
+    {
+      character.getCarrying().setCarriedLeft(toEquip);
+    }
+    else
+    {
+      character.getCarrying().setCarriedRight(toEquip);
+    }
+    handleEquip(toEquip);
+    character.getCarrying().getCarriedInactive().remove(toEquip);
+
+    if (showInventoryAfter)
+    {
+      InventoryCmd inv = new InventoryCmd(chatId, character);
+      CommandDelegate.execute(inv);
+    }
+  }
+
+  private void determineItemToEquip()
+  {
+    if (toEquip != null)
+    {
+      return;
+    }
     try
     {
       int index = Integer.parseInt(dropIndex);
@@ -35,29 +80,13 @@ public class EquipItemCmd extends AbstractCmd
     {
       toEquip = null;
     }
+  }
 
-    if (toEquip != null)
+  private void handleEquip(Item toEquip)
+  {
+    if (toEquip instanceof Trinket)
     {
-      makeSpace();
-      if (character.getCarrying().getCarriedLeft() == null)
-      {
-        character.getCarrying().setCarriedLeft(toEquip);
-      }
-      else
-      {
-        character.getCarrying().setCarriedRight(toEquip);
-      }
-      character.getCarrying().getCarriedInactive().remove(toEquip);
-      SendMessageCmd cmd = new SendMessageCmd(chatId, "Done.");
-      CommandDelegate.execute(cmd);
-
-      InventoryCmd inv = new InventoryCmd(chatId, character);
-      CommandDelegate.execute(inv);
-    }
-    else
-    {
-      SendMessageCmd cmd = new SendMessageCmd(chatId, "That's not a valid option");
-      CommandDelegate.execute(cmd);
+      ((Trinket)toEquip).equip(character);
     }
   }
 
@@ -76,5 +105,6 @@ public class EquipItemCmd extends AbstractCmd
     character.getCarrying().getCarriedInactive().add(moveR);
     character.getCarrying().setCarriedRight(moveL);
     character.getCarrying().setCarriedLeft(null);
+    CommandDelegate.execute(new UnequipItemCmd(character, moveR));
   }
 }

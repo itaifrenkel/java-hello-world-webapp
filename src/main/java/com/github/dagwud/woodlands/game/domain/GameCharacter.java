@@ -79,4 +79,5 @@ public abstract class GameCharacter extends Fighter
     }
     throw new WoodlandsRuntimeException("Nobody to fight");
   }
+
 }

@@ -9,6 +9,7 @@ import com.github.dagwud.woodlands.game.commands.character.SwitchCharacterPrompt
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.GiveItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.BuyDrinksCmd;
@@ -46,6 +47,7 @@ public enum ECommand
   RESET("/reset", false, (character, chatId) -> new ResetCmd(chatId)),
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
   CREATURE_CACHE("/cachecreature", false, ((character, chatId) -> new InvalidateCreatureCacheCmd(chatId))),
+  SPAWN_TRINKET("/trinket", false, ((character, chatId) -> new SpawnTrinketCmd(character))),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),

@@ -45,7 +45,7 @@ public abstract class Fighter extends GameObject
   private String healthIcon(Stats stats)
   {
     BigDecimal perc = new BigDecimal(stats.getHitPoints())
-        .divide(new BigDecimal(stats.getMaxHitPoints()), 3, RoundingMode.HALF_DOWN);
+        .divide(new BigDecimal(stats.getMaxHitPoints().total()), 3, RoundingMode.HALF_DOWN);
     if (perc.compareTo(EIGHTY_PER_CENT) >= 0)
     {
       return "💚";
@@ -85,4 +85,14 @@ public abstract class Fighter extends GameObject
   }
 
   public abstract Fighter chooseFighterToAttack(Collection<Fighter> fighters);
+
+  public final boolean canCarryMore()
+  {
+    return getCarrying().countTotalCarried() < determineMaxAllowedItems();
+  }
+
+  protected int determineMaxAllowedItems()
+  {
+    return Integer.MAX_VALUE;
+  }
 }
