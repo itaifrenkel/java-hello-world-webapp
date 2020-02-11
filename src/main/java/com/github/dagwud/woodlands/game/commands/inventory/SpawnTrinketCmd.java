@@ -26,6 +26,7 @@ public class SpawnTrinketCmd extends AbstractCmd
     {
       if (receiver instanceof PlayerCharacter)
       {
+        PlayerCharacter p = (PlayerCharacter)receiver;
         CommandDelegate.execute(new SendMessageCmd(p.getChatId(), "You can't carry any more"));
       }
       return;
