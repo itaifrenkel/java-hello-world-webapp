@@ -6,7 +6,10 @@ import com.github.dagwud.woodlands.game.domain.Item;
 public abstract class Trinket extends Item
 {
   private static final long serialVersionUID = 1L;
-  static final String RING_ICON = "\uD83D\uDC8D";
+
+  static final String BEADS_ICON = "\uD83D\uDCFF";
+  static final String AMULET_ICON = "\uD83D\uDC8E";
+  static final String WARD_ICON = "\uD83D\uDD2E";
 
   public String name;
   public String icon = "";
@@ -20,4 +23,9 @@ public abstract class Trinket extends Item
   public abstract void equip(Fighter fighter);
 
   public abstract void unequip(Fighter fighter);
+
+  String produceUnequipMessage()
+  {
+    return "You no longer feel the effects of the " + getName();
+  }
 }

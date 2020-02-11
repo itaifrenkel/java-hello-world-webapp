@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.domain.trinkets.LootBag;
 import com.github.dagwud.woodlands.game.log.Logger;
 import java.util.List;
 import java.util.ArrayList;
@@ -35,7 +36,16 @@ public abstract class PlayerCharacter extends GameCharacter
 
   public int determineMaxAllowedItems()
   {
-    return 7 + getStats().getLevel();
+    int base = 7 + getStats().getLevel();
+    for (Item item : getCarrying().getWorn())
+    {
+      if (item instanceof LootBag)
+      {
+        LootBag bag = (LootBag) item;
+        base += bag.getProvidedSpaces();
+      }
+    }
+    return base;
   }
 
   public Player getPlayedBy()
