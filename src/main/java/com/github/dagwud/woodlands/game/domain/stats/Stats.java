@@ -28,6 +28,7 @@ public class Stats implements Serializable
   private double damageMultiplier = 1;
   private int criticalStrikeChanceBonus;
 
+  private int bonusDamage;
   private Map<String, Integer> weaponBonusHit = new HashMap<>();
   private Map<String, Integer> weaponBonusDamage = new HashMap<>();
   private EState state;
@@ -129,6 +130,16 @@ public class Stats implements Serializable
   public void setWeaponBonusHit(Map<String, Integer> weaponBonusHit)
   {
     this.weaponBonusHit = weaponBonusHit;
+  }
+
+  public int getBonusDamage()
+  {
+    return bonusDamage;
+  }
+
+  public void setBonusDamage(int bonusDamage)
+  {
+    this.bonusDamage = bonusDamage;
   }
 
   public int getWeaponBonusDamage(Weapon weapon)
