@@ -66,6 +66,7 @@ public class AttackCmd extends AbstractCmd
 
     Stat modifier = attackWith.ranged ? attacker.getStats().getAgility() : attacker.getStats().getStrength();
     int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
+    weaponBoost += attacker.getStats().getBonusDamage();
 
     int defenderDefenceRating = defender.getStats().getBaseDefenceRating() + defender.getStats().getDefenceRatingBoost();
     defenderDefenceRating += countShieldsDefence(defender);
@@ -107,6 +108,7 @@ public class AttackCmd extends AbstractCmd
     DiceRollCmd rollDamage = new DiceRollCmd(weaponUsed.damage.diceCount, weaponUsed.damage.diceFaces);
     CommandDelegate.execute(rollDamage);
     int baseDamage = rollDamage.getTotal();
+    baseDamage += attacker.getStats().getBonusDamage();
 
     int criticalHitDamage = 0;
     if (hitStatus == EHitStatus.CRITICAL_HIT)
@@ -117,7 +119,7 @@ public class AttackCmd extends AbstractCmd
     }
 
     int bonusDamage = attacker.getStats().getWeaponBonusDamage(weaponUsed);
-    bonusDamage += attacker.getStats().getBonusDamage();
+
     int drunkStrengthDamage = 0;
     if (!weaponUsed.ranged)
     {
