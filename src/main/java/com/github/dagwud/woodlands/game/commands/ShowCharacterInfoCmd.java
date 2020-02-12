@@ -22,7 +22,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
   private final int chatId;
   private final PlayerCharacter character;
 
-  ShowCharacterInfoCmd(int chatId, PlayerCharacter character)
+  public ShowCharacterInfoCmd(int chatId, PlayerCharacter character)
   {
     super(new CharacterIsSetUpPrecondition(chatId, character));
     this.chatId = chatId;
