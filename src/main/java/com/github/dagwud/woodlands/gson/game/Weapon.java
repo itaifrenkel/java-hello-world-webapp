@@ -45,9 +45,14 @@ public class Weapon extends EquippableItem
   @Override
   public String statsSummary(Fighter carrier)
   {
-    int bonusDamage = carrier.getStats().getWeaponBonusDamage(this);
-
     String damageText = damage.determineAverageRoll();
+
+    if (carrier.getStats().getDamageBoost() != 0)
+    {
+      damageText += " +" + carrier.getStats().getDamageBoost();
+    }
+
+    int bonusDamage = carrier.getStats().getWeaponBonusDamage(this);
     if (bonusDamage != 0)
     {
       damageText += " +" + bonusDamage;
