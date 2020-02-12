@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.domain.trinkets.consumable;
 
 public class GreaterManaPotion extends ManaPotion
 {
+  private static final long SerialVersionUID = 1L;
   private static final int MANA_POINTS_TO_RECOVER = 3;
 
   public GreaterManaPotion()
