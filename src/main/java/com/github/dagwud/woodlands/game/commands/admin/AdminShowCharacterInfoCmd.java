@@ -16,7 +16,7 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
   private static final long serialVersionUID = 1L;
   private final int chatId;
 
-  public KillPromptCmd(int chatId, PlayerCharacter character)
+  public AdminShowCharacterInfoCmd(int chatId, PlayerCharacter character)
   {
     super(character.getPlayedBy().getPlayerState(), 2);
     this.chatId = chatId;
