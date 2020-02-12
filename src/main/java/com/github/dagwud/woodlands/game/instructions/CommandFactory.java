@@ -36,15 +36,18 @@ public class CommandFactory
 
   public AbstractCmd create(Update telegramUpdate, PlayerState playerState)
   {
+    int chatId = telegramUpdate.message.chat.id;
     String cmd = telegramUpdate.message.text;
+    if (cmd == null)
+    {
+      return new SendMessageCmd(chatId, "(・_・ヾ");
+    }
 
     SuspendableCmd waiting = playerState.getWaitingForInputCmd();
     if (waiting != null)
     {
       return new AcceptInputCmd(waiting, cmd);
     }
-
-    int chatId = telegramUpdate.message.chat.id;
 
     if (playerState.getActiveCharacter() != null)
     {
