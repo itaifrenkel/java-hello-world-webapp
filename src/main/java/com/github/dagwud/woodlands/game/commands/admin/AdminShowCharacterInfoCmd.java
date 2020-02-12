@@ -7,7 +7,7 @@ import com.github.dagwud.woodlands.game.commands.ShowCharacterInfoCmd;
 import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.command.inventory.InventoryCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
