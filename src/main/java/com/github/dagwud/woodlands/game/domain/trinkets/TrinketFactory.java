@@ -19,6 +19,7 @@ public class TrinketFactory
     trinkets.add(AmuletOfProtection.class);
     trinkets.add(WardOfAlacrity.class);
     trinkets.add(LootBag.class);
+    trinkets.add(WardOfViolence.class);
 
     trinkets.add(LesserHealingPotion.class);
     trinkets.add(GreaterHealingPotion.class);
