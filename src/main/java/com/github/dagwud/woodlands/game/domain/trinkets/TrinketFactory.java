@@ -13,12 +13,12 @@ public class TrinketFactory
   private TrinketFactory()
   {
     trinkets = new ArrayList<>();
-    /*trinkets.add(BeadsOfPower.class);
+    trinkets.add(BeadsOfPower.class);
     trinkets.add(AmuletOfPower.class);
     trinkets.add(BeadsOfProtection.class);
     trinkets.add(AmuletOfProtection.class);
     trinkets.add(WardOfAlacrity.class);
-    trinkets.add(LootBag.class);*/
+    trinkets.add(LootBag.class);
     trinkets.add(WardOfViolence.class);
 
     trinkets.add(LesserHealingPotion.class);
