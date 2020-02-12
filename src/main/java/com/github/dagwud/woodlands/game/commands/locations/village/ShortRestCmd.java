@@ -23,7 +23,7 @@ public class ShortRestCmd extends RestCmd
   {
     if (getCharacter().getStats().getRestPoints() <= 0)
     {
-      SendMessageCmd cmd = new SendMessageCmd(getCharacter().getPlayedBy().getChatId(), "You need a full rest\nThis is not yet implemented, so for now we'll let it slide. You've been granted a free bonus short rest. You can use it now");
+      SendMessageCmd cmd = new SendMessageCmd(getCharacter().getPlayedBy().getChatId(), "Your wounds are starting to take their toll; you need a full rest to fully recover");
       CommandDelegate.execute(cmd);
       return;
     }
