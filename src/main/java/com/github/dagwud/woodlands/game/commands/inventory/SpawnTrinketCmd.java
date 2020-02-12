@@ -37,7 +37,7 @@ public class SpawnTrinketCmd extends AbstractCmd
     if (receiver instanceof PlayerCharacter)
     {
       PlayerCharacter p = (PlayerCharacter)receiver;
-      CommandDelegate.execute(new SendMessageCmd(p.getPlayedBy().getChatId(), "You received a " + trinket.summary(receiver, false)));
+      CommandDelegate.execute(new SendMessageCmd(p.getPlayedBy().getChatId(), "You received a " + trinket.summary(receiver)));
     }
   }
 }
