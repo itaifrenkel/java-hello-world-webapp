@@ -13,7 +13,7 @@ class WardOfViolence extends WearableTrinket
   @Override
   public void equip(Fighter fighter)
   {
-    fighter.getStats().setWeaponBoost(fighter.getStats().getWeaponBoost() + BOOST_AMOUNT);
+    fighter.getStats().setBonusDamage(fighter.getStats().getBonusDamage() + BOOST_AMOUNT);
 
     if (fighter instanceof PlayerCharacter)
     {
@@ -26,7 +26,7 @@ class WardOfViolence extends WearableTrinket
   @Override
   public void unequip(Fighter fighter)
   {
-    fighter.getStats().setWeaponBoost(fighter.getStats().getWeaponBoost() - BOOST_AMOUNT);
+    fighter.getStats().setBonusDamage(fighter.getStats().getBonusDamage() - BOOST_AMOUNT);
 
     if (fighter instanceof PlayerCharacter)
     {
