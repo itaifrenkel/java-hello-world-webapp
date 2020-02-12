@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 
 public abstract class HealingPotion extends ConsumableTrinket
 {
+  private static final long SerialVersionUID = 1L;
   private final int hitPointsToRecover;
 
   public HealingPotion(String name, int hitPointsToRecover)
