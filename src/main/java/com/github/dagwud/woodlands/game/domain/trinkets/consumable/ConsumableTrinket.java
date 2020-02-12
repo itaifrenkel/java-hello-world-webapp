@@ -8,7 +8,7 @@ import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 
 public abstract class ConsumableTrinket extends Trinket
 {
-  private static final long SerialVersionUID = -108172448128640610;
+  private static final long SerialVersionUID = 1;
 
   private final String name;
   private final String icon;
