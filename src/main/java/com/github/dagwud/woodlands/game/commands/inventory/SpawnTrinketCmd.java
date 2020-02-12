@@ -33,5 +33,11 @@ public class SpawnTrinketCmd extends AbstractCmd
     }
     Trinket trinket = TrinketFactory.instance().create();
     receiver.getCarrying().getCarriedInactive().add(trinket);
+
+    if (receiver instanceof PlayerCharacter)
+    {
+      PlayerCharacter p = (PlayerCharacter)receiver;
+      CommandDelegate.execute(new SendMessageCmd(p.getPlayedBy().getChatId(), "You received a " + trinket.summary(receiver, false)));
+    }
   }
 }
