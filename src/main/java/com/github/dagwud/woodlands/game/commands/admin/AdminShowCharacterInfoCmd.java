@@ -50,7 +50,7 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
       CommandDelegate.execute(notAdmin);
       return;
     }
-    StringBuilder done = new StringBuilder("Killing off...\n");
+
     for (Party party : PartyRegistry.listAllParties())
     {
       for (GameCharacter gameCharacter : party.getActiveMembers())
@@ -63,13 +63,11 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
             ShowCharacterInfoCmd cmd = new ShowCharacterInfoCmd(chatId, character);
             CommandDelegate.execute(cmd);
 
-            done.append("\n\n");
+            InventoryCmd inv = new InventoryCmd(chatId, character);
+            CommandDelegate.execute(inv);
           }
         }
       }
     }
-
-    SendMessageCmd cmd = new SendMessageCmd(chatId, done.toString());
-    CommandDelegate.execute(cmd);
   }
 }
