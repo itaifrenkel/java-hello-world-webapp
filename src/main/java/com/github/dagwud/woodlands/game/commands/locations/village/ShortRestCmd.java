@@ -5,58 +5,57 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
-public class ShortRestCmd extends AbstractCmd
+public class ShortRestCmd extends RestCmd
 {
   private static final long serialVersionUID = 1L;
 
-  private final int chatId;
-  private final PlayerCharacter character;
-
   public ShortRestCmd(int chatId, PlayerCharacter character)
   {
-    super(new AbleToActPrerequisite(character));
-    this.chatId = chatId;
-    this.character = character;
+    super(chatId, character);
   }
 
   @Override
   public void execute()
   {
-    if (character.getStats().getRestPoints() <= 0)
+    if (getCharacter().getStats().getRestPoints() <= 0)
     {
-      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You need a full rest\nThis is not yet implemented, so for now we'll let it slide. You've been granted a free bonus short rest. You can use it now");
+      SendMessageCmd cmd = new SendMessageCmd(getCharacter().getPlayedBy().getChatId(), "You need a full rest\nThis is not yet implemented, so for now we'll let it slide. You've been granted a free bonus short rest. You can use it now");
       CommandDelegate.execute(cmd);
-      character.getStats().setRestPoints(1); //todo because long rest not yet implemented - needs to be removed, and at this point should abort the short rest
       return;
     }
 
-    if (character.getStats().getHitPoints() == character.getStats().getMaxHitPoints().total()
-            && character.getStats().getMana() == character.getStats().getMaxMana().total())
+    if (isFullyRested(getCharacter()))
     {
-      SendMessageCmd cmd = new SendMessageCmd(chatId, "You have initiated a short rest for your party");
+      SendMessageCmd cmd = new SendMessageCmd(getChatId(), "You have initiated a short rest for your party");
       CommandDelegate.execute(cmd);
     }
 
-    for (PlayerCharacter member : character.getParty().getActivePlayerCharacters())
+    for (PlayerCharacter member : getCharacter().getParty().getActivePlayerCharacters())
     {
       Stats stats = member.getStats();
-      if (!member.isDead() && stats.getHitPoints() < stats.getMaxHitPoints().total() || stats.getMana() < stats.getMaxMana().total())
+      if (!member.isDead() && !(isFullyRested(member)))
       {
-        if (stats.getRestPoints() > 0 || true /*todo see above*/)
+        if (stats.getRestPoints() > 0)
         {
-          stats.setState(EState.RESTING);
-          AbstractCmd restCompletedCmd = new DoShortRestCmd(member.getPlayedBy().getChatId(), member);
-          restCompletedCmd = new RunLaterCmd(Settings.SHORT_REST_DURATION_MS, restCompletedCmd);
-          CommandDelegate.execute(restCompletedCmd);
-          SendMessageCmd echo = new SendMessageCmd(member.getPlayedBy().getChatId(), "You're resting" + (member != character ? " (initiated by " + character.getName() + ")" : ""));
-          CommandDelegate.execute(echo);
+          scheduleRest(member);
         }
       }
     }
+  }
+
+  @Override
+  void scheduleRest(PlayerCharacter restFor)
+  {
+    Stats stats = restFor.getStats();
+    stats.setState(EState.RESTING);
+    AbstractCmd restCompletedCmd = new DoRestCmd(restFor.getPlayedBy().getChatId(), restFor, false);
+    restCompletedCmd = new RunLaterCmd(Settings.SHORT_REST_DURATION_MS, restCompletedCmd);
+    CommandDelegate.execute(restCompletedCmd);
+    SendMessageCmd echo = new SendMessageCmd(restFor.getPlayedBy().getChatId(), "You're resting" + (restFor != getCharacter() ? " (initiated by " + getCharacter().getName() + ")" : ""));
+    CommandDelegate.execute(echo);
   }
 }

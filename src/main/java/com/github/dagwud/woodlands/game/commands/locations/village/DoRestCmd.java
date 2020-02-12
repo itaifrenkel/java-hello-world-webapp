@@ -12,17 +12,19 @@ import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 
-public class DoShortRestCmd extends AbstractCmd
+public class DoRestCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
   private final int chatId;
   private final PlayerCharacter character;
+  private final boolean isLongRest;
 
-  DoShortRestCmd(int chatId, PlayerCharacter character)
+  DoRestCmd(int chatId, PlayerCharacter character, boolean isLongRest)
   {
     this.chatId = chatId;
     this.character = character;
+    this.isLongRest = isLongRest;
   }
 
   @Override
@@ -36,11 +38,19 @@ public class DoShortRestCmd extends AbstractCmd
     RollShortRestCmd roll = new RollShortRestCmd(character);
     CommandDelegate.execute(roll);
 
-    int hitPointsRecovered = roll.getRecoveredHitPoints();
+    int hitPointsRecovered = character.getStats().getMaxHitPoints().total() - character.getStats().getHitPoints();
+    if (!isLongRest)
+    {
+      hitPointsRecovered = roll.getRecoveredHitPoints();
+    }
     RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, hitPointsRecovered);
     CommandDelegate.execute(cmd);
 
-    int manaRecovered = 1;
+    int manaRecovered = character.getStats().getMaxMana().total() - character.getStats().getMana();
+    if (!isLongRest)
+    {
+      manaRecovered = 1;
+    }
     RecoverManaCmd mana = new RecoverManaCmd(character, manaRecovered);
     CommandDelegate.execute(mana);
 

@@ -12,10 +12,7 @@ import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
-import com.github.dagwud.woodlands.game.commands.locations.village.BuyDrinksCmd;
-import com.github.dagwud.woodlands.game.commands.locations.village.LeaveItemsCmd;
-import com.github.dagwud.woodlands.game.commands.locations.village.RetrieveItemsCmd;
-import com.github.dagwud.woodlands.game.commands.locations.village.ShortRestCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.*;
 import com.github.dagwud.woodlands.game.commands.logs.ShowLogsCmd;
 import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
 import com.github.dagwud.woodlands.game.commands.start.StartCmd;
@@ -64,6 +61,7 @@ public enum ECommand
   JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
   BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
   SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
+  LONG_REST("Long Rest", true, (character, chatId) -> new LongRestCmd(chatId, character)),
   LEAVE_ITEMS("Leave Items", true, (character, chatId) -> new LeaveItemsCmd(character)),
   RETRIEVE_ITEMS("Retrieve Items", true, (character, chatId) -> new RetrieveItemsCmd(character)),
   SWITCH_CHARACTERS("Switch Characters", true, (character, chatId) -> new SwitchCharacterPromptCmd(character.getPlayedBy())),
