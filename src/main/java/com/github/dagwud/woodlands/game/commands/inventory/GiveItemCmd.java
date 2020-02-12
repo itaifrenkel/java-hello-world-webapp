@@ -70,7 +70,6 @@ public class GiveItemCmd extends SuspendableCmd
         CommandDelegate.execute(new UnequipItemCmd(player.getActiveCharacter(), item));
         CommandDelegate.execute(new SendMessageCmd(player.getChatId(), "You give the " + item.getName() + " to " + partyMember.getName()));
         CommandDelegate.execute(new SendMessageCmd(partyMember.getPlayedBy().getChatId(), player.getActiveCharacter().getName() + " give you a " + item.getName() + " - what a sweetie."));
-        CommandDelegate.execute(new EquipItemCmd(partyMember, player.getChatId(), item, false));
 
         resetMenu();
         return;
