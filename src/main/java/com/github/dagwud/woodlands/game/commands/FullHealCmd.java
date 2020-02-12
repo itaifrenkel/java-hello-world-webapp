@@ -31,5 +31,7 @@ public class FullHealCmd extends AdminCmd
     CommandDelegate.execute(manaCmd);
 
     character.getStats().setDrunkeness(0);
+
+    character.getStats().setRestPoints(character.getStats().getRestPointsMax());
   }
 }
