@@ -56,6 +56,11 @@ public class DoRestCmd extends AbstractCmd
 
     soberUp();
 
+    if (isLongRest)
+    {
+      character.getStats().setRestPoints(character.getStats().getRestPointsMax());
+    }
+
     SendMessageCmd echo = new SendMessageCmd(chatId, "<b>You recovered ❤" + hitPointsRecovered +
             " and ✨" + manaRecovered + ".</b> " +
             "Now at ❤" + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints() +
