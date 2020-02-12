@@ -48,6 +48,7 @@ public enum ECommand
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
   CREATURE_CACHE("/cachecreature", false, ((character, chatId) -> new InvalidateCreatureCacheCmd(chatId))),
   SPAWN_TRINKET("/trinket", false, ((character, chatId) -> new SpawnTrinketCmd(character))),
+  SET_XP("/xp", false, ((character, chatId) -> new AdminSetXPCmd(chatId))),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),

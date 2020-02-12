@@ -18,6 +18,12 @@ public abstract class ConsumableTrinket extends Trinket
   }
 
   @Override
+  public void doEquip(Fighter character)
+  {
+    equip(character);
+  }
+
+  @Override
   public final void equip(Fighter fighter)
   {
     if (fighter instanceof PlayerCharacter)

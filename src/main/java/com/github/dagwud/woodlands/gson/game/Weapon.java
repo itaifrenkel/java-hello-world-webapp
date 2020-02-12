@@ -2,9 +2,10 @@ package com.github.dagwud.woodlands.gson.game;
 
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.items.EquippableItem;
 import com.google.gson.annotations.SerializedName;
 
-public class Weapon extends Item
+public class Weapon extends EquippableItem
 {
   private static final long serialVersionUID = 1L;
 

@@ -1,5 +1,8 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.inventory.UnequipItemCmd;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

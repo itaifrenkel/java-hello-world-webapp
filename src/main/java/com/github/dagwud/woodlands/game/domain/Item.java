@@ -21,4 +21,6 @@ public abstract class Item extends GameObject
   }
 
   public abstract String statsSummary(Fighter carrier);
+
+  public abstract void doEquip(Fighter character);
 }

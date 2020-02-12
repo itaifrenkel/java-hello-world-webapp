@@ -7,7 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
-abstract class PowerBoostTrinket extends Trinket
+abstract class PowerBoostTrinket extends WearableTrinket
 {
   private static final long serialVersionUID = 1L;
 

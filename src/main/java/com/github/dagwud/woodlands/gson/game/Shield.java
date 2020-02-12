@@ -2,8 +2,9 @@ package com.github.dagwud.woodlands.gson.game;
 
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.items.EquippableItem;
 
-public class Shield extends Item
+public class Shield extends EquippableItem
 {
   private static final long serialVersionUID = 1L;
 

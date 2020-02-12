@@ -5,8 +5,6 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
-import com.github.dagwud.woodlands.game.domain.trinkets.consumable.ConsumableTrinket;
 
 public class EquipItemCmd extends AbstractCmd
 {
@@ -47,26 +45,7 @@ public class EquipItemCmd extends AbstractCmd
       return;
     }
 
-    if (toEquip instanceof Trinket)
-    {
-      if (!(toEquip instanceof ConsumableTrinket))
-      {
-        character.getCarrying().getWorn().add(toEquip);
-      }
-    }
-    else
-    {
-      makeSpace();
-      if (character.getCarrying().getCarriedLeft() == null)
-      {
-        character.getCarrying().setCarriedLeft(toEquip);
-      }
-      else
-      {
-        character.getCarrying().setCarriedRight(toEquip);
-      }
-    }
-    handleEquip(toEquip);
+    toEquip.doEquip(character);
     character.getCarrying().getCarriedInactive().remove(toEquip);
 
     if (showInventoryAfter)
@@ -93,29 +72,4 @@ public class EquipItemCmd extends AbstractCmd
     }
   }
 
-  private void handleEquip(Item toEquip)
-  {
-    if (toEquip instanceof Trinket)
-    {
-      ((Trinket)toEquip).equip(character);
-    }
-  }
-
-  private void makeSpace()
-  {
-    if (character.getCarrying().getCarriedRight() == null)
-    {
-      return;
-    }
-    if (character.getCarrying().getCarriedLeft() == null)
-    {
-      return;
-    }
-    Item moveL = character.getCarrying().getCarriedLeft();
-    Item moveR = character.getCarrying().getCarriedRight();
-    character.getCarrying().getCarriedInactive().add(moveR);
-    character.getCarrying().setCarriedRight(moveL);
-    character.getCarrying().setCarriedLeft(null);
-    CommandDelegate.execute(new UnequipItemCmd(character, moveR));
-  }
 }

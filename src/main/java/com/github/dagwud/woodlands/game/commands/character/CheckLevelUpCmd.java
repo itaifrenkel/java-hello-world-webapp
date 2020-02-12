@@ -11,7 +11,7 @@ public class CheckLevelUpCmd extends AbstractCmd
 
   private final PlayerCharacter character;
 
-  CheckLevelUpCmd(PlayerCharacter character)
+  public CheckLevelUpCmd(PlayerCharacter character)
   {
     this.character = character;
   }
