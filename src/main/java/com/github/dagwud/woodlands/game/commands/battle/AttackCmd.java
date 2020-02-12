@@ -53,12 +53,10 @@ public class AttackCmd extends AbstractCmd
 
     if (isDragon(defender) && !attackWith.ranged)
     {
-System.out.println(attacker.getName() + " miss - dragon attacked with melee weapon " + attackWith.summary(attacker));
       return EHitStatus.MISS;
     }
     if (naturalRoll.getTotal() + attacker.getStats().determineHitChanceBoost() <= 1)
     {
-System.out.println(attacker.getName() + " natural miss - " + naturalRoll.getTotal() + " + bonus " + attacker.getStats().determineHitChanceBoost());
       return EHitStatus.MISS;
     }
     if (naturalRoll.getTotal() >= 20 - attacker.getStats().getCriticalStrikeChanceBonus())
@@ -77,7 +75,6 @@ System.out.println(attacker.getName() + " natural miss - " + naturalRoll.getTota
       return EHitStatus.HIT;
     }
 
-System.out.println(attacker.getName() + " miss: " + naturalRoll.getTotal() + "+" + modifier.total() + "+" + weaponBoost + "+" + attacker.getStats().determineHitChanceBoost() + " >= " + defenderDefenceRating);
     return EHitStatus.MISS;
   }
 
@@ -120,6 +117,7 @@ System.out.println(attacker.getName() + " miss: " + naturalRoll.getTotal() + "+"
     }
 
     int bonusDamage = attacker.getStats().getWeaponBonusDamage(weaponUsed);
+    bonusDamage += attacker.getStats().getBonusDamage();
     int drunkStrengthDamage = 0;
     if (!weaponUsed.ranged)
     {
