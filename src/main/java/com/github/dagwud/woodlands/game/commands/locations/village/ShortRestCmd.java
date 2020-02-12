@@ -37,7 +37,7 @@ public class ShortRestCmd extends RestCmd
     for (PlayerCharacter member : getCharacter().getParty().getActivePlayerCharacters())
     {
       Stats stats = member.getStats();
-      if (!member.isDead() && !(isFullyRested(member)))
+      if (!member.isDead() && member.getStats().getState() != EState.RESTING && !isFullyRested(member))
       {
         if (stats.getRestPoints() > 0)
         {
