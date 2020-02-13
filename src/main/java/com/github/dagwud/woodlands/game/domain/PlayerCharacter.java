@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class PlayerCharacter extends GameCharacter
 {
   private static final long serialVersionUID = 1L;
-  private Player playedBy;
+  private transient Player playedBy;
   public int playerChatId;
   private final ECharacterClass characterClass;
   private boolean setupComplete;
@@ -17,7 +17,6 @@ public abstract class PlayerCharacter extends GameCharacter
 
   public PlayerCharacter(Player playedBy, ECharacterClass characterClass)
   {
-    this.playedBy = playedBy;
     this.playerChatId = playedBy.getChatId();
     this.characterClass = characterClass;
   }
@@ -54,7 +53,11 @@ public abstract class PlayerCharacter extends GameCharacter
 
   public Player getPlayedBy()
   {
-    return GameStatesRegistry.lookup(playerChatId).getPlayer();
+    if (null == playedBy)
+    {
+      playedBy = GameStatesRegistry.lookup(playerChatId).getPlayer();
+    }
+    return playedBy;
   }
 
   public boolean isActive()
