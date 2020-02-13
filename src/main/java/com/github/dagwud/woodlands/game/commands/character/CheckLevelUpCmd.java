@@ -21,7 +21,7 @@ public class CheckLevelUpCmd extends AbstractCmd
   {
     int correctLevel = Levels.determineLevel(character.getStats().getExperience());
 
-    while (correctLevel > character.getStats().getLevel())
+    while (!character.isDead() && correctLevel > character.getStats().getLevel())
     {
       LevelUpCmd levelUp = new LevelUpCmd(character.getPlayedBy().getChatId(), character);
       CommandDelegate.execute(levelUp);
