@@ -12,11 +12,18 @@ import com.github.dagwud.woodlands.game.domain.trinkets.TrinketFactory;
 public class SpawnTrinketCmd extends AbstractCmd
 {
   private final Fighter receiver;
+  private final Trinket trinket;
 
   public SpawnTrinketCmd(Fighter receiver)
   {
+    this(receiver, TrinketFactory.instance().create());
+  }
+
+  public SpawnTrinketCmd(Fighter receiver, Trinket trinket)
+  {
     super((CommandPrerequisite) receiver::canCarryMore);
     this.receiver = receiver;
+    this.trinket = trinket;
   }
 
   @Override
@@ -31,7 +38,6 @@ public class SpawnTrinketCmd extends AbstractCmd
       }
       return;
     }
-    Trinket trinket = TrinketFactory.instance().create();
     receiver.getCarrying().getCarriedInactive().add(trinket);
 
     if (receiver instanceof PlayerCharacter)
