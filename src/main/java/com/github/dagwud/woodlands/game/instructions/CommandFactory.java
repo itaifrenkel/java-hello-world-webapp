@@ -84,11 +84,7 @@ public class CommandFactory
 
     if (playerState.getActiveCharacter() != null && playerState.getActiveCharacter().getParty() != null)
     {
-      DrunkUpMessageCmd drunkUpMessageCmd = new DrunkUpMessageCmd(cmd, playerState.getActiveCharacter().getStats().getDrunkeness());
-      CommandDelegate.execute(drunkUpMessageCmd);
-      String message = "<b>" + playerState.getActiveCharacter().getName() + " says \"" + drunkUpMessageCmd.getMessage() + "\"</b>";
-      return new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(),
-          message);
+      return new SpeakCmd(playerState.getActiveCharacter(), drunkUpMessageCmd.getMessage());
     }
 
     return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");
