@@ -35,9 +35,9 @@ public class PersistObjectCmd extends AbstractCmd
       File tmp = writeObject(object);
       upload(s3, tmp, name);
 
-      //Logger.info("Persisting object json " + name + ".txt...");
-     // File json = writeObjectJSON(object);
-    //  upload(s3, json, name + ".txt");
+      Logger.info("Persisting object json " + name + ".txt...");
+      File json = writeObjectJSON(object);
+      upload(s3, json, name + ".txt");
     }
     catch (Exception e)
     {
