@@ -38,7 +38,7 @@ public class SpeakCmd extends AbstractCmd
   {
     String[] dreams = {"goblins", "mountain", "village", "orcs", 
         "monster", "druid", "wizard", "potion", "warlord", 
-        "dragon", "army", "pheasant", "herbivore"
+        "dragon", "army", "pheasant", "herbivore",
         "broadsword", "robe", "raisins", "tavern", "ogre", 
         "cyclops", "battle axe", "goat", "witch", 
         "lion", "evil", "demon", "golem"};
