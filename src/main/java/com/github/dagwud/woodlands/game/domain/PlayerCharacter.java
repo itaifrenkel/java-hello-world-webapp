@@ -54,11 +54,7 @@ public abstract class PlayerCharacter extends GameCharacter
 
   public Player getPlayedBy()
   {
-    if (null == playedBy)
-    {
-      playedBy = GameStatesRegistry.lookup(playerChatId).getPlayer();
-    }
-    return playedBy;
+    return GameStatesRegistry.lookup(playerChatId).getPlayer();
   }
 
   public boolean isActive()
