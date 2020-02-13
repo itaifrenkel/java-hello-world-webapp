@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.log.Logger;
 
+import java.beans.XMLEncoder;
 import java.io.*;
 
 public class PersistObjectCmd extends AbstractCmd
@@ -60,7 +61,7 @@ public class PersistObjectCmd extends AbstractCmd
   private File writeObjectXML(Object object) throws IOException
   {
     File file = File.createTempFile("s3_upload_xml", "xml");
-    try (FileOutputSteam fos = new FileOutputStream(file))
+    try (FileOutputStream fos = new FileOutputStream(file))
     {
       try (BufferedOutputStream bos = new BufferedOutputStream(fos))
       {
