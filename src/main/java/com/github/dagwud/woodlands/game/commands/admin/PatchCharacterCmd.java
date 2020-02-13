@@ -41,8 +41,10 @@ public class PatchCharacterCmd extends AbstractCmd
         return;
       }
     }
-    character.getSpellAbilities().register(new HealingBlast(character));
+    HealingBlast spell = new HealingBlast(character);
+    character.getSpellAbilities().register(spell);
     CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched wizard " + character + " with healing spell"));
+    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You have been patched - new spell acquired: " + spell.getSpellName()));
   }
 
   private void patchRestingPlayers()
