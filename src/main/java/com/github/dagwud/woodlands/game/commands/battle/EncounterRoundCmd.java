@@ -167,12 +167,6 @@ public class EncounterRoundCmd extends AbstractCmd
       CommandDelegate.execute(new CastSpellCmd(spellToCast));
     }
 
-    if (!passives.isEmpty())
-    {
-      WaitCmd wait = new WaitCmd(1000);
-      CommandDelegate.execute(wait);
-    }
-
     return passives;
   }
 
