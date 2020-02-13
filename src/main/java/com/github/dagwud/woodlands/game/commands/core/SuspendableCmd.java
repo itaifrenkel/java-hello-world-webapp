@@ -39,6 +39,7 @@ public abstract class SuspendableCmd extends AbstractCmd
     if (nextPhaseToRun == numberOfPhases)
     {
       playerState.setWaitingForInputCmd(null);
+      resetMenu(playerState.getActiveCharacter());
     }
   }
 
