@@ -24,27 +24,6 @@ public class PatchCharacterCmd extends AbstractCmd
   public void execute()
   {
     patchRestingPlayers();
-    patchTooManyItemsCarried();
-    patchNewWizardSpell();
-  }
-
-  private void patchNewWizardSpell()
-  {
-    if (character.getCharacterClass() != ECharacterClass.WIZARD)
-    {
-      return;
-    }
-    for (SingleCastSpell s : character.getSpellAbilities().getKnownActiveSpell())
-    {
-      if (s instanceof HealingBlast)
-      {
-        return;
-      }
-    }
-    HealingBlast spell = new HealingBlast(character);
-    character.getSpellAbilities().register(spell);
-    CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched wizard " + character + " with healing spell"));
-    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You have been patched - new spell acquired: " + spell.getSpellName()));
   }
 
   private void patchRestingPlayers()
@@ -52,18 +31,11 @@ public class PatchCharacterCmd extends AbstractCmd
     if (character.getStats().getState() == EState.RESTING)
     {
       character.getStats().setState(EState.ALIVE);
-      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: un-rested " + character.getName()));
-    }
-  }
+      int rests = character.getStats().getRestPoints();
+      rests = Math.max(0, rests + 1); // restore the short rest they were robbed of
 
-  // only necessary to run once - on 11/12 feb
-  private void patchTooManyItemsCarried()
-  {
-    int dropCount = character.getCarrying().countTotalCarried() - character.determineMaxAllowedItems();
-    for (int i = 0; i < dropCount; i++)
-    {
-      CommandDelegate.execute(new DropItemCmd(character, character.getPlayedBy().getChatId(), "0"));
-      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: dropped from " + character.getName()));
+      character.getStats().setRestPoints(rests);
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: un-rested " + character.getName()));
     }
   }
 }
