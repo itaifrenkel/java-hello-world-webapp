@@ -45,6 +45,12 @@ public abstract class SuspendableCmd extends AbstractCmd
 
   protected abstract void executePart(int phaseToExecute, String capturedInput);
 
+  protected void resetMenu()
+  {
+    ShowMenuCmd showMenuCmd = new ShowMenuCmd(player.getActiveCharacter().getLocation().getMenu(), playerState);
+    CommandDelegate.execute(showMenuCmd);
+  }
+
   void setCapturedInput(String input)
   {
     this.capturedInput = input;
