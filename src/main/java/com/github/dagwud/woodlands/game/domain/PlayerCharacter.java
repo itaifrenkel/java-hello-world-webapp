@@ -18,7 +18,7 @@ public abstract class PlayerCharacter extends GameCharacter
   public PlayerCharacter(Player playedBy, ECharacterClass characterClass)
   {
     this.playedBy = playedBy;
-    this.playerChatId = player.getChatId();
+    this.playerChatId = playedBy.getChatId();
     this.characterClass = characterClass;
   }
 
