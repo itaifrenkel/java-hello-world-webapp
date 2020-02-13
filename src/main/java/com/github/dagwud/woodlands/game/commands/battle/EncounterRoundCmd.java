@@ -32,6 +32,11 @@ public class EncounterRoundCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (encounter.isEnded())
+    {
+      return;
+    }
+
     List<DamageInflicted> roundActivity = new ArrayList<>();
 
     // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
