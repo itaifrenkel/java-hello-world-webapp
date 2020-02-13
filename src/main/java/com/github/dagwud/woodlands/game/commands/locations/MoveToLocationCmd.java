@@ -63,7 +63,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
     endActiveEncounter();
 
-    if (allMoveTogether(location))
+    if (allMoveTogether(location) && !inVillageMove(location, characterToMove.getLocation()))
     {
       doMove(characterToMove.getParty().getActiveMembers(), location, characterToMove);
     }
@@ -71,6 +71,11 @@ public class MoveToLocationCmd extends AbstractCmd
     {
       doMove(characterToMove, location, characterToMove);
     }
+  }
+
+  private boolean inVillageMove(ELocation moveTo, ELocation currentLocation)
+  {
+    return (currentLocation == ELocation.INN || currentLocation == ELocation.TAVERN) && moveTo == ELocation.VILLAGE_SQUARE;
   }
 
   private boolean allMoveTogether(ELocation moveTo)
