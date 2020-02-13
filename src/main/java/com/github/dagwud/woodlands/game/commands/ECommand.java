@@ -2,10 +2,7 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.admin.*;
-import com.github.dagwud.woodlands.game.commands.character.CastSpellPromptCmd;
-import com.github.dagwud.woodlands.game.commands.character.ChangeNamePromptCmd;
-import com.github.dagwud.woodlands.game.commands.character.LevelUpCmd;
-import com.github.dagwud.woodlands.game.commands.character.SwitchCharacterPromptCmd;
+import com.github.dagwud.woodlands.game.commands.character.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.GiveItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
@@ -33,6 +30,7 @@ public enum ECommand
   INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
   GIVE("/give", false, (character, chatId) -> new GiveItemCmd(character.getPlayedBy())),
+  SPELL("/spell", false, (character, chatId) -> new ManualSpellCastCmd(chatId, character)),
 
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
   CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)),

@@ -43,7 +43,7 @@ public class HealingBlast extends SingleCastSpell
     StringBuilder b = new StringBuilder("A wave ripples out from " + getCaster().getName() + ", healing ");
     for (int i = 0; i < healed.size(); i++)
     {
-      if (i > 0 && i < healed.size() - 2)
+      if (i > 0 && i < healed.size() - 1)
       {
         b.append(", ");
       }
@@ -72,5 +72,11 @@ public class HealingBlast extends SingleCastSpell
   public int getManaCost()
   {
     return 1;
+  }
+
+  @Override
+  public boolean canCastOutsideOfBattle()
+  {
+    return true;
   }
 }

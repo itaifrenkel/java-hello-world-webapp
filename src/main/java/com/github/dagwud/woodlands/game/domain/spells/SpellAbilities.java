@@ -6,10 +6,7 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 public class SpellAbilities implements Serializable
 {
@@ -17,7 +14,7 @@ public class SpellAbilities implements Serializable
 
   private Collection<PassiveBattleRoundSpell> passives;
   private Collection<PassivePartySpell> passivePartySpells;
-  private Collection<SingleCastSpell> knownActiveSpell;
+  private List<SingleCastSpell> knownActiveSpell;
   private Deque<SingleCastSpell> preparedSpells;
 
   public SpellAbilities()
@@ -57,7 +54,7 @@ public class SpellAbilities implements Serializable
 
   public void register(SingleCastSpell spell)
   {
-    knownActiveSpell.add((SingleCastSpell)spell);
+    knownActiveSpell.add(spell);
   }
 
   public void prepare(SingleCastSpell spell)
@@ -71,7 +68,7 @@ public class SpellAbilities implements Serializable
     return !preparedSpells.isEmpty();
   }
 
-  public Collection<SingleCastSpell> getKnownActiveSpell()
+  public List<SingleCastSpell> getKnownActiveSpell()
   {
     return knownActiveSpell;
   }

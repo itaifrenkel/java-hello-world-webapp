@@ -11,4 +11,8 @@ public abstract class SingleCastSpell extends Spell
     super(spellName, caster);
   }
 
+  public boolean canCastOutsideOfBattle()
+  {
+    return false;
+  }
 }
