@@ -10,6 +10,8 @@ import com.github.dagwud.woodlands.game.log.Logger;
 
 import com.google.gson.*;
 
+import java.io.*;
+
 public class PersistObjectCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
@@ -67,7 +69,7 @@ public class PersistObjectCmd extends AbstractCmd
     {
       try (BufferedWriter bw = new BufferedWriter(fw))
       {
-        e.write(json);
+        bw.write(json);
       }
     }
     return file;
