@@ -60,7 +60,7 @@ public class DefeatCreatureCmd extends AbstractCmd
       if (c instanceof PlayerCharacter)
       {
         PlayerCharacter p = (PlayerCharacter)c;
-        if (p.isActive())
+        if (p.isActive() && !p.isDead())
         {
           double levelDiff = p.getStats().getLevel() - defeated.difficulty;
           if (levelDiff > 2.0)
