@@ -41,5 +41,9 @@ if (playerCharacter.playerChatId == 0)
 {
   CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: linked " +  playerCharacter.getName() + " to " + playerCharacter.playerChatId));
 }
+else
+{
+  CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "not patched: " +  playerCharacter.getName() + " in linked to " + playerCharacter.playerChatId));
+}
   }
 }
