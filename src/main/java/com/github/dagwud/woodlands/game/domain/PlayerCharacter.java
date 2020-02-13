@@ -9,7 +9,7 @@ public abstract class PlayerCharacter extends GameCharacter
 {
   private static final long serialVersionUID = 1L;
   private final Player playedBy;
-  private final int playerChatId;
+  private int playerChatId;
   private final ECharacterClass characterClass;
   private boolean setupComplete;
   private List<Fighter> recentlyDefeated;
