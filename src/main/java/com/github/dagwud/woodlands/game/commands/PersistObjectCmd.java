@@ -39,6 +39,11 @@ public class PersistObjectCmd extends AbstractCmd
       File json = writeObjectJSON(object);
       upload(s3, json, name + ".txt");
     }
+    catch (Exception e)
+    {
+      Logger.info("Failed to persist: " + e);
+      throw e;
+    }
     finally
     {
       s3.shutdown();
