@@ -5,8 +5,11 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.DropItemCmd;
+import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.characters.spells.HealingBlast;
+import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 
 public class PatchCharacterCmd extends AbstractCmd
 {
@@ -22,6 +25,24 @@ public class PatchCharacterCmd extends AbstractCmd
   {
     patchRestingPlayers();
     patchTooManyItemsCarried();
+    patchNewWizardSpell();
+  }
+
+  private void patchNewWizardSpell()
+  {
+    if (character.getCharacterClass() != ECharacterClass.WIZARD)
+    {
+      return;
+    }
+    for (SingleCastSpell s : character.getSpellAbilities().getKnownActiveSpell())
+    {
+      if (s instanceof HealingBlast)
+      {
+        return;
+      }
+    }
+    character.getSpellAbilities().register(new HealingBlast(character));
+    CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched wizard " + character + " with healing spell"));
   }
 
   private void patchRestingPlayers()
