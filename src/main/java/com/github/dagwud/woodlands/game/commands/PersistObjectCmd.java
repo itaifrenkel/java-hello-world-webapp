@@ -28,15 +28,14 @@ public class PersistObjectCmd extends AbstractCmd
   @Override
   public void execute() throws Exception
   {
-    Logger.info("Persisting object " + name + "...");
-    File tmp = writeObject(object);
-
     final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     try
     {
+      Logger.info("Persisting object " + name + "...");
+      File tmp = writeObject(object);
       upload(s3, tmp, name);
 
-      Logger.info("Persisting object json " + name + "...");
+      Logger.info("Persisting object json " + name + ".txt...");
       File json = writeObjectJSON(object);
       upload(s3, json, name + ".txt");
     }
@@ -44,6 +43,7 @@ public class PersistObjectCmd extends AbstractCmd
     {
       s3.shutdown();
     }
+    
   }
 
   private File writeObject(Object object) throws IOException
