@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ManualSpellCastCmd extends SuspendableCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private final PlayerCharacter caster;
   private final String[] spells;
