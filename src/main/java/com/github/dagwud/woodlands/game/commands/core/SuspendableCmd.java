@@ -47,7 +47,7 @@ public abstract class SuspendableCmd extends AbstractCmd
 
   protected void resetMenu(PlayerState playerState)
   {
-    ShowMenuCmd showMenuCmd = new ShowMenuCmd(playerState.getActiveCharacter().getLocation().getMenu(), playerState);
+    ShowMenuCmd showMenuCmd = new ShowMenuCmd(playerState.getPlayer().getActiveCharacter().getLocation().getMenu(), playerState);
     CommandDelegate.execute(showMenuCmd);
   }
 
