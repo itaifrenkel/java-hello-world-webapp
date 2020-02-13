@@ -62,7 +62,7 @@ public class PersistObjectCmd extends AbstractCmd
   private File writeObjectJSON(Object object) throws IOException
   {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    String json = gson.toJson(car);
+    String json = gson.toJson(object);
 
     File file = File.createTempFile("s3_upload_json", "txt");
     try (FileWriter fw = new FileWriter(file))
