@@ -33,6 +33,10 @@ public class PersistObjectCmd extends AbstractCmd
     try
     {
       upload(s3, tmp, name);
+
+      Logger.info("Persisting object xml " + name + "...");
+      File xml = writeObjectXML(object);
+      upload(s3, xml, name + ".xml");
     }
     finally
     {
@@ -53,6 +57,21 @@ public class PersistObjectCmd extends AbstractCmd
     return file;
   }
 
+  private File writeObjectXML(Object object) throws IOException
+  {
+    File file = File.createTempFile("s3_upload_xml", "xml");
+    try (FileOutputSteam fos = new FileOutputStream(file))
+    {
+      try (BufferedOutputStream bos = new BufferedOutputStream(fos))
+      {
+        try (XMLEncoder e = new XMLEncoder(bos))
+        {
+          e.writeObject(object);
+        }
+      }
+    }
+    return file;
+  }
 
   private void upload(AmazonS3 s3, File tmp, String name)
   {
