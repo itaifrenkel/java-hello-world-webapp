@@ -9,6 +9,7 @@ public abstract class PlayerCharacter extends GameCharacter
 {
   private static final long serialVersionUID = 1L;
   private final Player playedBy;
+  private final int playerChatId;
   private final ECharacterClass characterClass;
   private boolean setupComplete;
   private List<Fighter> recentlyDefeated;
@@ -16,6 +17,7 @@ public abstract class PlayerCharacter extends GameCharacter
   public PlayerCharacter(Player playedBy, ECharacterClass characterClass)
   {
     this.playedBy = playedBy;
+    this.playerChatId = player.getChatId();
     this.characterClass = characterClass;
   }
 
@@ -51,6 +53,10 @@ public abstract class PlayerCharacter extends GameCharacter
 
   public Player getPlayedBy()
   {
+    if (null == playedBy)
+    {
+      playedBy = GameStatesRegistry.lookup(playerChatId).getPlayer();
+    }
     return playedBy;
   }
 
