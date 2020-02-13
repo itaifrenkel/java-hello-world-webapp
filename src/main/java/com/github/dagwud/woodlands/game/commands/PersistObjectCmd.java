@@ -28,17 +28,11 @@ public class PersistObjectCmd extends AbstractCmd
   {
     Logger.info("Persisting object " + name + "...");
     File tmp = writeObject(object);
-    System.out.format("Uploading %s to S3 bucket %s...\n", tmp, Settings.S3_BUCKET_NAME);
+
     final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     try
     {
-      s3.putObject(Settings.S3_BUCKET_NAME, name, tmp);
-      Logger.info("Object persisted");
-    }
-    catch (AmazonServiceException e)
-    {
-      Logger.error(e.getErrorMessage());
-      throw new WoodlandsRuntimeException("Failed to persist", e);
+      upload(s3, tmp, name);
     }
     finally
     {
@@ -57,5 +51,21 @@ public class PersistObjectCmd extends AbstractCmd
       }
     }
     return file;
+  }
+
+
+  private void upload(AmazonS3 s3, File tmp, String name)
+  {
+    Logger.info("Uploading " + name + " to S3 bucket " + Settings.S3_BUCKET_NAME + "...");
+    try
+    {
+      s3.putObject(Settings.S3_BUCKET_NAME, name, tmp);
+      Logger.info("Object persisted");
+    }
+    catch (AmazonServiceException e)
+    {
+      Logger.error(e.getErrorMessage());
+      throw new WoodlandsRuntimeException("Failed to persist", e);
+    }
   }
 }
