@@ -31,7 +31,7 @@ public class SpeakCmd extends AbstractCmd
       message = produceDreamSpeak();
     }
     message = "<b>" + speaker.getName() + " says \"" + message + "\"</b>";
-    CommandDelegate.execute(new SendPartyMessageCmd(speaker.getParty(), message);
+    CommandDelegate.execute(new SendPartyMessageCmd(speaker.getParty(), message));
   }
 
   private String produceDreamSpeak()
