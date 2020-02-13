@@ -37,7 +37,7 @@ public abstract class PlayerCharacter extends GameCharacter
   @Override
   public int determineMaxAllowedItems()
   {
-    int base = 3 + Math.floorDiv(getStats().getLevel(), 3);
+    int base = 3 + Math.floorDiv(getStats().getLevel(), 2);
     for (Item item : getCarrying().getWorn())
     {
       if (item instanceof LootBag)
