@@ -2,13 +2,14 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.trinkets.LootBag;
 import com.github.dagwud.woodlands.game.log.Logger;
+import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import java.util.List;
 import java.util.ArrayList;
 
 public abstract class PlayerCharacter extends GameCharacter
 {
   private static final long serialVersionUID = 1L;
-  private final Player playedBy;
+  private Player playedBy;
   private int playerChatId;
   private final ECharacterClass characterClass;
   private boolean setupComplete;
