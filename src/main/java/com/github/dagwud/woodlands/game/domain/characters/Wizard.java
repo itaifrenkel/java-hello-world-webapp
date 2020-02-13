@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.characters.spells.AuraOfProtection;
 import com.github.dagwud.woodlands.game.domain.characters.spells.FlameAttack;
+import com.github.dagwud.woodlands.game.domain.characters.spells.HealingBlast;
 
 class Wizard extends PlayerCharacter
 {
@@ -15,5 +16,6 @@ class Wizard extends PlayerCharacter
     super(playedBy, ECharacterClass.WIZARD);
     getSpellAbilities().register(new AuraOfProtection(this)); // passive
     getSpellAbilities().register(new FlameAttack(this)); // active
+    getSpellAbilities().register(new HealingBlast(this)); // active
   }
 }

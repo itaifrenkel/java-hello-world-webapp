@@ -21,7 +21,7 @@ public class AdminSetXPCmd extends SuspendableCmd
   private String targetName;
   private int xp;
 
-  AdminSetXPCmd(int chatId)
+  public AdminSetXPCmd(int chatId)
   {
     super(GameStatesRegistry.lookup(chatId), 3);
     this.chatId = chatId;
