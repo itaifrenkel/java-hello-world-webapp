@@ -31,7 +31,7 @@ public class HealingBlast extends SingleCastSpell
         CommandDelegate.execute(roll);
         if (roll.getRecoveredHitPoints() != 0)
         {
-          RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, roll.getRecoveredHitPoints());
+          RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(target, roll.getRecoveredHitPoints());
           CommandDelegate.execute(cmd);
           healed.add(target.getName() + " (❤" + roll.getRecoveredHitPoints() + ")");
         }
