@@ -8,8 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 import com.github.dagwud.woodlands.game.log.Logger;
 
-import java.beans.XMLEncoder;
-import java.io.*;
+import com.google.gson.*;
 
 public class PersistObjectCmd extends AbstractCmd
 {
@@ -35,9 +34,9 @@ public class PersistObjectCmd extends AbstractCmd
     {
       upload(s3, tmp, name);
 
-      Logger.info("Persisting object xml " + name + "...");
-      File xml = writeObjectXML(object);
-      upload(s3, xml, name + ".xml");
+      Logger.info("Persisting object json " + name + "...");
+      File json = writeObjectJSON(object);
+      upload(s3, json, name + ".txt");
     }
     finally
     {
@@ -58,17 +57,17 @@ public class PersistObjectCmd extends AbstractCmd
     return file;
   }
 
-  private File writeObjectXML(Object object) throws IOException
+  private File writeObjectJSON(Object object) throws IOException
   {
-    File file = File.createTempFile("s3_upload_xml", "xml");
-    try (FileOutputStream fos = new FileOutputStream(file))
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String json = gson.toJson(car);
+
+    File file = File.createTempFile("s3_upload_json", "txt");
+    try (FileWriter fw = new FileWriter(file))
     {
-      try (BufferedOutputStream bos = new BufferedOutputStream(fos))
+      try (BufferedWriter bw = new BufferedWriter(fw))
       {
-        try (XMLEncoder e = new XMLEncoder(bos))
-        {
-          e.writeObject(object);
-        }
+        e.write(json);
       }
     }
     return file;
