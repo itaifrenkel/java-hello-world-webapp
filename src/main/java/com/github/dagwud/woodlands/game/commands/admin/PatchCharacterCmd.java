@@ -39,6 +39,7 @@ public class PatchCharacterCmd extends AbstractCmd
     }
 if (character.playerChatId == 0)
 {
+  character.playerChatId = character.getPlayedBy().getChatId();
   CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: linked " +  character.getName() + " to " + character.playerChatId));
 }
 else
