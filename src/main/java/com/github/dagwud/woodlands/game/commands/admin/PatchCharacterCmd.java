@@ -37,14 +37,5 @@ public class PatchCharacterCmd extends AbstractCmd
       character.getStats().setRestPoints(rests);
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: un-rested " + character.getName()));
     }
-if (character.playerChatId == 0)
-{
-  character.playerChatId = character.getPlayedBy().getChatId();
-  CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: linked " +  character.getName() + " to " + character.playerChatId));
-}
-else
-{
-  CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "not patched: " +  character.getName() + " is linked to " + character.playerChatId));
-}
   }
 }
