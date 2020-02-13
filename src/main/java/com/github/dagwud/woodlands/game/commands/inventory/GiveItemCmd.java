@@ -55,7 +55,6 @@ public class GiveItemCmd extends SuspendableCmd
 
       if (giveIndex.equals("ogetyourownitem"))
       {
-        resetMenu();
         return;
       }
 
@@ -71,7 +70,6 @@ public class GiveItemCmd extends SuspendableCmd
         CommandDelegate.execute(new SendMessageCmd(player.getChatId(), "You give the " + item.getName() + " to " + partyMember.getName()));
         CommandDelegate.execute(new SendMessageCmd(partyMember.getPlayedBy().getChatId(), player.getActiveCharacter().getName() + " give you a " + item.getName() + " - what a sweetie."));
 
-        resetMenu();
         return;
       } catch (NumberFormatException ex)
       {
@@ -80,7 +78,6 @@ public class GiveItemCmd extends SuspendableCmd
     }
 
     CommandDelegate.execute(new SendMessageCmd(player.getChatId(), "Look, if you aren't going to take this seriously let's just not do it at all."));
-    resetMenu();
   }
 
   private void getItem(String capturedInput)
