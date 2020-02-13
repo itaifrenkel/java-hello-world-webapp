@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.Serializable;
@@ -38,6 +39,11 @@ public abstract class AbstractCmd implements Serializable
   }
 
   public abstract void execute() throws Exception;
+
+  public void go()
+  {
+    CommandDelegate.execute(this);
+  }
 
   @Override
   public String toString()

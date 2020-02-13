@@ -15,7 +15,6 @@ import com.github.dagwud.woodlands.game.domain.Player;
 public class DoPlayerSetupCmd extends SuspendableCmd
 {
   private static final long serialVersionUID = 1L;
-  private static final int MAX_CHARACTER_NAME_LENGTH = 23;
 
   private String characterName;
   private String characterClass;
@@ -58,7 +57,8 @@ public class DoPlayerSetupCmd extends SuspendableCmd
       super.rejectCapturedInput();
       return;
     }
-    if (characterName.length() > MAX_CHARACTER_NAME_LENGTH)
+
+    if (characterName.length() > Settings.MAX_CHARACTER_NAME_LENGTH)
     {
       SendMessageCmd err = new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "That's too long");
       CommandDelegate.execute(err);

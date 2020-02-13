@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 public class Settings
 {
+  public static final int MAX_CHARACTER_NAME_LENGTH = 23;
+
   public static final BigDecimal DEFAULT_PERCENT_CHANCE_OF_ENCOUNTER = new BigDecimal("50");
   public static final int DELAY_BETWEEN_ENCOUNTERS_MS = 15_000;
   public static final int DELAY_BETWEEN_ROUNDS_MS = 15_000;
