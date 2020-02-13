@@ -3,15 +3,16 @@ package com.github.dagwud.woodlands.game.commands;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DrunkUpMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 
 public class SpeakCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
   private final GameCharacter speaker;
-  private final String message;
+  private String message;
 
   public SpeakCmd(GameCharacter speaker, String message)
   {
