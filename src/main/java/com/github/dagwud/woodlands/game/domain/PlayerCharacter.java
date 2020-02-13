@@ -58,6 +58,11 @@ public abstract class PlayerCharacter extends GameCharacter
     {
       playedBy = GameStatesRegistry.lookup(playerChatId).getPlayer();
     }
+    else
+    {
+      playerChatId = playedBy.getChatId();
+      System.out.println(playerChatId + playedBy.getName());
+}
     return playedBy;
   }
 
