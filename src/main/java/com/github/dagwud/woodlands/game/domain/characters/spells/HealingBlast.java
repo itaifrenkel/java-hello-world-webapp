@@ -46,6 +46,14 @@ public class HealingBlast extends SingleCastSpell
 
   private String buildMessage(List<String> healed)
   {
+    if (healed.isEmpty())
+    {
+      return "A wave ripples out from " + getCaster().getName() + ". The healing energy " +
+          "lingers in the air in search of a target and, not finding anyone nearby, " +
+          "focuses itself on a moth caught in a spiders web. Fully healed, the moth " +
+          "manages to break free of its prison and flies off to safety."; 
+    }
+
     StringBuilder b = new StringBuilder("A wave ripples out from " + getCaster().getName() + ", healing ");
     for (int i = 0; i < healed.size(); i++)
     {
