@@ -28,7 +28,6 @@ public class PatchCharacterCmd extends AbstractCmd
   public void execute()
   {
     patchRestingPlayers();
-    patchConsumables();
   }
 
   private void patchRestingPlayers()
@@ -43,31 +42,6 @@ public class PatchCharacterCmd extends AbstractCmd
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: un-rested " + character.getName()));
     }
 
-    patchConsumables();
   }
 
-  void patchConsumables()
-  {
-    for (Item item : character.getCarrying().getWorn())
-    {
-      patchConsumables(item);
-    }
-
-    for (Item item : character.getCarrying().getCarriedInactive())
-    {
-      patchConsumables(item);
-    }
-  }
-
-  void patchConsumables(Item item)
-  {
-    if (item instanceof ConsumableTrinket)
-    {
-      ConsumableTrinket c = (ConsumableTrinket)item;
-      ((Trinket)c).name = c.name;
-      String pName = ((Trinket)item).name;
-      String cName = c.name;
-      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: test " + pName + " vs " + cName));
-    }
-  }
 }

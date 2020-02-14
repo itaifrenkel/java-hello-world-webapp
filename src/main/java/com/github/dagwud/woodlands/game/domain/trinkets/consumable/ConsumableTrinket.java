@@ -8,16 +8,11 @@ import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 
 public abstract class ConsumableTrinket extends Trinket
 {
-  private static final long serialVersionUID = 3942778793858453956L;
-
-  public String name;
-  public String icon;
+  private static final long serialVersionUID = 1L;
 
   ConsumableTrinket(String name, String icon)
   {
     super(name, icon);
-    this.name = name;
-    this.icon = icon;
   }
 
   @Override
@@ -42,18 +37,6 @@ public abstract class ConsumableTrinket extends Trinket
   abstract void consume(Fighter fighter);
 
   abstract String produceConsumptionMessage();
-
-  @Override
-  public final String getName()
-  {
-    return name;
-  }
-
-  @Override
-  public final String getIcon()
-  {
-    return icon;
-  }
 
   @Override
   public final void unequip(Fighter fighter)
