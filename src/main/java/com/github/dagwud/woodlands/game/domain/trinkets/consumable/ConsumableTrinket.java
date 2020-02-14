@@ -10,8 +10,8 @@ public abstract class ConsumableTrinket extends Trinket
 {
   private static final long SerialVersionUID = 1;
 
-  private String name;
-  private String icon;
+  public String name;
+  public String icon;
 
   ConsumableTrinket(String name, String icon)
   {
