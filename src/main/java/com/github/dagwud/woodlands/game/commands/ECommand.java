@@ -22,7 +22,7 @@ import java.util.Map;
 public enum ECommand
 {
   HELP("/help", false, (character, chatId) -> new ShowHelpCmd(chatId)),
-  SAVE("/save", false, (character, chatId) -> new PersistWorldCmd()),
+  SAVE("/save", false, (character, chatId) -> new PersistWorldCmd(true)),
   START("/start", false, (character, chatId) -> new StartCmd(GameStatesRegistry.lookup(chatId), chatId)),
   NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character == null ? null : character.getPlayedBy(), chatId)),
   ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
