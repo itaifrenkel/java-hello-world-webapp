@@ -70,7 +70,7 @@ public class PatchCharacterCmd extends AbstractCmd
       String pName = ((Trinket)item).name;
       String cName = c.name;
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: test " + pName + " vs " + cName));
-      (Trinket)c.name = v;
+      ((Trinket)c).name = v;
     }
   }
 }
