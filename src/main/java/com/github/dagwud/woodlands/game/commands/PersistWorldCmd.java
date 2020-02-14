@@ -12,6 +12,18 @@ public class PersistWorldCmd extends AbstractCmd
 
   static final String GAME_STATE_FILE = "GameState.ser";
 
+  private final boolean includeJSON;
+
+  public PersistWorldCmd()
+  {
+    this(false);
+  }
+
+  public PersistWorldCmd(boolean includeJSON)
+  {
+    this.includeJSON = includeJSON;
+  }
+
   @Override
   public void execute()
   {
@@ -23,7 +35,7 @@ public class PersistWorldCmd extends AbstractCmd
 
   private void persist(Object object, String fileName)
   {
-    PersistObjectCmd persist = new PersistObjectCmd(fileName, object);
+    PersistObjectCmd persist = new PersistObjectCmd(fileName, object, includeJSON);
     CommandDelegate.execute(persist);
   }
 }
