@@ -68,7 +68,7 @@ public class PatchCharacterCmd extends AbstractCmd
       (Trinket)c.name = c.name;
       c.name = "blah";
       String pName = ((Trinket)item).name;
-      String cName = ((ConsumableTrinket))item.name;
+      String cName = c.name;
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: test " + pName + " vs " + cName));
       (Trinket)c.name = v;
     }
