@@ -18,11 +18,13 @@ public class PersistObjectCmd extends AbstractCmd
 
   private final String name;
   private final Object object;
+  private final boolean includeJSON;
 
-  PersistObjectCmd(String name, Object object)
+  PersistObjectCmd(String name, Object object, boolean includeJSON)
   {
     this.name = name;
     this.object = object;
+    this.includeJSON = includeJSON;
   }
 
   @Override
@@ -35,9 +37,12 @@ public class PersistObjectCmd extends AbstractCmd
       File tmp = writeObject(object);
       upload(s3, tmp, name);
 
-      //Logger.info("Persisting object json " + name + ".txt...");
-      //File json = writeObjectJSON(object);
-      //upload(s3, json, name + ".txt");
+      if (includeJSON)
+      {
+        Logger.info("Persisting object json " + name + ".txt...");
+        File json = writeObjectJSON(object);
+        upload(s3, json, name + ".txt");
+      }
     }
     catch (Exception e)
     {
