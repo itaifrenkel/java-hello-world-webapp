@@ -15,6 +15,16 @@ public abstract class Trinket extends Item
   public String name;
   public String icon = "";
 
+  public Trinket()
+  {
+  }
+
+  public Trinket(String name, String icon)
+  {
+    this.name = name;
+    this.icon = icon;
+  }
+
   @Override
   public String summary(Fighter carrier, boolean includeName)
   {
