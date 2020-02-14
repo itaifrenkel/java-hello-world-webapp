@@ -13,9 +13,9 @@ public class TrinketFactory
   private TrinketFactory()
   {
     trinkets = new ArrayList<>();
-   /* trinkets.add(BeadsOfPower.class);
- */   trinkets.add(AmuletOfPower.class);
- /*   trinkets.add(BeadsOfProtection.class);
+    trinkets.add(BeadsOfPower.class);
+    trinkets.add(AmuletOfPower.class);
+    trinkets.add(BeadsOfProtection.class);
     trinkets.add(AmuletOfProtection.class);
     trinkets.add(WardOfAlacrity.class);
     trinkets.add(LootBag.class);
@@ -26,7 +26,7 @@ public class TrinketFactory
     trinkets.add(MassiveHealingPotion.class);
     trinkets.add(LesserManaPotion.class);
     trinkets.add(GreaterManaPotion.class);
- */ }
+  }
 
   public static TrinketFactory instance()
   {

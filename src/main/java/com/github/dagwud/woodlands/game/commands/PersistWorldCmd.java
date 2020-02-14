@@ -11,7 +11,6 @@ public class PersistWorldCmd extends AbstractCmd
   private static final long serialVersionUID = 1L;
 
   static final String GAME_STATE_FILE = "GameState.ser";
-  static final String PARTY_REGISTRY_FILE = "PartyRegistry.ser";
 
   @Override
   public void execute()

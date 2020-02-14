@@ -13,7 +13,7 @@ public class GameStatesRegistry implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private static GameStatesRegistry instance;
+  private transient static GameStatesRegistry instance;
   private final Map<Integer, PlayerState> gameStatesByCharacter = new HashMap<>();
   private PartyRegistry partyRegistry;
 

@@ -6,7 +6,7 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 
 public abstract class ManaPotion extends ConsumableTrinket
 {
-  private static final long SerialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
   private final int manaPointsToRecover;
 
   ManaPotion(String name, int manaPointsToRecover)

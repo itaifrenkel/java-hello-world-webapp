@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PlayerState;
 
 import java.io.Serializable;
@@ -12,14 +13,12 @@ public class Player implements Serializable
   private static final long serialVersionUID = 1L;
 
   private final int chatId;
-  private final PlayerState playerState;
   private PlayerCharacter activeCharacter;
   private List<PlayerCharacter> inactiveCharacters = new ArrayList<>();
 
-  public Player(int chatId, PlayerState state)
+  public Player(int chatId)
   {
     this.chatId = chatId;
-    this.playerState = state;
   }
 
   public int getChatId()
@@ -39,7 +38,7 @@ public class Player implements Serializable
 
   public PlayerState getPlayerState()
   {
-    return playerState;
+    return GameStatesRegistry.lookup(chatId);
   }
 
   public List<PlayerCharacter> getInactiveCharacters()
