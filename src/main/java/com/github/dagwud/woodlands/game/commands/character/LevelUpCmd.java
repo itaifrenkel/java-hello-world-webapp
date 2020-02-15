@@ -3,15 +3,27 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
+import com.github.dagwud.woodlands.game.commands.character.level.ILevelUpAward;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.trinkets.AmuletOfProtection;
+import com.github.dagwud.woodlands.game.domain.trinkets.WardOfViolence;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LevelUpCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
+  private static final Map<Integer, ILevelUpAward> AWARDS = new HashMap<Integer, ILevelUpAward>()
+  {{
+    put(8, character1 -> new SpawnTrinketCmd(character1, new AmuletOfProtection()).go());
+    put(7, character1 -> new SpawnTrinketCmd(character1, new WardOfViolence()).go());
+  }};
 
   private final int chatId;
   private final PlayerCharacter character;
@@ -36,7 +48,14 @@ public class LevelUpCmd extends AbstractCmd
     AbstractCmd msg = new SendMessageCmd(chatId, "🍾 You have levelled up! Hit Point boost: ❤" + hitPointsGained + (manaGained != 0 ? ", Mana boost: ✨" + manaGained : ""));
     CommandDelegate.execute(msg);
 
-    character.getStats().setLevel(character.getStats().getLevel() + 1);
+    int newLevel = character.getStats().getLevel() + 1;
+
+    if (AWARDS.containsKey(newLevel))
+    {
+      AWARDS.get(newLevel).award(character);
+    }
+
+    character.getStats().setLevel(newLevel);
   }
 
   private int increaseHitPoints()

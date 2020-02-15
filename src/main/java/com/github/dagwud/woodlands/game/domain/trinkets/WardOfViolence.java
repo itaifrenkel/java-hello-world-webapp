@@ -5,7 +5,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
-class WardOfViolence extends WearableTrinket
+public class WardOfViolence extends WearableTrinket
 {
   private static final long serialVersionUID = 1L;
   private static final int BOOST_AMOUNT = 10;

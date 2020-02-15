@@ -36,4 +36,10 @@ abstract class RestCmd extends AbstractCmd
     return character.getStats().getHitPoints() >= character.getStats().getMaxHitPoints().total()
             && character.getStats().getMana() >= character.getStats().getMaxMana().total();
   }
+
+  final boolean isRestedEnough(PlayerCharacter character)
+  {
+    return (double)(character.getStats().getHitPoints()) /
+        (double)(character.getStats().getMaxHitPoints().total()) >= 0.2;
+  }
 }
