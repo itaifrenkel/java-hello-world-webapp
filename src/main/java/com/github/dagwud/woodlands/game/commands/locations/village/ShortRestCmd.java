@@ -28,18 +28,18 @@ public class ShortRestCmd extends RestCmd
       return;
     }
 
-   /* if (isFullyRested(getCharacter()))
+    if (isFullyRested(getCharacter()))
     {
       SendMessageCmd cmd = new SendMessageCmd(getChatId(), "You have initiated a short rest for your party");
       CommandDelegate.execute(cmd);
-    }*/
+    }
 
     for (PlayerCharacter member : getCharacter().getParty().getActivePlayerCharacters())
     {
       Stats stats = member.getStats();
       if (!member.isDead() && member.getStats().getState() != EState.RESTING)
       {
-        if (member == getCharacter() || !isRestedEnough(member))
+        if ((member == getCharacter() && !isFullyRested(member)) || !isRestedEnough(member))
         {
           if (stats.getRestPoints() > 0)
           {
