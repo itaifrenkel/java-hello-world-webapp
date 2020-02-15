@@ -46,7 +46,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
       {
         message.append("\n");
       }
-      String state = member.getStats().getState() == EState.ALIVE ? "" : " (" + member.getStats().getState() + ")";
+      String state = " (" + member.getStats().getState().icon + ")";
       String charClass = "";
       if (member instanceof PlayerCharacter)
       {
