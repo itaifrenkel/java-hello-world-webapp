@@ -134,7 +134,7 @@ public class MoveToLocationCmd extends AbstractCmd
   {
     for (GameCharacter member : party.getActiveMembers())
     {
-      if (member.getStats().getState() == EState.RESTING)
+      if (member.isResting())
       {
         return true;
       }
