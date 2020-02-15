@@ -7,7 +7,7 @@ public enum EState
   UNCONSCIOUS("💔"),
   DEAD("☠️");
 
-  private final String icon;
+  public final String icon;
 
   EState(String icon)
   {
