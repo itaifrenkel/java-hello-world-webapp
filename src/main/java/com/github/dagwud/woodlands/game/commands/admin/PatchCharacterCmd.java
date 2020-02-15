@@ -39,8 +39,8 @@ public class PatchCharacterCmd extends AbstractCmd
       {
         int rests = character.getStats().getRestPoints();
         rests = Math.max(0, rests + 1); // restore the short rest they were robbed of
+        character.getStats().setRestPoints(rests);
       }
-      character.getStats().setRestPoints(rests);
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: un-rested " + character.getName()));
     }
 
