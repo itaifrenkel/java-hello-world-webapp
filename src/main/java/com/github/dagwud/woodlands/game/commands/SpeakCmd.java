@@ -27,7 +27,7 @@ public class SpeakCmd extends AbstractCmd
     CommandDelegate.execute(drunkify);
     message = drunkify.getMessage();
 
-    if (speaker.getStats().getState() == EState.RESTING)
+    if (speaker.isResting())
     {
       message = produceDreamSpeak();
     }
