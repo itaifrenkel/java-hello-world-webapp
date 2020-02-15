@@ -35,7 +35,7 @@ public class LongRestCmd extends RestCmd
   void scheduleRest(PlayerCharacter restFor)
   {
     Stats stats = restFor.getStats();
-    stats.setState(EState.RESTING);
+    stats.setState(EState.LONG_RESTING);
     AbstractCmd restCompletedCmd = new DoRestCmd(restFor.getPlayedBy().getChatId(), restFor, true);
     restCompletedCmd = new RunLaterCmd(Settings.LONG_REST_DURATION_MS, restCompletedCmd);
     CommandDelegate.execute(restCompletedCmd);
