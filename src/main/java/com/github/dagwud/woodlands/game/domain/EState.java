@@ -2,15 +2,18 @@ package com.github.dagwud.woodlands.game.domain;
 
 public enum EState
 {
-  RESTING("🛏️"),
-  ALIVE(""),
-  UNCONSCIOUS("💔"),
-  DEAD("☠️");
+  SHORT_RESTING("😴", "resting"),
+  LONG_RESTING("🛏️", "resting"),
+  ALIVE("", "alive"), // implicit - no icon
+  UNCONSCIOUS("💔", "unconscious"),
+  DEAD("☠️", "dead");
 
   public final String icon;
+  public final String description;
 
-  EState(String icon)
+  EState(String icon, String description)
   {
     this.icon = icon;
+    this.description = description;
   }
 }
