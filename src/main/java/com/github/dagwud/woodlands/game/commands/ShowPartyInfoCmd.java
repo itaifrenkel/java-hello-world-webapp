@@ -46,7 +46,11 @@ public class ShowPartyInfoCmd extends AbstractCmd
       {
         message.append("\n");
       }
-      String state = " (" + member.getStats().getState().icon + ")";
+      String state = member.getStats().getState().icon;
+      if (!state.isEmpty())
+      {
+        state = " (" + state + ")";
+      }
       String charClass = "";
       if (member instanceof PlayerCharacter)
       {
