@@ -32,13 +32,15 @@ public class PatchCharacterCmd extends AbstractCmd
 
   private void patchRestingPlayers()
   {
-    if (character.getStats().getState() == EState.RESTING)
+    if (character.isResting())
     {
       character.getStats().setState(EState.ALIVE);
-      int rests = character.getStats().getRestPoints();
-      rests = Math.max(0, rests + 1); // restore the short rest they were robbed of
-
-      character.getStats().setRestPoints(rests);
+      if (character.getStats().getState() == EState.SHORT_RESTING)
+      {
+        int rests = character.getStats().getRestPoints();
+        rests = Math.max(0, rests + 1); // restore the short rest they were robbed of
+        character.getStats().setRestPoints(rests);
+      }
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Patched: un-rested " + character.getName()));
     }
 

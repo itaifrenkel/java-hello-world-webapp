@@ -37,7 +37,7 @@ public class ShortRestCmd extends RestCmd
     for (PlayerCharacter member : getCharacter().getParty().getActivePlayerCharacters())
     {
       Stats stats = member.getStats();
-      if (!member.isDead() && member.getStats().getState() != EState.RESTING)
+      if (!member.isDead() && !member.isResting() && !isFullyRested(member))
       {
         if ((member == getCharacter() && !isFullyRested(member)) || !isRestedEnough(member))
         {
@@ -54,7 +54,7 @@ public class ShortRestCmd extends RestCmd
   void scheduleRest(PlayerCharacter restFor)
   {
     Stats stats = restFor.getStats();
-    stats.setState(EState.RESTING);
+    stats.setState(EState.SHORT_RESTING);
     AbstractCmd restCompletedCmd = new DoRestCmd(restFor.getPlayedBy().getChatId(), restFor, false);
     restCompletedCmd = new RunLaterCmd(Settings.SHORT_REST_DURATION_MS, restCompletedCmd);
     CommandDelegate.execute(restCompletedCmd);

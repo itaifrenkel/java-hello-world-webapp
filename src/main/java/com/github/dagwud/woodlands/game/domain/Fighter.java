@@ -84,6 +84,12 @@ public abstract class Fighter extends GameObject
     return getStats().getState() == EState.DEAD;
   }
 
+  public boolean isResting()
+  {
+    return getStats().getState() == EState.SHORT_RESTING ||
+        getStats().getState() == EState.LONG_RESTING;
+  }
+
   public abstract Fighter chooseFighterToAttack(Collection<Fighter> fighters);
 
   public final boolean canCarryMore()
