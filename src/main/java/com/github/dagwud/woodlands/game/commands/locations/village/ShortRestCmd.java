@@ -39,7 +39,7 @@ public class ShortRestCmd extends RestCmd
       Stats stats = member.getStats();
       if (!member.isDead() && member.getStats().getState() != EState.RESTING)
       {
-        if (member == character || !isRestedEnough(member))
+        if (member == getCharacter() || !isRestedEnough(member))
         {
           if (stats.getRestPoints() > 0)
           {
