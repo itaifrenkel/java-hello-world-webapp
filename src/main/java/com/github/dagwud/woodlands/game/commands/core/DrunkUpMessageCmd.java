@@ -1,10 +1,20 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class DrunkUpMessageCmd extends AbstractCmd
 {
+  private static final int AUBERGINE_TARGET = 10;
+  private static final double AUBERGINE_CUTOFF = 0.5;
+
+  private static final String EMOJI_REGEX = "([^\\p{L}\\p{N}\\p{P}\\p{Z}\\n\\r+]+)";
+  private static final Pattern AUBERGINE_PATTERN = Pattern.compile(EMOJI_REGEX);
+
   private String message;
   private String incomingMessage;
   private int drunkeness;
+
 
   public DrunkUpMessageCmd(String message, int drunkeness)
   {
@@ -40,6 +50,25 @@ public class DrunkUpMessageCmd extends AbstractCmd
     if (drunkeness > 8)
     {
       message = message.replaceAll("\\.", "!").toUpperCase();
+    }
+    if (drunkeness > 9)
+    {
+      message = message.replaceAll("!", "!!!").toUpperCase();
+    }
+
+    // drunk enough, bring in the aubergines
+    if (drunkeness > AUBERGINE_TARGET)
+    {
+      StringBuilder result = new StringBuilder(message);
+      Matcher matcher = AUBERGINE_PATTERN.matcher(message);
+      while (matcher.find())
+      {
+        if (Math.random() > AUBERGINE_CUTOFF)
+        {
+          result.replace(matcher.start(1), matcher.end(1), "\uD83C\uDF46");
+        }
+      }
+      message = result.toString();
     }
 
     message = message.replaceAll("<B>", "<b>");
