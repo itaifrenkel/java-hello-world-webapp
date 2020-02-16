@@ -4,7 +4,6 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 public class RollShortRestCmd extends AbstractCmd
@@ -24,7 +23,7 @@ public class RollShortRestCmd extends AbstractCmd
   {
     Stats stats = character.getStats();
     int diceroll = roll(stats.getLevel(), stats.getRestDiceFace());
-    int newHitPoints = (stats.getHitPoints() + diceroll + stats.getConstitutionModifier());
+    int newHitPoints = (stats.getHitPoints() + diceroll + Math.max(stats.getConstitutionModifier(), 0));
     if (newHitPoints > stats.getMaxHitPoints().total())
     {
       newHitPoints = stats.getMaxHitPoints().total();

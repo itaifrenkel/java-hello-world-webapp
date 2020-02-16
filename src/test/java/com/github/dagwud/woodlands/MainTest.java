@@ -2,16 +2,17 @@ package com.github.dagwud.woodlands;
 
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.domain.ECharacterClass;
-import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.Item;
-import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
+import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.characters.spells.ArmyOfPeasants;
+import com.github.dagwud.woodlands.game.domain.characters.spells.HealingBlast;
 import com.github.dagwud.woodlands.game.log.Logger;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
 import com.github.dagwud.woodlands.gson.telegram.Update;
 import com.github.dagwud.woodlands.web.TelegramServlet;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -27,6 +28,39 @@ public class MainTest
   {
     PlayerState playerState = startBot();
     processCommand(playerState, "The Inn");
+  }
+
+  @Test
+  public void testHealNPC() throws Exception
+  {
+    PlayerState playerState = startBot();
+    initPlayer(playerState, "General");
+
+    PlayerState playerStateWizard = startBot(false);
+    initPlayer(playerStateWizard);
+
+    new CastSpellCmd(new ArmyOfPeasants(playerState.getActiveCharacter())).go();
+
+    int hitpoints = getPeasantPoints(playerStateWizard);
+
+    System.out.println(hitpoints);
+
+    new CastSpellCmd(new HealingBlast(playerStateWizard.getActiveCharacter())).go();
+    int newPoints = getPeasantPoints(playerStateWizard);
+
+    Assert.assertEquals(hitpoints, newPoints);
+  }
+
+  private int getPeasantPoints(PlayerState playerState)
+  {
+    int hitpoints = 0;
+    for (GameCharacter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
+    {
+      if (activeMember instanceof Peasant) {
+        hitpoints = activeMember.getStats().getHitPoints();
+      }
+    }
+    return hitpoints;
   }
 
   @Test
@@ -312,6 +346,11 @@ public class MainTest
 
   private void initPlayer(PlayerState playerState) throws Exception
   {
+    initPlayer(playerState, "Wizard");
+  }
+
+  private void initPlayer(PlayerState playerState, String playerClass) throws Exception
+  {
     Update update;
 
     update = createUpdate("TestUser" + playerState.getPlayer().getChatId(), playerState);
@@ -319,8 +358,8 @@ public class MainTest
     new TelegramServlet().processTelegramUpdate(update);
 
     // suspends to ask for player class
-    update = createUpdate("Wizard", playerState);
-    Logger.info("Wizard");
+    update = createUpdate(playerClass, playerState);
+    Logger.info(playerClass);
     new TelegramServlet().processTelegramUpdate(update);
   }
 
