@@ -14,6 +14,9 @@ public class BuyDrinksCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
+  public static final int MAX_WARNING_DRINKS_1 = 20;
+  public static final int MAX_WARNING_DRINKS_2 = 40;
+
   private final int chatId;
   private final PlayerCharacter activeCharacter;
 
@@ -27,11 +30,15 @@ public class BuyDrinksCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (activeCharacter.getStats().getHitPoints() <= 1)
+    if (activeCharacter.getStats().getDrunkeness() > MAX_WARNING_DRINKS_1)
     {
-      SendMessageCmd c = new SendMessageCmd(chatId, "\"You've had enough, mate\"");
+      String warning = "\"Are you sure that's a good idea?\" asks the barman. But he serves you anyway";
+      if (activeCharacter.getStats().getDrunkeness() > MAX_WARNING_DRINKS_2)
+      {
+        warning = "\"It's your funeral, pal\"";
+      }
+      SendMessageCmd c = new SendMessageCmd(chatId, warning);
       CommandDelegate.execute(c);
-      return;
     }
 
     ChanceCalculatorCmd chance = new ChanceCalculatorCmd(new BigDecimal("33.333"));
