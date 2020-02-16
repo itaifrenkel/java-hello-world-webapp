@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.GrantExperienceCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.creatures.DifficultyCacheFactory;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -39,6 +40,7 @@ public class DefeatCreatureCmd extends AbstractCmd
     if (!isFarmedEncounter)
     {
       reward = reward * 2;
+      CommandDelegate.execute(new SendPartyMessageCmd(victoriousParty, "<b>Double XP awarded!</b>"));
     }
 
     List<PlayerCharacter> victoriousPlayers = findVictors(victoriousParty, creatureDefeated);
