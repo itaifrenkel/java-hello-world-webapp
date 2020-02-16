@@ -21,6 +21,13 @@ public class LeavePartyCmd extends AbstractCmd
     this.party = party;
   }
 
+  public LeavePartyCmd(GameCharacter character, Party party, boolean evenIfDead)
+  {
+    super();
+    this.character = character;
+    this.party = party;
+  }
+
   @Override
   public void execute()
   {
