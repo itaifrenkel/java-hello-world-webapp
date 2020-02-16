@@ -20,12 +20,14 @@ public class DefeatCreatureCmd extends AbstractCmd
 
   private final Party victoriousParty;
   private final Creature creatureDefeated;
+  private final boolean isFarmedEncounter;
   private int experienceGrantedPerPlayer;
 
-  DefeatCreatureCmd(Party victoriousParty, Creature creatureDefeated)
+  DefeatCreatureCmd(Party victoriousParty, Creature creatureDefeated, boolean isFarmedEncounter)
   {
     this.victoriousParty = victoriousParty;
     this.creatureDefeated = creatureDefeated;
+    this.isFarmedEncounter = isFarmedEncounter;
   }
 
   @Override
@@ -34,7 +36,7 @@ public class DefeatCreatureCmd extends AbstractCmd
     double difficultyLevel = creatureDefeated.difficulty;
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(difficultyLevel);
     int reward = difficulty.experienceReward;
-    if (!encounter.isFarmed())
+    if (!isFarmedEncounter)
     {
       reward = reward * 2;
     }
