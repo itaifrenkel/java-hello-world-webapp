@@ -141,6 +141,7 @@ public class EncounterRoundCmd extends AbstractCmd
         CastSpellCmd cast = new CastSpellCmd(spell);
         CommandDelegate.execute(cast);
         spellsCast.add(spell);
+        encounter.markNotFarmed();
       }
     }
     return spellsCast;
