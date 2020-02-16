@@ -14,6 +14,10 @@ public class Encounter implements Serializable
   private Creature enemy;
   private boolean ended;
   private int currentRound;
+  /**
+   * a farmed encounter is one that happened automatically with no player intervention
+  */
+  private boolean farmed = true;
 
   public boolean isEnded()
   {
@@ -60,5 +64,15 @@ public class Encounter implements Serializable
   public void incrementBattleRound()
   {
     currentRound++;
+  }
+
+  public boolean isFarmed()
+  {
+    return farmed;
+  }
+
+  public void markNotFarmed()
+  {
+    farmed = false;
   }
 }
