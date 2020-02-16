@@ -30,8 +30,6 @@ public class RollShortRestCmd extends AbstractCmd
       newHitPoints = stats.getMaxHitPoints().total();
     }
     recoveredHitPoints = newHitPoints - stats.getHitPoints();
-
-    stats.setRestPoints(stats.getRestPoints() - 1);
   }
 
   private int roll(int diceCount, int diceFaces)
