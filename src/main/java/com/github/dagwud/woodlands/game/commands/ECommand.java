@@ -59,6 +59,7 @@ public enum ECommand
 
   JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
   BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
+  WAKE("Host a Wake", true, (character, chatId) -> new WakeCmd(chatId, character)),
   SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
   LONG_REST("Long Rest", true, (character, chatId) -> new LongRestCmd(chatId, character)),
   LEAVE_ITEMS("Leave Items", true, (character, chatId) -> new LeaveItemsCmd(character)),
