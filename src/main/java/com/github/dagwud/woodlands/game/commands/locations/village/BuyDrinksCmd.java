@@ -30,6 +30,13 @@ public class BuyDrinksCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (activeCharacter.getStats().getLevel() <= 1)
+    {
+      SendMessageCmd c = new SendMessageCmd(chatId, "The barman laughs as you politely request a drink. \"Come back when you've earned the right to drink with the grown-ups,\" he scoffs");
+      CommandDelegate.execute(c);
+      return;
+    } 
+
     if (activeCharacter.getStats().getDrunkeness() > MAX_WARNING_DRINKS_1)
     {
       String warning = "\"Are you sure that's a good idea?\" asks the barman. But he serves you anyway";
