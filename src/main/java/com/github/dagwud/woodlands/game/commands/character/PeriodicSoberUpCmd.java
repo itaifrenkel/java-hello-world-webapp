@@ -14,7 +14,7 @@ public class PeriodicSoberUpCmd extends AbstractCmd
   private final PlayerCharacter character;
   private final int chatId;
 
-  PeriodicSoberUpCmd(PlayerCharacter character, int chatId)
+  public PeriodicSoberUpCmd(PlayerCharacter character, int chatId)
   {
     this.character = character;
     this.chatId = chatId;
