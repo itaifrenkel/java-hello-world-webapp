@@ -28,6 +28,9 @@ public class PatchCharacterCmd extends AbstractCmd
   public void execute()
   {
     patchRestingPlayers();
+
+    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, chatId);
+    CommandDelegate.execute(periodicSoberUp);
   }
 
   private void patchRestingPlayers()
