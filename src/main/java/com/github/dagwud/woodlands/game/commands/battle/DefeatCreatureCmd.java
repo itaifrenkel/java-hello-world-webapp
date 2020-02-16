@@ -34,6 +34,10 @@ public class DefeatCreatureCmd extends AbstractCmd
     double difficultyLevel = creatureDefeated.difficulty;
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(difficultyLevel);
     int reward = difficulty.experienceReward;
+    if (!encounter.isFarmed())
+    {
+      reward = reward * 2;
+    }
 
     List<PlayerCharacter> victoriousPlayers = findVictors(victoriousParty, creatureDefeated);
     int rewardPerCharacter = victoriousPlayers.isEmpty() ? 0 : Math.floorDiv(reward, victoriousPlayers.size());
