@@ -68,7 +68,7 @@ public class EncounterRoundCmd extends AbstractCmd
     {
       if (!encounter.getEnemy().isConscious())
       {
-        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy());
+        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy(), encounter.isFarmedEncounter());
         CommandDelegate.execute(win);
 
         SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
