@@ -62,7 +62,7 @@ public class DoRestCmd extends AbstractCmd
     }
     else
     {
-      stats.setRestPoints(stats.getRestPoints() - 1);
+      character.getStats().setRestPoints(character.getStats().getRestPoints() - 1);
     }
 
     SendMessageCmd echo = new SendMessageCmd(chatId, "<b>You recovered ❤" + hitPointsRecovered +
