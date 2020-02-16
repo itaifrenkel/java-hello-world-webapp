@@ -10,5 +10,7 @@ public class Peasant extends NonPlayerCharacter
     setName(name);
     getStats().setHitPoints(hitPoints);
     getStats().getMaxHitPoints().setBase(hitPoints);
+    getStats().setRestDiceFace(1);
+    getStats().setLevel(1);
   }
 }
