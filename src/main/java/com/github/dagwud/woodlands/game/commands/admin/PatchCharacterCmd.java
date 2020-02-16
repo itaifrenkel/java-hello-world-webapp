@@ -30,7 +30,7 @@ public class PatchCharacterCmd extends AbstractCmd
   {
     patchRestingPlayers();
 
-    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, chatId);
+    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, character.getPlayedBy().getChatId());
     CommandDelegate.execute(periodicSoberUp);
   }
 
