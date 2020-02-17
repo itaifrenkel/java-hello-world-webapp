@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DoGiveItemCmd extends AbstractCmd
 {
-  private final PlayerCharacter giver;
+  private final GameCharacter giver;
   private final List<Item> from;
   private final GameCharacter receiver;
   private final Item itemToGive;
