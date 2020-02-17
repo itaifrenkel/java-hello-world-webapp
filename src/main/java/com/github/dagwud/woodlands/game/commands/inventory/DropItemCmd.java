@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.inventory;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite; 
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
@@ -19,6 +20,7 @@ public class DropItemCmd extends AbstractCmd
 
   public DropItemCmd(PlayerCharacter character, int chatId, String dropIndex)
   {
+    super(new AbleToActPrerequisite(character));
     this.character = character;
     this.chatId = chatId;
     this.dropIndex = dropIndex;
