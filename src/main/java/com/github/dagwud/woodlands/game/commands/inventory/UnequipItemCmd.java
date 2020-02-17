@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.inventory;
 
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisite.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
@@ -12,6 +13,7 @@ public class UnequipItemCmd extends AbstractCmd
 
   public UnequipItemCmd(Fighter character, Item toUnequip)
   {
+    super(new AbleToActPrerequisite(characterToMove));
     this.character = character;
     this.toUnequip = toUnequip;
   }
