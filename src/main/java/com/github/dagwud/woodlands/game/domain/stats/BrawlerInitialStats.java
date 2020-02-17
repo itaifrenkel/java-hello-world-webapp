@@ -1,5 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.stats;
 
+import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
+
 public class BrawlerInitialStats extends InitialStats
 {
   private static final long serialVersionUID = 1L;
@@ -34,4 +37,14 @@ public class BrawlerInitialStats extends InitialStats
     weaponMasteryBonusDamage.put("Javelin", 3);
   }
 
+  @Override
+  public Item[] getStartingItems()
+  {
+    return new Item[] {
+            ItemsCacheFactory.instance().getCache().findItem("Battle Axe"),
+            ItemsCacheFactory.instance().getCache().findItem("Hand Axe"),
+            ItemsCacheFactory.instance().getCache().findItem("Hand Axe"),
+            ItemsCacheFactory.instance().getCache().findItem("Javelin"),
+    };
+  }
 }

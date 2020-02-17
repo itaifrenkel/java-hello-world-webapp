@@ -1,5 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.stats;
 
+import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
+
 public class WizardInitialStats extends InitialStats
 {
   private static final long serialVersionUID = 1L;
@@ -30,5 +33,15 @@ public class WizardInitialStats extends InitialStats
     weaponMasteryBonusDamage.put("Staff", 2);
     weaponMasteryBonusHit.put("Dagger", 4);
     weaponMasteryBonusDamage.put("Dagger", 2);
+  }
+
+  @Override
+  public Item[] getStartingItems()
+  {
+    return new Item[] {
+            ItemsCacheFactory.instance().getCache().findItem("Dagger"),
+            ItemsCacheFactory.instance().getCache().findItem("Staff"),
+            ItemsCacheFactory.instance().getCache().findItem("Throwing Knife"),
+    };
   }
 }

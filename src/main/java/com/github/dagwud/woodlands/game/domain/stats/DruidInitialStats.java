@@ -1,5 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.stats;
 
+import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
+
 public class DruidInitialStats extends InitialStats
 {
   private static final long serialVersionUID = 1L;
@@ -21,7 +24,7 @@ public class DruidInitialStats extends InitialStats
     initialCharismaUnused = 13;
     initialCharismaModifierUnused = 1;
     initialProficiencyBonus = 2;
-    initialArmorClass = 15;
+    initialArmorClass = 13;
     initialInitiative = 2;
     initialSpeedUnused = 30;
     initialHitPoints = 10;
@@ -32,5 +35,17 @@ public class DruidInitialStats extends InitialStats
     weaponMasteryBonusDamage.put("Dagger", 2);
     weaponMasteryBonusHit.put("Slingshot", 4);
     weaponMasteryBonusDamage.put("Slingshot", 2);
+  }
+
+  @Override
+  public Item[] getStartingItems()
+  {
+    return new Item[] {
+//TODO            ItemsCacheFactory.instance().getCache().findItem("Leather Armor"),
+            ItemsCacheFactory.instance().getCache().findItem("Small iron shield"),
+            ItemsCacheFactory.instance().getCache().findItem("Scimitar"),
+            ItemsCacheFactory.instance().getCache().findItem("Dagger"),
+            ItemsCacheFactory.instance().getCache().findItem("Slingshot")
+    };
   }
 }

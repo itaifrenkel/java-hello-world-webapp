@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.characters.GameCharacterFactory;
@@ -31,6 +32,11 @@ public class CreateCharacterCmd extends AbstractCmd
 
     InitCharacterStatsCmd cmd = new InitCharacterStatsCmd(character);
     CommandDelegate.execute(cmd);
+
+    for (Item startingItem : character.getCharacterClass().getInitialStats().getStartingItems())
+    {
+      character.getCarrying().getCarriedInactive().add(startingItem);
+    }
     character.setSetupComplete(true);
 
     // Join a private party for just this character by default:

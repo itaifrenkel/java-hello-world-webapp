@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.trinkets.LootBag;
-import com.github.dagwud.woodlands.game.log.Logger;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,10 +9,11 @@ public abstract class PlayerCharacter extends GameCharacter
 {
   private static final long serialVersionUID = 1L;
   private transient Player playedBy;
-  public int playerChatId;
+  private int playerChatId;
   private final ECharacterClass characterClass;
   private boolean setupComplete;
   private List<Fighter> recentlyDefeated;
+  private Innkeeper innkeeper;
 
   public PlayerCharacter(Player playedBy, ECharacterClass characterClass)
   {
@@ -39,7 +39,7 @@ public abstract class PlayerCharacter extends GameCharacter
   @Override
   public int determineMaxAllowedItems()
   {
-    int base = 3 + Math.floorDiv(getStats().getLevel(), 2);
+    int base = 5 + Math.floorDiv(getStats().getLevel(), 2);
     for (Item item : getCarrying().getWorn())
     {
       if (item instanceof LootBag)
@@ -72,5 +72,14 @@ public abstract class PlayerCharacter extends GameCharacter
       recentlyDefeated = new ArrayList<>();
     }
     return recentlyDefeated;
+  }
+
+  public Innkeeper getInnkeeper()
+  {
+    if (null == innkeeper)
+    {
+      innkeeper = new Innkeeper(getPlayedBy());
+    }
+    return innkeeper;
   }
 }

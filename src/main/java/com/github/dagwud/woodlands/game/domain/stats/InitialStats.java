@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.stats;
 
+import com.github.dagwud.woodlands.game.domain.Item;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,5 +105,10 @@ public abstract class InitialStats
   public Map<String, Integer> getWeaponMasteryBonusDamage()
   {
     return weaponMasteryBonusDamage;
+  }
+
+  public Item[] getStartingItems()
+  {
+    return new Item[0];
   }
 }

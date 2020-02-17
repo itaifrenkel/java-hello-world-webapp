@@ -31,6 +31,15 @@ public class ItemsCache extends Cache
     return found;
   }
 
+  public EquippableItem findItem(String name)
+  {
+    if (shields.containsKey(name))
+    {
+      return shields.get(name);
+    }
+    return findWeapon(name);
+  }
+
   public List<EquippableItem> getAllItems()
   {
     List<EquippableItem> items = new ArrayList<>();

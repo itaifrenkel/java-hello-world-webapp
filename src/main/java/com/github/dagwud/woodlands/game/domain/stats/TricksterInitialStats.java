@@ -1,5 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.stats;
 
+import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
+
 public class TricksterInitialStats extends InitialStats
 {
   private static final long serialVersionUID = 1L;
@@ -32,5 +35,16 @@ public class TricksterInitialStats extends InitialStats
     weaponMasteryBonusDamage.put("Dart Gun", 3);
     weaponMasteryBonusHit.put("Dagger", 5);
     weaponMasteryBonusDamage.put("Dagger", 3);
+  }
+
+  @Override
+  public Item[] getStartingItems()
+  {
+    return new Item[] {
+            //TODO Leather Armor
+            ItemsCacheFactory.instance().getCache().findItem("Dagger"),
+            ItemsCacheFactory.instance().getCache().findItem("Dagger"),
+            ItemsCacheFactory.instance().getCache().findItem("Crossbow")
+    };
   }
 }

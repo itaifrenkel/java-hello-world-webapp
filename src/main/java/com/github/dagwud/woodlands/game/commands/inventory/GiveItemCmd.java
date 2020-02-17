@@ -9,7 +9,6 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +62,9 @@ public class GiveItemCmd extends SuspendableCmd
         int i = Integer.parseInt(giveIndex);
         List<Item> playerInactive = player.getActiveCharacter().getCarrying().getCarriedInactive();
         Item item = playerInactive.get(i);
-        playerInactive.remove(item);
-        partyMember.getCarrying().getCarriedInactive().add(item);
 
-        CommandDelegate.execute(new UnequipItemCmd(player.getActiveCharacter(), item));
-        CommandDelegate.execute(new SendMessageCmd(player.getChatId(), "You give the " + item.getName() + " to " + partyMember.getName()));
-        CommandDelegate.execute(new SendMessageCmd(partyMember.getPlayedBy().getChatId(), player.getActiveCharacter().getName() + " give you a " + item.getName() + " - what a sweetie."));
-
+        DoGiveItemCmd cmd = new DoGiveItemCmd(player.getActiveCharacter(), playerInactive, partyMember, item);
+        CommandDelegate.execute(cmd);
         return;
       } catch (NumberFormatException ex)
       {
