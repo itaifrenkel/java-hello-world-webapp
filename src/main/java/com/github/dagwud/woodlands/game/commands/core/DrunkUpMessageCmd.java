@@ -23,9 +23,13 @@ public class DrunkUpMessageCmd extends AbstractCmd
   }
 
   @Override
-  public void execute() throws Exception
+  public void execute()
   {
     message = incomingMessage;
+    if (message == null)
+    {
+      message = "";
+    }
 
     if (drunkeness > 2)
     {
