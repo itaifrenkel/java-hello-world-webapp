@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
+import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.ArmyOfPeasants;
 import com.github.dagwud.woodlands.game.domain.characters.spells.HealingBlast;
@@ -49,6 +50,21 @@ public class MainTest
     int newPoints = getPeasantPoints(playerStateWizard);
 
     Assert.assertEquals(hitpoints, newPoints);
+  }
+
+  @Test
+  public void testBestParty() throws Exception
+  {
+    PlayerState playerState = startBot();
+    initPlayer(playerState, "General");
+
+    PlayerState playerStateWizard = startBot(false);
+    initPlayer(playerStateWizard);
+
+    new JoinPartyCmd(playerStateWizard.getActiveCharacter(), "OtherParty").go();
+
+    Update update = createUpdate("/bestparty", playerState);
+    new TelegramServlet().processTelegramUpdate(update);
   }
 
   private int getPeasantPoints(PlayerState playerState)

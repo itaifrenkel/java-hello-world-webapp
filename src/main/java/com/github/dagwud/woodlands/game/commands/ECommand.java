@@ -31,6 +31,7 @@ public enum ECommand
   SPELL("/spell", false, (character, chatId) -> new ManualSpellCastCmd(chatId, character)),
 
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
+  BEST_PARTY("/bestparty", false, (character, chatId) -> new BestPartyCmd(chatId)),
   CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)),
   CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(chatId, character)),
   KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
