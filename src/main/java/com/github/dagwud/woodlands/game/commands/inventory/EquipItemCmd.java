@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.inventory;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite; 
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -18,6 +19,7 @@ public class EquipItemCmd extends AbstractCmd
 
   public EquipItemCmd(PlayerCharacter character, int chatId, String equipIndex, boolean showInventoryAfter)
   {
+    super(new AbleToActPrerequisite(character));
     this.character = character;
     this.chatId = chatId;
     this.dropIndex = equipIndex;
