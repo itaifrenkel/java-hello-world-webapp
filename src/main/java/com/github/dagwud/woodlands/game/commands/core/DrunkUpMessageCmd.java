@@ -26,10 +26,6 @@ public class DrunkUpMessageCmd extends AbstractCmd
   public void execute()
   {
     message = incomingMessage;
-    if (message == null)
-    {
-      message = "";
-    }
 
     if (drunkeness > 2)
     {
