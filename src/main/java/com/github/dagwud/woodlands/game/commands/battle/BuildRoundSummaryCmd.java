@@ -47,6 +47,7 @@ public class BuildRoundSummaryCmd extends AbstractCmd
               .append(damage.buildDamageDescription());
     }
     b.append("\n\n").append(buildBattleStatsSummary());
+    summary = b.toString();
   }
 
   private String buildBattleStatsSummary()
