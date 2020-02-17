@@ -3,12 +3,9 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.SpawnItemCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
-import com.github.dagwud.woodlands.gson.game.Weapon;
-
-import java.util.List;
 
 public class RetrieveItemsCmd extends AbstractCmd
 {
@@ -38,18 +35,9 @@ public class RetrieveItemsCmd extends AbstractCmd
 
   private Item chooseItem()
   {
-    Item chosenItem = null;
-    while (chosenItem == null)
-    {
-      List<Item> allItems = ItemsCacheFactory.instance().getCache().getAllItems();
-      int rand = (int) (Math.random() * allItems.size());
-      chosenItem = allItems.get(rand);
-      if (chosenItem.preventSpawning)
-      {
-        chosenItem = null; // try again
-      }
-    }
-    return chosenItem;
+    SpawnItemCmd cmd = new SpawnItemCmd(false);
+    CommandDelegate.execute(cmd);
+    return cmd.getSpawned();
   }
 
 }

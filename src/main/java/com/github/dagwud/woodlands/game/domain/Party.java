@@ -14,6 +14,7 @@ public class Party implements Serializable
   private String name;
   private Encounter encounter;
   private BigDecimal percentChanceOfEncounter;
+  private List<Item> collectedItems;
 
   public Party()
   {
@@ -167,6 +168,15 @@ public class Party implements Serializable
     {
       removeMember(nonPlayerCharacter);
     }
+  }
+
+  public List<Item> getCollectedItems()
+  {
+    if (null == collectedItems)
+    {
+      collectedItems = new LinkedList<>();
+    }
+    return collectedItems;
   }
 
   @Override

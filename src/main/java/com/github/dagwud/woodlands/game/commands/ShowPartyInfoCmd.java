@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class ShowPartyInfoCmd extends AbstractCmd
@@ -39,7 +40,15 @@ public class ShowPartyInfoCmd extends AbstractCmd
     }
 
     StringBuilder message = new StringBuilder();
-    message.append(character.getParty().getName()).append(":");
+    message.append(character.getParty().getName()).append(":\n");
+    if (!character.getParty().getCollectedItems().isEmpty())
+    {
+      message.append("Unclaimed Items:\n");
+      for (Item collectedItem : character.getParty().getCollectedItems())
+      {
+        message.append(" • ").append(collectedItem.getName()).append("\n");
+      }
+    }
     for (GameCharacter member : character.getParty().getActiveMembers())
     {
       if (message.length() > 0)

@@ -31,9 +31,9 @@ public class ItemsCache extends Cache
     return found;
   }
 
-  public List<Item> getAllItems()
+  public List<EquippableItem> getAllItems()
   {
-    List<Item> items = new ArrayList<>();
+    List<EquippableItem> items = new ArrayList<>();
     items.addAll(weapons.values());
     items.addAll(shields.values());
     return items;
