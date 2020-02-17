@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite; 
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -22,7 +23,7 @@ public class GiveItemCmd extends SuspendableCmd
 
   public GiveItemCmd(Player player)
   {
-    super(player.getPlayerState(), 3);
+    super(player.getPlayerState(), 3, new AbleToActPrerequisite(player.getActiveCharacter()));
     this.player = player;
   }
 
