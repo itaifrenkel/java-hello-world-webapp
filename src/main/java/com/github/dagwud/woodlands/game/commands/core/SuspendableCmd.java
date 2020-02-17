@@ -18,6 +18,13 @@ public abstract class SuspendableCmd extends AbstractCmd
     this.numberOfPhases = numberOfPhases;
   }
 
+  protected SuspendableCmd(PlayerState playerState, int numberOfPhases, CommandPrerequisite... prerequisites)
+  {
+    super(prerequisites);
+    this.playerState = playerState;
+    this.numberOfPhases = numberOfPhases;
+  }
+
   @Override
   public final void execute()
   {
