@@ -79,7 +79,7 @@ public class ClaimItemCmd extends SuspendableCmd
 
     for (Item item : activeCharacter.getParty().getCollectedItems())
     {
-      if (item.getName().equals(capturedInput))
+      if (item.getName().equalsIgnoreCase(capturedInput))
       {
         return item;
       }
@@ -90,7 +90,7 @@ public class ClaimItemCmd extends SuspendableCmd
   private String[] buildItemsList(Player player)
   {
     PlayerCharacter activeCharacter = player.getPlayerState().getActiveCharacter();
-    List<String> unclaimedItems = new ArrayList<>()
+    List<String> unclaimedItems = new ArrayList<>();
     for (Item i : activeCharacter.getParty().getCollectedItems())
     {
       unclaimedItems.add(i.getName());
