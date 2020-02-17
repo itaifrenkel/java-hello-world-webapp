@@ -13,7 +13,7 @@ public class UnequipItemCmd extends AbstractCmd
 
   public UnequipItemCmd(Fighter character, Item toUnequip)
   {
-    super(new AbleToActPrerequisite(characterToMove));
+    super(new AbleToActPrerequisite(character));
     this.character = character;
     this.toUnequip = toUnequip;
   }
