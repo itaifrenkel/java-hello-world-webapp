@@ -30,9 +30,9 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
       return;
     }
 
-    DiceRollCmd cmd = new DiceRollCmd(1, 20);
+    DiceRollCmd cmd = new DiceRollCmd(1, 6);
     CommandDelegate.execute(cmd);
-    if (cmd.getTotal() != 20)
+    if (cmd.getTotal() != 6)
     {
       // Nothing this time
       return;
