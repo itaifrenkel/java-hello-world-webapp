@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands;
 
-import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.domain.*;
@@ -32,7 +32,7 @@ public class MainTest
   }
 
   @Test
-  public void testHealNPC() throws Exception
+  public void testHealHealthyNPC() throws Exception
   {
     PlayerState playerState = startBot();
     initPlayer(playerState, "General");
@@ -72,7 +72,8 @@ public class MainTest
     int hitpoints = 0;
     for (GameCharacter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
     {
-      if (activeMember instanceof Peasant) {
+      if (activeMember instanceof Peasant)
+      {
         hitpoints = activeMember.getStats().getHitPoints();
       }
     }

@@ -23,6 +23,11 @@ public class ChoiceCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (options.length == 0)
+    {
+      return;
+    }
+
     String[] optionsText = new String[options.length];
     for (int i = 0; i < optionsText.length; i++)
     {
