@@ -35,7 +35,7 @@ public class DoGiveItemCmd extends AbstractCmd
     if (receiver instanceof PlayerCharacter)
     {
       CommandDelegate.execute(new SendMessageCmd(((PlayerCharacter)receiver).getPlayedBy().getChatId(),
-              giver + " give you a " + itemToGive.getName() + " - what a sweetie."));
+              giver.getName() + " gave you a " + itemToGive.getName() + " - what a sweetie."));
     }
   }
 }
