@@ -43,6 +43,6 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
     Item dropped = itemDrop.getSpawned();
     victoriousParty.getCollectedItems().add(dropped);
     new SendPartyMessageCmd(victoriousParty,
-            createdDefeated.name + " dropped " + dropped.getName() + "!").go();
+            "<b>" + createdDefeated.name + " dropped a " + dropped.getName() + "!</b>").go();
   }
 }

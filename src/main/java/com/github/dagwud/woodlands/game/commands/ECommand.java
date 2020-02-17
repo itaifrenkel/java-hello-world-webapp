@@ -4,9 +4,7 @@ import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.admin.*;
 import com.github.dagwud.woodlands.game.commands.character.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.inventory.GiveItemCmd;
-import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
-import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.*;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.*;
@@ -64,6 +62,7 @@ public enum ECommand
   LONG_REST("Long Rest", true, (character, chatId) -> new LongRestCmd(chatId, character)),
   LEAVE_ITEMS("Leave Items", true, (character, chatId) -> new LeaveItemsCmd(character)),
   RETRIEVE_ITEMS("Retrieve Items", true, (character, chatId) -> new RetrieveItemsCmd(character)),
+  CLAIM_ITEM("Claim Item", true, (character, chatId) -> new ClaimItemCmd(character.getPlayedBy())),
   SWITCH_CHARACTERS("Switch Characters", true, (character, chatId) -> new SwitchCharacterPromptCmd(character.getPlayedBy())),
   CHANGE_NAME("Change Name", true, (character, chatId) -> new ChangeNamePromptCmd(character.getPlayedBy())),
   ;
