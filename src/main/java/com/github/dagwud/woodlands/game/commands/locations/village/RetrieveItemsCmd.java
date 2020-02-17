@@ -52,6 +52,7 @@ public class RetrieveItemsCmd extends SuspendableCmd
     {
       items.add(item.getName());
     }
+    items.add("Cancel");
     return items.toArray(new String[0]);
   }
 
