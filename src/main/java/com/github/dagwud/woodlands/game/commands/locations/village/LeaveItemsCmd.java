@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.commands.inventory.DoGiveItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.GiveItemCmd;
 import com.github.dagwud.woodlands.game.domain.CarriedItems;
@@ -19,7 +20,7 @@ public class LeaveItemsCmd extends SuspendableCmd
 
   public LeaveItemsCmd(PlayerCharacter character)
   {
-    super(character.getPlayedBy().getPlayerState(), 2);
+    super(character.getPlayedBy().getPlayerState(), 2, new AbleToActPrerequisite(character));
   }
 
   @Override
