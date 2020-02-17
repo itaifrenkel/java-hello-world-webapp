@@ -23,6 +23,8 @@ public class SpeakCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    String speakerName = speaker.getName();
+
     DrunkUpMessageCmd drunkify = new DrunkUpMessageCmd(message, speaker.getStats().getDrunkeness());
     CommandDelegate.execute(drunkify);
     message = drunkify.getMessage();
@@ -31,7 +33,11 @@ public class SpeakCmd extends AbstractCmd
     {
       message = produceDreamSpeak();
     }
-    message = "<b>" + speaker.getName() + " says \"" + message + "\"</b>";
+    if (speaker.isDead())
+    {
+      speakerName = "The ghost of " + speakerName;
+    }
+    message = "<b>" + speakerName + " says \"" + message + "\"</b>";
     CommandDelegate.execute(new SendPartyMessageCmd(speaker.getParty(), message));
   }
 
