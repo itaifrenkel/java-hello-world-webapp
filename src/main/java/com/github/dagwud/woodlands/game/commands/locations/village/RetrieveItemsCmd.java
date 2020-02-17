@@ -30,7 +30,7 @@ public class RetrieveItemsCmd extends SuspendableCmd
     {
       case 0:
         String[] items = buildItemsList(getPlayerState().getActiveCharacter().getInnkeeper().getCarrying());
-        ChoiceCmd cmd = new ChoiceCmd(getPlayerState().getPlayer().getChatId(), "What would you like to leave with the Innkeeper?", items);
+        ChoiceCmd cmd = new ChoiceCmd(getPlayerState().getPlayer().getChatId(), "What would you like to retrieve?", items);
         CommandDelegate.execute(cmd);
         return;
       case 1:
@@ -41,7 +41,7 @@ public class RetrieveItemsCmd extends SuspendableCmd
           return;
         }
         retrieveItem(toRetrieve);
-        CommandDelegate.execute(new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "\"Sure, I'll hang on to that for you\""));
+        CommandDelegate.execute(new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "\"Ah, I thought you might be needing that\""));
     }
   }
 
