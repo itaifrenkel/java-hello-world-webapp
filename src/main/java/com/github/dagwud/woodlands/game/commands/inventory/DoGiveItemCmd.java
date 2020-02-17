@@ -16,7 +16,7 @@ public class DoGiveItemCmd extends AbstractCmd
   private final GameCharacter receiver;
   private final Item itemToGive;
 
-  public DoGiveItemCmd(PlayerCharacter giver, List<Item> from, GameCharacter receiver, Item itemToGive)
+  public DoGiveItemCmd(GameCharacter giver, List<Item> from, GameCharacter receiver, Item itemToGive)
   {
     this.from = from;
     this.giver = giver;
@@ -31,7 +31,10 @@ public class DoGiveItemCmd extends AbstractCmd
     receiver.getCarrying().getCarriedInactive().add(itemToGive);
 
     CommandDelegate.execute(new UnequipItemCmd(giver, itemToGive));
-    CommandDelegate.execute(new SendMessageCmd(giver.getPlayedBy().getChatId(), "You give the " + itemToGive.getName() + " to " + receiver.getName()));
+    if (giver instanceof PlayerCharacter)
+    {
+      CommandDelegate.execute(new SendMessageCmd(((PlayerCharacter)giver).getPlayedBy().getChatId(), "You give the " + itemToGive.getName() + " to " + receiver.getName()));
+    }
     if (receiver instanceof PlayerCharacter)
     {
       CommandDelegate.execute(new SendMessageCmd(((PlayerCharacter)receiver).getPlayedBy().getChatId(),
