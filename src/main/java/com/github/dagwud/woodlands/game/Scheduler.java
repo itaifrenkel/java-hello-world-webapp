@@ -61,4 +61,9 @@ public class Scheduler implements Serializable
   {
     getScheduledCommands().clear();
   }
+
+  public int count()
+  {
+    return getScheduledCommands().size();
+  }
 }
