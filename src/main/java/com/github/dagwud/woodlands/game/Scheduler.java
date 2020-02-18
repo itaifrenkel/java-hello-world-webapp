@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.commands.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunScheduledCmd;
 
@@ -41,6 +43,7 @@ public class Scheduler implements Serializable
     if (!getScheduledCommands().contains(cmd))
     {
       getScheduledCommands().add(cmd);
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT_ID, "Scheduled: " + cmd.toString()));
     }
 
     Callable<String> callable = new RunScheduledCmd(cmd.getDelayMS(), cmd.getCmdToRun());
