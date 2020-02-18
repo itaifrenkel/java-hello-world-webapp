@@ -16,6 +16,7 @@ public class GameStatesRegistry implements Serializable
   private transient static GameStatesRegistry instance;
   private final Map<Integer, PlayerState> gameStatesByCharacter = new HashMap<>();
   private PartyRegistry partyRegistry;
+  private Scheduler scheduler;
 
   private GameStatesRegistry()
   {
@@ -81,5 +82,14 @@ public class GameStatesRegistry implements Serializable
   PartyRegistry getPartyRegistry()
   {
     return partyRegistry;
+  }
+
+  Scheduler getScheduler()
+  {
+    if (null == scheduler)
+    {
+      scheduler = new Scheduler();
+    }
+    return scheduler;
   }
 }

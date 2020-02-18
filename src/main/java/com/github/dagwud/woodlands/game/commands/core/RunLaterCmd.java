@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
+import com.github.dagwud.woodlands.game.Scheduler;
 
 public class RunLaterCmd extends AbstractCmd
 {
@@ -19,11 +18,17 @@ public class RunLaterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Callable<String> callable = new RunScheduledCmd(delayMS, cmdToRun);
-    FutureTask task = new FutureTask<>(callable);
-    // Yes, threads are forbidden in EJB... but the current deployment server isn't actually
-    // using an EJB container, so this seems ok.
-    new Thread(task).start();
+    Scheduler.instance().schedule(this);
+  }
+
+  public long getDelayMS()
+  {
+    return delayMS;
+  }
+
+  public AbstractCmd getCmdToRun()
+  {
+    return cmdToRun;
   }
 
   @Override

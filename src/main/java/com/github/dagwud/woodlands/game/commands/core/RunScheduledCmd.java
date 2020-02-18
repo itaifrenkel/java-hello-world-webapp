@@ -4,14 +4,17 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.log.Logger;
 
+import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-public class RunScheduledCmd implements Callable<String>
+public class RunScheduledCmd implements Callable<String>, Serializable
 {
+  private static final long serialVersionUID = 1L;
+
   private final AbstractCmd cmdToRun;
   private final long delayMS;
 
-  RunScheduledCmd(long delayMS, AbstractCmd cmdToRun)
+  public RunScheduledCmd(long delayMS, AbstractCmd cmdToRun)
   {
     this.delayMS = delayMS;
     this.cmdToRun = cmdToRun;

@@ -54,6 +54,8 @@ public class RetrieveWorldCmd extends AbstractCmd
       GameStatesRegistry.instance();
     }
 
+    Scheduler.instance().restoreScheduled();
+
     Logger.info("Successfully restored world!");
 
     CommandDelegate.execute(new PatchWorldCmd());
