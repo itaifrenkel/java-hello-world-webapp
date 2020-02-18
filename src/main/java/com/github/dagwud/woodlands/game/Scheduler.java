@@ -56,4 +56,9 @@ public class Scheduler implements Serializable
     // using an EJB container, so this seems ok.
     new Thread(task).start();
   }
+
+  public void clear()
+  {
+    getScheduledCommands().clear();
+  }
 }
