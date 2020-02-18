@@ -9,18 +9,24 @@ import com.github.dagwud.woodlands.game.log.Logger;
 public class PersistWorldCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
-
-  static final String GAME_STATE_FILE = "GameState_developer.ser";
+  static final String GAME_STATE_FILE = "GameState.ser";
 
   private final boolean includeJSON;
+  private String filename;
 
   public PersistWorldCmd()
   {
-    this(false);
+    this(GAME_STATE_FILE, false);
   }
 
   public PersistWorldCmd(boolean includeJSON)
   {
+    this(GAME_STATE_FILE, includeJSON);
+  }
+
+  public PersistWorldCmd(String filename, boolean includeJSON)
+  {
+    this.filename = filename;
     this.includeJSON = includeJSON;
   }
 
@@ -28,7 +34,7 @@ public class PersistWorldCmd extends AbstractCmd
   public void execute()
   {
     GameStatesRegistry gameState = GameStatesRegistry.instance();
-    persist(gameState, GAME_STATE_FILE);
+    persist(gameState, filename);
 
     Logger.info("Successfully persisted world!");
   }

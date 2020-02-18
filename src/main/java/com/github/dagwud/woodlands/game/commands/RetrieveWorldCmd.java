@@ -13,6 +13,7 @@ import com.github.dagwud.woodlands.game.commands.admin.PatchCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.IsAdminPrerequisite;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.log.Logger;
 
@@ -23,8 +24,19 @@ import java.util.List;
 public class RetrieveWorldCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
+  private final String filename;
 
   private boolean retrieved;
+
+  public RetrieveWorldCmd()
+  {
+    this(PersistWorldCmd.GAME_STATE_FILE);
+  }
+
+  public RetrieveWorldCmd(String filename)
+  {
+    this.filename = filename;
+  }
 
   @Override
   public void execute() throws Exception
@@ -39,12 +51,12 @@ public class RetrieveWorldCmd extends AbstractCmd
       Logger.logError(e);
       objectNames = new ArrayList<>();
     }
-    if (!objectNames.contains(PersistWorldCmd.GAME_STATE_FILE))
+    if (!objectNames.contains(filename))
     {
       return;
     }
 
-    GameStatesRegistry gameState = read(PersistWorldCmd.GAME_STATE_FILE);
+    GameStatesRegistry gameState = read(filename);
     if (null != gameState)
     {
       GameStatesRegistry.reload(gameState);

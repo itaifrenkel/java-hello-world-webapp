@@ -21,6 +21,7 @@ public enum ECommand
 {
   HELP("/help", false, (character, chatId) -> new ShowHelpCmd(chatId)),
   SAVE("/save", false, (character, chatId) -> new PersistWorldCmd(false)),
+  BACKUP("/backup", false, (character, chatId) -> new PersistWorldCmd(PersistWorldCmd.GAME_STATE_FILE + ".backup", false)),
   START("/start", false, (character, chatId) -> new StartCmd(GameStatesRegistry.lookup(chatId), chatId)),
   NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character == null ? null : character.getPlayedBy(), chatId)),
   ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
