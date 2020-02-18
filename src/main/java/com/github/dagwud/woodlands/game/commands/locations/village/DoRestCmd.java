@@ -83,4 +83,10 @@ public class DoRestCmd extends AbstractCmd
       CommandDelegate.execute(sober);
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "DoRestCmd[isLongRest=" + isLongRest + "; character=" + character.getName() + "]";
+  }
 }
