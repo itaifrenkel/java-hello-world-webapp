@@ -49,7 +49,7 @@ public class RunScheduledCmd implements Callable<String>, Serializable
     }
     finally
     {
-      Scheduler.onComplete(cmdToRun);
+      Scheduler.instance().onComplete(cmdToRun);
     }
   }
 }
