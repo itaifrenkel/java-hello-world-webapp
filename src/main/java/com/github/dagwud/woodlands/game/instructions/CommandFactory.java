@@ -69,13 +69,13 @@ public class CommandFactory
       return by.build(playerState.getActiveCharacter(), chatId);
     }
 
-    if (cmd.matches("/d[LRW0-9]+"))
+    if (cmd.matches("/[Dd][LRW0-9]+"))
     {
       // Drop:
       String dropIndex = cmd.substring("/d".length());
       return new DropItemCmd(playerState.getActiveCharacter(), chatId, dropIndex);
     }
-    if (cmd.matches("/e[0-9]+"))
+    if (cmd.matches("/[Ee][0-9]+"))
     {
       // Equip:
       String dropIndex = cmd.substring("/e".length());

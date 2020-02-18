@@ -49,11 +49,11 @@ public class GiveItemCmd extends SuspendableCmd
 
   private void gift(String itemName)
   {
-    if (itemName.matches("/g[0-9]+"))
+    if (itemName.matches("/[Gg][0-9]+"))
     {
       String giveIndex = itemName.substring("/g".length());
 
-      if (giveIndex.equals("ogetyourownitem"))
+      if (giveIndex.equalsIgnoreCase("ogetyourownitem"))
       {
         return;
       }
