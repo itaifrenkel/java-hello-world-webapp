@@ -43,7 +43,7 @@ public class Scheduler implements Serializable
     if (!getScheduledCommands().contains(cmd))
     {
       getScheduledCommands().add(cmd);
-      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
+      //CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
     }
 
     Callable<String> callable = new RunScheduledCmd(cmd.getDelayMS(), cmd.getCmdToRun());
