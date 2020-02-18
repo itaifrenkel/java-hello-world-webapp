@@ -33,4 +33,10 @@ public class PeriodicSoberUpCmd extends AbstractCmd
       CommandDelegate.execute(next);
     }
   }
+
+  @Override
+  public String toString()
+  {
+    return "PeriodicSoberUpCmd[character=" + character.getName() + "]";
+  }
 }
