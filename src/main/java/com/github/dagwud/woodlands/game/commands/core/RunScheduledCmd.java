@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Scheduler;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.log.Logger;
 
@@ -45,6 +46,10 @@ public class RunScheduledCmd implements Callable<String>, Serializable
       }
       Logger.logError(e);
       throw e;
+    }
+    finally
+    {
+      Scheduler.onComplete(cmdToRun);
     }
   }
 }
