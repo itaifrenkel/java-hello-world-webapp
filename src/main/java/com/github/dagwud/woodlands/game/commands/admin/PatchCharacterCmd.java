@@ -30,8 +30,6 @@ public class PatchCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, character.getPlayedBy().getChatId());
-    CommandDelegate.execute(periodicSoberUp);
   }
 
 }
