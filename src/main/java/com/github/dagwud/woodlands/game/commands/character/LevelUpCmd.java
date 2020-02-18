@@ -45,7 +45,7 @@ public class LevelUpCmd extends AbstractCmd
     SendPartyMessageCmd msgParty = new SendPartyMessageCmd(character.getParty(), "🍾 " + character.getName() + " has levelled up!");
     CommandDelegate.execute(msgParty);
 
-    AbstractCmd msg = new SendMessageCmd(chatId, "🍾 You have levelled up! Hit Point boost: ❤" + hitPointsGained + (manaGained != 0 ? ", Mana boost: ✨" + manaGained : ""));
+    AbstractCmd msg = new SendMessageCmd(chatId, "🍾 <b>You have levelled up! Hit Point boost: ❤" + hitPointsGained + (manaGained != 0 ? ", Mana boost: ✨" + manaGained : "") + "</b>");
     CommandDelegate.execute(msg);
 
     int newLevel = character.getStats().getLevel() + 1;
