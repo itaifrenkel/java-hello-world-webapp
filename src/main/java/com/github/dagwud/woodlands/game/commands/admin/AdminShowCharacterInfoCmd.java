@@ -15,6 +15,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 public class AdminShowCharacterInfoCmd extends SuspendableCmd
 {
   private static final long serialVersionUID = 1L;
+
   private final int chatId;
 
   public AdminShowCharacterInfoCmd(int chatId, PlayerCharacter character)

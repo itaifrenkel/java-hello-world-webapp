@@ -5,7 +5,6 @@ import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
@@ -13,6 +12,8 @@ import java.util.List;
 
 public class BuildRoundSummaryCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Encounter encounter;
   private final List<DamageInflicted> damageInflicted;
   private final List<? extends Spell>[] spellGroups;

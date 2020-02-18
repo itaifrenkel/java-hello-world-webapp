@@ -17,6 +17,8 @@ import java.util.List;
 
 public class AdminSetXPCmd extends SuspendableCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private String targetName;
   private int xp;

@@ -12,6 +12,8 @@ import java.util.List;
 
 public class CastPreparedSpellsCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final List<Fighter> fighters;
   private final Encounter encounter;
   private List<SingleCastSpell> spellsCast;

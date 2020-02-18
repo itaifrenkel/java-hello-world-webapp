@@ -9,6 +9,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class AdminChangePartyCmd extends SuspendableCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final int chatId;
   private String partyToJoin;
   private String joiner;

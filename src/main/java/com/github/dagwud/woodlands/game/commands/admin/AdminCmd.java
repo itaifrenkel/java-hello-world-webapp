@@ -5,6 +5,8 @@ import com.github.dagwud.woodlands.game.commands.prerequisites.IsAdminPrerequisi
 
 public abstract class AdminCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   public AdminCmd(int chatId)
   {
     super(new IsAdminPrerequisite(chatId));

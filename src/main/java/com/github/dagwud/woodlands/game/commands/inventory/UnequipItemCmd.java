@@ -8,6 +8,8 @@ import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 
 public class UnequipItemCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Fighter character;
   private final Item toUnequip;
 

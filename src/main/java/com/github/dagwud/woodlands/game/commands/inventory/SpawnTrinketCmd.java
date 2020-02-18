@@ -11,6 +11,8 @@ import com.github.dagwud.woodlands.game.domain.trinkets.TrinketFactory;
 
 public class SpawnTrinketCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Fighter receiver;
   private final Trinket trinket;
 

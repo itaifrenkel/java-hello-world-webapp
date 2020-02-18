@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.domain.Party;
 public class CreatePartyCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
+
   private final String partyName;
   private Party createdParty;
 

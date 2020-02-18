@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class BestPartyCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private int chatId;
 
   public BestPartyCmd(int chatId)

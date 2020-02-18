@@ -13,6 +13,8 @@ import java.util.List;
 
 public class SpawnItemCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final boolean trinketsAllowed;
   private Item spawned;
 

@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class DrunkUpMessageCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private static final int AUBERGINE_TARGET = 10000;
   private static final double AUBERGINE_CUTOFF = 0.5;
 

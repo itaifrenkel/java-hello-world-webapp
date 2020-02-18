@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.domain.Fighter;
 public class PrepareSpellCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
+
   private final Fighter caster;
   private final SingleCastSpell spell;
 

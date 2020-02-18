@@ -12,6 +12,8 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class DefeatCreatureRewardCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Party victoriousParty;
   private final Creature createdDefeated;
 

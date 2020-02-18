@@ -14,8 +14,8 @@ public class BuyDrinksCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
-  public static final int MAX_WARNING_DRINKS_1 = 20;
-  public static final int MAX_WARNING_DRINKS_2 = 40;
+  private static final int MAX_WARNING_DRINKS_1 = 20;
+  private static final int MAX_WARNING_DRINKS_2 = 40;
 
   private final int chatId;
   private final PlayerCharacter activeCharacter;

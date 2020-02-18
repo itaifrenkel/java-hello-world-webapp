@@ -11,6 +11,8 @@ import java.util.List;
 
 public class CastPassiveAbilitiesCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final List<Fighter> fighters;
   private List<PassiveBattleRoundSpell> passivesCast;
 

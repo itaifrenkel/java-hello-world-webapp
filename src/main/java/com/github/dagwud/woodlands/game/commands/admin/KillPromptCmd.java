@@ -13,6 +13,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 public class KillPromptCmd extends SuspendableCmd
 {
   private static final long serialVersionUID = 1L;
+
   private final int chatId;
 
   public KillPromptCmd(int chatId, PlayerCharacter character)

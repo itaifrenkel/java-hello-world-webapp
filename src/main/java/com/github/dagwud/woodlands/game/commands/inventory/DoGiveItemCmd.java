@@ -11,6 +11,8 @@ import java.util.List;
 
 public class DoGiveItemCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final GameCharacter giver;
   private final List<Item> from;
   private final GameCharacter receiver;
