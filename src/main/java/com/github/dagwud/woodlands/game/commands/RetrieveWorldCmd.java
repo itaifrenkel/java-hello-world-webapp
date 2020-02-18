@@ -54,6 +54,12 @@ public class RetrieveWorldCmd extends AbstractCmd
       GameStatesRegistry.instance();
     }
 
+    if (Scheduler.instance().count() >= 20)
+    {
+      SendMessageCmd msg = new SendMessageCmd(Settings.ADMIN_CHAT, "Aaaaaaah! Too many schedules; resetting");
+      CommandDelegate.execute(msg);
+      Scheduler.instance().clear();
+    }
     Scheduler.instance().restoreScheduled();
 
     Logger.info("Successfully restored world!");

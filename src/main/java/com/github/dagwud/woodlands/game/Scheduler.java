@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunScheduledCmd;
 
@@ -32,7 +34,7 @@ public class Scheduler implements Serializable
   {
     for (RunLaterCmd scheduledCommand : getScheduledCommands())
     {
-      schedule(scheduledCommand);
+      doSchedule(scheduledCommand);
     }
   }
 
@@ -41,12 +43,27 @@ public class Scheduler implements Serializable
     if (!getScheduledCommands().contains(cmd))
     {
       getScheduledCommands().add(cmd);
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
     }
+    doSchedule(cmd);
+  }
 
+  private void doSchedule(RunLaterCmd cmd)
+  {
     Callable<String> callable = new RunScheduledCmd(cmd.getDelayMS(), cmd.getCmdToRun());
     FutureTask task = new FutureTask<>(callable);
     // Yes, threads are forbidden in EJB... but the current deployment server isn't actually
     // using an EJB container, so this seems ok.
     new Thread(task).start();
+  }
+
+  public void clear()
+  {
+    getScheduledCommands().clear();
+  }
+
+  public int count()
+  {
+    return getScheduledCommands().size();
   }
 }
