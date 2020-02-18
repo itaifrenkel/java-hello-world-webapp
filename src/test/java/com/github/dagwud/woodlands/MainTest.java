@@ -4,11 +4,15 @@ import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.GiveItemCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.ArmyOfPeasants;
 import com.github.dagwud.woodlands.game.domain.characters.spells.HealingBlast;
+import com.github.dagwud.woodlands.game.domain.trinkets.AmuletOfProtection;
 import com.github.dagwud.woodlands.game.log.Logger;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
+import com.github.dagwud.woodlands.gson.game.Weapon;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
 import com.github.dagwud.woodlands.gson.telegram.Update;
@@ -44,12 +48,27 @@ public class MainTest
 
     int hitpoints = getPeasantPoints(playerStateWizard);
 
-    System.out.println(hitpoints);
-
     new CastSpellCmd(new HealingBlast(playerStateWizard.getActiveCharacter())).go();
     int newPoints = getPeasantPoints(playerStateWizard);
 
     Assert.assertEquals(hitpoints, newPoints);
+  }
+
+  @Test
+  public void testGiveOnlyShowConsciousPlayers() throws Exception
+  {
+    PlayerState playerState = startBot();
+    initPlayer(playerState, "General");
+
+    PlayerState playerStateWizard = startBot(false);
+    initPlayer(playerStateWizard);
+
+    processCommand(playerState, "The Inn");
+    processCommand(playerStateWizard, "The Inn");
+
+    new CastSpellCmd(new ArmyOfPeasants(playerState.getActiveCharacter())).go();
+
+    processCommand(playerState, "/give");
   }
 
   @Test

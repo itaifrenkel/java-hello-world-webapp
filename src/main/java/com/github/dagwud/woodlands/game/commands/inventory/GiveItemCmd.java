@@ -5,11 +5,8 @@ import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite; 
-import com.github.dagwud.woodlands.game.domain.Item;
-import com.github.dagwud.woodlands.game.domain.Player;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,7 +152,7 @@ public class GiveItemCmd extends SuspendableCmd
 
     for (GameCharacter gameCharacter : activeCharacter.getParty().getActiveMembers())
     {
-      if (gameCharacter.getName().equals(capturedInput) && gameCharacter.getLocation().equals(activeCharacter.getLocation()))
+      if (gameCharacter.getName().equals(capturedInput) && validGiveTarget(activeCharacter, gameCharacter))
       {
         return gameCharacter;
       }
@@ -169,7 +166,7 @@ public class GiveItemCmd extends SuspendableCmd
     List<String> partyMembersInLocation = new ArrayList<>();
     for (GameCharacter gameCharacter : activeCharacter.getParty().getActiveMembers())
     {
-      if (gameCharacter.getLocation().equals(activeCharacter.getLocation()))
+      if (validGiveTarget(activeCharacter, gameCharacter))
       {
         partyMembersInLocation.add(gameCharacter.getName());
       }
@@ -177,5 +174,10 @@ public class GiveItemCmd extends SuspendableCmd
     partyMembersInLocation.add("Cancel");
 
     return partyMembersInLocation.toArray(new String[0]);
+  }
+
+  private boolean validGiveTarget(PlayerCharacter activeCharacter, GameCharacter gameCharacter)
+  {
+    return gameCharacter != activeCharacter && !(gameCharacter instanceof NonPlayerCharacter) && gameCharacter.isActive() && gameCharacter.getLocation().equals(activeCharacter.getLocation());
   }
 }
