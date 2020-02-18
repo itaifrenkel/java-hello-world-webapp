@@ -34,7 +34,7 @@ public class Scheduler implements Serializable
   {
     for (RunLaterCmd scheduledCommand : getScheduledCommands())
     {
-      //schedule(scheduledCommand);
+      doSchedule(scheduledCommand);
     }
   }
 
@@ -43,9 +43,13 @@ public class Scheduler implements Serializable
     if (!getScheduledCommands().contains(cmd))
     {
       getScheduledCommands().add(cmd);
-      //CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
     }
+    doSchedule(cmd);
+  }
 
+  private void doSchedule(RunLaterCmd cmd)
+  {
     Callable<String> callable = new RunScheduledCmd(cmd.getDelayMS(), cmd.getCmdToRun());
     FutureTask task = new FutureTask<>(callable);
     // Yes, threads are forbidden in EJB... but the current deployment server isn't actually
