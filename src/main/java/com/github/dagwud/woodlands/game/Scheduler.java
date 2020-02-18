@@ -34,7 +34,7 @@ public class Scheduler implements Serializable
   {
     for (RunLaterCmd scheduledCommand : getScheduledCommands())
     {
-      schedule(scheduledCommand);
+      //schedule(scheduledCommand);
     }
   }
 
