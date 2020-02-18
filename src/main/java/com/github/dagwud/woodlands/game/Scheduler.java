@@ -56,7 +56,7 @@ public class Scheduler implements Serializable
     CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
   }
 
-  public void onComplete(RunLaterCmd complete)
+  public void onComplete(AbstractCmd complete)
   {
     Iterator<RunLaterCmd> it = getScheduledCommands().iterator();
     while (it.hasNext())
