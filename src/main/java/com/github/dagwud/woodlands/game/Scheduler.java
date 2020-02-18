@@ -57,7 +57,18 @@ public class Scheduler implements Serializable
 
   public void onComplete(RunLaterCmd complete)
   {
-    getScheduledCommands.remove(complete);
+    Iterator<RunLaterCmd> it = getScheduledCommands().iterator();
+    while (it.hasNext())
+    {
+      RunLaterCmd run = it.next();
+      if (run.getCmdToRun() == complete)
+      {
+        CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Removed complete command: " + complete.toString()));
+        it.remove();
+        return;
+      }
+    }
+    CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Schedule oncomplete not found: " + complete.toString()));
   }
 
   public void clear()
