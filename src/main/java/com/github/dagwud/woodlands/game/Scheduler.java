@@ -55,6 +55,11 @@ public class Scheduler implements Serializable
     CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
   }
 
+  public void onComplete(RunLaterCmd complete)
+  {
+    getScheduledCommands.remove(complete);
+  }
+
   public void clear()
   {
     getScheduledCommands().clear();
