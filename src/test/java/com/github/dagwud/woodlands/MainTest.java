@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
+import com.github.dagwud.woodlands.game.commands.character.LevelUpCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.GiveItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.*;
@@ -27,6 +28,7 @@ import static org.junit.Assert.*;
 public class MainTest
 {
   private static int playerCount = 1;
+  private SimulatorSender iMessageSender;
 
   @Test
   public void testPlayerSetupRequired() throws Exception
@@ -109,7 +111,7 @@ public class MainTest
     assertEquals(ECharacterClass.WIZARD, playerState.getActiveCharacter().getCharacterClass());
     assertEquals(1, playerState.getActiveCharacter().getStats().getLevel());
     assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());
-    assertEquals(8, playerState.getActiveCharacter().getStats().getMaxHitPoints());
+    assertEquals(8, playerState.getActiveCharacter().getStats().getMaxHitPoints().total());
     assertEquals(2, playerState.getActiveCharacter().getStats().getMana());
     assertEquals(3, playerState.getActiveCharacter().getStats().getMaxMana().total());
     assertEquals(9, playerState.getActiveCharacter().getStats().getStrength().total());
@@ -117,22 +119,6 @@ public class MainTest
     assertEquals(15, playerState.getActiveCharacter().getStats().getConstitution().total());
 
     assertEquals(ELocation.VILLAGE_SQUARE, playerState.getActiveCharacter().getLocation());
-  }
-
-  @Test
-  public void testWeapon() throws Exception
-  {
-    PlayerState playerState = startBot();
-    initPlayer(playerState);
-
-    processCommand(playerState, "The Inn");
-    Update update = createUpdate("Retrieve Items", playerState);
-    new TelegramServlet().processTelegramUpdate(update);
-    update = createUpdate("/me", playerState);
-    new TelegramServlet().processTelegramUpdate(update);
-    assertNull(playerState.getActiveCharacter().getCarrying().getCarriedLeft());
-    assertNull(playerState.getActiveCharacter().getCarrying().getCarriedRight());
-    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
   }
 
   @Test
@@ -148,16 +134,16 @@ public class MainTest
     processCommand(playerState2, "The Inn");
     processCommand(playerState, "Retrieve Items");
     processCommand(playerState, "/me");
-    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
-    assertEquals(0, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(3, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(3, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
     Item givenItem = playerState.getActiveCharacter().getCarrying().getCarriedInactive().get(0);
 
     processCommand(playerState, "/give");
     processCommand(playerState, playerState2.getActiveCharacter().getName());
     processCommand(playerState, "/g0");
 
-    assertEquals(1, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
-    assertEquals(0, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(2, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(4, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
     assertEquals(givenItem, playerState2.getActiveCharacter().getCarrying().getCarriedInactive().get(0));
   }
 
@@ -171,17 +157,16 @@ public class MainTest
     initPlayer(playerState2);
 
     processCommand(playerState, "The Inn");
-    processCommand(playerState, "Retrieve Items");
     processCommand(playerState, "/me");
-    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
-    assertEquals(0, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(3, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(3, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
 
     processCommand(playerState, "/give");
     processCommand(playerState, playerState2.getActiveCharacter().getName());
     processCommand(playerState, "/g0");
 
-    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
-    assertEquals(0, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(3, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(3, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
   }
 
   @Test
@@ -197,20 +182,20 @@ public class MainTest
     processCommand(playerState2, "The Inn");
     processCommand(playerState, "Retrieve Items");
 
-    int maxItemsForTwo = playerState2.getActiveCharacter().getStats().getLevel() + 7;
-    for (int i = 0; i < maxItemsForTwo; i++)
+    int maxItemsForTwo = playerState2.getActiveCharacter().determineMaxAllowedItems();
+    for (int i = playerState.getActiveCharacter().getCarrying().countTotalCarried(); i < maxItemsForTwo; i++)
     {
-      processCommand(playerState2, "Retrieve Items");
+      new SpawnTrinketCmd(playerState2.getActiveCharacter(), new AmuletOfProtection()).go();
     }
 
-    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(3, playerState.getActiveCharacter().getCarrying().countTotalCarried());
     assertEquals(maxItemsForTwo, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
 
     processCommand(playerState, "/give");
     processCommand(playerState, playerState2.getActiveCharacter().getName());
     processCommand(playerState, "/g0");
 
-    assertEquals(1, playerState.getActiveCharacter().getCarrying().countTotalCarried());
+    assertEquals(3, playerState.getActiveCharacter().getCarrying().countTotalCarried());
     assertEquals(maxItemsForTwo, playerState2.getActiveCharacter().getCarrying().countTotalCarried());
   }
 
@@ -274,6 +259,8 @@ public class MainTest
     assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());
     assertEquals(ELocation.VILLAGE_SQUARE, playerState.getActiveCharacter().getLocation());
 
+    new LevelUpCmd(-1, playerState.getActiveCharacter()).go();
+
     update = createUpdate("The Tavern", playerState);
     new TelegramServlet().processTelegramUpdate(update);
     assertEquals(ELocation.TAVERN, playerState.getActiveCharacter().getLocation());
@@ -295,7 +282,7 @@ public class MainTest
 
     update = createUpdate("Short Rest", playerState);
     new TelegramServlet().processTelegramUpdate(update);
-    assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());
+    assertEquals(5, playerState.getActiveCharacter().getStats().getHitPoints());
   }
 
   @Test
@@ -357,12 +344,13 @@ public class MainTest
 
   private PlayerState startBot(boolean reset) throws Exception
   {
-    MessagingFactory.create(new SimulatorSender());
-
     if (reset)
     {
+      iMessageSender = new SimulatorSender();
+      MessagingFactory.create(iMessageSender);
       GameStatesRegistry.reset();
     }
+
     PlayerState playerState = GameStatesRegistry.lookup(-1 * playerCount);
     playerCount++;
     processCommand(playerState, "/start");
