@@ -38,6 +38,7 @@ public enum ECommand
   KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
   RESURRECT("/resurrect", false, (character, chatId) -> new ResurrectPromptCmd(chatId, character)),
   REMOVE("/rm", false, (character, chatId) -> new RemovePromptCmd(chatId, character)),
+  CLEAR_SCHEDULER("/clearscheduler, false, (character, chatId) -> new ClearSchedulerCmd(chatId)),
   SETPARTY("/setparty", false, (character, chatId) -> new AdminChangePartyCmd(chatId, character)),
   RESET("/reset", false, (character, chatId) -> new ResetCmd(chatId)),
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
