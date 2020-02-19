@@ -71,7 +71,7 @@ public class RallyCmd extends AbstractCmd
       if (movedBy instanceof PlayerCharacter)
       {
         PlayerCharacter mover = (PlayerCharacter)movedBy;
-        CommandDelegate.execute(new SendMessageCmd(mover.getPlayedBy().getChatId(), "<i> " is unable to respond</i>"));
+        CommandDelegate.execute(new SendMessageCmd(mover.getPlayedBy().getChatId(), "<i> " + characterToMove.getName() + " is unable to respond to the call</i>"));
       }
     }
   }
