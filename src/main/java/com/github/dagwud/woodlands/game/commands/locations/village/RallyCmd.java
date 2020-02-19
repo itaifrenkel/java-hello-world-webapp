@@ -7,6 +7,12 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.battle.EndEncounterCmd;
+
+import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWoodsCmd;
+import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
+import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
+import com.github.dagwud.woodlands.game.commands.locations.woodlands.EnterTheWoodlandsCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
