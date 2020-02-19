@@ -29,7 +29,8 @@ public class TavernIntervalCmd extends AbstractRoomCmd
     );
   }
 
-  private List<String> getLyrics() {
+  private List<String> getLyrics()
+  {
     return Arrays.asList(
             "I wanna rock.... ROCK!",
             "Baaabbbyyyyy SHARK DO DOO DO DO DO DOOOOOO",
@@ -77,7 +78,7 @@ public class TavernIntervalCmd extends AbstractRoomCmd
     String lyric = lyrics.get((int) Math.floor(Math.random() * lyrics.size()));
     String emit = emissions.get((int) Math.floor(Math.random() * emissions.size()));
 
-    String result = String.format(emit, lyric);
+    String result = "<i>" + String.format(emit, lyric) + "</i>";
 
     for (Party listAllParty : PartyRegistry.listAllParties())
     {
