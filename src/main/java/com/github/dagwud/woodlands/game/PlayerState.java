@@ -6,13 +6,14 @@ import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.menu.GameMenu;
 
 import java.io.Serializable;
+import java.util.Stack;
 
 public class PlayerState implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   private Player player;
-  private SuspendableCmd waitingForInputCmd;
+  private Stack<SuspendableCmd> waitingForInputCmd;
   private GameMenu currentMenu;
 
   PlayerState()
@@ -35,14 +36,23 @@ public class PlayerState implements Serializable
     this.player = player;
   }
 
-  public void setWaitingForInputCmd(SuspendableCmd waitingForInputCmd)
+  public void pushWaitingForInputCmd(SuspendableCmd waitingForInputCmd)
   {
-    this.waitingForInputCmd = waitingForInputCmd;
+    getWaitingForInputCmd().push(waitingForInputCmd);
   }
 
-  public SuspendableCmd getWaitingForInputCmd()
+  public SuspendableCmd peekWaitingForInputCmd()
   {
-    return waitingForInputCmd;
+    if (getWaitingForInputCmd().isEmpty())
+    {
+      return null;
+    }
+    return getWaitingForInputCmd().peek();
+  }
+
+  public SuspendableCmd popWaitingForInputCmd()
+  {
+    return getWaitingForInputCmd().pop();
   }
 
   public GameMenu getCurrentMenu()
@@ -55,4 +65,20 @@ public class PlayerState implements Serializable
     this.currentMenu = currentMenu;
   }
 
+  public void clearWaitingForInputCmd()
+  {
+    while (!getWaitingForInputCmd().isEmpty())
+    {
+      getWaitingForInputCmd().pop();
+    }
+  }
+
+  private Stack<SuspendableCmd> getWaitingForInputCmd()
+  {
+    if (null == waitingForInputCmd)
+    {
+      waitingForInputCmd = new Stack<>();
+    }
+    return waitingForInputCmd;
+  }
 }

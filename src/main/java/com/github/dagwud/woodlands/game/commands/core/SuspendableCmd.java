@@ -30,7 +30,7 @@ public abstract class SuspendableCmd extends AbstractCmd
   {
     if ("/cancel".equals(capturedInput))
     {
-      playerState.setWaitingForInputCmd(null);
+      playerState.clearWaitingForInputCmd();
       SendMessageCmd sendMessageCmd = new SendMessageCmd(playerState.getPlayer().getChatId(), "Cancelled.");
       CommandDelegate.execute(sendMessageCmd);
       return;
@@ -39,14 +39,22 @@ public abstract class SuspendableCmd extends AbstractCmd
     executePart(nextPhaseToRun, capturedInput);
     if (nextPhaseToRun == 0)
     {
-      playerState.setWaitingForInputCmd(this);
+      playerState.pushWaitingForInputCmd(this);
     }
     nextPhaseToRun++;
     capturedInput = null;
     if (nextPhaseToRun == numberOfPhases)
     {
-      playerState.setWaitingForInputCmd(null);
-      resetMenu(playerState);
+      playerState.popWaitingForInputCmd();
+      if (playerState.peekWaitingForInputCmd() == null)
+      {
+        resetMenu(playerState);
+      }
+      else
+      {
+        AcceptInputCmd parentContinue = new AcceptInputCmd(playerState.peekWaitingForInputCmd(), "[COMPLETE]");
+        CommandDelegate.execute(parentContinue);
+      }
     }
   }
 

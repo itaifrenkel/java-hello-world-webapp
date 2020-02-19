@@ -21,7 +21,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
 
   DoPlayerSetupCmd(Player player)
   {
-    super(player.getPlayerState(), 3);
+    super(player.getPlayerState(), 4);
   }
 
   @Override
@@ -36,9 +36,24 @@ public class DoPlayerSetupCmd extends SuspendableCmd
         receiveCharacterNameAndPromptForClass(capturedInput);
         break;
       case 2:
-        receiveClassAndInitStats(capturedInput);
+        receiveClass(capturedInput);
+        subchoice();
+        break;
+      case 3:
+        initStats();
         break;
     }
+  }
+
+  private void receiveClass(String capturedInput)
+  {
+    characterClass = capturedInput;
+  }
+
+  private void subchoice()
+  {
+    CommandDelegate.execute(new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "Starting subchoice"));
+    CommandDelegate.execute(new TestNestedSuspendableCmd(getPlayerState()));
   }
 
   private void promptForCharacterName()
@@ -73,10 +88,8 @@ public class DoPlayerSetupCmd extends SuspendableCmd
     CommandDelegate.execute(prompt);
   }
 
-  private void receiveClassAndInitStats(String capturedInput)
+  private void initStats()
   {
-    characterClass = capturedInput;
-
     ECharacterClass charClass;
     try
     {

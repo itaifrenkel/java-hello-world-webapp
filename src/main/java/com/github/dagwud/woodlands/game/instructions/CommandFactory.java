@@ -43,7 +43,7 @@ public class CommandFactory
       return new SendMessageCmd(chatId, "(・_・ヾ");
     }
 
-    SuspendableCmd waiting = playerState.getWaitingForInputCmd();
+    SuspendableCmd waiting = playerState.peekWaitingForInputCmd();
     if (waiting != null)
     {
       return new AcceptInputCmd(waiting, cmd);
