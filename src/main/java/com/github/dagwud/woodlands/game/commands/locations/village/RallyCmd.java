@@ -44,7 +44,7 @@ public class RallyCmd extends AbstractCmd
 
     for (GameCharacter character : rallier.getParty().getActiveMembers())
     {
-      doMove(character, movedBy);
+      doMove(character, rallier);
     }
   }
 
