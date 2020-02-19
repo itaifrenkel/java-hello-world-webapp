@@ -39,18 +39,18 @@ public class RallyCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    SendPartyMessageCmd msg = new SendPartyMessageCmd(rallier.getParty(), "<b>" + rallier.getName() + " sounds the call; all able fighters are duty-bound to answer!</b>");
+    ELocation moveTo = rallier.getLocation();
+    SendPartyMessageCmd msg = new SendPartyMessageCmd(rallier.getParty(), "<b>" + rallier.getName() + " sounds the call; all able fighters are duty-bound to rally at " + moveTo.getDisplayName() + "!</b>");
     CommandDelegate.execute(msg);
 
     for (GameCharacter character : rallier.getParty().getActiveMembers())
     {
-      doMove(character, rallier);
+      doMove(character, rallier, moveTo);
     }
   }
 
-  private void doMove(GameCharacter characterToMove, GameCharacter movedBy)
+  private void doMove(GameCharacter characterToMove, GameCharacter movedBy, ELocation moveTo)
   {
-    ELocation moveTo = movedBy.getLocation();
     if (characterToMove.getLocation() == moveTo)
     {
       return;
@@ -63,6 +63,7 @@ public class RallyCmd extends AbstractCmd
       if (characterToMove instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) characterToMove;
+        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>You have moved to " + moveTo.getDisplayName() + "</i>"));
         showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
         handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
       }
@@ -74,6 +75,11 @@ public class RallyCmd extends AbstractCmd
     }
     else
     {
+      if (characterToMove instanceof PlayerCharacter)
+      {
+        PlayerCharacter character = (PlayerCharacter)characterToMove;
+        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>You are unable to respond to the call. Shame on you.</i>"));
+      }
       if (movedBy instanceof PlayerCharacter)
       {
         PlayerCharacter mover = (PlayerCharacter)movedBy;
