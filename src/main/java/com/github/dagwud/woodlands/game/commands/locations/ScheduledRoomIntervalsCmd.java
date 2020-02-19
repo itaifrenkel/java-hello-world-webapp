@@ -1,10 +1,8 @@
 package com.github.dagwud.woodlands.game.commands.locations;
 
-import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractRoomCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Tuple;
 import com.github.dagwud.woodlands.game.log.Logger;
 
@@ -47,7 +45,6 @@ public class ScheduledRoomIntervalsCmd extends AbstractCmd
         {
           String message = "Hey giraffe - a room command exception'd. It sha'n't get triggered again: " + ex.toString();
           Logger.error(message);
-          new SendMessageCmd(Settings.NOT_THE_ADMIN_JUST_SOME_OTHER_GUY_CHAT, message).go();
         }
       }
     }
