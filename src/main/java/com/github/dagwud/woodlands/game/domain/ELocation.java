@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.ScheduledRoomIntervalsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.TavernIntervalCmd;
 import com.github.dagwud.woodlands.game.domain.menu.*;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public enum ELocation
         continue;
       }
 
-      System.out.println("Scheduling " + value.roomCmd + ", for " + value.displayName);
+      Logger.info("Scheduling " + value.roomCmd + ", for " + value.displayName);
       schedule.add(new Tuple<>(now + value.roomCmd.getInterval(), value.roomCmd));
     }
 
