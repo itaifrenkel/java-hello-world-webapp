@@ -31,9 +31,9 @@ public enum ECommand
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
   GIVE("/give", false, (character, chatId) -> new GiveItemCmd(character.getPlayedBy())),
   SPELL("/spell", false, (character, chatId) -> new ManualSpellCastCmd(chatId, character)),
+  BEST_PARTY("/bestparty", false, (character, chatId) -> new BestPartyCmd(chatId)),
 
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
-  BEST_PARTY("/bestparty", false, (character, chatId) -> new BestPartyCmd(chatId)),
   CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)),
   CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(chatId, character)),
   KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
@@ -62,6 +62,7 @@ public enum ECommand
   JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
   BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
   WAKE("Host a Wake", true, (character, chatId) -> new WakeCmd(chatId, character)),
+  UPGRADE("Celebrate", true, (character, chatId) -> new CelebrateCmd(chatId, character.getPlayedBy().getPlayerState())),
   SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
   LONG_REST("Long Rest", true, (character, chatId) -> new LongRestCmd(chatId, character)),
   LEAVE_ITEMS("Leave Items", true, (character, chatId) -> new LeaveItemsCmd(character)),

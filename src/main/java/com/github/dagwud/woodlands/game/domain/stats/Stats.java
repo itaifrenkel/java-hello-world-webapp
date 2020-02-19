@@ -13,6 +13,7 @@ public class Stats implements Serializable
 
   private int level;
   private int experience;
+  private int availableStatPointUpgrades;
   private int hitPoints;
   private Stat maxHitPoints = new Stat();
   private int mana;
@@ -27,6 +28,7 @@ public class Stats implements Serializable
 
   private double damageMultiplier = 1;
   private int criticalStrikeChanceBonus;
+  private int defenceRatingBoost;
 
   private int bonusDamage;
   private Map<String, Integer> weaponBonusHit = new HashMap<>();
@@ -35,7 +37,6 @@ public class Stats implements Serializable
 
   // thus endeth the serious stats and begin the fun stats
   private int drunkeness;
-  private int defenceRatingBoost;
 
   public int getLevel()
   {
@@ -282,5 +283,15 @@ public class Stats implements Serializable
   public void setDefenceRatingBoost(int defenceRatingBoost)
   {
     this.defenceRatingBoost = defenceRatingBoost;
+  }
+
+  public int getAvailableStatsPointUpgrades()
+  {
+    return availableStatPointUpgrades;
+  }
+
+  public void setAvailableStatsPointUpgrades(int availablePointUpgrades)
+  {
+    this.availableStatPointUpgrades = availablePointUpgrades;
   }
 }

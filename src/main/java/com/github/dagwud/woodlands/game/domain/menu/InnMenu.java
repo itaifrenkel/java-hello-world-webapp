@@ -9,6 +9,9 @@ public class InnMenu extends GameMenu
   public InnMenu()
   {
     setPrompt("<i>This is the inn</i>");
-    setOptions(ECommand.SHORT_REST, ECommand.LONG_REST, ECommand.RETRIEVE_ITEMS, ECommand.LEAVE_ITEMS, ECommand.SWITCH_CHARACTERS, ECommand.CHANGE_NAME, ECommand.VILLAGE_SQUARE);
+    setOptions(ECommand.SHORT_REST, ECommand.LONG_REST,
+            ECommand.RETRIEVE_ITEMS, ECommand.LEAVE_ITEMS,
+            ECommand.SWITCH_CHARACTERS, ECommand.CHANGE_NAME,
+            ECommand.VILLAGE_SQUARE);
   }
 }
