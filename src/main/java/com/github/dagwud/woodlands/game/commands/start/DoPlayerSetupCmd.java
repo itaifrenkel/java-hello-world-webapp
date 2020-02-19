@@ -36,8 +36,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
         receiveCharacterNameAndPromptForClass(capturedInput);
         break;
       case 2:
-        receiveClass(capturedInput);
-        subchoice();
+        receiveClass(capturedInput);     
         break;
       case 3:
         initStats();
@@ -48,12 +47,6 @@ public class DoPlayerSetupCmd extends SuspendableCmd
   private void receiveClass(String capturedInput)
   {
     characterClass = capturedInput;
-  }
-
-  private void subchoice()
-  {
-    CommandDelegate.execute(new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "Starting subchoice"));
-    CommandDelegate.execute(new TestNestedSuspendableCmd(getPlayerState()));
   }
 
   private void promptForCharacterName()
