@@ -36,7 +36,7 @@ public class Scheduler implements Serializable
   {
     for (RunLaterCmd scheduledCommand : getScheduledCommands())
     {
-      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Restoring scheduled command: " + scheduledCommand.toString()));
+      //CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Restoring scheduled command: " + scheduledCommand.toString()));
       doSchedule(scheduledCommand);
     }
   }
@@ -65,7 +65,7 @@ public class Scheduler implements Serializable
       RunLaterCmd run = it.next();
       if (run.getCmdToRun() == complete)
       {
-        CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Removed complete command: " + complete.toString()));
+        //CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Removed complete command: " + complete.toString()));
         it.remove();
         return;
       }
