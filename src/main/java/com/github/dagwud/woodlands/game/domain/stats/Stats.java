@@ -124,7 +124,9 @@ public class Stats implements Serializable
 
   public int getWeaponBonusHit(Weapon weapon)
   {
-    return weaponBonusHit.getOrDefault(weapon.getName(), 0);
+    int base = weaponBonusHit.getOrDefault(weapon.getName(), 0);
+    base += Math.max(Math.floorDiv(level - 1, 4), 0);
+    return base;
   }
 
   public void setWeaponBonusHit(Map<String, Integer> weaponBonusHit)
