@@ -54,7 +54,7 @@ public class Scheduler implements Serializable
     // Yes, threads are forbidden in EJB... but the current deployment server isn't actually
     // using an EJB container, so this seems ok.
     new Thread(task).start();
-    CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
+    //CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Scheduled: " + cmd.toString()));
   }
 
   public void onComplete(AbstractCmd complete)
