@@ -38,6 +38,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
     String message = character.getName() + " " +
         "(L" + stats.getLevel() + " " + character.getCharacterClass() + ")\n" +
         "Experience: " + character.getStats().getExperience() + "\n" +
+        (character.getStats().getAvailableStatsPointUpgrades() == 0 ? "" : "<b>You have a stat upgrade available!</b>\n") +
         produceProgress(character.getStats().getExperience()) + "\n" +
         "Location: " + character.getLocation() + "\n" +
         "Short Rests Available: " + character.getStats().getRestPoints() + "/" + character.getStats().getRestPointsMax() + "\n" +
