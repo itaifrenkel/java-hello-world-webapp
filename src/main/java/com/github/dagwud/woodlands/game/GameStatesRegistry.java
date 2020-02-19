@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.commands.RetrieveWorldCmd;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
 
 import java.io.Serializable;
@@ -66,12 +67,16 @@ public class GameStatesRegistry implements Serializable
     {
       return;
     }
+
     RetrieveWorldCmd cmd = new RetrieveWorldCmd();
     CommandDelegate.execute(cmd);
+
     if (!cmd.retrieved() && null == instance)
     {
       instance = new GameStatesRegistry();
     }
+
+    ELocation.scheduleRooms();
   }
 
   public static void reload(GameStatesRegistry gameState)

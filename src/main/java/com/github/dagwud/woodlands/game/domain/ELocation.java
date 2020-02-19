@@ -1,6 +1,13 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.commands.core.AbstractRoomCmd;
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
+import com.github.dagwud.woodlands.game.commands.locations.ScheduledRoomIntervalsCmd;
+import com.github.dagwud.woodlands.game.commands.locations.village.TavernIntervalCmd;
 import com.github.dagwud.woodlands.game.domain.menu.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public enum ELocation
 {
@@ -12,10 +19,11 @@ public enum ELocation
 
   INN("The Inn", new InnMenu(), true, "You look around, and see... stuff which hasn't yet been written down."),
 
-  TAVERN("The Tavern", new TavernMenu(), true, "The smell of spilled beer permeates the local tavern, and the floor crunches slightly underfoot as you walk across the dirt from dozens of well-worn shoes.\n\n" +
-          "The Raven is a friendly place, where all are welcome as long as they pay for their drinks. A burly guard with a dark oversized coat stands watch, and the magic-imbued rings on a chain around his neck clearly signal this is not a man to be trifled with. \n" +
-          "Apart from the guard, who looks permanently annoyed, the patrons of The Raven are all smiles - with the largest being the one plastered over the face of the barman.\n\n" +
-          "\"Long journey?\" he asks jovially, though something about his demeanor suggests he’s not that interested in your journey so much as how many coins are in your pocket."),
+  TAVERN("The Tavern", new TavernMenu(), true, "The smell of spilled beer permeates the local tavern, and the floor crunches slightly underfoot as you walk across the dirt from dozens of well-worn shoes. There is a worn jukebox in the corner, belting out jammin' tunes.\n\n" +
+            "The Raven is a friendly place, where all are welcome as long as they pay for their drinks. A burly guard with a dark oversized coat stands watch, and the magic-imbued rings on a chain around his neck clearly signal this is not a man to be trifled with. \n" +
+            "Apart from the guard, who looks permanently annoyed, the patrons of The Raven are all smiles - with the largest being the one plastered over the face of the barman.\n\n" +
+            "\"Long journey?\" he asks jovially, though something about his demeanor suggests he’s not that interested in your journey so much as how many coins are in your pocket.",
+          new TavernIntervalCmd()),
 
   MOUNTAIN("The Mountain", new MountainMenu(), true, "The Mountain overlooks the Village, and is home to a variety of small creatures. As such it has become something of a proving ground, where many adventurers home their skills and practice basics.\n\n" +
           "It’s also a generally safe space as long as you’re not alone - tradition dictates that because this is a training area, any adventurer who falls in a fight will be carried back to the Village by their comrades. However, being knocked unconscious while alone does bring the risk that your body may be set upon by the inhabitants of the mountain.\n\n" +
@@ -32,6 +40,7 @@ public enum ELocation
   private final GameMenu menu;
   private final boolean autoRetreat;
   private final String lookText;
+  private final AbstractRoomCmd roomCmd;
 
   ELocation(String displayName, GameMenu menu, boolean autoRetreat, String lookText)
   {
@@ -39,6 +48,37 @@ public enum ELocation
     this.menu = menu;
     this.autoRetreat = autoRetreat;
     this.lookText = lookText;
+    this.roomCmd = null;
+  }
+
+  ELocation(String displayName, GameMenu menu, boolean autoRetreat, String lookText, AbstractRoomCmd roomCmd)
+  {
+    this.displayName = displayName;
+    this.menu = menu;
+    this.autoRetreat = autoRetreat;
+    this.lookText = lookText;
+
+    this.roomCmd = roomCmd;
+  }
+
+  public static void scheduleRooms()
+  {
+    long now = System.currentTimeMillis();
+
+    List<Tuple<Long, AbstractRoomCmd>> schedule = new ArrayList<>();
+
+    for (ELocation value : values())
+    {
+      if (value.roomCmd == null)
+      {
+        continue;
+      }
+
+      System.out.println("Scheduling " + value.roomCmd + ", for " + value.displayName);
+      schedule.add(new Tuple<>(now + value.roomCmd.getInterval(), value.roomCmd));
+    }
+
+    new RunLaterCmd(1000, new ScheduledRoomIntervalsCmd(schedule), false).go();
   }
 
   public String toString()

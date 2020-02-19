@@ -8,11 +8,18 @@ public class RunLaterCmd extends AbstractCmd
 
   private final long delayMS;
   private final AbstractCmd cmdToRun;
+  private boolean restore;
 
   public RunLaterCmd(long delayMS, AbstractCmd cmdToRun)
   {
     this.delayMS = delayMS;
     this.cmdToRun = cmdToRun;
+  }
+  public RunLaterCmd(long delayMS, AbstractCmd cmdToRun, boolean restore)
+  {
+    this.delayMS = delayMS;
+    this.cmdToRun = cmdToRun;
+    this.restore = restore;
   }
 
   @Override
@@ -29,6 +36,11 @@ public class RunLaterCmd extends AbstractCmd
   public AbstractCmd getCmdToRun()
   {
     return cmdToRun;
+  }
+
+  public boolean isRestore()
+  {
+    return restore;
   }
 
   @Override

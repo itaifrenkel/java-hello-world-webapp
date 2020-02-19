@@ -9,12 +9,9 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.github.dagwud.woodlands.game.*;
-import com.github.dagwud.woodlands.game.commands.admin.PatchCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.prerequisites.IsAdminPrerequisite;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
@@ -72,6 +69,7 @@ public class RetrieveWorldCmd extends AbstractCmd
       CommandDelegate.execute(msg);
       Scheduler.instance().clear();
     }
+
     Scheduler.instance().restoreScheduled();
 
     Logger.info("Successfully restored world!");
