@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.menu.InnMenu;
 
@@ -16,7 +17,8 @@ public class ChangeNamePromptCmd extends SuspendableCmd
 
   public ChangeNamePromptCmd(Player player)
   {
-    super(player.getPlayerState(), 2);
+    super(player.getPlayerState(), 2, new AbleToActPrerequisite(player.getActiveCharacter()));
+
     this.player = player;
   }
 
