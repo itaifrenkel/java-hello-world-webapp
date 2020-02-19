@@ -12,6 +12,7 @@ import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
@@ -71,6 +72,7 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
 
     Scheduler.instance().restoreScheduled();
+    ELocation.scheduleRooms();
 
     Logger.info("Successfully restored world!");
 
