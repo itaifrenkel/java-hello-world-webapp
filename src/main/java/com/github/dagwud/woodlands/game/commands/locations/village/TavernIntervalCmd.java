@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.locations.village;
 
 import com.github.dagwud.woodlands.game.PartyRegistry;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractRoomCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.*;
@@ -75,6 +76,8 @@ public class TavernIntervalCmd extends AbstractRoomCmd
     String emit = emissions.get((int) Math.floor(Math.random() * emissions.size()));
 
     String result = String.format(emit, lyric);
+
+    new SendMessageCmd(Settings.NOT_THE_ADMIN_JUST_SOME_OTHER_GUY_CHAT, "Tavern triggered").go();
 
     for (Party listAllParty : PartyRegistry.listAllParties())
     {

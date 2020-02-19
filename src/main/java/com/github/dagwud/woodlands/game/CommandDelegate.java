@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.CommandException;
-import com.github.dagwud.woodlands.game.log.Logger;
 
 public class CommandDelegate
 {
