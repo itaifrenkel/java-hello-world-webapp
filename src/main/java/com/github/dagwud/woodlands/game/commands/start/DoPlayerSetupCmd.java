@@ -21,7 +21,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
 
   DoPlayerSetupCmd(Player player)
   {
-    super(player.getPlayerState(), 4);
+    super(player.getPlayerState(), 3);
   }
 
   @Override
@@ -36,9 +36,7 @@ public class DoPlayerSetupCmd extends SuspendableCmd
         receiveCharacterNameAndPromptForClass(capturedInput);
         break;
       case 2:
-        receiveClass(capturedInput);     
-        break;
-      case 3:
+        receiveClass(capturedInput);
         initStats();
         break;
     }
