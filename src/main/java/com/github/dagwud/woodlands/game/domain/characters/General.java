@@ -17,9 +17,11 @@ public class General extends PlayerCharacter
   General(Player playedBy)
   {
     super(playedBy, ECharacterClass.GENERAL);
+
     getSpellAbilities().register(new AirOfAuthority(this)); // passive
     getSpellAbilities().register(new ArmyOfPeasants(this)); // active
     getSpellAbilities().register(new CallToArms(this)); // active
+
     peasants = new ArrayList<>(4);
   }
 

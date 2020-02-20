@@ -46,7 +46,12 @@ public abstract class GameCharacter extends Fighter
 
   public void setLocation(ELocation location)
   {
+    if (this.location != null)
+    {
+      this.location.getCharactersInRoom().remove(this);
+    }
     this.location = location;
+    this.location.getCharactersInRoom().add(this);
   }
 
   public Party getParty()

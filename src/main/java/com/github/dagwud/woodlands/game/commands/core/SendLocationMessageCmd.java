@@ -1,0 +1,45 @@
+package com.github.dagwud.woodlands.game.commands.core;
+
+import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+
+public class SendLocationMessageCmd extends AbstractCmd
+{
+  private ELocation eLocation;
+  private String message;
+
+  private GameCharacter originator;
+
+  public SendLocationMessageCmd(ELocation eLocation, String message)
+  {
+    this.eLocation = eLocation;
+    this.message = message;
+  }
+
+  public SendLocationMessageCmd(ELocation eLocation, String message, GameCharacter originator)
+  {
+    this.eLocation = eLocation;
+    this.message = message;
+    this.originator = originator;
+  }
+
+  @Override
+  public void execute()
+  {
+    for (GameCharacter gameCharacter : eLocation.getCharactersInRoom())
+    {
+      if (gameCharacter == originator)
+      {
+        continue;
+      }
+
+      // should this be party only?
+      if (gameCharacter instanceof PlayerCharacter)
+      {
+        PlayerCharacter character = (PlayerCharacter) gameCharacter;
+        new SendMessageCmd(character.getPlayedBy().getChatId(), message).go();
+      }
+    }
+  }
+}

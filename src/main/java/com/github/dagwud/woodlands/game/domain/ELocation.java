@@ -45,6 +45,8 @@ public enum ELocation
   private final String lookText;
   private final AbstractRoomCmd roomCmd;
 
+  private final List<GameCharacter> charactersInRoom = new ArrayList<>();
+
   ELocation(String displayName, GameMenu menu, boolean autoRetreat, String lookText)
   {
     this.displayName = displayName;
@@ -82,6 +84,11 @@ public enum ELocation
     }
 
     new RunLaterCmd(1000, new ScheduledRoomIntervalsCmd(schedule), false).go();
+  }
+
+  public List<GameCharacter> getCharactersInRoom()
+  {
+    return charactersInRoom;
   }
 
   public String toString()

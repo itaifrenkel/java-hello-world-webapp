@@ -1,12 +1,8 @@
 package com.github.dagwud.woodlands.game.commands.locations.village;
 
-import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractRoomCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendLocationMessageCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Party;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -85,17 +81,6 @@ public class TavernIntervalCmd extends AbstractRoomCmd
 
     String result = "<i>" + String.format(emit, lyric) + "</i>";
 
-    for (Party listAllParty : PartyRegistry.listAllParties())
-    {
-      for (GameCharacter activeMember : listAllParty.getActiveMembers())
-      {
-        if (activeMember instanceof PlayerCharacter && activeMember.getLocation() == ELocation.TAVERN)
-        {
-          PlayerCharacter player = (PlayerCharacter) activeMember;
-
-          new SendMessageCmd(player.getPlayedBy().getChatId(), result).go();
-        }
-      }
-    }
+    new SendLocationMessageCmd(ELocation.TAVERN, result).go();
   }
 }

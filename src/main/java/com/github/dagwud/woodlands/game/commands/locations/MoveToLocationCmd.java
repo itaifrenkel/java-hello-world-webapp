@@ -2,11 +2,8 @@ package com.github.dagwud.woodlands.game.commands.locations;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.battle.EndEncounterCmd;
+import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWoodsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
@@ -14,11 +11,10 @@ import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterThePett
 import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.woodlands.EnterTheWoodlandsCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -67,8 +63,7 @@ public class MoveToLocationCmd extends AbstractCmd
     if (allMoveTogether(location) && !inVillageMove(location, characterToMove.getLocation()))
     {
       doMove(characterToMove.getParty().getActiveMembers(), location, characterToMove);
-    }
-    else
+    } else
     {
       doMove(characterToMove, location, characterToMove);
     }
@@ -98,17 +93,51 @@ public class MoveToLocationCmd extends AbstractCmd
     {
       return;
     }
+
+    ELocation from = characterToMove.getLocation();
+
+    produceExitMessage(characterToMove, moveTo, from);
+
     characterToMove.setLocation(moveTo);
 
     if (characterToMove instanceof PlayerCharacter)
     {
       PlayerCharacter character = (PlayerCharacter) characterToMove;
+
+      produceEntryMessage(moveTo, from, character);
+
       if (characterToMove != movedBy)
       {
         CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
       }
       showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
       handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
+    }
+  }
+
+  private void produceEntryMessage(ELocation moveTo, ELocation from, PlayerCharacter character)
+  {
+    String entryText = moveTo.getMenu().produceEntryText(character, from);
+    if (entryText != null)
+    {
+      new SendLocationMessageCmd(moveTo, "<i>" + entryText + "</i>", character).go();
+    }
+  }
+
+  private void produceExitMessage(GameCharacter characterToMove, ELocation moveTo, ELocation from)
+  {
+    if (characterToMove instanceof PlayerCharacter)
+    {
+      PlayerCharacter toMove = (PlayerCharacter) characterToMove;
+
+      if (from != null)
+      {
+        String exitText = from.getMenu().produceExitText(toMove, moveTo);
+        if (exitText != null)
+        {
+          new SendLocationMessageCmd(from, "<i>" + exitText + "</i>", characterToMove).go();
+        }
+      }
     }
   }
 

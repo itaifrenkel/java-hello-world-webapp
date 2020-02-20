@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands;
 
+import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
@@ -22,7 +23,12 @@ public class SuperSimulator9000WithAdvancedAI
 
         MessagingFactory.create(new SimulatorSender());
 
-        System.out.println("Send a /start to begin.");
+        telegramServlet.processTelegramUpdate(createUpdate("/start"));
+
+        // room scheduling doesn't happen without a persisted state to get at without erroring
+        // may behave weird if your persistence works, then comment it out
+        ELocation.scheduleRooms();
+
         while (true)
         {
             String s = in.nextLine();

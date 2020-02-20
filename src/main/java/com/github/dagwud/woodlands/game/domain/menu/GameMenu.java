@@ -2,6 +2,8 @@ package com.github.dagwud.woodlands.game.domain.menu;
 
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.ECommand;
+import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.io.Serializable;
 
@@ -42,6 +44,16 @@ public class GameMenu implements Serializable
       }
     }
     return false;
+  }
+
+  public String produceEntryText(PlayerCharacter playerState, ELocation from)
+  {
+    return null;
+  }
+
+  public String produceExitText(PlayerCharacter playerState, ELocation to)
+  {
+    return null;
   }
 
   public String[] produceOptions(PlayerState playerState)
