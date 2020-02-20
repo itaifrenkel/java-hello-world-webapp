@@ -16,7 +16,7 @@ public class CreaturesCache extends Cache
     this.creatures = cache(root.creatures);
   }
 
-  public Creature pickRandom(int minDifficulty, int maxDifficulty)
+  public Creature pickRandom(double minDifficulty, double maxDifficulty)
   {
     Creature picked = null;
     while (picked == null)
