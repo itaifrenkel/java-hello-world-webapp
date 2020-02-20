@@ -58,7 +58,7 @@ public class TavernIntervalCmd extends AbstractRoomCmd
             "You're poison running through my veins",
             "Bring server up, bring server down - hotfix live and code around",
             "I want to break freeeeee...",
-            "I'm too sexy for my shirt!,
+            "I'm too sexy for my shirt!",
             "I'm a cat, I'm a kitty cat, and I dance dance dance and I dance dance dance...",
             "Look at my horse, my horse is amaaaazing",
             "Whole lotta love...",
