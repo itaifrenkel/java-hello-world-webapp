@@ -64,6 +64,7 @@ public class ListPartiesCmd extends AdminCmd
         {
           b.append(" (inactive)");
         }
+        b.append(" • ").append(character.getStats().getState().description);
         b.append("\n");
       }
     }
