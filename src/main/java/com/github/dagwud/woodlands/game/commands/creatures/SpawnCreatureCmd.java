@@ -15,12 +15,12 @@ public class SpawnCreatureCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
-  private final int minDifficulty;
-  private final int maxDifficulty;
+  private final double minDifficulty;
+  private final double maxDifficulty;
   private final String creatureType;
   private Creature spawnedCreature;
 
-  public SpawnCreatureCmd(int minDifficulty, int maxDifficulty, String creatureType)
+  public SpawnCreatureCmd(double minDifficulty, double maxDifficulty, String creatureType)
   {
     this.minDifficulty = minDifficulty;
     this.maxDifficulty = maxDifficulty;
