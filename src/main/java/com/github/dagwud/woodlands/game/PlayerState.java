@@ -81,4 +81,9 @@ public class PlayerState implements Serializable
     }
     return waitingForInputCmd;
   }
+
+  public void removeWaitingForInput(SuspendableCmd suspendableCmd)
+  {
+    waitingForInputCmd.remove(suspendableCmd);
+  }
 }

@@ -41,19 +41,16 @@ public abstract class SuspendableCmd extends AbstractCmd
     {
       playerState.pushWaitingForInputCmd(this);
     }
+
     nextPhaseToRun++;
     capturedInput = null;
-    if (nextPhaseToRun == numberOfPhases)
+
+    if (nextPhaseToRun >= numberOfPhases)
     {
-      playerState.popWaitingForInputCmd();
+      playerState.removeWaitingForInput(this);
       if (playerState.peekWaitingForInputCmd() == null)
       {
         resetMenu(playerState);
-      }
-      else
-      {
-        AcceptInputCmd parentContinue = new AcceptInputCmd(playerState.peekWaitingForInputCmd(), "[COMPLETE]");
-        CommandDelegate.execute(parentContinue);
       }
     }
   }
