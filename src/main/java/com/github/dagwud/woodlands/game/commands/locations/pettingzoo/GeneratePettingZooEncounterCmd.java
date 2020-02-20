@@ -12,7 +12,7 @@ public class GeneratePettingZooEncounterCmd extends GenerateEncounterCmd
 {
   private static final long serialVersionUID = 1L;
 
-  GenerateMountainEncounterCmd(PlayerState playerState)
+  GeneratePettingZooEncounterCmd(PlayerState playerState)
   {
     super(playerState, ELocation.MOUNTAIN, Settings.PETTING_ZOO_MIN_DIFFICULTY, Settings.PETTING_ZOO_MAX_DIFFICULTY, Creature.CREATURE_TYPE_NORMAL);
   }
