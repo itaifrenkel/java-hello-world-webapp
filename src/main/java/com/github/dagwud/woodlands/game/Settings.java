@@ -25,7 +25,10 @@ public class Settings
 
   public static final String AUTO_JOIN_PARTY_NAME = null;
 
-  public static final int MOUNTAIN_MIN_DIFFICULTY = 0;
+  public static final int PETTING_ZOO_MIN_DIFFICULTY = 0;
+  public static final int PETTING_ZOO_MAX_DIFFICULTY = 1;
+
+  public static final int MOUNTAIN_MIN_DIFFICULTY = 1;
   public static final int MOUNTAIN_MAX_DIFFICULTY = 2;
 
   public static final int WOODLANDS_MIN_DIFFICULTY = 2;

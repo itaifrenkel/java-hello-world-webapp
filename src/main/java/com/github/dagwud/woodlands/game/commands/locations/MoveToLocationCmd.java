@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.commands.battle.EndEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWoodsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
+import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterThePettingZooCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.woodlands.EnterTheWoodlandsCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
@@ -152,6 +153,9 @@ public class MoveToLocationCmd extends AbstractCmd
   {
     switch (location)
     {
+      case PETTING_ZOO:
+        CommandDelegate.execute(new EnterThePettingZooCmd(playerState));
+        break;
       case MOUNTAIN:
         CommandDelegate.execute(new EnterTheMountainCmd(playerState));
         break;
