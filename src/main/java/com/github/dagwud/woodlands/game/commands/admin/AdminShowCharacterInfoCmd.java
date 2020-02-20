@@ -55,7 +55,7 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
 
     for (Party party : PartyRegistry.listAllParties())
     {
-      for (GameCharacter gameCharacter : party.getActiveMembers())
+      for (GameCharacter gameCharacter : party.getAllMembers())
       {
         if (gameCharacter instanceof PlayerCharacter)
         {
