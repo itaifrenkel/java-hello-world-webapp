@@ -31,7 +31,9 @@ public enum ECommand
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
   GIVE("/give", false, (character, chatId) -> new GiveItemCmd(character.getPlayedBy())),
   SPELL("/spell", false, (character, chatId) -> new ManualSpellCastCmd(chatId, character)),
+
   BEST_PARTY("/bestparty", false, (character, chatId) -> new BestPartyCmd(chatId)),
+  OOK("/ook", false, (character, chatId) -> new OokCmd(character)),
 
   PARTY_LIST("/parties", false, (character, chatId) -> new ListPartiesCmd(chatId)),
   CHEAT_LEVEL_UP_TEST("/levelup", false, (character, chatId) -> new LevelUpCmd(chatId, character)),
