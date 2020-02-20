@@ -34,7 +34,6 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
         switchTo(capturedInput);
         break;
     }
-
   }
 
   private void switchTo(String capturedInput)
@@ -59,8 +58,11 @@ public class SwitchCharacterPromptCmd extends SuspendableCmd
     SwitchCharacterCmd switchCmd = new SwitchCharacterCmd(player, switchTo);
     CommandDelegate.execute(switchCmd);
 
-    SendMessageCmd msg = new SendMessageCmd(player.getChatId(), "Now playing as " + switchTo.getName() + " the " + switchTo.getCharacterClass());
-    CommandDelegate.execute(msg);
+    if (switchCmd.isSuccess())
+    {
+      SendMessageCmd msg = new SendMessageCmd(player.getChatId(), "Now playing as " + switchTo.getName() + " the " + switchTo.getCharacterClass());
+      CommandDelegate.execute(msg);
+    }
 
     resetMenu(player);
   }

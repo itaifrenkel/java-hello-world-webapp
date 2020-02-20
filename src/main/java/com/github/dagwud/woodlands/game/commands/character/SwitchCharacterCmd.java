@@ -13,6 +13,8 @@ public class SwitchCharacterCmd extends AbstractCmd
   private final Player player;
   private final PlayerCharacter toActivate;
 
+  private boolean success;
+
   SwitchCharacterCmd(Player player, PlayerCharacter toActivate)
   {
     this.player = player;
@@ -31,7 +33,7 @@ public class SwitchCharacterCmd extends AbstractCmd
       }
       if (!toActivate.isConscious())
       {
-        SendMessageCmd err = new SendMessageCmd(player.getChatId(), toActivate.getName() + " is " + toActivate.getStats().getState());
+        SendMessageCmd err = new SendMessageCmd(player.getChatId(), toActivate.getName() + " is " + toActivate.getStats().getState().description + " - no character switch allowed.");
         CommandDelegate.execute(err);
         return;
       }
@@ -44,5 +46,12 @@ public class SwitchCharacterCmd extends AbstractCmd
 
     player.getInactiveCharacters().remove(toActivate);
     player.setActiveCharacter(toActivate);
+
+    success = true;
+  }
+
+  public boolean isSuccess()
+  {
+    return success;
   }
 }
