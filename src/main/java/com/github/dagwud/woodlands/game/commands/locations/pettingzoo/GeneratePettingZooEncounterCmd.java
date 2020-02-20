@@ -14,7 +14,7 @@ public class GeneratePettingZooEncounterCmd extends GenerateEncounterCmd
 
   GeneratePettingZooEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.MOUNTAIN, Settings.PETTING_ZOO_MIN_DIFFICULTY, Settings.PETTING_ZOO_MAX_DIFFICULTY, Creature.CREATURE_TYPE_NORMAL);
+    super(playerState, ELocation.PETTING_ZOO, Settings.PETTING_ZOO_MIN_DIFFICULTY, Settings.PETTING_ZOO_MAX_DIFFICULTY, Creature.CREATURE_TYPE_NORMAL);
   }
 
   @Override
