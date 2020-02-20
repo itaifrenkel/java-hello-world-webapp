@@ -19,11 +19,11 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
   private final PlayerState playerState;
   private final ELocation location;
-  private final int minDifficulty;
-  private final int maxDifficulty;
+  private final double minDifficulty;
+  private final double maxDifficulty;
   private String creatureType;
 
-  public GenerateEncounterCmd(PlayerState playerState, ELocation location, int minDifficulty, int maxDifficulty, String creatureType)
+  public GenerateEncounterCmd(PlayerState playerState, ELocation location, double minDifficulty, double maxDifficulty, String creatureType)
   {
     this.playerState = playerState;
     this.location = location;
