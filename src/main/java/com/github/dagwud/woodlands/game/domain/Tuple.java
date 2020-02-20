@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.domain;
 
-public class Tuple<O, T>
+import java.io.Serializable;
+
+public class Tuple<O extends Serializable, T extends Serializable> implements Serializable
 {
   private O one;
   private T two;
