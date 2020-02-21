@@ -52,6 +52,8 @@ public class TavernIntervalCmd extends AbstractRoomCmd
             "Guess who's back? Back again?",
             "Pick yourself up and try again (try again)",
             "Don't goooo chaaaasssing waterfaaaallllsss...",
+            "MAKING PANCAKES, MAKIN' BACON PAAAAAANCAKES",
+            "Maya heeee, maya haaaa, maya heyaaheyaaa",
             "YOU AIN'T NOTHING BUT A HOUND-DAWWWWG",
             "There's a lady who's sure - all that glitters is gold.",
             "You're poison running through my veins",
