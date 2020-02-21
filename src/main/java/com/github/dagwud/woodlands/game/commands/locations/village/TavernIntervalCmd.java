@@ -48,6 +48,7 @@ public class TavernIntervalCmd extends AbstractRoomCmd
             "Bye byeeeee Ms American Pie...",
             "The PHAAAAAANTOMMM OF THE OPERA.... IS HERRRE",
             "We don't need no, education...",
+            "My.... milkshake brings all the boys to the yard.",
             "I fell into a ring of fire.",
             "Guess who's back? Back again?",
             "Pick yourself up and try again (try again)",
