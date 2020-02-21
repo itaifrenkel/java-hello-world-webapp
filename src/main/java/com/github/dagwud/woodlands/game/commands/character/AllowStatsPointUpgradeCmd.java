@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class AllowStatsPointUpgradeCmd extends AbstractCmd
@@ -19,5 +21,7 @@ public class AllowStatsPointUpgradeCmd extends AbstractCmd
   {
     int upgrades = character.getStats().getAvailableStatsPointUpgrades();
     character.getStats().setAvailableStatsPointUpgrades(upgrades + 2);
+
+    CommandDegelate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<b>Congratulations! You've earned an upgrade to your character stats. Head to The Tavern to celebrate!"));
   }
 }
