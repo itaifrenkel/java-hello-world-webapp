@@ -44,7 +44,11 @@ public class CelebrateCmd extends SuspendableCmd
   private void promptForStat()
   {
     String[] stats = {"Strength", "Agility", "Constitution"};
-    ChoiceCmd cmd = new ChoiceCmd(chatId, "Which stat would you like to increase?", stats);
+    ChoiceCmd cmd = new ChoiceCmd(chatId, "You have " + character.getStats().getAvailableStatsPointUpgrades() + " stat point upgrades available. Which stat would you like to increase?\n" +
+                      "Strength: damage with ⚔️melee weapons\n" +
+                      "Agility: damage with 🏹ranged weapons\n" +
+                      "         and turn order\n" +
+                      "Constitution: Max ❤️ and more effective rest/heal", stats);
     CommandDelegate.execute(cmd);
   }
 
