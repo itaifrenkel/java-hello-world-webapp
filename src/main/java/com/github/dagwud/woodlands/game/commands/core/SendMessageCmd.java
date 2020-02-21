@@ -48,7 +48,16 @@ public class SendMessageCmd extends AbstractCmd
         }
       }
     }
-    MessagingFactory.create().sender().sendMessage(chatId, newMessage, replyMarkup);
+
+    // best attempt only because users can block bot:
+    try
+    {
+      MessagingFactory.create().sender().sendMessage(chatId, newMessage, replyMarkup);
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override
