@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
@@ -31,6 +32,10 @@ public class DeathCmd extends AbstractCmd
     {
       Player owner = ((NonPlayerCharacter)target).getOwnedBy();
       CommandDelegate.execute(new SendMessageCmd(owner.getChatId(), target.getName() + " has died"));
+    }
+    else
+    {
+      CommandDelegate.execute(new SendPartyAlertCmd(party, target.getName() + " has died!"));
     }
   }
 }
