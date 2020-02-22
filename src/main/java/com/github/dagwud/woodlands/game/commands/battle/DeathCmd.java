@@ -35,7 +35,7 @@ public class DeathCmd extends AbstractCmd
     }
     else if (target instanceof PlayerCharacter)
     {
-      PlayerCharacter character = (PlayerCharacter)fighter;
+      PlayerCharacter character = (PlayerCharacter)target;
       CommandDelegate.execute(new SendPartyAlertCmd(character.getParty(), character.getName() + " has died!"));
     }
   }
