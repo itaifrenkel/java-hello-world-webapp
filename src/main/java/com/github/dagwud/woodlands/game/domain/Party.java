@@ -15,6 +15,7 @@ public class Party implements Serializable
   private Encounter encounter;
   private BigDecimal percentChanceOfEncounter;
   private List<Item> collectedItems;
+  private Long alertChatId;
 
   public Party()
   {
@@ -29,7 +30,6 @@ public class Party implements Serializable
   public String getName()
   {
     return name;
-    //return name + "[" + Integer.toHexString(hashCode()).substring(3) + "]";
   }
 
   public void setActiveEncounter(Encounter encounter)
@@ -177,6 +177,15 @@ public class Party implements Serializable
       collectedItems = new LinkedList<>();
     }
     return collectedItems;
+  }
+
+  public String getAlertChatId()
+  {
+    if (alertChatId == null)
+    {
+      alertChatId = -332639493; // todo
+    }
+    return alertChatId;
   }
 
   @Override
