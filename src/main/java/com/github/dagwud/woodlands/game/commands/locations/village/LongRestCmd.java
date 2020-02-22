@@ -28,7 +28,13 @@ public class LongRestCmd extends RestCmd
       return;
     }
 
-    scheduleRest(getCharacter());
+    for (PlayerCharacter member : getCharacter().getParty().getActivePlayerCharacters())
+    {
+      if (!member.isDead() && !member.isResting())
+      {
+        scheduleRest(member);
+      }
+    }
   }
 
   @Override
