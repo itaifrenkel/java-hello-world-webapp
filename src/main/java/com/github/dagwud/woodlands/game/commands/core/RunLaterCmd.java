@@ -27,7 +27,10 @@ public class RunLaterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    startedAtTime = System.currentTimeMillis();
+    if (startedAtTime == 0) // in case of resumes
+    {
+      startedAtTime = System.currentTimeMillis();
+    }
     Scheduler.instance().schedule(this);
   }
 
