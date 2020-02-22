@@ -183,7 +183,7 @@ public class Party implements Serializable
   {
     if (alertChatId == null)
     {
-      alertChatId = -332639493; // todo
+      alertChatId = -332639493L; // todo
     }
     return alertChatId;
   }
