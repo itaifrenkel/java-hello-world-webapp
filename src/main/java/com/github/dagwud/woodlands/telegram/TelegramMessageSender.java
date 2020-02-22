@@ -16,7 +16,7 @@ public class TelegramMessageSender extends TelegramHelper implements IMessageSen
   public void sendMessage(long chatId, String message, String replyMarkup) throws IOException
   {
     Map<String, String> params = buildUrlParams(chatId, message, replyMarkup);
-    if (chatId > 0L)
+    if (chatId > 0L || chatId < -10000L)
     {
       callTelegram("sendMessage", params);
     }
