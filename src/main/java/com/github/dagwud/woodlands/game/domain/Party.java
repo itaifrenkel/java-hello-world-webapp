@@ -179,7 +179,7 @@ public class Party implements Serializable
     return collectedItems;
   }
 
-  public String getAlertChatId()
+  public Long getAlertChatId()
   {
     if (alertChatId == null)
     {
