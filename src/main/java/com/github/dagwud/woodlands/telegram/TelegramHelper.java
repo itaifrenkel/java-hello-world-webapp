@@ -20,7 +20,7 @@ abstract class TelegramHelper
     String url = encode(endpoint, params);
     //Logger.log("CALL: " + url);
     String result = callURL(url);
-    System.out.println(result);
+    //Logger.log(result);
   }
 
   private static String callURL(String url) throws IOException
