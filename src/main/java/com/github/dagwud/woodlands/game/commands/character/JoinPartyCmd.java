@@ -53,6 +53,9 @@ public class JoinPartyCmd extends AbstractCmd
 
     joiner.setParty(party);
     party.addMember(joiner);
+
+    CommandDelegate.execute(new SendPartyAlertCmd(party, joiner.getName() + " has joined " + party.getName()));
+
     if (party.getLeader() != null)
     {
       // Unless you're the founder
