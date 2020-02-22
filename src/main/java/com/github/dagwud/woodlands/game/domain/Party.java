@@ -15,7 +15,7 @@ public class Party implements Serializable
   private Encounter encounter;
   private BigDecimal percentChanceOfEncounter;
   private List<Item> collectedItems;
-  private Integer alertChatId;
+  private Long alertChatId;
 
   public Party()
   {
@@ -179,11 +179,11 @@ public class Party implements Serializable
     return collectedItems;
   }
 
-  public Integer getAlertChatId()
+  public Long getAlertChatId()
   {
     if (alertChatId == null)
     {
-      alertChatId = -332639493; // todo
+      alertChatId = -332639493L; // todo
     }
     return alertChatId;
   }
