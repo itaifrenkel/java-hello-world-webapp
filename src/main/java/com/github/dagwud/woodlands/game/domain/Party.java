@@ -181,9 +181,13 @@ public class Party implements Serializable
 
   public Long getAlertChatId()
   {
-    if (alertChatId == null)
+    if (alertChatId != null && getName().equalsIgnoreCase("Mousetrap"))
     {
       alertChatId = -332639493L; // todo
+    }
+    else
+    {
+      alertChatId = null;
     }
     return alertChatId;
   }
