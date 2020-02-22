@@ -17,7 +17,13 @@ public class RunScheduledCmd implements Callable<String>, Serializable
 
   public RunScheduledCmd(long delayMS, AbstractCmd cmdToRun)
   {
-    this.delayMS = delayMS;
+    this(System.currentTimeMillis(), delayMS, cmdToRun);
+  }
+
+  public RunScheduledCmd(long startDelayAtTime, long delayMS, AbstractCmd cmdToRun)
+  {
+    long alreadyElapsedMS = System.currentTimeMillis() - startDelayAtTime;
+    this.delayMS = Math.max(0, delayMS - alreadyElapsedMS);
     this.cmdToRun = cmdToRun;
   }
 
