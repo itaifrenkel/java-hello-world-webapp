@@ -28,9 +28,7 @@ public class SendPartyAlertCmd extends AbstractCmd
     // best attempt only because users can block bot:
     try
     {
-System.out.println("send to " + party.getAlertChatId() + ": " + message);
-     MessagingFactory.create().sender().sendMessage(party.getAlertChatId(), message);
-System.out.println("sent");
+      MessagingFactory.create().sender().sendMessage(party.getAlertChatId(), message);
     }
     catch (Exception e)
     {
