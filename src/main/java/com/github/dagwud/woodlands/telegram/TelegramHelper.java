@@ -53,12 +53,12 @@ abstract class TelegramHelper
     return resp.toString();
   }
 
-  static Map<String, String> buildUrlParams(int chatId, String message)
+  static Map<String, String> buildUrlParams(long chatId, String message)
   {
     return buildUrlParams(chatId, message, null);
   }
 
-  static Map<String, String> buildUrlParams(int chatId, String message, String replyMarkup)
+  static Map<String, String> buildUrlParams(long chatId, String message, String replyMarkup)
   {
     Map<String, String> params = new HashMap<>();
     params.put("chat_id", String.valueOf(chatId));
