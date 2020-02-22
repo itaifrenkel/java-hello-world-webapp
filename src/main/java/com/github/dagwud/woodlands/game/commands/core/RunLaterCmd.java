@@ -43,7 +43,7 @@ public class RunLaterCmd extends AbstractCmd
 
   public long getRemainingDelayMS()
   {
-    long elapsed = System.currentTimeMS() - startedAtTime();
+    long elapsed = System.currentTimeMS() - startedAtTime;
     return Math.max(0, delayMS - elapsed);
   }
 
