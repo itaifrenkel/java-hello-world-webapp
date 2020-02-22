@@ -13,8 +13,7 @@ public class RunLaterCmd extends AbstractCmd
 
   public RunLaterCmd(long delayMS, AbstractCmd cmdToRun)
   {
-    this.delayMS = delayMS;
-    this.cmdToRun = cmdToRun;
+    this(delayMS, cmdToRun, true);
   }
 
   public RunLaterCmd(long delayMS, AbstractCmd cmdToRun, boolean restore)
