@@ -19,7 +19,8 @@ abstract class TelegramHelper
     String endpoint = buildTelegramURL(method);
     String url = encode(endpoint, params);
     //Logger.log("CALL: " + url);
-    callURL(url);
+    String result = callURL(url);
+    System.out.println(result);
   }
 
   private static String callURL(String url) throws IOException
