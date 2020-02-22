@@ -25,6 +25,10 @@ public class SendPartyAlertCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (party == null)
+    {
+      return;
+    }
     // best attempt only because users can block bot:
     try
     {
