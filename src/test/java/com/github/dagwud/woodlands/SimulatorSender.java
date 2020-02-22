@@ -7,7 +7,7 @@ import java.io.IOException;
 public class SimulatorSender implements IMessageSender
 {
     @Override
-    public void sendMessage(int chatId, String message, String replyMarkup)
+    public void sendMessage(long chatId, String message, String replyMarkup)
     {
         if (chatId != -1)
         {
@@ -21,7 +21,7 @@ public class SimulatorSender implements IMessageSender
     }
 
     @Override
-    public void sendMessage(int chatId, String message) throws IOException
+    public void sendMessage(long chatId, String message) throws IOException
     {
         System.out.println(message);
     }
