@@ -33,7 +33,7 @@ public class DeathCmd extends AbstractCmd
       Player owner = ((NonPlayerCharacter)target).getOwnedBy();
       CommandDelegate.execute(new SendMessageCmd(owner.getChatId(), target.getName() + " has died"));
     }
-    elseif (target instanceof PlayerCharacter)
+    else if (target instanceof PlayerCharacter)
     {
       PlayerCharacter character = (PlayerCharacter)fighter;
       CommandDelegate.execute(new SendPartyAlertCmd(character.getParty(), character.getName() + " has died!"));
