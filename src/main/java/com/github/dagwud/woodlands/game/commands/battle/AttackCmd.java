@@ -19,7 +19,7 @@ public class AttackCmd extends AbstractCmd
   private final Weapon weaponUsed;
   private DamageInflicted damageInflicted;
 
-  AttackCmd(Fighter attacker, Weapon weaponUsed, Fighter defender)
+  public AttackCmd(Fighter attacker, Weapon weaponUsed, Fighter defender)
   {
     this.attacker = attacker;
     this.weaponUsed = weaponUsed;
