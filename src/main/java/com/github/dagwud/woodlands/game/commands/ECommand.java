@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.admin.*;
+import com.github.dagwud.woodlands.game.commands.battle.PrepareAttackCmd;
 import com.github.dagwud.woodlands.game.commands.character.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.*;
@@ -61,6 +62,7 @@ public enum ECommand
   THE_GORGE("The Gorge", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.THE_GORGE)),
 
   CAST_A_SPELL("Cast Spell", true, (character, chatId) -> new CastSpellPromptCmd(chatId, character)),
+  ATTACK("Attack", true, (character, chatId) -> new PrepareAttackCmd(character)),
 
   JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
   BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
@@ -74,6 +76,7 @@ public enum ECommand
   SWITCH_CHARACTERS("Switch Characters", true, (character, chatId) -> new SwitchCharacterPromptCmd(character.getPlayedBy())),
   CHANGE_NAME("Change Name", true, (character, chatId) -> new ChangeNamePromptCmd(character.getPlayedBy())),
   ;
+
 
 
   ECommand(String name, boolean menuCmd, ICommandBuilder commandBuilder)

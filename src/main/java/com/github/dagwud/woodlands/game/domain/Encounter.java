@@ -1,5 +1,8 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.commands.battle.AutomaticEncounterRoundCmd;
+import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.io.Serializable;
@@ -14,10 +17,26 @@ public class Encounter implements Serializable
   private Creature enemy;
   private boolean ended;
   private int currentRound;
+  private final int actionsAllowedPerRound;
+  private boolean hasAnyPlayerActivityPrepared;
+
   /**
    * a farmed encounter is one that happened automatically with no player intervention
   */
   private boolean farmed = true;
+  private boolean fightingStarted;
+
+  public Encounter(Party party, Creature enemy)
+  {
+    this(party, enemy, 3); // two attacks and a spell
+  }
+
+  protected Encounter(Party party, Creature enemy, int actionsAllowedPerRound)
+  {
+    this.party = party;
+    this.enemy = enemy;
+    this.actionsAllowedPerRound = actionsAllowedPerRound;
+  }
 
   public boolean isEnded()
   {
@@ -27,11 +46,6 @@ public class Encounter implements Serializable
   public void end()
   {
     ended = true;
-  }
-
-  public void setEnemy(Creature enemy)
-  {
-    this.enemy = enemy;
   }
 
   public Creature getEnemy()
@@ -71,8 +85,42 @@ public class Encounter implements Serializable
     return farmed;
   }
 
-  public void markNotFarmed()
+  public final void markNotFarmed()
   {
     farmed = false;
+  }
+
+  public final int getActionsAllowedPerRound()
+  {
+    return actionsAllowedPerRound;
+  }
+
+  public final void setFightingStarted(boolean fightingStarted)
+  {
+    this.fightingStarted = fightingStarted;
+  }
+
+  public final boolean hasFightingStarted()
+  {
+    return fightingStarted;
+  }
+
+  public EncounterRoundCmd createNextRoundCmd(PlayerState playerState, int delayBetweenRoundsMS)
+  {
+    return new AutomaticEncounterRoundCmd(playerState, delayBetweenRoundsMS);
+  }
+
+  public void setHasAnyPlayerActivityPrepared(boolean hasAnyPlayerActivityPrepared)
+  {
+    this.hasAnyPlayerActivityPrepared = hasAnyPlayerActivityPrepared;
+  }
+
+  public boolean hasAnyPlayerActivityPrepared()
+  {
+    return hasAnyPlayerActivityPrepared;
+  }
+
+  public void startFighting()
+  {
   }
 }

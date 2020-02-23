@@ -1,0 +1,41 @@
+package com.github.dagwud.woodlands.game.domain;
+
+import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
+import com.github.dagwud.woodlands.game.commands.battle.ManualEncounterRoundCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
+import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
+import com.github.dagwud.woodlands.gson.game.Creature;
+
+public class ManualEncounter extends Encounter
+{
+  private static final long serialVersionUID = 1L;
+  private final long timeAllowedForPlanningMS;
+
+  public ManualEncounter(Party party, Creature enemy, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
+  {
+    super(party, enemy, actionsAllowedPerRound);
+    this.timeAllowedForPlanningMS = timeAllowedForPlanningMS;
+  }
+
+  @Override
+  public void startFighting()
+  {
+    if (!hasAnyPlayerActivityPrepared())
+    {
+      new SendPartyMessageCmd(getParty(), "Nobody is keen for a fight").go();
+      new MoveToLocationCmd(getParty().getLeader(), ELocation.VILLAGE_SQUARE).go();
+    }
+  }
+
+  @Override
+  public EncounterRoundCmd createNextRoundCmd(PlayerState playerState, int delayBetweenRoundsMS)
+  {
+    return new ManualEncounterRoundCmd(playerState, delayBetweenRoundsMS);
+  }
+
+  public final long getTimeAllowedForPlanningMS()
+  {
+    return timeAllowedForPlanningMS;
+  }
+}

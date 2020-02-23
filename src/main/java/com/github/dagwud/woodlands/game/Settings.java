@@ -33,11 +33,17 @@ public class Settings
 
   public static final int WOODLANDS_MIN_DIFFICULTY = 2;
   public static final int WOODLANDS_MAX_DIFFICULTY = 6;
+  public static final int WOODLANDS_TIME_ALLOWED_FOR_PLANNING_MS = 30_000;
+  public static final int WOODLANDS_ACTIONS_PER_ROUND = 2;
 
   public static final int DEEP_WOODS_MIN_DIFFICULTY = 7;
   public static final int DEEP_WOODS_MAX_DIFFICULTY = 9;
+  public static final int DEEP_WOODS_TIME_ALLOWED_FOR_PLANNING_MS = 20_000;
+  public static final int DEEP_WOODS_ACTIONS_PER_ROUND = 2;
 
   // Any difficulty - but only dragons:
   public static final int THE_GORGE_MIN_DIFFICULTY = Integer.MIN_VALUE;
   public static final int THE_GORGE_MAX_DIFFICULTY = Integer.MAX_VALUE;
+  public static final int THE_GORGE_TIME_ALLOWED_FOR_PLANNING_MS = 20_000;
+  public static final int THE_GORGE_ACTIONS_PER_ROUND = 2;
 }

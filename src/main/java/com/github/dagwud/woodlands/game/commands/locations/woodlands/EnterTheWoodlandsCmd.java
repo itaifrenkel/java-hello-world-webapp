@@ -5,7 +5,9 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 
 public class EnterTheWoodlandsCmd extends AbstractCmd
 {
@@ -30,5 +32,8 @@ public class EnterTheWoodlandsCmd extends AbstractCmd
     RunLaterCmd cmd = new RunLaterCmd(Settings.DELAY_BETWEEN_ENCOUNTERS_MS,
             new GenerateWoodlandsEncounterCmd(playerState));
     CommandDelegate.execute(cmd);
+
+    new SendPartyAlertCmd(playerState.getActiveCharacter().getParty(),
+            playerState.getActiveCharacter().getParty().getName() + " is entering " + ELocation.WOODLANDS.getDisplayName()).go();
   }
 }

@@ -25,7 +25,7 @@ public class SendPartyAlertCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (party == null)
+    if (party == null || party.getAlertChatId() == null)
     {
       return;
     }

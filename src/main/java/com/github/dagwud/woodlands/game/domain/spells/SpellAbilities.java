@@ -57,10 +57,18 @@ public class SpellAbilities implements Serializable
     knownActiveSpell.add(spell);
   }
 
-  public void prepare(SingleCastSpell spell)
+  public void prepare(SingleCastSpell spell, int allowedActions)
   {
-    preparedSpells.clear();
+    makeSpaceForPreparedSpell(allowedActions);
     preparedSpells.addLast(spell);
+  }
+
+  public void makeSpaceForPreparedSpell(int allowedActions)
+  {
+    while (countPrepared() + 1> allowedActions) // +1 for the one we're going to add
+    {
+      preparedSpells.removeFirst();
+    }
   }
 
   public boolean hasPreparedSpell()
@@ -76,5 +84,20 @@ public class SpellAbilities implements Serializable
   public SingleCastSpell popPrepared()
   {
     return preparedSpells.pop();
+  }
+
+  public String[] listPrepared()
+  {
+    List<String> prepared = new ArrayList<>(preparedSpells.size());
+    for (SingleCastSpell preparedSpell : preparedSpells)
+    {
+      prepared.add(preparedSpell.getSpellName());
+    }
+    return prepared.toArray(new String[0]);
+  }
+
+  public int countPrepared()
+  {
+    return preparedSpells.size();
   }
 }

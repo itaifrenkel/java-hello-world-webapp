@@ -1,9 +1,11 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.battle.ShowPreparedActionsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
+import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PrepareSpellCmd;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
@@ -43,8 +45,8 @@ public class CastSpellPromptCmd extends AbstractCmd
     PrepareSpellCmd cmd = new PrepareSpellCmd(character, spell);
     CommandDelegate.execute(cmd);
 
-    SendMessageCmd send = new SendMessageCmd(chatId, "You will cast " + spell.getSpellName() + " on your next turn");
-    CommandDelegate.execute(send);
+    ShowPreparedActionsCmd msg = new ShowPreparedActionsCmd(character);
+    CommandDelegate.execute(msg);
   }
 
   private SingleCastSpell prepareSpell(PlayerCharacter character)

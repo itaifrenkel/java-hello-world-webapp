@@ -1,5 +1,9 @@
 package com.github.dagwud.woodlands.game.log;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Settings;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -20,16 +24,6 @@ public class Logger
     logs = new ArrayList<>();
   }
 
-  public static void info(String message)
-  {
-    getInstance().logs.add(message);
-    System.out.println(message);
-    while (getInstance().logs.size() > MAX_LOG)
-    {
-      getInstance().logs.remove(0);
-    }
-  }
-
   private static Logger getInstance()
   {
     if (instance == null)
@@ -48,6 +42,16 @@ public class Logger
     instance = new Logger();
   }
 
+  public static void info(String message)
+  {
+    getInstance().logs.add(message);
+    System.out.println(message);
+    while (getInstance().logs.size() > MAX_LOG)
+    {
+      getInstance().logs.remove(0);
+    }
+  }
+
   public static void logError(Exception e)
   {
     e.printStackTrace();
@@ -56,7 +60,9 @@ public class Logger
       try (PrintStream ps = new PrintStream(out))
       {
         e.printStackTrace(ps);
-        getInstance().logs.add(out.toString());
+        String log = out.toString();
+        getInstance().logs.add(log);
+        sendAdminMessage(log);
       }
     }
     catch (IOException ex)
@@ -68,6 +74,19 @@ public class Logger
   public static void error(String message)
   {
     info("*" + message + "*");
+    sendAdminMessage(message);
+  }
+
+  private static void sendAdminMessage(String out)
+  {
+    try
+    {
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, out));
+    }
+    catch (Exception ignore)
+    {
+      // oh well
+    }
   }
 
   public static List<String> getLogs()

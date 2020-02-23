@@ -2,9 +2,7 @@ package com.github.dagwud.woodlands.game.commands.battle;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
-import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
@@ -23,7 +21,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   private final double maxDifficulty;
   private String creatureType;
 
-  public GenerateEncounterCmd(PlayerState playerState, ELocation location, double minDifficulty, double maxDifficulty, String creatureType)
+  GenerateEncounterCmd(PlayerState playerState, ELocation location, double minDifficulty, double maxDifficulty, String creatureType)
   {
     this.playerState = playerState;
     this.location = location;
@@ -62,10 +60,8 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
         }
       }
 
-      ChanceCalculatorCmd chance = new ChanceCalculatorCmd(playerState.getActiveCharacter().getParty().getPercentChanceOfEncounter());
-      CommandDelegate.execute(chance);
-
-      if (!chance.getResult())
+      boolean shouldHaveEncounter = shouldHaveEncounter();
+      if (!shouldHaveEncounter)
       {
         String msg = "<i>Time passes. You keep moving. Nothing interesting happens.</i>";
         if (Math.random() <= 0.1d)
@@ -81,31 +77,20 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
       Encounter encounter = startEncounter();
       playerState.getActiveCharacter().getParty().setActiveEncounter(encounter);
 
-      EncounterRoundCmd cmd = new EncounterRoundCmd(playerState.getPlayer().getChatId(), encounter, Settings.DELAY_BETWEEN_ROUNDS_MS);
-      CommandDelegate.execute(cmd);
-
+      scheduleFirstRound(encounter);
       scheduleNextEncounter();
     }
   }
 
-  private Encounter createEncounter(Party party)
-  {
-    SpawnCreatureCmd cmd = new SpawnCreatureCmd(minDifficulty, maxDifficulty, creatureType);
-    CommandDelegate.execute(cmd);
-    Creature creature = cmd.getSpawnedCreature();
+  protected abstract void scheduleFirstRound(Encounter encounter);
 
-    Encounter encounter = new Encounter();
-    encounter.setParty(party);
-    encounter.setEnemy(creature);
+  protected abstract boolean shouldHaveEncounter();
 
-    return encounter;
-  }
   protected abstract void scheduleNextEncounter();
 
   private Encounter startEncounter()
   {
-    Encounter encounter = createEncounter(playerState.getActiveCharacter().getParty());
-
+    Encounter encounter = createEncounter();
     String message = "<b>You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + "):</b>\n" + encounter.getEnemy().summary();
     Item carriedLeft = encounter.getEnemy().getCarrying().getCarriedLeft();
     Item carriedRight = encounter.getEnemy().getCarrying().getCarriedRight();
@@ -128,8 +113,38 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
     return encounter;
   }
 
-  protected PlayerState getPlayerState()
+  private Encounter createEncounter()
+  {
+    SpawnCreatureCmd cmd = new SpawnCreatureCmd(getMinDifficulty(), getMaxDifficulty(), getCreatureType());
+    CommandDelegate.execute(cmd);
+    Creature creature = cmd.getSpawnedCreature();
+    return createEncounter(getPlayerState().getActiveCharacter().getParty(), creature);
+  }
+
+  abstract Encounter createEncounter(Party party, Creature enemy);
+
+  protected final PlayerState getPlayerState()
   {
     return playerState;
+  }
+
+  protected final ELocation getLocation()
+  {
+    return location;
+  }
+
+  final double getMinDifficulty()
+  {
+    return minDifficulty;
+  }
+
+  final double getMaxDifficulty()
+  {
+    return maxDifficulty;
+  }
+
+  final String getCreatureType()
+  {
+    return creatureType;
   }
 }
