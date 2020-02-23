@@ -47,7 +47,7 @@ public class Stat implements Serializable
 
   public void clearBonuses()
   {
-    this.bonuses = 0;
+    this.bonus = 0;
   }
 
   @Override
