@@ -30,7 +30,7 @@ public class RecoverHitPointsCmd extends AbstractCmd
     {
       if (target.getStats().getState() != EState.ALIVE)
       {
-        for (PassivePartySpell passivePartySpell : joiner.getSpellAbilities().getPassivePartySpells())
+        for (PassivePartySpell passivePartySpell : target.getSpellAbilities().getPassivePartySpells())
         {
           CommandDelegate.execute(new CastSpellCmd(passivePartySpell));
         }
