@@ -73,7 +73,7 @@ public class TelegramServlet extends HttpServlet
     String text = determineText(update);
     Logger.info(summarizeIncomingMessage(update));
 
-    if (chatId < 10000)
+     if (chatId < -10000)
     {
       // ignore group messages
       return;
