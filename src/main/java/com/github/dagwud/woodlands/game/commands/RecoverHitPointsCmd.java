@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.characters.spells.PassivePartySpell;
 
 public class RecoverHitPointsCmd extends AbstractCmd
 {
