@@ -33,8 +33,7 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
       if (victoriousParty.getCollectedItems().size() >= Settings.MAX_UNCLAIMED_PARTY_ITEMS)
       {
         return;
-      }!
-
+      }
     }
 
     DiceRollCmd cmd = new DiceRollCmd(1, 6);
