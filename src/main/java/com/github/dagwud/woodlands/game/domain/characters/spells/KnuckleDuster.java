@@ -1,6 +1,10 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.Weapon;
+import com.github.dagwud.woodlands.game.commands.battle.AttackCmd;
 
 public class KnuckleDuster extends SingleCastSpell
 {
@@ -15,14 +19,35 @@ public class KnuckleDuster extends SingleCastSpell
   @Override
   public boolean cast()
   {
+    int hitChanceBoost = 10_000;
     getCaster().getStats().setDamageMultiplier(getCaster().getStats().getDamageMultiplier() * DAMAGE_MULTIPLIER);
+    getCaster().getStats().setHitBoost(getCaster().getStats().getHitBoost() + hitChanceBoost);
+    DamageInflicted damage = doAttack();
+    setDamageInflicted(damage);
+    getCaster().getStats().setHitBoost(getCaster().getStats().getHitBoost() - hitChanceBoost);
+    getCaster().getStats().setDamageMultiplier(Math.floor(getCaster().getStats().getDamageMultiplier() / DAMAGE_MULTIPLIER));
     return true;
+  }
+
+  public DamageInflicted doAttack()
+  {
+    Fighter enemy = getCaster().getParty().getActiveEncounter().getEnemy();
+    AttackCmd attack = new AttackCmd(getCaster(), createWeapon(), enemy);
+    CommandDelegate.execute(attack);
+    return attack.getDamageInflicted();
+  }
+
+  private Weapon createWeapon()
+  {
+    Weapon weapon = new Weapon();
+    weapon.name = getSpellName();
+    weapon.customIcon = "✨";
+    return weapon;
   }
 
   @Override
   public void expire()
   {
-    getCaster().getStats().setDamageMultiplier(Math.floor(getCaster().getStats().getDamageMultiplier() / DAMAGE_MULTIPLIER));
   }
 
   @Override
