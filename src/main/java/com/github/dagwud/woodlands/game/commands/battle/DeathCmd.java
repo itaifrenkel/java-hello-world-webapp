@@ -8,14 +8,15 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.NonPlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 
 public class DeathCmd extends AbstractCmd
 {
-   private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-   private final Fighter target;
+  private final Fighter target;
 
   public DeathCmd(Fighter target)
   {
