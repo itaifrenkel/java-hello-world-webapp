@@ -9,7 +9,7 @@ import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
-import com.github.dagwud.woodlands.gson.game.Settings;
+import com.github.dagwud.woodlands.game.Settings;
 
 public class DefeatCreatureRewardCmd extends AbstractCmd
 {
