@@ -31,8 +31,11 @@ public class PatchCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    fixNegativeStats(character.getStats().getStrength(), "strength");
-    fixNegativeStats(character.getStats().getAgility(), "agility");
+    if (null != character.getStats())
+    {
+      fixNegativeStats(character.getStats().getStrength(), "strength");
+      fixNegativeStats(character.getStats().getAgility(), "agility");
+    }
   }
 
   void fixNegativeStats(Stat stat, String statName)
