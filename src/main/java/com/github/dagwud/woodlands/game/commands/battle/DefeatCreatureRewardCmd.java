@@ -9,6 +9,7 @@ import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.gson.game.Settings;
 
 public class DefeatCreatureRewardCmd extends AbstractCmd
 {
@@ -29,7 +30,11 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
     if (!victoriousParty.getCollectedItems().isEmpty())
     {
       new SendPartyMessageCmd(victoriousParty, "Your party has unclaimed items").go();
-      return;
+      if (victoriousParty.getCollectedItems().size() >= Settings.MAX_UNCLAIMED_PARTY_ITEMS)
+      {
+        return;
+      }!
+
     }
 
     DiceRollCmd cmd = new DiceRollCmd(1, 6);
