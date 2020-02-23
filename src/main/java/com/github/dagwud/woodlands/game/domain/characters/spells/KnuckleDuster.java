@@ -33,17 +33,10 @@ public class KnuckleDuster extends SingleCastSpell
   public DamageInflicted doAttack()
   {
     Fighter enemy = getCaster().getParty().getActiveEncounter().getEnemy();
-    AttackCmd attack = new AttackCmd(getCaster(), createWeapon(), enemy);
+    Weapon weapon = (Weapon)(getCaster().getCarrying().getCarriedLeft());
+    AttackCmd attack = new AttackCmd(getCaster(), weapon, enemy);
     CommandDelegate.execute(attack);
     return attack.getDamageInflicted();
-  }
-
-  private Weapon createWeapon()
-  {
-    Weapon weapon = new Weapon();
-    weapon.name = getSpellName();
-    weapon.customIcon = "✨";
-    return weapon;
   }
 
   @Override
