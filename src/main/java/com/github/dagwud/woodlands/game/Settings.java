@@ -14,6 +14,7 @@ public class Settings
   public static final long SOBER_UP_DELAY_MS = 60_000 * 20;
   public static final long SHORT_REST_DURATION_MS = 60_000 * 5;
   public static final long LONG_REST_DURATION_MS = 60_000 * 60; // 1 hour
+  public static final int MAX_UNCLAIMED_PARTY_ITEMS = 5;
 
   public static final int PROGRESS_BARS_FOR_EXPERIENCE = 10;
 
