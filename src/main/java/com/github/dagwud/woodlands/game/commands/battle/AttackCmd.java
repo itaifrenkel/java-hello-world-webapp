@@ -138,7 +138,7 @@ public class AttackCmd extends AbstractCmd
             baseDamage, defender, criticalHitDamage + bonusDamage + drunkStrengthDamage);
   }
 
-  DamageInflicted getDamageInflicted()
+  public DamageInflicted getDamageInflicted()
   {
     return damageInflicted;
   }
