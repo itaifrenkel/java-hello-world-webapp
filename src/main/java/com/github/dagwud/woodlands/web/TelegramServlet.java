@@ -73,6 +73,12 @@ public class TelegramServlet extends HttpServlet
     String text = determineText(update);
     Logger.info(summarizeIncomingMessage(update));
 
+    if (chatId < 10000)
+    {
+      // ignore group messages
+      return;
+    }
+    
     PlayerState playerState = GameStatesRegistry.lookup(chatId);
     synchronized (GameStatesRegistry.lookup(chatId))
     {
