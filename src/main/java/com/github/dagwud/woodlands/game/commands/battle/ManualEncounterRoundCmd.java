@@ -32,6 +32,11 @@ public class ManualEncounterRoundCmd extends EncounterRoundCmd
   protected void scheduleFightPhase(Encounter encounter, PlayerState playerState)
   {
     ManualEncounter manualEncounter = (ManualEncounter) playerState.getActiveCharacter().getParty().getActiveEncounter();
+    if (manualEncounter == null)
+    {
+      // encounter had ended
+      return;
+    }
 
     EncounterRoundFightCmd fight = new EncounterRoundFightCmd(playerState, encounter, getDelayBetweenRoundsMS());
     RunLaterCmd startRound = new RunLaterCmd(manualEncounter.getTimeAllowedForPlanningMS(), fight);
