@@ -30,6 +30,18 @@ public class PatchCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    Stat stat = character.getStats().getStrength();
+    fixNegativeStats(stat, character);
+  }
+
+  void fixNegativeStats(Stat stat, String statName)
+  {
+    if (stat.getTotal() < 0)
+    {
+      stat.clearBonuses();
+      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "PATCH: negative " + statName + " has been undone for " + character.getName()));
+      CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "PATCH: negative " + statName + " has been undone"));
+    }
   }
 
 }
