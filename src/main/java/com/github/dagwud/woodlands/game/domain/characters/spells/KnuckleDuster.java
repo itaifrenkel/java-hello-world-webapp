@@ -27,6 +27,7 @@ public class KnuckleDuster extends SingleCastSpell
     setDamageInflicted(damage);
     getCaster().getStats().setHitBoost(getCaster().getStats().getHitBoost() - hitChanceBoost);
     getCaster().getStats().setDamageMultiplier(Math.floor(getCaster().getStats().getDamageMultiplier() / DAMAGE_MULTIPLIER));
+    getCaster().getStats().setDamageMultiplier(1d);
     return true;
   }
 
