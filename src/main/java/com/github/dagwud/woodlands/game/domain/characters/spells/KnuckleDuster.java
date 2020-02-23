@@ -2,8 +2,9 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.Weapon;
+import com.github.dagwud.woodlands.gson.game.Weapon;
 import com.github.dagwud.woodlands.game.commands.battle.AttackCmd;
 
 public class KnuckleDuster extends SingleCastSpell
@@ -54,5 +55,11 @@ public class KnuckleDuster extends SingleCastSpell
   public int getManaCost()
   {
     return 1;
+  }
+
+  @Override
+  public PlayerCharacter getCaster()
+  {
+    return (PlayerCharacter)super.getCaster();
   }
 }
