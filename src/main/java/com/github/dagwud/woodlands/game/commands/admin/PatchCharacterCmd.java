@@ -37,7 +37,7 @@ public class PatchCharacterCmd extends AbstractCmd
 
   void fixNegativeStats(Stat stat, String statName)
   {
-    if (stat.getTotal() < 0)
+    if (stat.total() < 0)
     {
       stat.clearBonuses();
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "PATCH: negative " + statName + " has been undone for " + character.getName()));
