@@ -20,6 +20,11 @@ public class PrepareAttackCmd extends AbstractCmd
   public void execute()
   {
     Encounter activeEncounter = character.getParty().getActiveEncounter();
+    if (activeEncounter == null)
+    {
+      return;
+    }
+
     if (activeEncounter.hasFightingStarted())
     {
       CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "Too late - the round has already started"));
