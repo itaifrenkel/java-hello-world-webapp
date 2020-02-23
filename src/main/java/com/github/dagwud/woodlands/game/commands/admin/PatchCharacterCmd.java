@@ -16,6 +16,7 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell
 
 import com.github.dagwud.woodlands.game.domain.trinkets.*;
 import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.stats.*;
 import com.github.dagwud.woodlands.game.domain.trinkets.consumable.*;
 
 public class PatchCharacterCmd extends AbstractCmd
