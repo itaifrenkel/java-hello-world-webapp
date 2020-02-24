@@ -16,7 +16,7 @@ public class PrepareSpellCmd extends AbstractCmd
 
   public PrepareSpellCmd(GameCharacter caster, SingleCastSpell spell)
   {
-    super(new AbleToActPrecondition(caster));
+    super(new AbleToActPrerequisite(caster));
     this.caster = caster;
     this.spell = spell;
   }
