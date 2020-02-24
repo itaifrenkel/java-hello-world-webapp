@@ -9,6 +9,9 @@ import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class PatchWorldCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
@@ -16,7 +19,8 @@ public class PatchWorldCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
+    Collection<PlayerState> playerStates = new ArrayList<>(GameStatesRegistry.allPlayerStates());
+    for (PlayerState playerState : playerStates)
     {
       patch(playerState.getPlayer().getActiveCharacter());
 

@@ -60,7 +60,7 @@ public class PromptJoinPartyCmd extends SuspendableCmd
     try
     {
       long chatId = Long.parseLong(capturedInput);
-      if (chatId >= -10000L && chatId != NO_CHANGE_GROUP_CHAT && chatId != NO_GROUP_CHAT)
+      if (chatId <= -10000L || chatId == NO_CHANGE_GROUP_CHAT || chatId == NO_GROUP_CHAT)
       {
         groupChatId = chatId;
       }
@@ -102,7 +102,7 @@ public class PromptJoinPartyCmd extends SuspendableCmd
         }
         if (changed)
         {
-          new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be sent").go();
+          new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here").go();
         }
         getPlayerState().getActiveCharacter().getParty().setAlertChatId(alertChannelChatId);
         if (changed)
