@@ -43,6 +43,14 @@ public class WakeCmd extends AbstractCmd
       CommandDelegate.execute(c);
       return;
     }
+
+    if (!allAtSameLocation(activeCharacter.getParty())
+    {
+      SendMessageCmd c = new SendMessageCmd("It would be disrespectful if not everybody was here to pay their respects");
+      CommandDelegate.execute(c);
+      return;
+    }
+
     for (int i = 0; i < dead.getStats().getLevel(); i++)
     {
       for (PlayerCharacter c : activeCharacter.getParty().getActivePlayerCharacters())
@@ -57,4 +65,18 @@ public class WakeCmd extends AbstractCmd
     LeavePartyCmd leave = new LeavePartyCmd(dead, activeCharacter.getParty(), true);
     CommandDelegate.execute(leave);
   }
+
+  private boolean allAtSameLocation(Party party)
+  {
+    Set<ELocation> locations = new HashSet<>();
+    for (GameCharacter member : party.getActiveMembers())
+    {
+      if (!member.isDead())
+      {
+        locations.add(member.getLocation());
+      }
+    }
+    return locations.size() == 1;
+  }
+
 }
