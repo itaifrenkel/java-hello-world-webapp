@@ -46,4 +46,6 @@ public class Settings
   public static final int THE_GORGE_MAX_DIFFICULTY = Integer.MAX_VALUE;
   public static final int THE_GORGE_TIME_ALLOWED_FOR_PLANNING_MS = 20_000;
   public static final int THE_GORGE_ACTIONS_PER_ROUND = 2;
+
+  public static final boolean DEVELOPER_MODE = false;
 }

@@ -30,6 +30,11 @@ public class PersistObjectCmd extends AbstractCmd
   @Override
   public void execute() throws Exception
   {
+    if (Settings.DEVELOPER_MODE)
+    {
+      Logger.info("Developer mode active; skipping persistence");
+      return;
+    }
     final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     try
     {
