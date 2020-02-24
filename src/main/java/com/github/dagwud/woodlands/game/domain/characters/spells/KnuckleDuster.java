@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 import com.github.dagwud.woodlands.game.commands.battle.AttackCmd;
+import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 
 public class KnuckleDuster extends SingleCastSpell
 {
@@ -14,7 +15,7 @@ public class KnuckleDuster extends SingleCastSpell
 
   public KnuckleDuster(PlayerCharacter caster)
   {
-    super("Knuckle Duster", caster);
+    super("Spiritual Knuckle Duster", caster);
   }
 
   @Override
@@ -37,6 +38,10 @@ public class KnuckleDuster extends SingleCastSpell
     Weapon weapon = (Weapon)(getCaster().getCarrying().getCarriedLeft());
     AttackCmd attack = new AttackCmd(getCaster(), weapon, enemy);
     CommandDelegate.execute(attack);
+    
+    DealDamageCmd dealDamage = new DealDamageCmd(attack.getDamageInflicted(), enemy);
+    CommandDelegate.execute(dealDamage);
+    
     return attack.getDamageInflicted();
   }
 
