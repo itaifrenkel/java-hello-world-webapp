@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -13,6 +14,7 @@ public class PrepareAttackCmd extends AbstractCmd
 
   public PrepareAttackCmd(PlayerCharacter character)
   {
+    super(new AbleToActPrerequisite(character));
     this.character = character;
   }
 

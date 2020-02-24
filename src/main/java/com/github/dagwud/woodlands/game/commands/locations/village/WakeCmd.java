@@ -7,9 +7,14 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
+import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.Party;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 public class WakeCmd extends AbstractCmd
 {
@@ -43,6 +48,14 @@ public class WakeCmd extends AbstractCmd
       CommandDelegate.execute(c);
       return;
     }
+
+    if (!allAtSameLocation(activeCharacter.getParty()))
+    {
+      SendMessageCmd c = new SendMessageCmd(chatId, "It would be disrespectful if not everybody was here to pay their respects");
+      CommandDelegate.execute(c);
+      return;
+    }
+
     for (int i = 0; i < dead.getStats().getLevel(); i++)
     {
       for (PlayerCharacter c : activeCharacter.getParty().getActivePlayerCharacters())
@@ -57,4 +70,18 @@ public class WakeCmd extends AbstractCmd
     LeavePartyCmd leave = new LeavePartyCmd(dead, activeCharacter.getParty(), true);
     CommandDelegate.execute(leave);
   }
+
+  private boolean allAtSameLocation(Party party)
+  {
+    Set<ELocation> locations = new HashSet<>();
+    for (GameCharacter member : party.getActiveMembers())
+    {
+      if (!member.isDead())
+      {
+        locations.add(member.getLocation());
+      }
+    }
+    return locations.size() == 1;
+  }
+
 }
