@@ -14,7 +14,7 @@ public class PrepareAttackCmd extends AbstractCmd
 
   public PrepareAttackCmd(PlayerCharacter character)
   {
-    super(new AbleToActPrerequisite(activeCharacter));
+    super(new AbleToActPrerequisite(character));
     this.character = character;
   }
 
