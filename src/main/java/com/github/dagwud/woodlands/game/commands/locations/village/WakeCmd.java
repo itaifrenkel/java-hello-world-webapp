@@ -45,7 +45,7 @@ public class WakeCmd extends AbstractCmd
       return;
     }
 
-    if (!allAtSameLocation(activeCharacter.getParty())
+    if (!allAtSameLocation(activeCharacter.getParty()))
     {
       SendMessageCmd c = new SendMessageCmd("It would be disrespectful if not everybody was here to pay their respects");
       CommandDelegate.execute(c);
