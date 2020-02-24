@@ -59,6 +59,7 @@ public class AirOfAuthority extends PassiveBattleRoundSpell
       Integer buffedAmount = buffs.get(target);
       target.getStats().getStrength().removeBonus(buffedAmount);
     }
+    buffs.clear();
   }
 
   private int rollBuff(GameCharacter target)

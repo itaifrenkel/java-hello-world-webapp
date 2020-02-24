@@ -55,6 +55,7 @@ public class CallToArms extends SingleCastSpell
       target.getStats().getStrength().removeBonus(buffedAmount);
       target.getStats().getAgility().removeBonus(buffedAmount);
     }
+    buffs.clear();
   }
 
   private int rollBuff(GameCharacter target)

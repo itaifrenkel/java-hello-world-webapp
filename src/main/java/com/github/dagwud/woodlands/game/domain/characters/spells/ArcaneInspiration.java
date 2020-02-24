@@ -53,5 +53,6 @@ public class ArcaneInspiration extends PassivePartySpell
               getCaster().getName() + " is no longer boosting your maximum mana");
       CommandDelegate.execute(cmd);
     }
+    boosted.clear();
   }
 }

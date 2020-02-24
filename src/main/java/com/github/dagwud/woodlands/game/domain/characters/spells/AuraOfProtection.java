@@ -56,6 +56,7 @@ public class AuraOfProtection extends PassiveBattleRoundSpell
       Integer buffedAmount = buffs.get(target);
       target.getStats().setDefenceRatingBoost(target.getStats().getDefenceRatingBoost() - buffedAmount);
     }
+    buffs.clear();
   }
 
   @Override

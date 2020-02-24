@@ -35,6 +35,9 @@ public class PatchCharacterCmd extends AbstractCmd
     {
       fixNegativeStats(character.getStats().getStrength(), "strength");
       fixNegativeStats(character.getStats().getAgility(), "agility");
+      fixNegativeStats(character.getStats().getConstitution(), "constitution");
+      fixNegativeStats(character.getStats().getMaxMana(), "max mana");
+      fixNegativeStats(character.getStats().getMaxHitPoints(), "max HP");
     }
   }
 
