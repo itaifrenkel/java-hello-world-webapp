@@ -27,7 +27,10 @@ public class CastPassiveAbilitiesCmd extends AbstractCmd
     passivesCast = new ArrayList<>();
     for (Fighter member : fighters)
     {
-      passivesCast.addAll(member.getSpellAbilities().getPassives());
+      if (fighter.isConscious())
+      {
+        passivesCast.addAll(member.getSpellAbilities().getPassives());
+      }
     }
 
     passivesCast.removeIf(p -> !p.shouldCast());
