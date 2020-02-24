@@ -49,6 +49,7 @@ public enum ECommand
   CREATURE_CACHE("/cachecreature", false, ((character, chatId) -> new InvalidateCreatureCacheCmd(chatId))),
   SPAWN_TRINKET("/trinket", false, ((character, chatId) -> new SpawnTrinketCmd(character))),
   SET_XP("/xp", false, ((character, chatId) -> new AdminSetXPCmd(chatId))),
+  DAMAGE("/damage", false, ((character, chatId) -> new AdminDamageCmd(character))),
   YOU("/you", false, ((character, chatId) -> new AdminShowCharacterInfoCmd(chatId, character))),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),

@@ -12,7 +12,7 @@ public class RecoverHitPointsCmd extends AbstractCmd
   private static final long serialVersionUID = 1L;
 
   private final Fighter target;
-  private final int hitPointsRecovered;
+  private int hitPointsRecovered;
 
   public RecoverHitPointsCmd(Fighter target, int hitPointsRecovered)
   {
@@ -25,6 +25,7 @@ public class RecoverHitPointsCmd extends AbstractCmd
   {
     int newHP = target.getStats().getHitPoints() + hitPointsRecovered;
     newHP = Math.min(newHP, target.getStats().getMaxHitPoints().total());
+    hitPointsRecovered = newHP - target.getStats().getHitPoints();
     target.getStats().setHitPoints(newHP);
     if (target.getStats().getHitPoints() > 0)
     {
@@ -37,5 +38,10 @@ public class RecoverHitPointsCmd extends AbstractCmd
       }
       target.getStats().setState(EState.ALIVE);
     }
+  }
+
+  public int getHitPointsRecovered()
+  {
+    return hitPointsRecovered;
   }
 }
