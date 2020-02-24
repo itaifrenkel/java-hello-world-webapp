@@ -19,6 +19,12 @@ public class ShowPreparedActionsCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (character.getParty().getActiveEncounter() == null)
+    {
+      new SendMessageCmd(character.getPlayedBy().getChatId(), "No battle in progress!").go();
+      return;
+    }
+
     String[] spells = character.getSpellAbilities().listPrepared();
     String action = String.join(" and ", spells);
     action = "You will " + (spells.length == 0 ? "" : "cast " + action);

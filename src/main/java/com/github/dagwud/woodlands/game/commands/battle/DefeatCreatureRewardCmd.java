@@ -9,35 +9,46 @@ import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.game.Settings;
 
 public class DefeatCreatureRewardCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
+  private static final int CHANCE_FARMED_ENCOUNTER = 30; // 1 in x
+  private static final int CHANCE_NOT_FARMED_ENCOUNTER = 6; // 1 in x
+
   private final Party victoriousParty;
   private final Creature createdDefeated;
+  private final boolean isFarmedEncounter;
 
-  public DefeatCreatureRewardCmd(Party victoriousParty, Creature creatureDefeated)
+  public DefeatCreatureRewardCmd(Party victoriousParty, Creature creatureDefeated, boolean isFarmedEncounter)
   {
     this.victoriousParty = victoriousParty;
     this.createdDefeated = creatureDefeated;
+    this.isFarmedEncounter = isFarmedEncounter;
   }
 
   @Override
   public void execute()
   {
-    if (!victoriousParty.getCollectedItems().isEmpty())
-    {
-      new SendPartyMessageCmd(victoriousParty, "Your party has unclaimed items").go();
-      return;
-    }
+    int rollSpread = (isFarmedEncounter ? CHANCE_FARMED_ENCOUNTER : CHANCE_NOT_FARMED_ENCOUNTER);
 
-    DiceRollCmd cmd = new DiceRollCmd(1, 6);
+    DiceRollCmd cmd = new DiceRollCmd(1, rollSpread);
     CommandDelegate.execute(cmd);
-    if (cmd.getTotal() != 6)
+    if (cmd.getTotal() != rollSpread)
     {
       // Nothing this time
       return;
+    }
+
+    if (!victoriousParty.getCollectedItems().isEmpty())
+    {
+      new SendPartyMessageCmd(victoriousParty, "Your party has unclaimed items").go();
+      if (victoriousParty.getCollectedItems().size() >= Settings.MAX_UNCLAIMED_PARTY_ITEMS)
+      {
+        return;
+      }
     }
 
     SpawnItemCmd itemDrop = new SpawnItemCmd(true);

@@ -42,10 +42,9 @@ public class DefeatCreatureCmd extends AbstractCmd
     {
       reward = reward * 2;
       CommandDelegate.execute(new SendPartyMessageCmd(victoriousParty, "<b>Double XP awarded!</b>"));
-
-      DefeatCreatureRewardCmd rewardCmd = new DefeatCreatureRewardCmd(victoriousParty, creatureDefeated);
-      CommandDelegate.execute(rewardCmd);
     }
+    DefeatCreatureRewardCmd rewardCmd = new DefeatCreatureRewardCmd(victoriousParty, creatureDefeated, isFarmedEncounter);
+    CommandDelegate.execute(rewardCmd);
 
     List<PlayerCharacter> victoriousPlayers = findVictors(victoriousParty, creatureDefeated);
     int rewardPerCharacter = victoriousPlayers.isEmpty() ? 0 : Math.floorDiv(reward, victoriousPlayers.size());
