@@ -10,7 +10,7 @@ public class ManaRing extends TimedBenefitWearableTrinket
 {
   private static final long serialVersionUID = 1L;
   private static final int MANA_REGEN = 1;
-  private static final long REGENRATE_EVERY_MS = 30 * 60_000; // 30 minutes
+  private static final long REGENRATE_EVERY_MS = 3 * 60 * 60_000; // 3 hours
 
   @Override
   public void applyBenefit(Fighter applyTo)
