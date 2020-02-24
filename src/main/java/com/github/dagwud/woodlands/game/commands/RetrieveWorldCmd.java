@@ -12,7 +12,10 @@ import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
+import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
@@ -72,7 +75,10 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
 
     Scheduler.instance().restoreScheduled();
+
     ELocation.scheduleRooms();
+
+    EEvent.PLAYER_DEATH.subscribe(fighter -> new SendPartyAlertCmd(((PlayerCharacter) fighter).getParty(), fighter.getName() + " has died!").go());
 
     Logger.info("Successfully restored world!");
 
