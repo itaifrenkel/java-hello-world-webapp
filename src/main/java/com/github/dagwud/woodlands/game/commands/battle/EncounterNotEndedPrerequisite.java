@@ -15,6 +15,6 @@ public class EncounterNotEndedPrerequisite implements CommandPrerequisite
   @Override
   public boolean verify()
   {
-    return !encounter.isEnded();
+    return encounter != null && !encounter.isEnded();
   }
 }
