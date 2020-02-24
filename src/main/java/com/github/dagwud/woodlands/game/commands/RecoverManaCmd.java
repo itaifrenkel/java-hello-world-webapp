@@ -8,7 +8,7 @@ public class RecoverManaCmd extends AbstractCmd
   private static final long serialVersionUID = 1L;
 
   private final Fighter target;
-  private final int manaRecovered;
+  private int manaRecovered;
 
   public RecoverManaCmd(Fighter target, int manaRecovered)
   {
@@ -20,6 +20,12 @@ public class RecoverManaCmd extends AbstractCmd
   public void execute()
   {
     int newMana = Math.min(target.getStats().getMana() + manaRecovered, target.getStats().getMaxMana().total());
+    this.manaRecovered = newMana - target.getStats().getMana();
     target.getStats().setMana(newMana);
+  }
+
+  public int getManaRecovered()
+  {
+    return manaRecovered;
   }
 }
