@@ -7,8 +7,10 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.Party;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -49,7 +51,7 @@ public class WakeCmd extends AbstractCmd
 
     if (!allAtSameLocation(activeCharacter.getParty()))
     {
-      SendMessageCmd c = new SendMessageCmd(activeCharacter.getParty(), "It would be disrespectful if not everybody was here to pay their respects");
+      SendMessageCmd c = new SendMessageCmd(chatId, "It would be disrespectful if not everybody was here to pay their respects");
       CommandDelegate.execute(c);
       return;
     }
