@@ -15,8 +15,8 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
-  private static final int CHANCE_FARMED_ENCOUNTER = 30; // 1 in x
-  private static final int CHANCE_NOT_FARMED_ENCOUNTER = 6; // 1 in x
+  private static final int CHANCE_FARMED_ENCOUNTER = 20; // 1 in x
+  private static final int CHANCE_NOT_FARMED_ENCOUNTER = 4; // 1 in x
 
   private final Party victoriousParty;
   private final Creature createdDefeated;
