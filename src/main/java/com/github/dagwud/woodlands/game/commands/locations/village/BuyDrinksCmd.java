@@ -17,7 +17,7 @@ public class BuyDrinksCmd extends AbstractCmd
 
   private static final int MAX_WARNING_DRINKS_1 = 20;
   private static final int MAX_WARNING_DRINKS_2 = 40;
-  private static final long DRINK_DURATION_MS = 10_000;
+  private static final long DRINK_DURATION_MS = 30_000;
 
   private final int chatId;
   private final PlayerCharacter activeCharacter;
