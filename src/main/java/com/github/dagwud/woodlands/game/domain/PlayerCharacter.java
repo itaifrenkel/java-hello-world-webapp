@@ -82,4 +82,10 @@ public abstract class PlayerCharacter extends GameCharacter
     }
     return innkeeper;
   }
+
+  public boolean shouldGainExperienceByDefeating(Creature enemy)
+  {
+    double levelDiff = p.getStats().getLevel() - defeated.difficulty;
+    return levelDiff <= 2.0;
+  }
 }
