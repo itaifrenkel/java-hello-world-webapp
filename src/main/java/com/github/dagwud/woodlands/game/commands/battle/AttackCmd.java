@@ -68,7 +68,7 @@ public class AttackCmd extends AbstractCmd
     int weaponBoost = attacker.getStats().getWeaponBonusHit(attackWith);
     weaponBoost += attacker.getStats().getBonusDamage();
 
-    int defenderDefenceRating = defender.getStats().getBaseDefenceRating() + defender.getStats().getDefenceRatingBoost();
+    int defenderDefenceRating = defender.getStats().getDefenceRating();
     defenderDefenceRating += countShieldsDefence(defender);
 
     if (naturalRoll.getTotal() + modifier.total() + weaponBoost + attacker.getStats().determineHitChanceBoost() >= defenderDefenceRating)
