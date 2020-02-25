@@ -57,7 +57,7 @@ public class JoinPartyCmd extends AbstractCmd
 
     if (joiner instanceof PlayerCharacter)
     {
-      CommandDelegate.execute(new SendPartyAlertCmd(party, joiner.getName() + " has joined " + party.getName()));
+      EEvent.JOINED_PARTY.trigger((PlayerCharacter) joiner);
     }
 
     if (party.getLeader() != null)

@@ -8,7 +8,9 @@ import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.locations.deepwoods.GenerateDeepWoodsEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
+import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class EnterDeepWoodsCmd extends AbstractCmd
 {
@@ -25,7 +27,9 @@ public class EnterDeepWoodsCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (!playerState.getActiveCharacter().getParty().isLedBy(playerState.getActiveCharacter()))
+    PlayerCharacter activeCharacter = playerState.getActiveCharacter();
+
+    if (!activeCharacter.getParty().isLedBy(activeCharacter))
     {
       return;
     }
@@ -34,7 +38,6 @@ public class EnterDeepWoodsCmd extends AbstractCmd
             new GenerateDeepWoodsEncounterCmd(playerState));
     CommandDelegate.execute(cmd);
 
-    new SendPartyAlertCmd(playerState.getActiveCharacter().getParty(),
-            playerState.getActiveCharacter().getParty().getName() + " is entering " + ELocation.DEEP_WOODS.getDisplayName()).go();
+    EEvent.MOVED.trigger(activeCharacter);
   }
 }

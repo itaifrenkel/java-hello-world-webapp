@@ -20,6 +20,7 @@ import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RetrieveWorldCmd extends AbstractCmd
@@ -78,7 +79,7 @@ public class RetrieveWorldCmd extends AbstractCmd
 
     ELocation.scheduleRooms();
 
-    EEvent.PLAYER_DEATH.subscribe(fighter -> new SendPartyAlertCmd(((PlayerCharacter) fighter).getParty(), fighter.getName() + " has died!").go());
+    EEvent.subscribeToStandardEvents();
 
     Logger.info("Successfully restored world!");
 
@@ -93,6 +94,11 @@ public class RetrieveWorldCmd extends AbstractCmd
 
   private List<String> list()
   {
+    if (Settings.DEVELOPER_MODE)
+    {
+      return Collections.emptyList();
+    }
+
     List<String> objectNames = new ArrayList<>(2);
 
     Logger.info("Checking for persisted world...");

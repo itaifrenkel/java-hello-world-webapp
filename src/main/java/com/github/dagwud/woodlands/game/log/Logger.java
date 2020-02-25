@@ -79,6 +79,11 @@ public class Logger
 
   private static void sendAdminMessage(String out)
   {
+    if (Settings.DEVELOPER_MODE)
+    {
+      return;
+    }
+
     try
     {
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, out));

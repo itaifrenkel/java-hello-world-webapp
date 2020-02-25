@@ -1,8 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.events;
 
-import com.github.dagwud.woodlands.game.domain.Fighter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public interface EventRecipient
 {
-  void trigger(Fighter fighter);
+  void trigger(PlayerCharacter fighter);
 }

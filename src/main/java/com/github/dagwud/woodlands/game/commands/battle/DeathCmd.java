@@ -32,7 +32,7 @@ public class DeathCmd extends AbstractCmd
     }
     else if (target instanceof PlayerCharacter)
     {
-      EEvent.PLAYER_DEATH.trigger(target);
+      EEvent.PLAYER_DEATH.trigger((PlayerCharacter) target);
     }
   }
 }

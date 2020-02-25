@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.domain.events.EventRecipient;
 
 import java.util.ArrayList;
@@ -9,9 +11,17 @@ import java.util.Map;
 
 public enum EEvent
 {
-  PLAYER_DEATH;
+  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED;
 
   private static transient Map<EEvent, List<EventRecipient>> subscribers;
+
+  public static void subscribeToStandardEvents()
+  {
+    EEvent.PLAYER_DEATH.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has died!")));
+    EEvent.JOINED_PARTY.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has joined " + fighter.getParty().getName())));
+    EEvent.LEFT_PARTY.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName())));
+    EEvent.MOVED.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getParty().getName() + " is entering " + fighter.getLocation().getDisplayName())));
+  }
 
   public void subscribe(EventRecipient recipient)
   {
@@ -20,7 +30,7 @@ public enum EEvent
 
   // Making the ease-of-use-assumption now that any event will most likely involve a fighter
   // and any more context can be inferred from the event. This may be completely wrong.
-  public void trigger(Fighter fighter)
+  public void trigger(PlayerCharacter fighter)
   {
     for (EventRecipient subscriber : getSubscribers(this))
     {
