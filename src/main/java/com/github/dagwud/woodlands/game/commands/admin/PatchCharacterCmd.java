@@ -47,6 +47,8 @@ public class PatchCharacterCmd extends AbstractCmd
       if (!character.getSpellAbilities().hasKnownSpell(Intimidation.class))
       {
         character.getSpellAbilities().register(new Intimidation((Brawler)character));
+        new SendMessageCmd(character.getPlayedBy().getChatId(), "<b>You have learnt a new Spell</b>").go();
+        new SendMessageCmd(Settings.ADMIN_CHAT, character.getName() + " has learnt Intimidation").go();
       }
     }
   }
