@@ -80,7 +80,7 @@ public class PartyRegistry implements Serializable
     }
 
     // remove empty parties:
-    List<Party> empty = new ArrayList<>();
+    List<String> empty = new ArrayList<>();
     for (Map.Entry<String, Party> partyEntry : parties.entrySet())
     {
       Party value = partyEntry.getValue();
