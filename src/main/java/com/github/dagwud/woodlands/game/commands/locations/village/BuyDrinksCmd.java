@@ -17,6 +17,7 @@ public class BuyDrinksCmd extends AbstractCmd
 
   private static final int MAX_WARNING_DRINKS_1 = 20;
   private static final int MAX_WARNING_DRINKS_2 = 40;
+  private static final long DRINK_DURATION_MS = 10_000;
 
   private final int chatId;
   private final PlayerCharacter activeCharacter;
@@ -67,7 +68,7 @@ public class BuyDrinksCmd extends AbstractCmd
       modifyDrunkeness();
     }
     activeCharacter.getStats().setState(EState.DRINKING);
-    new RunLaterCmd(new FinishDrinkingCmd(10000, activeCharacter)).go(); 
+    new RunLaterCmd(DRINK_DURATION_MS, new FinishDrinkingCmd(activeCharacter)).go(); 
   }
 
   private void modifyDrunkeness()
