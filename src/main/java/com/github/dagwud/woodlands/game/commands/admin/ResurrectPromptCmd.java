@@ -85,6 +85,6 @@ public class ResurrectPromptCmd extends SuspendableCmd
     CommandDelegate.execute(cmd);
 
     return "Resurrected " + character.getName() +
-            " in party " + party.getName();
+            " in party " + (party == null ? "NULL" : party.getName());
   }
 }
