@@ -79,7 +79,7 @@ public abstract class Fighter extends GameObject
     return getStats().getState() == EState.ALIVE;
   }
 
-  public village isDrinking()
+  public boolean isDrinking()
   {
     return getStats().getState() == EState.DRINKING;
   }
