@@ -41,16 +41,6 @@ public class PatchCharacterCmd extends AbstractCmd
       fixNegativeStats(character.getStats().getMaxMana(), "max mana");
       fixNegativeStats(character.getStats().getMaxHitPoints(), "max HP");
     }
-
-    if (character.getCharacterClass() == ECharacterClass.BRAWLER)
-    {
-      if (!character.getSpellAbilities().hasKnownSpell(Intimidation.class))
-      {
-        character.getSpellAbilities().register(new Intimidation((Brawler)character));
-        new SendMessageCmd(character.getPlayedBy().getChatId(), "<b>You have learnt a new Spell</b>").go();
-        new SendMessageCmd(Settings.ADMIN_CHAT, character.getName() + " has learnt Intimidation").go();
-      }
-    }
   }
 
   void fixNegativeStats(Stat stat, String statName)
