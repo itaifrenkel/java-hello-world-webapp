@@ -29,6 +29,11 @@ public class BuildRoundSummaryCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (spells.isEmpty() && damageInflicted.isEmpty()
+    {
+      summary = "";
+      return;
+    }
     StringBuilder b = new StringBuilder();
     b.append("⚔️ <u>Battle Round #").append(encounter.getBattleRound()).append(":</u> ⚔️\n");
 
