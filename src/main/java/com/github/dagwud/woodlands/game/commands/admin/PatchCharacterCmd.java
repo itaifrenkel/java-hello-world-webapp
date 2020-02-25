@@ -25,6 +25,8 @@ public class PatchCharacterCmd extends AbstractCmd
 {
   private final PlayerCharacter character;
 
+  private static int uniqueNameIndex = 1; 
+
   public PatchCharacterCmd(PlayerCharacter character)
   {
     this.character = character;
@@ -33,6 +35,11 @@ public class PatchCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (character.getName().trim().equalsIgnoreCase("N00b ice king"))
+    {
+      character.setName(character.getName() + (uniqueNameIndex++));
+    }
+
     if (null != character.getStats())
     {
       fixNegativeStats(character.getStats().getStrength(), "strength");
