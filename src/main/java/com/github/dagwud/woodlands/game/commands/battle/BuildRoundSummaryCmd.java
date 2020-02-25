@@ -29,7 +29,7 @@ public class BuildRoundSummaryCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (spells.isEmpty() && damageInflicted.isEmpty()
+    if (spells.isEmpty() && damageInflicted.isEmpty())
     {
       summary = "";
       return;
