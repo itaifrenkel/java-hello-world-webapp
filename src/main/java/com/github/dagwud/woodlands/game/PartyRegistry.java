@@ -79,6 +79,24 @@ public class PartyRegistry implements Serializable
       fix(name);
     }
 
+    // remove empty parties:
+    List<Party> empty = new ArrayList<>();
+    for (Map.Entry<String, Party> partyEntry : parties.entrySet())
+    {
+      Party value = partyEntry.getValue();
+      String key = partyEntry.getKey();
+      if (value.getAllMembers().isEmpty())
+      {
+        empty.add(key);
+      }
+    }
+    for (String e : empty)
+    {
+      parties.remove(e);
+      SendMessageCmd admin = new SendMessageCmd(Settings.ADMIN_CHAT, "Removed empty party " + e);
+        CommandDelegate.execute(admin);
+    }
+
   }
 
   private void fix(String name)
