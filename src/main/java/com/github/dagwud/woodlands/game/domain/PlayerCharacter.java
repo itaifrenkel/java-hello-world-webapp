@@ -85,7 +85,7 @@ public abstract class PlayerCharacter extends GameCharacter
 
   public boolean shouldGainExperienceByDefeating(Creature enemy)
   {
-    double levelDiff = p.getStats().getLevel() - defeated.difficulty;
+    double levelDiff = getStats().getLevel() - enemy.difficulty;
     return levelDiff <= 2.0;
   }
 }
