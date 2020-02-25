@@ -134,6 +134,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
       if (c.shouldGainExperienceByDefeating(encounter.getEnemy()))
       {
         return false;
+      }
     }
     return true;
   }
