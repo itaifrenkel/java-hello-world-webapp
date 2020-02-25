@@ -5,6 +5,7 @@ public enum EState
   SHORT_RESTING("😴", "resting"),
   LONG_RESTING("🛏️", "resting"),
   ALIVE("", "alive"), // implicit - no icon
+  DRINKING("🍺", "drinking"),
   UNCONSCIOUS("💔", "unconscious"),
   DEAD("☠️", "dead");
 
