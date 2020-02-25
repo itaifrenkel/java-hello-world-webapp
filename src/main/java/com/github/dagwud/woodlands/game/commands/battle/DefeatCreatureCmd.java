@@ -53,6 +53,9 @@ public class DefeatCreatureCmd extends AbstractCmd
       GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
       CommandDelegate.execute(cmd);
 
+      SendMessageCmd cmd = new SendMessageCmd(member.getPlayedBy().getChatId(), creatureDefeated.name + " has been defeated! You gain " + rewardPerCharacter + " experience");
+      CommandDelegate.execute(cmd);
+
       //todo should probably be a command
       member.getRecentlyDefeated().add(creatureDefeated);
       while (member.getRecentlyDefeated().size() > 10)
