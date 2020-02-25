@@ -48,6 +48,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     {
       KnockUnconsciousCmd faint = new KnockUnconsciousCmd(encounter.getEnemy());
       CommandDelegate.execute(faint);
+      new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().getName() + " has fled!").go();
     }
 
     // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
