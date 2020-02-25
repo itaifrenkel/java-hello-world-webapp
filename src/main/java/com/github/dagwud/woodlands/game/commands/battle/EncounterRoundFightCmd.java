@@ -43,34 +43,39 @@ public class EncounterRoundFightCmd extends AbstractCmd
     encounter.setFightingStarted(true);
 
     List<DamageInflicted> roundActivity = new ArrayList<>();
+    List<PassiveBattleRoundSpell> passivesActivity = new ArrayList<>();
+    List<SingleCastSpell> spellsActivity = new ArrayList<>();
 
-    if (shouldEnemyFaint())
+    boolean enemyFainted = shouldEnemyFaint();
+    if (enemyFainted)
     {
       KnockUnconsciousCmd faint = new KnockUnconsciousCmd(encounter.getEnemy());
       CommandDelegate.execute(faint);
       new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().getName() + " has fled!").go();
     }
-
-    // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
-    // to spells like Army of Peasants)
-    List<Fighter> passivesOrder = buildOrderOfFight(encounter.getAllFighters());
-    List<PassiveBattleRoundSpell> passivesActivity = doPassiveAbilities(passivesOrder);
-
-    List<Fighter> spellOrder = buildOrderOfFight(encounter.getAllFighters());
-    List<SingleCastSpell> spellsActivity = doPreparedSpells(spellOrder);
-    for (Spell cast : spellsActivity)
+    else
     {
-      if (null != cast.getDamageInflicted())
+      // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
+      // to spells like Army of Peasants)
+      List<Fighter> passivesOrder = buildOrderOfFight(encounter.getAllFighters());
+      passivesActivity.addAll(doPassiveAbilities(passivesOrder));
+
+      List<Fighter> spellOrder = buildOrderOfFight(encounter.getAllFighters());
+      spellsActivity.addAll(doPreparedSpells(spellOrder));
+      for (Spell cast : spellsActivity)
       {
-        roundActivity.add(cast.getDamageInflicted());
+        if (null != cast.getDamageInflicted())
+        {
+          roundActivity.add(cast.getDamageInflicted());
+        }
       }
+
+      List<Fighter> fightOrder = buildOrderOfFight(encounter.getAllFighters());
+      roundActivity.addAll(doFighting(fightOrder, spellsActivity));
+
+      expireSpells(spellsActivity);
+      expirePassiveAbilities(passivesActivity);
     }
-
-    List<Fighter> fightOrder = buildOrderOfFight(encounter.getAllFighters());
-    roundActivity.addAll(doFighting(fightOrder, spellsActivity));
-
-    expireSpells(spellsActivity);
-    expirePassiveAbilities(passivesActivity);
 
     BuildRoundSummaryCmd summary = new BuildRoundSummaryCmd(encounter, roundActivity, passivesActivity, spellsActivity);
     CommandDelegate.execute(summary);
