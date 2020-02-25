@@ -11,7 +11,9 @@ import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.characters.Brawler;
 import com.github.dagwud.woodlands.game.domain.characters.spells.HealingBlast;
+import com.github.dagwud.woodlands.game.domain.characters.spells.Intimidation;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 
 import com.github.dagwud.woodlands.game.domain.trinkets.*;
@@ -38,6 +40,14 @@ public class PatchCharacterCmd extends AbstractCmd
       fixNegativeStats(character.getStats().getConstitution(), "constitution");
       fixNegativeStats(character.getStats().getMaxMana(), "max mana");
       fixNegativeStats(character.getStats().getMaxHitPoints(), "max HP");
+    }
+
+    if (character.getCharacterClass() == ECharacterClass.BRAWLER)
+    {
+      if (!character.getSpellAbilities().hasKnownSpell(Intimidation.class))
+      {
+        character.getSpellAbilities().register(new Intimidation((Brawler)character));
+      }
     }
   }
 
