@@ -44,6 +44,12 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
     List<DamageInflicted> roundActivity = new ArrayList<>();
 
+    if (shouldEnemyFaint())
+    {
+      KnockUnconsciousCmd faint = new KnockUnconsciousCmd(encounter.getEnemy());
+      CommandDelegate.execute(faint);
+    }
+
     // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
     // to spells like Army of Peasants)
     List<Fighter> passivesOrder = buildOrderOfFight(encounter.getAllFighters());
@@ -118,6 +124,18 @@ public class EncounterRoundFightCmd extends AbstractCmd
         CommandDelegate.execute(cmd);
       }
     }
+  }
+
+  private boolean shouldEnemyFaint()
+  {
+    Collection<PlayerCharacter> players = encounter.getParty().getActivePlayerCharacters();
+    for (PlayerCharacter c : players)
+    {
+      if (c.shouldGainExperienceByDefeating(encounter.getEnemy()))
+      {
+        return false;
+    }
+    return true;
   }
 
   private List<Fighter> buildOrderOfFight(Collection<Fighter> fighters)
