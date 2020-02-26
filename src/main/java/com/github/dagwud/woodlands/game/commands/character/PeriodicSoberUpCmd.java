@@ -27,6 +27,7 @@ public class PeriodicSoberUpCmd extends PeriodicCmd<SoberUpCmd>
   protected PeriodicSoberUpCmd createSingleRunCmd()
   {
     return new PeriodicSoberUpCmd(character, chatId);
+  }
 
   @Override
   public String toString()
