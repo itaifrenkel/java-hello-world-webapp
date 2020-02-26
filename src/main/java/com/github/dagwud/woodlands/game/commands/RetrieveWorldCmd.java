@@ -73,11 +73,12 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
 
     Scheduler.instance().restoreScheduled();
-    ELocation.scheduleRooms();
 
     Logger.info("Successfully restored world!");
 
     CommandDelegate.execute(new PatchWorldCmd());
+
+    ELocation.scheduleRooms();
 
     for (PlayerState player : GameStatesRegistry.allPlayerStates())
     {
