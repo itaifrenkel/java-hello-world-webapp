@@ -20,6 +20,12 @@ public class PeriodicSoberUpCmd extends PeriodicCmd<SoberUpCmd>
   }
 
   @Override
+  protected boolean shouldRunSingle()
+  {
+    return character.isConscious();
+  }
+
+  @Override
   protected boolean shouldCancelPeriodicTimer()
   {
     return character.isDead();
