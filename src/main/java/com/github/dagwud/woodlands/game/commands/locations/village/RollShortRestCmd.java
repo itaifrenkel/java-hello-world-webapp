@@ -6,6 +6,9 @@ import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
+import java.util.BigDecimal;
+import java.util.MathContext;
+
 public class RollShortRestCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
