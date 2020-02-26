@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 
 public class RollShortRestCmd extends AbstractCmd
 {
