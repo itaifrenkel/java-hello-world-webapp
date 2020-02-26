@@ -22,22 +22,20 @@ public class HealingWard extends TimedBenefitWearableTrinket
   @Override
   public void applyBenefit(Fighter applyTo)
   {
-    RollShortRestCmd roll = new RollShortRestCmd((GameCharacter) applyTo);
+    RollShortRestCmd roll = new RollShortRestCmd((GameCharacter) applyTo, HP_REGEN_PERCENT_OF_SHORT_REST);
     CommandDelegate.execute(roll);
-    BigDecimal hpShortRest = new BigDecimal(roll.getRecoveredHitPoints());
 
-    int hpRecoverd = Math.max(1, HP_REGEN_PERCENT_OF_SHORT_REST.multiply(hpShortRest)
-            .round(new MathContext(0, RoundingMode.DOWN)).intValue());
+    int hpRecovered = Math.max(1, roll.getRecoveredHitPoints());
 
-    RecoverHitPointsCmd recover = new RecoverHitPointsCmd(applyTo, hpRecoverd);
+    RecoverHitPointsCmd recover = new RecoverHitPointsCmd(applyTo, hpRecovered);
     CommandDelegate.execute(recover);
-    hpRecoverd = recover.getHitPointsRecovered();
+    hpRecovered = recover.getHitPointsRecovered();
     if (applyTo instanceof PlayerCharacter)
     {
       PlayerCharacter character = (PlayerCharacter) applyTo;
       if (hpRecoverd != 0)
       {
-        CommandDelegate.execute(new SendMessageCmd(character, "You recover " + hpRecoverd + "❤ through your " + getName()));
+        CommandDelegate.execute(new SendMessageCmd(character, "You recover " + hpRecovered + "❤ through your " + getName()));
       }
     }
   }
