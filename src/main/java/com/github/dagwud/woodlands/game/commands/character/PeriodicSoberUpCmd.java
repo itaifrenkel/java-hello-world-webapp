@@ -13,7 +13,7 @@ public class PeriodicSoberUpCmd extends PeriodicCmd<SoberUpCmd>
 
   public PeriodicSoberUpCmd(PlayerCharacter character, int chatId)
   {
-    super(Settings.SOBER_UP_DELAY_MS, new SoberUpCmd(character, chatId));
+    super(Settings.SOBER_UP_DELAY_MS);
     this.character = character;
   }
 
@@ -22,6 +22,11 @@ public class PeriodicSoberUpCmd extends PeriodicCmd<SoberUpCmd>
   {
     return character.isDead();
   }
+
+  @Override
+  protected PeriodicSoberUpCmd createSingleRunCmd()
+  {
+    return new PeriodicSoberUpCmd(character, chatId);
 
   @Override
   public String toString()
