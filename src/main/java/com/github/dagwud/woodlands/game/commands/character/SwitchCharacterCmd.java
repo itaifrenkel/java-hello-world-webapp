@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.start.CreateDefaultSchedulesCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
@@ -53,6 +54,8 @@ public class SwitchCharacterCmd extends AbstractCmd
       CommandDelegate.execute(new SendMessageCmd(toActivate, "Your party is no longer in " + ELocation.VILLAGE_SQUARE + ". You will need to rejoin the party when it returns"));
       CommandDelegate.execute(new LeavePartyCmd(toActivate, toActivate.getParty()));
     }
+
+    CommandDelegate.execute(new CreateDefaultSchedulesCmd(toActivate));
 
     success = true;
   }

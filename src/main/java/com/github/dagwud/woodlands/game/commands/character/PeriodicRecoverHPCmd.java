@@ -31,7 +31,7 @@ public class PeriodicRecoverHPCmd extends PeriodicCmd<RecoverPortionOfShortRestC
   @Override
   protected boolean shouldCancelPeriodicTimer()
   {
-    return character.isDead();
+    return character.isDead() || !character.isActive();
   }
 
 }

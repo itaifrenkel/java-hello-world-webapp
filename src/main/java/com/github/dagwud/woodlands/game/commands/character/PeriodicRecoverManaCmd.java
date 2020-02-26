@@ -31,7 +31,7 @@ public class PeriodicRecoverManaCmd extends PeriodicCmd<DoPeriodicRecoverManaCmd
   @Override
   protected boolean shouldCancelPeriodicTimer()
   {
-    return character.isDead();
+    return character.isDead() || !character.isActive();
   }
 
 }

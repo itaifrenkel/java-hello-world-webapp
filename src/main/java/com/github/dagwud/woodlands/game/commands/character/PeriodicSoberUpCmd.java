@@ -28,7 +28,7 @@ public class PeriodicSoberUpCmd extends PeriodicCmd<SoberUpCmd>
   @Override
   protected boolean shouldCancelPeriodicTimer()
   {
-    return character.isDead();
+    return character.isDead() || !character.isActive();
   }
 
   @Override

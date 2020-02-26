@@ -42,10 +42,6 @@ public class PatchWorldCmd extends AbstractCmd
     for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
       CommandDelegate.execute(new CreateDefaultSchedulesCmd(playerState.getActiveCharacter()));
-      for (PlayerCharacter inactiveCharacter : playerState.getPlayer().getInactiveCharacters())
-      {
-        CommandDelegate.execute(new CreateDefaultSchedulesCmd(inactiveCharacter));
-      }
     }
 
     // Rest and Drink completion schedules are lost:
