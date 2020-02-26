@@ -6,8 +6,8 @@ import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
-import java.util.BigDecimal;
-import java.util.MathContext;
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 public class RollShortRestCmd extends AbstractCmd
 {
