@@ -32,8 +32,7 @@ public class PromptJoinPartyCmd extends SuspendableCmd
         receivePartyNameAndPromptAlertGroup(capturedInput);
         break;
       case 2:
-        receiveAlertGroupChat(capturedInput);
-        join();
+        receiveAlertGroupChatAndJoin(capturedInput);
     }
   }
 
@@ -54,7 +53,7 @@ public class PromptJoinPartyCmd extends SuspendableCmd
     CommandDelegate.execute(cmd);
   }
 
-  private void receiveAlertGroupChat(String capturedInput)
+  private void receiveAlertGroupChatAndJoin(String capturedInput)
   {
     Long groupChatId = null;
     try
@@ -67,18 +66,20 @@ public class PromptJoinPartyCmd extends SuspendableCmd
     }
     catch (NumberFormatException ignored)
     {
-      // fall through
+      // fall through - will be caught in the null check below
     }
-    if (null != groupChatId)
+    if (null == groupChatId)
     {
-      alertChannelChatId = groupChatId;
-      return;
-    }
-    SendMessageCmd err = new SendMessageCmd(getPlayerState().getPlayer().getChatId(),
+      SendMessageCmd err = new SendMessageCmd(getPlayerState().getPlayer().getChatId(),
             "That's not a valid group chat ID. A group chat should have a negative number corresponding " +
                     "to the Telegram group chat. Try inviting @RawDataBot to get your group chat ID");
-    CommandDelegate.execute(err);
-    rejectCapturedInput();
+      CommandDelegate.execute(err);
+      rejectCapturedInput();
+      return;
+    }
+
+    alertChannelChatId = groupChatId;
+    join();
   }
 
   private void join()
