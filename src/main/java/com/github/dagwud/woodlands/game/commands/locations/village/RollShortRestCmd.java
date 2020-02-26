@@ -16,7 +16,7 @@ public class RollShortRestCmd extends AbstractCmd
 
   public RollShortRestCmd(GameCharacter character)
   {
-    this(character, new BigDecimal("100");
+    this(character, new BigDecimal("100"));
   }
 
   public RollShortRestCmd(GameCharacter character, BigDecimal percentageOfNormal)
