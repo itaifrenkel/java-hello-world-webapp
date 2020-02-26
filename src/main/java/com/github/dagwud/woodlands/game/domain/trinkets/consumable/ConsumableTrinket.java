@@ -27,7 +27,7 @@ public abstract class ConsumableTrinket extends Trinket
     if (fighter instanceof PlayerCharacter)
     {
       PlayerCharacter character = (PlayerCharacter) fighter;
-      SendMessageCmd msg = new SendMessageCmd(character.getPlayedBy().getChatId(), produceConsumptionMessage());
+      SendMessageCmd msg = new SendMessageCmd(character, produceConsumptionMessage());
       CommandDelegate.execute(msg);
     }
 

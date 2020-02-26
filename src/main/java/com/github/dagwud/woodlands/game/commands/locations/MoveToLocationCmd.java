@@ -108,7 +108,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
       if (characterToMove != movedBy)
       {
-        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
+        CommandDelegate.execute(new SendMessageCmd(character, "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
       }
       showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
       handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());

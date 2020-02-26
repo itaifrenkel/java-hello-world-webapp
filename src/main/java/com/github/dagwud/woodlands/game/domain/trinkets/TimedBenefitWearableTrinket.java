@@ -22,7 +22,7 @@ public abstract class TimedBenefitWearableTrinket extends WearableTrinket
     {
       PlayerCharacter p = (PlayerCharacter) fighter;
       String msg = produceEquipMessage(fighter);
-      CommandDelegate.execute(new SendMessageCmd(p.getPlayedBy().getChatId(), msg));
+      CommandDelegate.execute(new SendMessageCmd(p, msg));
     }
 
     ApplyTimeBasedBenefitCmd apply = new ApplyTimeBasedBenefitCmd(fighter, this);
@@ -35,7 +35,7 @@ public abstract class TimedBenefitWearableTrinket extends WearableTrinket
     if (fighter instanceof PlayerCharacter)
     {
       PlayerCharacter p = (PlayerCharacter) fighter;
-      CommandDelegate.execute(new SendMessageCmd(p.getPlayedBy().getChatId(), produceUnequipMessage()));
+      CommandDelegate.execute(new SendMessageCmd(p, produceUnequipMessage()));
     }
   }
 

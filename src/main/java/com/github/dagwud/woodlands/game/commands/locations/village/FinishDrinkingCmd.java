@@ -21,7 +21,7 @@ public class FinishDrinkingCmd extends AbstractCmd
   public void execute()
   {
     activeCharacter.getStats().setState(EState.ALIVE);
-    CommandDelegate.execute(new SendMessageCmd(activeCharacter.getPlayedBy().getChatId(), "Aaaaaaah. That hit the spot!"));
+    CommandDelegate.execute(new SendMessageCmd(activeCharacter, "Aaaaaaah. That hit the spot!"));
   }
 
 }

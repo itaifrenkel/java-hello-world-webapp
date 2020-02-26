@@ -29,7 +29,7 @@ public class PrepareAttackCmd extends AbstractCmd
 
     if (activeEncounter.hasFightingStarted())
     {
-      CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "Too late - the round has already started"));
+      CommandDelegate.execute(new SendMessageCmd(character, "Too late - the round has already started"));
     }
     // Don't actually prepare a spell; just make a space for one. Any unused spell slots will be filled with attacks:
     if (character.getSpellAbilities().hasPreparedSpell())

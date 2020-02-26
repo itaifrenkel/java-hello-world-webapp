@@ -53,7 +53,7 @@ public class DefeatCreatureCmd extends AbstractCmd
       GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
       CommandDelegate.execute(cmd);
 
-      SendMessageCmd msg = new SendMessageCmd(member.getPlayedBy().getChatId(), creatureDefeated.name + " has been defeated! You gain " + rewardPerCharacter + " experience");
+      SendMessageCmd msg = new SendMessageCmd(member, creatureDefeated.name + " has been defeated! You gain " + rewardPerCharacter + " experience");
       CommandDelegate.execute(msg);
 
       //todo should probably be a command
@@ -82,7 +82,7 @@ public class DefeatCreatureCmd extends AbstractCmd
           }
           else
           {
-            SendMessageCmd msg = new SendMessageCmd(p.getPlayedBy().getChatId(), "That's not exactly a fair fight; you don't qualify for an experience boost for defeating " + defeated.getName() + " (L" + defeated.difficulty + ")");
+            SendMessageCmd msg = new SendMessageCmd(p, "That's not exactly a fair fight; you don't qualify for an experience boost for defeating " + defeated.getName() + " (L" + defeated.difficulty + ")");
             CommandDelegate.execute(msg); 
           }
         }

@@ -17,6 +17,6 @@ public class OokCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    CommandDelegate.execute(new SendMessageCmd(playerCharacter.getPlayedBy().getChatId(), "Ook! Ook ook! Did you mean /look?"));
+    CommandDelegate.execute(new SendMessageCmd(playerCharacter, "Ook! Ook ook! Did you mean /look?"));
   }
 }

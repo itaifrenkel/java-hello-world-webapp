@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.core;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 
@@ -19,6 +20,11 @@ public class SendMessageCmd extends AbstractCmd
   public SendMessageCmd(int chatId, String message)
   {
     this(chatId, message, null);
+  }
+
+  public SendMessageCmd(PlayerCharacter sendTo, String message)
+  {
+    this(sendTo.getPlayedBy().getChatId(), message, null);
   }
 
   SendMessageCmd(int chatId, String message, String replyMarkup)

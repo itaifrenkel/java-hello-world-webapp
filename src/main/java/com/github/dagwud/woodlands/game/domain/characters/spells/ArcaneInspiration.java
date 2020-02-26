@@ -30,7 +30,7 @@ public class ArcaneInspiration extends PassivePartySpell
 
       if (target != getCaster())
       {
-        SendMessageCmd cmd = new SendMessageCmd(target.getPlayedBy().getChatId(),
+        SendMessageCmd cmd = new SendMessageCmd(target,
                 getCaster().getName() + " is boosting your maximum mana by +" + MANA_BOOST);
         CommandDelegate.execute(cmd);
       }
@@ -49,7 +49,7 @@ public class ArcaneInspiration extends PassivePartySpell
         character.getStats().setMana(character.getStats().getMaxMana().getBase());
       }
 
-      SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(),
+      SendMessageCmd cmd = new SendMessageCmd(character,
               getCaster().getName() + " is no longer boosting your maximum mana");
       CommandDelegate.execute(cmd);
     }

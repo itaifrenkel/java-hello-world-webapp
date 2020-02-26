@@ -39,7 +39,7 @@ public class SendLocationMessageCmd extends AbstractCmd
       if (gameCharacter instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) gameCharacter;
-        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), message));
+        CommandDelegate.execute(new SendMessageCmd(character, message));
       }
     }
   }

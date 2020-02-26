@@ -29,7 +29,7 @@ public class ShutdownWarningCmd extends AbstractCmd
         toRetreat.add(character);
       }
 
-      SendMessageCmd msg = new SendMessageCmd(character.getPlayedBy().getChatId(), "You can feel changes coming in the breeze. Best you head back to the Village to take shelter");
+      SendMessageCmd msg = new SendMessageCmd(character, "You can feel changes coming in the breeze. Best you head back to the Village to take shelter");
       CommandDelegate.execute(msg);
     }
 

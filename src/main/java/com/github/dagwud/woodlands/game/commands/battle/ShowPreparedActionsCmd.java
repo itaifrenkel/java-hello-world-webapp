@@ -20,7 +20,7 @@ public class ShowPreparedActionsCmd extends AbstractCmd
   {
     if (character.getParty().getActiveEncounter() == null)
     {
-      CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "No battle in progress!"));
+      CommandDelegate.execute(new SendMessageCmd(character, "No battle in progress!"));
       return;
     }
 
@@ -36,7 +36,7 @@ public class ShowPreparedActionsCmd extends AbstractCmd
       }
       action += "make " + attacks + " attack" + (attacks == 1 ? "" : "s");
     }
-    SendMessageCmd msg = new SendMessageCmd(character.getPlayedBy().getChatId(), action + " on your next turn");
+    SendMessageCmd msg = new SendMessageCmd(character, action + " on your next turn");
     CommandDelegate.execute(msg);
   }
 }

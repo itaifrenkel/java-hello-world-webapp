@@ -47,7 +47,7 @@ public class LongRestCmd extends RestCmd
     AbstractCmd restCompletedCmd = new DoRestCmd(restFor.getPlayedBy().getChatId(), restFor, true);
     restCompletedCmd = new RunLaterCmd(Settings.LONG_REST_DURATION_MS, restCompletedCmd);
     CommandDelegate.execute(restCompletedCmd);
-    SendMessageCmd echo = new SendMessageCmd(restFor.getPlayedBy().getChatId(), "You're resting");
+    SendMessageCmd echo = new SendMessageCmd(restFor, "You're resting");
     CommandDelegate.execute(echo);
   }
 }

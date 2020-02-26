@@ -56,7 +56,7 @@ public class PatchCharacterCmd extends AbstractCmd
     {
       stat.clearBonuses();
       CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "PATCH: negative " + statName + " has been undone for " + character.getName()));
-      CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "PATCH: negative " + statName + " has been undone"));
+      CommandDelegate.execute(new SendMessageCmd(character, "PATCH: negative " + statName + " has been undone"));
     }
   }
 
