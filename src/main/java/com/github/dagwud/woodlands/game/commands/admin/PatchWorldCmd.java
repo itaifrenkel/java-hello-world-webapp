@@ -1,10 +1,10 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
 import com.github.dagwud.woodlands.game.*;
-import com.github.dagwud.woodlands.game.commands.character.PeriodicSoberUpCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
+import com.github.dagwud.woodlands.game.commands.start.CreateDefaultSchedulesCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -32,35 +32,33 @@ public class PatchWorldCmd extends AbstractCmd
 
     if (Scheduler.instance().count() == 0)
     {
+      CommandDelegate.execute(new SendAdminMessageCmd("Schedules appear to have been lost! Recreating them..."));
       recreateSchedules();
     }
   }
 
   private void recreateSchedules()
   {
-    CommandDelegate.execute(new SendAdminMessageCmd("Schedules appear to have been lost! Recreating them..."));
     for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
-      createSchedules(playerState.getActiveCharacter());
+      CommandDelegate.execute(new CreateDefaultSchedulesCmd(playerState.getActiveCharacter()));
       for (PlayerCharacter inactiveCharacter : playerState.getPlayer().getInactiveCharacters())
       {
-        createSchedules(inactiveCharacter);
-      }
-
-      if (playerState.getActiveCharacter().isResting())
-      {
-        PlayerCharacter activeCharacter = playerState.getActiveCharacter();
-        activeCharacter.getStats().setState(EState.ALIVE);
-        CommandDelegate.execute(new MoveToLocationCmd(activeCharacter, ELocation.VILLAGE_SQUARE));
-        CommandDelegate.execute(new SendAdminMessageCmd("Unrested " + activeCharacter.getName()));
+        CommandDelegate.execute(new CreateDefaultSchedulesCmd(inactiveCharacter));
       }
     }
-  }
 
-  private void createSchedules(PlayerCharacter character)
-  {
-    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, character.getPlayedBy().getChatId());
-    CommandDelegate.execute(periodicSoberUp);
+    // Rest and Drink completion schedules are lost:
+    for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
+    {
+      PlayerCharacter character = playerState.getActiveCharacter();
+      if (character.isResting() || character.isDrinking())
+      {
+        character.getStats().setState(EState.ALIVE);
+        CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
+        CommandDelegate.execute(new SendAdminMessageCmd("Unrested " + character.getName()));
+      }
+    }
   }
 
   private void patch(PlayerCharacter character)
