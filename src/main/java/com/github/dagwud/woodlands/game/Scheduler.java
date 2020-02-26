@@ -30,7 +30,8 @@ public class Scheduler implements Serializable
 
   public void restoreScheduled()
   {
-    for (RunLaterCmd scheduledCommand : getScheduledCommands())
+    Collection<RunLaterCmd> scheduledCommands = new ArrayList<>(getScheduledCommands());
+    for (RunLaterCmd scheduledCommand : scheduledCommands)
     {
       if (scheduledCommand.isRestore())
       {
