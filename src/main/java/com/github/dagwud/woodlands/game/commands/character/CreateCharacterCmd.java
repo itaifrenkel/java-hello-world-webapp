@@ -2,10 +2,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.domain.ECharacterClass;
-import com.github.dagwud.woodlands.game.domain.Item;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.Player;
+import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.GameCharacterFactory;
 
 public class CreateCharacterCmd extends AbstractCmd
@@ -38,6 +35,8 @@ public class CreateCharacterCmd extends AbstractCmd
       character.getCarrying().getCarriedInactive().add(startingItem);
     }
     character.setSetupComplete(true);
+
+    character.setLocation(ELocation.VILLAGE_SQUARE);
 
     // Join a private party for just this character by default:
     JoinPartyCmd join = new JoinPartyCmd(character, "_" + characterName);
