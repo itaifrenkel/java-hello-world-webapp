@@ -31,13 +31,13 @@ public class BeginHerbalRemedyCmd extends SuspendableCmd
       case 1:
         if (capturedInput.equals("Cancel"))
         {
-          new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "Puff-puff-hold-onto. Not cool bro.").go();
+          CommandDelegate.execute(new SendMessageCmd(getPlayerState().getPlayer().getChatId(), "Puff-puff-hold-onto. Not cool bro."));
           return;
         }
 
         GameCharacter gameCharacter = findCharacter(capturedInput);
 
-        new CastSpellCmd(new HerbalRemedy(getPlayerState().getActiveCharacter(), gameCharacter)).go();
+        CommandDelegate.execute(new CastSpellCmd(new HerbalRemedy(getPlayerState().getActiveCharacter(), gameCharacter)));
 
         break;
     }

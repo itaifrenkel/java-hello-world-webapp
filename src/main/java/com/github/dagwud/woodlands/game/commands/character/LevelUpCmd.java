@@ -10,10 +10,8 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.trinkets.AmuletOfProtection;
 import com.github.dagwud.woodlands.game.domain.trinkets.WardOfViolence;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,12 +20,12 @@ public class LevelUpCmd extends AbstractCmd
   private static final long serialVersionUID = 1L;
   private static final Map<Integer, ILevelUpAward> AWARDS = new HashMap<Integer, ILevelUpAward>()
   {{
-    put(4, character1 -> new ReachLevel4AwardCmd(character1).go());
-    put(8, character1 -> new ReachLevel8AwardCmd(character1).go());
-    put(7, character1 -> new SpawnTrinketCmd(character1, new WardOfViolence()).go());
-    put(12, character1 -> new ReachLevel12AwardCmd(character1).go());
-    put(16, character1 -> new ReachLevel16AwardCmd(character1).go());
-    put(19, character1 -> new ReachLevel19AwardCmd(character1).go());
+    put(4, character1 -> CommandDelegate.execute(new ReachLevel4AwardCmd(character1)));
+    put(8, character1 -> CommandDelegate.execute(new ReachLevel8AwardCmd(character1)));
+    put(7, character1 -> CommandDelegate.execute(new SpawnTrinketCmd(character1, new WardOfViolence())));
+    put(12, character1 -> CommandDelegate.execute(new ReachLevel12AwardCmd(character1)));
+    put(16, character1 -> CommandDelegate.execute(new ReachLevel16AwardCmd(character1)));
+    put(19, character1 -> CommandDelegate.execute(new ReachLevel19AwardCmd(character1)));
   }};
 
   private final int chatId;

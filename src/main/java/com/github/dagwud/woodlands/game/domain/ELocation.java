@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractRoomCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.ScheduledRoomIntervalsCmd;
@@ -83,7 +84,7 @@ public enum ELocation
       schedule.add(new Tuple<>(now + value.roomCmd.getInterval(), value.roomCmd));
     }
 
-    new RunLaterCmd(1000, new ScheduledRoomIntervalsCmd(schedule), false).go();
+    CommandDelegate.execute(new RunLaterCmd(1000, new ScheduledRoomIntervalsCmd(schedule), false));
   }
 
   public List<GameCharacter> getCharactersInRoom()

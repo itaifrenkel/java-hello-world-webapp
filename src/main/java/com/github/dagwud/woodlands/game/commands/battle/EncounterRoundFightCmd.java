@@ -6,7 +6,6 @@ import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
@@ -51,7 +50,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     {
       KnockUnconsciousCmd faint = new KnockUnconsciousCmd(encounter.getEnemy());
       CommandDelegate.execute(faint);
-      new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().getName() + " has fled!").go();
+      CommandDelegate.execute(new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().getName() + " has fled!"));
     }
     else
     {

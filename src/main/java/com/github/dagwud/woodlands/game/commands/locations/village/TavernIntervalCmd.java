@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.locations.village;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractRoomCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendLocationMessageCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
@@ -87,6 +88,6 @@ public class TavernIntervalCmd extends AbstractRoomCmd
 
     String result = "<i>" + String.format(emit, lyric) + "</i>";
 
-    new SendLocationMessageCmd(ELocation.TAVERN, result).go();
+    CommandDelegate.execute(new SendLocationMessageCmd(ELocation.TAVERN, result));
   }
 }

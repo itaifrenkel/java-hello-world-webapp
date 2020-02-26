@@ -7,7 +7,6 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.RollShortRestCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class HerbalRemedy extends SingleCastSpell
 {
@@ -30,7 +29,7 @@ public class HerbalRemedy extends SingleCastSpell
   {
     if (target == null)
     {
-      new BeginHerbalRemedyCmd(getCaster().getPlayedBy().getPlayerState()).go();
+      CommandDelegate.execute(new BeginHerbalRemedyCmd(getCaster().getPlayedBy().getPlayerState()));
       return false;
     }
     else
@@ -43,11 +42,11 @@ public class HerbalRemedy extends SingleCastSpell
         {
           RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(target, roll.getRecoveredHitPoints());
           CommandDelegate.execute(cmd);
-          new SendMessageCmd(getCaster().getPlayedBy().getChatId(), getCaster().getName() + " passes some mystical, smoking tube to " + target.getName() + " who mystically inhales deeply and recovers " + roll.getRecoveredHitPoints() + " mystical points. Aweh").go();
+          CommandDelegate.execute(new SendMessageCmd(getCaster().getPlayedBy().getChatId(), getCaster().getName() + " passes some mystical, smoking tube to " + target.getName() + " who mystically inhales deeply and recovers " + roll.getRecoveredHitPoints() + " mystical points. Aweh"));
         }
         else
         {
-          new SendMessageCmd(getCaster().getPlayedBy().getChatId(), getCaster().getName() + " passes some mystical, smoking tube to " + target.getName() + " who mystically inhales deeply, then coughs awkwardly and turns green. That didn't, like, help bro. Aweh.").go();
+          CommandDelegate.execute(new SendMessageCmd(getCaster().getPlayedBy().getChatId(), getCaster().getName() + " passes some mystical, smoking tube to " + target.getName() + " who mystically inhales deeply, then coughs awkwardly and turns green. That didn't, like, help bro. Aweh."));
         }
       }
     }

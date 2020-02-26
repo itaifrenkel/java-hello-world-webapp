@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -38,7 +39,7 @@ public class SendLocationMessageCmd extends AbstractCmd
       if (gameCharacter instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) gameCharacter;
-        new SendMessageCmd(character.getPlayedBy().getChatId(), message).go();
+        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), message));
       }
     }
   }

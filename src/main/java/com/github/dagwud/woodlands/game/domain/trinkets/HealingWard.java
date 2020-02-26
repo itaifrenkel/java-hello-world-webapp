@@ -37,7 +37,7 @@ public class HealingWard extends TimedBenefitWearableTrinket
       PlayerCharacter character = (PlayerCharacter) applyTo;
       if (hpRecoverd != 0)
       {
-        new SendMessageCmd(character.getPlayedBy().getChatId(), "You recover " + hpRecoverd + "❤ through your " + getName()).go();
+        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You recover " + hpRecoverd + "❤ through your " + getName()));
       }
     }
   }

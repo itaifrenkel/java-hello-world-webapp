@@ -120,7 +120,7 @@ public class MoveToLocationCmd extends AbstractCmd
     String entryText = moveTo.getMenu().produceEntryText(character, from);
     if (entryText != null)
     {
-      new SendLocationMessageCmd(moveTo, "<i>" + entryText + "</i>", character).go();
+      CommandDelegate.execute(new SendLocationMessageCmd(moveTo, "<i>" + entryText + "</i>", character));
     }
   }
 
@@ -135,7 +135,7 @@ public class MoveToLocationCmd extends AbstractCmd
         String exitText = from.getMenu().produceExitText(toMove, moveTo);
         if (exitText != null)
         {
-          new SendLocationMessageCmd(from, "<i>" + exitText + "</i>", characterToMove).go();
+          CommandDelegate.execute(new SendLocationMessageCmd(from, "<i>" + exitText + "</i>", characterToMove));
         }
       }
     }

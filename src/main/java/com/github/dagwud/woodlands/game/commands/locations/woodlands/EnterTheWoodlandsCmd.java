@@ -33,7 +33,7 @@ public class EnterTheWoodlandsCmd extends AbstractCmd
             new GenerateWoodlandsEncounterCmd(playerState));
     CommandDelegate.execute(cmd);
 
-    new SendPartyAlertCmd(playerState.getActiveCharacter().getParty(),
-            playerState.getActiveCharacter().getParty().getName() + " is entering " + ELocation.WOODLANDS.getDisplayName()).go();
+    CommandDelegate.execute(new SendPartyAlertCmd(playerState.getActiveCharacter().getParty(),
+            playerState.getActiveCharacter().getParty().getName() + " is entering " + ELocation.WOODLANDS.getDisplayName()));
   }
 }

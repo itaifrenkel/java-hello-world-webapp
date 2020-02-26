@@ -90,7 +90,7 @@ public class PromptJoinPartyCmd extends SuspendableCmd
     {
       if (alertChannelChatId == NO_GROUP_CHAT)
       {
-        new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here").go();
+        CommandDelegate.execute(new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here"));
         getPlayerState().getActiveCharacter().getParty().setAlertChatId(null);
       }
       else
@@ -103,12 +103,12 @@ public class PromptJoinPartyCmd extends SuspendableCmd
         }
         if (changed)
         {
-          new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here").go();
+          CommandDelegate.execute(new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here"));
         }
         getPlayerState().getActiveCharacter().getParty().setAlertChatId(alertChannelChatId);
         if (changed)
         {
-          new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts for " + getPlayerState().getActiveCharacter().getParty().getName() + " will be posted here").go();
+          CommandDelegate.execute(new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts for " + getPlayerState().getActiveCharacter().getParty().getName() + " will be posted here"));
         }
       }
     }

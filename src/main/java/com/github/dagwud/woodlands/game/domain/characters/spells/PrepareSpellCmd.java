@@ -29,8 +29,8 @@ public class PrepareSpellCmd extends AbstractCmd
     {
       if (caster instanceof PlayerCharacter)
       {
-        new SendMessageCmd(((PlayerCharacter) caster).getPlayedBy().getChatId(),
-                "No encounter in progress").go();
+        CommandDelegate.execute(new SendMessageCmd(((PlayerCharacter) caster).getPlayedBy().getChatId(),
+                    "No encounter in progress"));
       }
       return;
     }

@@ -40,11 +40,6 @@ public abstract class AbstractCmd implements Serializable
 
   public abstract void execute() throws Exception;
 
-  public void go()
-  {
-    CommandDelegate.execute(this);
-  }
-
   @Override
   public String toString()
   {

@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
 import com.github.dagwud.woodlands.game.commands.battle.ManualEncounterRoundCmd;
@@ -23,8 +24,8 @@ public class ManualEncounter extends Encounter
   {
     if (!hasAnyPlayerActivityPrepared())
     {
-      new SendPartyMessageCmd(getParty(), "Nobody is keen for a fight").go();
-      new MoveToLocationCmd(getParty().getLeader(), ELocation.VILLAGE_SQUARE).go();
+      CommandDelegate.execute(new SendPartyMessageCmd(getParty(), "Nobody is keen for a fight"));
+      CommandDelegate.execute(new MoveToLocationCmd(getParty().getLeader(), ELocation.VILLAGE_SQUARE));
     }
   }
 

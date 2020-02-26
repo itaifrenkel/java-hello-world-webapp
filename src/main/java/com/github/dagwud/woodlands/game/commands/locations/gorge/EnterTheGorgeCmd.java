@@ -6,7 +6,6 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
-import com.github.dagwud.woodlands.game.commands.locations.deepwoods.GenerateDeepWoodsEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 
@@ -34,7 +33,7 @@ public class EnterTheGorgeCmd extends AbstractCmd
             new GenerateGorgeEncounterCmd(playerState));
     CommandDelegate.execute(cmd);
 
-    new SendPartyAlertCmd(playerState.getActiveCharacter().getParty(),
-            playerState.getActiveCharacter().getParty().getName() + " is entering " + ELocation.THE_GORGE.getDisplayName()).go();
+    CommandDelegate.execute(new SendPartyAlertCmd(playerState.getActiveCharacter().getParty(),
+            playerState.getActiveCharacter().getParty().getName() + " is entering " + ELocation.THE_GORGE.getDisplayName()));
   }
 }

@@ -68,7 +68,7 @@ public class BuyDrinksCmd extends AbstractCmd
       modifyDrunkeness();
     }
     activeCharacter.getStats().setState(EState.DRINKING);
-    new RunLaterCmd(DRINK_DURATION_MS, new FinishDrinkingCmd(activeCharacter)).go(); 
+    CommandDelegate.execute(new RunLaterCmd(DRINK_DURATION_MS, new FinishDrinkingCmd(activeCharacter)));
   }
 
   private void modifyDrunkeness()

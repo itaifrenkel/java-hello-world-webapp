@@ -23,7 +23,7 @@ public class ManaRing extends TimedBenefitWearableTrinket
       int recovered = mana.getManaRecovered();
       if (recovered != 0)
       {
-        new SendMessageCmd(character.getPlayedBy().getChatId(), "You recover " + recovered + "✨ through your " + getName()).go();
+        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "You recover " + recovered + "✨ through your " + getName()));
       }
     }
   }

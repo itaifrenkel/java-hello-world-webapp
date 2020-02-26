@@ -3,9 +3,8 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.EState;
-import java.math.BigDecimal;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class FinishDrinkingCmd extends AbstractCmd
 {
@@ -22,7 +21,7 @@ public class FinishDrinkingCmd extends AbstractCmd
   public void execute()
   {
     activeCharacter.getStats().setState(EState.ALIVE);
-    new SendMessageCmd(activeCharacter.getPlayedBy().getChatId(), "Aaaaaaah. That hit the spot!").go();
+    CommandDelegate.execute(new SendMessageCmd(activeCharacter.getPlayedBy().getChatId(), "Aaaaaaah. That hit the spot!"));
   }
 
 }

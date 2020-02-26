@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -44,7 +45,7 @@ public class BestPartyCmd extends AbstractCmd
 
     if (partyCount == 1)
     {
-      new SendMessageCmd(chatId, "There's just one party, and that's yours. You're in a dictatorship, yes, but you're winning.").go();
+      CommandDelegate.execute(new SendMessageCmd(chatId, "There's just one party, and that's yours. You're in a dictatorship, yes, but you're winning."));
       return;
     }
 
@@ -58,7 +59,7 @@ public class BestPartyCmd extends AbstractCmd
       count++;
     }
 
-    new SendMessageCmd(chatId, stringBuilder.toString()).go();
+    CommandDelegate.execute(new SendMessageCmd(chatId, stringBuilder.toString()));
   }
 
   private CombinedStats calculate(Party party)

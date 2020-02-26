@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.inventory;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
@@ -32,6 +33,6 @@ public class ApplyTimeBasedBenefitCmd extends AbstractCmd
     }
 
     trinket.applyBenefit(wearer);
-    new RunLaterCmd(trinket.getBenefitRepeatDurationMS(), new ApplyTimeBasedBenefitCmd(wearer, trinket)).go();
+    CommandDelegate.execute(new RunLaterCmd(trinket.getBenefitRepeatDurationMS(), new ApplyTimeBasedBenefitCmd(wearer, trinket)));
   }
 }

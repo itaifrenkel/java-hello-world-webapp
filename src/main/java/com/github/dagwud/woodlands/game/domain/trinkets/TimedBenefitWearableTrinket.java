@@ -26,7 +26,7 @@ public abstract class TimedBenefitWearableTrinket extends WearableTrinket
     }
 
     ApplyTimeBasedBenefitCmd apply = new ApplyTimeBasedBenefitCmd(fighter, this);
-    new RunLaterCmd(getBenefitRepeatDurationMS(), apply).go();
+    CommandDelegate.execute(new RunLaterCmd(getBenefitRepeatDurationMS(), apply));
   }
 
   @Override
