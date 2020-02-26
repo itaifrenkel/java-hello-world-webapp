@@ -13,7 +13,7 @@ public class PeriodicRecoverManaCmd extends PeriodicCmd<RecoverManaCmd>
 
   public PeriodicRecoverManaCmd(PlayerCharacter character)
   {
-    super(Settings.DELAY_BETWEEN_MANA_RECOVERY, new RecoverManaCmd(character, 1));
+    super(Settings.DELAY_BETWEEN_MANA_RECOVERY);
     this.character = character;
   }
 
@@ -22,4 +22,11 @@ public class PeriodicRecoverManaCmd extends PeriodicCmd<RecoverManaCmd>
   {
     return character.isDead();
   }
+
+  @Override
+  public RecoverManaCmd createSingleRunCmd()
+  {
+    return new RecoverManaCmd(character, 1);
+  }
+
 }
