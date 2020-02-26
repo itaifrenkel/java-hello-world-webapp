@@ -1,19 +1,18 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
 import com.github.dagwud.woodlands.game.commands.core.PeriodicCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
-public class PeriodicRecoverManaCmd extends PeriodicCmd<RecoverManaCmd>
+public class PeriodicRecoverHPCmd extends PeriodicCmd<RecoverPortionOfShortRestCmd>
 {
   private static final long serialVersionUID = 1L;
 
   private final PlayerCharacter character;
 
-  public PeriodicRecoverManaCmd(PlayerCharacter character)
+  public PeriodicRecoverHPCmd(PlayerCharacter character)
   {
-    super(Settings.DELAY_BETWEEN_MANA_RECOVERY);
+    super(Settings.DELAY_BETWEEN_HP_RECOVERY);
     this.character = character;
   }
 
@@ -24,9 +23,9 @@ public class PeriodicRecoverManaCmd extends PeriodicCmd<RecoverManaCmd>
   }
 
   @Override
-  public RecoverManaCmd createSingleRunCmd()
+  public RecoverPortionOfShortRestCmd createSingleRunCmd()
   {
-    return new RecoverManaCmd(character, 1);
+    return new RecoverPortionOfShortRestCmd(character, Settings.SCHEDULED_HP_RECOVERY_PERCENT_OF_SHORT_REST);
   }
 
   @Override

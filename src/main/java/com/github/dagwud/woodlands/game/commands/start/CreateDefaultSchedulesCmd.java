@@ -1,10 +1,10 @@
 package com.github.dagwud.woodlands.game.commands.start;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.character.PeriodicRecoverHPCmd;
 import com.github.dagwud.woodlands.game.commands.character.PeriodicRecoverManaCmd;
 import com.github.dagwud.woodlands.game.commands.character.PeriodicSoberUpCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.PeriodicCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class CreateDefaultSchedulesCmd extends AbstractCmd
@@ -21,10 +21,8 @@ public class CreateDefaultSchedulesCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    PeriodicCmd periodicSoberUp = new PeriodicSoberUpCmd(character, character.getPlayedBy().getChatId());
-    CommandDelegate.execute(periodicSoberUp);
-
-    PeriodicCmd periodicMana = new PeriodicRecoverManaCmd(character);
-    CommandDelegate.execute(periodicMana);
+    CommandDelegate.execute(new PeriodicSoberUpCmd(character, character.getPlayedBy().getChatId()));
+    CommandDelegate.execute(new PeriodicRecoverManaCmd(character));
+    CommandDelegate.execute(new PeriodicRecoverHPCmd(character));
   }
 }

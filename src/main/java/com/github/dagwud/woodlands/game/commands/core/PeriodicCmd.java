@@ -16,13 +16,20 @@ public abstract class PeriodicCmd<T extends AbstractCmd> extends AbstractCmd
   @Override
   public final void execute()
   {
-    if (!shouldCancelPeriodicTimer())
+    if (shouldCancelPeriodicTimer())
+    {
+      return;
+    }
+
+    if (shouldRunSingle())
     {
       T timerTickCmd = createSingleRunCmd();
       CommandDelegate.execute(timerTickCmd);
-      CommandDelegate.execute(new RunLaterCmd(runEveryMS, this));
     }
+    CommandDelegate.execute(new RunLaterCmd(runEveryMS, this));
   }
+
+  protected abstract boolean shouldRunSingle();
 
   protected abstract boolean shouldCancelPeriodicTimer();
 
