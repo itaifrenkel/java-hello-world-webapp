@@ -11,7 +11,7 @@ public class Settings
   public static final BigDecimal DEFAULT_PERCENT_CHANCE_OF_ENCOUNTER = new BigDecimal("50");
   public static final int DELAY_BETWEEN_ENCOUNTERS_MS = 15_000;
   public static final int DELAY_BETWEEN_ROUNDS_MS = 15_000;
-  public static final long DELAY_BETWEEN_MANA_RECOVERY = 3000 /*3 * 60 * 60_000*/; // 3 hours
+  public static final long DELAY_BETWEEN_MANA_RECOVERY = 3 * 60 * 60_000; // 3 hours
   public static final long SOBER_UP_DELAY_MS = 60_000 * 20;
   public static final long SHORT_REST_DURATION_MS = 60_000 * 5;
   public static final long LONG_REST_DURATION_MS = 60_000 * 60; // 1 hour
