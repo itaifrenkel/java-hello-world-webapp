@@ -12,10 +12,17 @@ public class RollShortRestCmd extends AbstractCmd
 
   private final GameCharacter character;
   private int recoveredHitPoints;
+  private final BigDecimal percentScale;
 
   public RollShortRestCmd(GameCharacter character)
   {
+    this(character, new BigDecimal("100");
+  }
+
+  public RollShortRestCmd(GameCharacter character, BigDecimal percentageOfNormal)
+  {
     this.character = character;
+    this.percentScale = percentageOfNormal;
   }
 
   @Override
@@ -29,6 +36,12 @@ public class RollShortRestCmd extends AbstractCmd
       newHitPoints = stats.getMaxHitPoints().total();
     }
     recoveredHitPoints = newHitPoints - stats.getHitPoints();
+
+    BigDecimal bdRecovered = new BigDecimal(recoveredHitPoints)
+        .multiply(percentScale)
+        .divide(new BigDecimal("100"), new MathContext(0, RoundingMode.FLOOR));
+ 
+    recoveredHitPoints = bdRecovered.intValue();
   }
 
   private int roll(int diceCount, int diceFaces)
