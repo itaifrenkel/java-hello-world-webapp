@@ -1,9 +1,6 @@
 package com.github.dagwud.woodlands.game;
 
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
-import com.github.dagwud.woodlands.game.commands.core.RunScheduledCmd;
+import com.github.dagwud.woodlands.game.commands.core.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -73,7 +70,7 @@ public class Scheduler implements Serializable
       }
     }
 
-    CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Schedule oncomplete not found: " + complete.toString()));
+    CommandDelegate.execute(new SendAdminMessageCmd("Schedule oncomplete not found: " + complete.toString()));
   }
 
   public void clear()

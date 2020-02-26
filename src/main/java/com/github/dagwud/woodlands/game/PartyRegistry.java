@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game;
 
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Party;
 
@@ -65,7 +66,7 @@ public class PartyRegistry implements Serializable
         {
           value.setName(key);
         }
-        SendMessageCmd admin = new SendMessageCmd(Settings.ADMIN_CHAT, "A null-named party was fixed");
+        SendMessageCmd admin = new SendAdminMessageCmd("A null-named party was fixed");
         CommandDelegate.execute(admin);
       }
       if (key != null && !key.equals(key.toLowerCase()))
@@ -93,7 +94,7 @@ public class PartyRegistry implements Serializable
     for (String e : empty)
     {
       parties.remove(e);
-      SendMessageCmd admin = new SendMessageCmd(Settings.ADMIN_CHAT, "Removed empty party " + e);
+      SendMessageCmd admin = new SendAdminMessageCmd("Removed empty party " + e);
         CommandDelegate.execute(admin);
     }
 

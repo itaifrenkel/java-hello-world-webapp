@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.log.Logger;
@@ -66,7 +67,7 @@ public class RetrieveWorldCmd extends AbstractCmd
 
     if (Scheduler.instance().count() >= 50)
     {
-      SendMessageCmd msg = new SendMessageCmd(Settings.ADMIN_CHAT, "<b><i>Aaaaaaah! Too many schedules; resetting</i></b>");
+      SendMessageCmd msg = new SendAdminMessageCmd("<b><i>Aaaaaaah! Too many schedules; resetting</i></b>");
       CommandDelegate.execute(msg);
       Scheduler.instance().clear();
     }

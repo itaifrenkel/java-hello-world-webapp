@@ -1,8 +1,7 @@
 package com.github.dagwud.woodlands.game.log;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -81,7 +80,7 @@ public class Logger
   {
     try
     {
-      CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, out));
+      CommandDelegate.execute(new SendAdminMessageCmd(out));
     }
     catch (Exception ignore)
     {

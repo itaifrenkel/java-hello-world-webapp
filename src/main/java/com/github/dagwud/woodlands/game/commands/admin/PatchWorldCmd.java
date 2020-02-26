@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game.commands.admin;
 import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.character.PeriodicSoberUpCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.EState;
@@ -38,7 +38,7 @@ public class PatchWorldCmd extends AbstractCmd
 
   private void recreateSchedules()
   {
-    CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Schedules appear to have been lost! Recreating them..."));
+    CommandDelegate.execute(new SendAdminMessageCmd("Schedules appear to have been lost! Recreating them..."));
     for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
       createSchedules(playerState.getActiveCharacter());
@@ -52,7 +52,7 @@ public class PatchWorldCmd extends AbstractCmd
         PlayerCharacter activeCharacter = playerState.getActiveCharacter();
         activeCharacter.getStats().setState(EState.ALIVE);
         CommandDelegate.execute(new MoveToLocationCmd(activeCharacter, ELocation.VILLAGE_SQUARE));
-        CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Unrested " + activeCharacter.getName()));
+        CommandDelegate.execute(new SendAdminMessageCmd("Unrested " + activeCharacter.getName()));
       }
     }
   }
