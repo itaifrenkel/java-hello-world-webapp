@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.start;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.PeriodicSoberUpCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.PeriodicCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class CreateDefaultSchedulesCmd extends AbstractCmd
@@ -19,7 +20,7 @@ public class CreateDefaultSchedulesCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, character.getPlayedBy().getChatId());
+    PeriodicCmd periodicSoberUp = new PeriodicSoberUpCmd(character, character.getPlayedBy().getChatId());
     CommandDelegate.execute(periodicSoberUp);
   }
 }
