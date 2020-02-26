@@ -34,18 +34,27 @@ public class RollShortRestCmd extends AbstractCmd
   {
     Stats stats = character.getStats();
     int diceroll = roll(stats.getLevel(), stats.getRestDiceFace());
+    diceroll = rollRecoveryAmount(diceroll, percentScale);
+
     int newHitPoints = (stats.getHitPoints() + diceroll + Math.max(stats.getConstitutionModifier(), 0));
     if (newHitPoints > stats.getMaxHitPoints().total())
     {
       newHitPoints = stats.getMaxHitPoints().total();
     }
     recoveredHitPoints = newHitPoints - stats.getHitPoints();
+  }
 
-    BigDecimal bdRecovered = new BigDecimal(recoveredHitPoints)
-        .multiply(percentScale)
-        .divide(new BigDecimal("100"), new MathContext(0, RoundingMode.FLOOR));
- 
-    recoveredHitPoints = bdRecovered.intValue();
+  private int rollRecoveryAmount(int diceroll, BigDecimal percentScale)
+  {
+    BigDecimal scaledDiceRoll = new BigDecimal(diceroll)
+            .multiply(percentScale)
+            .divide(new BigDecimal("100"), new MathContext(0, RoundingMode.FLOOR));
+    diceroll = scaledDiceRoll.intValue();
+    if (this.percentScale.compareTo(new BigDecimal("100")) != 0)
+    {
+      diceroll = Math.min(1, diceroll);
+    }
+    return diceroll;
   }
 
   private int roll(int diceCount, int diceFaces)
