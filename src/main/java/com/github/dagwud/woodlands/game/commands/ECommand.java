@@ -41,6 +41,7 @@ public enum ECommand
   CHEAT_FULL_HEAL("/heal", false, (character, chatId) -> new FullHealCmd(chatId, character)),
   KILL("/kill", false, (character, chatId) -> new KillPromptCmd(chatId, character)),
   RESURRECT("/resurrect", false, (character, chatId) -> new ResurrectPromptCmd(chatId, character)),
+  RESURRECT_ALL("/resurrectall", false, (character, chatId) -> new ResurrectPartyCmd(chatId, character)),
   REMOVE("/rm", false, (character, chatId) -> new RemovePromptCmd(chatId, character)),
   CLEAR_SCHEDULER("/clearscheduler", false, (character, chatId) -> new ClearSchedulerCmd(chatId)),
   SETPARTY("/setparty", false, (character, chatId) -> new AdminChangePartyCmd(chatId, character)),
