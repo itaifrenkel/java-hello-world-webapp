@@ -26,8 +26,10 @@ public abstract class PeriodicCmd<T extends AbstractCmd> extends AbstractCmd
       T timerTickCmd = createSingleRunCmd();
       CommandDelegate.execute(timerTickCmd);
     }
-    CommandDelegate.execute(new RunLaterCmd(runEveryMS, this));
+    CommandDelegate.execute(new RunLaterCmd(runEveryMS, createNext()));
   }
+
+  protected abstract PeriodicCmd<T> createNext();
 
   protected abstract boolean shouldRunSingle();
 

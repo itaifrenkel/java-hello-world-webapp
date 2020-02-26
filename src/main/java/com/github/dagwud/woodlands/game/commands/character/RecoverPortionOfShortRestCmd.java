@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -31,6 +32,9 @@ public class RecoverPortionOfShortRestCmd extends AbstractCmd
 
     RecoverHitPointsCmd recover = new RecoverHitPointsCmd(character, hpRecover);
     CommandDelegate.execute(recover);
-    CommandDelegate.execute(new SendMessageCmd(character, "<b>You recovered " + "❤" + recover.getHitPointsRecovered() + "</b>"));
+    if (recover.getHitPointsRecovered() != 0)
+    {
+      CommandDelegate.execute(new SendMessageCmd(character, "<b>You recovered " + Icons.HP + recover.getHitPointsRecovered() + "</b>"));
+    }
   }
 }

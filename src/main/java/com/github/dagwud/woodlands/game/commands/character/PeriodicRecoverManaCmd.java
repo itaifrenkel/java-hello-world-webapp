@@ -17,6 +17,12 @@ public class PeriodicRecoverManaCmd extends PeriodicCmd<DoPeriodicRecoverManaCmd
   }
 
   @Override
+  protected PeriodicCmd<DoPeriodicRecoverManaCmd> createNext()
+  {
+    return new PeriodicRecoverManaCmd(character);
+  }
+
+  @Override
   protected boolean shouldRunSingle()
   {
     return character.isConscious();

@@ -20,6 +20,12 @@ public class PeriodicSoberUpCmd extends PeriodicCmd<SoberUpCmd>
   }
 
   @Override
+  protected PeriodicCmd<SoberUpCmd> createNext()
+  {
+    return new PeriodicSoberUpCmd(character, chatId);
+  }
+
+  @Override
   protected boolean shouldRunSingle()
   {
     return character.isConscious();

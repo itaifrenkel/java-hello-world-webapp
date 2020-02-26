@@ -17,6 +17,12 @@ public class PeriodicRecoverHPCmd extends PeriodicCmd<RecoverPortionOfShortRestC
   }
 
   @Override
+  protected PeriodicCmd<RecoverPortionOfShortRestCmd> createNext()
+  {
+    return new PeriodicRecoverHPCmd(character);
+  }
+
+  @Override
   protected boolean shouldRunSingle()
   {
     return character.isConscious();
