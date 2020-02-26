@@ -65,7 +65,7 @@ public class RetrieveWorldCmd extends AbstractCmd
       GameStatesRegistry.instance();
     }
 
-    if (Scheduler.instance().count() >= 50)
+    if (Scheduler.instance().count() >= 70)
     {
       SendMessageCmd msg = new SendAdminMessageCmd("<b><i>Aaaaaaah! Too many schedules; resetting</i></b>");
       CommandDelegate.execute(msg);
