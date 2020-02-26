@@ -46,10 +46,11 @@ public class PromptJoinPartyCmd extends SuspendableCmd
   {
     partyToJoin = capturedInput;
     SendMessageCmd cmd = new SendMessageCmd(getPlayerState().getPlayer().getChatId(),
-            "To which group should alerts be published? Enter the Telegram group chat ID, or " + NO_GROUP_CHAT + " to turn off " +
-                    "group alerts for this party. Enter " + NO_CHANGE_GROUP_CHAT + " to leave the group setting as it is (e.g. if you're new to an existing party).\n" +
-                    "You can try inviting @RawDataBot to your group chat to find the group's ID\n" +
-                    "Remember to invite the Woodlands bot to your group chat!");
+            "To which group should alerts be published? Enter the Telegram group chat ID\n" +
+                    "* Enter " + NO_CHANGE_GROUP_CHAT + " to retain the current setting\n" +
+                    "* Enter " + NO_GROUP_CHAT + " to turn off alerts\n" +
+                    "Remember to invite the Woodlands bot to your group chat. \n\n" +
+                    "<b>If you don't know what to do, reply with 0</b>");
     CommandDelegate.execute(cmd);
   }
 
@@ -72,7 +73,8 @@ public class PromptJoinPartyCmd extends SuspendableCmd
     {
       SendMessageCmd err = new SendMessageCmd(getPlayerState().getPlayer().getChatId(),
             "That's not a valid group chat ID. A group chat should have a negative number corresponding " +
-                    "to the Telegram group chat. Try inviting @RawDataBot to get your group chat ID");
+                    "to the Telegram group chat. Try inviting @RawDataBot to get your group chat ID\n" +
+                    "<b>If you don't know what to do, reply with 0</b>");
       CommandDelegate.execute(err);
       rejectCapturedInput();
       return;
