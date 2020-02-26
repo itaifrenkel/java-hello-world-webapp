@@ -39,7 +39,6 @@ public enum ELocation
 
   THE_GORGE("The Gorge", new GorgeMenu(), false, "Here be dragons. Dragons can't be attacked with melee weapons - only ranged ones!");
 
-
   private final String displayName;
   private final GameMenu menu;
   private final boolean autoRetreat;
@@ -115,5 +114,10 @@ public enum ELocation
   public String getLookText()
   {
     return lookText;
+  }
+
+  public boolean isVillageLocation()
+  {
+    return this == VILLAGE_SQUARE || this == INN || this == TAVERN;
   }
 }

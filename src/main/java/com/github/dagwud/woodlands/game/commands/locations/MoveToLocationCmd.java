@@ -71,12 +71,12 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private boolean inVillageMove(ELocation moveTo, ELocation currentLocation)
   {
-    return (currentLocation == ELocation.INN || currentLocation == ELocation.TAVERN) && moveTo == ELocation.VILLAGE_SQUARE;
+    return currentLocation.isVillageLocation() && moveTo == ELocation.VILLAGE_SQUARE;
   }
 
   private boolean allMoveTogether(ELocation moveTo)
   {
-    return moveTo != ELocation.INN && moveTo != ELocation.TAVERN;
+    return moveTo == ELocation.VILLAGE_SQUARE || !moveTo.isVillageLocation();
   }
 
   private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo, GameCharacter movedBy)
