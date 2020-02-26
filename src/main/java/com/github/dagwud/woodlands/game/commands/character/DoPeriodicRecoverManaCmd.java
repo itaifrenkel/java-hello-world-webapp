@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -23,6 +24,6 @@ public class DoPeriodicRecoverManaCmd extends AbstractCmd
     RecoverManaCmd recover = new RecoverManaCmd(character, manaRecovered);
     CommandDelegate.execute(recover);
     manaRecovered = recover.getManaRecovered();
-    CommandDelegate.execute(new SendMessageCmd(character, "<b>You recovered ✨" + manaRecovered + "</b>"));
+    CommandDelegate.execute(new SendMessageCmd(character, "<b>You recovered " + Icons.MANA + manaRecovered + "</b>"));
   }
 }

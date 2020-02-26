@@ -31,6 +31,6 @@ public class RecoverPortionOfShortRestCmd extends AbstractCmd
 
     RecoverHitPointsCmd recover = new RecoverHitPointsCmd(character, hpRecover);
     CommandDelegate.execute(recover);
-    CommandDelegate.execute(new SendMessageCmd(character, "<b>You recovered ❤" + recover.getHitPointsRecovered() + "</b>"));
+    CommandDelegate.execute(new SendMessageCmd(character, "<b>You recovered " + "❤" + recover.getHitPointsRecovered() + "</b>"));
   }
 }

@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.domain.spells.SpellAbilities;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
@@ -32,12 +33,12 @@ public abstract class Fighter extends GameObject
     Stats stats = getStats();
     if (stats.getState() == EState.DEAD)
     {
-      return name + "☠️dead";
+      return name + Icons.DEAD + "️dead";
     }
     String message = name + healthIcon(stats) + stats.getHitPoints() + " / " + stats.getMaxHitPoints();
     if (stats.getMaxMana().total() != 0)
     {
-      message += ", ✨" + stats.getMana() + "/" + stats.getMaxMana();
+      message += ", " + Icons.MANA + stats.getMana() + "/" + stats.getMaxMana();
     }
     return message;
   }
@@ -48,21 +49,21 @@ public abstract class Fighter extends GameObject
         .divide(new BigDecimal(stats.getMaxHitPoints().total()), 3, RoundingMode.HALF_DOWN);
     if (perc.compareTo(EIGHTY_PER_CENT) >= 0)
     {
-      return "💚";
+      return Icons.HP_HEALTH;
     }
     if (perc.compareTo(SIXTY_FIVE_PER_CENT) >= 0)
     {
-      return "💛";
+      return Icons.HP_FAIRLY_HEALTHY;
     }
     if (perc.compareTo(FORTY_PER_CENT) >= 0)
     {
-      return "🧡";
+      return Icons.HP_HURT;
     }
     if (perc.compareTo(TWENTY_PER_CENT) >= 0)
     {
-      return "❤️";
+      return Icons.HP_BADLY_HURT + "️";
     }
-    return "💔";
+    return Icons.HP_CRITICAL;
   }
 
   public SpellAbilities getSpellAbilities()

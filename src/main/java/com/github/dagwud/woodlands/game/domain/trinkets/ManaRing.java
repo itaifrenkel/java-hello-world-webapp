@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.trinkets;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
@@ -23,7 +24,7 @@ public class ManaRing extends TimedBenefitWearableTrinket
       int recovered = mana.getManaRecovered();
       if (recovered != 0)
       {
-        CommandDelegate.execute(new SendMessageCmd(character, "You recover " + recovered + "✨ through your " + getName()));
+        CommandDelegate.execute(new SendMessageCmd(character, "You recover " + recovered + Icons.MANA + " through your " + getName()));
       }
     }
   }
@@ -55,6 +56,6 @@ public class ManaRing extends TimedBenefitWearableTrinket
   @Override
   public String statsSummary(Fighter carrier)
   {
-    return "✨" + MANA_REGEN + "/" + (REGENRATE_EVERY_MS / 60_000) + "m";
+    return Icons.MANA + MANA_REGEN + "/" + (REGENRATE_EVERY_MS / 60_000) + "m";
   }
 }

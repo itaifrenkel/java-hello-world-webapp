@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.trinkets;
 
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 
 public class BeadsOfPower extends PowerBoostTrinket
@@ -28,12 +29,12 @@ public class BeadsOfPower extends PowerBoostTrinket
   @Override
   String produceEquipMessage(Fighter fighter)
   {
-    return "You feel a rush of power as you put on the beads. Your maximum HP has been boosted to ❤" + fighter.getStats().getMaxHitPoints().total();
+    return "You feel a rush of power as you put on the beads. Your maximum HP has been boosted to " + "❤" + fighter.getStats().getMaxHitPoints().total();
   }
 
   @Override
   public String statsSummary(Fighter carrier)
   {
-    return "❤" + MAX_HP_BOOST;
+    return Icons.HP + MAX_HP_BOOST;
   }
 }

@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations.village;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
@@ -65,10 +66,10 @@ public class DoRestCmd extends AbstractCmd
       character.getStats().setRestPoints(character.getStats().getRestPoints() - 1);
     }
 
-    SendMessageCmd echo = new SendMessageCmd(chatId, "<b>You recovered ❤" + hitPointsRecovered +
-            " and ✨" + manaRecovered + ".</b> " +
-            "Now at ❤" + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints() +
-            ", ✨" + character.getStats().getMana() + "/" + character.getStats().getMaxMana());
+    SendMessageCmd echo = new SendMessageCmd(chatId, "<b>You recovered " + "❤" + hitPointsRecovered +
+            " and " + Icons.MANA + manaRecovered + ".</b> " +
+            "Now at " + Icons.HP + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints() +
+            ", " + Icons.MANA + character.getStats().getMana() + "/" + character.getStats().getMaxMana());
     CommandDelegate.execute(echo);
 
     MoveToLocationCmd chrisProtector = new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE);

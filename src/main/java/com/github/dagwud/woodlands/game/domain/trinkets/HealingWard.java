@@ -10,8 +10,6 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 public class HealingWard extends TimedBenefitWearableTrinket
 {
@@ -35,7 +33,7 @@ public class HealingWard extends TimedBenefitWearableTrinket
       PlayerCharacter character = (PlayerCharacter) applyTo;
       if (hpRecovered != 0)
       {
-        CommandDelegate.execute(new SendMessageCmd(character, "You recover " + hpRecovered + "❤ through your " + getName()));
+        CommandDelegate.execute(new SendMessageCmd(character, "You recover " + hpRecovered + "❤" + " through your " + getName()));
       }
     }
   }

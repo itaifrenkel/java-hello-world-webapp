@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
 import com.github.dagwud.woodlands.game.commands.character.level.ILevelUpAward;
@@ -48,7 +49,7 @@ public class LevelUpCmd extends AbstractCmd
     SendPartyMessageCmd msgParty = new SendPartyMessageCmd(character.getParty(), "🍾 <b>" + character.getName() + " has levelled up!</b>");
     CommandDelegate.execute(msgParty);
 
-    AbstractCmd msg = new SendMessageCmd(chatId, "🍾 <b>You have levelled up! Hit Point boost: ❤" + hitPointsGained + (manaGained != 0 ? ", Mana boost: ✨" + manaGained : "") + "</b>");
+    AbstractCmd msg = new SendMessageCmd(chatId, "🍾 <b>You have levelled up! Hit Point boost: " + "❤" + hitPointsGained + (manaGained != 0 ? ", Mana boost: " + Icons.MANA + manaGained : "") + "</b>");
     CommandDelegate.execute(msg);
 
     int newLevel = character.getStats().getLevel() + 1;

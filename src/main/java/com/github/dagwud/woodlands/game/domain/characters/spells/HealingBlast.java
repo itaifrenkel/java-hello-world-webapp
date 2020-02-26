@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.RollShortRestCmd;
 import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
@@ -33,7 +34,7 @@ public class HealingBlast extends SingleCastSpell
         {
           RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(target, roll.getRecoveredHitPoints());
           CommandDelegate.execute(cmd);
-          healed.add(target.getName() + " (❤" + roll.getRecoveredHitPoints() + ")");
+          healed.add(target.getName() + " (" + Icons.HP + roll.getRecoveredHitPoints() + ")");
         }
       }
     }

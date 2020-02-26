@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.trinkets.consumable;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.RecoverManaCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 
@@ -31,6 +32,6 @@ public abstract class ManaPotion extends ConsumableTrinket
   @Override
   public final String statsSummary(Fighter carrier)
   {
-    return "✨" + manaPointsToRecover;
+    return Icons.MANA + manaPointsToRecover;
   }
 }

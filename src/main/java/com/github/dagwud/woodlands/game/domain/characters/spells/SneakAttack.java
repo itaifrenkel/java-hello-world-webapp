@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.battle.DealDamageCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.battle.EHitStatus;
@@ -36,7 +37,7 @@ public class SneakAttack extends SingleCastSpell
   {
     Weapon weapon = new Weapon();
     weapon.name = getSpellName();
-    weapon.customIcon = "✨";
+    weapon.customIcon = Icons.MANA;
     return new DamageInflicted(attacker, weapon, EHitStatus.HIT, totalDamage, target, 0);
   }
 
