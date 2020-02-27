@@ -72,8 +72,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
       {
         message.append("at ").append(member.getLocation().getDisplayName()).append(" ");
       }
-      message.append(state).append("\n")
-          .append(" •").append(member.summary(false)).append("\n");
+      message.append(state).append(". ").append(member.summary(false)).append("\n");
     }
     return message.toString();
   }
