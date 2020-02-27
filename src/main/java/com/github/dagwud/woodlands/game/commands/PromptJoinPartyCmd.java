@@ -32,8 +32,7 @@ public class PromptJoinPartyCmd extends SuspendableCmd
         receivePartyNameAndPromptAlertGroup(capturedInput);
         break;
       case 2:
-        receiveAlertGroupChat(capturedInput);
-        join();
+        receiveAlertGroupChatAndJoin(capturedInput);
     }
   }
 
@@ -47,14 +46,15 @@ public class PromptJoinPartyCmd extends SuspendableCmd
   {
     partyToJoin = capturedInput;
     SendMessageCmd cmd = new SendMessageCmd(getPlayerState().getPlayer().getChatId(),
-            "To which group should alerts be published? Enter the Telegram group chat ID, or " + NO_GROUP_CHAT + " to turn off " +
-                    "group alerts for this party. Enter " + NO_CHANGE_GROUP_CHAT + " to leave the group setting as it is (e.g. if you're new to an existing party).\n" +
-                    "You can try inviting @RawDataBot to your group chat to find the group's ID\n" +
-                    "Remember to invite the Woodlands bot to your group chat!");
+            "To which group should alerts be published? Enter the Telegram group chat ID\n" +
+                    "* Enter " + NO_CHANGE_GROUP_CHAT + " to retain the current setting\n" +
+                    "* Enter " + NO_GROUP_CHAT + " to turn off alerts\n" +
+                    "Remember to invite the Woodlands bot to your group chat. \n\n" +
+                    "<b>If you don't know what to do, reply with 0</b>");
     CommandDelegate.execute(cmd);
   }
 
-  private void receiveAlertGroupChat(String capturedInput)
+  private void receiveAlertGroupChatAndJoin(String capturedInput)
   {
     Long groupChatId = null;
     try
@@ -67,18 +67,21 @@ public class PromptJoinPartyCmd extends SuspendableCmd
     }
     catch (NumberFormatException ignored)
     {
-      // fall through
+      // fall through - will be caught in the null check below
     }
-    if (null != groupChatId)
+    if (null == groupChatId)
     {
-      alertChannelChatId = groupChatId;
+      SendMessageCmd err = new SendMessageCmd(getPlayerState().getPlayer().getChatId(),
+            "That's not a valid group chat ID. A group chat should have a negative number corresponding " +
+                    "to the Telegram group chat. Try inviting @RawDataBot to get your group chat ID\n" +
+                    "<b>If you don't know what to do, reply with 0</b>");
+      CommandDelegate.execute(err);
+      rejectCapturedInput();
       return;
     }
-    SendMessageCmd err = new SendMessageCmd(getPlayerState().getPlayer().getChatId(),
-            "That's not a valid group chat ID. A group chat should have a negative number corresponding " +
-                    "to the Telegram group chat. Try inviting @RawDataBot to get your group chat ID");
-    CommandDelegate.execute(err);
-    rejectCapturedInput();
+
+    alertChannelChatId = groupChatId;
+    join();
   }
 
   private void join()
@@ -90,7 +93,7 @@ public class PromptJoinPartyCmd extends SuspendableCmd
     {
       if (alertChannelChatId == NO_GROUP_CHAT)
       {
-        new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here").go();
+        CommandDelegate.execute(new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here"));
         getPlayerState().getActiveCharacter().getParty().setAlertChatId(null);
       }
       else
@@ -103,12 +106,12 @@ public class PromptJoinPartyCmd extends SuspendableCmd
         }
         if (changed)
         {
-          new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here").go();
+          CommandDelegate.execute(new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts will no longer be posted here"));
         }
         getPlayerState().getActiveCharacter().getParty().setAlertChatId(alertChannelChatId);
         if (changed)
         {
-          new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts for " + getPlayerState().getActiveCharacter().getParty().getName() + " will be posted here").go();
+          CommandDelegate.execute(new SendPartyAlertCmd(getPlayerState().getActiveCharacter().getParty(), "Group alerts for " + getPlayerState().getActiveCharacter().getParty().getName() + " will be posted here"));
         }
       }
     }

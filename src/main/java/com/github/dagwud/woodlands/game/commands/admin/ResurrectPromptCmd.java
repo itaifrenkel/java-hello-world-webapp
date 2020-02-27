@@ -1,11 +1,12 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
-import com.github.dagwud.woodlands.game.*;
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.FullHealCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
-import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -81,10 +82,7 @@ public class ResurrectPromptCmd extends SuspendableCmd
     FullHealCmd cmd = new FullHealCmd(chatId, character);
     CommandDelegate.execute(cmd);
 
-    MoveToLocationCmd move = new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE);
-    CommandDelegate.execute(cmd);
-
     return "Resurrected " + character.getName() +
-            " in party " + party.getName();
+            " in party " + (party == null ? "NULL" : party.getName());
   }
 }

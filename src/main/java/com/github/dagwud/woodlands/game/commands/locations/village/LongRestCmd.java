@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 
@@ -42,10 +43,11 @@ public class LongRestCmd extends RestCmd
   {
     Stats stats = restFor.getStats();
     stats.setState(EState.LONG_RESTING);
+    restFor.setLocation(ELocation.INN);
     AbstractCmd restCompletedCmd = new DoRestCmd(restFor.getPlayedBy().getChatId(), restFor, true);
     restCompletedCmd = new RunLaterCmd(Settings.LONG_REST_DURATION_MS, restCompletedCmd);
     CommandDelegate.execute(restCompletedCmd);
-    SendMessageCmd echo = new SendMessageCmd(restFor.getPlayedBy().getChatId(), "You're resting");
+    SendMessageCmd echo = new SendMessageCmd(restFor, "You're resting");
     CommandDelegate.execute(echo);
   }
 }

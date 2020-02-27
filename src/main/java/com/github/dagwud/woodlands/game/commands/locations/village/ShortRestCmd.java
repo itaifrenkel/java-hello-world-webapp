@@ -58,7 +58,7 @@ public class ShortRestCmd extends RestCmd
     AbstractCmd restCompletedCmd = new DoRestCmd(restFor.getPlayedBy().getChatId(), restFor, false);
     restCompletedCmd = new RunLaterCmd(Settings.SHORT_REST_DURATION_MS, restCompletedCmd);
     CommandDelegate.execute(restCompletedCmd);
-    SendMessageCmd echo = new SendMessageCmd(restFor.getPlayedBy().getChatId(), "You're resting" + (restFor != getCharacter() ? " (initiated by " + getCharacter().getName() + ")" : ""));
+    SendMessageCmd echo = new SendMessageCmd(restFor, "You're resting" + (restFor != getCharacter() ? " (initiated by " + getCharacter().getName() + ")" : ""));
     CommandDelegate.execute(echo);
   }
 }

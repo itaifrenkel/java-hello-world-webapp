@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
+import com.github.dagwud.woodlands.game.commands.start.CreateDefaultSchedulesCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -44,8 +45,7 @@ public class SpawnCharacterCmd extends AbstractCmd
     MoveToLocationCmd move = new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE);
     CommandDelegate.execute(move);
 
-    PeriodicSoberUpCmd periodicSoberUp = new PeriodicSoberUpCmd(character, chatId);
-    CommandDelegate.execute(periodicSoberUp);
+    CommandDelegate.execute(new CreateDefaultSchedulesCmd(character));
 
     this.spawned = character;
   }

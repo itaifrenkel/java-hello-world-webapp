@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.battle.EHitStatus;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
@@ -8,10 +9,6 @@ import java.io.Serializable;
 public class DamageInflicted implements Serializable
 {
   private static final long serialVersionUID = 1L;
-
-  private static final String MISSED_ICON = "\uD83D\uDE48";
-  private static final String CRITICAL_HIT_ICON = "\uD83C\uDFAF";
-  private static final String SPELL_HIT_ICON = "✨";
 
   private final Weapon inflictedWith;
   private final int baseDamage;
@@ -66,26 +63,26 @@ public class DamageInflicted implements Serializable
     if (hitStatus == EHitStatus.DO_NOTHING)
     {
       return attacker.getName() + " " +
-          (attacker.isDead() ? "☠️" :"😴") +
+          (attacker.isDead() ? Icons.DEAD + "️" : Icons.DO_NOTHING) +
           " did nothing";
     }
     if (hitStatus == EHitStatus.MISS)
     {
-      return attacker.getName() + " " + MISSED_ICON + " missed → " + defender.getName();
+      return attacker.getName() + " " + Icons.MISS + " missed → " + defender.getName();
     }
     return attacker.getName() + " " +
             inflictedWith.getIcon() +
             baseDamage + (bonusDamage != 0 ? "+" + bonusDamage : "") +
             " → " + defender.getName()
             + hitIcon(hitStatus)
-            + (isKillingBlow() ? "☠️" : "");
+            + (isKillingBlow() ? Icons.DEAD + "️" : "");
   }
 
   private String hitIcon(EHitStatus hitStatus)
   {
     if (hitStatus == EHitStatus.CRITICAL_HIT)
     {
-      return " (" + CRITICAL_HIT_ICON + ")";
+      return " (" + Icons.CRITICAL_HIT + ")";
     }
     return "";
   }

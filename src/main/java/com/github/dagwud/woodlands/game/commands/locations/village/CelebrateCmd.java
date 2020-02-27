@@ -1,8 +1,8 @@
 package com.github.dagwud.woodlands.game.commands.locations.village;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.PlayerState;
-import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
@@ -45,10 +45,10 @@ public class CelebrateCmd extends SuspendableCmd
   {
     String[] stats = {"Strength", "Agility", "Constitution"};
     ChoiceCmd cmd = new ChoiceCmd(chatId, "You have " + character.getStats().getAvailableStatsPointUpgrades() + " stat point upgrades available. Which stat would you like to increase?\n" +
-                      "Strength: damage with ⚔️melee weapons\n" +
-                      "Agility: damage with 🏹ranged weapons\n" +
+                      "Strength: damage with " + Icons.MELEE + " melee weapons\n" +
+                      "Agility: damage with " + Icons.RANGED + " ranged weapons\n" +
                       "         and turn order\n" +
-                      "Constitution: Max ❤️ and more effective rest/heal", stats);
+                      "Constitution: Max " + Icons.HP + " and more effective rest/heal", stats);
     CommandDelegate.execute(cmd);
   }
 

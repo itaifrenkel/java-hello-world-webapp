@@ -72,12 +72,12 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private boolean inVillageMove(ELocation moveTo, ELocation currentLocation)
   {
-    return (currentLocation == ELocation.INN || currentLocation == ELocation.TAVERN) && moveTo == ELocation.VILLAGE_SQUARE;
+    return currentLocation.isVillageLocation() && moveTo == ELocation.VILLAGE_SQUARE;
   }
 
   private boolean allMoveTogether(ELocation moveTo)
   {
-    return moveTo != ELocation.INN && moveTo != ELocation.TAVERN;
+    return moveTo == ELocation.VILLAGE_SQUARE || !moveTo.isVillageLocation();
   }
 
   private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo, GameCharacter movedBy)
@@ -109,7 +109,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
       if (characterToMove != movedBy)
       {
-        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
+        CommandDelegate.execute(new SendMessageCmd(character, "<i>" + movedBy.getName() + " leads you to " + moveTo + "</i>"));
       }
       showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
       handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
@@ -121,7 +121,7 @@ public class MoveToLocationCmd extends AbstractCmd
     String entryText = moveTo.getMenu().produceEntryText(character, from);
     if (entryText != null)
     {
-      new SendLocationMessageCmd(moveTo, "<i>" + entryText + "</i>", character).go();
+      CommandDelegate.execute(new SendLocationMessageCmd(moveTo, "<i>" + entryText + "</i>", character));
     }
   }
 
@@ -136,7 +136,7 @@ public class MoveToLocationCmd extends AbstractCmd
         String exitText = from.getMenu().produceExitText(toMove, moveTo);
         if (exitText != null)
         {
-          new SendLocationMessageCmd(from, "<i>" + exitText + "</i>", characterToMove).go();
+          CommandDelegate.execute(new SendLocationMessageCmd(from, "<i>" + exitText + "</i>", characterToMove));
         }
       }
     }

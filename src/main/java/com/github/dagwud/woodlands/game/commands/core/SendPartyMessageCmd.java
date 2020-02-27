@@ -22,7 +22,7 @@ public class SendPartyMessageCmd extends AbstractCmd
   {
     for (PlayerCharacter member : party.getActivePlayerCharacters())
     {
-      SendMessageCmd send = new SendMessageCmd(member.getPlayedBy().getChatId(), message);
+      SendMessageCmd send = new SendMessageCmd(member, message);
       CommandDelegate.execute(send);
     }
   }

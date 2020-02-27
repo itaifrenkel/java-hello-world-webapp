@@ -1,16 +1,16 @@
 package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunScheduledCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
-import java.util.Iterator;
 
 public class Scheduler implements Serializable
 {
@@ -33,7 +33,8 @@ public class Scheduler implements Serializable
 
   public void restoreScheduled()
   {
-    for (RunLaterCmd scheduledCommand : getScheduledCommands())
+    Collection<RunLaterCmd> scheduledCommands = new ArrayList<>(getScheduledCommands());
+    for (RunLaterCmd scheduledCommand : scheduledCommands)
     {
       if (scheduledCommand.isRestore())
       {
@@ -73,7 +74,7 @@ public class Scheduler implements Serializable
       }
     }
 
-    CommandDelegate.execute(new SendMessageCmd(Settings.ADMIN_CHAT, "Schedule oncomplete not found: " + complete.toString()));
+    CommandDelegate.execute(new SendAdminMessageCmd("Schedule oncomplete not found: " + complete.toString()));
   }
 
   public void clear()
@@ -84,5 +85,16 @@ public class Scheduler implements Serializable
   public int count()
   {
     return getScheduledCommands().size();
+  }
+
+  public Collection<String> listScheduleDescriptions()
+  {
+    Collection<String> list = new ArrayList<>();
+    for (RunLaterCmd scheduled : getScheduledCommands())
+    {
+      String delay = (int)(Math.floorDiv(scheduled.getRemainingDelayMS(), 1000)) + "s";
+      list.add(scheduled.getCmdToRun().toString() + " - " + delay);
+    }
+    return list;
   }
 }

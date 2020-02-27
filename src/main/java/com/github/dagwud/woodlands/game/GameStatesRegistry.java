@@ -12,6 +12,7 @@ import java.util.Map;
 public class GameStatesRegistry implements Serializable
 {
   private static final long serialVersionUID = 1L;
+  private static transient boolean limpMode = false;
 
   private transient static GameStatesRegistry instance;
   private final Map<Integer, PlayerState> gameStatesByCharacter = new HashMap<>();
@@ -93,5 +94,15 @@ public class GameStatesRegistry implements Serializable
       scheduler = new Scheduler();
     }
     return scheduler;
+  }
+
+  public static void setLimpMode(boolean limpMode)
+  {
+    GameStatesRegistry.limpMode = limpMode;
+  }
+
+  public static boolean isLimpMode()
+  {
+    return limpMode;
   }
 }

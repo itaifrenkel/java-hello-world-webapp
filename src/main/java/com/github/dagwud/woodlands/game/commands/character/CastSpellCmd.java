@@ -35,7 +35,7 @@ public class CastSpellCmd extends AbstractCmd
       if (spell.getCaster() instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) spell.getCaster();
-        SendMessageCmd cmd = new SendMessageCmd(character.getPlayedBy().getChatId(), "You don't have enough mana to cast " + spell.buildSpellDescription());
+        SendMessageCmd cmd = new SendMessageCmd(character, "You don't have enough mana to cast " + spell.buildSpellDescription());
         CommandDelegate.execute(cmd);
       }
       return;

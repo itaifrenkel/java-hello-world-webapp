@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.domain.trinkets.LootBag;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
+import com.github.dagwud.woodlands.gson.game.Creature;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -81,5 +82,11 @@ public abstract class PlayerCharacter extends GameCharacter
       innkeeper = new Innkeeper(getPlayedBy());
     }
     return innkeeper;
+  }
+
+  public boolean shouldGainExperienceByDefeating(Creature enemy)
+  {
+    double levelDiff = getStats().getLevel() - enemy.difficulty;
+    return levelDiff <= 2.0;
   }
 }

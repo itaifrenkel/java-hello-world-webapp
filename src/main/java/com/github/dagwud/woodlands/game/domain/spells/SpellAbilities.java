@@ -1,9 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.spells;
 
-import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PassivePartySpell;
-import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveSpell;
-import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.*;
 
 import java.io.Serializable;
 import java.util.*;
@@ -99,5 +96,17 @@ public class SpellAbilities implements Serializable
   public int countPrepared()
   {
     return preparedSpells.size();
+  }
+
+  public boolean hasKnownSpell(Class<? extends SingleCastSpell> spellClass)
+  {
+    for (SingleCastSpell knownSpell : getKnownActiveSpell())
+    {
+      if (knownSpell.getClass() == spellClass)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }

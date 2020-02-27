@@ -170,7 +170,7 @@ public class Stats implements Serializable
     this.state = state;
   }
 
-  public int getBaseDefenceRating()
+  private int getBaseDefenceRating()
   {
     return 10 + getAgilityModifier();
   }
@@ -273,6 +273,11 @@ public class Stats implements Serializable
   public void setDamageMultiplier(double damageMultiplier)
   {
     this.damageMultiplier = damageMultiplier;
+  }
+
+  public int getDefenceRating()
+  {
+    return getBaseDefenceRating() + getDefenceRatingBoost();
   }
 
   public int getDefenceRatingBoost()

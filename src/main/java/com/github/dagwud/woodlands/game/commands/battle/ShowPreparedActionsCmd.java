@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class ShowPreparedActionsCmd extends AbstractCmd
@@ -21,7 +20,7 @@ public class ShowPreparedActionsCmd extends AbstractCmd
   {
     if (character.getParty().getActiveEncounter() == null)
     {
-      new SendMessageCmd(character.getPlayedBy().getChatId(), "No battle in progress!").go();
+      CommandDelegate.execute(new SendMessageCmd(character, "No battle in progress!"));
       return;
     }
 
@@ -37,7 +36,7 @@ public class ShowPreparedActionsCmd extends AbstractCmd
       }
       action += "make " + attacks + " attack" + (attacks == 1 ? "" : "s");
     }
-    SendMessageCmd msg = new SendMessageCmd(character.getPlayedBy().getChatId(), action + " on your next turn");
+    SendMessageCmd msg = new SendMessageCmd(character, action + " on your next turn");
     CommandDelegate.execute(msg);
   }
 }

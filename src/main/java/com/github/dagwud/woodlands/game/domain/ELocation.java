@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractRoomCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.ScheduledRoomIntervalsCmd;
@@ -37,7 +38,6 @@ public enum ELocation
   DEEP_WOODS("Deep Woods", new DeepWoodsMenu(), false, "Not much is known about the deep woods..."),
 
   THE_GORGE("The Gorge", new GorgeMenu(), false, "Here be dragons. Dragons can't be attacked with melee weapons - only ranged ones!");
-
 
   private final String displayName;
   private final GameMenu menu;
@@ -83,7 +83,7 @@ public enum ELocation
       schedule.add(new Tuple<>(now + value.roomCmd.getInterval(), value.roomCmd));
     }
 
-    new RunLaterCmd(1000, new ScheduledRoomIntervalsCmd(schedule), false).go();
+    CommandDelegate.execute(new RunLaterCmd(1000, new ScheduledRoomIntervalsCmd(schedule), false));
   }
 
   public List<GameCharacter> getCharactersInRoom()
@@ -114,5 +114,10 @@ public enum ELocation
   public String getLookText()
   {
     return lookText;
+  }
+
+  public boolean isVillageLocation()
+  {
+    return this == VILLAGE_SQUARE || this == INN || this == TAVERN;
   }
 }

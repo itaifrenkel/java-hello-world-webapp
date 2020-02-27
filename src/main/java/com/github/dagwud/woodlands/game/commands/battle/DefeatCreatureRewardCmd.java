@@ -5,7 +5,6 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.SpawnItemCmd;
-import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
@@ -15,8 +14,8 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
-  private static final int CHANCE_FARMED_ENCOUNTER = 30; // 1 in x
-  private static final int CHANCE_NOT_FARMED_ENCOUNTER = 6; // 1 in x
+  private static final int CHANCE_FARMED_ENCOUNTER = 20; // 1 in x
+  private static final int CHANCE_NOT_FARMED_ENCOUNTER = 4; // 1 in x
 
   private final Party victoriousParty;
   private final Creature createdDefeated;
@@ -44,7 +43,7 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
 
     if (!victoriousParty.getCollectedItems().isEmpty())
     {
-      new SendPartyMessageCmd(victoriousParty, "Your party has unclaimed items").go();
+      CommandDelegate.execute(new SendPartyMessageCmd(victoriousParty, "Your party has unclaimed items"));
       if (victoriousParty.getCollectedItems().size() >= Settings.MAX_UNCLAIMED_PARTY_ITEMS)
       {
         return;
@@ -55,7 +54,7 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
     CommandDelegate.execute(itemDrop);
     Item dropped = itemDrop.getSpawned();
     victoriousParty.getCollectedItems().add(dropped);
-    new SendPartyMessageCmd(victoriousParty,
-            "<b>" + createdDefeated.name + " dropped a " + dropped.getName() + "!</b>").go();
+    CommandDelegate.execute(new SendPartyMessageCmd(victoriousParty,
+            "<b>" + createdDefeated.name + " dropped a " + dropped.getName() + "!</b>"));
   }
 }

@@ -26,7 +26,7 @@ public class EnterTheVillageCmd extends AbstractCmd
       RecoverHitPointsCmd cmd = new RecoverHitPointsCmd(character, 1);
       CommandDelegate.execute(cmd);
 
-      SendMessageCmd reviveMessage = new SendMessageCmd(character.getPlayedBy().getChatId(), "You come to on the dusty floor of the Village Square. A small crowd is gathered around, giggling, as you drag yourself up. \n<b>You should get some rest</b>");
+      SendMessageCmd reviveMessage = new SendMessageCmd(character, "You come to on the dusty floor of the Village Square. A small crowd is gathered around, giggling, as you drag yourself up. \n<b>You should get some rest</b>");
       CommandDelegate.execute(reviveMessage);
     }
   }

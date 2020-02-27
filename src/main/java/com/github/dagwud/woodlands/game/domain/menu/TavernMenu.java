@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.menu;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.ECommand;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
@@ -37,7 +38,7 @@ public class TavernMenu extends GameMenu
   private String produceRandomText(PlayerCharacter playerState, List<String> textOptions)
   {
     DiceRollCmd diceRollCmd = new DiceRollCmd(1, textOptions.size());
-    diceRollCmd.go();
+    CommandDelegate.execute(diceRollCmd);
 
     return String.format(textOptions.get(diceRollCmd.getTotal() - 1), playerState.getName());
   }

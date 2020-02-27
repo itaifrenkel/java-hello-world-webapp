@@ -204,4 +204,16 @@ public class Party implements Serializable
 
     return Objects.hash(name);
   }
+
+  public boolean allInVillage()
+  {
+    for (GameCharacter activeMember : getActiveMembers())
+    {
+      if (!activeMember.getLocation().isVillageLocation())
+      {
+        return false;
+      }
+    }
+    return true;
+  }
 }

@@ -43,7 +43,7 @@ public class JoinPartyCmd extends AbstractCmd
       PlayerCharacter character = (PlayerCharacter) joiner;
       if (!isPartyInTheVillage(party))
       {
-        SendMessageCmd send = new SendMessageCmd(character.getPlayedBy().getChatId(), "You can't join that party - it's not in the Village");
+        SendMessageCmd send = new SendMessageCmd(character, "You can't join that party - it's not in the Village");
         CommandDelegate.execute(send);
 
         SendPartyMessageCmd partyMsg = new SendPartyMessageCmd(party, character.getName() + " wants to join, but can only do so when you're in the Village");
@@ -84,9 +84,7 @@ public class JoinPartyCmd extends AbstractCmd
     {
       return true;
     }
-    return party.getLeader().getLocation() == ELocation.VILLAGE_SQUARE
-            || party.getLeader().getLocation() == ELocation.INN
-            || party.getLeader().getLocation() == ELocation.TAVERN;
+    return party.getLeader().getLocation().isVillageLocation();
   }
 
   @Override

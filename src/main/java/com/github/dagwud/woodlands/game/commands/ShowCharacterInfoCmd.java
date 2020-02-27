@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.Levels;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
@@ -43,9 +44,9 @@ public class ShowCharacterInfoCmd extends AbstractCmd
         "Location: " + character.getLocation() + "\n" +
         "Short Rests Available: " + character.getStats().getRestPoints() + "/" + character.getStats().getRestPointsMax() + "\n" +
         "\n" +
-        "❤: " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
-        "✨: " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
-        "🍺: " + stats.getDrunkeness() + "\n" +
+        Icons.HP + ": " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
+        Icons.MANA + ": " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
+        Icons.DRUNK + ": " + stats.getDrunkeness() + "\n" +
         "Strength: " + stats.getStrength() + "\n" +
         "Agility: " + stats.getAgility() + "\n" +
         "Constitution: " + stats.getConstitution() + "\n" +

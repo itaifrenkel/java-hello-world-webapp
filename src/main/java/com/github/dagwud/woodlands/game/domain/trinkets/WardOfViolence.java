@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.trinkets;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -18,8 +19,8 @@ public class WardOfViolence extends WearableTrinket
     if (fighter instanceof PlayerCharacter)
     {
       PlayerCharacter p = (PlayerCharacter) fighter;
-      String msg = produceEquipMessage(fighter);
-      CommandDelegate.execute(new SendMessageCmd(p.getPlayedBy().getChatId(), msg));
+      String msg = produceEquipMessage();
+      CommandDelegate.execute(new SendMessageCmd(p, msg));
     }
   }
 
@@ -31,11 +32,11 @@ public class WardOfViolence extends WearableTrinket
     if (fighter instanceof PlayerCharacter)
     {
       PlayerCharacter p = (PlayerCharacter) fighter;
-      CommandDelegate.execute(new SendMessageCmd(p.getPlayedBy().getChatId(), produceUnequipMessage()));
+      CommandDelegate.execute(new SendMessageCmd(p, produceUnequipMessage()));
     }
   }
 
-  String produceEquipMessage(Fighter fighter)
+  String produceEquipMessage()
   {
     return "A dark feeling overcomes you; you feel malice spreading through your body - and it feels good. You feel powerful and dangerous.";
   }
@@ -55,6 +56,6 @@ public class WardOfViolence extends WearableTrinket
   @Override
   public String statsSummary(Fighter carrier)
   {
-    return "⚔️🏹 +" + BOOST_AMOUNT;
+    return Icons.MELEE + Icons.RANGED + " +" + BOOST_AMOUNT;
   }
 }

@@ -1,11 +1,11 @@
 package com.github.dagwud.woodlands;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellCmd;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.character.LevelUpCmd;
-import com.github.dagwud.woodlands.game.commands.inventory.GiveItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.ArmyOfPeasants;
@@ -13,7 +13,6 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.HealingBlast;
 import com.github.dagwud.woodlands.game.domain.trinkets.AmuletOfProtection;
 import com.github.dagwud.woodlands.game.log.Logger;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
-import com.github.dagwud.woodlands.gson.game.Weapon;
 import com.github.dagwud.woodlands.gson.telegram.Chat;
 import com.github.dagwud.woodlands.gson.telegram.Message;
 import com.github.dagwud.woodlands.gson.telegram.Update;
@@ -46,11 +45,11 @@ public class MainTest
     PlayerState playerStateWizard = startBot(false);
     initPlayer(playerStateWizard);
 
-    new CastSpellCmd(new ArmyOfPeasants(playerState.getActiveCharacter())).go();
+    CommandDelegate.execute(new CastSpellCmd(new ArmyOfPeasants(playerState.getActiveCharacter())));
 
     int hitpoints = getPeasantPoints(playerStateWizard);
 
-    new CastSpellCmd(new HealingBlast(playerStateWizard.getActiveCharacter())).go();
+    CommandDelegate.execute(new CastSpellCmd(new HealingBlast(playerStateWizard.getActiveCharacter())));
     int newPoints = getPeasantPoints(playerStateWizard);
 
     Assert.assertEquals(hitpoints, newPoints);
@@ -68,7 +67,7 @@ public class MainTest
     processCommand(playerState, "The Inn");
     processCommand(playerStateWizard, "The Inn");
 
-    new CastSpellCmd(new ArmyOfPeasants(playerState.getActiveCharacter())).go();
+    CommandDelegate.execute(new CastSpellCmd(new ArmyOfPeasants(playerState.getActiveCharacter())));
 
     processCommand(playerState, "/give");
   }
@@ -82,7 +81,7 @@ public class MainTest
     PlayerState playerStateWizard = startBot(false);
     initPlayer(playerStateWizard);
 
-    new JoinPartyCmd(playerStateWizard.getActiveCharacter(), "OtherParty").go();
+    CommandDelegate.execute(new JoinPartyCmd(playerStateWizard.getActiveCharacter(), "OtherParty"));
 
     Update update = createUpdate("/bestparty", playerState);
     new TelegramServlet().processTelegramUpdate(update);
@@ -185,7 +184,7 @@ public class MainTest
     int maxItemsForTwo = playerState2.getActiveCharacter().determineMaxAllowedItems();
     for (int i = playerState.getActiveCharacter().getCarrying().countTotalCarried(); i < maxItemsForTwo; i++)
     {
-      new SpawnTrinketCmd(playerState2.getActiveCharacter(), new AmuletOfProtection()).go();
+      CommandDelegate.execute(new SpawnTrinketCmd(playerState2.getActiveCharacter(), new AmuletOfProtection()));
     }
 
     assertEquals(3, playerState.getActiveCharacter().getCarrying().countTotalCarried());
@@ -259,7 +258,7 @@ public class MainTest
     assertEquals(8, playerState.getActiveCharacter().getStats().getHitPoints());
     assertEquals(ELocation.VILLAGE_SQUARE, playerState.getActiveCharacter().getLocation());
 
-    new LevelUpCmd(-1, playerState.getActiveCharacter()).go();
+    CommandDelegate.execute(new LevelUpCmd(-1, playerState.getActiveCharacter()));
 
     update = createUpdate("The Tavern", playerState);
     new TelegramServlet().processTelegramUpdate(update);

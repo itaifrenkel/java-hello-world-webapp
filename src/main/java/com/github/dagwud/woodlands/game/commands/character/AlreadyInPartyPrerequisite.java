@@ -25,7 +25,7 @@ public class AlreadyInPartyPrerequisite implements CommandPrerequisite
       if (fighter instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) fighter;
-        SendMessageCmd send = new SendMessageCmd(character.getPlayedBy().getChatId(), "You're already in that party!");
+        SendMessageCmd send = new SendMessageCmd(character, "You're already in that party!");
         CommandDelegate.execute(send);
       }
       return false;

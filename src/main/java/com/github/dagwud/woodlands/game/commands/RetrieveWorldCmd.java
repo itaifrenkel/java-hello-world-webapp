@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.github.dagwud.woodlands.game.*;
 import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.domain.EEvent;
@@ -50,7 +51,9 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
     catch (SdkClientException e)
     {
+      GameStatesRegistry.setLimpMode(true);
       Logger.logError(e);
+      CommandDelegate.execute(new SendAdminMessageCmd("<b>GAME IS IN LIMP MODE!</b>"));
       objectNames = new ArrayList<>();
     }
     if (!objectNames.contains(filename))
@@ -68,15 +71,14 @@ public class RetrieveWorldCmd extends AbstractCmd
       GameStatesRegistry.instance();
     }
 
-    if (Scheduler.instance().count() >= 20)
+    if (Scheduler.instance().count() >= 70)
     {
-      SendMessageCmd msg = new SendMessageCmd(Settings.ADMIN_CHAT, "Aaaaaaah! Too many schedules; resetting");
+      SendAdminMessageCmd msg = new SendAdminMessageCmd("<b><i>Aaaaaaah! Too many schedules; resetting</i></b>");
       CommandDelegate.execute(msg);
       Scheduler.instance().clear();
     }
 
     Scheduler.instance().restoreScheduled();
-
     ELocation.scheduleRooms();
 
     EEvent.subscribeToStandardEvents();
@@ -84,6 +86,8 @@ public class RetrieveWorldCmd extends AbstractCmd
     Logger.info("Successfully restored world!");
 
     CommandDelegate.execute(new PatchWorldCmd());
+
+    ELocation.scheduleRooms();
 
     for (PlayerState player : GameStatesRegistry.allPlayerStates())
     {

@@ -29,6 +29,11 @@ public class BuildRoundSummaryCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (noSpells(spellGroups) && damageInflicted.isEmpty())
+    {
+      summary = "";
+      return;
+    }
     StringBuilder b = new StringBuilder();
     b.append("⚔️ <u>Battle Round #").append(encounter.getBattleRound()).append(":</u> ⚔️\n");
 
@@ -49,6 +54,18 @@ public class BuildRoundSummaryCmd extends AbstractCmd
     }
     b.append("\n\n").append(buildBattleStatsSummary());
     summary = b.toString();
+  }
+
+  private boolean noSpells(List<? extends Spell>... spellGroups)
+  {
+    for (List<? extends Spell> spells : spellGroups)
+    {
+      if (!spells.isEmpty())
+      {
+        return false;
+      }
+    }
+    return true;
   }
 
   private String buildBattleStatsSummary()

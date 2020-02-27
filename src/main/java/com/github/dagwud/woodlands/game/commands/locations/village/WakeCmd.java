@@ -60,7 +60,7 @@ public class WakeCmd extends AbstractCmd
     {
       for (PlayerCharacter c : activeCharacter.getParty().getActivePlayerCharacters())
       {
-        SendMessageCmd msg = new SendMessageCmd(c.getPlayedBy().getChatId(), "<b>Raise a glass to those no longer with us</b>");
+        SendMessageCmd msg = new SendMessageCmd(c, "<b>Raise a glass to those no longer with us</b>");
         CommandDelegate.execute(msg);
 
         BuyDrinksCmd drink = new BuyDrinksCmd(c.getPlayedBy().getChatId(), c);

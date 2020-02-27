@@ -58,7 +58,7 @@ public class ChangeNamePromptCmd extends SuspendableCmd
 
     player.getActiveCharacter().setName(characterName);
 
-    new SendMessageCmd(player.getChatId(), "Henceforth, the people of this land shall call you " + characterName).go();
-    new ShowMenuCmd(new InnMenu(), player.getPlayerState()).go();
+    CommandDelegate.execute(new SendMessageCmd(player.getChatId(), "Henceforth, the people of this land shall call you " + characterName));
+    CommandDelegate.execute(new ShowMenuCmd(new InnMenu(), player.getPlayerState()));
   }
 }

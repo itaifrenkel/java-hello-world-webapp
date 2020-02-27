@@ -17,7 +17,7 @@ public class IsAdminPrerequisite implements CommandPrerequisite
   @Override
   public boolean verify()
   {
-    if (chatId != Settings.ADMIN_CHAT)
+    if (chatId != Settings.ADMIN_CHAT && chatId != -1)
     {
       SendMessageCmd notAdmin = new SendMessageCmd(chatId, "You're not an admin. Go away.");
       CommandDelegate.execute(notAdmin);

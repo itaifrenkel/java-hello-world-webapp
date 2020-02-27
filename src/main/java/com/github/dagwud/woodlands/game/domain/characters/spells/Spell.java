@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.domain.DamageInflicted;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 
@@ -26,7 +27,7 @@ public abstract class Spell implements Serializable
 
   public String buildSpellDescription()
   {
-    return "✨" + spellName;
+    return Icons.MANA + spellName;
   }
 
   public Fighter getCaster()

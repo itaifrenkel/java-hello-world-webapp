@@ -64,14 +64,14 @@ public class RallyCmd extends AbstractCmd
       if (characterToMove instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) characterToMove;
-        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>You have moved to " + moveTo.getDisplayName() + "</i>"));
+        CommandDelegate.execute(new SendMessageCmd(character, "<i>You have moved to " + moveTo.getDisplayName() + "</i>"));
         showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
         handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
       }
       if (movedBy instanceof PlayerCharacter)
       {
         PlayerCharacter mover = (PlayerCharacter)movedBy;
-        CommandDelegate.execute(new SendMessageCmd(mover.getPlayedBy().getChatId(), "<i> " + characterToMove.getName() + " has responded to your call</i>"));
+        CommandDelegate.execute(new SendMessageCmd(mover, "<i> " + characterToMove.getName() + " has responded to your call</i>"));
       }
     }
     else
@@ -79,12 +79,12 @@ public class RallyCmd extends AbstractCmd
       if (characterToMove instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter)characterToMove;
-        CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<i>You are unable to respond to the call. Shame on you.</i>"));
+        CommandDelegate.execute(new SendMessageCmd(character, "<i>You are unable to respond to the call. Shame on you.</i>"));
       }
       if (movedBy instanceof PlayerCharacter)
       {
         PlayerCharacter mover = (PlayerCharacter)movedBy;
-        CommandDelegate.execute(new SendMessageCmd(mover.getPlayedBy().getChatId(), "<i> " + characterToMove.getName() + " is unable to respond to the call</i>"));
+        CommandDelegate.execute(new SendMessageCmd(mover, "<i> " + characterToMove.getName() + " is unable to respond to the call</i>"));
       }
     }
   }

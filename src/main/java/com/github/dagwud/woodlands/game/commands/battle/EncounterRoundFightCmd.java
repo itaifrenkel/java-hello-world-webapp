@@ -6,7 +6,6 @@ import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
@@ -43,27 +42,39 @@ public class EncounterRoundFightCmd extends AbstractCmd
     encounter.setFightingStarted(true);
 
     List<DamageInflicted> roundActivity = new ArrayList<>();
+    List<PassiveBattleRoundSpell> passivesActivity = new ArrayList<>();
+    List<SingleCastSpell> spellsActivity = new ArrayList<>();
 
-    // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
-    // to spells like Army of Peasants)
-    List<Fighter> passivesOrder = buildOrderOfFight(encounter.getAllFighters());
-    List<PassiveBattleRoundSpell> passivesActivity = doPassiveAbilities(passivesOrder);
-
-    List<Fighter> spellOrder = buildOrderOfFight(encounter.getAllFighters());
-    List<SingleCastSpell> spellsActivity = doPreparedSpells(spellOrder);
-    for (Spell cast : spellsActivity)
+    boolean enemyFainted = shouldEnemyFaint();
+    if (enemyFainted)
     {
-      if (null != cast.getDamageInflicted())
-      {
-        roundActivity.add(cast.getDamageInflicted());
-      }
+      KnockUnconsciousCmd faint = new KnockUnconsciousCmd(encounter.getEnemy());
+      CommandDelegate.execute(faint);
+      CommandDelegate.execute(new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().getName() + " has fled!"));
     }
+    else
+    {
+      // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
+      // to spells like Army of Peasants)
+      List<Fighter> passivesOrder = buildOrderOfFight(encounter.getAllFighters());
+      passivesActivity.addAll(doPassiveAbilities(passivesOrder));
 
-    List<Fighter> fightOrder = buildOrderOfFight(encounter.getAllFighters());
-    roundActivity.addAll(doFighting(fightOrder, spellsActivity));
+      List<Fighter> spellOrder = buildOrderOfFight(encounter.getAllFighters());
+      spellsActivity.addAll(doPreparedSpells(spellOrder));
+      for (Spell cast : spellsActivity)
+      {
+        if (null != cast.getDamageInflicted())
+        {
+          roundActivity.add(cast.getDamageInflicted());
+        }
+      }
 
-    expireSpells(spellsActivity);
-    expirePassiveAbilities(passivesActivity);
+      List<Fighter> fightOrder = buildOrderOfFight(encounter.getAllFighters());
+      roundActivity.addAll(doFighting(fightOrder, spellsActivity));
+
+      expireSpells(spellsActivity);
+      expirePassiveAbilities(passivesActivity);
+    }
 
     BuildRoundSummaryCmd summary = new BuildRoundSummaryCmd(encounter, roundActivity, passivesActivity, spellsActivity);
     CommandDelegate.execute(summary);
@@ -76,9 +87,6 @@ public class EncounterRoundFightCmd extends AbstractCmd
       {
         DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy(), encounter.isFarmed());
         CommandDelegate.execute(win);
-
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().name + " has been defeated! Each player gains " + win.getExperienceGrantedPerPlayer() + " experience");
-        CommandDelegate.execute(cmd);
       }
 
       EndEncounterCmd end = new EndEncounterCmd(encounter);
@@ -121,6 +129,19 @@ public class EncounterRoundFightCmd extends AbstractCmd
         CommandDelegate.execute(cmd);
       }
     }
+  }
+
+  private boolean shouldEnemyFaint()
+  {
+    Collection<PlayerCharacter> players = encounter.getParty().getActivePlayerCharacters();
+    for (PlayerCharacter c : players)
+    {
+      if (c.shouldGainExperienceByDefeating(encounter.getEnemy()))
+      {
+        return false;
+      }
+    }
+    return true;
   }
 
   private List<Fighter> buildOrderOfFight(Collection<Fighter> fighters)

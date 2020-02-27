@@ -22,6 +22,6 @@ public class AllowStatsPointUpgradeCmd extends AbstractCmd
     int upgrades = character.getStats().getAvailableStatsPointUpgrades();
     character.getStats().setAvailableStatsPointUpgrades(upgrades + 2);
 
-    CommandDelegate.execute(new SendMessageCmd(character.getPlayedBy().getChatId(), "<b>Congratulations! You've earned an upgrade to your character stats. Head to The Tavern to celebrate!"));
+    CommandDelegate.execute(new SendMessageCmd(character, "<b>Congratulations! You've earned an upgrade to your character stats. Head to The Tavern to celebrate!"));
   }
 }

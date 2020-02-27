@@ -75,7 +75,7 @@ public class AdminChangePartyCmd extends SuspendableCmd
         if (character != null && character.getName().equalsIgnoreCase(joiner))
         {
 
-if (character.getParty().getName()==null)
+if (null != character.getParty() && character.getParty().getName()==null)
  character.getParty().setName("NotNull");
 
           JoinPartyCmd join = new JoinPartyCmd(character, partyToJoin);

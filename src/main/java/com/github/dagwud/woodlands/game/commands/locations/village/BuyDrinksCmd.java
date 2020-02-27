@@ -4,10 +4,11 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.ReduceHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-
+import com.github.dagwud.woodlands.game.domain.EState;
 import java.math.BigDecimal;
 
 public class BuyDrinksCmd extends AbstractCmd
@@ -16,6 +17,7 @@ public class BuyDrinksCmd extends AbstractCmd
 
   private static final int MAX_WARNING_DRINKS_1 = 20;
   private static final int MAX_WARNING_DRINKS_2 = 40;
+  private static final long DRINK_DURATION_MS = 30_000;
 
   private final int chatId;
   private final PlayerCharacter activeCharacter;
@@ -65,6 +67,8 @@ public class BuyDrinksCmd extends AbstractCmd
       modifyDrunkeness();
       modifyDrunkeness();
     }
+    activeCharacter.getStats().setState(EState.DRINKING);
+    CommandDelegate.execute(new RunLaterCmd(DRINK_DURATION_MS, new FinishDrinkingCmd(activeCharacter)));
   }
 
   private void modifyDrunkeness()
