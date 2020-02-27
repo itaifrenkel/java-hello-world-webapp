@@ -49,13 +49,13 @@ public class Weapon extends EquippableItem
 
     if (carrier.getStats().getBonusDamage() != 0)
     {
-      damageText += " +" + carrier.getStats().getBonusDamage();
+      damageText += "+" + carrier.getStats().getBonusDamage();
     }
 
     int bonusDamage = carrier.getStats().getWeaponBonusDamage(this);
     if (bonusDamage != 0)
     {
-      damageText += " +" + bonusDamage;
+      damageText += "+" + bonusDamage;
     }
     return damageText;
   }
