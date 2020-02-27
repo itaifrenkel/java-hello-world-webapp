@@ -72,14 +72,14 @@ public class ShowPartyInfoCmd extends AbstractCmd
 
       String levelAndClass = "L" + member.getStats().getLevel() + " " + charClass;
 
-      String weapons = " ";
+      String weapons = "";
       if (member.getCarrying().getCarriedLeft() != null)
       {
         weapons += member.getCarrying().getCarriedLeft().summary(character, false);
       }
       if (member.getCarrying().getCarriedRight() != null)
       {
-        if (!weapons.trim().isEmpty())
+        if (!weapons.isEmpty())
         {
           weapons += ", ";
         }
