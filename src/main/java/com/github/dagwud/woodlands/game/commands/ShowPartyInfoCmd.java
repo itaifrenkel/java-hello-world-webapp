@@ -75,11 +75,15 @@ public class ShowPartyInfoCmd extends AbstractCmd
       String weapons = " ";
       if (member.getCarrying().getCarriedLeft() != null)
       {
-        weapons += member.getCarrying().getCarriedLeft().summary(character) + " ";
+        weapons += member.getCarrying().getCarriedLeft().summary(character, false);
       }
       if (member.getCarrying().getCarriedRight() != null)
       {
-        weapons += member.getCarrying().getCarriedRight().summary(character) + " ";
+        if (!weapons.trim().isEmpty())
+        {
+          weapons += ", ";
+        }
+        weapons += member.getCarrying().getCarriedRight().summary(character, false);
       }
 
       if (message.length() > 0)
