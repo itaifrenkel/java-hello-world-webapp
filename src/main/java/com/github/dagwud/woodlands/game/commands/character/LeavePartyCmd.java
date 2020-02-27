@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
+import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.CommandDelegate;
@@ -40,10 +41,12 @@ public class LeavePartyCmd extends AbstractCmd
     {
       CommandDelegate.execute(new SendPartyMessageCmd(party, character.getName() + " has left " + party.getName()));
     }
+
     party.removeMember(character);
+
     if (character instanceof PlayerCharacter)
     {
-      CommandDelegate.execute(new SendPartyAlertCmd(party, character.getName() + " has left " + party.getName()));
+      EEvent.LEFT_PARTY.trigger((PlayerCharacter) character);
     }
   }
 
