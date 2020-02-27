@@ -75,11 +75,11 @@ public class ShowPartyInfoCmd extends AbstractCmd
       String weapons = " ";
       if (member.getCarrying().getCarriedLeft() != null)
       {
-        weapons += member.getCarrying().getCarriedLeft().summary(character) + " ");
+        weapons += member.getCarrying().getCarriedLeft().summary(character) + " ";
       }
       if (member.getCarrying().getCarriedRight() != null)
       {
-        weapons += member.getCarrying().getCarriedRight().summary(character) + " ");
+        weapons += member.getCarrying().getCarriedRight().summary(character) + " ";
       }
 
       if (message.length() > 0)
@@ -88,7 +88,8 @@ public class ShowPartyInfoCmd extends AbstractCmd
       }
 
       message.append(member.getName()).append(": ").append(levelAndClass).append(location).append("\n");
-      message.append(state).append(member.summary(false)).append(weapons).append("\n");
+      message.append(state).append(member.summary(false)).append("\n");
+      message.append(weapons).append("\n");
     }
     return message.toString();
   }
