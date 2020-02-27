@@ -13,11 +13,15 @@ import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
+import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RetrieveWorldCmd extends AbstractCmd
@@ -75,6 +79,9 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
 
     Scheduler.instance().restoreScheduled();
+    ELocation.scheduleRooms();
+
+    EEvent.subscribeToStandardEvents();
 
     Logger.info("Successfully restored world!");
 
@@ -91,6 +98,11 @@ public class RetrieveWorldCmd extends AbstractCmd
 
   private List<String> list()
   {
+    if (Settings.DEVELOPER_MODE)
+    {
+      return Collections.emptyList();
+    }
+
     List<String> objectNames = new ArrayList<>(2);
 
     Logger.info("Checking for persisted world...");
