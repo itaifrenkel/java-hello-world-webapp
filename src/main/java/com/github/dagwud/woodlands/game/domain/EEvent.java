@@ -26,7 +26,11 @@ public enum EEvent
       CommandDelegate.execute(new SendPartyMessageCmd(fighter.getParty(), fighter.getName() + " has joined " + fighter.getParty().getName() + "!"));
     });
 
-    EEvent.LEFT_PARTY.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName())));
+    EEvent.LEFT_PARTY.subscribe(fighter ->
+    {
+      CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName()));
+      CommandDelegate.execute(new SendPartyMessageCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName()));
+    });
     EEvent.MOVED.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getParty().getName() + " is entering " + fighter.getLocation().getDisplayName())));
   }
 

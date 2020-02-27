@@ -2,7 +2,6 @@ package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -36,12 +35,7 @@ public class LeavePartyCmd extends AbstractCmd
     ExpireSpellsCmd expireAll = new ExpireSpellsCmd(character.getSpellAbilities().getPassivePartySpells());
     CommandDelegate.execute(expireAll);
 
-    if (!party.isPrivateParty())
-    {
-      CommandDelegate.execute(new SendPartyMessageCmd(party, character.getName() + " has left " + party.getName()));
-    }
-
-    if (character instanceof PlayerCharacter)
+    if (character instanceof PlayerCharacter && !party.isPrivateParty())
     {
       EEvent.LEFT_PARTY.trigger((PlayerCharacter) character);
     }
