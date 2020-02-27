@@ -52,28 +52,32 @@ public class ShowPartyInfoCmd extends AbstractCmd
     }
     for (GameCharacter member : character.getParty().getActiveMembers())
     {
-      if (message.length() > 0)
-      {
-        message.append("\n");
-      }
       String state = member.getStats().getState().icon;
       if (!state.isEmpty())
       {
         state = " (" + state + ")";
       }
+
       String charClass = "";
       if (member instanceof PlayerCharacter)
       {
         charClass = ((PlayerCharacter)member).getCharacterClass().toString();
       }
-      message.append(member.getName());
+
+      String location = "";
       if (member.getLocation() != character.getParty().getLeader().getLocation())
       {
-        message.append(" (").append(member.getLocation().getDisplayName()).append(")");
+        location = " (" + member.getLocation().getDisplayName() + ")";
       }
-      message.append("\n");
-      message.append(" • L").append(member.getStats().getLevel()).append(" ").append(charClass).append("\n");
-     
+
+      String levelAndClass = "L" + member.getStats().getLevel() + " " + charClass;
+
+      if (message.length() > 0)
+      {
+        message.append("\n");
+      }
+
+      message.append(member.getName()).append(": ").append(levelAndClass).append(location).append("\n");
       message.append(state).append(member.summary(false)).append("\n");
     }
     return message.toString();
