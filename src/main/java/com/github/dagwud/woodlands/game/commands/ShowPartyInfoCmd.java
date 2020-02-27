@@ -40,8 +40,8 @@ public class ShowPartyInfoCmd extends AbstractCmd
     }
 
     StringBuilder message = new StringBuilder();
-    message.append(character.getParty().getName()).append(" (")
-        .append(character.getParty().getLeader().getLocation().getDisplayName() + "):\n");
+    message.append(character.getParty().getName())
+        .append(" (").append(character.getParty().getLeader().getLocation().getDisplayName() + "):\n");
     if (!character.getParty().getCollectedItems().isEmpty())
     {
       message.append("Unclaimed Items:\n");
@@ -66,12 +66,14 @@ public class ShowPartyInfoCmd extends AbstractCmd
       {
         charClass = ((PlayerCharacter)member).getCharacterClass().toString();
       }
-      message.append(member.getName()).append(":\n")
-          .append(" • L").append(member.getStats().getLevel()).append(" ").append(charClass).append(" ");
+      message.append(member.getName());
       if (member.getLocation() != character.getParty().getLeader().getLocation())
       {
-        message.append("at ").append(member.getLocation().getDisplayName()).append(". ");
+        message.append(" (").append(member.getLocation().getDisplayName()).append(")");
       }
+      message.append("\n");
+      message.append(" • L").append(member.getStats().getLevel()).append(" ").append(charClass).append("\n");
+     
       message.append(state).append(member.summary(false)).append("\n");
     }
     return message.toString();
