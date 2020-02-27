@@ -75,7 +75,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
       String weapons = " ";
       if (member.getCarrying().getCarriedLeft() != null)
       {
-        weapons += member.getCarrying().getCarriedLeft().summary(character, false) + " ";
+        weapons += member.getCarrying().getCarriedLeft().summary(character, false);
       }
       if (member.getCarrying().getCarriedRight() != null)
       {
@@ -83,7 +83,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
         {
           weapons += ", ";
         }
-        weapons += member.getCarrying().getCarriedRight().summary(character, false) + " ";
+        weapons += member.getCarrying().getCarriedRight().summary(character, false);
       }
 
       if (message.length() > 0)
