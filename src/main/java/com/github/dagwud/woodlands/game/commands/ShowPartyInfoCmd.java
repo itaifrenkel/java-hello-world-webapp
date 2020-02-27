@@ -88,7 +88,8 @@ public class ShowPartyInfoCmd extends AbstractCmd
       }
 
       message.append(member.getName()).append(": ").append(levelAndClass).append(location).append("\n");
-      message.append(state).append(member.summary(false)).append(weapons).append("\n");
+      message.append(state).append(member.summary(false)).append("\n");
+      message.append(weapons).append("\n");
     }
     return message.toString();
   }
