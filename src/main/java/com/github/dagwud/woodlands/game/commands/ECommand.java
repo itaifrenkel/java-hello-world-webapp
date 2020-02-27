@@ -44,6 +44,7 @@ public enum ECommand
   RESURRECT_ALL("/resurrectall", false, (character, chatId) -> new ResurrectPartyCmd(chatId, character)),
   REMOVE("/rm", false, (character, chatId) -> new RemovePromptCmd(chatId, character)),
   CLEAR_SCHEDULER("/clearscheduler", false, (character, chatId) -> new ClearSchedulerCmd(chatId)),
+  LIST_SCHEDULES("/schedules", false, (character, chatId) -> new ListSchedulesCmd(chatId)),
   SETPARTY("/setparty", false, (character, chatId) -> new AdminChangePartyCmd(chatId, character)),
   RESET("/reset", false, (character, chatId) -> new ResetCmd(chatId)),
   SHUTDOWN("/shutdown", false, (character, chatId) -> new ShutdownCmd()),

@@ -46,6 +46,6 @@ public class PeriodicSoberUpCmd extends PeriodicCmd<SoberUpCmd>
   @Override
   public String toString()
   {
-    return "PeriodicSoberUpCmd[character=" + character.getName() + "]";
+    return "PeriodicSoberUpCmd:" + character.getName();
   }
 }

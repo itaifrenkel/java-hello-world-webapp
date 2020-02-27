@@ -40,4 +40,9 @@ public class PeriodicRecoverManaCmd extends PeriodicCmd<DoPeriodicRecoverManaCmd
     return character.isDead() || !character.isActive();
   }
 
+  @Override
+  public String toString()
+  {
+    return "PeriodicRecoverManaCmd:" + character.getName();
+  }
 }

@@ -40,4 +40,9 @@ public class PeriodicRecoverHPCmd extends PeriodicCmd<RecoverPortionOfShortRestC
     return character.isDead() || !character.isActive();
   }
 
+  @Override
+  public String toString()
+  {
+    return "PeriodicRecoverHPCmd:" + character.getName();
+  }
 }

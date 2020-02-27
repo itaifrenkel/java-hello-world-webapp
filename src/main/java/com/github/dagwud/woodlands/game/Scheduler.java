@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.core.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.Iterator;
@@ -82,5 +83,15 @@ public class Scheduler implements Serializable
   public int count()
   {
     return getScheduledCommands().size();
+  }
+
+  public Collection<String> listScheduleDescriptions()
+  {
+    Collection<String> list = new ArrayList<>();
+    for (RunLaterCmd scheduled : getScheduledCommands())
+    {
+      list.add(scheduled.getCmdToRun().toString() + " - " + scheduled.getRemainingDelayMS() + "ms");
+    }
+    return list;
   }
 }
