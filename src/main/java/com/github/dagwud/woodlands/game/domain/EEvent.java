@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.events.EventRecipient;
 
 import java.util.ArrayList;
@@ -18,7 +19,13 @@ public enum EEvent
   public static void subscribeToStandardEvents()
   {
     EEvent.PLAYER_DEATH.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has died!")));
-    EEvent.JOINED_PARTY.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has joined " + fighter.getParty().getName())));
+
+    EEvent.JOINED_PARTY.subscribe(fighter ->
+    {
+      CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has joined " + fighter.getParty().getName()));
+      CommandDelegate.execute(new SendPartyMessageCmd(fighter.getParty(), fighter.getName() + " has joined " + fighter.getParty().getName() + "!"));
+    });
+
     EEvent.LEFT_PARTY.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName())));
     EEvent.MOVED.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getParty().getName() + " is entering " + fighter.getLocation().getDisplayName())));
   }

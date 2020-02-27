@@ -47,6 +47,9 @@ public class LeavePartyCmd extends AbstractCmd
     }
 
     party.removeMember(character);
+
+    JoinPartyCmd join = new JoinPartyCmd(character, "_" + character.getName());
+    CommandDelegate.execute(join);
   }
 
   @Override
