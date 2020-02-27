@@ -92,7 +92,8 @@ public class Scheduler implements Serializable
     Collection<String> list = new ArrayList<>();
     for (RunLaterCmd scheduled : getScheduledCommands())
     {
-      list.add(scheduled.getCmdToRun().toString() + " - " + scheduled.getRemainingDelayMS() + "ms");
+      String delay = (int)(Math.floorDiv(scheduled.getRemainingDelayMS(), 1000)) + "s";
+      list.add(scheduled.getCmdToRun().toString() + " - " + delay);
     }
     return list;
   }
