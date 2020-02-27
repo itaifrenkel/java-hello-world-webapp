@@ -79,7 +79,6 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
 
     Scheduler.instance().restoreScheduled();
-    ELocation.scheduleRooms();
 
     EEvent.subscribeToStandardEvents();
 
