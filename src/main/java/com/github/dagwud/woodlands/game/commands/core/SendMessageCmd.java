@@ -35,7 +35,7 @@ public class SendMessageCmd extends AbstractCmd
   }
 
   @Override
-  public void execute() throws IOException
+  public void execute()
   {
     PlayerState currentPlayerStateLookup = GameStatesRegistry.lookup(chatId);
 

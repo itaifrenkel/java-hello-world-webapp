@@ -66,7 +66,7 @@ public class PartyRegistry implements Serializable
         {
           value.setName(key);
         }
-        SendMessageCmd admin = new SendAdminMessageCmd("A null-named party was fixed");
+        SendAdminMessageCmd admin = new SendAdminMessageCmd("A null-named party was fixed");
         CommandDelegate.execute(admin);
       }
       if (key != null && !key.equals(key.toLowerCase()))
@@ -94,8 +94,7 @@ public class PartyRegistry implements Serializable
     for (String e : empty)
     {
       parties.remove(e);
-      SendMessageCmd admin = new SendAdminMessageCmd("Removed empty party " + e);
-        CommandDelegate.execute(admin);
+      CommandDelegate.execute(new SendAdminMessageCmd("Removed empty party " + e));
     }
 
   }

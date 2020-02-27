@@ -46,6 +46,7 @@ public enum ECommand
   CLEAR_SCHEDULER("/clearscheduler", false, (character, chatId) -> new ClearSchedulerCmd(chatId)),
   SETPARTY("/setparty", false, (character, chatId) -> new AdminChangePartyCmd(chatId, character)),
   RESET("/reset", false, (character, chatId) -> new ResetCmd(chatId)),
+  SHUTDOWN("/shutdown", false, (character, chatId) -> new ShutdownCmd()),
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
   CREATURE_CACHE("/cachecreature", false, ((character, chatId) -> new InvalidateCreatureCacheCmd(chatId))),
   SPAWN_TRINKET("/trinket", false, ((character, chatId) -> new SpawnTrinketCmd(character))),

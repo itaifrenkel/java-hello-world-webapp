@@ -47,7 +47,9 @@ public class RetrieveWorldCmd extends AbstractCmd
     }
     catch (SdkClientException e)
     {
+      GameStatesRegistry.setLimpMode(true);
       Logger.logError(e);
+      CommandDelegate.execute(new SendAdminMessageCmd("<b>GAME IS IN LIMP MODE!</b>"));
       objectNames = new ArrayList<>();
     }
     if (!objectNames.contains(filename))
@@ -67,7 +69,7 @@ public class RetrieveWorldCmd extends AbstractCmd
 
     if (Scheduler.instance().count() >= 70)
     {
-      SendMessageCmd msg = new SendAdminMessageCmd("<b><i>Aaaaaaah! Too many schedules; resetting</i></b>");
+      SendAdminMessageCmd msg = new SendAdminMessageCmd("<b><i>Aaaaaaah! Too many schedules; resetting</i></b>");
       CommandDelegate.execute(msg);
       Scheduler.instance().clear();
     }

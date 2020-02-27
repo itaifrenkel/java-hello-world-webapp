@@ -33,6 +33,12 @@ public class PersistWorldCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (GameStatesRegistry.isLimpMode())
+    {
+      CommandDelegate.execute(new SendAdminMessageCmd("<b>Limp mode active; not saving game state!</b>"));
+      return;
+    }
+
     GameStatesRegistry gameState = GameStatesRegistry.instance();
     persist(gameState, filename);
 

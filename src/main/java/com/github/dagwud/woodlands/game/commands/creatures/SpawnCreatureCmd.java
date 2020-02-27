@@ -57,7 +57,7 @@ public class SpawnCreatureCmd extends AbstractCmd
       {
         if (attempts >= 100)
         {
-          SendMessageCmd err = new SendAdminMessageCmd("Unable to find any creatures of type '" + creatureType + "'");
+          SendAdminMessageCmd err = new SendAdminMessageCmd("Unable to find any creatures of type '" + creatureType + "'");
           CommandDelegate.execute(err);
           return template;
         }

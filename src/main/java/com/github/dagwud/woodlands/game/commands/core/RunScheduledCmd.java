@@ -39,9 +39,9 @@ public class RunScheduledCmd implements Callable<String>, Serializable
       Logger.error("WARNING: Exception in asynchronous thread; can't be thrown to caller so logging it here:");
       try
       {
-        SendMessageCmd adminInfo = new SendAdminMessageCmd("Exception in asynchronous thread");
+        SendAdminMessageCmd adminInfo = new SendAdminMessageCmd("Exception in asynchronous thread");
         CommandDelegate.execute(adminInfo);
-        SendMessageCmd exc = new SendAdminMessageCmd(e.toString());
+        SendAdminMessageCmd exc = new SendAdminMessageCmd(e.toString());
         CommandDelegate.execute(exc);
       }
       catch (Exception ignore)
