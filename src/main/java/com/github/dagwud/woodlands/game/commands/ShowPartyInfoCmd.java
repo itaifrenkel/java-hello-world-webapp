@@ -79,7 +79,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
       }
       if (member.getCarrying().getCarriedRight() != null)
       {
-        if (!weapons.trim().isEmpty)
+        if (!weapons.trim().isEmpty())
         {
           weapons += ", ";
         }
