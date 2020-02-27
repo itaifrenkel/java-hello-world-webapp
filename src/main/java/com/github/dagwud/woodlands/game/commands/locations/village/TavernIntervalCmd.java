@@ -24,6 +24,7 @@ public class TavernIntervalCmd extends AbstractRoomCmd
             "The speakers let out a burst of static, but you're pretty sure they meant \"%s\"",
             "People wave their hands in the air, and sing \"%s\" like they just don't care.",
             "The speakers bare their souls and croon \"%s\", but no-one cares.",
+            "Something in your head yells \"%s\" - oh, it's just the speaker.",
             "The music pauses, the crowd tenses, then the world explodes to the noise of \"%s\"",
             "The speakers belch out, mightily, singing \"%s\"",
             "Behind the crowd yelling you can make out \"%s\"",
