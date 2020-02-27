@@ -64,7 +64,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
       String charClass = "";
       if (member instanceof PlayerCharacter)
       {
-        charClass = ((PlayerCharacter)member).getCharacterClass();
+        charClass = ((PlayerCharacter)member).getCharacterClass().toString();
       }
       message.append(member.getName()).append(":\n")
           .append(" • L").append(member.getStats().getLevel()).append(" ").append(charClass).append(" ");
