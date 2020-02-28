@@ -35,7 +35,7 @@ public enum ELocation
 
   PETTING_ZOO("Petting Zoo", new PettingZooMenu(), true, "The Petting Zoo is full of cute little animals"),
 
-  WOODLANDS("The Woodlands", new WoodlandsMenu(), false, "There's stuff to be seen in the Woodlands."),
+  WOODLANDS("The Woodlands", new WoodlandsMenu(), false, "There's stuff to be seen in the Woodlands. Like... wood. And lands."),
 
   DEEP_WOODS("Deep Woods", new DeepWoodsMenu(), false, "Not much is known about the deep woods..."),
 

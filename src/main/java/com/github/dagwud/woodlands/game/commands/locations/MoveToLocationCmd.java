@@ -57,7 +57,8 @@ public class MoveToLocationCmd extends AbstractCmd
     if (allMoveTogether(location) && !inVillageMove(location, characterToMove.getLocation()))
     {
       doMove(characterToMove.getParty().getActiveMembers(), location, characterToMove);
-    } else
+    }
+    else
     {
       doMove(characterToMove, location, characterToMove);
     }

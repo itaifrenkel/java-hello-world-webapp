@@ -9,6 +9,8 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class DoPeriodicRecoverManaCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final PlayerCharacter character;
   private int manaRecovered;
 
@@ -24,7 +26,7 @@ public class DoPeriodicRecoverManaCmd extends AbstractCmd
     RecoverManaCmd recover = new RecoverManaCmd(character, manaRecovered);
     CommandDelegate.execute(recover);
     manaRecovered = recover.getManaRecovered();
-    if (manaRecovered != 0 || true)
+    if (manaRecovered != 0)
     {
       CommandDelegate.execute(new SendMessageCmd(character, "<b>You recovered " + Icons.MANA + manaRecovered + "</b>"));
     }

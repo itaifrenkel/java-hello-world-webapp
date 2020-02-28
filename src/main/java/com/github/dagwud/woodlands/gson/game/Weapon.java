@@ -47,16 +47,12 @@ public class Weapon extends EquippableItem
   {
     String damageText = damage.determineAverageRoll();
 
-    if (carrier.getStats().getBonusDamage() != 0)
+    int bonus = carrier.getStats().getBonusDamage() + carrier.getStats().getWeaponBonusDamage(this);
+    if (bonus != 0)
     {
-      damageText += " +" + carrier.getStats().getBonusDamage();
+      damageText += "+" + bonus;
     }
 
-    int bonusDamage = carrier.getStats().getWeaponBonusDamage(this);
-    if (bonusDamage != 0)
-    {
-      damageText += " +" + bonusDamage;
-    }
     return damageText;
   }
 

@@ -4,10 +4,12 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
-import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.EEvent;
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PassivePartySpell;
 import com.github.dagwud.woodlands.game.log.Logger;
 
@@ -55,21 +57,15 @@ public class JoinPartyCmd extends AbstractCmd
     joiner.setParty(party);
     party.addMember(joiner);
 
-    if (joiner instanceof PlayerCharacter)
+    if (joiner instanceof PlayerCharacter && !party.isPrivateParty())
     {
-      CommandDelegate.execute(new SendPartyAlertCmd(party, joiner.getName() + " has joined " + party.getName()));
+      EEvent.JOINED_PARTY.trigger((PlayerCharacter) joiner);
     }
 
     if (party.getLeader() != null)
     {
       // Unless you're the founder
       joiner.setLocation(party.getLeader().getLocation());
-    }
-
-    if (!party.isPrivateParty())
-    {
-      SendPartyMessageCmd welcome = new SendPartyMessageCmd(party, joiner.getName() + " has joined " + partyName + "!");
-      CommandDelegate.execute(welcome);
     }
 
     for (PassivePartySpell passivePartySpell : joiner.getSpellAbilities().getPassivePartySpells())
