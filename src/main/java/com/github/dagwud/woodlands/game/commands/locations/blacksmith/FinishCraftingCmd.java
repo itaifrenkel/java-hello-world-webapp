@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations.blacksmith;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.DoGiveItemCmd;
 import com.github.dagwud.woodlands.game.domain.Blacksmith;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -27,5 +28,7 @@ public class FinishCraftingCmd extends AbstractCmd
   {
     CommandDelegate.execute(new DoGiveItemCmd(null, blacksmith, crafted));
     blacksmith.setBusyCrafting(false);
+    blacksmith.addReadyForCollection(crafted, craftedFor);
+    CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith has crafted " + String.valueOf(crafted)) + " for " + craftedFor));
   }
 }
