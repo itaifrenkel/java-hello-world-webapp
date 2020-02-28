@@ -9,6 +9,8 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class FinishCraftingCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
+
   private final Blacksmith blacksmith;
   private final Weapon crafted;
   private final PlayerCharacter craftedFor;
