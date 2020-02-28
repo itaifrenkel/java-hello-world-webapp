@@ -22,12 +22,6 @@ public class EnterBlacksmithCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (character.getPlayedBy().getChatId() != Settings.ADMIN_CHAT)
-    {
-      CommandDelegate.execute(new SendMessageCmd(character, "The door is locked. There's a hurriedly-written sign on the window: \"Opening Soon\""));
-      CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
-    }
-
     if (character.getParty().getBlacksmith().isBusyCrafting())
     {
       CommandDelegate.execute(new SendMessageCmd(character, "The door to the Blacksmith's shop is locked; you can hear the sounds of clashing steel coming from his workshop. He must be busy with something."));
