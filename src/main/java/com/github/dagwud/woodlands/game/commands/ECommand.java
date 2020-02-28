@@ -15,6 +15,7 @@ import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
 import com.github.dagwud.woodlands.game.commands.start.StartCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.util.HashMap;
 import java.util.Map;
