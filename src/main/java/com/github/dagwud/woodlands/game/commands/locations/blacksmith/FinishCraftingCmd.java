@@ -29,6 +29,6 @@ public class FinishCraftingCmd extends AbstractCmd
     CommandDelegate.execute(new DoGiveItemCmd(null, blacksmith, crafted));
     blacksmith.setBusyCrafting(false);
     blacksmith.addReadyForCollection(crafted, craftedFor);
-    CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith has crafted " + crafted.getName() + " for " + craftedFor));
+    CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith has crafted " + crafted.getName() + " for " + craftedFor.getName()));
   }
 }
