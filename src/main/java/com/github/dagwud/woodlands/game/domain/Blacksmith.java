@@ -29,10 +29,21 @@ public class Blacksmith extends NonPlayerCharacter
 
   public Weapon collectWeaponFor(PlayerCharacter craftedFor)
   {
+    return getReadyForCollection().remove(craftedFor);
+  }
+
+  public void addReadyForCollection(Weapon weapon, PlayerCharacter craftedFor)
+  {
+    getReadyForCollection().put(craftedFor, weapon);
+  }
+    
+  private Map<PlayerCharacter, Weapon> getReadyForCollection()
+  {
     if (readyForCollection == null)
     {
       readyForCollection = new HashMap<>();
     }
-    return readyForCollection.remove(craftedFor);
+    return readyForCollection;
   }
+
 }
