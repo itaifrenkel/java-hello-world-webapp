@@ -37,7 +37,7 @@ public class EnterBlacksmithCmd extends AbstractCmd
     if (null != collected)
     {
       CommandDelegate.execute(new SendMessageCmd(character, "The Blacksmith smiles as you enter. \"Ah!\" he says, \"I've got something for you. I think you're gonna like it \""));
-      CommandDelegate.execute(new DoGiveItemCmd(blacksmith, character, collected));
+      CommandDelegate.execute(new DoGiveItemCmd(character.getParty().getBlacksmith(), character, collected));
     }
   }
 }
