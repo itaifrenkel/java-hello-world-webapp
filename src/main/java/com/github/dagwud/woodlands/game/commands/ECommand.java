@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.admin.*;
-import com.github.dagwud.woodlands.game.commands.battle.PrepareAttackCmd;
+import com.github.dagwud.woodlands.game.commands.battle.*;
 import com.github.dagwud.woodlands.game.commands.character.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.*;
