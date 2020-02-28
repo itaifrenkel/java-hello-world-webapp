@@ -71,7 +71,6 @@ public class LeaveItemsCmd extends SuspendableCmd
   {
     PlayerCharacter giver = getPlayerState().getPlayer().getActiveCharacter();
     DoGiveItemCmd give = new DoGiveItemCmd(giver,
-            giver.getCarrying().getCarriedInactive(),
             giver.getInnkeeper(), toLeave);
     CommandDelegate.execute(give);
   }

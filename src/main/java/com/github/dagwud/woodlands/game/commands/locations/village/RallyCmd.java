@@ -6,24 +6,12 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.battle.EndEncounterCmd;
 
-import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWoodsCmd;
-import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
-import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
-import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterThePettingZooCmd;
-import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
-import com.github.dagwud.woodlands.game.commands.locations.woodlands.EnterTheWoodlandsCmd;
+import com.github.dagwud.woodlands.game.commands.locations.HandleLocationEntryCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.Party;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 public class RallyCmd extends AbstractCmd
 {
@@ -66,7 +54,7 @@ public class RallyCmd extends AbstractCmd
         PlayerCharacter character = (PlayerCharacter) characterToMove;
         CommandDelegate.execute(new SendMessageCmd(character, "<i>You have moved to " + moveTo.getDisplayName() + "</i>"));
         showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
-        handleLocationEntry(moveTo, character.getPlayedBy().getPlayerState());
+        CommandDelegate.execute(new HandleLocationEntryCmd(moveTo, character.getPlayedBy().getPlayerState()));
       }
       if (movedBy instanceof PlayerCharacter)
       {
@@ -95,28 +83,4 @@ public class RallyCmd extends AbstractCmd
     CommandDelegate.execute(cmd);
   }
 
-  private void handleLocationEntry(ELocation location, PlayerState playerState)
-  {
-    switch (location)
-    {
-      case PETTING_ZOO:
-        CommandDelegate.execute(new EnterThePettingZooCmd(playerState));
-        break;
-       case MOUNTAIN:
-        CommandDelegate.execute(new EnterTheMountainCmd(playerState));
-        break;
-      case WOODLANDS:
-        CommandDelegate.execute(new EnterTheWoodlandsCmd(playerState));
-        break;
-      case DEEP_WOODS:
-        CommandDelegate.execute(new EnterDeepWoodsCmd(playerState));
-        break;
-      case THE_GORGE:
-        CommandDelegate.execute(new EnterTheGorgeCmd(playerState));
-        break;
-      case VILLAGE_SQUARE:
-        CommandDelegate.execute(new EnterTheVillageCmd(playerState.getActiveCharacter()));
-        break;
-    }
-  }
 }

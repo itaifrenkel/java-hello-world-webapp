@@ -16,6 +16,7 @@ public class Party implements Serializable
   private BigDecimal percentChanceOfEncounter;
   private List<Item> collectedItems;
   private Long alertChatId;
+  private Blacksmith blacksmith;
 
   public Party()
   {
@@ -215,5 +216,14 @@ public class Party implements Serializable
       }
     }
     return true;
+  }
+
+  public Blacksmith getBlacksmith()
+  {
+    if (blacksmith == null)
+    {
+      blacksmith = new Blacksmith();
+    }
+    return blacksmith;
   }
 }

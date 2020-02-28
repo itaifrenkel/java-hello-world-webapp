@@ -72,7 +72,6 @@ public class RetrieveItemsCmd extends SuspendableCmd
   {
     PlayerCharacter character = getPlayerState().getPlayer().getActiveCharacter();
     DoGiveItemCmd give = new DoGiveItemCmd(character.getInnkeeper(),
-            character.getInnkeeper().getCarrying().getCarriedInactive(),
             character, toRetrieve);
     CommandDelegate.execute(give);
   }

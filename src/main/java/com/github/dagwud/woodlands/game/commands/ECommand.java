@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.*;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
+import com.github.dagwud.woodlands.game.commands.locations.blacksmith.CraftWeaponPromptCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.*;
 import com.github.dagwud.woodlands.game.commands.logs.ShowLogsCmd;
 import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
@@ -57,6 +58,7 @@ public enum ECommand
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
+  BLACKSMITH("Blacksmith", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.BLACKSMITH)),
   THE_VILLAGE("The Village", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
   VILLAGE_SQUARE("Village Square", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
   THE_PETTING_ZOO("The Petting Zoo", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.PETTING_ZOO)),
@@ -79,6 +81,7 @@ public enum ECommand
   CLAIM_ITEM("Claim Item", true, (character, chatId) -> new ClaimItemCmd(character.getPlayedBy())),
   SWITCH_CHARACTERS("Switch Characters", true, (character, chatId) -> new SwitchCharacterPromptCmd(character.getPlayedBy())),
   CHANGE_NAME("Change Name", true, (character, chatId) -> new ChangeNamePromptCmd(character.getPlayedBy())),
+  CRAFT_WEAPON("Craft a Weapon", true, (character, chatId) -> new CraftWeaponPromptCmd(character, character.getPlayedBy().getPlayerState())),
   ;
 
 

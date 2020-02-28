@@ -24,6 +24,8 @@ public class Settings
   public static final long SHORT_REST_DURATION_MS = 60_000 * 5;
   public static final long LONG_REST_DURATION_MS = 60_000 * 60; // 1 hour
 
+  public static final long BLACKSMITH_CRAFTING_TIME_MS = 3000; //todo
+
   public static final int MAX_UNCLAIMED_PARTY_ITEMS = 5;
 
   public static final int PROGRESS_BARS_FOR_EXPERIENCE = 10;
@@ -58,5 +60,6 @@ public class Settings
   public static final int THE_GORGE_TIME_ALLOWED_FOR_PLANNING_MS = 20_000;
   public static final int THE_GORGE_ACTIONS_PER_ROUND = 2;
 
-  public static final boolean DEVELOPER_MODE = false;
+  public static final boolean DEVELOPER_MODE = true;
+  ;
 }
