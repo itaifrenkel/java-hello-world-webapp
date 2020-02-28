@@ -11,6 +11,7 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class EnterBlacksmithCmd extends AbstractCmd
 {
+  private static final long serialVersionUID = 1L;
   private final PlayerCharacter character;
 
   public EnterBlacksmithCmd(PlayerCharacter character)
@@ -33,7 +34,7 @@ public class EnterBlacksmithCmd extends AbstractCmd
       CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
     }
 
-    Weapon collected = character.getParty().getBlacksmith(). collectWeaponFor(character);
+    Weapon collected = character.getParty().getBlacksmith().collectWeaponFor(character);
     if (null != collected)
     {
       CommandDelegate.execute(new SendMessageCmd(character, "The Blacksmith smiles as you enter. \"Ah!\" he says, \"I've got something for you. I think you're gonna like it \""));
