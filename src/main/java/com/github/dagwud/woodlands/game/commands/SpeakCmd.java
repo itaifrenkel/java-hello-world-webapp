@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DrunkUpMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -39,6 +40,7 @@ public class SpeakCmd extends AbstractCmd
     }
     message = "<b>" + speakerName + " says \"" + message + "\"</b>";
     CommandDelegate.execute(new SendPartyMessageCmd(speaker.getParty(), message));
+    CommandDelegate.execute(new SendPartyAlertCmd(speaker.getParty(), message));
   }
 
   private String produceDreamSpeak()
