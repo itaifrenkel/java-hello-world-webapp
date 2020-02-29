@@ -1,8 +1,5 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.inventory.UnequipItemCmd;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,5 +69,24 @@ public class CarriedItems implements Serializable
     total += carriedInactive.size();
 
     return total;
+  }
+
+  public String summary(Fighter summaryFor)
+  {
+    String message = "";
+    if (carriedLeft != null || carriedRight != null)
+    {
+      if (carriedLeft != null)
+      {
+        message += ", ";
+        message += carriedLeft.summary(summaryFor, false);
+      }
+      if (carriedRight != null)
+      {
+        message += ", ";
+        message += carriedRight.summary(summaryFor, false);
+      }
+    }
+    return message;
   }
 }

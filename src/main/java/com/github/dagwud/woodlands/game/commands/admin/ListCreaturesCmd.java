@@ -1,16 +1,12 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.admin.AdminCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureFromTemplateCmd;
 import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
-import com.github.dagwud.woodlands.game.creatures.DifficultyCacheFactory;
-import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Creature;
-import com.github.dagwud.woodlands.gson.game.Difficulty;
-import com.github.dagwud.woodlands.game.domain.Item;
+
+import java.util.*;
 
 public class ListCreaturesCmd extends AdminCmd
 {
@@ -24,50 +20,25 @@ public class ListCreaturesCmd extends AdminCmd
   @Override
   public void execute()
   {
-    for (Creature template : CreaturesCacheFactory.instance().getCache().listAll())
+    List<String> entries = new ArrayList<>();
+    List<Creature> creatures = new ArrayList<>(CreaturesCacheFactory.instance().getCache().listAll());
+    creatures.sort(Comparator.comparingDouble(o -> o.difficulty));
+    for (Creature template : creatures)
     {
-      // todo duplication in SpawnCreatureCmd:
-      Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(template.difficulty);
+      SpawnCreatureFromTemplateCmd spawn = new SpawnCreatureFromTemplateCmd(template);
+      CommandDelegate.execute(spawn);
+      Creature spawnedCreature = spawn.getSpawnedCreature();
 
-      Stats stats = new Stats();
-      int hitPoints = chooseRandomInRange(difficulty.minimumHitPoints, difficulty.maximumHitPoints);
-      stats.setHitPoints(hitPoints);
-      stats.getMaxHitPoints().setBase(hitPoints);
-      stats.setStrength(16, 0);
-      stats.setAgility(16, 0);
-      stats.setDefenceRatingBoost(difficulty.defensiveRating);
-   
-      Creature spawnedCreature = new Creature(template);
-      spawnedCreature.setStats(stats);
+      String desc = "L" + spawnedCreature.difficulty + ": " + spawnedCreature.summary() +
+              spawnedCreature.getCarrying().summary(spawnedCreature);
 
-      String desc = "L" + spawnedCreature.difficulty + ": " + spawnedCreature.summary();
-      
-      String message = desc;
-      // todo duplicate in GenerateEncounterCmd:
-      Item carriedLeft = spawnedCreature.getCarrying().getCarriedLeft();
-      Item carriedRight = spawnedCreature.getCarrying().getCarriedRight();
-      if (carriedLeft != null || carriedRight != null)
-      {
-        if (carriedLeft != null)
-        {
-          message += ", ";
-          message += carriedLeft.summary(spawnedCreature, false);
-        }
-        if (carriedRight != null)
-        {
-          message += ", ";
-          message += carriedRight.summary(spawnedCreature, false);
-        }
-      }
-
-      CommandDelegate.execute(new SendAdminMessageCmd(desc));
+      entries.add(desc);
     }
-  }
 
-  private int chooseRandomInRange(int minInclusive, int maxInclusive)
-  {
-    int rand = (int) (Math.random() * ((maxInclusive - minInclusive) + 1));
-    return rand + minInclusive;
+    for (String entry : entries)
+    {
+      CommandDelegate.execute(new SendAdminMessageCmd(entry));
+    }
   }
 
 }

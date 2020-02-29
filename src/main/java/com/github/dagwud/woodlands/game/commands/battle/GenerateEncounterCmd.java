@@ -4,7 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureCmd;
+import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureByDifficultyCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.Item;
@@ -92,21 +92,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   {
     Encounter encounter = createEncounter();
     String message = "<b>You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + "):</b>\n" + encounter.getEnemy().summary();
-    Item carriedLeft = encounter.getEnemy().getCarrying().getCarriedLeft();
-    Item carriedRight = encounter.getEnemy().getCarrying().getCarriedRight();
-    if (carriedLeft != null || carriedRight != null)
-    {
-      if (carriedLeft != null)
-      {
-        message += ", ";
-        message += carriedLeft.summary(encounter.getEnemy(), false);
-      }
-      if (carriedRight != null)
-      {
-        message += ", ";
-        message += carriedRight.summary(encounter.getEnemy(), false);
-      }
-    }
+    message += encounter.getEnemy().getCarrying().summary(encounter.getEnemy());
 
     SendPartyMessageCmd msg = new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), message);
     CommandDelegate.execute(msg);
@@ -115,7 +101,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
   private Encounter createEncounter()
   {
-    SpawnCreatureCmd cmd = new SpawnCreatureCmd(getMinDifficulty(), getMaxDifficulty(), getCreatureType());
+    SpawnCreatureByDifficultyCmd cmd = new SpawnCreatureByDifficultyCmd(getMinDifficulty(), getMaxDifficulty(), getCreatureType());
     CommandDelegate.execute(cmd);
     Creature creature = cmd.getSpawnedCreature();
     return createEncounter(getPlayerState().getActiveCharacter().getParty(), creature);
