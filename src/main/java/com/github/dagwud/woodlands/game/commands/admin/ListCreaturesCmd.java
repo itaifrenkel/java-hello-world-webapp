@@ -25,7 +25,7 @@ public class ListCreaturesCmd extends AdminCmd
   {
     for (Creature template : CreaturesCacheFactory.instance().getCache().listAll())
     {
-      // todo duplication
+      // todo duplication in SpawnCreatureCmd:
       Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(template.difficulty);
 
       Stats stats = new Stats();
@@ -40,7 +40,26 @@ public class ListCreaturesCmd extends AdminCmd
       spawnedCreature.setStats(stats);
 
       String desc = spawnedCreature.name + " (L" + spawnedCreature.difficulty + "): " + spawnedCreature.summary();
-      CommandDelegate.execute(new SendAdminMessageCmd("• " + desc));
+      
+      String message = desc;
+      // todo duplicate in GenerateEncounterCmd:
+      Item carriedLeft = encounter.getEnemy().getCarrying().getCarriedLeft();
+      Item carriedRight = encounter.getEnemy().getCarrying().getCarriedRight();
+      if (carriedLeft != null || carriedRight != null)
+      {
+        if (carriedLeft != null)
+        {
+          message += ", ";
+          message += carriedLeft.summary(encounter.getEnemy(), false);
+        }
+        if (carriedRight != null)
+        {
+          message += ", ";
+          message += carriedRight.summary(encounter.getEnemy(), false);
+        }
+      }
+
+      CommandDelegate.execute(new SendAdminMessageCmd(desc));
     }
   }
 
