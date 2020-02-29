@@ -1,10 +1,8 @@
-package com.github.dagwud.woodlands.game.commands.admin;
+package com.github.dagwud.woodlands.game.commands.creatures;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureFromTemplateCmd;
 import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.gson.game.Creature;
 

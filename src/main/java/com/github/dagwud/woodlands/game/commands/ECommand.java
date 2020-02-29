@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.admin.*;
 import com.github.dagwud.woodlands.game.commands.battle.*;
 import com.github.dagwud.woodlands.game.commands.character.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.creatures.ListCreaturesCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.*;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
