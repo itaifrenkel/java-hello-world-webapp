@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.Cache;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.CreaturesRoot;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -14,6 +15,11 @@ public class CreaturesCache extends Cache
   CreaturesCache(CreaturesRoot root)
   {
     this.creatures = cache(root.creatures);
+  }
+
+  public Collection<Creature> listAll()
+  {
+    return creatures.values();
   }
 
   public Creature pickRandom(double minDifficulty, double maxDifficulty)
