@@ -31,7 +31,7 @@ public enum EEvent
       CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName()));
       CommandDelegate.execute(new SendPartyMessageCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName()));
     });
-    EEvent.MOVED.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getParty().getName() + " is entering " + fighter.getLocation().getDisplayName())));
+    EEvent.MOVED.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getParty().getName() + " is entering " + fighter.getLocation().getDisplayName() + ".\nJoin the battle: @TheWoodlandsBot")));
   }
 
   public void subscribe(EventRecipient recipient)
