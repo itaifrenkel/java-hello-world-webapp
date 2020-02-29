@@ -35,7 +35,7 @@ public abstract class Fighter extends GameObject
     {
       return name + Icons.DEAD + "️dead";
     }
-    String message = name + healthIcon(stats) + stats.getHitPoints() + " / " + stats.getMaxHitPoints();
+    String message = name + healthIcon(stats) + stats.getHitPointsDescription();
     if (stats.getMaxMana().total() != 0)
     {
       message += ", " + Icons.MANA + stats.getMana() + "/" + stats.getMaxMana();

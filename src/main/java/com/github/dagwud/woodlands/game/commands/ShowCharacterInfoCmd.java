@@ -44,7 +44,7 @@ public class ShowCharacterInfoCmd extends AbstractCmd
         "Location: " + character.getLocation() + "\n" +
         "Short Rests Available: " + character.getStats().getRestPoints() + "/" + character.getStats().getRestPointsMax() + "\n" +
         "\n" +
-        Icons.HP + ": " + stats.getHitPoints() + " / " + stats.getMaxHitPoints() + "\n" +
+        Icons.HP + ": " + stats.getHitPointsDescription() + "\n" +
         Icons.MANA + ": " + stats.getMana() + " / " + stats.getMaxMana() + "\n" +
         Icons.DRUNK + ": " + stats.getDrunkeness() + "\n" +
         "Strength: " + stats.getStrength() + "\n" +

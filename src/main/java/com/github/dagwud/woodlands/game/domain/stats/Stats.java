@@ -303,4 +303,13 @@ public class Stats implements Serializable
   {
     this.availableStatPointUpgrades = availablePointUpgrades;
   }
+
+  public String getHitPointsDescription()
+  {
+    if (getHitPoints() != getMaxHitPoints().total())
+    {
+      return getHitPoints() + " / " + getMaxHitPoints();
+    }
+    return String.valueOf(getHitPoints());
+  }
 }

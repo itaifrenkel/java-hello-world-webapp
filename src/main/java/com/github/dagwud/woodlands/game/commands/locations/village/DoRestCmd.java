@@ -68,7 +68,7 @@ public class DoRestCmd extends AbstractCmd
 
     SendMessageCmd echo = new SendMessageCmd(chatId, "<b>You recovered " + Icons.HP + hitPointsRecovered +
             " and " + Icons.MANA + manaRecovered + ".</b> " +
-            "Now at " + Icons.HP + character.getStats().getHitPoints() + "/" + character.getStats().getMaxHitPoints() +
+            "Now at " + Icons.HP + character.getStats().getHitPointsDescription() +
             ", " + Icons.MANA + character.getStats().getMana() + "/" + character.getStats().getMaxMana());
     CommandDelegate.execute(echo);
 
