@@ -1,8 +1,12 @@
 package com.github.dagwud.woodlands.game.domain.menu;
 
+import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.ECommand;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class VillageMenu extends GameMenu
 {
@@ -16,6 +20,17 @@ public class VillageMenu extends GameMenu
         ECommand.BLACKSMITH,
         ECommand.THE_PETTING_ZOO, ECommand.THE_MOUNTAIN,
         ECommand.THE_WOODLANDS);
+  }
+
+  @Override
+  public String[] produceOptions(PlayerState playerState)
+  {
+    List<String> strings = Arrays.asList(super.produceOptions(playerState));
+    if (playerState.getActiveCharacter().getParty().getCollectedItems().isEmpty())
+    {
+      strings.remove(ECommand.CLAIM_ITEM.toString());
+    }
+    return strings.toArray(new String[0]);
   }
 
   @Override
