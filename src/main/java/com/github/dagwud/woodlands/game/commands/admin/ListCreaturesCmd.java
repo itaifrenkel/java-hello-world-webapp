@@ -43,4 +43,11 @@ public class ListCreaturesCmd extends AdminCmd
       CommandDelegate.execute(new SendAdminMessageCmd("• " + desc));
     }
   }
+
+  private int chooseRandomInRange(int minInclusive, int maxInclusive)
+  {
+    int rand = (int) (Math.random() * ((maxInclusive - minInclusive) + 1));
+    return rand + minInclusive;
+  }
+
 }
