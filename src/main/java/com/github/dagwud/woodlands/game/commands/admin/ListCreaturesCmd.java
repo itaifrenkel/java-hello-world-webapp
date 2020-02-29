@@ -40,7 +40,7 @@ public class ListCreaturesCmd extends AdminCmd
       spawnedCreature.setStats(stats);
 
       String desc = spawnedCreature.name + " (L" + spawnedCreature.difficulty + "): " + spawnedCreature.summary();
-      CommandDelegate.execute(new SendAdminCmd("• " + desc));
+      CommandDelegate.execute(new SendAdminMessageCmd("• " + desc));
     }
   }
 }
