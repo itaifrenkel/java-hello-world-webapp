@@ -10,7 +10,7 @@ import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Difficulty;
-import com.github.dagwud.woodlands.gson.game.Item;
+import com.github.dagwud.woodlands.game.domain.Item;
 
 public class ListCreaturesCmd extends AdminCmd
 {
