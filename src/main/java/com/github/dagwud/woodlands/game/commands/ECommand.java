@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.admin.*;
-import com.github.dagwud.woodlands.game.commands.battle.PrepareAttackCmd;
+import com.github.dagwud.woodlands.game.commands.battle.*;
 import com.github.dagwud.woodlands.game.commands.character.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.*;
@@ -15,6 +15,7 @@ import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
 import com.github.dagwud.woodlands.game.commands.start.StartCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +53,7 @@ public enum ECommand
   LOGS("/log", false, (character, chatId) -> new ShowLogsCmd(chatId)),
   CREATURE_CACHE("/cachecreature", false, ((character, chatId) -> new InvalidateCreatureCacheCmd(chatId))),
   SPAWN_TRINKET("/trinket", false, ((character, chatId) -> new SpawnTrinketCmd(character))),
+  SPAWN_ITEM("/item", false, ((character, chatId) -> new DefeatCreatureRewardCmd(character.getParty(), new Creature(), false))),
   SET_XP("/xp", false, ((character, chatId) -> new AdminSetXPCmd(chatId))),
   DAMAGE("/damage", false, ((character, chatId) -> new AdminDamageCmd(character))),
   YOU("/you", false, ((character, chatId) -> new AdminShowCharacterInfoCmd(chatId, character))),

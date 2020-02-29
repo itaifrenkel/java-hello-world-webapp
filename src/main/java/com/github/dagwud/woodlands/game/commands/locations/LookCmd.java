@@ -31,11 +31,14 @@ public class LookCmd extends AbstractCmd
     CommandDelegate.execute(cmd);
 
     StringBuilder otherPartyMembersHere = new StringBuilder();
-    for (GameCharacter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
+    if (playerState.getActiveCharacter().getParty() != null)
     {
-      if (activeMember != playerState.getActiveCharacter() && activeMember.getLocation() == location)
+      for (GameCharacter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
       {
-        otherPartyMembersHere.append(activeMember.getName()).append(", ");
+        if (activeMember != playerState.getActiveCharacter() && activeMember.getLocation() == location)
+        {
+          otherPartyMembersHere.append(activeMember.getName()).append(", ");
+        }
       }
     }
 

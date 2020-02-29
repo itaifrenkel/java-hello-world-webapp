@@ -54,9 +54,7 @@ public class StartWeaponCraft extends AbstractCmd
     {
       return firstWeapon.ranged;
     }
-    DiceRollCmd cmd = new DiceRollCmd(1, 2);
-    CommandDelegate.execute(cmd);
-    return cmd.getTotal() == 1;
+    return true;
   }
 
   private Damage determinedDamage(Weapon firstWeapon, Weapon secondWeapon)
