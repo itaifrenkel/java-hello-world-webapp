@@ -9,6 +9,8 @@ public abstract class Icons
   public static final String CRITICAL_HIT = "\uD83C\uDFAF";
   public static final String MISS = "\uD83D\uDE48";
 
+  public static final String LEADER = "🎖";
+
   public static final String UNCONSCIOUS = "💔";
   public static final String SHORT_REST = "😴";
   public static final String LONG_REST = "🛏️";

@@ -31,7 +31,7 @@ public class ListPartiesCmd extends AdminCmd
     {
       b.append(party.getName())
               .append(" (").append(party.size()).append(") - ")
-              .append(party.getLeader() == null ? "No leader" : "🎖" + party.getLeader().getName())
+              .append(party.getLeader() == null ? "No leader" : Icons.LEADER + party.getLeader().getName())
               .append("\n");
       for (GameCharacter c : party.getActiveMembers())
       {

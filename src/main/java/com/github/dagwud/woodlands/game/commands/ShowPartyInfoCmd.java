@@ -1,13 +1,11 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.start.CharacterIsSetUpPrecondition;
-import com.github.dagwud.woodlands.game.domain.EState;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Item;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.*;
 
 public class ShowPartyInfoCmd extends AbstractCmd
 {
@@ -71,6 +69,10 @@ public class ShowPartyInfoCmd extends AbstractCmd
       }
 
       String levelAndClass = "L" + member.getStats().getLevel() + " " + charClass;
+      if (member instanceof PlayerCharacter && character.getParty().isLedBy((PlayerCharacter) member))
+      {
+        levelAndClass += " " + Icons.LEADER;
+      }
 
       String weapons = "";
       if (member.getCarrying().getCarriedLeft() != null)

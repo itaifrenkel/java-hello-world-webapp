@@ -110,10 +110,8 @@ public class Party implements Serializable
 
   public GameCharacter getLeader()
   {
-    Iterator<GameCharacter> it = members.iterator();
-    while (it.hasNext())
+    for (GameCharacter member : members)
     {
-      GameCharacter member = it.next();
       if (member.isActive())
       {
         return member;
@@ -225,5 +223,16 @@ public class Party implements Serializable
       blacksmith = new Blacksmith();
     }
     return blacksmith;
+  }
+
+  public void changeLeader(GameCharacter newLeader)
+  {
+    if (!members.contains(newLeader))
+    {
+      // prevent very bad things happening
+      return;
+    }
+    members.remove(newLeader);
+    members.add(0, newLeader);
   }
 }

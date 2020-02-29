@@ -12,6 +12,7 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MoveToLocationCmd extends AbstractCmd
@@ -56,7 +57,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
     if (allMoveTogether(location) && !inVillageMove(location, characterToMove.getLocation()))
     {
-      doMove(characterToMove.getParty().getActiveMembers(), location, characterToMove);
+      doMove(characterToMove.getParty(), location, characterToMove);
     }
     else
     {
@@ -74,8 +75,10 @@ public class MoveToLocationCmd extends AbstractCmd
     return moveTo == ELocation.VILLAGE_SQUARE || !moveTo.isVillageLocation();
   }
 
-  private void doMove(Collection<GameCharacter> charactersToMove, ELocation moveTo, GameCharacter movedBy)
+  private void doMove(Party partyToMove, ELocation moveTo, GameCharacter movedBy)
   {
+    partyToMove.changeLeader(movedBy);
+    List<GameCharacter> charactersToMove = partyToMove.getActiveMembers();
     for (GameCharacter character : charactersToMove)
     {
       doMove(character, moveTo, movedBy);
