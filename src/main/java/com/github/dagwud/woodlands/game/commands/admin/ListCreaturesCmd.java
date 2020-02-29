@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Difficulty;
+import com.github.dagwud.woodlands.gson.game.Item;
 
 public class ListCreaturesCmd extends AdminCmd
 {
@@ -43,19 +44,19 @@ public class ListCreaturesCmd extends AdminCmd
       
       String message = desc;
       // todo duplicate in GenerateEncounterCmd:
-      Item carriedLeft = encounter.getEnemy().getCarrying().getCarriedLeft();
-      Item carriedRight = encounter.getEnemy().getCarrying().getCarriedRight();
+      Item carriedLeft = spawnedCreature.getCarrying().getCarriedLeft();
+      Item carriedRight = spawnedCreature.getCarrying().getCarriedRight();
       if (carriedLeft != null || carriedRight != null)
       {
         if (carriedLeft != null)
         {
           message += ", ";
-          message += carriedLeft.summary(encounter.getEnemy(), false);
+          message += carriedLeft.summary(spawnedCreature, false);
         }
         if (carriedRight != null)
         {
           message += ", ";
-          message += carriedRight.summary(encounter.getEnemy(), false);
+          message += carriedRight.summary(spawnedCreature, false);
         }
       }
 
