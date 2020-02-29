@@ -1,21 +1,25 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureFromTemplateCmd;
 import com.github.dagwud.woodlands.game.creatures.CreaturesCacheFactory;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-public class ListCreaturesCmd extends AdminCmd
+public class ListCreaturesCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
+  private final int chatId;
 
   public ListCreaturesCmd(int chatId)
   {
-    super(chatId);
+    this.chatId = chatId;
   }
 
   @Override
@@ -45,7 +49,7 @@ public class ListCreaturesCmd extends AdminCmd
       count++;
       if (count >= batchSize)
       {
-        CommandDelegate.execute(new SendAdminMessageCmd(b.toString()));
+        CommandDelegate.execute(new SendMessageCmd(chatId, b.toString()));
         count = 0;
         b = new StringBuilder();
       }

@@ -34,6 +34,7 @@ public enum ECommand
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
   GIVE("/give", false, (character, chatId) -> new GiveItemCmd(character.getPlayedBy())),
   SPELL("/spell", false, (character, chatId) -> new ManualSpellCastCmd(chatId, character)),
+  LIST_CREATURES("/creatures", false, (character, chatId) -> new ListCreaturesCmd(chatId)),
 
   BEST_PARTY("/bestparty", false, (character, chatId) -> new BestPartyCmd(chatId)),
   OOK("/ook", false, (character, chatId) -> new OokCmd(character)),
@@ -47,7 +48,6 @@ public enum ECommand
   REMOVE("/rm", false, (character, chatId) -> new RemovePromptCmd(chatId, character)),
   CLEAR_SCHEDULER("/clearscheduler", false, (character, chatId) -> new ClearSchedulerCmd(chatId)),
   LIST_SCHEDULES("/schedules", false, (character, chatId) -> new ListSchedulesCmd(chatId)),
-  LIST_CREATURES("/creatures", false, (character, chatId) -> new ListCreaturesCmd(chatId)),
   SETPARTY("/setparty", false, (character, chatId) -> new AdminChangePartyCmd(chatId, character)),
   RESET("/reset", false, (character, chatId) -> new ResetCmd(chatId)),
   SHUTDOWN("/shutdown", false, (character, chatId) -> new ShutdownCmd()),

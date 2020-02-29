@@ -207,6 +207,10 @@ public class Stats implements Serializable
 
   private int determineProficiency()
   {
+    if (getLevel() < 2)
+    {
+      return 0;
+    }
     return Math.floorDiv(getLevel() + 8, 4);
   }
 
