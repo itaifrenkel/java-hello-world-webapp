@@ -9,6 +9,7 @@ import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 import com.github.dagwud.woodlands.game.items.UnknownWeaponException;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Creature extends Fighter
@@ -128,4 +129,8 @@ public class Creature extends Fighter
     }
   }
 
+  public String difficulty()
+  {
+    return new DecimalFormat("0.#").format(difficulty);
+  }
 }

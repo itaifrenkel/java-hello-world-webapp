@@ -130,7 +130,8 @@ public class ShowCharacterInfoCmd extends AbstractCmd
       b.append("• ").append(f.getName());
       if (f instanceof Creature)
       {
-        b.append(" (L").append(((Creature) f).difficulty).append(")");
+        Creature creature = (Creature) f;
+        b.append(" (L").append(creature.difficulty()).append(")");
       }
       b.append("\n");
     }

@@ -91,7 +91,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   private Encounter startEncounter()
   {
     Encounter encounter = createEncounter();
-    String message = "<b>You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty + "):</b>\n" + encounter.getEnemy().summary();
+    String message = "<b>You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty() + "):</b>\n" + encounter.getEnemy().summary();
     message += encounter.getEnemy().getCarrying().summary(encounter.getEnemy());
 
     SendPartyMessageCmd msg = new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), message);

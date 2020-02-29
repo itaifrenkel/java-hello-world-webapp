@@ -32,7 +32,7 @@ public class ListCreaturesCmd extends AbstractCmd
       CommandDelegate.execute(spawn);
       Creature spawnedCreature = spawn.getSpawnedCreature();
 
-      String desc = "L" + spawnedCreature.difficulty + ": " + spawnedCreature.summary() +
+      String desc = "L" + spawnedCreature.difficulty() + ": " + spawnedCreature.summary() +
               spawnedCreature.getCarrying().summary(spawnedCreature);
 
       entries.add(desc);
