@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.ECommand;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +26,9 @@ public class VillageMenu extends GameMenu
   @Override
   public String[] produceOptions(PlayerState playerState)
   {
-    List<String> strings = Arrays.asList(super.produceOptions(playerState));
+    String[] strings1 = super.produceOptions(playerState);
+    ArrayList<String> strings = new ArrayList<String>(Arrays.asList(strings1));
+
     if (playerState.getActiveCharacter().getParty().getCollectedItems().isEmpty())
     {
       strings.remove(ECommand.CLAIM_ITEM.toString());
