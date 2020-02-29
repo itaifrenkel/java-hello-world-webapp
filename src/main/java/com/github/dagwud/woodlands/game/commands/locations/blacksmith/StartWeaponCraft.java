@@ -43,8 +43,31 @@ public class StartWeaponCraft extends AbstractCmd
 
   private String determineName(Weapon firstWeapon, Weapon secondWeapon)
   {
-    //todo nicer names
-    return firstWeapon.getName().substring(0, 3) + secondWeapon.getName().substring(3);
+    StringBuilder m = new StringBuilder();
+    String[] syllablesFirst = firstWeapon.getSyllables();
+    int firstSegments = Math.min(1, syllablesFirst.length / 2);
+    for (int i = 0; i < firstSegments; i++)
+    {
+      if (i > 0)
+      {
+        m.append("|");
+      }
+      m.append(syllablesFirst[i]);
+    }
+
+    m.append("|");
+
+    String[] syllablesSecond = secondWeapon.getSyllables();
+    int secondSegments = Math.min(1, syllablesSecond.length / 2);
+    for (int i = secondSegments; i < syllablesSecond.length; i++)
+    {
+      if (i > secondSegments)
+      {
+        m.append("|");
+      }
+      m.append(syllablesSecond[i]);
+    }
+    return m.toString();
   }
 
   private boolean determineRanged(Weapon firstWeapon, Weapon secondWeapon)

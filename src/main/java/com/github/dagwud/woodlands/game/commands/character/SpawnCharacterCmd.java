@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
+import com.github.dagwud.woodlands.game.commands.locations.blacksmith.StartWeaponCraft;
 import com.github.dagwud.woodlands.game.commands.start.CreateDefaultSchedulesCmd;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.ELocation;

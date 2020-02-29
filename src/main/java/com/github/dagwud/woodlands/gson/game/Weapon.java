@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.gson.game;
 
 import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.items.EquippableItem;
 import com.google.gson.annotations.SerializedName;
 
@@ -33,7 +32,12 @@ public class Weapon extends EquippableItem
   @Override
   public String getName()
   {
-    return name;
+    return name.replaceAll("\\|", "");
+  }
+
+  public String[] getSyllables()
+  {
+    return name.split("\\|");
   }
 
   @Override
