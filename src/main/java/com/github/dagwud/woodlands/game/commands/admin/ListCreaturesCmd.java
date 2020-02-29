@@ -39,7 +39,7 @@ public class ListCreaturesCmd extends AdminCmd
       Creature spawnedCreature = new Creature(template);
       spawnedCreature.setStats(stats);
 
-      String desc = spawnedCreature.name + " (L" + spawnedCreature.difficulty + "): " + spawnedCreature.summary();
+      String desc = "L" + spawnedCreature.difficulty + ": " + spawnedCreature.summary();
       
       String message = desc;
       // todo duplicate in GenerateEncounterCmd:
