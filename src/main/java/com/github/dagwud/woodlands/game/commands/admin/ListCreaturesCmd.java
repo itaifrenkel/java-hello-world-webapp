@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureFromTemplateCmd;
@@ -35,9 +36,23 @@ public class ListCreaturesCmd extends AdminCmd
       entries.add(desc);
     }
 
+    int batchSize = 10;
+    int count = 0;
+    StringBuilder b = new StringBuilder();
     for (String entry : entries)
     {
-      CommandDelegate.execute(new SendAdminMessageCmd(entry));
+      b.append(entry);
+      count++;
+      if (count >= batchSize)
+      {
+        CommandDelegate.execute(new SendAdminMessageCmd(b.toString()));
+        count = 0;
+        b = new StringBuilder();
+      }
+      else
+      {
+        b.append("\n");
+      }
     }
   }
 
