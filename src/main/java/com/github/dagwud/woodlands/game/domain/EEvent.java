@@ -18,7 +18,7 @@ public enum EEvent
 
   public static void subscribeToStandardEvents()
   {
-    EEvent.PLAYER_DEATH.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has died!")));
+    EEvent.PLAYER_DEATH.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has died! Nice job, " + fighter.getParty().getLeader().getName())));
 
     EEvent.JOINED_PARTY.subscribe(fighter ->
     {
