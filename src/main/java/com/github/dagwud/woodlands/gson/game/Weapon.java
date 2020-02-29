@@ -21,6 +21,15 @@ public class Weapon extends EquippableItem
   @SerializedName(value = "custom_icon")
   public String customIcon;
 
+  public Weapon()
+  {
+  }
+
+  public Weapon(String name)
+  {
+    this.name = name;
+  }
+
   @Override
   public String getName()
   {

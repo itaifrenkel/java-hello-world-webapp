@@ -35,8 +35,7 @@ public class SneakAttack extends SingleCastSpell
 
   private DamageInflicted generateDamage(Fighter attacker, int totalDamage, Fighter target)
   {
-    Weapon weapon = new Weapon();
-    weapon.name = getSpellName();
+    Weapon weapon = new Weapon(getSpellName());
     weapon.customIcon = Icons.MANA;
     return new DamageInflicted(attacker, weapon, EHitStatus.HIT, totalDamage, target, 0);
   }

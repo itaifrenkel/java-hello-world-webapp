@@ -35,17 +35,16 @@ public class StartWeaponCraft extends AbstractCmd
 
   private Weapon createCraftedWeapon()
   {
-    Weapon crafted = new Weapon();
+    Weapon crafted = new Weapon(determineName(firstWeapon, secondWeapon));
     crafted.ranged = determineRanged(firstWeapon, secondWeapon);
     crafted.damage = determinedDamage(firstWeapon, secondWeapon);
-    crafted.name = determineName(firstWeapon, secondWeapon);
     return crafted;
   }
 
   private String determineName(Weapon firstWeapon, Weapon secondWeapon)
   {
     //todo nicer names
-    return firstWeapon.name.substring(0, 3) + secondWeapon.name.substring(3);
+    return firstWeapon.getName().substring(0, 3) + secondWeapon.getName().substring(3);
   }
 
   private boolean determineRanged(Weapon firstWeapon, Weapon secondWeapon)
