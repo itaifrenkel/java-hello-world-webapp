@@ -69,9 +69,11 @@ public class ShowPartyInfoCmd extends AbstractCmd
       }
 
       String levelAndClass = "L" + member.getStats().getLevel() + " " + charClass;
+      
+      String name = member.getName();
       if (member instanceof PlayerCharacter && character.getParty().isLedBy((PlayerCharacter) member))
       {
-        levelAndClass = Icons.LEADER + " " + levelAndClass;
+        name = Icons.LEADER + " " + name;
       }
 
       String weapons = "";
@@ -93,7 +95,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
         message.append("\n");
       }
 
-      String firstLine = member.getName() + ": " + levelAndClass + location + state + "\n";
+      String firstLine = name + ": " + levelAndClass + location + state + "\n";
       String secondLine = member.summary(false) + "\n";
       String thirdLine = weapons + (weapons.isEmpty() ? "" : "\n");
 
