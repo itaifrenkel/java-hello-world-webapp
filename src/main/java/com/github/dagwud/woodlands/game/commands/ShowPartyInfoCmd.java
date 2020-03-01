@@ -93,8 +93,8 @@ public class ShowPartyInfoCmd extends AbstractCmd
         message.append("\n");
       }
 
-      String firstLine = member.getName() + ": " + levelAndClass + location + "\n";
-      String secondLine = state + member.summary(false) + "\n";
+      String firstLine = member.getName() + ": " + levelAndClass + location + state + "\n";
+      String secondLine = member.summary(false) + "\n";
       String thirdLine = weapons + (weapons.isEmpty() ? "" : "\n");
 
       message.append(firstLine);
