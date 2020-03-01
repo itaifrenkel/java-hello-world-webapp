@@ -30,13 +30,6 @@ public class WakeCmd extends AbstractCmd
     this.activeCharacter = activeCharacter;
   }
 
-  public WakeCmd(int chatId, PlayerCharacter activeCharacter, boolean isWake)
-  {
-    // no precondition - for a wake, you can drink while drinking
-    this.chatId = chatId;
-    this.activeCharacter = activeCharacter;
-  }
-
   @Override
   public void execute()
   {
@@ -70,7 +63,7 @@ public class WakeCmd extends AbstractCmd
         SendMessageCmd msg = new SendMessageCmd(c, "<b>Raise a glass to those no longer with us</b>");
         CommandDelegate.execute(msg);
 
-        BuyDrinksCmd drink = new BuyDrinksCmd(c.getPlayedBy().getChatId(), c);
+        BuyDrinksCmd drink = new BuyDrinksCmd(c.getPlayedBy().getChatId(), c, true);
         CommandDelegate.execute(drink);
       }
     }
