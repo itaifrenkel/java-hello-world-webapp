@@ -51,6 +51,10 @@ public class ShowPartyInfoCmd extends AbstractCmd
     for (GameCharacter member : character.getParty().getActiveMembers())
     {
       String state = member.getStats().getState().icon;
+      if (member instanceof PlayerCharacter && character.getParty().isLedBy((PlayerCharacter) member))
+      {
+        state = Icons.LEADER + state;
+      }
       if (!state.isEmpty())
       {
         state = " (" + state + ")";
@@ -68,14 +72,10 @@ public class ShowPartyInfoCmd extends AbstractCmd
         location = " (" + member.getLocation().getDisplayName() + ")";
       }
 
+      String name = member.getName();
+     
       String levelAndClass = "L" + member.getStats().getLevel() + " " + charClass;
       
-      String name = member.getName();
-      if (member instanceof PlayerCharacter && character.getParty().isLedBy((PlayerCharacter) member))
-      {
-        name = Icons.LEADER + " " + name;
-      }
-
       String weapons = "";
       if (member.getCarrying().getCarriedLeft() != null)
       {
