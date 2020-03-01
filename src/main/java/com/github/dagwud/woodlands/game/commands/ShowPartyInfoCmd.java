@@ -93,9 +93,13 @@ public class ShowPartyInfoCmd extends AbstractCmd
         message.append("\n");
       }
 
-      message.append(member.getName()).append(": ").append(levelAndClass).append(location).append("\n");
-      message.append(state).append(member.summary(false)).append("\n");
-      message.append(weapons).append("\n");
+      String firstLine = member.getName() + ": " + levelAndClass + location + "\n";
+      String secondLine = state + member.summary(false) + "\n";
+      String thirdLine = weapons + (weapons.isEmpty() ? "" : "\n";
+
+      message.append(firstLine);
+      message.append(secondLine);
+      message.append(thirdLine);
     }
     return message.toString();
   }
