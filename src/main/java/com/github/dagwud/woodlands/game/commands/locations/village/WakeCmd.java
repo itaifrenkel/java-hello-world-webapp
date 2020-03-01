@@ -30,6 +30,13 @@ public class WakeCmd extends AbstractCmd
     this.activeCharacter = activeCharacter;
   }
 
+  public WakeCmd(int chatId, PlayerCharacter activeCharacter, boolean isWake)
+  {
+    // no precondition - for a wake, you can drink while drinking
+    this.chatId = chatId;
+    this.activeCharacter = activeCharacter;
+  }
+
   @Override
   public void execute()
   {
