@@ -71,7 +71,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
       String levelAndClass = "L" + member.getStats().getLevel() + " " + charClass;
       if (member instanceof PlayerCharacter && character.getParty().isLedBy((PlayerCharacter) member))
       {
-        levelAndClass = levelAndClass + Icons.LEADER + " " + levelAndClass;
+        levelAndClass = Icons.LEADER + " " + levelAndClass;
       }
 
       String weapons = "";
