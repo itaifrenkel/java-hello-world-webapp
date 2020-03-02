@@ -1,11 +1,14 @@
 package com.github.dagwud.woodlands.game.domain.stats;
 
+import com.github.dagwud.woodlands.game.domain.EAchievement;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Stats implements Serializable
 {
@@ -37,6 +40,7 @@ public class Stats implements Serializable
 
   // thus endeth the serious stats and begin the fun stats
   private int drunkeness;
+  private Set<EAchievement> achievements = new HashSet<>();
 
   public int getLevel()
   {
@@ -311,5 +315,15 @@ public class Stats implements Serializable
       return getHitPoints() + " / " + getMaxHitPoints();
     }
     return String.valueOf(getHitPoints());
+  }
+
+  public Set<EAchievement> getAchievements()
+  {
+    if (achievements == null)
+    {
+      achievements = new HashSet<>();
+    }
+
+    return achievements;
   }
 }

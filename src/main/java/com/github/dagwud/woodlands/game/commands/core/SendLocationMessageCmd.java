@@ -5,6 +5,9 @@ import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SendLocationMessageCmd extends AbstractCmd
 {
   private ELocation eLocation;
@@ -28,7 +31,10 @@ public class SendLocationMessageCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    for (GameCharacter gameCharacter : eLocation.getCharactersInRoom())
+    // grab a copy to avoid concurrent modification errors.
+
+    List<GameCharacter> charactersInRoom = new ArrayList<>(eLocation.getCharactersInRoom());
+    for (GameCharacter gameCharacter : charactersInRoom)
     {
       if (gameCharacter == originator)
       {
