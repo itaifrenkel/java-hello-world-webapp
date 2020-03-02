@@ -40,6 +40,12 @@ public class BuyDrinksCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (!activeCharacter.isAlive())
+    {
+      // for wake, we can end up here
+      return;
+    }
+
     if (activeCharacter.getStats().getLevel() <= 1)
     {
       SendMessageCmd c = new SendMessageCmd(chatId, "The barman laughs as you politely request a drink. \"Come back when you've earned the right to drink with the grown-ups,\" he scoffs");
