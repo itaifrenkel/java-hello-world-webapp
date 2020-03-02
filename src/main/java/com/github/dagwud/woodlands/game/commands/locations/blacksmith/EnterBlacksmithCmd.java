@@ -48,10 +48,10 @@ public class EnterBlacksmithCmd extends AbstractCmd
         CommandDelegate.execute(new SendMessageCmd(character, "The door to the Blacksmith's shop is locked; you can hear the sounds of clashing steel coming from his workshop. He must be busy with something."));
       }
     }
-  }
 
-  if (character.getParty().getBlacksmith().isBusyCrafting())
-  {
-    CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
+    if (character.getParty().getBlacksmith().isBusyCrafting())
+    {
+      CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
+    }
   }
 }
