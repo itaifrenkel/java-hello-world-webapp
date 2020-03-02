@@ -4,10 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.domain.events.CreatureDroppedEventRecipient;
-import com.github.dagwud.woodlands.game.domain.events.CreatureWasMuggedEventRecipient;
-import com.github.dagwud.woodlands.game.domain.events.Event;
-import com.github.dagwud.woodlands.game.domain.events.EventRecipient;
+import com.github.dagwud.woodlands.game.domain.events.*;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.util.ArrayList;
@@ -17,7 +14,7 @@ import java.util.Map;
 
 public enum EEvent
 {
-  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM;
+  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM, CREATURE_DEFEATED;
 
   private static transient Map<EEvent, List<EventRecipient<? extends Event>>> subscribers;
 
@@ -39,6 +36,7 @@ public enum EEvent
 
     EEvent.MOVED.subscribe(event -> CommandDelegate.execute(new SendPartyAlertCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getParty().getName() + " is entering " + event.getPlayerCharacter().getLocation().getDisplayName() + ".\nJoin the battle: @TheWoodlandsBot")));
 
+    EEvent.CREATURE_DEFEATED.subscribe(new CreatureDefeatedEventRecipient());
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureDroppedEventRecipient());
 
     subscribeForAchievements();
@@ -47,6 +45,7 @@ public enum EEvent
   private static void subscribeForAchievements()
   {
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureWasMuggedEventRecipient());
+    EEvent.CREATURE_DEFEATED.subscribe(new DrunkenVictoryEventRecipient());
     EEvent.PLAYER_DEATH.subscribe(event ->
     {
       CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.SHUFFLED_OFF_THE_MORTAL_COIL));

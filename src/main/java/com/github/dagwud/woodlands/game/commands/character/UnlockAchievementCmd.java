@@ -36,8 +36,11 @@ public class UnlockAchievementCmd extends AbstractCmd
     String message = String.format(ACHIEVEMENT, achievement.getAchievementName(), achievement.getDescription());
     CommandDelegate.execute(new SendMessageCmd(playerCharacter, message));
 
-    SendPartyMessageCmd sendPartyMessageCmd = new SendPartyMessageCmd(playerCharacter.getParty(), playerCharacter.getName() + " has unlocked achievement " + achievement.getAchievementName());
-    CommandDelegate.execute(sendPartyMessageCmd);
+    if (!playerCharacter.getParty().isPrivateParty())
+    {
+      SendPartyMessageCmd sendPartyMessageCmd = new SendPartyMessageCmd(playerCharacter.getParty(), playerCharacter.getName() + " has unlocked achievement " + achievement.getAchievementName());
+      CommandDelegate.execute(sendPartyMessageCmd);
+    }
 
     checkForMostAchievementsAchievement();
   }
