@@ -23,8 +23,8 @@ public abstract class CavernMenu extends GameMenu
     {
       List<ICommand> options = new ArrayList<>();
       populateMenuOption(options, buildBackCommand());
-      populateMenuOption(options, buildDeeperCommand());
       populateMenuOption(options, buildSidePathCommand());
+      populateMenuOption(options, buildDeeperCommand());
       setOptions(buildOptions(options.toArray(new ICommand[0])));
     }
     return super.getOptions();
