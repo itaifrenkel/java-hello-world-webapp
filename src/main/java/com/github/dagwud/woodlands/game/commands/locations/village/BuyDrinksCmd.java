@@ -40,7 +40,7 @@ public class BuyDrinksCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (!activeCharacter.isAlive())
+    if (activeCharacter.isDead())
     {
       // for wake, we can end up here
       return;
