@@ -3,6 +3,9 @@ package com.github.dagwud.woodlands.game.domain;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
+import com.github.dagwud.woodlands.game.domain.events.CreatureDroppedEventRecipient;
+import com.github.dagwud.woodlands.game.domain.events.CreatureWasMuggedEventRecipient;
+import com.github.dagwud.woodlands.game.domain.events.Event;
 import com.github.dagwud.woodlands.game.domain.events.EventRecipient;
 
 import java.util.ArrayList;
@@ -12,44 +15,56 @@ import java.util.Map;
 
 public enum EEvent
 {
-  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED;
+  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM;
 
-  private static transient Map<EEvent, List<EventRecipient>> subscribers;
+  private static transient Map<EEvent, List<EventRecipient<? extends Event>>> subscribers;
 
   public static void subscribeToStandardEvents()
   {
-    EEvent.PLAYER_DEATH.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has died! Nice job, " + fighter.getParty().getLeader().getName())));
+    EEvent.PLAYER_DEATH.subscribe(event -> CommandDelegate.execute(new SendPartyAlertCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getName() + " has died! Nice job, " + event.getPlayerCharacter().getParty().getLeader().getName())));
 
-    EEvent.JOINED_PARTY.subscribe(fighter ->
+    EEvent.JOINED_PARTY.subscribe(event ->
     {
-      CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has joined " + fighter.getParty().getName()));
-      CommandDelegate.execute(new SendPartyMessageCmd(fighter.getParty(), fighter.getName() + " has joined " + fighter.getParty().getName() + "!"));
+      CommandDelegate.execute(new SendPartyAlertCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getName() + " has joined " + event.getPlayerCharacter().getParty().getName()));
+      CommandDelegate.execute(new SendPartyMessageCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getName() + " has joined " + event.getPlayerCharacter().getParty().getName() + "!"));
     });
 
-    EEvent.LEFT_PARTY.subscribe(fighter ->
+    EEvent.LEFT_PARTY.subscribe(event ->
     {
-      CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName()));
-      CommandDelegate.execute(new SendPartyMessageCmd(fighter.getParty(), fighter.getName() + " has left " + fighter.getParty().getName()));
+      CommandDelegate.execute(new SendPartyAlertCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getName() + " has left " + event.getPlayerCharacter().getParty().getName()));
+      CommandDelegate.execute(new SendPartyMessageCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getName() + " has left " + event.getPlayerCharacter().getParty().getName()));
     });
-    EEvent.MOVED.subscribe(fighter -> CommandDelegate.execute(new SendPartyAlertCmd(fighter.getParty(), fighter.getParty().getName() + " is entering " + fighter.getLocation().getDisplayName() + ".\nJoin the battle: @TheWoodlandsBot")));
+
+    EEvent.MOVED.subscribe(event -> CommandDelegate.execute(new SendPartyAlertCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getParty().getName() + " is entering " + event.getPlayerCharacter().getLocation().getDisplayName() + ".\nJoin the battle: @TheWoodlandsBot")));
+
+    EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureDroppedEventRecipient());
+    EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureWasMuggedEventRecipient());
   }
 
-  public void subscribe(EventRecipient recipient)
+  public void subscribe(EventRecipient<? extends Event> recipient)
   {
     getSubscribers(this).add(recipient);
   }
 
-  // Making the ease-of-use-assumption now that any event will most likely involve a fighter
-  // and any more context can be inferred from the event. This may be completely wrong.
-  public void trigger(PlayerCharacter fighter)
+  // Ease-of-use standard case where it just involves a player character.
+  public void trigger(PlayerCharacter playerCharacter)
   {
-    for (EventRecipient subscriber : getSubscribers(this))
+    for (EventRecipient<? extends Event> subscriber : getSubscribers(this))
     {
-      subscriber.trigger(fighter);
+      subscriber.preTrigger(new Event(playerCharacter));
     }
   }
 
-  public static List<EventRecipient> getSubscribers(EEvent eEvent)
+  // More general use-case
+  public void trigger(Event event)
+  {
+    for (EventRecipient<? extends Event> subscriber : getSubscribers(this))
+    {
+      subscriber.preTrigger(event);
+    }
+  }
+
+  public static List<EventRecipient<? extends Event>> getSubscribers(EEvent eEvent)
   {
     if (subscribers == null)
     {

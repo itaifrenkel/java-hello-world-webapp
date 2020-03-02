@@ -38,11 +38,13 @@ public class DefeatCreatureCmd extends AbstractCmd
     double difficultyLevel = creatureDefeated.difficulty;
     Difficulty difficulty = DifficultyCacheFactory.instance().getCache().getDifficulty(difficultyLevel);
     int reward = difficulty.experienceReward;
+
     if (!isFarmedEncounter)
     {
       reward = reward * 2;
       CommandDelegate.execute(new SendPartyMessageCmd(victoriousParty, "<b>Double XP awarded!</b>"));
     }
+
     DefeatCreatureRewardCmd rewardCmd = new DefeatCreatureRewardCmd(victoriousParty, creatureDefeated, isFarmedEncounter);
     CommandDelegate.execute(rewardCmd);
 
