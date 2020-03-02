@@ -84,7 +84,7 @@ public class CraftWeaponPromptCmd extends SuspendableCmd
     CommandDelegate.execute(new SendMessageCmd(character, "\"I'll see what I can do. Come back in a few hours.\""));
     CommandDelegate.execute(new DoGiveItemCmd(character, character.getParty().getBlacksmith(), firstWeapon));
     CommandDelegate.execute(new DoGiveItemCmd(character, character.getParty().getBlacksmith(), secondWeapon));
-    CommandDelegate.execute(new StartWeaponCraft(character.getParty().getBlacksmith(), character, firstWeapon, secondWeapon));
+    CommandDelegate.execute(new StartWeaponCraft(character, firstWeapon, secondWeapon));
     CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
   }
 

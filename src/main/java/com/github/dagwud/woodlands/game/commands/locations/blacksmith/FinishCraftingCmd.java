@@ -12,13 +12,11 @@ public class FinishCraftingCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
-  private final Blacksmith blacksmith;
   private final Weapon crafted;
   private final PlayerCharacter craftedFor;
 
-  public FinishCraftingCmd(Blacksmith blacksmith, Weapon crafted, PlayerCharacter craftedFor)
+  public FinishCraftingCmd(Weapon crafted, PlayerCharacter craftedFor)
   {
-    this.blacksmith = crafterFor.getParty().getBlacksmith();
     this.crafted = crafted;
     this.craftedFor = craftedFor;
   }
@@ -26,6 +24,7 @@ public class FinishCraftingCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    Blacksmith blacksmith = craftedFor.getParty().getBlacksmith();
     CommandDelegate.execute(new DoGiveItemCmd(null, blacksmith, crafted));
     blacksmith.setBusyCrafting(false);
     blacksmith.addReadyForCollection(crafted, craftedFor);

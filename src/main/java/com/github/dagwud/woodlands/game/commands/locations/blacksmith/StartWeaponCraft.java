@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.commands.locations.blacksmith;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.domain.Blacksmith;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -12,14 +11,12 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class StartWeaponCraft extends AbstractCmd
 {
-  private final Blacksmith blacksmith;
   private final PlayerCharacter craftFor;
   private final Weapon firstWeapon;
   private final Weapon secondWeapon;
 
-  public StartWeaponCraft(Blacksmith blacksmith, PlayerCharacter craftFor, Weapon firstWeapon, Weapon secondWeapon)
+  public StartWeaponCraft(PlayerCharacter craftFor, Weapon firstWeapon, Weapon secondWeapon)
   {
-    this.blacksmith = blacksmith;
     this.craftFor = craftFor;
     this.firstWeapon = firstWeapon;
     this.secondWeapon = secondWeapon;
@@ -28,9 +25,9 @@ public class StartWeaponCraft extends AbstractCmd
   @Override
   public void execute()
   {
-    blacksmith.setBusyCrafting(true);
+    craftFor.getParty().getBlacksmith().setBusyCrafting(true);
     Weapon crafted = createCraftedWeapon();
-    CommandDelegate.execute(new RunLaterCmd(Settings.BLACKSMITH_CRAFTING_TIME_MS, new FinishCraftingCmd(blacksmith, crafted, craftFor)));
+    CommandDelegate.execute(new RunLaterCmd(Settings.BLACKSMITH_CRAFTING_TIME_MS, new FinishCraftingCmd(crafted, craftFor)));
   }
 
   private Weapon createCraftedWeapon()
