@@ -31,7 +31,7 @@ public class VillageMenu extends GameMenu
 
     if (playerState.getActiveCharacter().getParty().getCollectedItems().isEmpty())
     {
-      strings.remove(ECommand.CLAIM_ITEM.toString());
+      strings.remove(ECommand.CLAIM_ITEM.getMenuText());
     }
     return strings.toArray(new String[0]);
   }

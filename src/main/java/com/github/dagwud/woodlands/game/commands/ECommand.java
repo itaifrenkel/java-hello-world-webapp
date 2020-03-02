@@ -21,7 +21,7 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ECommand
+public enum ECommand implements ICommand
 {
   HELP("/help", false, (character, chatId) -> new ShowHelpCmd(chatId)),
   SAVE("/save", false, (character, chatId) -> new PersistWorldCmd(false)),
@@ -71,6 +71,15 @@ public enum ECommand
   THE_WOODLANDS("The Woodlands", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.WOODLANDS)),
   DEEP_WOODS("Deep Woods", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.DEEP_WOODS)),
   THE_GORGE("The Gorge", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.THE_GORGE)),
+  CAVERN_ENTRANCE("Cavern Entrance", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_ENTRANCE)),
+  CAVERN_1("Cavern1", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_1)),
+  CAVERN_2("Cavern2", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_2)),
+  CAVERN_3("Cavern3", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_3)),
+  CAVERN_4("Cavern4", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_4)),
+  CAVERN_5("Cavern5", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_5)),
+  CAVERN_6("Cavern6", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_6)),
+  CAVERN_7("Cavern7", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_7)),
+  CAVERN_8("Cavern8", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_8)),
 
   CAST_A_SPELL("Cast Spell", true, (character, chatId) -> new CastSpellPromptCmd(chatId, character)),
   ATTACK("Attack", true, (character, chatId) -> new PrepareAttackCmd(character)),
@@ -88,8 +97,6 @@ public enum ECommand
   CHANGE_NAME("Change Name", true, (character, chatId) -> new ChangeNamePromptCmd(character.getPlayedBy())),
   CRAFT_WEAPON("Craft a Weapon", true, (character, chatId) -> new CraftWeaponPromptCmd(character, character.getPlayedBy().getPlayerState())),
   ;
-
-
 
   ECommand(String name, boolean menuCmd, ICommandBuilder commandBuilder)
   {
@@ -117,6 +124,7 @@ public enum ECommand
   private boolean menuCmd;
   private ICommandBuilder commandBuilder;
 
+  @Override
   public boolean isMenuCmd()
   {
     return menuCmd;
@@ -127,13 +135,14 @@ public enum ECommand
     return this.name.equalsIgnoreCase(name);
   }
 
+  @Override
   public AbstractCmd build(PlayerCharacter character, int chatId)
   {
     return commandBuilder.build(character, chatId);
   }
 
   @Override
-  public String toString()
+  public String getMenuText()
   {
     return this.name;
   }

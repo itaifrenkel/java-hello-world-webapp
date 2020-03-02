@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.domain.menu;
 
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.ECommand;
+import com.github.dagwud.woodlands.game.commands.ICommand;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -12,24 +13,24 @@ public class GameMenu implements Serializable
   private static final long serialVersionUID = 1L;
 
   private String prompt;
-  private ECommand[] options;
+  private ICommand[] options;
 
   public String getPrompt()
   {
     return prompt;
   }
 
-  void setPrompt(String prompt)
+  protected void setPrompt(String prompt)
   {
     this.prompt = prompt;
   }
 
-  public ECommand[] getOptions()
+  public ICommand[] getOptions()
   {
     return options;
   }
 
-  void setOptions(ECommand... options)
+  protected void setOptions(ICommand... options)
   {
     this.options = options;
   }
@@ -58,15 +59,27 @@ public class GameMenu implements Serializable
 
   public String[] produceOptions(PlayerState playerState)
   {
-    ECommand[] options = getOptions();
+    ICommand[] options = getOptions();
     String[] strings = new String[options.length];
 
     for (int i = 0; i < options.length; i++)
     {
-      ECommand option = options[i];
-      strings[i] = option.toString();
+      ICommand option = options[i];
+      strings[i] = option.getMenuText();
     }
 
     return strings;
+  }
+
+  public ICommand getOption(String cmd)
+  {
+    for (ICommand option : getOptions())
+    {
+      if (option.getMenuText().equals(cmd))
+      {
+        return option;
+      }
+    }
+    return null;
   }
 }
