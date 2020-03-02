@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.DoGiveItemCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
@@ -33,6 +34,7 @@ public class EnterBlacksmithCmd extends AbstractCmd
     if (null != collected)
     {
       CommandDelegate.execute(new SendMessageCmd(character, "The Blacksmith smiles as you enter. \"Ah!\" he says, \"I've got something for you. I think you're gonna like it \""));
+      CommandDelegate.execute(new SendAdminMessageCmd(character.getName() + " is collecting " + collected.getName() + " from the Blacksmith"));
       CommandDelegate.execute(new DoGiveItemCmd(character.getParty().getBlacksmith(), character, collected));
     }
   }
