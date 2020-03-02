@@ -23,7 +23,6 @@ public class PatchWorldCmd extends AbstractCmd
     for (PlayerState playerState : playerStates)
     {
       patch(playerState.getPlayer().getActiveCharacter());
-playerState.getPlayer().getActiveCharacter().getParty().getBlacksmith().setBusyCrafting(false);
 
       for (PlayerCharacter inactiveCharacter : playerState.getPlayer().getInactiveCharacters())
       {
