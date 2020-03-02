@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.events.*;
@@ -46,15 +45,7 @@ public enum EEvent
   {
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureWasMuggedEventRecipient());
     EEvent.CREATURE_DEFEATED.subscribe(new DrunkenVictoryEventRecipient());
-    EEvent.PLAYER_DEATH.subscribe(event ->
-    {
-      CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.SHUFFLED_OFF_THE_MORTAL_COIL));
-
-      if (event.getPlayerCharacter().getParty().getLeader() != event.getPlayerCharacter())
-      {
-        CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.EVERYONE_FOR_THEMSELVES));
-      }
-    });
+    EEvent.PLAYER_DEATH.subscribe(new PlayerDeathAchievementEvent());
   }
 
   public void subscribe(EventRecipient<? extends Event> recipient)
