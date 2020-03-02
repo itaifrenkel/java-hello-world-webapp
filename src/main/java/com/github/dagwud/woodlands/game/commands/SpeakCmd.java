@@ -38,8 +38,8 @@ public class SpeakCmd extends AbstractCmd
     {
       speakerName = "The ghost of " + speakerName;
     }
-    message = "<b>" + speakerName + " says \"" + message + "\"</b>";
-    CommandDelegate.execute(new SendPartyMessageCmd(speaker.getParty(), message));
+    message = speakerName + " says \"" + message + "\"";
+    CommandDelegate.execute(new SendPartyMessageCmd(speaker.getParty(), "<b>" + message + "</b>"));
     CommandDelegate.execute(new SendPartyAlertCmd(speaker.getParty(), message));
   }
 
