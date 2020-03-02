@@ -36,6 +36,7 @@ public enum ECommand
   GIVE("/give", false, (character, chatId) -> new GiveItemCmd(character.getPlayedBy())),
   SPELL("/spell", false, (character, chatId) -> new ManualSpellCastCmd(chatId, character)),
   LIST_CREATURES("/creatures", false, (character, chatId) -> new ListCreaturesCmd(chatId)),
+  ACHIEVEMENTS("/achievements", false, (character, chatId) -> new ListAchievementsCmd(character)),
 
   BEST_PARTY("/bestparty", false, (character, chatId) -> new BestPartyCmd(chatId)),
   OOK("/ook", false, (character, chatId) -> new OokCmd(character)),

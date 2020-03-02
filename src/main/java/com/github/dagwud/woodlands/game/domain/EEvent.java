@@ -1,12 +1,14 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.events.CreatureDroppedEventRecipient;
 import com.github.dagwud.woodlands.game.domain.events.CreatureWasMuggedEventRecipient;
 import com.github.dagwud.woodlands.game.domain.events.Event;
 import com.github.dagwud.woodlands.game.domain.events.EventRecipient;
+import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +40,20 @@ public enum EEvent
     EEvent.MOVED.subscribe(event -> CommandDelegate.execute(new SendPartyAlertCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getParty().getName() + " is entering " + event.getPlayerCharacter().getLocation().getDisplayName() + ".\nJoin the battle: @TheWoodlandsBot")));
 
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureDroppedEventRecipient());
+
+    subscribeForAchievements();
+  }
+
+  private static void subscribeForAchievements()
+  {
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureWasMuggedEventRecipient());
+    EEvent.PLAYER_DEATH.subscribe(event ->
+    {
+      if (event.getPlayerCharacter().getParty().getLeader() != event.getPlayerCharacter())
+      {
+        new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.EVERYONE_FOR_THEMSELVES);
+      }
+    });
   }
 
   public void subscribe(EventRecipient<? extends Event> recipient)
@@ -51,7 +66,15 @@ public enum EEvent
   {
     for (EventRecipient<? extends Event> subscriber : getSubscribers(this))
     {
-      subscriber.preTrigger(new Event(playerCharacter));
+      try
+      {
+        subscriber.preTrigger(new Event(playerCharacter));
+      }
+      catch (Exception ex)
+      {
+        // don't want one subscriber to break events
+        Logger.logError(ex);
+      }
     }
   }
 

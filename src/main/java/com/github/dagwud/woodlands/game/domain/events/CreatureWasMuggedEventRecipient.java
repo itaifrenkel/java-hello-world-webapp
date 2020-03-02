@@ -1,7 +1,8 @@
 package com.github.dagwud.woodlands.game.domain.events;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
+import com.github.dagwud.woodlands.game.domain.EAchievement;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Creature;
@@ -15,8 +16,7 @@ public class CreatureWasMuggedEventRecipient implements EventRecipient<CreatureD
   {
     if (creatureWasMugged(event.getPlayerCharacter().getParty(), event.getCreature()))
     {
-      // TODO: log an achievement, just want to get the plumbing in place first
-      CommandDelegate.execute(new SendMessageCmd(event.getPlayerCharacter(), "<i>You mugged the " + event.getCreature().name + " - rough.</i>"));
+      CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.MUGGED_A_CREATURE));
     }
   }
 
