@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.locations.ScheduledRoomIntervalsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.TavernIntervalCmd;
 import com.github.dagwud.woodlands.game.domain.menu.*;
+import com.github.dagwud.woodlands.game.domain.menu.cavern.*;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.util.ArrayList;
@@ -39,7 +40,17 @@ public enum ELocation
 
   DEEP_WOODS("Deep Woods", new DeepWoodsMenu(), false, "Not much is known about the deep woods..."),
 
-  THE_GORGE("The Gorge", new GorgeMenu(), false, "Here be dragons. Dragons can't be attacked with melee weapons - only ranged ones!");
+  THE_GORGE("The Gorge", new GorgeMenu(), false, "Here be dragons. Dragons can't be attacked with melee weapons - only ranged ones!"),
+
+  CAVERN_ENTRANCE("The Cavern Entrance", new CavernEntranceMenu(), false, "The rock face is marred by a large hole - the entrance to an underground system of caverns once used by miners. The miners cleared out long ago, tellling tales of monsters in the deep."),
+  CAVERN_1("The Cavern", new Cavern1Menu(), false, "You're in a cavern - it's damp."),
+  CAVERN_2("The Cavern", new Cavern2Menu(), false, "You're in a cavern - it's quite dark and damp"),
+  CAVERN_3("The Cavern", new Cavern3Menu(), false, "You're in a cavern - it's dark and damp"),
+  CAVERN_4("The Cavern", new Cavern4Menu(), false, "You're in a cavern - it's dark and damp"),
+  CAVERN_5("The Cavern", new Cavern5Menu(), false, "You're in a cavern - it's dark and damp"),
+  CAVERN_6("The Cavern", new Cavern6Menu(), false, "You're in a cavern - it's dark and damp"),
+  CAVERN_7("The Cavern", new Cavern7Menu(), false, "You're in a cavern - it's dark and damp"),
+  CAVERN_8("The Cavern", new Cavern8Menu(), false, "You're in a cavern - it's damp, and you can hear noises coming from nearby");
 
   private final String displayName;
   private final GameMenu menu;

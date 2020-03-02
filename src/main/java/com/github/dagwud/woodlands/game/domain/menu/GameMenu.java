@@ -19,7 +19,7 @@ public class GameMenu implements Serializable
     return prompt;
   }
 
-  void setPrompt(String prompt)
+  protected void setPrompt(String prompt)
   {
     this.prompt = prompt;
   }
@@ -29,7 +29,7 @@ public class GameMenu implements Serializable
     return options;
   }
 
-  void setOptions(ECommand... options)
+  protected void setOptions(ECommand... options)
   {
     this.options = options;
   }
