@@ -49,9 +49,11 @@ public enum EEvent
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureWasMuggedEventRecipient());
     EEvent.PLAYER_DEATH.subscribe(event ->
     {
+      CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.SHUFFLED_OFF_THE_MORTAL_COIL));
+
       if (event.getPlayerCharacter().getParty().getLeader() != event.getPlayerCharacter())
       {
-        new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.EVERYONE_FOR_THEMSELVES);
+        CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.EVERYONE_FOR_THEMSELVES));
       }
     });
   }
@@ -69,8 +71,7 @@ public enum EEvent
       try
       {
         subscriber.preTrigger(new Event(playerCharacter));
-      }
-      catch (Exception ex)
+      } catch (Exception ex)
       {
         // don't want one subscriber to break events
         Logger.logError(ex);
