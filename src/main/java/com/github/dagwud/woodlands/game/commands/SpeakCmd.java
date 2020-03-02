@@ -1,12 +1,14 @@
 package com.github.dagwud.woodlands.game.commands;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DrunkUpMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.domain.EState;
+import com.github.dagwud.woodlands.game.domain.EAchievement;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class SpeakCmd extends AbstractCmd
 {
@@ -28,6 +30,12 @@ public class SpeakCmd extends AbstractCmd
 
     DrunkUpMessageCmd drunkify = new DrunkUpMessageCmd(message, speaker.getStats().getDrunkeness());
     CommandDelegate.execute(drunkify);
+
+    if (speaker instanceof PlayerCharacter && !message.equals(drunkify.getMessage()) && message.startsWith("/"))
+    {
+      CommandDelegate.execute(new UnlockAchievementCmd((PlayerCharacter) speaker, EAchievement.DRUNKEN_COMMAND));
+    }
+
     message = drunkify.getMessage();
 
     if (speaker.isResting())
@@ -45,15 +53,15 @@ public class SpeakCmd extends AbstractCmd
 
   private String produceDreamSpeak()
   {
-    String[] dreams = {"goblins", "mountain", "village", "orcs", 
-        "monster", "druid", "wizard", "potion", "warlord", 
-        "dragon", "army", "pheasant", "herbivore",
-        "broadsword", "robe", "raisins", "tavern", "ogre", 
-        "cyclops", "battle axe", "goat", "witch", 
-        "lion", "evil", "demon", "golem"};
-    int a = (int)(Math.random() * dreams.length);
-    int b = (int)(Math.random() * dreams.length);
-    int c = (int)(Math.random() * dreams.length);
+    String[] dreams = {"goblins", "mountain", "village", "orcs",
+            "monster", "druid", "wizard", "potion", "warlord",
+            "dragon", "army", "pheasant", "herbivore",
+            "broadsword", "robe", "raisins", "tavern", "ogre",
+            "cyclops", "battle axe", "goat", "witch",
+            "lion", "evil", "demon", "golem"};
+    int a = (int) (Math.random() * dreams.length);
+    int b = (int) (Math.random() * dreams.length);
+    int c = (int) (Math.random() * dreams.length);
     return ".." + dreams[a] + "..." + dreams[b] + "..." + dreams[c] + "..";
   }
 }

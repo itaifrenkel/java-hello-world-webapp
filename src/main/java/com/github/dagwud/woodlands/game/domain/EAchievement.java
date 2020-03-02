@@ -5,6 +5,7 @@ public enum EAchievement
   MUGGED_A_CREATURE("Your Loot Or Your Life", "Through the threat of violence, you've taken a creature's belongings"),
   EVERYONE_FOR_THEMSELVES("Everyone For Themselves", "You were their leader. You made it out, they didn't"),
   ALL_THE_ACHIEVEMENTS("All The Achievements", "You have more achievements than anyone else - that's quite an achievement"),
+  DRUNKEN_COMMAND("NOW LISHTEN HERE YOU", "You were drunk enough that you issued a command that was not a command"),
   SHUFFLED_OFF_THE_MORTAL_COIL("Shuffled Off The Mortal Coil", "You're definitely not sleeping - you're dead");
 
   private final String achievementName;
