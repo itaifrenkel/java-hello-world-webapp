@@ -319,6 +319,11 @@ public class Stats implements Serializable
 
   public Set<EAchievement> getAchievements()
   {
+    if (achievements == null)
+    {
+      achievements = new HashSet<>();
+    }
+
     return achievements;
   }
 }
