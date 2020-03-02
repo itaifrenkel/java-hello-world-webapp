@@ -5,8 +5,8 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.SpawnItemCmd;
-import com.github.dagwud.woodlands.game.domain.Item;
-import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.events.CreatureDroppedItemEvent;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.game.Settings;
 
@@ -54,7 +54,14 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
     CommandDelegate.execute(itemDrop);
     Item dropped = itemDrop.getSpawned();
     victoriousParty.getCollectedItems().add(dropped);
-    CommandDelegate.execute(new SendPartyMessageCmd(victoriousParty,
-            "<b>" + createdDefeated.name + " dropped a " + dropped.getName() + "!</b>"));
+
+    for (GameCharacter activeMember : victoriousParty.getActiveMembers())
+    {
+      if (activeMember instanceof PlayerCharacter)
+      {
+        PlayerCharacter member = (PlayerCharacter) activeMember;
+        EEvent.CREATURE_DROPPED_ITEM.trigger(new CreatureDroppedItemEvent(member, createdDefeated, dropped));
+      }
+    }
   }
 }

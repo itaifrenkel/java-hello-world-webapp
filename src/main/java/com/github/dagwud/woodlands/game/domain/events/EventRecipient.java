@@ -1,8 +1,14 @@
 package com.github.dagwud.woodlands.game.domain.events;
 
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-
-public interface EventRecipient
+public interface EventRecipient<T extends Event>
 {
-  void trigger(PlayerCharacter fighter);
+  /**
+   * Just keeping all the dodgy hacks in one place.
+   */
+  default void preTrigger(Event event)
+  {
+    trigger((T) event);
+  }
+
+  void trigger(T event);
 }

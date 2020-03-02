@@ -46,6 +46,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     List<SingleCastSpell> spellsActivity = new ArrayList<>();
 
     boolean enemyFainted = shouldEnemyFaint();
+
     if (enemyFainted)
     {
       KnockUnconsciousCmd faint = new KnockUnconsciousCmd(encounter.getEnemy());

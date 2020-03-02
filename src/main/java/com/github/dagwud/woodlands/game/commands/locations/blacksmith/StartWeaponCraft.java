@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.domain.Blacksmith;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Damage;
@@ -28,6 +29,7 @@ public class StartWeaponCraft extends AbstractCmd
     craftFor.getParty().getBlacksmith().setBusyCrafting(true);
     Weapon crafted = createCraftedWeapon();
     CommandDelegate.execute(new RunLaterCmd(Settings.BLACKSMITH_CRAFTING_TIME_MS, new FinishCraftingCmd(crafted, craftFor)));
+    CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith is crafting " + firstWeapon.getName() + " and " + secondWeapon.getName() + " into a " + crafted.getName() + " for " + craftFor.getName())); 
   }
 
   private Weapon createCraftedWeapon()
