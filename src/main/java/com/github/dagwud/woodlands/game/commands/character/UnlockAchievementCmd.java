@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.character;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EAchievement;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -33,5 +34,8 @@ public class UnlockAchievementCmd extends AbstractCmd
     achievements.add(achievement);
     String message = String.format(ACHIEVEMENT, achievement.getAchievementName(), achievement.getDescription());
     CommandDelegate.execute(new SendMessageCmd(playerCharacter, message));
+
+    SendPartyMessageCmd sendPartyMessageCmd = new SendPartyMessageCmd(playerCharacter.getParty(), playerCharacter.getName() + " has unlocked achievement " + achievement.getAchievementName());
+    CommandDelegate.execute(sendPartyMessageCmd);
   }
 }

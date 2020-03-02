@@ -20,6 +20,11 @@ public class SendPartyMessageCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (party.isPrivateParty())
+    {
+      return;
+    }
+
     for (PlayerCharacter member : party.getActivePlayerCharacters())
     {
       SendMessageCmd send = new SendMessageCmd(member, message);
