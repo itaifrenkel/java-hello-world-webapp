@@ -18,7 +18,7 @@ public class FinishCraftingCmd extends AbstractCmd
 
   public FinishCraftingCmd(Blacksmith blacksmith, Weapon crafted, PlayerCharacter craftedFor)
   {
-    this.blacksmith = blacksmith;
+    this.blacksmith = crafterFor.getParty().getBlacksmith();
     this.crafted = crafted;
     this.craftedFor = craftedFor;
   }
