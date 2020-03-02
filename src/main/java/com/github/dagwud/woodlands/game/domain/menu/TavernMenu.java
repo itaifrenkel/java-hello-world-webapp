@@ -56,10 +56,10 @@ public class TavernMenu extends GameMenu
     List<String> options = new ArrayList<>(Arrays.asList(super.produceOptions(playerState)));
     if (playerState.getActiveCharacter().getStats().getAvailableStatsPointUpgrades() > 0)
     {
-      options.add(ECommand.UPGRADE.toString());
+      options.add(ECommand.UPGRADE.getMenuText());
     }
 
-    options.add(ECommand.VILLAGE_SQUARE.toString());
+    options.add(ECommand.VILLAGE_SQUARE.getMenuText());
 
     return options.toArray(new String[0]);
   }
