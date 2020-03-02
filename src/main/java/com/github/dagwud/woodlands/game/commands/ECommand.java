@@ -21,7 +21,7 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ECommand
+public enum ECommand implements ICommand
 {
   HELP("/help", false, (character, chatId) -> new ShowHelpCmd(chatId)),
   SAVE("/save", false, (character, chatId) -> new PersistWorldCmd(false)),
@@ -97,8 +97,6 @@ public enum ECommand
   CRAFT_WEAPON("Craft a Weapon", true, (character, chatId) -> new CraftWeaponPromptCmd(character, character.getPlayedBy().getPlayerState())),
   ;
 
-
-
   ECommand(String name, boolean menuCmd, ICommandBuilder commandBuilder)
   {
     this.name = name;
@@ -125,6 +123,7 @@ public enum ECommand
   private boolean menuCmd;
   private ICommandBuilder commandBuilder;
 
+  @Override
   public boolean isMenuCmd()
   {
     return menuCmd;
@@ -135,13 +134,14 @@ public enum ECommand
     return this.name.equalsIgnoreCase(name);
   }
 
+  @Override
   public AbstractCmd build(PlayerCharacter character, int chatId)
   {
     return commandBuilder.build(character, chatId);
   }
 
   @Override
-  public String toString()
+  public String getMenuText()
   {
     return this.name;
   }

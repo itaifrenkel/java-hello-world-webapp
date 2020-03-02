@@ -62,7 +62,11 @@ public class CommandFactory
       }
     }
 
-    ECommand by = ECommand.by(cmd);
+    ICommand by = ECommand.by(cmd);
+    if (by == null && isValidMenuOption(cmd, playerState.getCurrentMenu(), playerState))
+    {
+      by = playerState.getCurrentMenu().getOption(cmd);
+    }
 
     if (by != null && (!by.isMenuCmd() || isValidMenuOption(cmd, playerState.getCurrentMenu(), playerState)))
     {

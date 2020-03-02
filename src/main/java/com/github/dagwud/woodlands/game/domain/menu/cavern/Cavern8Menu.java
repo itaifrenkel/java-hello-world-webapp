@@ -1,12 +1,25 @@
 package com.github.dagwud.woodlands.game.domain.menu.cavern;
 
-import com.github.dagwud.woodlands.game.commands.ECommand;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 
 public class Cavern8Menu extends CavernMenu
 {
-  // The is the deepest point of the cave system. Future cavern expansion is possible from here...
-  public Cavern8Menu()
+  @Override
+  protected ELocation getBackTowardsEntranceLocation()
   {
-    super(ECommand.CAVERN_7);
+    return ELocation.CAVERN_7;
+  }
+
+  @Override
+  ELocation getDeeperLocation()
+  {
+    // The is the deepest point of the cave system. Future cavern expansion is possible from here...
+    return null;
+  }
+
+  @Override
+  ELocation getSidePathLocation()
+  {
+    return null;
   }
 }

@@ -1,11 +1,24 @@
 package com.github.dagwud.woodlands.game.domain.menu.cavern;
 
-import com.github.dagwud.woodlands.game.commands.ECommand;
+import com.github.dagwud.woodlands.game.domain.ELocation;
 
 public class Cavern6Menu extends CavernMenu
 {
-  public Cavern6Menu()
+  @Override
+  protected ELocation getBackTowardsEntranceLocation()
   {
-    super(ECommand.CAVERN_4, ECommand.CAVERN_5);
+    return ELocation.CAVERN_5;
+  }
+
+  @Override
+  ELocation getDeeperLocation()
+  {
+    return null;
+  }
+
+  @Override
+  protected ELocation getSidePathLocation()
+  {
+    return ELocation.CAVERN_4;
   }
 }
