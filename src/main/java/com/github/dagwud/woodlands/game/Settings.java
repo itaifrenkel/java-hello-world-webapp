@@ -65,6 +65,7 @@ public class Settings
   public static final int CAVERN_ACTIONS_PER_ROUND = 2;
 
   public static final boolean SUICIDAL_CREATURES = false; // if true, enemies will NEVER retreat, even if they're totally overpowered
+  public static final long ROOM_INTERVAL_MS = 10_000;
 
   public static boolean DEVELOPER_MODE = false;
 }
