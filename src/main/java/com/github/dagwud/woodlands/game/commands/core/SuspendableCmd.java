@@ -47,15 +47,20 @@ public abstract class SuspendableCmd extends AbstractCmd
 
     if (nextPhaseToRun >= numberOfPhases)
     {
-      playerState.removeWaitingForInput(this);
-      if (playerState.peekWaitingForInputCmd() == null)
-      {
-        resetMenu(playerState);
-      }
+      removeSuspendable();
     }
   }
 
   protected abstract void executePart(int phaseToExecute, String capturedInput);
+
+  protected void removeSuspendable()
+  {
+    playerState.removeWaitingForInput(this);
+    if (playerState.peekWaitingForInputCmd() == null)
+    {
+      resetMenu(playerState);
+    }
+  }
 
   protected void resetMenu(PlayerState playerState)
   {
