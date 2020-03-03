@@ -17,9 +17,10 @@ public class ClearCraftersCmd extends AdminCmd
   @Override
   public void execute()
   {
-    for (PlayerCharacter activePlayerCharacter : character.getParty().getActivePlayerCharacters()) {
-      activePlayerCharacter.getParty().getBlacksmith().completeCrafting(activePlayerCharacter);
-      activePlayerCharacter.getParty().getAlchemist().completeCrafting(activePlayerCharacter);
+    for (PlayerCharacter c : character.getParty().getActivePlayerCharacters()) 
+    {
+      c.getParty().getBlacksmith().completeCrafting(c);
+      c.getParty().getAlchemist().completeCrafting(c);
     }
   }
 }
