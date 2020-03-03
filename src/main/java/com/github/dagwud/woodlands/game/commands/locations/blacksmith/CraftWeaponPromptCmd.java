@@ -14,6 +14,12 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
 {
   private static final long serialVersionUID = 1L;
 
+  @Override
+  protected Crafter getCrafter()
+  {
+    return character.getParty().getBlacksmith();
+  }
+
   public CraftWeaponPromptCmd(PlayerCharacter character, PlayerState playerState)
   {
     super(character, playerState);
