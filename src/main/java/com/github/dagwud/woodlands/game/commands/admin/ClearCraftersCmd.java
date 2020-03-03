@@ -27,7 +27,7 @@ public class ClearCraftersCmd extends AdminCmd
   @Override
   protected void execute()
   {
-    character.getParty().getBlacksmith().setCrafting(false);
-    character.getParty().getAlchemist().setCrafting(false);
+    character.getParty().getBlacksmith().setBusyCrafting(false);
+    character.getParty().getAlchemist().setBusyCrafting(false);
   }
 }
