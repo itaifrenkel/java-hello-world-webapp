@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands.locations.pettingzoo;
+package com.github.dagwud.woodlands.game.commands.locations.mountain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
