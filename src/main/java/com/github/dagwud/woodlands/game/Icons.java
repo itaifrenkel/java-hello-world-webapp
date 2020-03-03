@@ -10,6 +10,7 @@ public abstract class Icons
   public static final String MISS = "\uD83D\uDE48";
 
   public static final String LEADER = "🎖";
+  public static final String ACHIEVEMENT = "🏅";
 
   public static final String UNCONSCIOUS = "💔";
   public static final String SHORT_REST = "😴";
@@ -25,4 +26,5 @@ public abstract class Icons
 
   public static final String MELEE = "⚔";
   public static final String RANGED = "🏹";
+
 }
