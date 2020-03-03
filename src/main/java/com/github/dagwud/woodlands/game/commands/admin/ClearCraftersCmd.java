@@ -20,7 +20,8 @@ public class ClearCraftersCmd extends AdminCmd
 
   public ClearCraftersCmd(PlayerCharacter character)
   {
-    super(character.getPlayedBy().getPlayerState(), character);
+    super(character.getPlayedBy().getChatId());
+    this.character = character;
   }
 
   @Override
