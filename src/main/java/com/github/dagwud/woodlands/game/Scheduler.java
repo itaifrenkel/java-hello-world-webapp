@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -28,31 +29,44 @@ public class Scheduler implements Serializable
     {
       scheduledCommands = new ArrayList<>();
     }
+
     return scheduledCommands;
   }
 
   public void restoreScheduled()
   {
     Collection<RunLaterCmd> scheduledCommands = new ArrayList<>(getScheduledCommands());
+    List<RunLaterCmd> notPersistentCommands = new ArrayList<>();
+
     for (RunLaterCmd scheduledCommand : scheduledCommands)
     {
       if (scheduledCommand.isRestore())
       {
         doSchedule(scheduledCommand);
       }
+      else
+      {
+        notPersistentCommands.add(scheduledCommand);
+      }
     }
+
+    getScheduledCommands().removeAll(notPersistentCommands);
   }
 
   public void schedule(RunLaterCmd cmd)
   {
-    getScheduledCommands().add(cmd);
+    if (cmd.isRestore())
+    {
+      getScheduledCommands().add(cmd);
+    }
+
     doSchedule(cmd);
   }
 
   private void doSchedule(RunLaterCmd cmd)
   {
     long delayMS = cmd.getRemainingDelayMS();
-    Callable<String> callable = new RunScheduledCmd(delayMS, cmd.getCmdToRun());
+    Callable<String> callable = new RunScheduledCmd(delayMS, cmd.getCmdToRun(), cmd.isRestore());
     FutureTask<String> task = new FutureTask<>(callable);
 
     // Yes, threads are forbidden in EJB... but the current deployment server isn't actually
@@ -92,7 +106,7 @@ public class Scheduler implements Serializable
     Collection<String> list = new ArrayList<>();
     for (RunLaterCmd scheduled : getScheduledCommands())
     {
-      String delay = (int)(Math.floorDiv(scheduled.getRemainingDelayMS(), 1000)) + "s";
+      String delay = (int) (Math.floorDiv(scheduled.getRemainingDelayMS(), 1000)) + "s";
       list.add(scheduled.getCmdToRun().toString() + " - " + delay);
     }
     return list;
