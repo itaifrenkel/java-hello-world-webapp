@@ -9,7 +9,7 @@ import com.github.dagwud.woodlands.game.commands.locations.cavern.EnterTheCavern
 import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWoodsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
-import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterThePettingZooCmd;
+import com.github.dagwud.woodlands.game.commands.locations.pettingzoo.EnterThePettingZooCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.woodlands.EnterTheWoodlandsCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
