@@ -27,8 +27,7 @@ public class FinishCraftingCmd extends AbstractCmd
   public void execute()
   {
     CommandDelegate.execute(new DoGiveItemCmd(null, crafter, crafted));
-    crafter.setBusyCrafting(false);
-    crafter.addReadyForCollection(crafted, craftedFor);
+    crafter.completeCrafting(craftedFor);
     CommandDelegate.execute(new SendAdminMessageCmd("Crafting complete: " + crafter.getName() + " has completed " + crafted.getName() + " for " + craftedFor.getName()));
   }
 }
