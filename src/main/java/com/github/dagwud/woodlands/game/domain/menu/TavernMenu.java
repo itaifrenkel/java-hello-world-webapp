@@ -26,7 +26,7 @@ public class TavernMenu extends GameMenu
   public TavernMenu()
   {
     setPrompt("<i>This is the Tavern</i>");
-    setOptions(ECommand.BUY_DRINKS, ECommand.WAKE);
+    setOptions(ECommand.BUY_DRINKS, ECommand.JOIN, ECommand.WAKE);
   }
 
   @Override
