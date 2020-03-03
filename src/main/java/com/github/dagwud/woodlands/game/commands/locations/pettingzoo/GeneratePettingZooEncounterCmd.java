@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands.locations.mountain;
+package com.github.dagwud.woodlands.game.commands.locations.pettingzoo;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
@@ -12,9 +12,9 @@ public class GeneratePettingZooEncounterCmd extends GenerateAutomaticEncounterCm
 {
   private static final long serialVersionUID = 1L;
 
-  GeneratePettingZooEncounterCmd(PlayerState playerState)
+  public GeneratePettingZooEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.PETTING_ZOO, 2,
+    super(playerState, ELocation.PETTING_ZOO, 1,
             Settings.PETTING_ZOO_MIN_DIFFICULTY, Settings.PETTING_ZOO_MAX_DIFFICULTY,
             Creature.CREATURE_TYPE_NORMAL);
   }

@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnterAlchemistCmd;
 import com.github.dagwud.woodlands.game.commands.locations.blacksmith.EnterBlacksmithCmd;
+import com.github.dagwud.woodlands.game.commands.locations.cavern.EnterTheCavernCmd;
 import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWoodsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
@@ -55,6 +56,17 @@ public class HandleLocationEntryCmd extends AbstractCmd
         break;
       case ALCHEMIST:
         CommandDelegate.execute(new EnterAlchemistCmd(playerState.getActiveCharacter()));
+        break;
+
+      case CAVERN_1:
+      case CAVERN_2:
+      case CAVERN_3:
+      case CAVERN_4:
+      case CAVERN_5:
+      case CAVERN_6:
+      case CAVERN_7:
+      case CAVERN_8:
+        CommandDelegate.execute(new EnterTheCavernCmd(playerState, location));
         break;
     }
   }

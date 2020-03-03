@@ -17,7 +17,7 @@ public abstract class GenerateManualEncounterCmd extends GenerateEncounterCmd
   private final int timeAllowedForPlanningMS;
   private final int actionsPerRound;
 
-  public GenerateManualEncounterCmd(PlayerState playerState, ELocation location, int enemyCount, int minDifficulty, int maxDifficulty, String creatureType, int timeAllowedForPlanningMS, int actionsPerRound)
+  public GenerateManualEncounterCmd(PlayerState playerState, ELocation location, int enemyCount, double minDifficulty, double maxDifficulty, String creatureType, int timeAllowedForPlanningMS, int actionsPerRound)
   {
     super(playerState, location, enemyCount, minDifficulty, maxDifficulty, creatureType);
     this.timeAllowedForPlanningMS = timeAllowedForPlanningMS;

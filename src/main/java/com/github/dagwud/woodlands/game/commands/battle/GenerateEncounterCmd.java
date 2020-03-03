@@ -156,12 +156,12 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
     return location;
   }
 
-  final double getMinDifficulty()
+  protected final double getMinDifficulty()
   {
     return minDifficulty;
   }
 
-  final double getMaxDifficulty()
+  protected final double getMaxDifficulty()
   {
     return maxDifficulty;
   }
@@ -169,5 +169,10 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   final String getCreatureType()
   {
     return creatureType;
+  }
+
+  public int getEnemyCount()
+  {
+    return enemyCount;
   }
 }
