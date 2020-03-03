@@ -6,10 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.RunScheduledCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -103,12 +100,14 @@ public class Scheduler implements Serializable
 
   public Collection<String> listScheduleDescriptions()
   {
-    Collection<String> list = new ArrayList<>();
+    List<String> list = new ArrayList<>();
     for (RunLaterCmd scheduled : getScheduledCommands())
     {
       String delay = (int) (Math.floorDiv(scheduled.getRemainingDelayMS(), 1000)) + "s";
       list.add(scheduled.getCmdToRun().toString() + " - " + delay);
     }
+
+    Collections.sort(list);
     return list;
   }
 }
