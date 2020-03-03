@@ -3,7 +3,9 @@ package com.github.dagwud.woodlands.game.domain;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class GameCharacter extends Fighter
 {
@@ -73,16 +75,18 @@ public abstract class GameCharacter extends Fighter
   }
 
   @Override
-  public Fighter chooseFighterToAttack(Collection<Fighter> fighters)
+  public Creature chooseFighterToAttack(Collection<? extends Fighter> fighters)
   {
+    List<Creature> creatures = new ArrayList<>();
     for (Fighter fighter : fighters)
     {
       if (fighter instanceof Creature)
       {
-        return fighter;
+        creatures.add((Creature) fighter);
       }
     }
-    throw new WoodlandsRuntimeException("Nobody to fight");
+    int i = (int)(Math.random() * creatures.size());
+    return creatures.get(i);
   }
 
 }

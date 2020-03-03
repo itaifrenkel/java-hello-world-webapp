@@ -8,13 +8,14 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Encounter implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   private Party party;
-  private Creature enemy;
+  private List<Creature> enemies;
   private boolean ended;
   private int currentRound;
   private final int actionsAllowedPerRound;
@@ -26,15 +27,15 @@ public class Encounter implements Serializable
   private boolean farmed = true;
   private boolean fightingStarted;
 
-  public Encounter(Party party, Creature enemy)
+  public Encounter(Party party, List<Creature> enemies)
   {
-    this(party, enemy, 3); // two attacks and a spell
+    this(party, enemies, 3); // two attacks and a spell
   }
 
-  protected Encounter(Party party, Creature enemy, int actionsAllowedPerRound)
+  protected Encounter(Party party, List<Creature> enemies, int actionsAllowedPerRound)
   {
     this.party = party;
-    this.enemy = enemy;
+    this.enemies = enemies;
     this.actionsAllowedPerRound = actionsAllowedPerRound;
   }
 
@@ -48,15 +49,15 @@ public class Encounter implements Serializable
     ended = true;
   }
 
-  public Creature getEnemy()
+  public List<Creature> getEnemies()
   {
-    return enemy;
+    return enemies;
   }
 
   public Collection<Fighter> getAllFighters()
   {
     Collection<Fighter> fighters = new ArrayList<>(party.getActiveMembers());
-    fighters.add(enemy);
+    fighters.addAll(enemies);
     return fighters;
   }
 
@@ -115,7 +116,7 @@ public class Encounter implements Serializable
     this.hasAnyPlayerActivityPrepared = hasAnyPlayerActivityPrepared;
   }
 
-  public boolean hasAnyPlayerActivityPrepared()
+  boolean hasAnyPlayerActivityPrepared()
   {
     return hasAnyPlayerActivityPrepared;
   }
@@ -123,4 +124,5 @@ public class Encounter implements Serializable
   public void startFighting()
   {
   }
+
 }

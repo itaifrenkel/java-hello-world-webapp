@@ -22,7 +22,7 @@ public class Distraction extends SingleCastSpell
   public boolean cast()
   {
     Trickster caster = getCaster();
-    Creature target = caster.getParty().getActiveEncounter().getEnemy();
+    Creature target = caster.chooseFighterToAttack(caster.getParty().getActiveEncounter().getEnemies());
 
     int hitBoost = target.getStats().getHitBoost();
 

@@ -17,7 +17,7 @@ public class FogOfConfusion extends SingleCastSpell
   @Override
   public boolean cast()
   {
-    target = getCaster().getParty().getActiveEncounter().getEnemy();
+    target = getCaster().chooseFighterToAttack(getCaster().getParty().getActiveEncounter().getEnemies());
     target.getStats().setHitBoost(target.getStats().getHitBoost() - HIT_CHANCE_PENALTY);
     return true;
   }

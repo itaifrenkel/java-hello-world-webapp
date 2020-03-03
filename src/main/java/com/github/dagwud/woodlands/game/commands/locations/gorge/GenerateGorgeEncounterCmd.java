@@ -15,7 +15,7 @@ public class GenerateGorgeEncounterCmd extends GenerateManualEncounterCmd
 
   GenerateGorgeEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.THE_GORGE, Settings.THE_GORGE_MIN_DIFFICULTY,
+    super(playerState, ELocation.THE_GORGE, 1, Settings.THE_GORGE_MIN_DIFFICULTY,
             Settings.THE_GORGE_MAX_DIFFICULTY, Creature.CREATURE_TYPE_DRAGON,
             Settings.THE_GORGE_TIME_ALLOWED_FOR_PLANNING_MS, Settings.THE_GORGE_ACTIONS_PER_ROUND);
   }

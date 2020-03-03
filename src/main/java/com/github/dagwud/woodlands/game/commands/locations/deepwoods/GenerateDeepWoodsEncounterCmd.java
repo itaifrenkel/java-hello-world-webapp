@@ -15,7 +15,7 @@ public class GenerateDeepWoodsEncounterCmd extends GenerateManualEncounterCmd
 
   GenerateDeepWoodsEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.DEEP_WOODS,
+    super(playerState, ELocation.DEEP_WOODS, 1,
             Settings.DEEP_WOODS_MIN_DIFFICULTY, Settings.DEEP_WOODS_MAX_DIFFICULTY, Creature.CREATURE_TYPE_NORMAL,
             Settings.DEEP_WOODS_TIME_ALLOWED_FOR_PLANNING_MS, Settings.DEEP_WOODS_ACTIONS_PER_ROUND);
   }

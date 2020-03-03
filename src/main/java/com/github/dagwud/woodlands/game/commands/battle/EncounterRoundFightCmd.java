@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.PassiveBattleRoundSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
+import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.ArrayList;
@@ -45,15 +46,20 @@ public class EncounterRoundFightCmd extends AbstractCmd
     List<PassiveBattleRoundSpell> passivesActivity = new ArrayList<>();
     List<SingleCastSpell> spellsActivity = new ArrayList<>();
 
-    boolean enemyFainted = shouldEnemyFaint();
-
-    if (enemyFainted)
+    int faintedEnemiesCount = 0;
+    for (Creature enemy : encounter.getEnemies())
     {
-      KnockUnconsciousCmd faint = new KnockUnconsciousCmd(encounter.getEnemy());
-      CommandDelegate.execute(faint);
-      CommandDelegate.execute(new SendPartyMessageCmd(encounter.getParty(), encounter.getEnemy().getName() + " has fled!"));
+      boolean enemyFainted = encounter.getEnemies().size() == 1 && shouldEnemyFaint(enemy);
+      if (enemyFainted)
+      {
+        KnockUnconsciousCmd faint = new KnockUnconsciousCmd(enemy);
+        CommandDelegate.execute(faint);
+        CommandDelegate.execute(new SendPartyMessageCmd(encounter.getParty(), enemy.getName() + " has fled!"));
+        faintedEnemiesCount++;
+      }
     }
-    else
+
+    if (faintedEnemiesCount != encounter.getEnemies().size())
     {
       // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
       // to spells like Army of Peasants)
@@ -82,12 +88,15 @@ public class EncounterRoundFightCmd extends AbstractCmd
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.getSummary());
     CommandDelegate.execute(status);
 
-    if (!encounter.getEnemy().isConscious() || !anyPlayerCharactersStillAlive(encounter))
+    if (!anyEnemyConscious() || !anyPlayerCharactersStillAlive(encounter))
     {
-      if (!encounter.getEnemy().isConscious())
+      for (Creature enemy : encounter.getEnemies())
       {
-        DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), encounter.getEnemy(), encounter.isFarmed());
-        CommandDelegate.execute(win);
+        if (!enemy.isConscious())
+        {
+          DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), enemy, encounter.isFarmed());
+          CommandDelegate.execute(win);
+        }
       }
 
       EndEncounterCmd end = new EndEncounterCmd(encounter);
@@ -132,17 +141,29 @@ public class EncounterRoundFightCmd extends AbstractCmd
     }
   }
 
-  private boolean shouldEnemyFaint()
+  private boolean anyEnemyConscious()
+  {
+    for (Creature enemy : encounter.getEnemies())
+    {
+      if (enemy.isConscious())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean shouldEnemyFaint(Creature enemy)
   {
     Collection<PlayerCharacter> players = encounter.getParty().getActivePlayerCharacters();
     for (PlayerCharacter c : players)
     {
-      if (c.shouldGainExperienceByDefeating(encounter.getEnemy()))
+      if (c.shouldGainExperienceByDefeating(enemy))
       {
         return false;
       }
     }
-    return encounter.getEnemy().difficulty <= 10;
+    return enemy.difficulty <= 10;
   }
 
   private List<Fighter> buildOrderOfFight(Collection<Fighter> fighters)
@@ -223,7 +244,9 @@ public class EncounterRoundFightCmd extends AbstractCmd
     int attacksAllowed = encounter.getActionsAllowedPerRound() - spellsCast;
     int totalAttacksAllowed = attacksAllowed;
 
-    Fighter defender = attacker.chooseFighterToAttack(encounter.getAllFighters());
+    Fighter defender;
+
+    defender = attacker.chooseFighterToAttack(encounter.getAllFighters());
     if (attacker.isConscious() && defender.isConscious() && attacksAllowed > 0)
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
@@ -233,6 +256,8 @@ public class EncounterRoundFightCmd extends AbstractCmd
       }
       attacksAllowed--;
     }
+
+    defender = attacker.chooseFighterToAttack(encounter.getAllFighters());
     if (attacker.isConscious() && defender.isConscious() && attacksAllowed > 0)
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);

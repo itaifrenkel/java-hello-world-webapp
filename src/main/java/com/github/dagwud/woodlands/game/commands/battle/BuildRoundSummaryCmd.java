@@ -19,7 +19,7 @@ public class BuildRoundSummaryCmd extends AbstractCmd
   private final List<? extends Spell>[] spellGroups;
   private String summary;
 
-  public BuildRoundSummaryCmd(Encounter encounter, List<DamageInflicted> damageInflicted, List<? extends Spell>... spellGroups)
+  BuildRoundSummaryCmd(Encounter encounter, List<DamageInflicted> damageInflicted, List<? extends Spell>... spellGroups)
   {
     this.encounter = encounter;
     this.damageInflicted = damageInflicted;
@@ -76,7 +76,10 @@ public class BuildRoundSummaryCmd extends AbstractCmd
     {
       b.append("\n").append(bullet(member)).append(member.summary());
     }
-    b.append("\n").append(bullet(encounter.getEnemy())).append(encounter.getEnemy().summary());
+    for (Creature enemy : encounter.getEnemies())
+    {
+      b.append("\n").append(bullet(enemy)).append(enemy.summary());
+    }
     return b.toString();
   }
 

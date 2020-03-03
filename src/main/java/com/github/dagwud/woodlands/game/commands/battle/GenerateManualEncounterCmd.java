@@ -9,15 +9,17 @@ import com.github.dagwud.woodlands.game.domain.ManualEncounter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
+import java.util.List;
+
 public abstract class GenerateManualEncounterCmd extends GenerateEncounterCmd
 {
   private static final long serialVersionUID = 1L;
   private final int timeAllowedForPlanningMS;
   private final int actionsPerRound;
 
-  public GenerateManualEncounterCmd(PlayerState playerState, ELocation location, int minDifficulty, int maxDifficulty, String creatureType, int timeAllowedForPlanningMS, int actionsPerRound)
+  public GenerateManualEncounterCmd(PlayerState playerState, ELocation location, int enemyCount, int minDifficulty, int maxDifficulty, String creatureType, int timeAllowedForPlanningMS, int actionsPerRound)
   {
-    super(playerState, location, minDifficulty, maxDifficulty, creatureType);
+    super(playerState, location, enemyCount, minDifficulty, maxDifficulty, creatureType);
     this.timeAllowedForPlanningMS = timeAllowedForPlanningMS;
     this.actionsPerRound = actionsPerRound;
   }
@@ -29,7 +31,7 @@ public abstract class GenerateManualEncounterCmd extends GenerateEncounterCmd
   }
 
   @Override
-  protected Encounter createEncounter(Party party, Creature enemy)
+  protected Encounter createEncounter(Party party, List<Creature> enemy)
   {
     return new ManualEncounter(party, enemy, timeAllowedForPlanningMS, actionsPerRound);
   }

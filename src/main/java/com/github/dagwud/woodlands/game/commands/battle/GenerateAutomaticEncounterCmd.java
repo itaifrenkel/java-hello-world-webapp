@@ -9,13 +9,15 @@ import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
+import java.util.List;
+
 public abstract class GenerateAutomaticEncounterCmd extends GenerateEncounterCmd
 {
   private static final long serialVersionUID = 1L;
 
-  public GenerateAutomaticEncounterCmd(PlayerState playerState, ELocation location, double minDifficulty, double maxDifficulty, String creatureType)
+  public GenerateAutomaticEncounterCmd(PlayerState playerState, ELocation location, int enemyCount, double minDifficulty, double maxDifficulty, String creatureType)
   {
-    super(playerState, location, minDifficulty, maxDifficulty, creatureType);
+    super(playerState, location, enemyCount, minDifficulty, maxDifficulty, creatureType);
   }
 
   @Override
@@ -27,7 +29,7 @@ public abstract class GenerateAutomaticEncounterCmd extends GenerateEncounterCmd
   }
 
   @Override
-  Encounter createEncounter(Party party, Creature enemy)
+  Encounter createEncounter(Party party, List<Creature> enemy)
   {
     return new Encounter(party, enemy);
   }

@@ -23,7 +23,7 @@ public class SneakAttack extends SingleCastSpell
   @Override
   public boolean cast()
   {
-    Creature target = getCaster().getParty().getActiveEncounter().getEnemy();
+    Creature target = getCaster().chooseFighterToAttack(getCaster().getParty().getActiveEncounter().getEnemies());
     DiceRollCmd roll = new DiceRollCmd(Math.floorDiv(getCaster().getStats().getLevel() - 1, 2) + 1, 8);
     CommandDelegate.execute(roll);
     setDamageInflicted(generateDamage(getCaster(), roll.getTotal(), target));

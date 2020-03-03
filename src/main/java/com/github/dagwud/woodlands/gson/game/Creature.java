@@ -99,7 +99,7 @@ public class Creature extends Fighter
   }
 
   @Override
-  public Fighter chooseFighterToAttack(Collection<Fighter> members)
+  public Fighter chooseFighterToAttack(Collection<? extends Fighter> members)
   {
     List<Fighter> targets = new ArrayList<>(members);
     targets.removeIf(f -> !(f instanceof GameCharacter));

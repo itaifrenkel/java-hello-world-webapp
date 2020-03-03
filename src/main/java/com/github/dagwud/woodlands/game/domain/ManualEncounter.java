@@ -8,14 +8,16 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
+import java.util.List;
+
 public class ManualEncounter extends Encounter
 {
   private static final long serialVersionUID = 1L;
   private final long timeAllowedForPlanningMS;
 
-  public ManualEncounter(Party party, Creature enemy, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
+  public ManualEncounter(Party party, List<Creature> enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
   {
-    super(party, enemy, actionsAllowedPerRound);
+    super(party, enemies, actionsAllowedPerRound);
     this.timeAllowedForPlanningMS = timeAllowedForPlanningMS;
   }
 
