@@ -118,6 +118,7 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
         potions.add(inactive.getName());
       }
     }
+    potions.add("Cancel");
     return potions;
   }
 }
