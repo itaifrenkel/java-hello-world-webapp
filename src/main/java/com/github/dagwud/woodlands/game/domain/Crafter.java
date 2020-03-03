@@ -6,7 +6,7 @@ import java.util.Map;
 public class Crafter<T extends Item> extends NonPlayerCharacter
 {
   private static final long serialVersionUID = 1L;
-  private Map<PlayerCharacter, T> busyWithCrafting;
+  private Map<PlayerCharacter, T> busyCrafting;
   private Map<PlayerCharacter, T> readyForCollection;
   
   Crafter(Player ownedBy)
@@ -16,7 +16,7 @@ public class Crafter<T extends Item> extends NonPlayerCharacter
 
   public void completeCrafting(PlayerCharacter character)
   {
-    T remove = busyWithCrafting.remove(character);
+    T remove = getBusyCrafting().remove(character);
     if (remove != null)
     {
       readyForCollection.put(character, remove);
@@ -35,11 +35,11 @@ public class Crafter<T extends Item> extends NonPlayerCharacter
 
   public Map<PlayerCharacter, T> getBusyCrafting()
   {
-    if (busyWithCrafting == null)
+    if (busyCrafting == null)
     {
-      busyWithCrafting = new HashMap<>();
+      busyCrafting = new HashMap<>();
     }
-    return busyWithCrafting;
+    return busyCrafting;
   }
 
   public T collectFor(PlayerCharacter craftedFor)
