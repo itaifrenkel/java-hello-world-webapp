@@ -135,13 +135,15 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item> extends Sus
 
   private void schedule()
   {
-    CommandDelegate.execute(new DoGiveItemCmd(character, character.getParty().getBlacksmith(), firstItem));
-    CommandDelegate.execute(new DoGiveItemCmd(character, character.getParty().getBlacksmith(), secondItem));
+    CommandDelegate.execute(new DoGiveItemCmd(character, getCrafter(), firstItem));
+    CommandDelegate.execute(new DoGiveItemCmd(character,getCrafter(), secondItem));
     CommandDelegate.execute(createCraftCmd(firstItem, secondItem));
     CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
   }
 
   protected abstract AbstractCmd createCraftCmd(A firstItem, B secondItem);
+
+  protected abstract Crafter getCrafter();
 
   public PlayerCharacter getCharacter()
   {
