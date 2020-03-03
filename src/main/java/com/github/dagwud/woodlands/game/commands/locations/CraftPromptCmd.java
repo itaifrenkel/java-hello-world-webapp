@@ -47,6 +47,12 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item> extends Sus
 
   private A acceptFirstWeaponAndPromptForSecondWeapon(String capturedInput)
   {
+    if (capturedInput.equals("Cancel"))
+    {
+      removeSuspendable();
+      return null;
+    }
+
     A firstItem = findFirstItem(capturedInput);
     if (null == firstItem)
     {
@@ -85,6 +91,12 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item> extends Sus
 
   private B acceptSecondItem(String capturedInput)
   {
+    if (capturedInput.equals("Cancel"))
+    {
+      removeSuspendable();
+      return null;
+    }
+
     B item = findSecondItem(capturedInput);
     if (null == item)
     {
