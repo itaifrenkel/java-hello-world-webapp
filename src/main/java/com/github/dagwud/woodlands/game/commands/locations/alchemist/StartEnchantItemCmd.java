@@ -28,8 +28,8 @@ public class StartEnchantItemCmd extends AbstractCmd
   public void execute()
   {
     Alchemist alchemist = enchantFor.getParty().getAlchemist();
-    alchemist.setBusyCrafting(true);
     Weapon crafted = createEnchantedWeapon();
+    alchemist.setBusyCrafting(enchantFor, crafted);
     CommandDelegate.execute(new RunLaterCmd(Settings.ALCHEMIST_CRAFTING_TIME_MS, new FinishCraftingCmd(crafted, enchantFor, alchemist)));
     CommandDelegate.execute(new SendAdminMessageCmd("Alchemist is enchanting " + toEnchant.getName() + " and " + enchantWith.getName() + " into a " + crafted.getName() + " for " + enchantFor.getName()));
   }

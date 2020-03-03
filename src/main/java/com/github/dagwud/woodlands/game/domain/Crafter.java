@@ -1,28 +1,41 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.gson.game.Weapon;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Crafter<T extends Item> extends NonPlayerCharacter
 {
   private static final long serialVersionUID = 1L;
-  private boolean busyCrafting;
   private Map<PlayerCharacter, T> readyForCollection;
+  private Map<PlayerCharacter, T> busyCrafting;
 
   Crafter(Player ownedBy)
   {
     super(ownedBy);
   }
 
-  public void setBusyCrafting(boolean busyCrafting)
+  public void completeCrafting(PlayerCharacter character)
   {
-    this.busyCrafting = busyCrafting;
+    T remove = busyCrafting.remove(character);
+    readyForCollection.put(character, remove);
+  }
+
+  public void setBusyCrafting(PlayerCharacter character, T item)
+  {
+    getBusyCrafting().put(character, item);
   }
 
   public boolean isBusyCrafting()
   {
+    return !getBusyCrafting().isEmpty();
+  }
+
+  public Map<PlayerCharacter, T> getBusyCrafting()
+  {
+    if (busyCrafting == null)
+    {
+      busyCrafting = new HashMap<>();
+    }
     return busyCrafting;
   }
 

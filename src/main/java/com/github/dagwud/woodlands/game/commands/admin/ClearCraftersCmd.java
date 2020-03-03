@@ -1,15 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.PartyRegistry;
-import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.commands.ShowCharacterInfoCmd;
-import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class ClearCraftersCmd extends AdminCmd
@@ -27,7 +17,9 @@ public class ClearCraftersCmd extends AdminCmd
   @Override
   public void execute()
   {
-    character.getParty().getBlacksmith().setBusyCrafting(false);
-    character.getParty().getAlchemist().setBusyCrafting(false);
+    for (PlayerCharacter activePlayerCharacter : character.getParty().getActivePlayerCharacters()) {
+      activePlayerCharacter.getParty().getBlacksmith().completeCrafting(activePlayerCharacter);
+      activePlayerCharacter.getParty().getAlchemist().completeCrafting(activePlayerCharacter);
+    }
   }
 }
