@@ -104,6 +104,7 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
         weapons.add(inactive.getName());
       }
     }
+    weapons.add("Cancel");
     return weapons;
   }
 
