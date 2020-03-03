@@ -96,6 +96,7 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
         weapons.add(inactive.getName());
       }
     }
+    weapons.add("Cancel");
     return weapons;
   }
 
