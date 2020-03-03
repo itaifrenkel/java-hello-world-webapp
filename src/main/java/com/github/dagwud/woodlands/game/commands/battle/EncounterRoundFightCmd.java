@@ -142,7 +142,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
         return false;
       }
     }
-    return true;
+    return encounter.getEnemy().difficulty <= 10;
   }
 
   private List<Fighter> buildOrderOfFight(Collection<Fighter> fighters)
