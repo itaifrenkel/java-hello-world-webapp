@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.battle;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
@@ -155,6 +156,11 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
   private boolean shouldEnemyFaint(Creature enemy)
   {
+    if (Settings.SUICIDAL_CREATURES)
+    {
+      return false;
+    }
+
     Collection<PlayerCharacter> players = encounter.getParty().getActivePlayerCharacters();
     for (PlayerCharacter c : players)
     {

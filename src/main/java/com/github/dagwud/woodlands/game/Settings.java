@@ -61,5 +61,7 @@ public class Settings
   public static final int THE_GORGE_TIME_ALLOWED_FOR_PLANNING_MS = 20_000;
   public static final int THE_GORGE_ACTIONS_PER_ROUND = 2;
 
+  public static final boolean SUICIDAL_CREATURES = true; // if true, enemies will NEVER retreat, even if they're totally overpowered
+
   public static boolean DEVELOPER_MODE = false;
 }
