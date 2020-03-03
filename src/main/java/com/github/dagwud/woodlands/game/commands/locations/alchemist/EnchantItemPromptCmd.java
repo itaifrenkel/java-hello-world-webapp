@@ -69,7 +69,7 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   @Override
   protected String produceAcceptedJobMessage()
   {
-    return "\"Very well! Now if you'll excuse me, I'll get right to it. Come back when the shadow has moved an arc\"";
+    return "\"Very well! Now if you'll excuse me, I'll get right to it. Come back when the sun overhead has travelled nine hundred minutes of an arc\"";
   }
 
   @Override
