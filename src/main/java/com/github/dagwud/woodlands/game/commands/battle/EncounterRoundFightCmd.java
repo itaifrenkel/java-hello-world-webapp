@@ -47,20 +47,20 @@ public class EncounterRoundFightCmd extends AbstractCmd
     List<PassiveBattleRoundSpell> passivesActivity = new ArrayList<>();
     List<SingleCastSpell> spellsActivity = new ArrayList<>();
 
-    int faintedEnemiesCount = 0;
+    int fledEnemiesCount = 0;
     for (Creature enemy : encounter.getEnemies())
     {
-      boolean enemyFainted = encounter.getEnemies().size() == 1 && shouldEnemyFaint(enemy);
-      if (enemyFainted)
+      boolean enemyFled = encounter.getEnemies().size() == 1 && shouldEnemyFlee(enemy);
+      if (enemyFled)
       {
         KnockUnconsciousCmd faint = new KnockUnconsciousCmd(enemy);
         CommandDelegate.execute(faint);
         CommandDelegate.execute(new SendPartyMessageCmd(encounter.getParty(), enemy.getName() + " has fled!"));
-        faintedEnemiesCount++;
+        fledEnemiesCount++;
       }
     }
 
-    if (faintedEnemiesCount != encounter.getEnemies().size())
+    if (fledEnemiesCount != encounter.getEnemies().size())
     {
       // Note that we need to keep re-checking order of fight since the fighters involved may change (e.g. due
       // to spells like Army of Peasants)
@@ -154,7 +154,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     return false;
   }
 
-  private boolean shouldEnemyFaint(Creature enemy)
+  private boolean shouldEnemyFlee(Creature enemy)
   {
     if (Settings.SUICIDAL_CREATURES)
     {
