@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.locations;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnterAlchemistCmd;
 import com.github.dagwud.woodlands.game.commands.locations.blacksmith.EnterBlacksmithCmd;
 import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWoodsCmd;
 import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
@@ -51,6 +52,9 @@ public class HandleLocationEntryCmd extends AbstractCmd
         break;
       case BLACKSMITH:
         CommandDelegate.execute(new EnterBlacksmithCmd(playerState.getActiveCharacter()));
+        break;
+      case ALCHEMIST:
+        CommandDelegate.execute(new EnterAlchemistCmd(playerState.getActiveCharacter()));
         break;
     }
   }

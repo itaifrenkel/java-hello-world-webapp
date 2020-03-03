@@ -18,7 +18,7 @@ public class VillageMenu extends GameMenu
     setPrompt("<i>You are at The Village</i>");
     setOptions(ECommand.JOIN, ECommand.CLAIM_ITEM,
         ECommand.THE_INN, ECommand.THE_TAVERN,
-        ECommand.BLACKSMITH,
+        ECommand.BLACKSMITH, ECommand.ALCHEMIST,
         ECommand.THE_PETTING_ZOO, ECommand.THE_MOUNTAIN,
         ECommand.THE_WOODLANDS);
   }

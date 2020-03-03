@@ -1,7 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.locations.blacksmith;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
@@ -24,7 +23,7 @@ public class EnterBlacksmithCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Weapon collected = character.getParty().getBlacksmith().collectWeaponFor(character);
+    Weapon collected = character.getParty().getBlacksmith().collectFor(character);
 
     if (null != collected)
     {

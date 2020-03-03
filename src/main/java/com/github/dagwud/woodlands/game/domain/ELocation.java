@@ -30,6 +30,8 @@ public enum ELocation
 
   BLACKSMITH("Blacksmith", new BlacksmithMenu(), true, "The Blacksmith's shop is........ hot"),
 
+  ALCHEMIST("Alchemist", new AlchemistMenu(), true, "The Alchemist's store smells of a combination of sweet flowers, wines, and animal dung that's been heated up. Between that and the jars of you-don't-want-to-know-what-exactly lining his shelves, it's not a pleasant place to be. Nevertheless, he's widely known as the best alchemist in the village, and even though that's not saying much, he does possess a useful set of skills."),
+
   MOUNTAIN("The Mountain", new MountainMenu(), true, "The Mountain overlooks the Village, and is home to a variety of small creatures. As such it has become something of a proving ground, where many adventurers home their skills and practice basics.\n\n" +
           "It’s also a generally safe space as long as you’re not alone - tradition dictates that because this is a training area, any adventurer who falls in a fight will be carried back to the Village by their comrades. However, being knocked unconscious while alone does bring the risk that your body may be set upon by the inhabitants of the mountain.\n\n" +
           "As such, it’s best to travel in a group."),

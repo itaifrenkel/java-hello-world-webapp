@@ -17,6 +17,7 @@ public class Party implements Serializable
   private List<Item> collectedItems;
   private Long alertChatId;
   private Blacksmith blacksmith;
+  private Alchemist alchemist;
 
   public Party()
   {
@@ -223,6 +224,15 @@ public class Party implements Serializable
       blacksmith = new Blacksmith();
     }
     return blacksmith;
+  }
+
+  public Alchemist getAlchemist()
+  {
+    if (alchemist == null)
+    {
+      alchemist = new Alchemist();
+    }
+    return alchemist;
   }
 
   public void changeLeader(GameCharacter newLeader)

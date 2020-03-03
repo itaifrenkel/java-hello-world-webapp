@@ -16,6 +16,7 @@ public class Weapon extends EquippableItem
   public Damage damage;
 
   public boolean ranged;
+  public boolean enchanted;
 
   @SerializedName(value = "custom_icon")
   public String customIcon;
@@ -29,10 +30,19 @@ public class Weapon extends EquippableItem
     this.name = name;
   }
 
+  public Weapon(Weapon copy)
+  {
+    this.name = copy.name;
+    this.damage = new Damage(copy.damage);
+    this.ranged = copy.ranged;
+    this.enchanted = copy.enchanted;
+    this.customIcon = copy.customIcon;
+  }
+
   @Override
   public String getName()
   {
-    return name.replaceAll("\\|", "");
+    return (enchanted ? "Enchanted " : "" ) + name.replaceAll("\\|", "");
   }
 
   public String[] getSyllables()

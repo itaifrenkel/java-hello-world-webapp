@@ -15,6 +15,16 @@ public class Damage implements Serializable
   @SerializedName("dice_faces")
   public int diceFaces;
 
+  public Damage()
+  {
+  }
+
+  public Damage(Damage copy)
+  {
+    this.diceCount = copy.diceCount;
+    this.diceFaces = copy.diceFaces;
+  }
+
   public String determineAverageRoll()
   {
     float average = ((1f + (float) diceFaces) / 2f) * (float) diceCount;

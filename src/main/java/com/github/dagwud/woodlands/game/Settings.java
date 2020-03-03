@@ -25,6 +25,7 @@ public class Settings
   public static final long LONG_REST_DURATION_MS = 60_000 * 60; // 1 hour
 
   public static final long BLACKSMITH_CRAFTING_TIME_MS = 78 * 60 * 1000; // 1 hour 18 minutes... because he's a little arbitrary
+  public static final long ALCHEMIST_CRAFTING_TIME_MS = 78 * 60 * 1000; // 1 hour 18 minutes... because he's a little arbitrary
 
   public static final int MAX_UNCLAIMED_PARTY_ITEMS = 5;
 

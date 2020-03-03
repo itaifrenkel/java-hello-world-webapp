@@ -10,13 +10,13 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Damage;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
-public class StartWeaponCraft extends AbstractCmd
+public class StartWeaponCraftCmd extends AbstractCmd
 {
   private final PlayerCharacter craftFor;
   private final Weapon firstWeapon;
   private final Weapon secondWeapon;
 
-  public StartWeaponCraft(PlayerCharacter craftFor, Weapon firstWeapon, Weapon secondWeapon)
+  public StartWeaponCraftCmd(PlayerCharacter craftFor, Weapon firstWeapon, Weapon secondWeapon)
   {
     this.craftFor = craftFor;
     this.firstWeapon = firstWeapon;
@@ -26,9 +26,10 @@ public class StartWeaponCraft extends AbstractCmd
   @Override
   public void execute()
   {
-    craftFor.getParty().getBlacksmith().setBusyCrafting(true);
+    Blacksmith blacksmith = craftFor.getParty().getBlacksmith();
+    blacksmith.setBusyCrafting(true);
     Weapon crafted = createCraftedWeapon();
-    CommandDelegate.execute(new RunLaterCmd(Settings.BLACKSMITH_CRAFTING_TIME_MS, new FinishCraftingCmd(crafted, craftFor)));
+    CommandDelegate.execute(new RunLaterCmd(Settings.BLACKSMITH_CRAFTING_TIME_MS, new FinishCraftingCmd(crafted, craftFor, blacksmith)));
     CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith is crafting " + firstWeapon.getName() + " and " + secondWeapon.getName() + " into a " + crafted.getName() + " for " + craftFor.getName())); 
   }
 
@@ -37,7 +38,13 @@ public class StartWeaponCraft extends AbstractCmd
     Weapon crafted = new Weapon(determineName(firstWeapon, secondWeapon));
     crafted.ranged = determineRanged(firstWeapon, secondWeapon);
     crafted.damage = determinedDamage(firstWeapon, secondWeapon);
+    crafted.enchanted = determineEnchanted(firstWeapon, secondWeapon);
     return crafted;
+  }
+
+  private boolean determineEnchanted(Weapon firstWeapon, Weapon secondWeapon)
+  {
+    return firstWeapon.enchanted && secondWeapon.enchanted;
   }
 
   private String determineName(Weapon firstWeapon, Weapon secondWeapon)
