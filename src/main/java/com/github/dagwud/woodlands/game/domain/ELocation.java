@@ -133,6 +133,6 @@ public enum ELocation
 
   public boolean isVillageLocation()
   {
-    return this == VILLAGE_SQUARE || this == INN || this == TAVERN || this == BLACKSMITH;
+    return this == VILLAGE_SQUARE || this == INN || this == TAVERN || this == BLACKSMITH || this == ALCHEMIST;
   }
 }
