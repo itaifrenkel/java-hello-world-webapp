@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.locations.alchemist;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.CraftPromptCmd;
+import com.github.dagwud.woodlands.game.domain.Crafter;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.trinkets.consumable.ConsumableTrinket;
@@ -21,7 +22,7 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   @Override
   public Crafter getCrafter()
   {
-    return character.getParty().getAlchemist();
+    return getCharacter().getParty().getAlchemist();
   }
 
   @Override

@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.locations.blacksmith;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.CraftPromptCmd;
+import com.github.dagwud.woodlands.game.domain.Crafter;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
@@ -17,7 +18,7 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
   @Override
   protected Crafter getCrafter()
   {
-    return character.getParty().getBlacksmith();
+    return getCharacter().getParty().getBlacksmith();
   }
 
   public CraftWeaponPromptCmd(PlayerCharacter character, PlayerState playerState)
