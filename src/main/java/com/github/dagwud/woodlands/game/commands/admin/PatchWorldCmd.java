@@ -54,6 +54,10 @@ public class PatchWorldCmd extends AbstractCmd
         CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
         CommandDelegate.execute(new SendAdminMessageCmd("Unrested " + character.getName()));
       }
+
+      // Crafting schedules are lost:
+      character.getParty().getAlchemist().completeCrafting(character);
+      character.getParty().getBlacksmith().completeCrafting(character);
     }
   }
 
