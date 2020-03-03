@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.character;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Icons;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EAchievement;
@@ -35,7 +36,9 @@ public class ListAchievementsCmd extends AbstractCmd
     StringBuilder stringBuilder = new StringBuilder("Your worldly achievements:\n");
     for (EAchievement eAchievement : eAchievements)
     {
-      stringBuilder.append(eAchievement.getAchievementName()).append(" - ").append(eAchievement.getDescription()).append("\n");
+      stringBuilder.append(Icons.ACHIEVEMENT)
+          .append(" ").append(eAchievement.getAchievementName()).append("\n")
+          .append("   <i>").append(eAchievement.getDescription()).append("</i>\n\n");
     }
 
     CommandDelegate.execute(new SendMessageCmd(playerCharacter, stringBuilder.toString()));
