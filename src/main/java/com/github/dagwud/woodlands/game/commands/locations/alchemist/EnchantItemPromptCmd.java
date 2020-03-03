@@ -19,6 +19,12 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   }
 
   @Override
+  public Crafter getCrafter()
+  {
+    return character.getParty().getAlchemist();
+  }
+
+  @Override
   protected String produceFirstItemPromptMessage()
   {
     return "\"What do you have that needs enchanting?\"";
