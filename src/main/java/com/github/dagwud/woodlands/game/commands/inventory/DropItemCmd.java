@@ -70,6 +70,8 @@ public class DropItemCmd extends AbstractCmd
 
     if (dropped != null)
     {
+      character.getStats().incrementItemsDroppedCount();
+
       SendMessageCmd cmd = new SendMessageCmd(chatId, "You dropped " + dropped.getName());
       CommandDelegate.execute(cmd);
 
