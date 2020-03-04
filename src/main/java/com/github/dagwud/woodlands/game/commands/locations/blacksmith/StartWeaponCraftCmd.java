@@ -88,7 +88,7 @@ public class StartWeaponCraftCmd extends AbstractCmd
   private Damage determinedDamage(Weapon firstWeapon, Weapon secondWeapon)
   {
     Damage damage = new Damage();
-    damage.diceCount = average(firstWeapon.damage.diceCount, secondWeapon.damage.diceCount);
+    damage.diceCount = Math.max(firstWeapon.damage.diceCount, secondWeapon.damage.diceCount);
     damage.diceFaces = determineDiceFaces(firstWeapon.damage.diceFaces, secondWeapon.damage.diceFaces);
     return damage;
   }
@@ -104,15 +104,5 @@ public class StartWeaponCraftCmd extends AbstractCmd
     if (d1 == 12) return 20;
     if (d1 == 20) return 24;
     return d1 + 2;
-  }
-
-  private int average(int... values)
-  {
-    int total = 0;
-    for (int value : values)
-    {
-      total += value;
-    }
-    return Math.floorDiv(total, values.length);
   }
 }
