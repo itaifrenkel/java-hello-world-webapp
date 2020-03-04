@@ -22,7 +22,7 @@ public class ShowPlayerChoiceCmd extends AbstractCmd
 
   private final int chatId;
   private final Party party;
-  private final String
+  private final String prompt;
 
   public AdminShowCharacterInfoCmd(int chatId, String prompt, Party party)
   {
