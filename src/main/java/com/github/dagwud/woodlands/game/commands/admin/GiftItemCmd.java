@@ -28,7 +28,7 @@ public class GiftItemCmd extends SuspendableCmd
   {
     super(character.getPlayedBy().getPlayerState(), 3);
     this.chatId = chatId;
-    this.party = party;
+    this.party = character.getParty();
   }
 
   @Override
