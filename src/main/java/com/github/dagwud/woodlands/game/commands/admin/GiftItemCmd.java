@@ -100,6 +100,6 @@ public class GiftItemCmd extends SuspendableCmd
       rejectCapturedInput();
       return;
     }
-    CommandDelegate.execute(new SendMessageCmd(chatId, "Todo gift to " + recipient.getName() + ": " + itemName));
+    CommandDelegate.execute(new SendMessageCmd(chatId, "Todo gift to " + recipient.getName() + ": " + item.getName()));
   }
 }
