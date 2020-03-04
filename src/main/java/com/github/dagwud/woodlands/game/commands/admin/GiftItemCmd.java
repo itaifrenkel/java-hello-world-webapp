@@ -22,7 +22,7 @@ public class GiftItemCmd extends SuspendableCmd
 
   private final int chatId;
   private final Party party;
-  private final PlayerCharacter recipient;
+  private PlayerCharacter recipient;
 
   public GiftItemCmd(int chatId, PlayerCharacter character)
   {
@@ -78,7 +78,7 @@ public class GiftItemCmd extends SuspendableCmd
     if (recipient == null)
     {
       CommandDelegate.execute(new SendMessageCmd(chatId, "Nope. Try again"));
-      rejectInput();
+      rejectCapturedInput();
       return;
     }
 
