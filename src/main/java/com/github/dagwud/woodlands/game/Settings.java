@@ -10,7 +10,7 @@ public class Settings
 
   public static final BigDecimal DEFAULT_PERCENT_CHANCE_OF_ENCOUNTER = new BigDecimal("50");
   public static final int DELAY_BETWEEN_ENCOUNTERS_MS = 15_000;
-  public static final int DELAY_BETWEEN_ROUNDS_MS = 15_000;
+  public static final int DELAY_BETWEEN_ROUNDS_MS = 3_000;
 
   // Automatic mana recovery: recover 1 mana point every 3 hours
   public static final long DELAY_BETWEEN_MANA_RECOVERY = 3 * 60 * 60_000; // 3 hours
