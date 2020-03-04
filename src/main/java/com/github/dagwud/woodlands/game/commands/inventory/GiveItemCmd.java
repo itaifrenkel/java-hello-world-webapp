@@ -63,8 +63,12 @@ public class GiveItemCmd extends SuspendableCmd
 
         DoGiveItemCmd cmd = new DoGiveItemCmd(player.getActiveCharacter(), partyMember, item);
         CommandDelegate.execute(cmd);
+
+        player.getActiveCharacter().getStats().incrememtItemsGivenAwayCount();
+
         return;
-      } catch (NumberFormatException ex)
+      }
+      catch (NumberFormatException ex)
       {
         // let it fall through
       }
