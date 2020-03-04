@@ -37,9 +37,13 @@ public class Stats implements Serializable
   private Map<String, Integer> weaponBonusHit = new HashMap<>();
   private Map<String, Integer> weaponBonusDamage = new HashMap<>();
   private EState state;
-
-  // thus endeth the serious stats and begin the fun stats
   private int drunkeness;
+  private int craftsCount;
+  private int enchantmentsCount;
+  private int itemsGivenAwayCount;
+  private int itemsDroppedCount;
+  private int leadershipMovesCount;
+
   private Set<EAchievement> achievements = new HashSet<>();
 
   public int getLevel()
@@ -326,4 +330,55 @@ public class Stats implements Serializable
 
     return achievements;
   }
+
+  public int getEnchantmentsCount()
+  {
+    return enchantmentsCount;
+  }
+
+  public void incrementEnchantmentsCount()
+  {
+    enchantmentsCount++;
+  }
+
+  public int getCraftsCount()
+  {
+    return craftsCount;
+  }
+
+  public void incrementCraftsCount()
+  {
+    craftsCount++;
+  }
+
+  public int getItemsGivenAwayCount()
+  {
+    return itemsGivenAwayCount;
+  }
+
+  public void incrementItemsGivenAwayCount()
+  {
+    itemsGivenAwayCount++;
+  }
+
+  public int getItemsDroppedCount()
+  {
+    return itemsDroppedCount;
+  }
+
+  public void incrementItemsGivenAwayCount()
+  {
+    itemsDroppedCount++;
+  }
+
+  public int getLeadershipMovesCount()
+  {
+    return leadershipMovesCount;
+  }
+
+  public void incrementLeadershipMovesCount()
+  {
+    leadershipMovesCount++;
+  }
+
 }
