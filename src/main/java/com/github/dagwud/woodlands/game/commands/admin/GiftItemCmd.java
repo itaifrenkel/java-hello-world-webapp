@@ -92,7 +92,7 @@ public class GiftItemCmd extends SuspendableCmd
     EquippableItem item;
     try
     {
-      item = ItemsCacheFactory.instance().findItem(itemName);
+      item = ItemsCacheFactory.instance().getCache().findItem(itemName);
     }
     catch (Exception e)
     {
