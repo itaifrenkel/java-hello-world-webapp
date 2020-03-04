@@ -366,7 +366,7 @@ public class Stats implements Serializable
     return itemsDroppedCount;
   }
 
-  public void incrementItemsGivenAwayCount()
+  public void incrementItemsDroppedCount()
   {
     itemsDroppedCount++;
   }
