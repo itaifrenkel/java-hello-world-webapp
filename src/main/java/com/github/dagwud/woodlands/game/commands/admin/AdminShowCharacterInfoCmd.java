@@ -17,10 +17,12 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
   private static final long serialVersionUID = 1L;
 
   private final int chatId;
+  private final PlayerCharacter character;
 
   public AdminShowCharacterInfoCmd(int chatId, PlayerCharacter character)
   {
     super(character.getPlayedBy().getPlayerState(), 2);
+    this.character = character;
     this.chatId = chatId;
   }
 
@@ -40,8 +42,19 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
 
   private void promptForCharacter()
   {
-    SendMessageCmd cmd = new SendMessageCmd(chatId, "Please enter the character name");
+    //SendMessageCmd cmd = new SendMessageCmd(chatId, "Please enter the character name");
+    ChoiceCmd cmd = new ChoiceCmd(chatId, "Which player?", buildPlayerNames());
     CommandDelegate.execute(cmd);
+  }
+
+  private String[] buildPlayerNames()
+  {
+    List<String> characters = new ArrayList<>();
+    for (GameCharacter c : character.getParty().getActivePlayerCharacters())
+    {
+      characters.add(c.getName());
+    }
+    return characters.toArray(new String[0]);
   }
 
   private void show(String name)
