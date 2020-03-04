@@ -46,19 +46,8 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
 
   private void promptForCharacter()
   {
-    //SendMessageCmd cmd = new SendMessageCmd(chatId, "Please enter the character name");
-    ChoiceCmd cmd = new ChoiceCmd(chatId, "Which player?", buildPlayerNames());
+    ShowPlayerChoiceCmd cmd = new ShowPlayerChoiceCmd(chatId, "Which player?", character.getParty());
     CommandDelegate.execute(cmd);
-  }
-
-  private String[] buildPlayerNames()
-  {
-    List<String> characters = new ArrayList<>();
-    for (GameCharacter c : character.getParty().getActivePlayerCharacters())
-    {
-      characters.add(c.getName());
-    }
-    return characters.toArray(new String[0]);
   }
 
   private void show(String name)
