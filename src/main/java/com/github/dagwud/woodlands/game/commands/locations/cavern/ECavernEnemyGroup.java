@@ -2,14 +2,14 @@ package com.github.dagwud.woodlands.game.commands.locations.cavern;
 
 enum ECavernEnemyGroup
 {
-  CAVERN_1(2, 1, 2),
-  CAVERN_2(2, 2, 3),
-  CAVERN_3(2, 3, 4),
-  CAVERN_4(3, 4, 5),
-  CAVERN_5(3, 5, 7),
-  CAVERN_6(4, 5, 7),
-  CAVERN_7(5, 7, 9),
-  CAVERN_8(5, 10, 12);
+  CAVERN_1(5, 4, 4),
+  CAVERN_2(6, 5, 5),
+  CAVERN_3(6, 6, 6),
+  CAVERN_4(6, 7, 7),
+  CAVERN_5(5, 9, 9),
+  CAVERN_6(4, 10, 10),
+  CAVERN_7(5, 11, 11),
+  CAVERN_8(5, 12, 12);
 
   private static final long serialVersionUID = 1L;
 
