@@ -34,7 +34,7 @@ public class RequestEncounterRoundPlanningCmd extends AbstractCmd
   private void promptForAction()
   {
     String planningDuration = encounter.getTimeAllowedForPlanningMS() / 1000 + " seconds";
-    ManualEncounterMenu menu = new ManualEncounterMenu(planningDuration);
+    ManualEncounterMenu menu = new ManualEncounterMenu(planningDuration, encounter.getParty().getLeader().getLocation());
     playerState.setCurrentMenu(menu);
     ShowMenuCmd showMenuCmd = new ShowMenuCmd(menu, playerState);
     CommandDelegate.execute(showMenuCmd);
