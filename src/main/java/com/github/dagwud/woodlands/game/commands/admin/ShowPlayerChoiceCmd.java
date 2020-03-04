@@ -24,7 +24,7 @@ public class ShowPlayerChoiceCmd extends AbstractCmd
   private final Party party;
   private final String prompt;
 
-  public AdminShowCharacterInfoCmd(int chatId, String prompt, Party party)
+  public ShowPlayerChoiceCmd(int chatId, String prompt, Party party)
   {
     this.party = party;
     this.chatId = chatId;
