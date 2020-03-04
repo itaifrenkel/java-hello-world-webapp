@@ -12,6 +12,8 @@ import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.items.EquippableItem;
+import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -87,6 +89,17 @@ public class GiftItemCmd extends SuspendableCmd
 
   private void acceptItemAndGiveGift(String itemName)
   {
+    EquippableItem item;
+    try
+    {
+      item = ItemsCacheFactory.instance().findItem(itemName);
+    }
+    catch (Exception e)
+    {
+      CommandDelegate.execute(new SendMessageCmd(chatId, "Nope. Try again"));
+      rejectCapturedInput();
+      return;
+    }
     CommandDelegate.execute(new SendMessageCmd(chatId, "Todo gift to " + recipient.getName() + ": " + itemName));
   }
 }
