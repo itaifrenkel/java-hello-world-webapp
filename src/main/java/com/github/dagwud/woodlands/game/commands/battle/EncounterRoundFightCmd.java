@@ -95,7 +95,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
       {
         if (!enemy.isConscious())
         {
-          DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), enemy, encounter.isFarmed());
+          DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), enemy, encounter.isFarmed(), encounter.getEnemies().size() > 1);
           CommandDelegate.execute(win);
         }
       }
