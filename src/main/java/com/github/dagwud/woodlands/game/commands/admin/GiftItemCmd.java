@@ -66,7 +66,7 @@ public class GiftItemCmd extends SuspendableCmd
     }
 
     recipient = null;
-    for (GameCharacter gameCharacter : party.getAllMembers())
+    for (GameCharacter gameCharacter : party.getActivePlayerCharacters())
     {
       if (gameCharacter instanceof PlayerCharacter)
       {
