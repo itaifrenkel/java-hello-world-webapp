@@ -15,9 +15,9 @@ public class Settings
   // Automatic mana recovery: recover 1 mana point every 3 hours
   public static final long DELAY_BETWEEN_MANA_RECOVERY = 3 * 60 * 60_000; // 3 hours
 
-  // Automatic HP recovery: recover 20% of what a short rest would give every 45 minutes
+  // Automatic HP recovery: recover 20% of what a short rest would give every 90 minutes
   // (given as 10% every 22.5 minutes)
-  public static final long DELAY_BETWEEN_HP_RECOVERY = (20 * 60_000) + 30_000; // 22.5 minutes
+  public static final long DELAY_BETWEEN_HP_RECOVERY = 45 * 60_000; // 45 minutes
   public static final BigDecimal SCHEDULED_HP_RECOVERY_PERCENT_OF_SHORT_REST = new BigDecimal("10");
 
   public static final long SOBER_UP_DELAY_MS = 60_000 * 20;
