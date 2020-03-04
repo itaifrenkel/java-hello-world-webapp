@@ -100,6 +100,8 @@ public class GiftItemCmd extends SuspendableCmd
       rejectCapturedInput();
       return;
     }
-    CommandDelegate.execute(new SendMessageCmd(chatId, "Todo gift to " + recipient.getName() + ": " + item.getName()));
+    recipient.getCarrying().getCarriedInactive().add(item);
+    CommandDelegate.execute(new SendMessageCmd(recipient.getPlayedBy(), "A sudden bolt of lightning flashes across the sky, and slams into the ground at your feet. When you look down, you're astonished to see a " + item.getName() + " just lying there. Guess it must be your lucky day!"));
+    CommandDelegate.execute(new SendMessageCmd(chatId, "Gifted to " + recipient.getName() + ": " + item.getName()));
   }
 }
