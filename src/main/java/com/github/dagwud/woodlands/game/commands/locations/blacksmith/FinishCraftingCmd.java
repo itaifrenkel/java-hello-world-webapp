@@ -35,4 +35,5 @@ public class FinishCraftingCmd extends AbstractCmd
   public String toString()
   {
     return "FinishCraftingCmd[crafter=\"" + crafter.getName() + "\",for=\"" + craftedFor.getName() + "\"]";
+  }
 }
