@@ -16,7 +16,7 @@ public class FinishCraftingCmd<T extends EquippableItem> extends AbstractCmd
   private final PlayerCharacter craftedFor;
   private final Crafter<T> crafter;
 
-  public FinishCraftingCmd(T crafted, PlayerCharacter craftedFor, Crafter<T> crafter)
+  public FinishCraftingCmd(T crafted, PlayerCharacter craftedFor, Crafter crafter)
   {
     this.crafted = crafted;
     this.craftedFor = craftedFor;
