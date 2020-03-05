@@ -22,7 +22,7 @@ public class ListSongsCmd extends AbstractCmd
     JukeBox jukeBox = GameStatesRegistry.instance().getJukeBox();
     for (String lyric : jukeBox.getLyrics())
     {
-      CommandDelegate.execute(new SendMessageCmd(chatId, lyric);
+      CommandDelegate.execute(new SendMessageCmd(chatId, lyric));
     }
   }
 }
