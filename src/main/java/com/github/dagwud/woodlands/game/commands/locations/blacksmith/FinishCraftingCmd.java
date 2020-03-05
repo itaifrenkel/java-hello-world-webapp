@@ -34,6 +34,6 @@ public class FinishCraftingCmd<T extends EquippableItem> extends AbstractCmd
   @Override
   public String toString()
   {
-    return "FinishCraftingCmd[crafter=\"" + crafter.getName() + "\",type=\"" + crafted.getClass.getSimpleName() + "\",for=\"" + craftedFor.getName() + "\"]";
+    return "FinishCraftingCmd[crafter=\"" + crafter.getName() + "\",type=\"" + crafted.getClass().getSimpleName() + "\",for=\"" + craftedFor.getName() + "\"]";
   }
 }
