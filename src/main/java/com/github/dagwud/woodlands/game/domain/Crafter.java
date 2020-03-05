@@ -35,7 +35,7 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
     long remainingMS = System.currentTimeMillis() - (craftingStartedAt + craftingDurationMS);
     long remainingMin = -Math.floorDiv(-remainingMS, 60_000); // ceil div
     remainingMin = -Math.floorDiv(-remainingMin, 5) * 5; // make time less accurate
-    return remainingMin;
+    return (int)remainingMin;
   }
 
   public boolean isBusyCrafting()
