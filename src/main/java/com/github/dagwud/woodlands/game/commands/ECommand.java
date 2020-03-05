@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.commands.inventory.*;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnchantItemPromptCmd;
+import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnchantShieldPromptCmd;
 import com.github.dagwud.woodlands.game.commands.locations.blacksmith.CraftWeaponPromptCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.*;
 import com.github.dagwud.woodlands.game.commands.logs.ShowLogsCmd;
