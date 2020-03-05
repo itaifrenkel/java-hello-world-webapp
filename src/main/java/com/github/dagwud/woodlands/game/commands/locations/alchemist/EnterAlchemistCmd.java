@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.locations.alchemist;
 
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
@@ -44,7 +45,10 @@ public class EnterAlchemistCmd extends AbstractCmd
     {
       if (character.getParty().getAlchemist().isBusyCrafting())
       {
-        CommandDelegate.execute(new SendMessageCmd(character, "The door to the Alchemist's store is locked; and judging by the smell lingering around the building, perhaps you're better off out here in the fresh air. He must be busy with something, so you resolve to return later."));
+        int remainingMinutes = character.getParty().getAlchemist().determineRemainingCraftingMinutes(Settings.ALCHEMIST_CRAFTING_TIME_MS);
+        CommandDelegate.execute(new SendMessageCmd(character, "The door to the Alchemist's store is locked; and judging by the smell lingering around the building, " +
+                   "perhaps you're better off out here in the fresh air. In response to your knocking, a spell activates on his door and a burn mark appears, " +
+                   "showing the words \"COME BACK IN " + remainingMinutes + "\". He must be busy with something, so you resolve to return later."));
       }
     }
 
