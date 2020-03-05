@@ -1,5 +1,6 @@
 {
   "creatures": [
+    {"name": "Flea", "difficulty": 0, "weapon-left": "Bite (soft)", "fight-mode":  "STRONGEST", "creature-type":  "normal"},
     {"name": "Badger", "difficulty": 0, "weapon-left": "Small Bite", "fight-mode":  "RANDOM", "creature-type":  "normal"},
     {"name": "Frog", "difficulty": 0, "weapon-left": "Small Bite", "fight-mode":  "WEAKEST", "creature-type":  "normal"},
     {"name": "Crab", "difficulty": 0, "weapon-left": "Small Bite", "fight-mode":  "WEAKEST", "creature-type":  "normal"},
@@ -7,7 +8,6 @@
     {"name": "Goat", "difficulty": 0, "weapon-left": "Small Bite", "fight-mode":  "WEAKEST", "creature-type":  "normal"},
     {"name": "Fire Beetle", "difficulty": 0, "weapon-left": "Small Bite", "fight-mode":  "RANDOM", "creature-type":  "normal"},
 
-    {"name":  "Flea", "difficulty": 0.125, "weapon-left": "Bite (soft)", "fight-mode":  "STRONGEST", "creature-type":  "normal"},
     {"name":  "Camel", "difficulty": 0.125, "weapon-left": "Bite (soft)", "fight-mode":  "STRONGEST", "creature-type":  "normal"},
     {"name":  "Poisonous Snake", "difficulty":  0.125, "weapon-left":  "Bite (soft)", "fight-mode":  "STRONGEST", "creature-type":  "normal"},
     {"name":  "Pony", "difficulty":  0.125, "weapon-left":  "Bite (soft)", "fight-mode":  "WEAKEST", "creature-type":  "normal"},
