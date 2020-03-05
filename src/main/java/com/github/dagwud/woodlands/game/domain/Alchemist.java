@@ -12,4 +12,9 @@ public class Alchemist extends Crafter<Weapon>
     setName("the Alchemist");
   }
 
+  @Override
+  protected void incrementCollectionStat(PlayerCharacter collectedBy)
+  {
+    collectedBy.getStats().incrementEnchantmentsCount();
+  }
 }

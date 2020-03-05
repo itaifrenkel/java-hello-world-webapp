@@ -83,6 +83,7 @@ public class MoveToLocationCmd extends AbstractCmd
     {
       doMove(character, moveTo, movedBy);
     }
+    movedBy.getStats().incrementLeadershipMovesCount();
   }
 
   private void doMove(GameCharacter characterToMove, ELocation moveTo, GameCharacter movedBy)

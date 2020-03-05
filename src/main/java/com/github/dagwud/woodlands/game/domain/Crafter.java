@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Crafter<T extends Item> extends NonPlayerCharacter
+public abstract class Crafter<T extends Item> extends NonPlayerCharacter
 {
   private static final long serialVersionUID = 1L;
   private Map<PlayerCharacter, T> busyCrafting;
@@ -44,13 +44,15 @@ public class Crafter<T extends Item> extends NonPlayerCharacter
 
   public T collectFor(PlayerCharacter craftedFor)
   {
-    return getReadyForCollection().remove(craftedFor);
+    T collect = getReadyForCollection().remove(craftedFor);
+    if (collect != null)
+    {
+      incrementCollectionStat(craftedFor);
+    }
+    return collect;
   }
 
-  public void addReadyForCollection(T weapon, PlayerCharacter craftedFor)
-  {
-    getReadyForCollection().put(craftedFor, weapon);
-  }
+  protected abstract void incrementCollectionStat(PlayerCharacter collectedBy);
 
   private Map<PlayerCharacter, T> getReadyForCollection()
   {

@@ -15,4 +15,9 @@ public class Blacksmith extends Crafter<Weapon>
     setName("the Blacksmith");
   }
 
+  @Override
+  protected void incrementCollectionStat(PlayerCharacter collectedBy)
+  {
+    collectedBy.getStats().incrementCraftsCount();
+  }
 }
