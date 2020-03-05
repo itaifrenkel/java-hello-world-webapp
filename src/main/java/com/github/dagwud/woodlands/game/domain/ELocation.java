@@ -65,11 +65,7 @@ public enum ELocation
 
   ELocation(String displayName, GameMenu menu, boolean autoRetreat, String lookText)
   {
-    this.lookText = lookText;
-    this.displayName = displayName;
-    this.menu = menu;
-    this.autoRetreat = autoRetreat;
-    this.roomCmd = null;
+    this(displayName, menu, autoRetreat, lookText, null);
   }
 
   ELocation(String displayName, GameMenu menu, boolean autoRetreat, String lookText, AbstractRoomCmd roomCmd)
