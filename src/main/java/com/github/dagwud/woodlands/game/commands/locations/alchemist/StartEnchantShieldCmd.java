@@ -36,8 +36,9 @@ public class StartEnchantShieldCmd extends AbstractCmd
 
   private Shield createEnchantedShield()
   {
-    Shield shield = new Shield(toEnchant);
-    shield.strength = shield.strength + 1;
+    Shield shield = new Shield();
+    shield.name = toEnchant.name;
+    shield.strength = toEnchant.strength + 1;
     shield.enchanted = true;
     return shield;
   }
