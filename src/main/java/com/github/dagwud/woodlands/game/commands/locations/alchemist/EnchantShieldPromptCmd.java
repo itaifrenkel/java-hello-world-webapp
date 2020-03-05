@@ -90,11 +90,11 @@ public class EnchantShieldPromptCmd extends CraftPromptCmd<Shield, ConsumableTri
     List<String> shields = new ArrayList<>();
     if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof Shield)
     {
-      weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
+      shields.add(getCharacter().getCarrying().getCarriedLeft().getName());
     }
     if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Shield)
     {
-      weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
+      shields.add(getCharacter().getCarrying().getCarriedRight().getName());
     }
     for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
     {
