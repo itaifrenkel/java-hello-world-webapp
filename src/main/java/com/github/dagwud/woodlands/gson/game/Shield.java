@@ -27,7 +27,16 @@ public class Shield extends EquippableItem
   @Override
   public String summary(Fighter carrier, boolean includeName)
   {
-    return (includeName ? (enchanted ? "Enchanted " : "") + getName()) + " " : "") + getIcon() + statsSummary(carrier);
+    String summary = getIcon() + statsSummary(carrier);
+    if (includeName)
+    {
+      summary = getName() + " " + summary;
+      if (enchanted)
+      {
+        summary = "Enchanted " + summary;
+      }
+    }
+    return summary;
   }
 
   @Override
