@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.gson.game.Weapon;
-import com.github.dagwud.woodlands.game.items;
+import com.github.dagwud.woodlands.game.items.EquippableItem;
 
 public class Alchemist extends Crafter<EquippableItem>
 {
