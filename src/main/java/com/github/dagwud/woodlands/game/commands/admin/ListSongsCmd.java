@@ -11,6 +11,8 @@ import java.util.List;
 
 public class ListSongsCmd extends AbstractCmd
 {
+  private final int chatId;
+
   public ListSongsCmd(int chatId)
   {
     this.chatId = chatId;
