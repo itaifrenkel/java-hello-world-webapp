@@ -30,4 +30,9 @@ public class FinishCraftingCmd extends AbstractCmd
     crafter.completeCrafting(craftedFor);
     CommandDelegate.execute(new SendAdminMessageCmd("Crafting complete: " + crafter.getName() + " has completed " + crafted.getName() + " for " + craftedFor.getName()));
   }
+
+  @Override
+  public String toString()
+  {
+    return "FinishCraftingCmd[crafter=\"" + crafter.getName() + "\",for=\"" + craftedFor.getName() + "\"]";
 }
