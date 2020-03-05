@@ -8,7 +8,9 @@ public enum EAchievement
   DRUNKEN_COMMAND("NOW LISHTEN HERE YOU", "You were drunk enough that you issued a command that was not a command"),
   PARTY_IS_OVER("Party's Over... Forever", "You managed to get your entire party killed. Nice one"),
   DRUNKEN_VICTORY("Gonna Feel That In The Morning", "Despite your entire party being drunk, you still won a battle"),
-  SHUFFLED_OFF_THE_MORTAL_COIL("Shuffled Off The Mortal Coil", "You're definitely not sleeping - you're dead");
+  SHUFFLED_OFF_THE_MORTAL_COIL("Shuffled Off The Mortal Coil", "You're definitely not sleeping - you're dead"),
+  LITTERER("Litterer", "Going green is definitely not a priority to you - you've dropped unwanted items all over the place"),
+  PHILANTHROPIST("Philanthropist", "Such a charitable person; you just love giving stuff away");
 
   private final String achievementName;
   private final String description;
