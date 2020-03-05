@@ -8,7 +8,8 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
   private static final long serialVersionUID = 1L;
   private Map<PlayerCharacter, T> busyCrafting;
   private Map<PlayerCharacter, T> readyForCollection;
-  
+  private long craftingStartedAt;
+
   Crafter(Player ownedBy)
   {
     super(ownedBy);
@@ -26,6 +27,13 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
   public void setBusyCrafting(PlayerCharacter character, T item)
   {
     getBusyCrafting().put(character, item);
+    craftingStartedAt = System.currentTimeMillis();
+  }
+
+  public int determineRemainingCraftingMinutes(long craftingDurationMS)
+  {
+    long remainingMS = System.currentTimeMillis - (craftingStartedAt + craftingDurationMS);
+    return -Math.floorDiv(-remainingMS, 60_000); // ceil div
   }
 
   public boolean isBusyCrafting()
