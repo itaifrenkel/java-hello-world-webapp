@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.commands.locations.village;
+package com.github.dagwud.woodlands.game.commands.admin;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
