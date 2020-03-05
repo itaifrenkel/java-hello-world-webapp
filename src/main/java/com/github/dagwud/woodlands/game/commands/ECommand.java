@@ -64,6 +64,7 @@ public enum ECommand implements ICommand
   DAMAGE("/damage", false, ((character, chatId) -> new AdminDamageCmd(character))),
   YOU("/you", false, ((character, chatId) -> new AdminShowCharacterInfoCmd(chatId, character))),
   ADD_SONG("/song", false, ((character, chatId) -> new AddSongCmd(character.getPlayedBy().getPlayerState()))),
+  LIST_SONGS("/songs", false, ((character, chatId) -> new ListSongsCmd(character.getPlayedBy().getPlayerState()))),
   ADD_EMISSION("/emit", false, ((character, chatId) -> new AddEmissionCmd(character.getPlayedBy().getPlayerState()))),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
