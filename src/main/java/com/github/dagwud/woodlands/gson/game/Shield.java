@@ -10,6 +10,7 @@ public class Shield extends EquippableItem
 
   public String name;
   public int strength;
+  public boolean enchanted;
 
   @Override
   public String getName()
@@ -26,7 +27,16 @@ public class Shield extends EquippableItem
   @Override
   public String summary(Fighter carrier, boolean includeName)
   {
-    return (includeName ? getName() + " " : "") + getIcon() + statsSummary(carrier);
+    String summary = getIcon() + statsSummary(carrier);
+    if (includeName)
+    {
+      summary = getName() + " " + summary;
+      if (enchanted)
+      {
+        summary = "Enchanted " + summary;
+      }
+    }
+    return summary;
   }
 
   @Override

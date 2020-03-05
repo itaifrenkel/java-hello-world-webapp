@@ -7,6 +7,6 @@ public class AlchemistMenu extends GameMenu
   public AlchemistMenu()
   {
     setPrompt("<i>This is the Alchemist's store</i>");
-    setOptions(ECommand.VILLAGE_SQUARE, ECommand.ENCHANT_ITEM);
+    setOptions(ECommand.ENCHANT_ITEM, ECommand.ENCHANT_SHIELD, ECommand.VILLAGE_SQUARE);
   }
 }

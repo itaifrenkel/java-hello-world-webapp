@@ -1,8 +1,9 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.gson.game.Weapon;
+import com.github.dagwud.woodlands.game.items.EquippableItem;
 
-public class Alchemist extends Crafter<Weapon>
+public class Alchemist extends Crafter<EquippableItem>
 {
   private static final long serialVersionUID = 1L;
 

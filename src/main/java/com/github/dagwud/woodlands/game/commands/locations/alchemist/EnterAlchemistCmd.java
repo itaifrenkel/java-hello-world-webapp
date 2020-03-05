@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
+import com.github.dagwud.woodlands.game.items.EquippableItem;
 
 public class EnterAlchemistCmd extends AbstractCmd
 {
@@ -24,7 +25,7 @@ public class EnterAlchemistCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    Weapon collected = character.getParty().getAlchemist().collectFor(character);
+    EquippableItem collected = character.getParty().getAlchemist().collectFor(character);
 
     if (null != collected)
     {

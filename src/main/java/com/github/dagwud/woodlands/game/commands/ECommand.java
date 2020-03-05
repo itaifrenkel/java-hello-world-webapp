@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.commands.inventory.*;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnchantItemPromptCmd;
+import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnchantShieldPromptCmd;
 import com.github.dagwud.woodlands.game.commands.locations.blacksmith.CraftWeaponPromptCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.*;
 import com.github.dagwud.woodlands.game.commands.logs.ShowLogsCmd;
@@ -73,6 +74,7 @@ public enum ECommand implements ICommand
   CRAFT_WEAPON("Craft a Weapon", true, (character, chatId) -> new CraftWeaponPromptCmd(character, character.getPlayedBy().getPlayerState())),
   ALCHEMIST("Alchemist", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.ALCHEMIST)),
   ENCHANT_ITEM("Enchant an Item", true, (character, chatId) -> new EnchantItemPromptCmd(character, character.getPlayedBy().getPlayerState())),
+  ENCHANT_SHIELD("Enchant a Shield", true, (character, chatId) -> new EnchantShieldPromptCmd(character, character.getPlayedBy().getPlayerState())),
   THE_VILLAGE("The Village", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
   VILLAGE_SQUARE("Village Square", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
   THE_PETTING_ZOO("🦡The Petting Zoo🦡", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.PETTING_ZOO)),
