@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.commands.battle;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 
-import com.github.dagwud.woodlands.game.command.RunLaterCmd;
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 
