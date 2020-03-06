@@ -32,9 +32,10 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
   public void setCraftingExpectedEndTime(long craftingDurationMS)
   {
     craftingStartedAt = System.currentTimeMillis();
+    this.craftingDurationMS = craftingDurationMS;
   }
 
-  public int determineRemainingCraftingMinutes(long craftingDurationMS)
+  public int determineRemainingCraftingMinutes()
   {
     long remainingMS = craftingDurationMS - (System.currentTimeMillis() - craftingStartedAt);
     long remainingMin = -Math.floorDiv(-remainingMS, 60_000); // ceil div
