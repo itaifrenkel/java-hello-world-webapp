@@ -37,7 +37,7 @@ public class StartWeaponCraftCmd extends AbstractCmd
 
   private long determineCraftTime(Weapon craft)
   {
-    double perc = Math.min((double)100, weapon.determineAverageRollAmount());
+    double perc = Math.min((double)100, craft.determineAverageRollAmount());
     return (long)(perc * Settings.BLACKSMITH_CRAFTING_TIME_MS);
   }
 
