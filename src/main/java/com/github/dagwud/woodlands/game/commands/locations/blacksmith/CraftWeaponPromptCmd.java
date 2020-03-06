@@ -98,17 +98,26 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
     List<String> weapons = new ArrayList<>();
     if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof Weapon)
     {
-      weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
+      if (getCharacter().getCarrying().getCarriedLeft().getDamage().determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+      {
+        weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
+      }
     }
     if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
     {
-      weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
+      if (getCharacter().getCarrying().getCarriedRight().getDamage().determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+      {
+        weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
+      }
     }
     for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
     {
       if (inactive instanceof Weapon)
       {
-        weapons.add(inactive.getName());
+        if (inactive.getDamage().determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+        {
+          weapons.add(inactive.getName());
+        }
       }
     }
     weapons.add("Cancel");
