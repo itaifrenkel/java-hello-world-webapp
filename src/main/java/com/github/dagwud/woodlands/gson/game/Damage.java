@@ -25,9 +25,14 @@ public class Damage implements Serializable
     this.diceFaces = copy.diceFaces;
   }
 
+  public float determineAverageRollAmount()
+  {
+    return ((1f + (float) diceFaces) / 2f) * (float) diceCount;
+  }
+
   public String determineAverageRoll()
   {
-    float average = ((1f + (float) diceFaces) / 2f) * (float) diceCount;
+    float average = determineAverageRollAmount();
     return new DecimalFormat("#.##").format(average);
   }
 }
