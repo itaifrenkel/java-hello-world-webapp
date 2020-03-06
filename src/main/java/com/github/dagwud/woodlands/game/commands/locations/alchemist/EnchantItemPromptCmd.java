@@ -88,19 +88,31 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   private List<String> produceWeapons()
   {
     List<String> weapons = new ArrayList<>();
+
     if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof Weapon)
     {
-      weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
+      Weapon left = (Weapon) getCharacter().getCarrying().getCarriedLeft();
+      if (left.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+      {
+        weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
+      }
     }
     if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
     {
-      weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
+      Weapon right = (Weapon)getCharacter().getCarrying().getCarriedRight();
+      if (right.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+      {
+        weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
+      }
     }
     for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
     {
       if (inactive instanceof Weapon)
       {
-        weapons.add(inactive.getName());
+        if (((Weapon)inactive).damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+        {
+          weapons.add(inactive.getName());
+        }
       }
     }
     weapons.add("Cancel");
