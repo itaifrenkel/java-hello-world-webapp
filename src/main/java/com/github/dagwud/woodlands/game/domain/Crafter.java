@@ -9,6 +9,7 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
   private Map<PlayerCharacter, T> busyCrafting;
   private Map<PlayerCharacter, T> readyForCollection;
   private long craftingStartedAt;
+  private long craftingDurationMS;
 
   Crafter(Player ownedBy)
   {
