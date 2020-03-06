@@ -97,16 +97,19 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
   private List<String> produceWeapons()
   {
     List<String> weapons = new ArrayList<>();
+
     if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof Weapon)
     {
-      if ((Weapon)(getCharacter().getCarrying().getCarriedLeft()).damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+      Weapon left = (Weapon) getCharacter().getCarrying().getCarriedLeft();
+      if (left.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
       {
         weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
       }
     }
     if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
     {
-      if ((Weapon)(getCharacter().getCarrying().getCarriedRight()).damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+      Weapon right = getCharacter().getCarrying().getCarriedRight();
+      if (right.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
       {
         weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
       }
@@ -115,7 +118,7 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
     {
       if (inactive instanceof Weapon)
       {
-        if (inactive.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+        if (((Weapon)inactive).damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
         {
           weapons.add(inactive.getName());
         }
