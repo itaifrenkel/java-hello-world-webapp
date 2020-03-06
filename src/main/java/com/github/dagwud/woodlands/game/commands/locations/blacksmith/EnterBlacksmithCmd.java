@@ -47,7 +47,9 @@ public class EnterBlacksmithCmd extends AbstractCmd
     {
       if (blacksmith.isBusyCrafting())
       {
-        CommandDelegate.execute(new SendMessageCmd(character, "The door to the Blacksmith's shop is locked; you can hear the sounds of clashing steel coming from his workshop. He must be busy with something, because he yells out \"I'm busy with something, come back in " + blacksmith.determineRemainingCraftingMinutes(Settings.BLACKSMITH_CRAFTING_TIME_MS) + "!\""));
+        int remainingTimeMins = blacksmith.determineRemainingCraftingMinutes();
+        CommandDelegate.execute(new SendMessageCmd(character, "The door to the Blacksmith's shop is locked; you can hear the sounds of clashing steel coming from his workshop. " +
+                        "He must be busy with something, because he yells out \"I'm busy with something, come back in " + remainingTimeMins + "!\""));
       }
     }
 
