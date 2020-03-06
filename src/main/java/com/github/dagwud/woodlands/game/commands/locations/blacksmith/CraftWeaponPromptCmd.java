@@ -108,7 +108,7 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
     }
     if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
     {
-      Weapon right = getCharacter().getCarrying().getCarriedRight();
+      Weapon right = (Weapon)getCharacter().getCarrying().getCarriedRight();
       if (right.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
       {
         weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
