@@ -27,6 +27,10 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
   public void setBusyCrafting(PlayerCharacter character, T item)
   {
     getBusyCrafting().put(character, item);
+  }
+  
+  public void setCraftingExpectedEndTime(long craftingDurationMS)
+  {
     craftingStartedAt = System.currentTimeMillis();
   }
 
