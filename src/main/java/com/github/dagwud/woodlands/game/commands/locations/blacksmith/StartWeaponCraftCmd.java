@@ -28,10 +28,17 @@ public class StartWeaponCraftCmd extends AbstractCmd
   {
     Blacksmith blacksmith = craftFor.getParty().getBlacksmith();
     Weapon crafted = createCraftedWeapon();
+    long craftTimeMS = determineCraftTime(craftedFor);
     blacksmith.setBusyCrafting(craftFor, crafted);
-    blacksmith.setCraftingExpectedEndTime(Settings.BLACKSMITH_CRAFTING_TIME_MS);
-    CommandDelegate.execute(new RunLaterCmd(Settings.BLACKSMITH_CRAFTING_TIME_MS, new FinishCraftingCmd<Weapon>(crafted, craftFor, blacksmith)));
+    blacksmith.setCraftingExpectedEndTime(craftTimeMS);
+    CommandDelegate.execute(new RunLaterCmd(craftTimeMS, new FinishCraftingCmd<Weapon>(crafted, craftFor, blacksmith)));
     CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith is crafting " + firstWeapon.getName() + " and " + secondWeapon.getName() + " into a " + crafted.getName() + " for " + craftFor.getName())); 
+  }
+
+  private long determineCraftTime(Weapon craft)
+  {
+    double perc = Math.min((double)100, weapon.determineAverageRollAmount());
+    return (long)(perc * Settings.BLACKSMITH_CRAFTING_TIME_MS;
   }
 
   private Weapon createCraftedWeapon()
