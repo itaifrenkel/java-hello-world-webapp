@@ -1,5 +1,6 @@
 package com.github.dagwud.woodlands.game.commands.locations.blacksmith;
 
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.CraftPromptCmd;
