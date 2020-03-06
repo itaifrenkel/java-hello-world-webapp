@@ -30,7 +30,7 @@ public class StartEnchantShieldCmd extends AbstractCmd
     Alchemist alchemist = enchantFor.getParty().getAlchemist();
     Shield crafted = createEnchantedShield();
     alchemist.setBusyCrafting(enchantFor, crafted);
-    CommandDelegate.execute(new RunLaterCmd(Settings.ALCHEMIST_CRAFTING_TIME_MS, new FinishCraftingCmd<Shield>(crafted, enchantFor, alchemist)));
+    CommandDelegate.execute(new RunLaterCmd(Settings.ALCHEMIST_CRAFT_SHIELD_TIME_MS, new FinishCraftingCmd<Shield>(crafted, enchantFor, alchemist)));
     CommandDelegate.execute(new SendAdminMessageCmd("Alchemist is enchanting " + toEnchant.getName() + " and " + enchantWith.getName() + " into a " + crafted.getName() + " for " + enchantFor.getName()));
   }
 
