@@ -35,11 +35,12 @@ public class StartWeaponCraftCmd extends AbstractCmd
     CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith is crafting " + firstWeapon.getName() + " and " + secondWeapon.getName() + " into a " + crafted.getName() + " for " + craftFor.getName())); 
   }
 
+  // for every 1% of the max damage, it takes 2% of max time to craft
   private long determineCraftTime(Weapon craft)
   {
-    // for every 1% of the max damage, it takes 2% of max time to craft
     double damage = craft.damage.determineAverageRollAmount();
-    double scaledDamage = Math.min((double)Settings.MAX_CRAFTABLE_WEAPON_DAMAGE, damage * 2.0d);
+    double maxDamage = (double) Settings.MAX_CRAFTABLE_WEAPON_DAMAGE;
+    double scaledDamage = Math.min(maxDamage, damage * 2.0d);
     long maxTime = Settings.BLACKSMITH_CRAFTING_TIME_MS;
     double perc = scaledDamage / maxDamage;
     long duration = (long) (perc * maxTime);
