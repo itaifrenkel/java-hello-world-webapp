@@ -13,26 +13,23 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 public class StartWeaponCraftCmd extends AbstractCmd
 {
   private final PlayerCharacter craftFor;
-  private final Weapon firstWeapon;
-  private final Weapon secondWeapon;
+  private final Weapon weaponToCraft;
 
-  public StartWeaponCraftCmd(PlayerCharacter craftFor, Weapon firstWeapon, Weapon secondWeapon)
+  public StartWeaponCraftCmd(PlayerCharacter craftFor, Weapon weaponToCraft)
   {
     this.craftFor = craftFor;
-    this.firstWeapon = firstWeapon;
-    this.secondWeapon = secondWeapon;
+    this.weaponToCraft = weaponToCraft;
   }
 
   @Override
   public void execute()
   {
     Blacksmith blacksmith = craftFor.getParty().getBlacksmith();
-    Weapon crafted = createCraftedWeapon();
-    long craftTimeMS = determineCraftTime(crafted);
-    blacksmith.setBusyCrafting(craftFor, crafted);
+    long craftTimeMS = determineCraftTime(weaponToCraft);
+    blacksmith.setBusyCrafting(craftFor, weaponToCraft);
     blacksmith.setCraftingExpectedEndTime(craftTimeMS);
-    CommandDelegate.execute(new RunLaterCmd(craftTimeMS, new FinishCraftingCmd<Weapon>(crafted, craftFor, blacksmith)));
-    CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith is crafting " + firstWeapon.getName() + " and " + secondWeapon.getName() + " into a " + crafted.getName() + " for " + craftFor.getName())); 
+    CommandDelegate.execute(new RunLaterCmd(craftTimeMS, new FinishCraftingCmd<Weapon>(weaponToCraft, craftFor, blacksmith)));
+    CommandDelegate.execute(new SendAdminMessageCmd("Blacksmith is crafting " + weaponToCraft.getName() + " for " + craftFor.getName())); 
   }
 
   // for every 1% of the max damage, it takes 2% of max time to craft
@@ -44,15 +41,6 @@ public class StartWeaponCraftCmd extends AbstractCmd
     long maxTime = Settings.BLACKSMITH_CRAFTING_TIME_MS;
     double perc = scaledDamage / maxDamage;
     return (long) (perc * maxTime);
-  }
-
-  private Weapon createCraftedWeapon()
-  {
-    Weapon crafted = new Weapon(determineName(firstWeapon, secondWeapon));
-    crafted.ranged = determineRanged(firstWeapon, secondWeapon);
-    crafted.damage = determinedDamage(firstWeapon, secondWeapon);
-    crafted.enchanted = determineEnchanted(firstWeapon, secondWeapon);
-    return crafted;
   }
 
   private boolean determineEnchanted(Weapon firstWeapon, Weapon secondWeapon)
