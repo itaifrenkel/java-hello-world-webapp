@@ -32,6 +32,7 @@ public enum ECommand implements ICommand
   NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character == null ? null : character.getPlayedBy(), chatId)),
   ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
   PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
+  PARTY_ALSO("/pary", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
   RALLY("/rally", false, (character, chatId) -> new RallyCmd(character)),
   INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
