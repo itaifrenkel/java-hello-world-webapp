@@ -54,7 +54,7 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
   @Override
   protected String produceAcceptedJobMessage()
   {
-    return "\"I'll see what I can do. Come back in a few hours.\"";
+    return "\"I'll see what I can do. Come back a bit later.\"";
   }
 
   @Override
