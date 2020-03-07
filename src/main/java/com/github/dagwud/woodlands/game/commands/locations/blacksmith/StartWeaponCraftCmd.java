@@ -37,9 +37,12 @@ public class StartWeaponCraftCmd extends AbstractCmd
 
   private long determineCraftTime(Weapon craft)
   {
-    double perc = Math.min((double)100, craft.damage.determineAverageRollAmount()) / 100.0d;
-    long duration = (long)(perc * Settings.BLACKSMITH_CRAFTING_TIME_MS);
-    return Math.min(duration * 2L, Settings.BLACKSMITH_CRAFTING_TIME_MS);
+    // for every 1% of the max damage, it takes 2% of max time to craft
+    double damage = craft.damage.determineAverageRollAmount();
+    double scaledDamage = Math.min((double)Settings.MAX_CRAFTABLE_WEAPON_DAMAGE, damage * 2.0d);
+    long maxTime = Settings.BLACKSMITH_CRAFTING_TIME_MS;
+    double perc = scaledDamage / maxDamage;
+    long duration = (long) (perc * maxTime);
   }
 
   private Weapon createCraftedWeapon()
