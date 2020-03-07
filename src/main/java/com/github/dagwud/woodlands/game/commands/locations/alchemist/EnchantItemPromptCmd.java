@@ -13,7 +13,7 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrinket>
+public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrinket, Weapon>
 {
   public EnchantItemPromptCmd(PlayerCharacter character, PlayerState playerState)
   {
@@ -51,6 +51,19 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   }
 
   @Override
+  protected Weapon createCraftedItem(Weapon firstItem, ConsumableTrinket secondItem)
+  {
+    Weapon crafted = new Weapon(firstItem);
+    crafted.damage.diceCount = crafted.damage.diceCount + 1;
+    crafted.enchanted = true;
+    if (!getCharacter().canHandleWeapon(crafted))
+    {
+      return null;
+    }
+    return crafted;
+  }
+
+  @Override
   protected String produceCantWorkWithMessage()
   {
     return "\"I don't know what you expect me to do with that.\"";
@@ -81,64 +94,16 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   }
 
   @Override
-  protected AbstractCmd createCraftCmd(Weapon firstItem, ConsumableTrinket secondItem)
+  protected String produceJobDeclinedMessage()
   {
-    return new StartEnchantItemCmd(getCharacter(), firstItem, secondItem);
+    // No restrictions on shields, so this shouldn't happen...
+    return "\"Uhhhhhhhh... this is awkward. This shouldn't have happened. Something must be very wrong with the world\"";
   }
 
-  private List<String> produceWeapons()
+  @Override
+  protected AbstractCmd createCraftCmd(Weapon craftedItem)
   {
-    List<String> weapons = new ArrayList<>();
-
-    if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof Weapon)
-    {
-      Weapon left = (Weapon) getCharacter().getCarrying().getCarriedLeft();
-      if (left.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
-      {
-        weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
-      }
-    }
-    if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
-    {
-      Weapon right = (Weapon)getCharacter().getCarrying().getCarriedRight();
-      if (right.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
-      {
-        weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
-      }
-    }
-    for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
-    {
-      if (inactive instanceof Weapon)
-      {
-        if (((Weapon)inactive).damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
-        {
-          weapons.add(inactive.getName());
-        }
-      }
-    }
-    weapons.add("Cancel");
-    return weapons;
+    return new StartEnchantItemCmd(getCharacter(), craftedItem);
   }
 
-  private List<String> producePotions()
-  {
-    List<String> potions = new ArrayList<>();
-    if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof ConsumableTrinket)
-    {
-      potions.add(getCharacter().getCarrying().getCarriedLeft().getName());
-    }
-    if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof ConsumableTrinket)
-    {
-      potions.add(getCharacter().getCarrying().getCarriedRight().getName());
-    }
-    for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
-    {
-      if (inactive instanceof ConsumableTrinket)
-      {
-        potions.add(inactive.getName());
-      }
-    }
-    potions.add("Cancel");
-    return potions;
-  }
 }

@@ -1,18 +1,19 @@
 package com.github.dagwud.woodlands.game.commands.locations.blacksmith;
 
-import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.CraftPromptCmd;
 import com.github.dagwud.woodlands.game.domain.Crafter;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.gson.game.Damage;
 import com.github.dagwud.woodlands.gson.game.Weapon;
+import com.github.dagwud.woodlands.game.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
+public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon, Weapon>
 {
   private static final long serialVersionUID = 1L;
 
@@ -58,19 +59,31 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
   }
 
   @Override
-  protected AbstractCmd createCraftCmd(Weapon firstItem, Weapon secondItem)
+  protected String produceJobDeclinedMessage()
   {
-    Weapon toCraft = createCraftedWeapon(firstItem, secondaries);
-    return new StartWeaponCraftCmd(getCharacter(), toCraft);
+    return "\"Look, I don’t know who you were in a past life, but you clearly shouldn’t be hauling around that kind " +
+            "of firepower. When you’re able to control that much damage, come back and chat to me, but for now " +
+            "I can’t help you.";
   }
 
-  private Weapon createCraftedWeapon()
+  @Override
+  protected AbstractCmd createCraftCmd(Weapon crafted)
   {
-    Weapon crafted = new Weapon(determineName(firstWeapon, secondWeapon));
-    crafted.ranged = determineRanged(firstWeapon, secondWeapon);
-    crafted.damage = determinedDamage(firstWeapon, secondWeapon);
-    crafted.enchanted = determineEnchanted(firstWeapon, secondWeapon);
-    return crafted;
+    return new StartWeaponCraftCmd(getCharacter(), crafted);
+  }
+
+  @Override
+  protected Weapon createCraftedItem(Weapon firstItem, Weapon secondItem)
+  {
+    Weapon crafted = new Weapon(determineName(firstItem, secondItem));
+    crafted.ranged = determineRanged(firstItem, secondItem);
+    crafted.damage = determinedDamage(firstItem, secondItem);
+    crafted.enchanted = determineEnchanted(firstItem, secondItem);
+    if (getCharacter().canHandleWeapon(crafted))
+    {
+      return crafted;
+    }
+    return null;
   }
 
   @Override
@@ -102,40 +115,6 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon>
     List<String> weapons = produceWeapons();
     weapons.remove(exclude);
     return weapons.toArray(new String[0]);
-  }
-
-  private List<String> produceWeapons()
-  {
-    List<String> weapons = new ArrayList<>();
-
-    if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof Weapon)
-    {
-      Weapon left = (Weapon) getCharacter().getCarrying().getCarriedLeft();
-      if (left.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
-      {
-        weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
-      }
-    }
-    if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
-    {
-      Weapon right = (Weapon)getCharacter().getCarrying().getCarriedRight();
-      if (right.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
-      {
-        weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
-      }
-    }
-    for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
-    {
-      if (inactive instanceof Weapon)
-      {
-        if (((Weapon)inactive).damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
-        {
-          weapons.add(inactive.getName());
-        }
-      }
-    }
-    weapons.add("Cancel");
-    return weapons;
   }
 
   private boolean determineEnchanted(Weapon firstWeapon, Weapon secondWeapon)

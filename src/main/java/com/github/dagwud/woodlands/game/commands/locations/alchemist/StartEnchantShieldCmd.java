@@ -14,33 +14,22 @@ import com.github.dagwud.woodlands.gson.game.Shield;
 public class StartEnchantShieldCmd extends AbstractCmd
 {
   private final PlayerCharacter enchantFor;
-  private final Shield toEnchant;
-  private final ConsumableTrinket enchantWith;
+  private final Shield enchantedShield;
 
-  StartEnchantShieldCmd(PlayerCharacter character, Shield toEnchant, ConsumableTrinket enchantWith)
+  StartEnchantShieldCmd(PlayerCharacter character, Shield enchantedShield)
   {
     this.enchantFor = character;
-    this.toEnchant = toEnchant;
-    this.enchantWith = enchantWith;
+    this.enchantedShield = enchantedShield;
   }
 
   @Override
   public void execute()
   {
     Alchemist alchemist = enchantFor.getParty().getAlchemist();
-    Shield crafted = createEnchantedShield();
-    alchemist.setBusyCrafting(enchantFor, crafted);
+    alchemist.setBusyCrafting(enchantFor, enchantedShield);
     alchemist.setCraftingExpectedEndTime(Settings.ALCHEMIST_ENCHANT_SHIELD_TIME_MS);
-    CommandDelegate.execute(new RunLaterCmd(Settings.ALCHEMIST_ENCHANT_SHIELD_TIME_MS, new FinishCraftingCmd<Shield>(crafted, enchantFor, alchemist)));
-    CommandDelegate.execute(new SendAdminMessageCmd("Alchemist is enchanting " + toEnchant.getName() + " and " + enchantWith.getName() + " into a " + crafted.getName() + " for " + enchantFor.getName()));
+    CommandDelegate.execute(new RunLaterCmd(Settings.ALCHEMIST_ENCHANT_SHIELD_TIME_MS, new FinishCraftingCmd<>(enchantedShield, enchantFor, alchemist)));
+    CommandDelegate.execute(new SendAdminMessageCmd("Alchemist is enchanting  a " + enchantedShield.getName() + " for " + enchantFor.getName()));
   }
 
-  private Shield createEnchantedShield()
-  {
-    Shield shield = new Shield();
-    shield.name = toEnchant.name;
-    shield.strength = toEnchant.strength + 1;
-    shield.enchanted = true;
-    return shield;
-  }
 }

@@ -12,7 +12,7 @@ import com.github.dagwud.woodlands.gson.game.Shield;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnchantShieldPromptCmd extends CraftPromptCmd<Shield, ConsumableTrinket>
+public class EnchantShieldPromptCmd extends CraftPromptCmd<Shield, ConsumableTrinket, Shield>
 {
   public EnchantShieldPromptCmd(PlayerCharacter character, PlayerState playerState)
   {
@@ -50,6 +50,24 @@ public class EnchantShieldPromptCmd extends CraftPromptCmd<Shield, ConsumableTri
   }
 
   @Override
+  protected String produceJobDeclinedMessage()
+  {
+    return "\"Look, I don’t know who you were in a past life, but you clearly shouldn’t be hauling around that kind " +
+            "of firepower. When you’re able to control that much damage, come back and chat to me, but for now " +
+            "I can’t help you.";
+  }
+
+  @Override
+  protected Shield createCraftedItem(Shield firstItem, ConsumableTrinket secondItem)
+  {
+    Shield shield = new Shield();
+    shield.name = firstItem.name;
+    shield.strength = firstItem.strength + 1;
+    shield.enchanted = true;
+    return shield;
+  }
+
+  @Override
   protected String produceCantWorkWithMessage()
   {
     return "\"I don't know what you expect me to do with that.\"";
@@ -80,9 +98,9 @@ public class EnchantShieldPromptCmd extends CraftPromptCmd<Shield, ConsumableTri
   }
 
   @Override
-  protected AbstractCmd createCraftCmd(Shield firstItem, ConsumableTrinket secondItem)
+  protected AbstractCmd createCraftCmd(Shield crafted)
   {
-    return new StartEnchantShieldCmd(getCharacter(), firstItem, secondItem);
+    return new StartEnchantShieldCmd(getCharacter(), crafted);
   }
 
   private List<String> produceShields()
@@ -107,25 +125,4 @@ public class EnchantShieldPromptCmd extends CraftPromptCmd<Shield, ConsumableTri
     return shields;
   }
 
-  private List<String> producePotions()
-  {
-    List<String> potions = new ArrayList<>();
-    if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof ConsumableTrinket)
-    {
-      potions.add(getCharacter().getCarrying().getCarriedLeft().getName());
-    }
-    if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof ConsumableTrinket)
-    {
-      potions.add(getCharacter().getCarrying().getCarriedRight().getName());
-    }
-    for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
-    {
-      if (inactive instanceof ConsumableTrinket)
-      {
-        potions.add(inactive.getName());
-      }
-    }
-    potions.add("Cancel");
-    return potions;
-  }
 }

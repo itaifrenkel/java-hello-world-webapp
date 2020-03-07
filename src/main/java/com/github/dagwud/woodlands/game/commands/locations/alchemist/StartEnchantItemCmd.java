@@ -14,32 +14,22 @@ import com.github.dagwud.woodlands.gson.game.Weapon;
 public class StartEnchantItemCmd extends AbstractCmd
 {
   private final PlayerCharacter enchantFor;
-  private final Weapon toEnchant;
-  private final ConsumableTrinket enchantWith;
+  private final Weapon enchantedWeapon;
 
-  StartEnchantItemCmd(PlayerCharacter character, Weapon toEnchant, ConsumableTrinket enchantWith)
+  StartEnchantItemCmd(PlayerCharacter character, Weapon enchantedWeapon)
   {
     this.enchantFor = character;
-    this.toEnchant = toEnchant;
-    this.enchantWith = enchantWith;
+    this.enchantedWeapon = enchantedWeapon;
   }
 
   @Override
   public void execute()
   {
     Alchemist alchemist = enchantFor.getParty().getAlchemist();
-    Weapon crafted = createEnchantedWeapon();
-    alchemist.setBusyCrafting(enchantFor, crafted);
+    alchemist.setBusyCrafting(enchantFor, enchantedWeapon);
     alchemist.setCraftingExpectedEndTime(Settings.ALCHEMIST_ENCHANT_WEAPON_TIME_MS);
-    CommandDelegate.execute(new RunLaterCmd(Settings.ALCHEMIST_ENCHANT_WEAPON_TIME_MS, new FinishCraftingCmd(crafted, enchantFor, alchemist)));
-    CommandDelegate.execute(new SendAdminMessageCmd("Alchemist is enchanting " + toEnchant.getName() + " and " + enchantWith.getName() + " into a " + crafted.getName() + " for " + enchantFor.getName()));
+    CommandDelegate.execute(new RunLaterCmd(Settings.ALCHEMIST_ENCHANT_WEAPON_TIME_MS, new FinishCraftingCmd<>(enchantedWeapon, enchantFor, alchemist)));
+    CommandDelegate.execute(new SendAdminMessageCmd("Alchemist is enchanting a " + enchantedWeapon.getName() + " for " + enchantFor.getName()));
   }
 
-  private Weapon createEnchantedWeapon()
-  {
-    Weapon weapon = new Weapon(toEnchant);
-    weapon.damage.diceCount = weapon.damage.diceCount + 1;
-    weapon.enchanted = true;
-    return weapon;
-  }
 }
