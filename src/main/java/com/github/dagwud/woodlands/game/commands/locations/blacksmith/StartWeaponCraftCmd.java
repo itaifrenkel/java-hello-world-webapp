@@ -43,7 +43,7 @@ public class StartWeaponCraftCmd extends AbstractCmd
     double scaledDamage = Math.min(maxDamage, damage * 2.0d);
     long maxTime = Settings.BLACKSMITH_CRAFTING_TIME_MS;
     double perc = scaledDamage / maxDamage;
-    long duration = (long) (perc * maxTime);
+    return (long) (perc * maxTime);
   }
 
   private Weapon createCraftedWeapon()
