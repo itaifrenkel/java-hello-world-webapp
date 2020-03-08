@@ -7,6 +7,7 @@ public enum EAchievement
   ALL_THE_ACHIEVEMENTS("All The Achievements", "You have more achievements than anyone else - that's quite an achievement"),
   DRUNKEN_COMMAND("NOW LISHTEN HERE YOU", "You were drunk enough that you issued a command that was not a command"),
   PARTY_IS_OVER("Party's Over... Forever", "You managed to get your entire party killed. Nice one"),
+  CAPTAIN_MY_CAPTAIN("Captain My Captain", "You've led your party the most times"),
   DRUNKEN_VICTORY("Gonna Feel That In The Morning", "Despite your entire party being drunk, you still won a battle"),
   SHUFFLED_OFF_THE_MORTAL_COIL("Shuffled Off The Mortal Coil", "You're definitely not sleeping - you're dead"),
   SO_CRAFTY("So Crafty", "You're the craftiest of the crafty crafters - you've crafted the most items in your party"),
