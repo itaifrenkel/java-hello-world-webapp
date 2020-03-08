@@ -29,6 +29,8 @@ public enum ELocation
             "\"Long journey?\" he asks jovially, though something about his demeanor suggests he’s not that interested in your journey so much as how many coins are in your pocket.",
           new TavernIntervalCmd()),
 
+  SPARRING_TENT("Sparring Tent", new SparringTentMenu(), false, "The dusty ground is splattered with drops of blood"),
+
   BLACKSMITH("Blacksmith", new BlacksmithMenu(), true, "The Blacksmith's shop is........ hot"),
 
   ALCHEMIST("Alchemist", new AlchemistMenu(), true, "The Alchemist's store smells of a combination of sweet flowers, wines, and animal dung that's been heated up. Between that and the jars of you-don't-want-to-know-what-exactly lining his shelves, it's not a pleasant place to be. Nevertheless, he's widely known as the best alchemist in the village, and even though that's not saying much, he does possess a useful set of skills."),
@@ -65,7 +67,11 @@ public enum ELocation
 
   ELocation(String displayName, GameMenu menu, boolean autoRetreat, String lookText)
   {
-    this(displayName, menu, autoRetreat, lookText, null);
+    this.lookText = lookText;
+    this.displayName = displayName;
+    this.menu = menu;
+    this.autoRetreat = autoRetreat;
+    this.roomCmd = null;
   }
 
   ELocation(String displayName, GameMenu menu, boolean autoRetreat, String lookText, AbstractRoomCmd roomCmd)
@@ -130,6 +136,11 @@ public enum ELocation
 
   public boolean isVillageLocation()
   {
-    return this == VILLAGE_SQUARE || this == INN || this == TAVERN || this == BLACKSMITH || this == ALCHEMIST;
+    return this == VILLAGE_SQUARE
+            || this == INN
+            || this == TAVERN
+            || this == BLACKSMITH
+            || this == ALCHEMIST
+            || this == SPARRING_TENT;
   }
 }

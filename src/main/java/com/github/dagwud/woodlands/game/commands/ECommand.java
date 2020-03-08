@@ -98,6 +98,7 @@ public enum ECommand implements ICommand
 
   JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
   BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
+  SPARRING_TENT("Pick a Fight", false, (character, chatIt) -> new MoveToLocationCmd(character, ELocation.SPARRING_TENT)),
   WAKE("Host a Wake", true, (character, chatId) -> new WakeCmd(chatId, character)),
   UPGRADE("Celebrate", true, (character, chatId) -> new CelebrateCmd(chatId, character.getPlayedBy().getPlayerState())),
   SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),

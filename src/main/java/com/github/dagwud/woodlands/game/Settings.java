@@ -66,6 +66,9 @@ public class Settings
   public static final int CAVERN_TIME_ALLOWED_FOR_PLANNING_MS = 20_000;
   public static final int CAVERN_ACTIONS_PER_ROUND = 2;
 
+  public static final int SPARRING_TENT_TIME_ALLOWED_FOR_PLANNING_MS = 15_000;
+  public static final int SPARRING_TENT_ACTIONS_PER_ROUND = 3;
+
   public static final boolean SUICIDAL_CREATURES = false; // if true, enemies will NEVER retreat, even if they're totally overpowered
   public static final long ROOM_INTERVAL_MS = 10_000;
 

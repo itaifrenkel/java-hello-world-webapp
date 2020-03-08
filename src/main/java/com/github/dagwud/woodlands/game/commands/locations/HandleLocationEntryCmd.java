@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.commands.locations.deepwoods.EnterDeepWo
 import com.github.dagwud.woodlands.game.commands.locations.gorge.EnterTheGorgeCmd;
 import com.github.dagwud.woodlands.game.commands.locations.mountain.EnterTheMountainCmd;
 import com.github.dagwud.woodlands.game.commands.locations.pettingzoo.EnterThePettingZooCmd;
+import com.github.dagwud.woodlands.game.commands.locations.sparringtent.EnterSparringTentCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.EnterTheVillageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.woodlands.EnterTheWoodlandsCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
@@ -56,6 +57,9 @@ public class HandleLocationEntryCmd extends AbstractCmd
         break;
       case ALCHEMIST:
         CommandDelegate.execute(new EnterAlchemistCmd(playerState.getActiveCharacter()));
+        break;
+      case SPARRING_TENT:
+        CommandDelegate.execute(new EnterSparringTentCmd(playerState.getActiveCharacter()));
         break;
 
       case CAVERN_1:

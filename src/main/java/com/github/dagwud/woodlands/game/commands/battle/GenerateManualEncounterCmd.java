@@ -3,11 +3,7 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.Encounter;
-import com.github.dagwud.woodlands.game.domain.ManualEncounter;
-import com.github.dagwud.woodlands.game.domain.Party;
-import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.game.domain.*;
 
 import java.util.List;
 
