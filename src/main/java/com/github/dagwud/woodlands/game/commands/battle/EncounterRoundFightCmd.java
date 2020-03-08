@@ -48,9 +48,9 @@ public class EncounterRoundFightCmd extends AbstractCmd
     List<SingleCastSpell> spellsActivity = new ArrayList<>();
 
     int fledEnemiesCount = 0;
-    for (Creature enemy : encounter.getEnemies())
+    for (Fighter enemy : encounter.getEnemies())
     {
-      boolean enemyFled = encounter.getEnemies().size() == 1 && shouldEnemyFlee(enemy);
+      boolean enemyFled = encounter.getEnemies().size() == 1 && enemy instanceof Creature && shouldEnemyFlee((Creature)enemy);
       if (enemyFled)
       {
         KnockUnconsciousCmd faint = new KnockUnconsciousCmd(enemy);
@@ -89,13 +89,24 @@ public class EncounterRoundFightCmd extends AbstractCmd
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.getSummary());
     CommandDelegate.execute(status);
 
-    if (!anyEnemyConscious() || !anyPlayerCharactersStillAlive(encounter))
+    if (!anyEnemyConscious() || !encounter.anyAggressorsStillConscious())
     {
-      for (Creature enemy : encounter.getEnemies())
+      for (Fighter enemy : encounter.getEnemies())
       {
         if (!enemy.isConscious())
         {
-          DefeatCreatureCmd win = new DefeatCreatureCmd(encounter.getParty(), enemy, encounter.isFarmed(), encounter.getEnemies().size() > 1);
+          AbstractCmd win;
+          if (enemy instanceof Creature)
+          {
+            win = new DefeatCreatureCmd(encounter.getParty(), (Creature)enemy, encounter.isFarmed(), encounter.getEnemies().size() > 1);
+          }
+          else
+          {
+            Collection<Fighter> allFighters = encounter.getAllFighters();
+            allFighters.remove(enemy);
+            Fighter victor = allFighters.iterator().next();
+            win = new DefeatSparringPartnerCmd(encounter.getParty(), victor, enemy);
+          }
           CommandDelegate.execute(win);
         }
       }
@@ -144,7 +155,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
   private boolean anyEnemyConscious()
   {
-    for (Creature enemy : encounter.getEnemies())
+    for (Fighter enemy : encounter.getEnemies())
     {
       if (enemy.isConscious())
       {
@@ -230,18 +241,6 @@ public class EncounterRoundFightCmd extends AbstractCmd
     return null;
   }
 
-  private boolean anyPlayerCharactersStillAlive(Encounter encounter)
-  {
-    for (PlayerCharacter member : encounter.getParty().getActivePlayerCharacters())
-    {
-      if (member.isConscious())
-      {
-        return true;
-      }
-    }
-    return false;
-  }
-
   private List<DamageInflicted> doAttack(Fighter attacker, List<SingleCastSpell> spellsActivity)
   {
     List<DamageInflicted> roundActivity = new ArrayList<>();
@@ -252,7 +251,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
     Fighter defender;
 
-    defender = attacker.chooseFighterToAttack(encounter.getAllFighters());
+    defender = encounter.chooseFighterToAttack(attacker);
     if (attacker.isConscious() && defender.isConscious() && attacksAllowed > 0)
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
@@ -263,7 +262,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
       attacksAllowed--;
     }
 
-    defender = attacker.chooseFighterToAttack(encounter.getAllFighters());
+    defender = encounter.chooseFighterToAttack(attacker);
     if (attacker.isConscious() && defender.isConscious() && attacksAllowed > 0)
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);

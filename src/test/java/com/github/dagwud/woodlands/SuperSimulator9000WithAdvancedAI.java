@@ -18,38 +18,59 @@ import java.util.Scanner;
 public class SuperSimulator9000WithAdvancedAI
 {
 
-    public static void main(String[] args) throws Exception
-    {
-        Scanner in = new Scanner(System.in);
-        TelegramServlet telegramServlet = new TelegramServlet();
+  public static void main(String[] args) throws Exception
+  {
+    SimulatorFrame frame = new SimulatorFrame();
+    frame.setVisible(true);
 
-        Settings.DEVELOPER_MODE = true;
+    Scanner in = new Scanner(System.in);
+    TelegramServlet telegramServlet = new TelegramServlet();
 
-        MessagingFactory.create(new SimulatorSender());
+    Settings.DEVELOPER_MODE = true;
 
-        telegramServlet.processTelegramUpdate(createUpdate("/start"));
+    MessagingFactory.create(new SimulatorSender());
+
+    telegramServlet.processTelegramUpdate(createUpdate("/start", -1));
 
         // various things don't happen without a persisted state to get at without erroring
         // may behave weird if your persistence works, then comment it out
         ELocation.scheduleRooms();
         EEvent.subscribeToStandardEvents();
 
-        while (true)
-        {
-            String s = in.nextLine();
-            Update update = createUpdate(s);
-            telegramServlet.processTelegramUpdate(update);
-        }
-    }
-
-    private static Update createUpdate(String messageText)
+    int chatId = -1;
+    while (true)
     {
-        Update u = new Update();
-        u.message = new Message();
-        u.message.text = messageText;
-        u.message.chat = new Chat();
-        u.message.chat.id = -1;
-        u.message.from = new User();
-        return u;
+      try
+      {
+        String s = in.nextLine();
+        // allow simulating multiple players by switching chat IDs:
+        if (s.startsWith("chatid:-"))
+        {
+          chatId = Integer.parseInt(s.substring("chatid:".length()));
+          System.out.println("*** Simulator now running with chat_id=" + chatId + "***");
+        }
+        else
+        {
+          Update update = createUpdate(s, chatId);
+          telegramServlet.processTelegramUpdate(update);
+        }
+      }
+      catch (Exception e)
+      {
+        // smother and keep running
+        e.printStackTrace();
+      }
     }
+  }
+
+  private static Update createUpdate(String messageText, int id)
+  {
+    Update u = new Update();
+    u.message = new Message();
+    u.message.text = messageText;
+    u.message.chat = new Chat();
+    u.message.chat.id = id;
+    u.message.from = new User();
+    return u;
+  }
 }

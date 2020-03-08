@@ -75,18 +75,35 @@ public abstract class GameCharacter extends Fighter
   }
 
   @Override
-  public Creature chooseFighterToAttack(Collection<? extends Fighter> fighters)
+  public Fighter chooseFighterToAttack(Collection<? extends Fighter> fighters)
   {
-    List<Creature> creatures = new ArrayList<>();
+    return chooseFighterToAttack(fighters, false, null);
+  }
+
+  public Fighter chooseFighterToAttack(Collection<? extends Fighter> fighters, boolean allowFriendlyFire, Fighter attacker)
+  {
+    List<Fighter> enemies = new ArrayList<>();
     for (Fighter fighter : fighters)
     {
       if (fighter instanceof Creature)
       {
-        creatures.add((Creature) fighter);
+        enemies.add(fighter);
       }
     }
-    int i = (int)(Math.random() * creatures.size());
-    return creatures.get(i);
+
+    if (allowFriendlyFire)
+    {
+      for (Fighter fighter : fighters)
+      {
+        if (fighter instanceof PlayerCharacter && fighter != attacker)
+        {
+          enemies.add(fighter);
+        }
+      }
+    }
+
+    int i = (int)(Math.random() * enemies.size());
+    return enemies.get(i);
   }
 
 }

@@ -72,13 +72,9 @@ public class BuildRoundSummaryCmd extends AbstractCmd
   {
     StringBuilder b = new StringBuilder();
     b.append("<u>Stats after round ").append(encounter.getBattleRound()).append("</u>\n");
-    for (GameCharacter member : encounter.getParty().getActiveMembers())
+    for (Fighter fighter : encounter.getAllFighters())
     {
-      b.append("\n").append(bullet(member)).append(member.summary());
-    }
-    for (Creature enemy : encounter.getEnemies())
-    {
-      b.append("\n").append(bullet(enemy)).append(enemy.summary());
+      b.append("\n").append(bullet(fighter)).append(fighter.summary());
     }
     return b.toString();
   }

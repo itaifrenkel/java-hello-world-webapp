@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.ChanceCalculatorCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
@@ -29,7 +30,7 @@ public abstract class GenerateAutomaticEncounterCmd extends GenerateEncounterCmd
   }
 
   @Override
-  Encounter createEncounter(Party party, List<Creature> enemy)
+  Encounter createEncounter(Party party, List<? extends Fighter> enemy)
   {
     return new Encounter(party, enemy);
   }

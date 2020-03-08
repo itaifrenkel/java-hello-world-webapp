@@ -1,7 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.characters.Trickster;
-import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ public class Distraction extends SingleCastSpell
 {
   private static final long serialVersionUID = 1L;
 
-  private Map<Creature, Integer> debuffs;
+  private Map<Fighter, Integer> debuffs;
 
   public Distraction(Trickster caster)
   {
@@ -22,7 +22,7 @@ public class Distraction extends SingleCastSpell
   public boolean cast()
   {
     Trickster caster = getCaster();
-    Creature target = caster.chooseFighterToAttack(caster.getParty().getActiveEncounter().getEnemies());
+    Fighter target = caster.chooseFighterToAttack(caster.getParty().getActiveEncounter().getEnemies());
 
     int hitBoost = target.getStats().getHitBoost();
 
@@ -38,7 +38,7 @@ public class Distraction extends SingleCastSpell
   @Override
   public void expire()
   {
-    for (Creature target : debuffs.keySet())
+    for (Fighter target : debuffs.keySet())
     {
       Integer buffedAmount = debuffs.get(target);
       target.getStats().setHitBoost(target.getStats().getHitBoost() + buffedAmount);

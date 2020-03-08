@@ -29,6 +29,12 @@ public class MoveToLocationCmd extends AbstractCmd
     this.location = location;
   }
 
+  public MoveToLocationCmd(GameCharacter characterToMove, ELocation location, boolean evenIfUnconscious)
+  {
+    this.characterToMove = characterToMove;
+    this.location = location;
+  }
+
   @Override
   public void execute()
   {

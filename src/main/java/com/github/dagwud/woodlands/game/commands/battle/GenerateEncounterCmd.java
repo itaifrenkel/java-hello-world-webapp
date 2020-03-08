@@ -5,9 +5,7 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureByDifficultyCmd;
-import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.Encounter;
-import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.util.ArrayList;
@@ -103,21 +101,17 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
     return encounter;
   }
 
-  private String buildEncounteredSummary(Encounter encounter)
+  protected String buildEncounteredSummary(Encounter encounter)
   {
     StringBuilder b = new StringBuilder();
     b.append(encounter.getEnemies().size() == 1 ? "<b>You encountered a </b>" : "<b>You encountered:</b>\n");
-    for (Creature enemy : encounter.getEnemies())
+    for (Fighter enemy : encounter.getEnemies())
     {
       if (encounter.getEnemies().size() > 1)
       {
         b.append("• ");
       }
       b.append(buildEnemySummary(enemy));
-      if (encounter.getEnemies().size() > 1)
-      {
-        b.append("");
-      }
       b.append(enemy.getCarrying().summary(enemy));
       if (encounter.getEnemies().size() > 1)
       {
@@ -127,24 +121,39 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
     return b.toString();
   }
 
-  private String buildEnemySummary(Creature enemy)
+  protected String buildEnemySummary(Fighter enemy)
   {
-    return "<b>" + enemy.name + " (L" + enemy.difficulty() + "):</b>\n" + enemy.summary();
+    String level;
+    if (enemy instanceof Creature)
+    {
+      level = ((Creature) enemy).difficulty();
+    }
+    else
+    {
+      level = String.valueOf(enemy.getStats().getLevel());
+    }
+    return "<b>" + enemy.getName() + " (L" + level + "):</b>\n" + enemy.summary();
   }
 
   private Encounter createEncounter()
   {
-    List<Creature> creatures = new ArrayList<>();
+    List<Fighter> creatures = produceEnemies();
+    return createEncounter(getPlayerState().getActiveCharacter().getParty(), creatures);
+  }
+
+  protected List<Fighter> produceEnemies()
+  {
+    List<Fighter> creatures = new ArrayList<>();
     for (int i = 0; i < enemyCount; i++)
     {
       SpawnCreatureByDifficultyCmd cmd = new SpawnCreatureByDifficultyCmd(getMinDifficulty(), getMaxDifficulty(), getCreatureType());
       CommandDelegate.execute(cmd);
       creatures.add(cmd.getSpawnedCreature());
     }
-    return createEncounter(getPlayerState().getActiveCharacter().getParty(), creatures);
+    return creatures;
   }
 
-  abstract Encounter createEncounter(Party party, List<Creature> enemy);
+  abstract Encounter createEncounter(Party party, List<? extends Fighter> enemy);
 
   protected final PlayerState getPlayerState()
   {
@@ -166,12 +175,12 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
     return maxDifficulty;
   }
 
-  final String getCreatureType()
+  private String getCreatureType()
   {
     return creatureType;
   }
 
-  public int getEnemyCount()
+  protected int getEnemyCount()
   {
     return enemyCount;
   }

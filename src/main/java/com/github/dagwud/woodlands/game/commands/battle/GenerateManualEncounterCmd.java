@@ -31,7 +31,7 @@ public abstract class GenerateManualEncounterCmd extends GenerateEncounterCmd
   }
 
   @Override
-  protected Encounter createEncounter(Party party, List<Creature> enemy)
+  protected Encounter createEncounter(Party party, List<? extends Fighter> enemy)
   {
     return new ManualEncounter(party, enemy, timeAllowedForPlanningMS, actionsPerRound);
   }
@@ -41,5 +41,15 @@ public abstract class GenerateManualEncounterCmd extends GenerateEncounterCmd
   {
     EncounterRoundCmd cmd = new ManualEncounterRoundCmd(getPlayerState(), Settings.DELAY_BETWEEN_ROUNDS_MS);
     CommandDelegate.execute(cmd);
+  }
+
+  protected int getTimeAllowedForPlanningMS()
+  {
+    return timeAllowedForPlanningMS;
+  }
+
+  protected int getActionsPerRound()
+  {
+    return actionsPerRound;
   }
 }

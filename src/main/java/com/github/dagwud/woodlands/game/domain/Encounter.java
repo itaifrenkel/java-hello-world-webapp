@@ -3,11 +3,10 @@ package com.github.dagwud.woodlands.game.domain;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.battle.AutomaticEncounterRoundCmd;
 import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
-import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class Encounter implements Serializable
@@ -15,7 +14,7 @@ public class Encounter implements Serializable
   private static final long serialVersionUID = 1L;
 
   private Party party;
-  private List<Creature> enemies;
+  private List<? extends Fighter> enemies;
   private boolean ended;
   private int currentRound;
   private final int actionsAllowedPerRound;
@@ -27,12 +26,12 @@ public class Encounter implements Serializable
   private boolean farmed = true;
   private boolean fightingStarted;
 
-  public Encounter(Party party, List<Creature> enemies)
+  public Encounter(Party party, List<? extends Fighter> enemies)
   {
     this(party, enemies, 3); // two attacks and a spell
   }
 
-  protected Encounter(Party party, List<Creature> enemies, int actionsAllowedPerRound)
+  protected Encounter(Party party, List<? extends Fighter> enemies, int actionsAllowedPerRound)
   {
     this.party = party;
     this.enemies = enemies;
@@ -49,14 +48,14 @@ public class Encounter implements Serializable
     ended = true;
   }
 
-  public List<Creature> getEnemies()
+  public List<? extends Fighter> getEnemies()
   {
     return enemies;
   }
 
   public Collection<Fighter> getAllFighters()
   {
-    Collection<Fighter> fighters = new ArrayList<>(party.getActiveMembers());
+    Collection<Fighter> fighters = new HashSet<>(party.getActiveMembers());
     fighters.addAll(enemies);
     return fighters;
   }
@@ -125,4 +124,20 @@ public class Encounter implements Serializable
   {
   }
 
+  public Fighter chooseFighterToAttack(Fighter attacker)
+  {
+    return attacker.chooseFighterToAttack(getAllFighters());
+  }
+
+  public boolean anyAggressorsStillConscious()
+  {
+    for (PlayerCharacter member : getParty().getActivePlayerCharacters())
+    {
+      if (member.isConscious())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 }
