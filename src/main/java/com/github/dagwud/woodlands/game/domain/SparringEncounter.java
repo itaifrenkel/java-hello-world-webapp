@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class SparringEncounter extends ManualEncounter
@@ -11,6 +13,15 @@ public class SparringEncounter extends ManualEncounter
   {
     super(party, enemies, timeAllowedForPlanningMS, actionsAllowedPerRound);
     this.aggressor = aggressor;
+  }
+
+  @Override
+  public Collection<Fighter> getAllFighters()
+  {
+    Collection<Fighter> fighters = new HashSet<>();
+    fighters.add(aggressor);
+    fighters.addAll(getEnemies());
+    return fighters;
   }
 
   @Override
