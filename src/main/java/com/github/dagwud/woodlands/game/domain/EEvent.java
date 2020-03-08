@@ -13,7 +13,8 @@ import java.util.Map;
 
 public enum EEvent
 {
-  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM, CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY;
+  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM,
+  CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY, CRAFTED_ITEM, ENCHANTED_ITEM;
 
   private static transient Map<EEvent, List<EventRecipient<? extends Event>>> subscribers;
 
@@ -48,6 +49,9 @@ public enum EEvent
     EEvent.PLAYER_DEATH.subscribe(new PlayerDeathAchievementEvent());
     EEvent.PLAYER_DROPPED_ITEM.subscribe(new CharacterDroppedItemEventRecipient());
     EEvent.PLAYER_GAVE_ITEM_AWAY.subscribe(new CharacterGaveItemEventRecipient());
+
+    EEvent.CRAFTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SO_CRAFTY, playerCharacter -> playerCharacter.getStats().getCraftsCount()));
+    EEvent.CRAFTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SPELLS_GREAT, playerCharacter -> playerCharacter.getStats().getEnchantmentsCount()));
   }
 
   public void subscribe(EventRecipient<? extends Event> recipient)

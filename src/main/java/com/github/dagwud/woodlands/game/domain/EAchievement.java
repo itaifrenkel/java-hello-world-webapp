@@ -9,6 +9,8 @@ public enum EAchievement
   PARTY_IS_OVER("Party's Over... Forever", "You managed to get your entire party killed. Nice one"),
   DRUNKEN_VICTORY("Gonna Feel That In The Morning", "Despite your entire party being drunk, you still won a battle"),
   SHUFFLED_OFF_THE_MORTAL_COIL("Shuffled Off The Mortal Coil", "You're definitely not sleeping - you're dead"),
+  SO_CRAFTY("So Crafty", "You're the craftiest of the crafty crafters - you've crafted the most items in your party"),
+  SPELLS_GREAT("Spells Great", "You spell great, anyone ever tell you that? You have had the most items enchanted"),
   LITTERER("Litterer", "Going green is definitely not a priority to you - you've dropped unwanted items all over the place"),
   PHILANTHROPIST("Philanthropist", "Such a charitable person; you just love giving stuff away");
 
@@ -29,6 +31,11 @@ public enum EAchievement
   public String getDescription()
   {
     return description;
+  }
+
+  public boolean heldBy(PlayerCharacter playerCharacter)
+  {
+    return playerCharacter.getStats().getAchievements().contains(this);
   }
 
 }
