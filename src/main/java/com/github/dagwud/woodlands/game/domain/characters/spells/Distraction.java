@@ -21,12 +21,11 @@ public class Distraction extends SingleCastSpell
   @Override
   public boolean cast()
   {
-    Trickster caster = getCaster();
-    Fighter target = caster.chooseFighterToAttack(caster.getParty().getActiveEncounter().getEnemies());
+    Fighter target = getCaster().getParty().getActiveEncounter().chooseFighterToAttack(getCaster());
 
     int hitBoost = target.getStats().getHitBoost();
 
-    int change = (int) Math.min(Math.floor((double)caster.getStats().getLevel() / 3.0), 7);
+    int change = (int) Math.min(Math.floor((double)getCaster().getStats().getLevel() / 3.0), 7);
 
     debuffs.put(target, change);
 

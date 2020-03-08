@@ -23,7 +23,7 @@ public class FlameAttack extends SingleCastSpell
   @Override
   public boolean cast()
   {
-    Fighter target = getCaster().chooseFighterToAttack(getCaster().getParty().getActiveEncounter().getEnemies());
+    Fighter target = getCaster().getParty().getActiveEncounter().chooseFighterToAttack(getCaster());
     DiceRollCmd roll = new DiceRollCmd(getCaster().getStats().getLevel(), 8);
     CommandDelegate.execute(roll);
     setDamageInflicted(generateDamage(getCaster(), roll.getTotal(), target));

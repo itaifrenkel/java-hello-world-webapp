@@ -34,7 +34,7 @@ public class KnuckleDuster extends SingleCastSpell
 
   public DamageInflicted doAttack()
   {
-    Fighter enemy = getCaster().chooseFighterToAttack(getCaster().getParty().getActiveEncounter().getEnemies());
+    Fighter enemy = getCaster().getParty().getActiveEncounter().chooseFighterToAttack(getCaster());
     Weapon weapon = (Weapon)(getCaster().getCarrying().getCarriedLeft());
     AttackCmd attack = new AttackCmd(getCaster(), weapon, enemy);
     CommandDelegate.execute(attack);
