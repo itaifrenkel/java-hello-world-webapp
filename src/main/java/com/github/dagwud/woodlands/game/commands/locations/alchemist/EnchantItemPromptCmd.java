@@ -96,8 +96,9 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   @Override
   protected String produceJobDeclinedMessage()
   {
-    // No restrictions on shields, so this shouldn't happen...
-    return "\"Uhhhhhhhh... this is awkward. This shouldn't have happened. Something must be very wrong with the world\"";
+    return "\"Look, I don’t know who you were in a past life, but you clearly shouldn’t be hauling around that kind " +
+            "of firepower. When you’re able to control that much damage, come back and chat to me, but for now " +
+            "I can’t help you.";
   }
 
   @Override

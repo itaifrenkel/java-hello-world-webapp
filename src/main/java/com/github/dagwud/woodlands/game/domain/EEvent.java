@@ -13,7 +13,9 @@ import java.util.Map;
 
 public enum EEvent
 {
-  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM, CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY;
+  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM,
+  CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY, CRAFTED_ITEM, ENCHANTED_ITEM,
+  LED_PARTY;
 
   private static transient Map<EEvent, List<EventRecipient<? extends Event>>> subscribers;
 
@@ -48,6 +50,18 @@ public enum EEvent
     EEvent.PLAYER_DEATH.subscribe(new PlayerDeathAchievementEvent());
     EEvent.PLAYER_DROPPED_ITEM.subscribe(new CharacterDroppedItemEventRecipient());
     EEvent.PLAYER_GAVE_ITEM_AWAY.subscribe(new CharacterGaveItemEventRecipient());
+
+    EEvent.CRAFTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SO_CRAFTY, playerCharacter -> playerCharacter.getStats().getCraftsCount()));
+    EEvent.ENCHANTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SPELLS_GREAT, playerCharacter -> playerCharacter.getStats().getEnchantmentsCount()));
+    EEvent.LED_PARTY.subscribe(new MostSomethingDoneEventRecipient(EAchievement.CAPTAIN_MY_CAPTAIN, playerCharacter ->
+    {
+      if (playerCharacter.getParty().isPrivateParty())
+      {
+        return 0.0;
+      }
+
+      return playerCharacter.getStats().getLeadershipMovesCount();
+    }));
   }
 
   public void subscribe(EventRecipient<? extends Event> recipient)
@@ -63,7 +77,8 @@ public enum EEvent
       try
       {
         subscriber.preTrigger(new Event(playerCharacter));
-      } catch (Exception ex)
+      }
+      catch (Exception ex)
       {
         // don't want one subscriber to break events
         Logger.logError(ex);

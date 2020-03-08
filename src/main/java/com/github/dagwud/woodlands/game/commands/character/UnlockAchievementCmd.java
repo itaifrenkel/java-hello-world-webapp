@@ -52,12 +52,12 @@ public class UnlockAchievementCmd extends AbstractCmd
       return;
     }
 
-    Set<EAchievement> achievements = playerCharacter.getStats().getAchievements();
-    if (achievements.contains(EAchievement.ALL_THE_ACHIEVEMENTS))
+    if (EAchievement.ALL_THE_ACHIEVEMENTS.heldBy(playerCharacter))
     {
       return;
     }
 
+    Set<EAchievement> achievements = playerCharacter.getStats().getAchievements();
     long current = count(achievements);
     for (GameCharacter activeMember : playerCharacter.getParty().getActiveMembers())
     {

@@ -52,9 +52,8 @@ public class EnchantShieldPromptCmd extends CraftPromptCmd<Shield, ConsumableTri
   @Override
   protected String produceJobDeclinedMessage()
   {
-    return "\"Look, I don’t know who you were in a past life, but you clearly shouldn’t be hauling around that kind " +
-            "of firepower. When you’re able to control that much damage, come back and chat to me, but for now " +
-            "I can’t help you.";
+    // No restrictions on shields, so this shouldn't happen...
+    return "\"Uhhhhhhhh... this is awkward. This shouldn't have happened. Something must be very wrong with the world\"";
   }
 
   @Override

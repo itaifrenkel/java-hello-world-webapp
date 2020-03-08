@@ -5,12 +5,8 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.battle.EndEncounterCmd;
 import com.github.dagwud.woodlands.game.commands.core.*;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
-import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Party;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.*;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -85,11 +81,19 @@ public class MoveToLocationCmd extends AbstractCmd
   {
     partyToMove.changeLeader(movedBy);
     List<GameCharacter> charactersToMove = partyToMove.getActiveMembers();
+
     for (GameCharacter character : charactersToMove)
     {
       doMove(character, moveTo, movedBy);
     }
+
     movedBy.getStats().incrementLeadershipMovesCount();
+
+    if (movedBy instanceof PlayerCharacter)
+    {
+      PlayerCharacter by = (PlayerCharacter) movedBy;
+      EEvent.LED_PARTY.trigger(by);
+    }
   }
 
   private void doMove(GameCharacter characterToMove, ELocation moveTo, GameCharacter movedBy)

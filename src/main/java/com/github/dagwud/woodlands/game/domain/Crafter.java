@@ -16,13 +16,14 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
     super(ownedBy);
   }
 
-  public void completeCrafting(PlayerCharacter character)
+  public T completeCrafting(PlayerCharacter character)
   {
     T remove = getBusyCrafting().remove(character);
     if (remove != null)
     {
       readyForCollection.put(character, remove);
     }
+    return remove;
   }
 
   public void setBusyCrafting(PlayerCharacter character, T item)
@@ -61,10 +62,12 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
   public T collectFor(PlayerCharacter craftedFor)
   {
     T collect = getReadyForCollection().remove(craftedFor);
+
     if (collect != null)
     {
       incrementCollectionStat(craftedFor);
     }
+
     return collect;
   }
 
