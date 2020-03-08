@@ -20,9 +20,6 @@ public class SuperSimulator9000WithAdvancedAI
 
   public static void main(String[] args) throws Exception
   {
-    SimulatorFrame frame = new SimulatorFrame();
-    frame.setVisible(true);
-
     Scanner in = new Scanner(System.in);
     TelegramServlet telegramServlet = new TelegramServlet();
 
