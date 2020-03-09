@@ -148,7 +148,7 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon, Weapon>
       }
       m.append(syllablesSecond[i]);
     }
-    return m.toString();
+    return m.toString().trim();
   }
 
   private boolean determineRanged(Weapon firstWeapon, Weapon secondWeapon)
