@@ -19,6 +19,12 @@ public class FogOfConfusion extends SingleCastSpell
   {
     Fighter target = getCaster().getParty().getActiveEncounter().chooseFighterToAttack(getCaster());
     target.getStats().setHitBoost(target.getStats().getHitBoost() - HIT_CHANCE_PENALTY);
+    if (target instanceof PlayerCharacter)
+    {
+      SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+              getCaster().getName() + " reduced your hit accuracy by -" + HIT_CHANCE_PENALTY);
+      CommandDelegate.execute(cmd);
+    }
     return true;
   }
 
@@ -26,6 +32,12 @@ public class FogOfConfusion extends SingleCastSpell
   public void expire()
   {
     target.getStats().setHitBoost(target.getStats().getHitBoost() + HIT_CHANCE_PENALTY);
+    if (target instanceof PlayerCharacter)
+    {
+      SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+              getCaster().getName() + " is no longer reducing your hit accuracy by -" + HIT_CHANCE_PENALTY);
+      CommandDelegate.execute(cmd);
+    }
   }
 
   @Override
