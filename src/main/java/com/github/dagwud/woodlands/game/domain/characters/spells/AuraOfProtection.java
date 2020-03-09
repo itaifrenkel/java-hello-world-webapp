@@ -55,6 +55,13 @@ public class AuraOfProtection extends PassiveBattleRoundSpell
     {
       Integer buffedAmount = buffs.get(target);
       target.getStats().setDefenceRatingBoost(target.getStats().getDefenceRatingBoost() - buffedAmount);
+ 
+      if (target instanceof PlayerCharacter)
+      {
+        SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+                getCaster().getName() + " is no longer buffing your defences by +" + BUFF_AMOUNT);
+        CommandDelegate.execute(cmd);
+      }
     }
     buffs.clear();
   }
