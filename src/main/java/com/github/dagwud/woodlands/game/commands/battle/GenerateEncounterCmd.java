@@ -35,54 +35,52 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   @Override
   public final void execute()
   {
+    // You've left the location of the battles; encounter no longer happens:
+    if (playerState.getActiveCharacter().getLocation() != location)
     {
-      // You've left the location of the battles; encounter no longer happens:
-      if (playerState.getActiveCharacter().getLocation() != location)
-      {
-        return;
-      }
+      return;
+    }
 
-      // Party is all dead:
-      Party party = playerState.getActiveCharacter().getParty();
-      if (!party.canAct())
-      {
-        return;
-      }
+    // Party is all dead:
+    Party party = playerState.getActiveCharacter().getParty();
+    if (!party.canAct())
+    {
+      return;
+    }
 
-      // There's already an encounter in progress; don't start another one:
-      if (party.getActiveEncounter() != null)
+    // There's already an encounter in progress; don't start another one:
+    if (party.getActiveEncounter() != null)
+    {
+      if (party.getActiveEncounter().isEnded())
       {
-        if (party.getActiveEncounter().isEnded())
-        {
-          party.setActiveEncounter(null);
-        }
-        else
-        {
-          scheduleNextEncounter();
-          return;
-        }
+        party.setActiveEncounter(null);
       }
-
-      boolean shouldHaveEncounter = shouldHaveEncounter();
-      if (!shouldHaveEncounter)
+      else
       {
-        String msg = "<i>Time passes. You keep moving. Nothing interesting happens.</i>";
-        if (Math.random() <= 0.1d)
-        {
-          msg = "<i>You see some trees.</i>";
-        }
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(playerState.getPlayer().getActiveCharacter().getParty(), msg);
-        CommandDelegate.execute(cmd);
         scheduleNextEncounter();
         return;
       }
-
-      Encounter encounter = startEncounter();
-      party.setActiveEncounter(encounter);
-
-      scheduleFirstRound(encounter);
-      scheduleNextEncounter();
     }
+
+    boolean shouldHaveEncounter = shouldHaveEncounter();
+    if (!shouldHaveEncounter)
+    {
+      String msg = "<i>Time passes. You keep moving. Nothing interesting happens.</i>";
+      if (Math.random() <= 0.1d)
+      {
+        msg = "<i>You see some trees.</i>";
+      }
+      SendPartyMessageCmd cmd = new SendPartyMessageCmd(playerState.getPlayer().getActiveCharacter().getParty(), msg);
+      CommandDelegate.execute(cmd);
+      scheduleNextEncounter();
+      return;
+    }
+
+    Encounter encounter = startEncounter();
+    party.setActiveEncounter(encounter);
+
+    scheduleFirstRound(encounter);
+    scheduleNextEncounter();
   }
 
   protected abstract void scheduleFirstRound(Encounter encounter);
