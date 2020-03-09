@@ -1,10 +1,9 @@
 package com.github.dagwud.woodlands.game.commands.locations.blacksmith;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
-import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.DoGiveItemCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.Blacksmith;
@@ -27,6 +26,7 @@ public class EnterBlacksmithCmd extends AbstractCmd
   {
     Blacksmith blacksmith = character.getParty().getBlacksmith();
     Weapon collected = blacksmith.collectFor(character);
+    boolean couldPotentiallyCraftSomething = character.produceItems(Weapon.class).size() > 1;
 
     if (null != collected)
     {
@@ -49,11 +49,17 @@ public class EnterBlacksmithCmd extends AbstractCmd
       {
         int remainingTimeMins = blacksmith.determineRemainingCraftingMinutes();
         CommandDelegate.execute(new SendMessageCmd(character, "The door to the Blacksmith's shop is locked; you can hear the sounds of clashing steel coming from his workshop. " +
-                        "He must be busy with something, because he yells out \"I'm busy with something, come back in " + remainingTimeMins + "!\""));
+                "He must be busy with something, because he yells out \"I'm busy with something, come back in " + remainingTimeMins + "!\""));
+      }
+
+      if (!couldPotentiallyCraftSomething)
+      {
+        CommandDelegate.execute(new SendMessageCmd(character, "I'm sure the Blacksmith would love to just hang out and chat with you, but he's a busy man, battling to find trustworthy apprentices." +
+                " He has no time to waste - you'll need to visit him with at least two items that he work with."));
       }
     }
 
-    if (blacksmith.isBusyCrafting())
+    if (blacksmith.isBusyCrafting() || !couldPotentiallyCraftSomething)
     {
       CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
     }

@@ -12,11 +12,13 @@ import com.github.dagwud.woodlands.game.domain.Crafter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 import com.github.dagwud.woodlands.game.domain.trinkets.consumable.ConsumableTrinket;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -188,6 +190,7 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item, C extends I
         weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
       }
     }
+
     if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
     {
       Weapon right = (Weapon)getCharacter().getCarrying().getCarriedRight();
@@ -196,6 +199,7 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item, C extends I
         weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
       }
     }
+
     for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
     {
       if (inactive instanceof Weapon)
@@ -206,29 +210,20 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item, C extends I
         }
       }
     }
+
     weapons.add("Cancel");
     return weapons;
   }
 
   protected final List<String> producePotions()
   {
-    List<String> potions = new ArrayList<>();
-    if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof ConsumableTrinket)
-    {
-      potions.add(getCharacter().getCarrying().getCarriedLeft().getName());
-    }
-    if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof ConsumableTrinket)
-    {
-      potions.add(getCharacter().getCarrying().getCarriedRight().getName());
-    }
-    for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
-    {
-      if (inactive instanceof ConsumableTrinket)
-      {
-        potions.add(inactive.getName());
-      }
-    }
-    potions.add("Cancel");
-    return potions;
+    List<String> collect = getCharacter().produceItems(ConsumableTrinket.class)
+            .stream()
+            .map(Trinket::getName)
+            .collect(Collectors.toList());
+
+    collect.add("Cancel");
+
+    return collect;
   }
 }

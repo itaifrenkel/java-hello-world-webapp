@@ -1,17 +1,12 @@
 package com.github.dagwud.woodlands.game.commands.locations.alchemist;
 
-import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.CraftPromptCmd;
 import com.github.dagwud.woodlands.game.domain.Crafter;
-import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.trinkets.consumable.ConsumableTrinket;
 import com.github.dagwud.woodlands.gson.game.Weapon;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrinket, Weapon>
 {
@@ -41,7 +36,7 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   @Override
   protected Weapon findFirstItem(String name)
   {
-    return (Weapon)findItem(name);
+    return (Weapon) findItem(name);
   }
 
   @Override
@@ -84,7 +79,7 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   @Override
   protected ConsumableTrinket findSecondItem(String name)
   {
-    return (ConsumableTrinket)findItem(name);
+    return (ConsumableTrinket) findItem(name);
   }
 
   @Override

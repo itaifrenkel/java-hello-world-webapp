@@ -1,6 +1,9 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.Brawler;
 
 import java.util.HashMap;
@@ -22,6 +25,7 @@ public class Intimidation extends SingleCastSpell
   public boolean cast()
   {
     int boost = 20; // equivalent of a natural d20 - guaranteed to cause a critical hit
+
     for (GameCharacter member : getCaster().getParty().getActiveMembers())
     {
       member.getStats().setCriticalStrikeChanceBonus(member.getStats().getCriticalStrikeChanceBonus() + boost);
@@ -33,6 +37,7 @@ public class Intimidation extends SingleCastSpell
         CommandDelegate.execute(cmd);
       }
     }
+
     return true;
   }
 

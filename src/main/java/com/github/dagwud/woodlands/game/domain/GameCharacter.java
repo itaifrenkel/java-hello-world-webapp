@@ -102,8 +102,32 @@ public abstract class GameCharacter extends Fighter
       }
     }
 
-    int i = (int)(Math.random() * enemies.size());
+    int i = (int) (Math.random() * enemies.size());
     return enemies.get(i);
   }
 
+  // completely checked, if you check
+  @SuppressWarnings("unchecked")
+  public <T> List<T> produceItems(Class<T> ofClass)
+  {
+    List<T> potions = new ArrayList<>();
+
+    if (getCarrying().getCarriedLeft() != null && ofClass.isAssignableFrom(getCarrying().getCarriedLeft().getClass()))
+    {
+      potions.add((T) getCarrying().getCarriedLeft());
+    }
+    if (getCarrying().getCarriedRight() != null && ofClass.isAssignableFrom(getCarrying().getCarriedRight().getClass()))
+    {
+      potions.add((T) getCarrying().getCarriedRight());
+    }
+    for (Item inactive : getCarrying().getCarriedInactive())
+    {
+      if (ofClass.isAssignableFrom(inactive.getClass()))
+      {
+        potions.add((T) inactive);
+      }
+    }
+
+    return potions;
+  }
 }
