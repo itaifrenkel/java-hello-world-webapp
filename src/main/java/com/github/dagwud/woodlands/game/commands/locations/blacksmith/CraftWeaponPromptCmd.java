@@ -126,7 +126,7 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon, Weapon>
   {
     StringBuilder m = new StringBuilder();
     String[] syllablesFirst = firstWeapon.getSyllables();
-    int firstSegments = Math.min(1, syllablesFirst.length / 2);
+    int firstSegments = Math.max(1, syllablesFirst.length / 2);
     for (int i = 0; i < firstSegments; i++)
     {
       if (i > 0)
@@ -139,7 +139,7 @@ public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon, Weapon>
     m.append("|");
 
     String[] syllablesSecond = secondWeapon.getSyllables();
-    int secondSegments = Math.min(1, syllablesSecond.length / 2);
+    int secondSegments = Math.max(1, syllablesSecond.length / 2);
     for (int i = secondSegments; i < syllablesSecond.length; i++)
     {
       if (i > secondSegments)
