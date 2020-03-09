@@ -25,7 +25,7 @@ public class ArmyOfPeasantsFleeRecipient implements EventRecipient<Event>
       return;
     }
 
-    CommandDelegate.execute(new SendPartyMessageCmd(playerCharacter.getParty(), "General " + playerCharacter.getName() + " has died, and their army of peasants quickly flees!"));
+    CommandDelegate.execute(new SendPartyMessageCmd(playerCharacter.getParty(), "General " + playerCharacter.getName() + " is no longer in command, and their army of peasants quickly flees!"));
 
     for (Peasant peasant : character.getPeasants())
     {
