@@ -54,6 +54,12 @@ public class CallToArms extends SingleCastSpell
       Integer buffedAmount = buffs.get(target);
       target.getStats().getStrength().removeBonus(buffedAmount);
       target.getStats().getAgility().removeBonus(buffedAmount);
+
+      if (target instanceof PlayerCharacter)
+      {
+        CommandDelegate.execute(new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+                getCaster().getName() + " is no longer buffing your strength and agility"));
+      }
     }
     buffs.clear();
   }
