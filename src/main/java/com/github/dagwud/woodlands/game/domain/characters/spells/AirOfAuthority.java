@@ -61,7 +61,7 @@ public class AirOfAuthority extends PassiveBattleRoundSpell
       if (target instanceof PlayerCharacter)
       {
         SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
-                getCaster().getName() + " is no longer buffing your strength by +" + buffAmount);
+                getCaster().getName() + " is no longer buffing your strength by +" + buffedAmount);
         CommandDelegate.execute(cmd);
       }
     }
