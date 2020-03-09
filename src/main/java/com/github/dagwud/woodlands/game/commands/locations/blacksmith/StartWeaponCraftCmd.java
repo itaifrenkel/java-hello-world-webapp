@@ -36,7 +36,7 @@ public class StartWeaponCraftCmd extends AbstractCmd
   private long determineCraftTime(Weapon craft)
   {
     double damage = craft.damage.determineAverageRollAmount();
-    double maxDamage = (double) Settings.MAX_CRAFTABLE_WEAPON_DAMAGE;
+    double maxDamage = Settings.MAX_CRAFTABLE_WEAPON_DAMAGE;
     double scaledDamage = Math.min(maxDamage, damage * 2.0d);
     long maxTime = Settings.BLACKSMITH_CRAFTING_TIME_MS;
     double perc = scaledDamage / maxDamage;

@@ -13,7 +13,8 @@ public enum EAchievement
   SO_CRAFTY("So Crafty", "You're the craftiest of the crafty crafters - you've crafted the most items in your party"),
   SPELLS_GREAT("Spells Great", "You spell great, anyone ever tell you that? You have had the most items enchanted"),
   LITTERER("Litterer", "Going green is definitely not a priority to you - you've dropped unwanted items all over the place"),
-  PHILANTHROPIST("Philanthropist", "Such a charitable person; you just love giving stuff away");
+  PHILANTHROPIST("Philanthropist", "Such a charitable person; you just love giving stuff away"),
+  HOARDER("Lazy Hoarder", "I mean, yeah, sure, you're definitely gonna need that. Why not burden the innkeeper with it");
 
   private final String achievementName;
   private final String description;
