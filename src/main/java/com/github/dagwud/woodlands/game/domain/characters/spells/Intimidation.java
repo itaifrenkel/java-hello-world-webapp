@@ -26,6 +26,12 @@ public class Intimidation extends SingleCastSpell
     {
       member.getStats().setCriticalStrikeChanceBonus(member.getStats().getCriticalStrikeChanceBonus() + boost);
       buffs.put(member, boost);
+      if (member instanceof PlayerCharacter)
+      {
+        SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) member).getPlayedBy().getChatId(),
+                getCaster().getName() + " is intimidating the enemy; you're more likely to land a critical hit");
+        CommandDelegate.execute(cmd);
+      }
     }
     return true;
   }
@@ -36,7 +42,13 @@ public class Intimidation extends SingleCastSpell
     for (GameCharacter target : buffs.keySet())
     {
       Integer buffedAmount = buffs.get(target);
-      target.getStats().setCriticalStrikeChanceBonus(target.getStats().getHitBoost() + buffedAmount);
+      target.getStats().setCriticalStrikeChanceBonus(target.getStats().getCriticalStrikeChanceBonus() - buffedAmount);
+      if (target instanceof PlayerCharacter)
+      {
+        SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+                getCaster().getName() + " is no longer intimidating the enemy");
+        CommandDelegate.execute(cmd);
+      }
     }
     buffs.clear();
   }
