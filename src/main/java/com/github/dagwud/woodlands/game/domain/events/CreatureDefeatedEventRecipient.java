@@ -7,6 +7,8 @@ import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class CreatureDefeatedEventRecipient implements EventRecipient<CreatureDefeatedEvent>
 {
+  private static final int COUNT_RECENTLY_DEFEATED_TO_SHOW = 4;
+
   @Override
   public void trigger(CreatureDefeatedEvent event)
   {
@@ -17,7 +19,7 @@ public class CreatureDefeatedEventRecipient implements EventRecipient<CreatureDe
     CommandDelegate.execute(msg);
 
     member.getRecentlyDefeated().add(creatureDefeated);
-    while (member.getRecentlyDefeated().size() > 10)
+    while (member.getRecentlyDefeated().size() > COUNT_RECENTLY_DEFEATED_TO_SHOW)
     {
       member.getRecentlyDefeated().remove(0);
     }
