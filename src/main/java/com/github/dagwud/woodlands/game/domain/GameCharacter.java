@@ -94,6 +94,11 @@ public abstract class GameCharacter extends Fighter
       }
     }
 
+
+    if (enemies.isEmpty())
+    {
+      return null;
+    }
     int i = (int) (Math.random() * enemies.size());
     return enemies.get(i);
   }
