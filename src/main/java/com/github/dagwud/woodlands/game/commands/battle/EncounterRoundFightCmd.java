@@ -41,7 +41,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     {
       return;
     }
-    encounter.setFightingStarted(true);
+    encounter.setFightingStarted();
 
     List<DamageInflicted> roundActivity = new ArrayList<>();
     List<PassiveBattleRoundSpell> passivesActivity = new ArrayList<>();
