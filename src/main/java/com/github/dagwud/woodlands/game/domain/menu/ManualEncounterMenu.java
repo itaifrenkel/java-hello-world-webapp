@@ -14,16 +14,24 @@ public class ManualEncounterMenu extends ActiveSpellsMenu
 
   public ManualEncounterMenu(String planningDuration, ELocation location)
   {
+    this(planningDuration, location, false);
+  }
+  
+  public ManualEncounterMenu(String planningDuration, ELocation location, boolean allowPlanning)
+  {
     setPrompt("What will you do? Battle commences in " + planningDuration);
-    ICommand[] options = produceOptions(location.getMenu());
+    ICommand[] options = produceOptions(location.getMenu(), allowPlanning);
     setOptions(options);
   }
 
-  private ICommand[] produceOptions(GameMenu baseMenu)
+  private ICommand[] produceOptions(GameMenu baseMenu, boolean allowPlanning)
   {
     List<ICommand> options = new ArrayList<>();
     Collections.addAll(options, baseMenu.getOptions());
-    options.add(ECommand.ATTACK);
+    if (allowPlanning)
+    {
+      options.add(ECommand.ATTACK);
+    }
     return options.toArray(new ICommand[0]);
   }
 }
