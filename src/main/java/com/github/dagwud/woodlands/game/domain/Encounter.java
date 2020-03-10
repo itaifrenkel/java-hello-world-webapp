@@ -95,7 +95,7 @@ public class Encounter implements Serializable
     return actionsAllowedPerRound;
   }
 
-  public final void setStatus(boolean status)
+  public final void setStatus(EncounterStatus status)
   {
     this.status = status;
   }
