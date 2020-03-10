@@ -65,6 +65,7 @@ public enum ECommand implements ICommand
   SET_XP("/xp", false, ((character, chatId) -> new AdminSetXPCmd(chatId))),
   DAMAGE("/damage", false, ((character, chatId) -> new AdminDamageCmd(character))),
   YOU("/you", false, ((character, chatId) -> new AdminShowCharacterInfoCmd(chatId, character))),
+  STATS("/stats", false, ((character, chatId) -> new AdminShowCharacterStatsCmd(chatId, character))),
   ADD_SONG("/song", false, ((character, chatId) -> new AddSongCmd(character.getPlayedBy().getPlayerState()))),
   LIST_SONGS("/songs", false, ((character, chatId) -> new ListSongsCmd(chatId))),
   ADD_EMISSION("/emit", false, ((character, chatId) -> new AddEmissionCmd(character.getPlayedBy().getPlayerState()))),

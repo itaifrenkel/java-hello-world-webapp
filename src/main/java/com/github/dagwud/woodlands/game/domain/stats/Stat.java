@@ -45,6 +45,11 @@ public class Stat implements Serializable
     this.bonus -= bonusAmount;
   }
 
+  public int getBonus()
+  {
+    return bonus;
+  }
+
   public void clearBonuses()
   {
     this.bonus = 0;

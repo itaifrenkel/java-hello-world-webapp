@@ -5,10 +5,7 @@ import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Stats implements Serializable
 {
@@ -136,6 +133,11 @@ public class Stats implements Serializable
     int base = weaponBonusHit.getOrDefault(weapon.getName(), 0);
     base += Math.max(Math.floorDiv(level - 1, 4), 0);
     return base;
+  }
+
+  public Map<String, Integer> getWeaponBonusHits()
+  {
+    return Collections.unmodifiableMap(weaponBonusHit);
   }
 
   public void setWeaponBonusHit(Map<String, Integer> weaponBonusHit)
