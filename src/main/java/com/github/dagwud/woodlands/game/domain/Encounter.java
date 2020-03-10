@@ -100,14 +100,9 @@ public class Encounter implements Serializable
     this.status = status;
   }
 
-  public final boolean hasFightingStarted()
+  public final EncounterStatus getStatus()
   {
-    return status == EncounterStatus.FIGHTING;
-  }
-
-  public final boolean canPrepareActions()
-  {
-    return status == EncounterStatus.PREPARE_ACTIONS;
+    return status;
   }
 
   public EncounterRoundCmd createNextRoundCmd(PlayerState playerState, int delayBetweenRoundsMS)
