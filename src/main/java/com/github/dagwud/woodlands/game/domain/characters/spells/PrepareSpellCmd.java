@@ -34,9 +34,20 @@ public class PrepareSpellCmd extends AbstractCmd
       }
       return;
     }
-    if (activeEncounter.hasFightingStarted() && caster instanceof PlayerCharacter)
+    if (activeEncounter.getStatus() == EncounterStatus.FIGHTING)
     {
-      CommandDelegate.execute(new SendMessageCmd(((PlayerCharacter) caster).getPlayedBy().getChatId(), "Too late - the round has already started"));
+      if (caster instanceof PlayerCharacter)
+      { 
+        CommandDelegate.execute(new SendMessageCmd((PlayerCharacter)caster, "Too late - the round has already started"));
+      }
+      return;
+    }
+    if (activeEncounter.getStatus() == EncounterStatus.BETWEEN_ROUNDS)
+    {
+      if (caster instanceof PlayerCharacter)
+      {
+        CommandDelegate.execute(new SendMessageCmd((PlayerCharacter)caster, "Hold your horses - the round hasn't started yet"));
+      }
       return;
     }
     caster.getSpellAbilities().prepare(spell, activeEncounter.getActionsAllowedPerRound());

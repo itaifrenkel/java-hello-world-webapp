@@ -13,13 +13,16 @@ import java.util.Map;
 
 public enum EEvent
 {
-  PLAYER_DEATH, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM, CREATURE_DEFEATED;
+  PLAYER_DEATH, PLAYER_UNCONSCIOUS, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM,
+  CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY, LEFT_ITEM, CRAFTED_ITEM, ENCHANTED_ITEM, CLAIMED_ITEM,
+  LED_PARTY;
 
   private static transient Map<EEvent, List<EventRecipient<? extends Event>>> subscribers;
 
   public static void subscribeToStandardEvents()
   {
     EEvent.PLAYER_DEATH.subscribe(event -> CommandDelegate.execute(new SendPartyAlertCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getName() + " has died! Nice job, " + event.getPlayerCharacter().getParty().getLeader().getName())));
+    EEvent.CLAIMED_ITEM.subscribe(new ClaimedItemEventRecipient());
 
     EEvent.JOINED_PARTY.subscribe(event ->
     {
@@ -38,6 +41,10 @@ public enum EEvent
     EEvent.CREATURE_DEFEATED.subscribe(new CreatureDefeatedEventRecipient());
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureDroppedEventRecipient());
 
+    ArmyOfPeasantsFleeRecipient armyOfPeasantsFleeRecipient = new ArmyOfPeasantsFleeRecipient();
+    EEvent.PLAYER_DEATH.subscribe(armyOfPeasantsFleeRecipient);
+    EEvent.PLAYER_UNCONSCIOUS.subscribe(armyOfPeasantsFleeRecipient);
+
     subscribeForAchievements();
   }
 
@@ -46,6 +53,23 @@ public enum EEvent
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureWasMuggedEventRecipient());
     EEvent.CREATURE_DEFEATED.subscribe(new DrunkenVictoryEventRecipient());
     EEvent.PLAYER_DEATH.subscribe(new PlayerDeathAchievementEvent());
+    EEvent.PLAYER_DROPPED_ITEM.subscribe(new CharacterDroppedItemEventRecipient());
+    EEvent.PLAYER_GAVE_ITEM_AWAY.subscribe(new CharacterGaveItemEventRecipient());
+    EEvent.LEFT_ITEM.subscribe(new CharacterLeftItemEventRecipient());
+
+    EEvent.CRAFTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SO_CRAFTY, playerCharacter -> playerCharacter.getStats().getCraftsCount()));
+    EEvent.ENCHANTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SPELLS_GREAT, playerCharacter -> playerCharacter.getStats().getEnchantmentsCount()));
+    EEvent.CLAIMED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.MINE_MINE, playerCharacter -> playerCharacter.getStats().getItemsClaimedCount()));
+
+    EEvent.LED_PARTY.subscribe(new MostSomethingDoneEventRecipient(EAchievement.CAPTAIN_MY_CAPTAIN, playerCharacter ->
+    {
+      if (playerCharacter.getParty().isPrivateParty())
+      {
+        return 0.0;
+      }
+
+      return playerCharacter.getStats().getLeadershipMovesCount();
+    }));
   }
 
   public void subscribe(EventRecipient<? extends Event> recipient)
@@ -56,16 +80,16 @@ public enum EEvent
   // Ease-of-use standard case where it just involves a player character.
   public void trigger(PlayerCharacter playerCharacter)
   {
-    for (EventRecipient<? extends Event> subscriber : getSubscribers(this))
+    trigger(new Event(playerCharacter));
+  }
+
+  // super ease-of-use to avoid having to test everywhere in code
+  public void trigger(Fighter target)
+  {
+    if (target instanceof PlayerCharacter)
     {
-      try
-      {
-        subscriber.preTrigger(new Event(playerCharacter));
-      } catch (Exception ex)
-      {
-        // don't want one subscriber to break events
-        Logger.logError(ex);
-      }
+      PlayerCharacter playerCharacter = (PlayerCharacter) target;
+      trigger(playerCharacter);
     }
   }
 
@@ -74,7 +98,15 @@ public enum EEvent
   {
     for (EventRecipient<? extends Event> subscriber : getSubscribers(this))
     {
-      subscriber.preTrigger(event);
+      try
+      {
+        subscriber.preTrigger(event);
+      }
+      catch (Exception ex)
+      {
+        // don't want one subscriber to break events
+        Logger.logError(ex);
+      }
     }
   }
 

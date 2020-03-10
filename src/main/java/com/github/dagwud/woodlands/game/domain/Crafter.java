@@ -3,26 +3,46 @@ package com.github.dagwud.woodlands.game.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Crafter<T extends Item> extends NonPlayerCharacter
+public abstract class Crafter<T extends Item> extends NonPlayerCharacter
 {
   private static final long serialVersionUID = 1L;
-  private Map<PlayerCharacter, T> readyForCollection;
   private Map<PlayerCharacter, T> busyCrafting;
+  private Map<PlayerCharacter, T> readyForCollection;
+  private long craftingStartedAt;
+  private long craftingDurationMS;
 
   Crafter(Player ownedBy)
   {
     super(ownedBy);
   }
 
-  public void completeCrafting(PlayerCharacter character)
+  public T completeCrafting(PlayerCharacter character)
   {
-    T remove = busyCrafting.remove(character);
-    readyForCollection.put(character, remove);
+    T remove = getBusyCrafting().remove(character);
+    if (remove != null)
+    {
+      readyForCollection.put(character, remove);
+    }
+    return remove;
   }
 
   public void setBusyCrafting(PlayerCharacter character, T item)
   {
     getBusyCrafting().put(character, item);
+  }
+  
+  public void setCraftingExpectedEndTime(long craftingDurationMS)
+  {
+    craftingStartedAt = System.currentTimeMillis();
+    this.craftingDurationMS = craftingDurationMS;
+  }
+
+  public int determineRemainingCraftingMinutes()
+  {
+    long remainingMS = craftingDurationMS - (System.currentTimeMillis() - craftingStartedAt);
+    long remainingMin = -Math.floorDiv(-remainingMS, 60_000); // ceil div
+    remainingMin = -Math.floorDiv(-remainingMin, 5) * 5; // make time less accurate
+    return (int)remainingMin;
   }
 
   public boolean isBusyCrafting()
@@ -41,13 +61,17 @@ public class Crafter<T extends Item> extends NonPlayerCharacter
 
   public T collectFor(PlayerCharacter craftedFor)
   {
-    return getReadyForCollection().remove(craftedFor);
+    T collect = getReadyForCollection().remove(craftedFor);
+
+    if (collect != null)
+    {
+      incrementCollectionStat(craftedFor);
+    }
+
+    return collect;
   }
 
-  public void addReadyForCollection(T weapon, PlayerCharacter craftedFor)
-  {
-    getReadyForCollection().put(craftedFor, weapon);
-  }
+  protected abstract void incrementCollectionStat(PlayerCharacter collectedBy);
 
   private Map<PlayerCharacter, T> getReadyForCollection()
   {

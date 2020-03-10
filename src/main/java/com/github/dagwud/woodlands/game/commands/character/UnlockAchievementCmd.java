@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class UnlockAchievementCmd extends AbstractCmd
 {
-  public static final String ACHIEVEMENT = "<i>You've unlocked an achievement: %s.\n%s!</i>";
+  private static final String ACHIEVEMENT = "<i>You've unlocked an achievement: %s.\n%s!</i>";
   private PlayerCharacter playerCharacter;
   private EAchievement achievement;
 
@@ -52,12 +52,12 @@ public class UnlockAchievementCmd extends AbstractCmd
       return;
     }
 
-    Set<EAchievement> achievements = playerCharacter.getStats().getAchievements();
-    if (achievements.contains(EAchievement.ALL_THE_ACHIEVEMENTS))
+    if (EAchievement.ALL_THE_ACHIEVEMENTS.heldBy(playerCharacter))
     {
       return;
     }
 
+    Set<EAchievement> achievements = playerCharacter.getStats().getAchievements();
     long current = count(achievements);
     for (GameCharacter activeMember : playerCharacter.getParty().getActiveMembers())
     {

@@ -51,7 +51,7 @@ public class HealingBlast extends SingleCastSpell
     {
       return "A wave ripples out from " + getCaster().getName() + ". The healing energy " +
           "lingers in the air in search of a target and, not finding anyone nearby, " +
-          "focuses itself on a moth caught in a spiders web. Fully healed, the moth " +
+          "focuses itself on a moth caught in a spider’s web. Fully healed, the moth " +
           "manages to break free of its prison and flies off to safety."; 
     }
 

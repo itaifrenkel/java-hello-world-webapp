@@ -245,4 +245,17 @@ public class Party implements Serializable
     members.remove(newLeader);
     members.add(0, newLeader);
   }
+
+  public List<PlayerCharacter> findPlayerCharactersIn(ELocation location)
+  {
+    List<PlayerCharacter> found = new ArrayList<>(2);
+    for (PlayerCharacter activePlayerCharacter : getActivePlayerCharacters())
+    {
+      if (activePlayerCharacter.getLocation() == location)
+      {
+        found.add(activePlayerCharacter);
+      }
+    }
+    return found;
+  }
 }

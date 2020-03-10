@@ -3,9 +3,11 @@ package com.github.dagwud.woodlands.game.commands.inventory;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite; 
+import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
+import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.events.CharacterDroppedItemEvent;
 import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 
 import java.util.List;
@@ -70,6 +72,8 @@ public class DropItemCmd extends AbstractCmd
 
     if (dropped != null)
     {
+      EEvent.PLAYER_DROPPED_ITEM.trigger(new CharacterDroppedItemEvent(character, dropped));
+
       SendMessageCmd cmd = new SendMessageCmd(chatId, "You dropped " + dropped.getName());
       CommandDelegate.execute(cmd);
 

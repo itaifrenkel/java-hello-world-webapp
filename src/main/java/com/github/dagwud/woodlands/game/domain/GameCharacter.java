@@ -3,7 +3,9 @@ package com.github.dagwud.woodlands.game.domain;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class GameCharacter extends Fighter
 {
@@ -30,7 +32,6 @@ public abstract class GameCharacter extends Fighter
   public String getName()
   {
     return name;
-    //return name + "[" + Integer.toHexString(hashCode()).substring(4) + "]";
   }
 
   public void setName(String name)
@@ -73,16 +74,57 @@ public abstract class GameCharacter extends Fighter
   }
 
   @Override
-  public Fighter chooseFighterToAttack(Collection<Fighter> fighters)
+  public Fighter chooseFighterToAttack(Collection<? extends Fighter> fighters)
   {
-    for (Fighter fighter : fighters)
-    {
-      if (fighter instanceof Creature)
-      {
-        return fighter;
-      }
-    }
-    throw new WoodlandsRuntimeException("Nobody to fight");
+    return chooseFighterToAttack(fighters, false, null);
   }
 
+  public Fighter chooseFighterToAttack(Collection<? extends Fighter> fighters, boolean allowFriendlyFire, Fighter attacker)
+  {
+    List<Fighter> enemies = new ArrayList<>();
+    for (Fighter fighter : fighters)
+    {
+      boolean isCandidate = (allowFriendlyFire && fighter instanceof PlayerCharacter)
+                            || (!allowFriendlyFire && fighter instanceof Creature);
+      isCandidate = isCandidate && fighter.isConscious();
+      isCandidate = isCandidate && (fighter != attacker);
+      if (isCandidate)
+      {
+        enemies.add(fighter);
+      }
+    }
+
+
+    if (enemies.isEmpty())
+    {
+      return null;
+    }
+    int i = (int) (Math.random() * enemies.size());
+    return enemies.get(i);
+  }
+
+  // completely checked, if you check
+  @SuppressWarnings("unchecked")
+  public <T> List<T> produceItems(Class<T> ofClass)
+  {
+    List<T> potions = new ArrayList<>();
+
+    if (getCarrying().getCarriedLeft() != null && ofClass.isAssignableFrom(getCarrying().getCarriedLeft().getClass()))
+    {
+      potions.add((T) getCarrying().getCarriedLeft());
+    }
+    if (getCarrying().getCarriedRight() != null && ofClass.isAssignableFrom(getCarrying().getCarriedRight().getClass()))
+    {
+      potions.add((T) getCarrying().getCarriedRight());
+    }
+    for (Item inactive : getCarrying().getCarriedInactive())
+    {
+      if (ofClass.isAssignableFrom(inactive.getClass()))
+      {
+        potions.add((T) inactive);
+      }
+    }
+
+    return potions;
+  }
 }

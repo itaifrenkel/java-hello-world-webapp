@@ -14,7 +14,9 @@ public class GenerateMountainEncounterCmd extends GenerateAutomaticEncounterCmd
 
   GenerateMountainEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.MOUNTAIN, Settings.MOUNTAIN_MIN_DIFFICULTY, Settings.MOUNTAIN_MAX_DIFFICULTY, Creature.CREATURE_TYPE_NORMAL);
+    super(playerState, ELocation.MOUNTAIN, 1,
+            Settings.MOUNTAIN_MIN_DIFFICULTY, Settings.MOUNTAIN_MAX_DIFFICULTY,
+            Creature.CREATURE_TYPE_NORMAL);
   }
 
   @Override

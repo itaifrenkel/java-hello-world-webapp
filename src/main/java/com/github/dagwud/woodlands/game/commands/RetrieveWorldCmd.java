@@ -73,6 +73,11 @@ public class RetrieveWorldCmd extends AbstractCmd
 
     if (Scheduler.instance().count() >= 70)
     {
+      SendAdminMessageCmd msg = new SendAdminMessageCmd("<b><i>WARNING! THERE ARE " + Scheduler.instance().count() + " SCHEDULES TO RESTORE!</i></b>");
+      CommandDelegate.execute(msg);
+    }
+    if (Scheduler.instance().count() >= 200)
+    {
       SendAdminMessageCmd msg = new SendAdminMessageCmd("<b><i>Aaaaaaah! Too many schedules; resetting</i></b>");
       CommandDelegate.execute(msg);
       Scheduler.instance().clear();

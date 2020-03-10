@@ -1,6 +1,8 @@
 package com.github.dagwud.woodlands.game.commands.battle;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+
+import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 
@@ -24,6 +26,6 @@ public class AutomaticEncounterRoundCmd extends EncounterRoundCmd
   {
     // no schedule as such; do it immediately
     EncounterRoundFightCmd fight = new EncounterRoundFightCmd(playerState, encounter, getDelayBetweenRoundsMS());
-    CommandDelegate.execute(fight);
+    CommandDelegate.execute(new RunLaterCmd(2000, fight));
   }
 }

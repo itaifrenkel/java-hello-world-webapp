@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.ExpireSpellsCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 
@@ -21,7 +22,10 @@ public class KnockUnconsciousCmd extends AbstractCmd
   public void execute()
   {
     target.getStats().setState(EState.UNCONSCIOUS);
+
     ExpireSpellsCmd expireAll = new ExpireSpellsCmd(target.getSpellAbilities().getPassivePartySpells());
     CommandDelegate.execute(expireAll);
+
+    EEvent.PLAYER_UNCONSCIOUS.trigger(target);
   }
 }

@@ -1,5 +1,6 @@
 {
   "creatures": [
+    {"name": "Flea", "difficulty": 0, "weapon-left": "Bite (soft)", "fight-mode":  "STRONGEST", "creature-type":  "normal"},
     {"name": "Badger", "difficulty": 0, "weapon-left": "Small Bite", "fight-mode":  "RANDOM", "creature-type":  "normal"},
     {"name": "Frog", "difficulty": 0, "weapon-left": "Small Bite", "fight-mode":  "WEAKEST", "creature-type":  "normal"},
     {"name": "Crab", "difficulty": 0, "weapon-left": "Small Bite", "fight-mode":  "WEAKEST", "creature-type":  "normal"},

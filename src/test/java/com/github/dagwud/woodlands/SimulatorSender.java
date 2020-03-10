@@ -9,10 +9,6 @@ public class SimulatorSender implements IMessageSender
     @Override
     public void sendMessage(long chatId, String message, String replyMarkup)
     {
-        if (chatId != -1)
-        {
-            return;
-        }
         System.out.println(message);
         if (replyMarkup != null)
         {

@@ -10,11 +10,12 @@ public class Shield extends EquippableItem
 
   public String name;
   public int strength;
+  public boolean enchanted;
 
   @Override
   public String getName()
   {
-    return name;
+    return (enchanted ? "Enchanted " : "") + name;
   }
 
   @Override

@@ -7,8 +7,15 @@ public enum EAchievement
   ALL_THE_ACHIEVEMENTS("All The Achievements", "You have more achievements than anyone else - that's quite an achievement"),
   DRUNKEN_COMMAND("NOW LISHTEN HERE YOU", "You were drunk enough that you issued a command that was not a command"),
   PARTY_IS_OVER("Party's Over... Forever", "You managed to get your entire party killed. Nice one"),
+  CAPTAIN_MY_CAPTAIN("Captain My Captain", "You've led your party the most times"),
   DRUNKEN_VICTORY("Gonna Feel That In The Morning", "Despite your entire party being drunk, you still won a battle"),
-  SHUFFLED_OFF_THE_MORTAL_COIL("Shuffled Off The Mortal Coil", "You're definitely not sleeping - you're dead");
+  SHUFFLED_OFF_THE_MORTAL_COIL("Shuffled Off The Mortal Coil", "You're definitely not sleeping - you're dead"),
+  SO_CRAFTY("So Crafty", "You're the craftiest of the crafty crafters - you've crafted the most items in your party"),
+  SPELLS_GREAT("Spells Great", "You spell great, anyone ever tell you that? You have had the most items enchanted"),
+  MINE_MINE("Mine Mine Mine Mine", "Everything the light touches is your claimdom, or so it seems - you've claimed the most items"),
+  LITTERER("Litterer", "Going green is definitely not a priority to you - you've dropped unwanted items all over the place"),
+  PHILANTHROPIST("Philanthropist", "Such a charitable person; you just love giving stuff away"),
+  HOARDER("Lazy Hoarder", "I mean, yeah, sure, you're definitely gonna need that. Why not burden the innkeeper with it");
 
   private final String achievementName;
   private final String description;
@@ -27,6 +34,11 @@ public enum EAchievement
   public String getDescription()
   {
     return description;
+  }
+
+  public boolean heldBy(PlayerCharacter playerCharacter)
+  {
+    return playerCharacter.getStats().getAchievements().contains(this);
   }
 
 }

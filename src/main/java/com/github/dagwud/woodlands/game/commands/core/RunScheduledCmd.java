@@ -13,16 +13,13 @@ public class RunScheduledCmd implements Callable<String>, Serializable
 
   private final AbstractCmd cmdToRun;
   private final long delayMS;
+  private boolean restore;
 
-  public RunScheduledCmd(long delayMS, AbstractCmd cmdToRun)
-  {
-    this(System.currentTimeMillis(), delayMS, cmdToRun);
-  }
-
-  public RunScheduledCmd(long startDelayAtTime, long delayMS, AbstractCmd cmdToRun)
+  public RunScheduledCmd(long delayMS, AbstractCmd cmdToRun, boolean restore)
   {
     this.delayMS = delayMS;
     this.cmdToRun = cmdToRun;
+    this.restore = restore;
   }
 
   @Override
@@ -53,7 +50,10 @@ public class RunScheduledCmd implements Callable<String>, Serializable
     }
     finally
     {
-      Scheduler.instance().onComplete(cmdToRun);
+      if (restore)
+      {
+        Scheduler.instance().onComplete(cmdToRun);
+      }
     }
   }
 }

@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.DoGiveItemCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.CarriedItems;
+import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -73,5 +74,7 @@ public class LeaveItemsCmd extends SuspendableCmd
     DoGiveItemCmd give = new DoGiveItemCmd(giver,
             giver.getInnkeeper(), toLeave);
     CommandDelegate.execute(give);
+
+    EEvent.LEFT_ITEM.trigger(giver);
   }
 }

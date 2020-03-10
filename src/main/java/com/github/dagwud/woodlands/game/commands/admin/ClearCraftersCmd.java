@@ -1,6 +1,12 @@
 package com.github.dagwud.woodlands.game.commands.admin;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.inventory.DoGiveItemCmd;
+import com.github.dagwud.woodlands.game.domain.Alchemist;
+import com.github.dagwud.woodlands.game.domain.Blacksmith;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.items.EquippableItem;
+import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class ClearCraftersCmd extends AdminCmd
 {
@@ -17,9 +23,21 @@ public class ClearCraftersCmd extends AdminCmd
   @Override
   public void execute()
   {
-    for (PlayerCharacter activePlayerCharacter : character.getParty().getActivePlayerCharacters()) {
-      activePlayerCharacter.getParty().getBlacksmith().completeCrafting(activePlayerCharacter);
-      activePlayerCharacter.getParty().getAlchemist().completeCrafting(activePlayerCharacter);
+    for (PlayerCharacter c : character.getParty().getActivePlayerCharacters())
+    {
+      Blacksmith blacksmith = c.getParty().getBlacksmith();
+      Weapon weapon = blacksmith.completeCrafting(c);
+      if (weapon != null)
+      {
+        CommandDelegate.execute(new DoGiveItemCmd(null, blacksmith, weapon));
+      }
+
+      Alchemist alchemist = c.getParty().getAlchemist();
+      EquippableItem equippableItem = alchemist.completeCrafting(c);
+      if (equippableItem != null)
+      {
+        CommandDelegate.execute(new DoGiveItemCmd(null, alchemist, equippableItem));
+      }
     }
   }
 }

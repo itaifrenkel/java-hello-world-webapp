@@ -1,8 +1,8 @@
 package com.github.dagwud.woodlands.game.domain;
 
-import com.github.dagwud.woodlands.gson.game.Weapon;
+import com.github.dagwud.woodlands.game.items.EquippableItem;
 
-public class Alchemist extends Crafter<Weapon>
+public class Alchemist extends Crafter<EquippableItem>
 {
   private static final long serialVersionUID = 1L;
 
@@ -12,4 +12,11 @@ public class Alchemist extends Crafter<Weapon>
     setName("the Alchemist");
   }
 
+  @Override
+  protected void incrementCollectionStat(PlayerCharacter collectedBy)
+  {
+    collectedBy.getStats().incrementEnchantmentsCount();
+
+    EEvent.ENCHANTED_ITEM.trigger(collectedBy);
+  }
 }

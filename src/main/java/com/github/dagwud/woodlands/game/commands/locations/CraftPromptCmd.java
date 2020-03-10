@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.locations;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
@@ -11,8 +12,21 @@ import com.github.dagwud.woodlands.game.domain.Crafter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
+import com.github.dagwud.woodlands.game.domain.trinkets.consumable.ConsumableTrinket;
+import com.github.dagwud.woodlands.gson.game.Weapon;
 
-public abstract class CraftPromptCmd<A extends Item, B extends Item> extends SuspendableCmd
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ *
+ * @param <A> first input item type
+ * @param <B> second input item type
+ * @param <C> resulting item type
+ */
+public abstract class CraftPromptCmd<A extends Item, B extends Item, C extends Item> extends SuspendableCmd
 {
   private static final long serialVersionUID = 1L;
 
@@ -39,10 +53,19 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item> extends Sus
         return;
       case 2:
         secondItem = acceptSecondItem(capturedInput);
-        if (null != secondItem)
+        if (null == secondItem)
         {
-          schedule();
+          return;
         }
+
+        C toCraft = createCraftedItem(firstItem, secondItem);
+        if (toCraft == null)
+        {
+          CommandDelegate.execute(new SendMessageCmd(character, produceJobDeclinedMessage()));
+          return;
+        }
+        CommandDelegate.execute(new SendMessageCmd(getCharacter(), produceAcceptedJobMessage()));
+        schedule(toCraft);
     }
   }
 
@@ -84,6 +107,8 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item> extends Sus
 
   protected abstract String produceAcceptItemMessage();
 
+  protected abstract C createCraftedItem(A firstItem, B secondItem);
+
   protected abstract String produceCantWorkWithMessage();
 
   protected abstract String produceSecondItemPromptMessage();
@@ -106,7 +131,6 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item> extends Sus
       return null;
     }
 
-    CommandDelegate.execute(new SendMessageCmd(getCharacter(), produceAcceptedJobMessage()));
     return item;
   }
 
@@ -134,20 +158,72 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item> extends Sus
     return null;
   }
 
-  private void schedule()
+  private void schedule(C toCraft)
   {
     CommandDelegate.execute(new DoGiveItemCmd(character, getCrafter(), firstItem));
     CommandDelegate.execute(new DoGiveItemCmd(character,getCrafter(), secondItem));
-    CommandDelegate.execute(createCraftCmd(firstItem, secondItem));
+    CommandDelegate.execute(createCraftCmd(toCraft));
     CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
   }
 
-  protected abstract AbstractCmd createCraftCmd(A firstItem, B secondItem);
+  protected abstract String produceJobDeclinedMessage();
+
+  protected abstract AbstractCmd createCraftCmd(C crafted);
 
   protected abstract Crafter getCrafter();
 
   public PlayerCharacter getCharacter()
   {
     return character;
+  }
+
+
+  protected final List<String> produceWeapons()
+  {
+    List<String> weapons = new ArrayList<>();
+
+    if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof Weapon)
+    {
+      Weapon left = (Weapon) getCharacter().getCarrying().getCarriedLeft();
+      if (left.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+      {
+        weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
+      }
+    }
+
+    if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
+    {
+      Weapon right = (Weapon)getCharacter().getCarrying().getCarriedRight();
+      if (right.damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+      {
+        weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
+      }
+    }
+
+    for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
+    {
+      if (inactive instanceof Weapon)
+      {
+        if (((Weapon)inactive).damage.determineAverageRollAmount() < Settings.MAX_CRAFTABLE_WEAPON_DAMAGE)
+        {
+          weapons.add(inactive.getName());
+        }
+      }
+    }
+
+    weapons.add("Cancel");
+    return weapons;
+  }
+
+  protected final List<String> producePotions()
+  {
+    List<String> collect = getCharacter().produceItems(ConsumableTrinket.class)
+            .stream()
+            .map(Trinket::getName)
+            .collect(Collectors.toList());
+
+    collect.add("Cancel");
+
+    return collect;
   }
 }

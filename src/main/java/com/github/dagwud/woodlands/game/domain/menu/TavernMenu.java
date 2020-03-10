@@ -26,7 +26,7 @@ public class TavernMenu extends GameMenu
   public TavernMenu()
   {
     setPrompt("<i>This is the Tavern</i>");
-    setOptions(ECommand.BUY_DRINKS, ECommand.JOIN, ECommand.WAKE);
+    setOptions(ECommand.BUY_DRINKS, ECommand.SPARRING_TENT, ECommand.JOIN, ECommand.CLAIM_ITEM, ECommand.WAKE);
   }
 
   @Override
@@ -54,9 +54,15 @@ public class TavernMenu extends GameMenu
   {
     // Arrays.asList produces an immutable list
     List<String> options = new ArrayList<>(Arrays.asList(super.produceOptions(playerState)));
+
     if (playerState.getActiveCharacter().getStats().getAvailableStatsPointUpgrades() > 0)
     {
       options.add(ECommand.UPGRADE.getMenuText());
+    }
+
+    if (playerState.getActiveCharacter().getParty().getCollectedItems().isEmpty())
+    {
+      options.remove(ECommand.CLAIM_ITEM.getMenuText());
     }
 
     options.add(ECommand.VILLAGE_SQUARE.getMenuText());

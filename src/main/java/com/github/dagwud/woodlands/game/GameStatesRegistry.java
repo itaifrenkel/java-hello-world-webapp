@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game;
 
 import com.github.dagwud.woodlands.game.commands.RetrieveWorldCmd;
 import com.github.dagwud.woodlands.game.domain.WoodlandsRuntimeException;
+import com.github.dagwud.woodlands.game.domain.location.tavern.JukeBox;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -15,9 +16,11 @@ public class GameStatesRegistry implements Serializable
   private static transient boolean limpMode = false;
 
   private transient static GameStatesRegistry instance;
+
   private final Map<Integer, PlayerState> gameStatesByCharacter = new HashMap<>();
   private PartyRegistry partyRegistry;
   private Scheduler scheduler;
+  private JukeBox jukeBox;
 
   private GameStatesRegistry()
   {
@@ -27,18 +30,22 @@ public class GameStatesRegistry implements Serializable
   public static PlayerState lookup(int chatId)
   {
     GameStatesRegistry registry = instance();
+
     if (!registry.gameStatesByCharacter.containsKey(chatId))
     {
       CreateGameStateCmd cmd = new CreateGameStateCmd(chatId);
       CommandDelegate.execute(cmd);
 
       PlayerState playerStateForChat = cmd.getCreatedPlayerState();
+
       if (registry.gameStatesByCharacter.containsKey(chatId))
       {
         throw new WoodlandsRuntimeException("Duplicate players for chat " + chatId);
       }
+
       registry.gameStatesByCharacter.put(chatId, playerStateForChat);
     }
+
     return registry.gameStatesByCharacter.get(chatId);
   }
 
@@ -58,6 +65,7 @@ public class GameStatesRegistry implements Serializable
     {
       createInstance();
     }
+
     return instance;
   }
 
@@ -85,6 +93,16 @@ public class GameStatesRegistry implements Serializable
   PartyRegistry getPartyRegistry()
   {
     return partyRegistry;
+  }
+
+  public JukeBox getJukeBox()
+  {
+    if (jukeBox == null)
+    {
+      jukeBox = new JukeBox();
+    }
+
+    return jukeBox;
   }
 
   Scheduler getScheduler()

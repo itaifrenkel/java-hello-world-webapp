@@ -7,10 +7,8 @@ import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Item;
-import com.github.dagwud.woodlands.game.domain.Player;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.events.CharacterItemEvent;
 import com.github.dagwud.woodlands.game.domain.trinkets.Trinket;
 
 import java.util.ArrayList;
@@ -59,20 +57,19 @@ public class ClaimItemCmd extends SuspendableCmd
       return;
     }
 
-    if (!player.getActiveCharacter().canCarryMore())
+    PlayerCharacter activeCharacter = player.getActiveCharacter();
+
+    if (!activeCharacter.canCarryMore())
     {
       SendMessageCmd cmd = new SendMessageCmd(player.getChatId(), "You already have enough stuff; stop being greedy.");
       CommandDelegate.execute(cmd);
       return;
     }
 
-    player.getActiveCharacter().getParty().getCollectedItems().remove(claimed);
-    player.getActiveCharacter().getCarrying().getCarriedInactive().add(claimed);
+    activeCharacter.getParty().getCollectedItems().remove(claimed);
+    activeCharacter.getCarrying().getCarriedInactive().add(claimed);
 
-    String msg = "<b>" + player.getActiveCharacter().getName() +
-        " has claimed " + claimed.summary(player.getActiveCharacter()) + "</b>";
-    SendPartyMessageCmd cmd = new SendPartyMessageCmd(player.getActiveCharacter().getParty(), msg);
-    CommandDelegate.execute(cmd);
+    EEvent.CLAIMED_ITEM.trigger(new CharacterItemEvent(activeCharacter, claimed));
   }
 
   private Item findItem(String capturedInput)

@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.commands.inventory.*;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnchantItemPromptCmd;
+import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnchantShieldPromptCmd;
 import com.github.dagwud.woodlands.game.commands.locations.blacksmith.CraftWeaponPromptCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.*;
 import com.github.dagwud.woodlands.game.commands.logs.ShowLogsCmd;
@@ -31,6 +32,7 @@ public enum ECommand implements ICommand
   NEW("/new", false, (character, chatId) -> new PlayerSetupCmd(character == null ? null : character.getPlayedBy(), chatId)),
   ME("/me", false, (character, chatId) -> new ShowCharacterInfoCmd(chatId, character)),
   PARTY("/party", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
+  PARTY_ALSO("/pary", false, (character, chatId) -> new ShowPartyInfoCmd(chatId, character)),
   RALLY("/rally", false, (character, chatId) -> new RallyCmd(character)),
   INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
@@ -59,9 +61,14 @@ public enum ECommand implements ICommand
   CREATURE_CACHE("/cachecreature", false, ((character, chatId) -> new InvalidateCreatureCacheCmd(chatId))),
   SPAWN_TRINKET("/trinket", false, ((character, chatId) -> new SpawnTrinketCmd(character))),
   SPAWN_ITEM("/item", false, ((character, chatId) -> new DefeatCreatureRewardCmd(character.getParty(), new Creature(), false))),
+  GIFT_ITEM("/giftitem", false, ((character, chatId) -> new GiftItemCmd(chatId, character))),
   SET_XP("/xp", false, ((character, chatId) -> new AdminSetXPCmd(chatId))),
   DAMAGE("/damage", false, ((character, chatId) -> new AdminDamageCmd(character))),
   YOU("/you", false, ((character, chatId) -> new AdminShowCharacterInfoCmd(chatId, character))),
+  STATS("/stats", false, ((character, chatId) -> new AdminShowCharacterStatsCmd(chatId, character))),
+  ADD_SONG("/song", false, ((character, chatId) -> new AddSongCmd(character.getPlayedBy().getPlayerState()))),
+  LIST_SONGS("/songs", false, ((character, chatId) -> new ListSongsCmd(chatId))),
+  ADD_EMISSION("/emit", false, ((character, chatId) -> new AddEmissionCmd(character.getPlayedBy().getPlayerState()))),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
@@ -69,13 +76,14 @@ public enum ECommand implements ICommand
   CRAFT_WEAPON("Craft a Weapon", true, (character, chatId) -> new CraftWeaponPromptCmd(character, character.getPlayedBy().getPlayerState())),
   ALCHEMIST("Alchemist", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.ALCHEMIST)),
   ENCHANT_ITEM("Enchant an Item", true, (character, chatId) -> new EnchantItemPromptCmd(character, character.getPlayedBy().getPlayerState())),
+  ENCHANT_SHIELD("Enchant a Shield", true, (character, chatId) -> new EnchantShieldPromptCmd(character, character.getPlayedBy().getPlayerState())),
   THE_VILLAGE("The Village", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
   VILLAGE_SQUARE("Village Square", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE)),
-  THE_PETTING_ZOO("The Petting Zoo", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.PETTING_ZOO)),
-  THE_MOUNTAIN("The Mountain", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.MOUNTAIN)),
-  THE_WOODLANDS("The Woodlands", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.WOODLANDS)),
-  DEEP_WOODS("Deep Woods", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.DEEP_WOODS)),
-  THE_GORGE("The Gorge", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.THE_GORGE)),
+  THE_PETTING_ZOO("🦡The Petting Zoo🦡", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.PETTING_ZOO)),
+  THE_MOUNTAIN("⛰The Mountain⛰", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.MOUNTAIN)),
+  THE_WOODLANDS("🌲The Woodlands🌲", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.WOODLANDS)),
+  DEEP_WOODS("🌲Deep Woods🌲", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.DEEP_WOODS)),
+  THE_GORGE("🐲The Gorge🐲", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.THE_GORGE)),
   CAVERN_ENTRANCE("Cavern Entrance", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_ENTRANCE)),
   CAVERN_1("Cavern1", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_1)),
   CAVERN_2("Cavern2", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.CAVERN_2)),
@@ -91,6 +99,7 @@ public enum ECommand implements ICommand
 
   JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
   BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
+  SPARRING_TENT("Pick a Fight", false, (character, chatIt) -> new MoveToLocationCmd(character, ELocation.SPARRING_TENT)),
   WAKE("Host a Wake", true, (character, chatId) -> new WakeCmd(chatId, character)),
   UPGRADE("Celebrate", true, (character, chatId) -> new CelebrateCmd(chatId, character.getPlayedBy().getPlayerState())),
   SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),

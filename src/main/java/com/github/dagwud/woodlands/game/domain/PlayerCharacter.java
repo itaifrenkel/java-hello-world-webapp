@@ -1,8 +1,11 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.domain.trinkets.LootBag;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.gson.game.Creature;
+import com.github.dagwud.woodlands.gson.game.Weapon;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -88,5 +91,57 @@ public abstract class PlayerCharacter extends GameCharacter
   {
     double levelDiff = getStats().getLevel() - enemy.difficulty;
     return levelDiff <= 2.0;
+  }
+
+  public boolean canHandleWeapon(Weapon weapon)
+  {
+    double percentage = determinePercentageOfMaxDamageThatPlayerCanHandle();
+    double maxDamageAllowed = ((double)Settings.MAX_CRAFTABLE_WEAPON_DAMAGE) * percentage / 100d;
+    return weapon.damage.determineAverageRollAmount() <= maxDamageAllowed;
+  }
+
+  private double determinePercentageOfMaxDamageThatPlayerCanHandle()
+  {
+    if (getStats().getLevel() >= 14)
+    {
+      return 100;
+    }
+    if (getStats().getLevel() >= 13)
+    {
+      return 85;
+    }
+    if (getStats().getLevel() >= 12)
+    {
+      return 75;
+    }
+    if (getStats().getLevel() >= 11)
+    {
+      return 65;
+    }
+    if (getStats().getLevel() >= 10)
+    {
+      return 50;
+    }
+    if (getStats().getLevel() >= 9)
+    {
+      return 35;
+    }
+    if (getStats().getLevel() >= 8)
+    {
+      return 20;
+    }
+    if (getStats().getLevel() >= 7)
+    {
+      return 10;
+    }
+    if (getStats().getLevel() >= 3)
+    {
+      return 8;
+    }
+    if (getStats().getLevel() >= 2)
+    {
+      return 7;
+    }
+    return 0; // effectively no crafting
   }
 }

@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
+import com.github.dagwud.woodlands.game.domain.events.CharacterItemEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +64,12 @@ public class GiveItemCmd extends SuspendableCmd
 
         DoGiveItemCmd cmd = new DoGiveItemCmd(player.getActiveCharacter(), partyMember, item);
         CommandDelegate.execute(cmd);
+
+        EEvent.PLAYER_GAVE_ITEM_AWAY.trigger(new CharacterItemEvent(player.getActiveCharacter(), item));
+
         return;
-      } catch (NumberFormatException ex)
+      }
+      catch (NumberFormatException ex)
       {
         // let it fall through
       }

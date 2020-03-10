@@ -58,6 +58,12 @@ public class AirOfAuthority extends PassiveBattleRoundSpell
     {
       Integer buffedAmount = buffs.get(target);
       target.getStats().getStrength().removeBonus(buffedAmount);
+      if (target instanceof PlayerCharacter)
+      {
+        SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+                getCaster().getName() + " is no longer buffing your strength by +" + buffedAmount);
+        CommandDelegate.execute(cmd);
+      }
     }
     buffs.clear();
   }

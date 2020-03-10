@@ -24,13 +24,15 @@ public class DefeatCreatureCmd extends AbstractCmd
   private final Party victoriousParty;
   private final Creature creatureDefeated;
   private final boolean isFarmedEncounter;
+  private final boolean isMultiCreatureEncounter;
   private int experienceGrantedPerPlayer;
 
-  DefeatCreatureCmd(Party victoriousParty, Creature creatureDefeated, boolean isFarmedEncounter)
+  DefeatCreatureCmd(Party victoriousParty, Creature creatureDefeated, boolean isFarmedEncounter, boolean isMultiCreatureEncounter)
   {
     this.victoriousParty = victoriousParty;
     this.creatureDefeated = creatureDefeated;
     this.isFarmedEncounter = isFarmedEncounter;
+    this.isMultiCreatureEncounter = isMultiCreatureEncounter;
   }
 
   @Override
@@ -49,7 +51,7 @@ public class DefeatCreatureCmd extends AbstractCmd
     DefeatCreatureRewardCmd rewardCmd = new DefeatCreatureRewardCmd(victoriousParty, creatureDefeated, isFarmedEncounter);
     CommandDelegate.execute(rewardCmd);
 
-    List<PlayerCharacter> victoriousPlayers = findVictors(victoriousParty, creatureDefeated);
+    List<PlayerCharacter> victoriousPlayers = findVictors(victoriousParty, creatureDefeated, isMultiCreatureEncounter);
     int rewardPerCharacter = victoriousPlayers.isEmpty() ? 0 : Math.floorDiv(reward, victoriousPlayers.size());
     for (PlayerCharacter member : victoriousPlayers)
     {
@@ -61,7 +63,7 @@ public class DefeatCreatureCmd extends AbstractCmd
     experienceGrantedPerPlayer = rewardPerCharacter;
   }
 
-  private List<PlayerCharacter> findVictors(Party party, Creature defeated)
+  private List<PlayerCharacter> findVictors(Party party, Creature defeated, boolean isMultiCreatureEncounter)
   {
     List<PlayerCharacter> victors = new ArrayList<>();
     for (GameCharacter c : party.getActiveMembers())
@@ -71,7 +73,7 @@ public class DefeatCreatureCmd extends AbstractCmd
         PlayerCharacter p = (PlayerCharacter) c;
         if (p.isActive() && !p.isDead())
         {
-          if (p.shouldGainExperienceByDefeating(defeated))
+          if (isMultiCreatureEncounter || p.shouldGainExperienceByDefeating(defeated))
           {
             victors.add(p);
           }

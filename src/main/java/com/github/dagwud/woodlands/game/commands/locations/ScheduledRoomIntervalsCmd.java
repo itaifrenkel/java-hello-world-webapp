@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.commands.locations;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractRoomCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
@@ -28,7 +29,7 @@ public class ScheduledRoomIntervalsCmd extends AbstractCmd
   }
 
   @Override
-  public void execute() throws Exception
+  public void execute()
   {
     long now = System.currentTimeMillis();
 
@@ -57,6 +58,6 @@ public class ScheduledRoomIntervalsCmd extends AbstractCmd
       scheduledCommands.add(new Tuple<>(now + firedCommand.getTwo().getInterval(), firedCommand.getTwo()));
     }
 
-    CommandDelegate.execute(new RunLaterCmd(1000, this, false));
+    CommandDelegate.execute(new RunLaterCmd(Settings.ROOM_INTERVAL_MS, this, false));
   }
 }

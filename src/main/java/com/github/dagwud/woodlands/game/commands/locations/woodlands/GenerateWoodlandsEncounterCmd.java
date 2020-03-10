@@ -15,7 +15,7 @@ public class GenerateWoodlandsEncounterCmd extends GenerateManualEncounterCmd
 
   GenerateWoodlandsEncounterCmd(PlayerState playerState)
   {
-    super(playerState, ELocation.WOODLANDS, Settings.WOODLANDS_MIN_DIFFICULTY,
+    super(playerState, ELocation.WOODLANDS, 1, Settings.WOODLANDS_MIN_DIFFICULTY,
             Settings.WOODLANDS_MAX_DIFFICULTY, Creature.CREATURE_TYPE_NORMAL,
             Settings.WOODLANDS_TIME_ALLOWED_FOR_PLANNING_MS, Settings.WOODLANDS_ACTIONS_PER_ROUND);
   }

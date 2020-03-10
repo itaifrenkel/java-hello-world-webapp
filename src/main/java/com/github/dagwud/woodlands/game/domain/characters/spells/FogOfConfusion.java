@@ -1,13 +1,15 @@
 package com.github.dagwud.woodlands.game.domain.characters.spells;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.gson.game.Creature;
 
 public class FogOfConfusion extends SingleCastSpell
 {
   private static final long serialVersionUID = 1L;
   private static final int HIT_CHANCE_PENALTY = 10000;
-  private Creature target;
+  private Fighter target;
 
   public FogOfConfusion(PlayerCharacter caster)
   {
@@ -17,8 +19,14 @@ public class FogOfConfusion extends SingleCastSpell
   @Override
   public boolean cast()
   {
-    target = getCaster().getParty().getActiveEncounter().getEnemy();
+    Fighter target = getCaster().getParty().getActiveEncounter().chooseFighterToAttack(getCaster());
     target.getStats().setHitBoost(target.getStats().getHitBoost() - HIT_CHANCE_PENALTY);
+    if (target instanceof PlayerCharacter)
+    {
+      SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+              getCaster().getName() + " reduced your hit accuracy by -" + HIT_CHANCE_PENALTY);
+      CommandDelegate.execute(cmd);
+    }
     return true;
   }
 
@@ -26,6 +34,12 @@ public class FogOfConfusion extends SingleCastSpell
   public void expire()
   {
     target.getStats().setHitBoost(target.getStats().getHitBoost() + HIT_CHANCE_PENALTY);
+    if (target instanceof PlayerCharacter)
+    {
+      SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+              getCaster().getName() + " is no longer reducing your hit accuracy by -" + HIT_CHANCE_PENALTY);
+      CommandDelegate.execute(cmd);
+    }
   }
 
   @Override

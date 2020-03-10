@@ -10,22 +10,24 @@ public class Settings
 
   public static final BigDecimal DEFAULT_PERCENT_CHANCE_OF_ENCOUNTER = new BigDecimal("50");
   public static final int DELAY_BETWEEN_ENCOUNTERS_MS = 15_000;
-  public static final int DELAY_BETWEEN_ROUNDS_MS = 15_000;
+  public static final int DELAY_BETWEEN_ROUNDS_MS = 10_000;
 
   // Automatic mana recovery: recover 1 mana point every 3 hours
   public static final long DELAY_BETWEEN_MANA_RECOVERY = 3 * 60 * 60_000; // 3 hours
 
-  // Automatic HP recovery: recover 20% of what a short rest would give every 45 minutes
+  // Automatic HP recovery: recover 20% of what a short rest would give every 90 minutes
   // (given as 10% every 22.5 minutes)
-  public static final long DELAY_BETWEEN_HP_RECOVERY = (20 * 60_000) + 30_000; // 22.5 minutes
+  public static final long DELAY_BETWEEN_HP_RECOVERY = 45 * 60_000; // 45 minutes
   public static final BigDecimal SCHEDULED_HP_RECOVERY_PERCENT_OF_SHORT_REST = new BigDecimal("10");
 
   public static final long SOBER_UP_DELAY_MS = 60_000 * 20;
   public static final long SHORT_REST_DURATION_MS = 60_000 * 5;
   public static final long LONG_REST_DURATION_MS = 60_000 * 60; // 1 hour
 
-  public static final long BLACKSMITH_CRAFTING_TIME_MS = 78 * 1000; // 1 hour 18 minutes... because he's a little arbitrary
-  public static final long ALCHEMIST_CRAFTING_TIME_MS = 60 * 1000; // 1 hour
+  public static final long BLACKSMITH_CRAFTING_TIME_MS = 78 * 60_000; // 1 hour 18 minutes... because he's a little arbitrary
+  public static final long ALCHEMIST_ENCHANT_WEAPON_TIME_MS = 60 * 60_000; // 1 hour
+  public static final long ALCHEMIST_ENCHANT_SHIELD_TIME_MS = 20 * 60_000; // 20 minutes
+  public static final int MAX_CRAFTABLE_WEAPON_DAMAGE = 100;
 
   public static final int MAX_UNCLAIMED_PARTY_ITEMS = 5;
 
@@ -60,6 +62,15 @@ public class Settings
   public static final int THE_GORGE_MAX_DIFFICULTY = Integer.MAX_VALUE;
   public static final int THE_GORGE_TIME_ALLOWED_FOR_PLANNING_MS = 20_000;
   public static final int THE_GORGE_ACTIONS_PER_ROUND = 2;
+
+  public static final int CAVERN_TIME_ALLOWED_FOR_PLANNING_MS = 20_000;
+  public static final int CAVERN_ACTIONS_PER_ROUND = 2;
+
+  public static final int SPARRING_TENT_TIME_ALLOWED_FOR_PLANNING_MS = 15_000;
+  public static final int SPARRING_TENT_ACTIONS_PER_ROUND = 1;
+
+  public static final boolean SUICIDAL_CREATURES = false; // if true, enemies will NEVER retreat, even if they're totally overpowered
+  public static final long ROOM_INTERVAL_MS = 10_000;
 
   public static boolean DEVELOPER_MODE = false;
 }

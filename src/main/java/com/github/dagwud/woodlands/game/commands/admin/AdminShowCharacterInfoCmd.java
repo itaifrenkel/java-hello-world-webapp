@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.ShowCharacterInfoCmd;
 import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
+import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
@@ -12,15 +13,20 @@ import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class AdminShowCharacterInfoCmd extends SuspendableCmd
 {
   private static final long serialVersionUID = 1L;
 
   private final int chatId;
+  private final PlayerCharacter character;
 
   public AdminShowCharacterInfoCmd(int chatId, PlayerCharacter character)
   {
     super(character.getPlayedBy().getPlayerState(), 2);
+    this.character = character;
     this.chatId = chatId;
   }
 
@@ -40,7 +46,7 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
 
   private void promptForCharacter()
   {
-    SendMessageCmd cmd = new SendMessageCmd(chatId, "Please enter the character name");
+    ShowPlayerChoiceCmd cmd = new ShowPlayerChoiceCmd(chatId, "Which player?", character.getParty());
     CommandDelegate.execute(cmd);
   }
 

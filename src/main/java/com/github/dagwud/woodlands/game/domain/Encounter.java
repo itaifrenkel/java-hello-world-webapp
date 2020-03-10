@@ -3,18 +3,18 @@ package com.github.dagwud.woodlands.game.domain;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.battle.AutomaticEncounterRoundCmd;
 import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
-import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 public class Encounter implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   private Party party;
-  private Creature enemy;
+  private List<? extends Fighter> enemies;
   private boolean ended;
   private int currentRound;
   private final int actionsAllowedPerRound;
@@ -24,17 +24,17 @@ public class Encounter implements Serializable
    * a farmed encounter is one that happened automatically with no player intervention
   */
   private boolean farmed = true;
-  private boolean fightingStarted;
+  private EncounterStatus status;
 
-  public Encounter(Party party, Creature enemy)
+  public Encounter(Party party, List<? extends Fighter> enemies)
   {
-    this(party, enemy, 3); // two attacks and a spell
+    this(party, enemies, 3); // two attacks and a spell
   }
 
-  protected Encounter(Party party, Creature enemy, int actionsAllowedPerRound)
+  protected Encounter(Party party, List<? extends Fighter> enemies, int actionsAllowedPerRound)
   {
     this.party = party;
-    this.enemy = enemy;
+    this.enemies = enemies;
     this.actionsAllowedPerRound = actionsAllowedPerRound;
   }
 
@@ -48,15 +48,15 @@ public class Encounter implements Serializable
     ended = true;
   }
 
-  public Creature getEnemy()
+  public List<? extends Fighter> getEnemies()
   {
-    return enemy;
+    return enemies;
   }
 
   public Collection<Fighter> getAllFighters()
   {
-    Collection<Fighter> fighters = new ArrayList<>(party.getActiveMembers());
-    fighters.add(enemy);
+    Collection<Fighter> fighters = new HashSet<>(party.getActiveMembers());
+    fighters.addAll(enemies);
     return fighters;
   }
 
@@ -95,14 +95,14 @@ public class Encounter implements Serializable
     return actionsAllowedPerRound;
   }
 
-  public final void setFightingStarted(boolean fightingStarted)
+  public final void setStatus(EncounterStatus status)
   {
-    this.fightingStarted = fightingStarted;
+    this.status = status;
   }
 
-  public final boolean hasFightingStarted()
+  public final EncounterStatus getStatus()
   {
-    return fightingStarted;
+    return status;
   }
 
   public EncounterRoundCmd createNextRoundCmd(PlayerState playerState, int delayBetweenRoundsMS)
@@ -115,12 +115,29 @@ public class Encounter implements Serializable
     this.hasAnyPlayerActivityPrepared = hasAnyPlayerActivityPrepared;
   }
 
-  public boolean hasAnyPlayerActivityPrepared()
+  boolean hasAnyPlayerActivityPrepared()
   {
     return hasAnyPlayerActivityPrepared;
   }
 
   public void startFighting()
   {
+  }
+
+  public Fighter chooseFighterToAttack(Fighter attacker)
+  {
+    return attacker.chooseFighterToAttack(getAllFighters());
+  }
+
+  public boolean anyAggressorsStillConscious()
+  {
+    for (PlayerCharacter member : getParty().getActivePlayerCharacters())
+    {
+      if (member.isConscious())
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }

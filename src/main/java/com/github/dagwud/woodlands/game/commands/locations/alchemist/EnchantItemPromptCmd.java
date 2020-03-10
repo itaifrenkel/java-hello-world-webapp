@@ -4,15 +4,11 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.CraftPromptCmd;
 import com.github.dagwud.woodlands.game.domain.Crafter;
-import com.github.dagwud.woodlands.game.domain.Item;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.trinkets.consumable.ConsumableTrinket;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrinket>
+public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrinket, Weapon>
 {
   public EnchantItemPromptCmd(PlayerCharacter character, PlayerState playerState)
   {
@@ -40,13 +36,26 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   @Override
   protected Weapon findFirstItem(String name)
   {
-    return (Weapon)findItem(name);
+    return (Weapon) findItem(name);
   }
 
   @Override
   protected String produceAcceptItemMessage()
   {
     return "\"Oh, a fine specimen. But certainly we can give it a little something extra\"";
+  }
+
+  @Override
+  protected Weapon createCraftedItem(Weapon firstItem, ConsumableTrinket secondItem)
+  {
+    Weapon crafted = new Weapon(firstItem);
+    crafted.damage.diceCount = crafted.damage.diceCount + 1;
+    crafted.enchanted = true;
+    if (!getCharacter().canHandleWeapon(crafted))
+    {
+      return null;
+    }
+    return crafted;
   }
 
   @Override
@@ -70,7 +79,7 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   @Override
   protected ConsumableTrinket findSecondItem(String name)
   {
-    return (ConsumableTrinket)findItem(name);
+    return (ConsumableTrinket) findItem(name);
   }
 
   @Override
@@ -80,52 +89,17 @@ public class EnchantItemPromptCmd extends CraftPromptCmd<Weapon, ConsumableTrink
   }
 
   @Override
-  protected AbstractCmd createCraftCmd(Weapon firstItem, ConsumableTrinket secondItem)
+  protected String produceJobDeclinedMessage()
   {
-    return new StartEnchantItemCmd(getCharacter(), firstItem, secondItem);
+    return "\"Look, I don’t know who you were in a past life, but you clearly shouldn’t be hauling around that kind " +
+            "of firepower. When you’re able to control that much damage, come back and chat to me, but for now " +
+            "I can’t help you.";
   }
 
-  private List<String> produceWeapons()
+  @Override
+  protected AbstractCmd createCraftCmd(Weapon craftedItem)
   {
-    List<String> weapons = new ArrayList<>();
-    if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof Weapon)
-    {
-      weapons.add(getCharacter().getCarrying().getCarriedLeft().getName());
-    }
-    if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof Weapon)
-    {
-      weapons.add(getCharacter().getCarrying().getCarriedRight().getName());
-    }
-    for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
-    {
-      if (inactive instanceof Weapon)
-      {
-        weapons.add(inactive.getName());
-      }
-    }
-    weapons.add("Cancel");
-    return weapons;
+    return new StartEnchantItemCmd(getCharacter(), craftedItem);
   }
 
-  private List<String> producePotions()
-  {
-    List<String> potions = new ArrayList<>();
-    if (getCharacter().getCarrying().getCarriedLeft() != null && getCharacter().getCarrying().getCarriedLeft() instanceof ConsumableTrinket)
-    {
-      potions.add(getCharacter().getCarrying().getCarriedLeft().getName());
-    }
-    if (getCharacter().getCarrying().getCarriedRight() != null && getCharacter().getCarrying().getCarriedRight() instanceof ConsumableTrinket)
-    {
-      potions.add(getCharacter().getCarrying().getCarriedRight().getName());
-    }
-    for (Item inactive : getCharacter().getCarrying().getCarriedInactive())
-    {
-      if (inactive instanceof ConsumableTrinket)
-      {
-        potions.add(inactive.getName());
-      }
-    }
-    potions.add("Cancel");
-    return potions;
-  }
 }

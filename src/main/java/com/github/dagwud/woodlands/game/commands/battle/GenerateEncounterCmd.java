@@ -5,11 +5,11 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.SpawnCreatureByDifficultyCmd;
-import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.Encounter;
-import com.github.dagwud.woodlands.game.domain.Item;
-import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.gson.game.Creature;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GenerateEncounterCmd extends AbstractCmd
 {
@@ -17,14 +17,16 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
   private final PlayerState playerState;
   private final ELocation location;
+  private final int enemyCount;
   private final double minDifficulty;
   private final double maxDifficulty;
   private String creatureType;
 
-  GenerateEncounterCmd(PlayerState playerState, ELocation location, double minDifficulty, double maxDifficulty, String creatureType)
+  GenerateEncounterCmd(PlayerState playerState, ELocation location, int enemyCount, double minDifficulty, double maxDifficulty, String creatureType)
   {
     this.playerState = playerState;
     this.location = location;
+    this.enemyCount = enemyCount;
     this.minDifficulty = minDifficulty;
     this.maxDifficulty = maxDifficulty;
     this.creatureType = creatureType;
@@ -33,53 +35,52 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   @Override
   public final void execute()
   {
+    // You've left the location of the battles; encounter no longer happens:
+    if (playerState.getActiveCharacter().getLocation() != location)
     {
-      // You've left the location of the battles; encounter no longer happens:
-      if (playerState.getActiveCharacter().getLocation() != location)
-      {
-        return;
-      }
+      return;
+    }
 
-      // Party is all dead:
-      if (!playerState.getActiveCharacter().getParty().canAct())
-      {
-        return;
-      }
+    // Party is all dead:
+    Party party = playerState.getActiveCharacter().getParty();
+    if (!party.canAct())
+    {
+      return;
+    }
 
-      // There's already an encounter in progress; don't start another one:
-      if (playerState.getActiveCharacter().getParty().getActiveEncounter() != null)
+    // There's already an encounter in progress; don't start another one:
+    if (party.getActiveEncounter() != null)
+    {
+      if (party.getActiveEncounter().isEnded())
       {
-        if (playerState.getActiveCharacter().getParty().getActiveEncounter().isEnded())
-        {
-          playerState.getActiveCharacter().getParty().setActiveEncounter(null);
-        }
-        else
-        {
-          scheduleNextEncounter();
-          return;
-        }
+        party.setActiveEncounter(null);
       }
-
-      boolean shouldHaveEncounter = shouldHaveEncounter();
-      if (!shouldHaveEncounter)
+      else
       {
-        String msg = "<i>Time passes. You keep moving. Nothing interesting happens.</i>";
-        if (Math.random() <= 0.1d)
-        {
-          msg = "<i>You see some trees.</i>";
-        }
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(playerState.getPlayer().getActiveCharacter().getParty(), msg);
-        CommandDelegate.execute(cmd);
         scheduleNextEncounter();
         return;
       }
-
-      Encounter encounter = startEncounter();
-      playerState.getActiveCharacter().getParty().setActiveEncounter(encounter);
-
-      scheduleFirstRound(encounter);
-      scheduleNextEncounter();
     }
+
+    boolean shouldHaveEncounter = shouldHaveEncounter();
+    if (!shouldHaveEncounter)
+    {
+      String msg = "<i>Time passes. You keep moving. Nothing interesting happens.</i>";
+      if (Math.random() <= 0.1d)
+      {
+        msg = "<i>You see some trees.</i>";
+      }
+      SendPartyMessageCmd cmd = new SendPartyMessageCmd(playerState.getPlayer().getActiveCharacter().getParty(), msg);
+      CommandDelegate.execute(cmd);
+      scheduleNextEncounter();
+      return;
+    }
+
+    Encounter encounter = startEncounter();
+    party.setActiveEncounter(encounter);
+
+    scheduleFirstRound(encounter);
+    scheduleNextEncounter();
   }
 
   protected abstract void scheduleFirstRound(Encounter encounter);
@@ -91,23 +92,66 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   private Encounter startEncounter()
   {
     Encounter encounter = createEncounter();
-    String message = "<b>You encountered a " + encounter.getEnemy().name + " (L" + encounter.getEnemy().difficulty() + "):</b>\n" + encounter.getEnemy().summary();
-    message += encounter.getEnemy().getCarrying().summary(encounter.getEnemy());
+    String message = buildEncounteredSummary(encounter);
 
     SendPartyMessageCmd msg = new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), message);
     CommandDelegate.execute(msg);
     return encounter;
   }
 
-  private Encounter createEncounter()
+  protected String buildEncounteredSummary(Encounter encounter)
   {
-    SpawnCreatureByDifficultyCmd cmd = new SpawnCreatureByDifficultyCmd(getMinDifficulty(), getMaxDifficulty(), getCreatureType());
-    CommandDelegate.execute(cmd);
-    Creature creature = cmd.getSpawnedCreature();
-    return createEncounter(getPlayerState().getActiveCharacter().getParty(), creature);
+    StringBuilder b = new StringBuilder();
+    b.append(encounter.getEnemies().size() == 1 ? "<b>You encountered a </b>" : "<b>You encountered:</b>\n");
+    for (Fighter enemy : encounter.getEnemies())
+    {
+      if (encounter.getEnemies().size() > 1)
+      {
+        b.append("• ");
+      }
+      b.append(buildEnemySummary(enemy));
+      b.append(enemy.getCarrying().summary(enemy));
+      if (encounter.getEnemies().size() > 1)
+      {
+        b.append("\n");
+      }
+    }
+    return b.toString();
   }
 
-  abstract Encounter createEncounter(Party party, Creature enemy);
+  protected String buildEnemySummary(Fighter enemy)
+  {
+    String level;
+    if (enemy instanceof Creature)
+    {
+      level = ((Creature) enemy).difficulty();
+    }
+    else
+    {
+      level = String.valueOf(enemy.getStats().getLevel());
+    }
+    return "<b>" + enemy.getName() + " (L" + level + "):</b>\n" + enemy.summary();
+  }
+
+  private Encounter createEncounter()
+  {
+    List<Fighter> creatures = produceEnemies();
+    return createEncounter(getPlayerState().getActiveCharacter().getParty(), creatures);
+  }
+
+  protected List<Fighter> produceEnemies()
+  {
+    List<Fighter> creatures = new ArrayList<>();
+    for (int i = 0; i < enemyCount; i++)
+    {
+      SpawnCreatureByDifficultyCmd cmd = new SpawnCreatureByDifficultyCmd(getMinDifficulty(), getMaxDifficulty(), getCreatureType());
+      CommandDelegate.execute(cmd);
+      creatures.add(cmd.getSpawnedCreature());
+    }
+    return creatures;
+  }
+
+  abstract Encounter createEncounter(Party party, List<? extends Fighter> enemy);
 
   protected final PlayerState getPlayerState()
   {
@@ -119,18 +163,23 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
     return location;
   }
 
-  final double getMinDifficulty()
+  protected final double getMinDifficulty()
   {
     return minDifficulty;
   }
 
-  final double getMaxDifficulty()
+  protected final double getMaxDifficulty()
   {
     return maxDifficulty;
   }
 
-  final String getCreatureType()
+  private String getCreatureType()
   {
     return creatureType;
+  }
+
+  protected int getEnemyCount()
+  {
+    return enemyCount;
   }
 }
