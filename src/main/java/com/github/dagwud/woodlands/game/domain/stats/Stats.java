@@ -39,6 +39,7 @@ public class Stats implements Serializable
   private int enchantmentsCount;
   private int itemsGivenAwayCount;
   private int itemsDroppedCount;
+  private int itemsClaimedCount;
   private int leadershipMovesCount;
 
   private Set<EAchievement> achievements = new HashSet<>();
@@ -383,4 +384,13 @@ public class Stats implements Serializable
     leadershipMovesCount++;
   }
 
+  public void incrementItemsClaimedCount()
+  {
+    itemsClaimedCount++;
+  }
+
+  public int getItemsClaimedCount()
+  {
+    return itemsClaimedCount;
+  }
 }
