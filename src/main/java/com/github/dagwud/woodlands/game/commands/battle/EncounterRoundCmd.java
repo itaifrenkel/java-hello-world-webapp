@@ -29,7 +29,7 @@ public abstract class EncounterRoundCmd extends AbstractCmd
       return;
     }
     encounter.setHasAnyPlayerActivityPrepared(false);
-    encounter.setStatus(EncounterStatus.BETWEEN_ROUNDS);
+    encounter.setStatus(EncounterStatus.PREPARE_ACTIONS);
     executePreparationPhase(encounter);
     scheduleFightPhase(encounter, playerState);
   }
