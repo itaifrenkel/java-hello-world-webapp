@@ -36,12 +36,12 @@ public class PrepareSpellCmd extends AbstractCmd
     }
     if (activeEncounter.getStatus() == EncounterStatus.FIGHTING)
     {
-      CommandDelegate.execute(new SendMessageCmd(character, "Too late - the round has already started"));
+      CommandDelegate.execute(new SendMessageCmd(caster, "Too late - the round has already started"));
       return;
     }
     if (activeEncounter.getStatus() == EncounterStatus.BETWEEN_ROUNDS)
     {
-      CommandDelegate.execute(new SendMessageCmd(character, "Hold your horses - the round hasn't started yet"));
+      CommandDelegate.execute(new SendMessageCmd(caster, "Hold your horses - the round hasn't started yet"));
       return;
     }
     caster.getSpellAbilities().prepare(spell, activeEncounter.getActionsAllowedPerRound());
