@@ -3,6 +3,7 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.domain.Encounter;
+import com.github.dagwud.woodlands.game.domain.EncounterStatus;
 import com.github.dagwud.woodlands.game.domain.ManualEncounter;
 
 public abstract class EncounterRoundCmd extends AbstractCmd
@@ -28,7 +29,7 @@ public abstract class EncounterRoundCmd extends AbstractCmd
       return;
     }
     encounter.setHasAnyPlayerActivityPrepared(false);
-    encounter.setFightingStarted(false);
+    encounter.setStatus(EncounterStatus.BETWEEN_ROUNDS);
     executePreparationPhase(encounter);
     scheduleFightPhase(encounter, playerState);
   }
