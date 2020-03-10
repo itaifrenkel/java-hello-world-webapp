@@ -252,7 +252,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     Fighter defender;
 
     defender = encounter.chooseFighterToAttack(attacker);
-    if (attacker.isConscious() && defender.isConscious() && attacksAllowed > 0)
+    if (attacker.isConscious() && defender != null && defender.isConscious() && attacksAllowed > 0)
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedLeft(), defender);
       if (damage.getHitStatus() != EHitStatus.DO_NOTHING)
@@ -263,7 +263,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     }
 
     defender = encounter.chooseFighterToAttack(attacker);
-    if (attacker.isConscious() && defender.isConscious() && attacksAllowed > 0)
+    if (attacker.isConscious() && defender != null && defender.isConscious() && attacksAllowed > 0)
     {
       DamageInflicted damage = doAttack(attacker, attacker.getCarrying().getCarriedRight(), defender);
       if (damage.getHitStatus() != EHitStatus.DO_NOTHING)
