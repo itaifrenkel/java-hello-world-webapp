@@ -24,7 +24,7 @@ public class Encounter implements Serializable
    * a farmed encounter is one that happened automatically with no player intervention
   */
   private boolean farmed = true;
-  private boolean fightingStarted;
+  private EncounterStatus status;
 
   public Encounter(Party party, List<? extends Fighter> enemies)
   {
@@ -95,14 +95,19 @@ public class Encounter implements Serializable
     return actionsAllowedPerRound;
   }
 
-  public final void setFightingStarted(boolean fightingStarted)
+  public final void setStatus(boolean status)
   {
-    this.fightingStarted = fightingStarted;
+    this.status = status;
   }
 
   public final boolean hasFightingStarted()
   {
-    return fightingStarted;
+    return status == EncounterStatus.FIGHTING;
+  }
+
+  public final boolean canPrepareActions()
+  {
+    return status == EncounterStatus.PREPARE_ACTIONS;
   }
 
   public EncounterRoundCmd createNextRoundCmd(PlayerState playerState, int delayBetweenRoundsMS)
