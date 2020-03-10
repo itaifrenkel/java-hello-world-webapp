@@ -3,9 +3,6 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
-import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Encounter;
 import com.github.dagwud.woodlands.game.domain.ManualEncounter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -21,7 +18,7 @@ public class ManualEncounterRoundCmd extends EncounterRoundCmd
   void executePreparationPhase(Encounter encounter)
   {
     ManualEncounter manualEncounter = (ManualEncounter) encounter;
-    for (PlayerCharacter character : encounter.getParty().getActivePlayerCharacters())
+    for (PlayerCharacter character : encounter.getAggressor().getActivePlayerCharacters())
     {
       RequestEncounterRoundPlanningCmd planning = new RequestEncounterRoundPlanningCmd(character.getPlayedBy().getPlayerState(), manualEncounter);
       CommandDelegate.execute(planning);

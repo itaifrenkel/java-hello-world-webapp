@@ -25,8 +25,8 @@ public class ManualEncounter extends Encounter
   {
     if (!hasAnyPlayerActivityPrepared())
     {
-      CommandDelegate.execute(new SendPartyMessageCmd(getParty(), "Nobody is keen for a fight"));
-      CommandDelegate.execute(new MoveToLocationCmd(getParty().getLeader(), ELocation.VILLAGE_SQUARE));
+      CommandDelegate.execute(new SendPartyMessageCmd(getAggressor(), "Nobody is keen for a fight"));
+      CommandDelegate.execute(new MoveToLocationCmd(getAggressor().getLeader(), ELocation.VILLAGE_SQUARE));
     }
   }
 

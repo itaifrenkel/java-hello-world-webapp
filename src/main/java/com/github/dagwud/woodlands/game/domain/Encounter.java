@@ -13,7 +13,7 @@ public class Encounter implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private Party party;
+  private FightingGroup aggressor;
   private List<? extends Fighter> enemies;
   private boolean ended;
   private int currentRound;
@@ -26,14 +26,14 @@ public class Encounter implements Serializable
   private boolean farmed = true;
   private EncounterStatus status;
 
-  public Encounter(Party party, List<? extends Fighter> enemies)
+  public Encounter(FightingGroup aggressor, List<? extends Fighter> enemies)
   {
-    this(party, enemies, 3); // two attacks and a spell
+    this(aggressor, enemies, 3); // two attacks and a spell
   }
 
-  protected Encounter(Party party, List<? extends Fighter> enemies, int actionsAllowedPerRound)
+  protected Encounter(FightingGroup aggressor, List<? extends Fighter> enemies, int actionsAllowedPerRound)
   {
-    this.party = party;
+    this.aggressor = aggressor;
     this.enemies = enemies;
     this.actionsAllowedPerRound = actionsAllowedPerRound;
   }
@@ -46,6 +46,16 @@ public class Encounter implements Serializable
   public void end()
   {
     ended = true;
+    Party party;
+    if (getAggressor() instanceof Party)
+    {
+      party = (Party) getAggressor();
+    }
+    else
+    {
+      party = getAggressor().getLeader().getParty();
+    }
+    party.setActiveEncounter(null);
   }
 
   public List<? extends Fighter> getEnemies()
@@ -55,19 +65,14 @@ public class Encounter implements Serializable
 
   public Collection<Fighter> getAllFighters()
   {
-    Collection<Fighter> fighters = new HashSet<>(party.getActiveMembers());
+    Collection<Fighter> fighters = new HashSet<>(aggressor.getActiveMembers());
     fighters.addAll(enemies);
     return fighters;
   }
 
-  public Party getParty()
+  public FightingGroup getAggressor()
   {
-    return party;
-  }
-
-  public void setParty(Party party)
-  {
-    this.party = party;
+    return aggressor;
   }
 
   public int getBattleRound()
@@ -131,7 +136,7 @@ public class Encounter implements Serializable
 
   public boolean anyAggressorsStillConscious()
   {
-    for (PlayerCharacter member : getParty().getActivePlayerCharacters())
+    for (PlayerCharacter member : getAggressor().getActivePlayerCharacters())
     {
       if (member.isConscious())
       {
