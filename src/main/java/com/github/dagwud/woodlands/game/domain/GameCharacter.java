@@ -32,7 +32,6 @@ public abstract class GameCharacter extends Fighter
   public String getName()
   {
     return name;
-    //return name + "[" + Integer.toHexString(hashCode()).substring(4) + "]";
   }
 
   public void setName(String name)
@@ -85,20 +84,13 @@ public abstract class GameCharacter extends Fighter
     List<Fighter> enemies = new ArrayList<>();
     for (Fighter fighter : fighters)
     {
-      if (fighter instanceof Creature)
+      boolean isCandidate = (allowFriendlyFire && fighter instanceof PlayerCharacter)
+                            || (!allowFriendlyFire && fighter instanceof Creature);
+      isCandidate = isCandidate && fighter.isConscious();
+      isCandidate = isCandidate && (fighter != attacker);
+      if (isCandidate)
       {
         enemies.add(fighter);
-      }
-    }
-
-    if (allowFriendlyFire)
-    {
-      for (Fighter fighter : fighters)
-      {
-        if (fighter instanceof PlayerCharacter && fighter != attacker)
-        {
-          enemies.add(fighter);
-        }
       }
     }
 
