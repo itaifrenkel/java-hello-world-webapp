@@ -39,7 +39,7 @@ public class Scheduler implements Serializable
     {
       if (scheduledCommand.isRestore())
       {
-        doSchedule(scheduledCommand);
+        //doSchedule(scheduledCommand);
       }
       else
       {
