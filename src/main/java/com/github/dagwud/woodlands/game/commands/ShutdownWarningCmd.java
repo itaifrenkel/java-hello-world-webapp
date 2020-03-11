@@ -24,13 +24,16 @@ public class ShutdownWarningCmd extends AbstractCmd
     for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
       PlayerCharacter character = playerState.getPlayer().getActiveCharacter();
-      if (character != null && shouldRetreat(character))
+      if (character != null)
       {
-        toRetreat.add(character);
-      }
+        if (shouldRetreat(character))
+        {
+          toRetreat.add(character);
+        }
 
-      SendMessageCmd msg = new SendMessageCmd(character, "You can feel changes coming in the breeze. Best you head back to the Village to take shelter");
-      CommandDelegate.execute(msg);
+        SendMessageCmd msg = new SendMessageCmd(character, "You can feel changes coming in the breeze. Best you head back to the Village to take shelter");
+        CommandDelegate.execute(msg);
+      }
     }
 
     for (PlayerCharacter character : toRetreat)
