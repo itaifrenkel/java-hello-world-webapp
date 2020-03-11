@@ -1,10 +1,12 @@
-package com.github.dagwud.woodlands.game.domain.events;
+package com.github.dagwud.woodlands.game.domain.events.achievements;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
 import com.github.dagwud.woodlands.game.domain.EAchievement;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.events.CreatureDroppedItemEvent;
+import com.github.dagwud.woodlands.game.domain.events.EventRecipient;
 import com.github.dagwud.woodlands.gson.game.Creature;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package com.github.dagwud.woodlands.game.domain.events;
+package com.github.dagwud.woodlands.game.domain.events.achievements;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
@@ -6,6 +6,8 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.domain.EAchievement;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerQuantifier;
+import com.github.dagwud.woodlands.game.domain.events.Event;
+import com.github.dagwud.woodlands.game.domain.events.EventRecipient;
 
 public class MostSomethingDoneEventRecipient implements EventRecipient<Event>
 {

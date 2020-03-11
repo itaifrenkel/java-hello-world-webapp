@@ -37,13 +37,8 @@ public class Creature extends Fighter
   private Stats stats;
   private CarriedItems carriedItems;
 
-  public Creature()
-  {
-  }
-
   public Creature(Creature template)
   {
-    this();
     this.name = template.name;
     this.difficulty = template.difficulty;
     this.weaponLeft = template.weaponLeft;

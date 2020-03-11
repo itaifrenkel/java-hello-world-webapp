@@ -1,9 +1,11 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.domain.events.*;
+import com.github.dagwud.woodlands.game.domain.events.achievements.*;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.util.ArrayList;
@@ -14,8 +16,8 @@ import java.util.Map;
 public enum EEvent
 {
   PLAYER_DEATH, PLAYER_UNCONSCIOUS, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM,
-  CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY, LEFT_ITEM, CRAFTED_ITEM, ENCHANTED_ITEM, CLAIMED_ITEM,
-  LED_PARTY;
+  CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY, LEFT_ITEM, CRAFTED_ITEM,
+  ENCHANTED_ITEM, CLAIMED_ITEM, LED_PARTY, SPARRING;
 
   private static transient Map<EEvent, List<EventRecipient<? extends Event>>> subscribers;
 
@@ -51,16 +53,20 @@ public enum EEvent
   private static void subscribeForAchievements()
   {
     EEvent.CREATURE_DROPPED_ITEM.subscribe(new CreatureWasMuggedEventRecipient());
-    EEvent.CREATURE_DEFEATED.subscribe(new DrunkenVictoryEventRecipient());
+    EEvent.CREATURE_DEFEATED.subscribe(new DefeatedCreatureAchievementsEventRecipient());
     EEvent.PLAYER_DEATH.subscribe(new PlayerDeathAchievementEvent());
     EEvent.PLAYER_DROPPED_ITEM.subscribe(new CharacterDroppedItemEventRecipient());
     EEvent.PLAYER_GAVE_ITEM_AWAY.subscribe(new CharacterGaveItemEventRecipient());
     EEvent.LEFT_ITEM.subscribe(new CharacterLeftItemEventRecipient());
+    EEvent.LEFT_PARTY.subscribe(event -> CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.SCREW_YOU_GUYS)));
 
     EEvent.CRAFTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SO_CRAFTY, playerCharacter -> playerCharacter.getStats().getCraftsCount()));
     EEvent.ENCHANTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SPELLS_GREAT, playerCharacter -> playerCharacter.getStats().getEnchantmentsCount()));
     EEvent.CLAIMED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.MINE_MINE, playerCharacter -> playerCharacter.getStats().getItemsClaimedCount()));
 
+    EEvent.SPARRING.subscribe(new SparringEventRecipient());
+
+    EEvent.LED_PARTY.subscribe(event -> CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.I_KNOW_THE_WAY)));
     EEvent.LED_PARTY.subscribe(new MostSomethingDoneEventRecipient(EAchievement.CAPTAIN_MY_CAPTAIN, playerCharacter ->
     {
       if (playerCharacter.getParty().isPrivateParty())

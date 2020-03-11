@@ -96,6 +96,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
     SendPartyMessageCmd msg = new SendPartyMessageCmd(playerState.getActiveCharacter().getParty(), message);
     CommandDelegate.execute(msg);
+
     return encounter;
   }
 

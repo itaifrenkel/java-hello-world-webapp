@@ -55,6 +55,8 @@ public class DefeatCreatureCmd extends AbstractCmd
     int rewardPerCharacter = victoriousPlayers.isEmpty() ? 0 : Math.floorDiv(reward, victoriousPlayers.size());
     for (PlayerCharacter member : victoriousPlayers)
     {
+      member.getStats().incrementCreaturesDefeatedCount();
+
       EEvent.CREATURE_DEFEATED.trigger(new CreatureDefeatedEvent(member, creatureDefeated, rewardPerCharacter));
 
       GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);

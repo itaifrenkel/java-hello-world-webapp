@@ -42,10 +42,12 @@ public class GenerateSparringEncounterCmd extends GenerateManualEncounterCmd
   {
     List<PlayerCharacter> partners = partnerFor.getParty().findPlayerCharactersIn(ELocation.SPARRING_TENT);
     partners.remove(partnerFor);
+
     if (partners.isEmpty())
     {
       return null;
     }
+
     return partners.get(0);
   }
 

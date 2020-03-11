@@ -300,6 +300,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     {
       return new DamageInflicted(attacker, null, EHitStatus.DO_NOTHING, 0, defender, 0);
     }
+
     AttackCmd attack = new AttackCmd(attacker, (Weapon)attackWith, defender);
     CommandDelegate.execute(attack);
     DamageInflicted damageInflicted = attack.getDamageInflicted();

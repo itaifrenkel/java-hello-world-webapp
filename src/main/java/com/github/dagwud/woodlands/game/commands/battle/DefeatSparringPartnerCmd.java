@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.domain.*;
+import com.github.dagwud.woodlands.game.domain.events.SparringEvent;
 
 public class DefeatSparringPartnerCmd extends AbstractCmd
 {
@@ -29,10 +30,17 @@ public class DefeatSparringPartnerCmd extends AbstractCmd
     {
       CommandDelegate.execute(new SendMessageCmd((PlayerCharacter) victor, "<b>You have defeated " + loser.getName() + "!</b>"));
     }
+
     if (loser instanceof PlayerCharacter)
     {
       CommandDelegate.execute(new SendMessageCmd((PlayerCharacter) loser, "<b>You have been defeated by " + victor.getName() + "!</b>"));
     }
+
+    if (victor instanceof PlayerCharacter && loser instanceof PlayerCharacter)
+    {
+      EEvent.SPARRING.trigger(new SparringEvent((PlayerCharacter) victor, (PlayerCharacter) loser));
+    }
+
     CommandDelegate.execute(new SendPartyAlertCmd(party, "<b>" + victor.getName() + " has defeated " + loser.getName() + " in a sparring match!</b>"));
 
     // Defeated character must be taken to the village for resuscitation; victor can go celebrate:

@@ -41,6 +41,7 @@ public class Stats implements Serializable
   private int itemsDroppedCount;
   private int itemsClaimedCount;
   private int leadershipMovesCount;
+  private int creaturesDefeatedCount;
 
   private Set<EAchievement> achievements = new HashSet<>();
 
@@ -382,6 +383,16 @@ public class Stats implements Serializable
   public void incrementLeadershipMovesCount()
   {
     leadershipMovesCount++;
+  }
+
+  public void incrementCreaturesDefeatedCount()
+  {
+    creaturesDefeatedCount++;
+  }
+
+  public int getCreaturesDefeatedCount()
+  {
+    return creaturesDefeatedCount;
   }
 
   public void incrementItemsClaimedCount()

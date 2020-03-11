@@ -25,18 +25,20 @@ public class EnterSparringTentCmd extends AbstractCmd
   {
     List<PlayerCharacter> partners = activeCharacter.getParty().findPlayerCharactersIn(ELocation.SPARRING_TENT);
     partners.remove(activeCharacter);
+
     if (partners.isEmpty())
     {
       CommandDelegate.execute(new SendPartyAlertCmd(activeCharacter.getParty(), activeCharacter.getName() + " is waiting for a sparring partner"));
       return;
     }
+
     if (partners.size() > 1)
     {
       CommandDelegate.execute(new SendMessageCmd(activeCharacter, "There's already a pair sparring in the tent; house rules prevent you from interfering"));
       CommandDelegate.execute(new MoveToLocationCmd(activeCharacter, ELocation.TAVERN));
       return;
     }
-    PlayerCharacter enemy = partners.get(0);
+
     GenerateSparringEncounterCmd cmd = new GenerateSparringEncounterCmd(activeCharacter.getPlayedBy().getPlayerState());
     CommandDelegate.execute(cmd);
   }
