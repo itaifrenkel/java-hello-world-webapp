@@ -27,9 +27,9 @@ public abstract class GenerateAutomaticEncounterCmd extends GenerateEncounterCmd
   }
 
   @Override
-  Encounter createEncounter(Party party, FightingGroup enemy)
+  Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy)
   {
-    return new Encounter(party, enemy);
+    return new Encounter(aggressor, enemy);
   }
 
   @Override

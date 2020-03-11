@@ -49,10 +49,10 @@ public class GenerateSparringEncounterCmd extends GenerateManualEncounterCmd
   }
 
   @Override
-  protected Encounter createEncounter(Party party, FightingGroup enemy)
+  protected Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy)
   {
     FightingGroup enemies = produceEnemies();
-    return new SparringEncounter(party, getPlayerState().getActiveCharacter(), enemies, getTimeAllowedForPlanningMS(), getActionsPerRound());
+    return new SparringEncounter(aggressor, enemies, getTimeAllowedForPlanningMS(), getActionsPerRound());
   }
 
   @Override

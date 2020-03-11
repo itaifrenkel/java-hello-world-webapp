@@ -150,7 +150,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
     return new CreatureGroup(creatures);
   }
 
-  abstract Encounter createEncounter(Party party, FightingGroup enemy);
+  abstract Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy);
 
   protected final PlayerState getPlayerState()
   {

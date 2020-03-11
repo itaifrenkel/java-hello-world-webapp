@@ -6,19 +6,17 @@ import java.util.HashSet;
 public class SparringEncounter extends ManualEncounter
 {
   private static final long serialVersionUID = 1L;
-  private final PlayerCharacter aggressor;
 
-  public SparringEncounter(Party party, PlayerCharacter aggressor, FightingGroup enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
+  public SparringEncounter(FightingGroup aggressor, FightingGroup enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
   {
-    super(party, enemies, timeAllowedForPlanningMS, actionsAllowedPerRound);
-    this.aggressor = aggressor;
+    super(aggressor, enemies, timeAllowedForPlanningMS, actionsAllowedPerRound);
   }
 
   @Override
   public Collection<Fighter> getAllFighters()
   {
     Collection<Fighter> fighters = new HashSet<>();
-    fighters.add(aggressor);
+    fighters.addAll(getAggressor().getActiveMembers());
     fighters.addAll(getEnemies().getActiveMembers());
     return fighters;
   }
@@ -33,6 +31,13 @@ public class SparringEncounter extends ManualEncounter
   @Override
   public boolean anyAggressorsStillConscious()
   {
-    return aggressor.isConscious();
+    for (Fighter activeMember : getAggressor().getActiveMembers())
+    {
+      if (activeMember.isConscious())
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }
