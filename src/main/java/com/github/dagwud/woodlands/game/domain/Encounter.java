@@ -12,8 +12,8 @@ public class Encounter implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private transient FightingGroup aggressor;
-  private transient FightingGroup enemies;
+  private FightingGroup aggressor;
+  private FightingGroup enemies;
   private boolean ended;
   private int currentRound;
   private final int actionsAllowedPerRound;
