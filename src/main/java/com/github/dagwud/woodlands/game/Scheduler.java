@@ -13,7 +13,7 @@ import java.util.concurrent.FutureTask;
 public class Scheduler implements Serializable
 {
   private static final long serialVersionUID = 1L;
-  private transient Collection<RunLaterCmd> scheduledCommands;
+  private Collection<RunLaterCmd> scheduledCommands;
 
   public static Scheduler instance()
   {
@@ -68,7 +68,7 @@ public class Scheduler implements Serializable
 
     // Yes, threads are forbidden in EJB... but the current deployment server isn't actually
     // using an EJB container, so this seems ok.
-    new Thread(task).start();
+    //new Thread(task).start();
   }
 
   public void onComplete(AbstractCmd complete)
