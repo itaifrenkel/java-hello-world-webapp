@@ -3,7 +3,6 @@ package com.github.dagwud.woodlands.game.domain.events.achievements;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.UnlockAchievementCmd;
 import com.github.dagwud.woodlands.game.domain.EAchievement;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.events.CreatureDefeatedEvent;
 import com.github.dagwud.woodlands.game.domain.events.EventRecipient;
@@ -24,30 +23,20 @@ public class DefeatedCreatureAchievementsEventRecipient implements EventRecipien
 
   private void checkForDrunkenVictory(CreatureDefeatedEvent event, PlayerCharacter member)
   {
-    List<GameCharacter> activeMembers = member.getParty().getActiveMembers();
+    List<PlayerCharacter> activeMembers = member.getParty().getActivePlayerCharacters();
 
-    for (GameCharacter activeMember : activeMembers)
+    for (PlayerCharacter activeMember : activeMembers)
     {
-      if (!(activeMember instanceof PlayerCharacter))
-      {
-        continue;
-      }
-
-      if (activeMember.getStats().getDrunkeness() == 0 || !((PlayerCharacter) activeMember).shouldGainExperienceByDefeating(event.getCreature()))
+      if (activeMember.getStats().getDrunkeness() == 0 || !activeMember.shouldGainExperienceByDefeating(event.getCreature()))
       {
         return;
       }
     }
 
     // awkward to have to loop twice but I think we have to
-    for (GameCharacter activeMember : activeMembers)
+    for (PlayerCharacter activeMember : activeMembers)
     {
-      if (!(activeMember instanceof PlayerCharacter))
-      {
-        continue;
-      }
-
-      CommandDelegate.execute(new UnlockAchievementCmd((PlayerCharacter) activeMember, EAchievement.DRUNKEN_VICTORY));
+      CommandDelegate.execute(new UnlockAchievementCmd(activeMember, EAchievement.DRUNKEN_VICTORY));
     }
   }
 

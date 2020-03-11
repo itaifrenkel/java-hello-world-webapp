@@ -39,8 +39,6 @@ public class DefeatSparringPartnerCmd extends AbstractCmd
       EEvent.SPARRING.trigger(new SparringEvent((PlayerCharacter) victor, (PlayerCharacter) loser));
     }
 
-    CommandDelegate.execute(new SendPartyAlertCmd(party, "<b>" + victor.getName() + " has defeated " + loser.getName() + " in a sparring match!</b>"));
-
     Party victorParty = determineParty(victor);
     Party loserParty = determineParty(loser);
     if (victorParty != null)
