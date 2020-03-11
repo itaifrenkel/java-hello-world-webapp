@@ -13,7 +13,7 @@ import java.util.concurrent.FutureTask;
 public class Scheduler implements Serializable
 {
   private static final long serialVersionUID = 1L;
-  private Collection<RunLaterCmd> scheduledCommands;
+  private transient Collection<RunLaterCmd> scheduledCommands;
 
   public static Scheduler instance()
   {
