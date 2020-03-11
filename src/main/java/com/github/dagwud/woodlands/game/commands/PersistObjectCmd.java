@@ -35,6 +35,7 @@ public class PersistObjectCmd extends AbstractCmd
       Logger.info("Developer mode active; skipping persistence");
       return;
     }
+
     final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Settings.S3_REGION).build();
     try
     {
