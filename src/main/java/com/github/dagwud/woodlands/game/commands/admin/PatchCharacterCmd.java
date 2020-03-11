@@ -21,6 +21,11 @@ public class PatchCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (null == character)
+    {
+      return;
+    }
+
     if (null != character.getStats())
     {
       fixNegativeStats(character.getStats().getStrength(), "strength");
