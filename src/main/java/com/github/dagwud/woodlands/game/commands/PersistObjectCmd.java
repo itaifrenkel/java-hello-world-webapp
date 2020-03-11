@@ -57,7 +57,7 @@ public class PersistObjectCmd extends AbstractCmd
     finally
     {
       s3.shutdown();
-    } 
+    }
   }
 
   private File writeObject(Object object) throws IOException

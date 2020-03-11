@@ -27,9 +27,9 @@ public abstract class GenerateManualEncounterCmd extends GenerateEncounterCmd
   }
 
   @Override
-  protected Encounter createEncounter(Party party, List<? extends Fighter> enemy)
+  protected Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy)
   {
-    return new ManualEncounter(party, enemy, timeAllowedForPlanningMS, actionsPerRound);
+    return new ManualEncounter(aggressor, enemy, timeAllowedForPlanningMS, actionsPerRound);
   }
 
   @Override

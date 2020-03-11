@@ -2,13 +2,11 @@ package com.github.dagwud.woodlands.game.commands.admin;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
-import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.character.CheckLevelUpCmd;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.domain.Fighter;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Player;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -58,7 +56,7 @@ public class AdminSetXPCmd extends SuspendableCmd
   {
     PlayerCharacter activeCharacter = player.getPlayerState().getActiveCharacter();
     List<String> partyMembers = new ArrayList<>();
-    for (GameCharacter gameCharacter : activeCharacter.getParty().getActiveMembers())
+    for (Fighter gameCharacter : activeCharacter.getParty().getActiveMembers())
     {
       partyMembers.add(gameCharacter.getName());
     }
@@ -88,7 +86,7 @@ public class AdminSetXPCmd extends SuspendableCmd
 
   private void setXP()
   {
-    for (GameCharacter member : getPlayerState().getPlayer().getActiveCharacter().getParty().getAllMembers())
+    for (Fighter member : getPlayerState().getPlayer().getActiveCharacter().getParty().getAllMembers())
     {
       if (member.getName().equalsIgnoreCase(targetName))
       {

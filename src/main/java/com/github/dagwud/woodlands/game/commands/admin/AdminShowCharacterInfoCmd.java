@@ -4,17 +4,11 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.ShowCharacterInfoCmd;
-import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
-import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-
-import java.util.List;
-import java.util.ArrayList;
 
 public class AdminShowCharacterInfoCmd extends SuspendableCmd
 {
@@ -61,21 +55,17 @@ public class AdminShowCharacterInfoCmd extends SuspendableCmd
 
     for (Party party : PartyRegistry.listAllParties())
     {
-      for (GameCharacter gameCharacter : party.getAllMembers())
+      for (PlayerCharacter gameCharacter : party.getActivePlayerCharacters())
       {
-        if (gameCharacter instanceof PlayerCharacter)
+        if (gameCharacter.getName().equalsIgnoreCase(name))
         {
-          PlayerCharacter character = (PlayerCharacter)gameCharacter;
-          if (character.getName().equalsIgnoreCase(name))
-          {
-            ShowCharacterInfoCmd cmd = new ShowCharacterInfoCmd(chatId, character);
-            CommandDelegate.execute(cmd);
+          ShowCharacterInfoCmd cmd = new ShowCharacterInfoCmd(chatId, gameCharacter);
+          CommandDelegate.execute(cmd);
 
-            InventoryCmd inv = new InventoryCmd(chatId, character);
-            CommandDelegate.execute(inv);
-          }
+          InventoryCmd inv = new InventoryCmd(chatId, gameCharacter);
+          CommandDelegate.execute(inv);
         }
-      }
+        }
     }
   }
 }

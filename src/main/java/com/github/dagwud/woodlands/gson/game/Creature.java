@@ -99,6 +99,10 @@ public class Creature extends Fighter
     List<Fighter> targets = new ArrayList<>(members);
     targets.removeIf(f -> !(f instanceof GameCharacter));
     targets.removeIf(f -> !f.isConscious());
+    if (targets.isEmpty())
+    {
+      return null;
+    }
 
     switch (fightMode)
     {
@@ -122,6 +126,12 @@ public class Creature extends Fighter
       default:
         throw new WoodlandsRuntimeException("Unknown fight mode '" + fightMode + "'");
     }
+  }
+
+  @Override
+  public boolean isActive()
+  {
+    return true;
   }
 
   public String difficulty()

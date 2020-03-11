@@ -6,10 +6,7 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.character.LeavePartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Party;
-import com.github.dagwud.woodlands.game.domain.Player;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +53,10 @@ public class RemovePromptCmd extends SuspendableCmd
   {
     StringBuilder done = new StringBuilder("Vanishing characters...\n");
 
-    List<GameCharacter> toRemove = new ArrayList<>();
+    List<Fighter> toRemove = new ArrayList<>();
     for (Party party : PartyRegistry.listAllParties())
     {
-      for (GameCharacter character : party.getActiveMembers())
+      for (Fighter character : party.getActiveMembers())
       {
         if (character.getName().equalsIgnoreCase(name))
         {
@@ -69,19 +66,26 @@ public class RemovePromptCmd extends SuspendableCmd
     }
 
 
-    for (GameCharacter character : toRemove)
+    for (Fighter character : toRemove)
     {
-      Party party = character.getParty();
-      LeavePartyCmd leave = new LeavePartyCmd(character, party);
-      CommandDelegate.execute(leave);
+      String partyName = "";
+      if (character instanceof GameCharacter)
+      {
+        GameCharacter gameCharacter = (GameCharacter) character;
+        Party party = gameCharacter.getParty();
+        LeavePartyCmd leave = new LeavePartyCmd(gameCharacter, party);
+        CommandDelegate.execute(leave);
+        partyName = party.getName();
+      }
 
       if (character instanceof PlayerCharacter)
       {
-        Player playedBy = ((PlayerCharacter)character).getPlayedBy();
-        playedBy.remove(character);
+        PlayerCharacter playerCharacter = (PlayerCharacter) character;
+        Player playedBy = playerCharacter.getPlayedBy();
+        playedBy.remove(playerCharacter);
       }
       done.append("Obliterated ").append(character.getName())
-              .append(" in party ").append(party.getName()).append("\n");
+              .append(" in party ").append(partyName).append("\n");
     }
 
     SendMessageCmd cmd = new SendMessageCmd(chatId, done.toString());

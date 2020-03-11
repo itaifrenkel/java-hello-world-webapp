@@ -3,8 +3,8 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
 
@@ -15,7 +15,7 @@ public class CallToArms extends SingleCastSpell
 {
   private static final long serialVersionUID = 1L;
 
-  private Map<GameCharacter, Integer> buffs;
+  private Map<Fighter, Integer> buffs;
 
   public CallToArms(General caster)
   {
@@ -26,7 +26,7 @@ public class CallToArms extends SingleCastSpell
   @Override
   public boolean cast()
   {
-    for (GameCharacter target : getCaster().getParty().getActiveMembers())
+    for (Fighter target : getCaster().getParty().getActiveMembers())
     {
       int buffAmount = rollBuff(target);
       if (buffAmount != 0)
@@ -49,7 +49,7 @@ public class CallToArms extends SingleCastSpell
   @Override
   public void expire()
   {
-    for (GameCharacter target : buffs.keySet())
+    for (Fighter target : buffs.keySet())
     {
       Integer buffedAmount = buffs.get(target);
       target.getStats().getStrength().removeBonus(buffedAmount);
@@ -64,7 +64,7 @@ public class CallToArms extends SingleCastSpell
     buffs.clear();
   }
 
-  private int rollBuff(GameCharacter target)
+  private int rollBuff(Fighter target)
   {
     if (getCaster() == target)
     {
@@ -80,7 +80,7 @@ public class CallToArms extends SingleCastSpell
     return roll.getTotal();
   }
 
-  private int determineBuffDiceFaces(GameCharacter targetChar)
+  private int determineBuffDiceFaces(Fighter targetChar)
   {
     if (!(targetChar instanceof PlayerCharacter))
     {

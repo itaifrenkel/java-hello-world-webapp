@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.Brawler;
 
@@ -13,7 +13,7 @@ public class Intimidation extends SingleCastSpell
 {
   private static final long serialVersionUID = 1L;
 
-  private Map<GameCharacter, Integer> buffs;
+  private Map<Fighter, Integer> buffs;
 
   public Intimidation(Brawler caster)
   {
@@ -26,7 +26,7 @@ public class Intimidation extends SingleCastSpell
   {
     int boost = 20; // equivalent of a natural d20 - guaranteed to cause a critical hit
 
-    for (GameCharacter member : getCaster().getParty().getActiveMembers())
+    for (Fighter member : getCaster().getParty().getActiveMembers())
     {
       member.getStats().setCriticalStrikeChanceBonus(member.getStats().getCriticalStrikeChanceBonus() + boost);
       buffs.put(member, boost);
@@ -44,7 +44,7 @@ public class Intimidation extends SingleCastSpell
   @Override
   public void expire()
   {
-    for (GameCharacter target : buffs.keySet())
+    for (Fighter target : buffs.keySet())
     {
       Integer buffedAmount = buffs.get(target);
       target.getStats().setCriticalStrikeChanceBonus(target.getStats().getCriticalStrikeChanceBonus() - buffedAmount);

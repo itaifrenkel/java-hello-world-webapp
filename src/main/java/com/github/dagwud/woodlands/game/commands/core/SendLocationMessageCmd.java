@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.commands.core;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -33,8 +34,8 @@ public class SendLocationMessageCmd extends AbstractCmd
   {
     // grab a copy to avoid concurrent modification errors.
 
-    List<GameCharacter> charactersInRoom = new ArrayList<>(eLocation.getCharactersInRoom());
-    for (GameCharacter gameCharacter : charactersInRoom)
+    List<Fighter> charactersInRoom = new ArrayList<>(eLocation.getCharactersInRoom());
+    for (Fighter gameCharacter : charactersInRoom)
     {
       if (gameCharacter == originator)
       {

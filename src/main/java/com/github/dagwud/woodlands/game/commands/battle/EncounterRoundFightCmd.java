@@ -48,14 +48,14 @@ public class EncounterRoundFightCmd extends AbstractCmd
     List<SingleCastSpell> spellsActivity = new ArrayList<>();
 
     int fledEnemiesCount = 0;
-    for (Fighter enemy : encounter.getEnemies())
+    for (Fighter enemy : encounter.getEnemies().getActiveMembers())
     {
       boolean enemyFled = encounter.getEnemies().size() == 1 && enemy instanceof Creature && shouldEnemyFlee((Creature)enemy);
       if (enemyFled)
       {
         KnockUnconsciousCmd faint = new KnockUnconsciousCmd(enemy);
         CommandDelegate.execute(faint);
-        CommandDelegate.execute(new SendPartyMessageCmd(encounter.getParty(), enemy.getName() + " has fled!"));
+        CommandDelegate.execute(new SendPartyMessageCmd(encounter.getAggressor(), enemy.getName() + " has fled!"));
         fledEnemiesCount++;
       }
     }
@@ -86,26 +86,26 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
     BuildRoundSummaryCmd summary = new BuildRoundSummaryCmd(encounter, roundActivity, passivesActivity, spellsActivity);
     CommandDelegate.execute(summary);
-    SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getParty(), summary.getSummary());
+    SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getAggressor(), summary.getSummary());
     CommandDelegate.execute(status);
 
     if (!anyEnemyConscious() || !encounter.anyAggressorsStillConscious())
     {
-      for (Fighter enemy : encounter.getEnemies())
+      for (Fighter enemy : encounter.getEnemies().getActiveMembers())
       {
         if (!enemy.isConscious())
         {
           AbstractCmd win;
           if (enemy instanceof Creature)
           {
-            win = new DefeatCreatureCmd(encounter.getParty(), (Creature)enemy, encounter.isFarmed(), encounter.getEnemies().size() > 1);
+            win = new DefeatCreatureCmd(encounter.getAggressor(), (Creature)enemy, encounter.isFarmed(), encounter.getEnemies().size() > 1);
           }
           else
           {
             Collection<Fighter> allFighters = encounter.getAllFighters();
             allFighters.remove(enemy);
             Fighter victor = allFighters.iterator().next();
-            win = new DefeatSparringPartnerCmd(encounter.getParty(), victor, enemy);
+            win = new DefeatSparringPartnerCmd(victor, enemy);
           }
           CommandDelegate.execute(win);
         }
@@ -118,7 +118,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     PlayerCharacter inDanger = getAnyPlayerInDanger();
     if (inDanger != null)
     {
-      if (encounter.getParty().capableOfRetreat())
+      if (encounter.getAggressor().capableOfRetreat())
       {
         if (inDanger.getLocation().isAutoRetreat())
         {
@@ -129,7 +129,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
       }
       else
       {
-        TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(encounter.getParty());
+        TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(encounter.getAggressor());
         CommandDelegate.execute(killall);
 
         EndEncounterCmd end = new EndEncounterCmd(encounter);
@@ -145,9 +145,9 @@ public class EncounterRoundFightCmd extends AbstractCmd
     }
     else
     {
-      if (!encounter.getParty().canAct())
+      if (!encounter.getAggressor().canAct())
       {
-        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getParty(), "<b>You have been defeated!</b>");
+        SendPartyMessageCmd cmd = new SendPartyMessageCmd(encounter.getAggressor(), "<b>You have been defeated!</b>");
         CommandDelegate.execute(cmd);
       }
     }
@@ -155,7 +155,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
   private boolean anyEnemyConscious()
   {
-    for (Fighter enemy : encounter.getEnemies())
+    for (Fighter enemy : encounter.getEnemies().getActiveMembers())
     {
       if (enemy.isConscious())
       {
@@ -172,7 +172,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
       return false;
     }
 
-    Collection<PlayerCharacter> players = encounter.getParty().getActivePlayerCharacters();
+    Collection<PlayerCharacter> players = encounter.getAggressor().getActivePlayerCharacters();
     for (PlayerCharacter c : players)
     {
       if (c.shouldGainExperienceByDefeating(enemy))
@@ -230,7 +230,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
   private PlayerCharacter getAnyPlayerInDanger()
   {
-    for (PlayerCharacter member : encounter.getParty().getActivePlayerCharacters())
+    for (PlayerCharacter member : encounter.getAggressor().getActivePlayerCharacters())
     {
       double hpPerc = ((double) member.getStats().getHitPoints()) / ((double) member.getStats().getMaxHitPoints().total());
       if (!member.isDead() && hpPerc <= 0.2)
@@ -317,7 +317,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     RunLaterCmd nextEncounter = new RunLaterCmd(delayBetweenRoundsMS, nextRoundCmd);
     CommandDelegate.execute(nextEncounter);
 
-    SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getParty(), "Next round of battle in " + (delayBetweenRoundsMS / 1000) + " seconds");
+    SendPartyMessageCmd msg = new SendPartyMessageCmd(encounter.getAggressor(), "Next round of battle in " + (delayBetweenRoundsMS / 1000) + " seconds");
     CommandDelegate.execute(msg);
   }
 }

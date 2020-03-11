@@ -5,8 +5,8 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.NonPlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.spells.HerbalRemedy;
 
@@ -36,7 +36,6 @@ public class BeginHerbalRemedyCmd extends SuspendableCmd
         }
 
         GameCharacter gameCharacter = findCharacter(capturedInput);
-
         CommandDelegate.execute(new CastSpellCmd(new HerbalRemedy(getPlayerState().getActiveCharacter(), gameCharacter)));
 
         break;
@@ -47,11 +46,15 @@ public class BeginHerbalRemedyCmd extends SuspendableCmd
   {
     PlayerCharacter activeCharacter = getPlayerState().getActiveCharacter();
 
-    for (GameCharacter gameCharacter : activeCharacter.getParty().getActiveMembers())
+    for (Fighter fighter : activeCharacter.getParty().getActiveMembers())
     {
-      if (gameCharacter.getName().equals(capturedInput) && validTarget(activeCharacter, gameCharacter))
+      if (fighter instanceof GameCharacter)
       {
-        return gameCharacter;
+        GameCharacter gameCharacter = (GameCharacter) fighter;
+        if (gameCharacter.getName().equals(capturedInput) && validTarget(activeCharacter, gameCharacter))
+        {
+          return gameCharacter;
+        }
       }
     }
     return null;
@@ -68,7 +71,7 @@ public class BeginHerbalRemedyCmd extends SuspendableCmd
   {
     PlayerCharacter activeCharacter = playerState.getActiveCharacter();
     List<String> partyMembersInLocation = new ArrayList<>();
-    for (GameCharacter gameCharacter : activeCharacter.getParty().getActiveMembers())
+    for (Fighter gameCharacter : activeCharacter.getParty().getActiveMembers())
     {
       if (validTarget(activeCharacter, gameCharacter))
       {
@@ -80,8 +83,8 @@ public class BeginHerbalRemedyCmd extends SuspendableCmd
     return partyMembersInLocation.toArray(new String[0]);
   }
 
-  private boolean validTarget(PlayerCharacter activeCharacter, GameCharacter gameCharacter)
+  private boolean validTarget(PlayerCharacter activeCharacter, Fighter gameCharacter)
   {
-    return !(gameCharacter instanceof NonPlayerCharacter) && gameCharacter.getLocation().equals(activeCharacter.getLocation());
+    return (gameCharacter instanceof PlayerCharacter) && gameCharacter.getLocation().equals(activeCharacter.getLocation());
   }
 }

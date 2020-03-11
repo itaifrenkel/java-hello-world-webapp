@@ -6,11 +6,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class Party implements Serializable
+public class Party extends FightingGroup implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private List<GameCharacter> members = new ArrayList<>(4);
+  private List<Fighter> members = new ArrayList<>(4);
   private String name;
   private Encounter encounter;
   private BigDecimal percentChanceOfEncounter;
@@ -55,35 +55,9 @@ public class Party implements Serializable
     leaver.setParty(null);
   }
 
-  public List<GameCharacter> getAllMembers()
+  public List<Fighter> getAllMembers()
   {
     return Collections.unmodifiableList(members);
-  }
-
-  public List<GameCharacter> getActiveMembers()
-  {
-    List<GameCharacter> active = new ArrayList<>(members.size());
-    for (GameCharacter member : members)
-    {
-      if (member.isActive())
-      {
-        active.add(member);
-      }
-    }
-    return active;
-  }
-
-  public List<PlayerCharacter> getActivePlayerCharacters()
-  {
-    List<PlayerCharacter> active = new ArrayList<>();
-    for (GameCharacter activeMember : getActiveMembers())
-    {
-      if (activeMember instanceof PlayerCharacter)
-      {
-        active.add((PlayerCharacter)activeMember);
-      }
-    }
-    return active;
   }
 
   public boolean isLedBy(PlayerCharacter activeCharacter)
@@ -91,57 +65,9 @@ public class Party implements Serializable
     return getLeader() == activeCharacter;
   }
 
-  public int size()
-  {
-    int count = 0;
-    for (GameCharacter c : members)
-    {
-      if (c.isActive())
-      {
-        count++;
-      }
-    }
-    return count;
-  }
-
   public boolean isPrivateParty()
   {
     return getName().startsWith("_");
-  }
-
-  public GameCharacter getLeader()
-  {
-    for (GameCharacter member : members)
-    {
-      if (member.isActive())
-      {
-        return member;
-      }
-    }
-   return null;
-  }
-
-  public boolean capableOfRetreat()
-  {
-    return countConscious() >= (0.5 * size());
-  }
-
-  public boolean canAct()
-  {
-    return countConscious() > 0;
-  }
-
-  private int countConscious()
-  {
-    int conscious = 0;
-    for (GameCharacter member : getActiveMembers())
-    {
-      if (member.isActive() && member.isConscious())
-      {
-        conscious++;
-      }
-    }
-    return conscious;
   }
 
   public BigDecimal getPercentChanceOfEncounter()
@@ -152,22 +78,6 @@ public class Party implements Serializable
   public void setPercentChanceOfEncounter(BigDecimal percentChanceOfEncounter)
   {
     this.percentChanceOfEncounter = percentChanceOfEncounter;
-  }
-
-  public void removeDeadNPCs()
-  {
-    Collection<NonPlayerCharacter> toRemove = new ArrayList<>(1);
-    for (GameCharacter member : members)
-    {
-      if (member instanceof NonPlayerCharacter && member.isDead())
-      {
-        toRemove.add((NonPlayerCharacter) member);
-      }
-    }
-    for (NonPlayerCharacter nonPlayerCharacter : toRemove)
-    {
-      removeMember(nonPlayerCharacter);
-    }
   }
 
   public List<Item> getCollectedItems()
@@ -207,7 +117,7 @@ public class Party implements Serializable
 
   public boolean allInVillage()
   {
-    for (GameCharacter activeMember : getActiveMembers())
+    for (Fighter activeMember : getActiveMembers())
     {
       if (!activeMember.getLocation().isVillageLocation())
       {
@@ -257,5 +167,11 @@ public class Party implements Serializable
       }
     }
     return found;
+  }
+
+  @Override
+  protected Collection<Fighter> getMembers()
+  {
+    return members;
   }
 }

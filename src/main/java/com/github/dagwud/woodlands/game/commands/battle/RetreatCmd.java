@@ -32,7 +32,7 @@ public class RetreatCmd extends AbstractCmd
     CommandDelegate.execute(cmd);
   }
 
-  private String buildRetreatMessage(PlayerCharacter inDanger, GameCharacter retreater)
+  private String buildRetreatMessage(PlayerCharacter inDanger, Fighter retreater)
   {
     Party party = inDanger.getParty();
     if (party.isPrivateParty())
@@ -48,11 +48,11 @@ public class RetreatCmd extends AbstractCmd
 
   private GameCharacter findActiveCharacter(Party party)
   {
-    for (GameCharacter member : party.getActiveMembers())
+    for (Fighter member : party.getActiveMembers())
     {
-      if (member.isConscious())
+      if (member instanceof GameCharacter && member.isConscious())
       {
-        return member;
+        return (GameCharacter) member;
       }
     }
     throw new WoodlandsRuntimeException("Nobody is alive to sound the retreat");

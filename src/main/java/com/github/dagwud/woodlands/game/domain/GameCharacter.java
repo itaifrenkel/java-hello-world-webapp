@@ -14,18 +14,12 @@ public abstract class GameCharacter extends Fighter
   private final CarriedItems carrying;
   private Party party;
   private String name;
-  private ELocation location;
 
   public GameCharacter()
   {
     stats = new Stats();
     stats.setState(EState.ALIVE);
     carrying = new CarriedItems();
-  }
-
-  public ELocation getLocation()
-  {
-    return location;
   }
 
   @Override
@@ -45,15 +39,6 @@ public abstract class GameCharacter extends Fighter
     return stats;
   }
 
-  public void setLocation(ELocation location)
-  {
-    if (this.location != null)
-    {
-      this.location.getCharactersInRoom().remove(this);
-    }
-    this.location = location;
-    this.location.getCharactersInRoom().add(this);
-  }
 
   public Party getParty()
   {
