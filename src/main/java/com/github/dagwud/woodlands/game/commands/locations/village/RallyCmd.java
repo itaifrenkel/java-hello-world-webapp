@@ -57,7 +57,7 @@ public class RallyCmd extends AbstractCmd
         showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
         CommandDelegate.execute(new HandleLocationEntryCmd(moveTo, character.getPlayedBy().getPlayerState()));
       }
-      if (movedBy instanceof PlayerCharacter)
+      if (movedBy instanceof PlayerCharacter && mover instanceof PlayerCharacter)
       {
         PlayerCharacter mover = (PlayerCharacter)movedBy;
         CommandDelegate.execute(new SendMessageCmd(mover, "<i> " + characterToMove.getName() + " has responded to your call</i>"));
