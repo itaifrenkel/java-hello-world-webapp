@@ -14,7 +14,7 @@ import java.util.Map;
 public enum EEvent
 {
   PLAYER_DEATH, PLAYER_UNCONSCIOUS, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM,
-  CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY, LEFT_ITEM, CRAFTED_ITEM, ENCHANTED_ITEM,
+  CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY, LEFT_ITEM, CRAFTED_ITEM, ENCHANTED_ITEM, CLAIMED_ITEM,
   LED_PARTY;
 
   private static transient Map<EEvent, List<EventRecipient<? extends Event>>> subscribers;
@@ -22,6 +22,7 @@ public enum EEvent
   public static void subscribeToStandardEvents()
   {
     EEvent.PLAYER_DEATH.subscribe(event -> CommandDelegate.execute(new SendPartyAlertCmd(event.getPlayerCharacter().getParty(), event.getPlayerCharacter().getName() + " has died! Nice job, " + event.getPlayerCharacter().getParty().getLeader().getName())));
+    EEvent.CLAIMED_ITEM.subscribe(new ClaimedItemEventRecipient());
 
     EEvent.JOINED_PARTY.subscribe(event ->
     {
@@ -58,6 +59,8 @@ public enum EEvent
 
     EEvent.CRAFTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SO_CRAFTY, playerCharacter -> playerCharacter.getStats().getCraftsCount()));
     EEvent.ENCHANTED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.SPELLS_GREAT, playerCharacter -> playerCharacter.getStats().getEnchantmentsCount()));
+    EEvent.CLAIMED_ITEM.subscribe(new MostSomethingDoneEventRecipient(EAchievement.MINE_MINE, playerCharacter -> playerCharacter.getStats().getItemsClaimedCount()));
+
     EEvent.LED_PARTY.subscribe(new MostSomethingDoneEventRecipient(EAchievement.CAPTAIN_MY_CAPTAIN, playerCharacter ->
     {
       if (playerCharacter.getParty().isPrivateParty())
