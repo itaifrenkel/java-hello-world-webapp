@@ -66,7 +66,7 @@ public class ShowPartyInfoCmd extends AbstractCmd
         charClass = ((PlayerCharacter)member).getCharacterClass().toString();
       }
 
-      String location = member.getLocation().getDisplayName();
+      String location = "";
       if (member.getLocation() != character.getParty().getLeader().getLocation())
       {
         location = " (" + member.getLocation().getDisplayName() + ")";
