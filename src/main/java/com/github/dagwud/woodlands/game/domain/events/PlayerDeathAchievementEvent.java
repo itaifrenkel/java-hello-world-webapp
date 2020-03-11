@@ -12,7 +12,7 @@ public class PlayerDeathAchievementEvent implements EventRecipient<Event>
     CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.SHUFFLED_OFF_THE_MORTAL_COIL));
 
     Party party = event.getPlayerCharacter().getParty();
-    GameCharacter leader = party.getLeader();
+    Fighter leader = party.getLeader();
     if (leader != event.getPlayerCharacter())
     {
       CommandDelegate.execute(new UnlockAchievementCmd(event.getPlayerCharacter(), EAchievement.EVERYONE_FOR_THEMSELVES));

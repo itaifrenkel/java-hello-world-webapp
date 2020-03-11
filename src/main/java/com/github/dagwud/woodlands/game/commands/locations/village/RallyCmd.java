@@ -9,6 +9,7 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 
 import com.github.dagwud.woodlands.game.commands.locations.HandleLocationEntryCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -32,13 +33,13 @@ public class RallyCmd extends AbstractCmd
     SendPartyMessageCmd msg = new SendPartyMessageCmd(rallier.getParty(), "<b>" + rallier.getName() + " sounds the call; all able fighters are duty-bound to rally at " + moveTo.getDisplayName() + "!</b>");
     CommandDelegate.execute(msg);
 
-    for (GameCharacter character : rallier.getParty().getActiveMembers())
+    for (Fighter character : rallier.getParty().getActiveMembers())
     {
       doMove(character, rallier, moveTo);
     }
   }
 
-  private void doMove(GameCharacter characterToMove, GameCharacter movedBy, ELocation moveTo)
+  private void doMove(Fighter characterToMove, GameCharacter movedBy, ELocation moveTo)
   {
     if (characterToMove.getLocation() == moveTo)
     {

@@ -7,14 +7,13 @@ import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 public class Encounter implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   private FightingGroup aggressor;
-  private List<? extends Fighter> enemies;
+  private FightingGroup enemies;
   private boolean ended;
   private int currentRound;
   private final int actionsAllowedPerRound;
@@ -26,12 +25,12 @@ public class Encounter implements Serializable
   private boolean farmed = true;
   private EncounterStatus status;
 
-  public Encounter(FightingGroup aggressor, List<? extends Fighter> enemies)
+  public Encounter(FightingGroup aggressor, FightingGroup enemies)
   {
     this(aggressor, enemies, 3); // two attacks and a spell
   }
 
-  protected Encounter(FightingGroup aggressor, List<? extends Fighter> enemies, int actionsAllowedPerRound)
+  protected Encounter(FightingGroup aggressor, FightingGroup enemies, int actionsAllowedPerRound)
   {
     this.aggressor = aggressor;
     this.enemies = enemies;
@@ -53,12 +52,20 @@ public class Encounter implements Serializable
     }
     else
     {
-      party = getAggressor().getLeader().getParty();
+      if (getAggressor().getLeader() instanceof GameCharacter)
+      {
+        GameCharacter leader = (GameCharacter) getAggressor().getLeader();
+        party = leader.getParty();
+      }
+      else
+      {
+        throw new UnsupportedOperationException("Leader is a " + getAggressor().getLeader().getClass().getSimpleName());
+      }
     }
     party.setActiveEncounter(null);
   }
 
-  public List<? extends Fighter> getEnemies()
+  public FightingGroup getEnemies()
   {
     return enemies;
   }
@@ -66,7 +73,7 @@ public class Encounter implements Serializable
   public Collection<Fighter> getAllFighters()
   {
     Collection<Fighter> fighters = new HashSet<>(aggressor.getActiveMembers());
-    fighters.addAll(enemies);
+    fighters.addAll(enemies.getActiveMembers());
     return fighters;
   }
 

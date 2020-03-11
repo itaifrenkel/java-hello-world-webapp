@@ -9,12 +9,12 @@ public abstract class FightingGroup implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  protected abstract Collection<GameCharacter> getMembers();
+  protected abstract Collection<Fighter> getMembers();
 
-  public List<GameCharacter> getActiveMembers()
+  public List<Fighter> getActiveMembers()
   {
-    List<GameCharacter> active = new ArrayList<>(getMembers().size());
-    for (GameCharacter member : getMembers())
+    List<Fighter> active = new ArrayList<>(getMembers().size());
+    for (Fighter member : getMembers())
     {
       if (member.isActive())
       {
@@ -27,7 +27,7 @@ public abstract class FightingGroup implements Serializable
   public List<PlayerCharacter> getActivePlayerCharacters()
   {
     List<PlayerCharacter> active = new ArrayList<>();
-    for (GameCharacter activeMember : getActiveMembers())
+    for (Fighter activeMember : getActiveMembers())
     {
       if (activeMember instanceof PlayerCharacter)
       {
@@ -47,14 +47,11 @@ public abstract class FightingGroup implements Serializable
     return getActiveMembers().size();
   }
 
-  public GameCharacter getLeader()
+  public Fighter getLeader()
   {
-    for (GameCharacter member : getMembers())
+    for (Fighter member : getActivePlayerCharacters())
     {
-      if (member.isActive())
-      {
-        return member;
-      }
+      return member;
     }
     return null;
   }
@@ -67,7 +64,7 @@ public abstract class FightingGroup implements Serializable
   public void removeDeadNPCs()
   {
     Collection<NonPlayerCharacter> toRemove = new ArrayList<>(1);
-    for (GameCharacter member : getMembers())
+    for (Fighter member : getMembers())
     {
       if (member instanceof NonPlayerCharacter && member.isDead())
       {
@@ -85,7 +82,7 @@ public abstract class FightingGroup implements Serializable
   private int countConscious()
   {
     int conscious = 0;
-    for (GameCharacter member : getActiveMembers())
+    for (Fighter member : getActiveMembers())
     {
       if (member.isActive() && member.isConscious())
       {

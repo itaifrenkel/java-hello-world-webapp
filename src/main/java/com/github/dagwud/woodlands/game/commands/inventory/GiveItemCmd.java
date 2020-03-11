@@ -86,7 +86,7 @@ public class GiveItemCmd extends SuspendableCmd
       return;
     }
 
-    GameCharacter gameCharacter = findCharacter(capturedInput);
+    Fighter gameCharacter = findCharacter(capturedInput);
 
     if (gameCharacter != null && gameCharacter.getName().equalsIgnoreCase(player.getActiveCharacter().getName()))
     {
@@ -151,11 +151,11 @@ public class GiveItemCmd extends SuspendableCmd
     return itemsList;
   }
 
-  private GameCharacter findCharacter(String capturedInput)
+  private Fighter findCharacter(String capturedInput)
   {
     PlayerCharacter activeCharacter = player.getPlayerState().getActiveCharacter();
 
-    for (GameCharacter gameCharacter : activeCharacter.getParty().getActiveMembers())
+    for (Fighter gameCharacter : activeCharacter.getParty().getActiveMembers())
     {
       if (gameCharacter.getName().equals(capturedInput) && validGiveTarget(activeCharacter, gameCharacter))
       {
@@ -169,7 +169,7 @@ public class GiveItemCmd extends SuspendableCmd
   {
     PlayerCharacter activeCharacter = player.getPlayerState().getActiveCharacter();
     List<String> partyMembersInLocation = new ArrayList<>();
-    for (GameCharacter gameCharacter : activeCharacter.getParty().getActiveMembers())
+    for (Fighter gameCharacter : activeCharacter.getParty().getActiveMembers())
     {
       if (validGiveTarget(activeCharacter, gameCharacter))
       {
@@ -181,8 +181,9 @@ public class GiveItemCmd extends SuspendableCmd
     return partyMembersInLocation.toArray(new String[0]);
   }
 
-  private boolean validGiveTarget(PlayerCharacter activeCharacter, GameCharacter gameCharacter)
+  private boolean validGiveTarget(PlayerCharacter activeCharacter, Fighter gameCharacter)
   {
-    return gameCharacter != activeCharacter && !(gameCharacter instanceof NonPlayerCharacter) && gameCharacter.isActive() && gameCharacter.getLocation().equals(activeCharacter.getLocation());
+    return gameCharacter != activeCharacter && gameCharacter.isActive() &&
+            gameCharacter.getLocation() == activeCharacter.getLocation();
   }
 }

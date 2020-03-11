@@ -7,7 +7,6 @@ import com.github.dagwud.woodlands.game.commands.battle.GenerateManualEncounterC
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 
-import java.util.Collections;
 import java.util.List;
 
 public class GenerateSparringEncounterCmd extends GenerateManualEncounterCmd
@@ -26,10 +25,10 @@ public class GenerateSparringEncounterCmd extends GenerateManualEncounterCmd
   }
 
   @Override
-  protected List<Fighter> produceEnemies()
+  protected FightingGroup produceEnemies()
   {
     PlayerCharacter partner = findSparringPartnerIfAny(getPlayerState().getActiveCharacter());
-    return Collections.singletonList(partner);
+    return new SingleFighter(partner);
   }
 
   @Override
@@ -50,9 +49,10 @@ public class GenerateSparringEncounterCmd extends GenerateManualEncounterCmd
   }
 
   @Override
-  protected Encounter createEncounter(Party party, List<? extends Fighter> enemy)
+  protected Encounter createEncounter(Party party, FightingGroup enemy)
   {
-    return new SparringEncounter(party, getPlayerState().getActiveCharacter(), produceEnemies(), getTimeAllowedForPlanningMS(), getActionsPerRound());
+    FightingGroup enemies = produceEnemies();
+    return new SparringEncounter(party, getPlayerState().getActiveCharacter(), enemies, getTimeAllowedForPlanningMS(), getActionsPerRound());
   }
 
   @Override

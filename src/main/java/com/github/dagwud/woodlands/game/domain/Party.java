@@ -10,7 +10,7 @@ public class Party extends FightingGroup implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private List<GameCharacter> members = new ArrayList<>(4);
+  private List<Fighter> members = new ArrayList<>(4);
   private String name;
   private Encounter encounter;
   private BigDecimal percentChanceOfEncounter;
@@ -55,7 +55,7 @@ public class Party extends FightingGroup implements Serializable
     leaver.setParty(null);
   }
 
-  public List<GameCharacter> getAllMembers()
+  public List<Fighter> getAllMembers()
   {
     return Collections.unmodifiableList(members);
   }
@@ -117,7 +117,7 @@ public class Party extends FightingGroup implements Serializable
 
   public boolean allInVillage()
   {
-    for (GameCharacter activeMember : getActiveMembers())
+    for (Fighter activeMember : getActiveMembers())
     {
       if (!activeMember.getLocation().isVillageLocation())
       {
@@ -170,7 +170,7 @@ public class Party extends FightingGroup implements Serializable
   }
 
   @Override
-  protected Collection<GameCharacter> getMembers()
+  protected Collection<Fighter> getMembers()
   {
     return members;
   }

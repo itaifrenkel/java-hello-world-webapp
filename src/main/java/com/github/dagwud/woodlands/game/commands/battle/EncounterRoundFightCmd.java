@@ -48,7 +48,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     List<SingleCastSpell> spellsActivity = new ArrayList<>();
 
     int fledEnemiesCount = 0;
-    for (Fighter enemy : encounter.getEnemies())
+    for (Fighter enemy : encounter.getEnemies().getActiveMembers())
     {
       boolean enemyFled = encounter.getEnemies().size() == 1 && enemy instanceof Creature && shouldEnemyFlee((Creature)enemy);
       if (enemyFled)
@@ -91,7 +91,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
     if (!anyEnemyConscious() || !encounter.anyAggressorsStillConscious())
     {
-      for (Fighter enemy : encounter.getEnemies())
+      for (Fighter enemy : encounter.getEnemies().getActiveMembers())
       {
         if (!enemy.isConscious())
         {
@@ -155,7 +155,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
   private boolean anyEnemyConscious()
   {
-    for (Fighter enemy : encounter.getEnemies())
+    for (Fighter enemy : encounter.getEnemies().getActiveMembers())
     {
       if (enemy.isConscious())
       {

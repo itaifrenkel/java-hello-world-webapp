@@ -2,7 +2,7 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class AuraOfProtection extends PassiveBattleRoundSpell
   private static final long serialVersionUID = 1L;
   public static final int BUFF_AMOUNT = 1;
 
-  private Map<GameCharacter, Integer> buffs;
+  private Map<Fighter, Integer> buffs;
 
   public AuraOfProtection(PlayerCharacter caster)
   {
@@ -30,7 +30,7 @@ public class AuraOfProtection extends PassiveBattleRoundSpell
   @Override
   public boolean cast()
   {
-    for (GameCharacter target : getCaster().getParty().getActiveMembers())
+    for (Fighter target : getCaster().getParty().getActiveMembers())
     {
       if (target != getCaster())
       {
@@ -51,7 +51,7 @@ public class AuraOfProtection extends PassiveBattleRoundSpell
   @Override
   public void expire()
   {
-    for (GameCharacter target : buffs.keySet())
+    for (Fighter target : buffs.keySet())
     {
       Integer buffedAmount = buffs.get(target);
       target.getStats().setDefenceRatingBoost(target.getStats().getDefenceRatingBoost() - buffedAmount);

@@ -7,14 +7,12 @@ import com.github.dagwud.woodlands.game.commands.battle.ManualEncounterRoundCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 
-import java.util.List;
-
 public class ManualEncounter extends Encounter
 {
   private static final long serialVersionUID = 1L;
   private final long timeAllowedForPlanningMS;
 
-  public ManualEncounter(Party party, List<? extends Fighter> enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
+  public ManualEncounter(Party party, FightingGroup enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
   {
     super(party, enemies, actionsAllowedPerRound);
     this.timeAllowedForPlanningMS = timeAllowedForPlanningMS;
@@ -26,7 +24,11 @@ public class ManualEncounter extends Encounter
     if (!hasAnyPlayerActivityPrepared())
     {
       CommandDelegate.execute(new SendPartyMessageCmd(getAggressor(), "Nobody is keen for a fight"));
-      CommandDelegate.execute(new MoveToLocationCmd(getAggressor().getLeader(), ELocation.VILLAGE_SQUARE));
+      if (getAggressor().getLeader() instanceof GameCharacter)
+      {
+        GameCharacter leader = (GameCharacter) getAggressor().getLeader();
+        CommandDelegate.execute(new MoveToLocationCmd(leader, ELocation.VILLAGE_SQUARE));
+      }
     }
   }
 

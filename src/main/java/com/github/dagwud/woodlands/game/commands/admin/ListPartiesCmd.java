@@ -3,12 +3,9 @@ package com.github.dagwud.woodlands.game.commands.admin;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.Party;
+import com.github.dagwud.woodlands.game.domain.*;
 
 import com.github.dagwud.woodlands.game.*;
-import com.github.dagwud.woodlands.game.domain.Player;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 public class ListPartiesCmd extends AdminCmd
 {
@@ -33,7 +30,7 @@ public class ListPartiesCmd extends AdminCmd
               .append(" (").append(party.size()).append(") - ")
               .append(party.getLeader() == null ? "No leader" : Icons.LEADER + party.getLeader().getName())
               .append("\n");
-      for (GameCharacter c : party.getActiveMembers())
+      for (Fighter c : party.getActiveMembers())
       {
         b.append(" • ").append(c.summary())
                 .append(" (").append(c.getStats().getState()).append(")")

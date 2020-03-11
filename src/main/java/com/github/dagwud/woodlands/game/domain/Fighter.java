@@ -17,6 +17,23 @@ public abstract class Fighter extends GameObject
   private static final BigDecimal TWENTY_PER_CENT = new BigDecimal("0.2");
 
   private SpellAbilities spellAbilities;
+  private ELocation location;
+
+  public ELocation getLocation()
+  {
+    return location;
+  }
+
+
+  public void setLocation(ELocation location)
+  {
+    if (this.location != null)
+    {
+      this.location.getCharactersInRoom().remove(this);
+    }
+    this.location = location;
+    this.location.getCharactersInRoom().add(this);
+  }
 
   public abstract Stats getStats();
 
@@ -107,4 +124,6 @@ public abstract class Fighter extends GameObject
   {
     return Integer.MAX_VALUE;
   }
+
+  public abstract boolean isActive();
 }

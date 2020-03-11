@@ -4,9 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.domain.EAchievement;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.*;
 
 import java.util.Set;
 
@@ -59,9 +57,9 @@ public class UnlockAchievementCmd extends AbstractCmd
 
     Set<EAchievement> achievements = playerCharacter.getStats().getAchievements();
     long current = count(achievements);
-    for (GameCharacter activeMember : playerCharacter.getParty().getActiveMembers())
+    for (PlayerCharacter activeMember : playerCharacter.getParty().getActivePlayerCharacters())
     {
-      if (!(activeMember instanceof PlayerCharacter) || activeMember == playerCharacter)
+      if (activeMember == playerCharacter)
       {
         continue;
       }
@@ -73,7 +71,7 @@ public class UnlockAchievementCmd extends AbstractCmd
       }
     }
 
-    for (GameCharacter activeMember : playerCharacter.getParty().getActiveMembers())
+    for (Fighter activeMember : playerCharacter.getParty().getActiveMembers())
     {
       activeMember.getStats().getAchievements().remove(EAchievement.ALL_THE_ACHIEVEMENTS);
     }

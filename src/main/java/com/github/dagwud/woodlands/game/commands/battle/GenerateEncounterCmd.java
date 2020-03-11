@@ -103,7 +103,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
   {
     StringBuilder b = new StringBuilder();
     b.append(encounter.getEnemies().size() == 1 ? "<b>You encountered a </b>" : "<b>You encountered:</b>\n");
-    for (Fighter enemy : encounter.getEnemies())
+    for (Fighter enemy : encounter.getEnemies().getActiveMembers())
     {
       if (encounter.getEnemies().size() > 1)
       {
@@ -135,11 +135,10 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
   private Encounter createEncounter()
   {
-    List<Fighter> creatures = produceEnemies();
-    return createEncounter(getPlayerState().getActiveCharacter().getParty(), creatures);
+    return createEncounter(getPlayerState().getActiveCharacter().getParty(), produceEnemies());
   }
 
-  protected List<Fighter> produceEnemies()
+  protected FightingGroup produceEnemies()
   {
     List<Fighter> creatures = new ArrayList<>();
     for (int i = 0; i < enemyCount; i++)
@@ -148,10 +147,10 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
       CommandDelegate.execute(cmd);
       creatures.add(cmd.getSpawnedCreature());
     }
-    return creatures;
+    return new CreatureGroup(creatures);
   }
 
-  abstract Encounter createEncounter(Party party, List<? extends Fighter> enemy);
+  abstract Encounter createEncounter(Party party, FightingGroup enemy);
 
   protected final PlayerState getPlayerState()
   {
