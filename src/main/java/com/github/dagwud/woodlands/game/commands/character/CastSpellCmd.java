@@ -6,6 +6,7 @@ import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
+import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 public class CastSpellCmd extends AbstractCmd
@@ -47,6 +48,11 @@ public class CastSpellCmd extends AbstractCmd
 
       SendMessageCmd success = new SendMessageCmd(((PlayerCharacter) spell.getCaster()).getPlayedBy().getChatId(), "You cast " + spell.buildSpellDescription());
       CommandDelegate.execute(success);
+      
+      if (spell instanceof SingleCastSpell)
+      {
+        spell.expire();
+      }
     }
   }
 
