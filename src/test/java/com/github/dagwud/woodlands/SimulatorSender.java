@@ -9,16 +9,23 @@ public class SimulatorSender implements IMessageSender
     @Override
     public void sendMessage(long chatId, String message, String replyMarkup)
     {
-        System.out.println(message);
+        String prefix = buildPrefix(chatId);
+        message = message.replaceAll("\n", "\n" + prefix);
+        System.out.println(prefix + message);
         if (replyMarkup != null)
         {
-            System.out.println(chatId + ">   Markup: " + replyMarkup);
+            System.out.println(prefix + "  Markup: " + replyMarkup);
         }
     }
 
     @Override
-    public void sendMessage(long chatId, String message) throws IOException
+    public void sendMessage(long chatId, String message)
     {
-        System.out.println(message);
+        System.out.println(buildPrefix(chatId) + message);
+    }
+
+    private String buildPrefix(long chatId)
+    {
+        return chatId + "> ";
     }
 }
