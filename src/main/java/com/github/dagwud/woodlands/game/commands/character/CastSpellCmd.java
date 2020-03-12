@@ -48,11 +48,6 @@ public class CastSpellCmd extends AbstractCmd
 
       SendMessageCmd success = new SendMessageCmd(((PlayerCharacter) spell.getCaster()).getPlayedBy().getChatId(), "You cast " + spell.buildSpellDescription());
       CommandDelegate.execute(success);
-      
-      if (spell instanceof SingleCastSpell)
-      {
-        spell.expire();
-      }
     }
   }
 
