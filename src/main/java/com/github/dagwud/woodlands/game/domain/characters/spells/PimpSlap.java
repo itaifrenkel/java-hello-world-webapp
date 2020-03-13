@@ -110,7 +110,7 @@ public class PimpSlap extends PassiveBattleRoundSpell
     {
       return 8;
     }
-    if (target.getCharacterClass() == ECharacterClass.GENERAL)
+    if (target.getCharacterClass() == ECharacterClass.PIMP)
     {
       // Generals can't buff each other
       return 0;
