@@ -27,7 +27,9 @@ public class DoubleEntendres implements Serializable
             "Spank my ass!",
             "Pull my hair!",
             "I'm givin' her all she's got Capt'n!",
-            "Faster!"
+            "Faster!",
+            "There's no PP left for this move!",
+            "Use the hoof!"
     ));
   }
 
@@ -46,7 +48,8 @@ public class DoubleEntendres implements Serializable
             "Don't stop now!",
             "Tease...",
             "No, go deeper!",
-            "Deeper!"
+            "Deeper!",
+            "I was so close!"
     ));
   }
 }
