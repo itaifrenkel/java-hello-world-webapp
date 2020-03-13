@@ -119,9 +119,9 @@ public class PimpSlap extends PassiveBattleRoundSpell
   }
 
   @Override
-  public General getCaster()
+  public Pimp getCaster()
   {
-    return (General) super.getCaster();
+    return (Pimp) super.getCaster();
   }
 
 }

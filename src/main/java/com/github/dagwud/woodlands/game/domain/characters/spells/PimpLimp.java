@@ -7,6 +7,7 @@ import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
+import com.github.dagwud.woodlands.game.domain.characters.Pimp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class PimpLimp extends PassiveBattleRoundSpell
 
   private Map<Fighter, Integer> buffs;
 
-  public PimpLimp(General caster)
+  public PimpLimp(Pimp caster)
   {
     super("Pimp Limp", caster);
     buffs = new HashMap<>();
@@ -118,9 +119,9 @@ public class PimpLimp extends PassiveBattleRoundSpell
   }
 
   @Override
-  public General getCaster()
+  public Pimp getCaster()
   {
-    return (General) super.getCaster();
+    return (Pimp) super.getCaster();
   }
 
 }

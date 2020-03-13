@@ -18,7 +18,7 @@ public class CallToArms extends SingleCastSpell
 
   private Map<Fighter, Integer> buffs;
 
-  public CallToArms(General caster)
+  public CallToArms(Pimp caster)
   {
     super("Call to Arms", caster);
     buffs = new HashMap<>();

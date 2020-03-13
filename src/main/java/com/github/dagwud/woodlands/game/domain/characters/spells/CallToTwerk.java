@@ -118,9 +118,9 @@ public class CallToTwerk extends SingleCastSpell
   }
 
   @Override
-  public General getCaster()
+  public Pimp getCaster()
   {
-    return (General) super.getCaster();
+    return (Pimp) super.getCaster();
   }
 
 }
