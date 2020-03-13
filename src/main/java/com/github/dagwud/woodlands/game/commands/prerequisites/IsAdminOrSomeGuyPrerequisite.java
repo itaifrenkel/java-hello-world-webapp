@@ -19,7 +19,7 @@ public class IsAdminOrSomeGuyPrerequisite implements CommandPrerequisite
   @Override
   public boolean verify()
   {
-    if (chatId != Settings.ADMIN_CHAT && chatId != -1 && Arrays.asList(Settings.NOT_THE_ADMIN_JUST_SOME_OTHER_GUY_CHAT).contains(chatId))
+    if (chatId != Settings.ADMIN_CHAT && chatId != -1 && !Arrays.asList(Settings.NOT_THE_ADMIN_JUST_SOME_OTHER_GUY_CHAT).contains(chatId))
     {
       SendMessageCmd notAdmin = new SendMessageCmd(chatId, "You're not an admin or some other strangely specific guy. Go away.");
       CommandDelegate.execute(notAdmin);
