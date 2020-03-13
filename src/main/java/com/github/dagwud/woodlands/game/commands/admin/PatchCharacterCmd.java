@@ -26,11 +26,6 @@ public class PatchCharacterCmd extends AbstractCmd
       return;
     }
 
-    if (character.getPlayedBy().getChatId() == 586271876L)
-    {
-      character.setName("TINY PENIS");
-    }
-
     if (null != character.getStats())
     {
       fixNegativeStats(character.getStats().getStrength(), "strength");
