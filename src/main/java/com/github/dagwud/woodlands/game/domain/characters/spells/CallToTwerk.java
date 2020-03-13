@@ -12,15 +12,15 @@ import com.github.dagwud.woodlands.game.domain.characters.Pimp;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CallToArms extends SingleCastSpell
+public class CallToTwerk extends SingleCastSpell
 {
   private static final long serialVersionUID = 1L;
 
   private Map<Fighter, Integer> buffs;
 
-  public CallToArms(General caster)
+  public CallToTwerk(Pimp caster)
   {
-    super("Call to Arms", caster);
+    super("Call to Twerk", caster);
     buffs = new HashMap<>();
   }
 
@@ -39,7 +39,7 @@ public class CallToArms extends SingleCastSpell
         if (target instanceof PlayerCharacter)
         {
           SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
-                  getCaster().getName() + " buffed your strength and agility by +" + buffAmount);
+                  getCaster().getName() + " pimped your strength and agility by +" + buffAmount);
           CommandDelegate.execute(cmd);
         }
       }
@@ -59,7 +59,7 @@ public class CallToArms extends SingleCastSpell
       if (target instanceof PlayerCharacter)
       {
         CommandDelegate.execute(new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
-                getCaster().getName() + " is no longer buffing your strength and agility"));
+                getCaster().getName() + " is no longer pimping your strength and agility"));
       }
     }
     buffs.clear();

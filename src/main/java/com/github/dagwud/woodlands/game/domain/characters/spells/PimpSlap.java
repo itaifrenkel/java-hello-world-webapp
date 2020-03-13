@@ -12,16 +12,22 @@ import com.github.dagwud.woodlands.game.domain.characters.Pimp;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CallToArms extends SingleCastSpell
+public class PimpSlap extends PassiveBattleRoundSpell
 {
   private static final long serialVersionUID = 1L;
 
   private Map<Fighter, Integer> buffs;
 
-  public CallToArms(General caster)
+  public PimpSlap(Pimp caster)
   {
-    super("Call to Arms", caster);
+    super("Pimp Slap", caster);
     buffs = new HashMap<>();
+  }
+
+  @Override
+  public boolean shouldCast()
+  {
+    return true;
   }
 
   @Override
@@ -33,13 +39,12 @@ public class CallToArms extends SingleCastSpell
       if (buffAmount != 0)
       {
         target.getStats().getStrength().addBonus(buffAmount);
-        target.getStats().getAgility().addBonus(buffAmount);
         buffs.put(target, buffAmount);
 
         if (target instanceof PlayerCharacter)
         {
           SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
-                  getCaster().getName() + " buffed your strength and agility by +" + buffAmount);
+                  getCaster().getName() + " pimped your strength by +" + buffAmount);
           CommandDelegate.execute(cmd);
         }
       }
@@ -54,12 +59,11 @@ public class CallToArms extends SingleCastSpell
     {
       Integer buffedAmount = buffs.get(target);
       target.getStats().getStrength().removeBonus(buffedAmount);
-      target.getStats().getAgility().removeBonus(buffedAmount);
-
       if (target instanceof PlayerCharacter)
       {
-        CommandDelegate.execute(new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
-                getCaster().getName() + " is no longer buffing your strength and agility"));
+        SendMessageCmd cmd = new SendMessageCmd(((PlayerCharacter) target).getPlayedBy().getChatId(),
+                getCaster().getName() + " is no longer pimping your strength by +" + buffedAmount);
+        CommandDelegate.execute(cmd);
       }
     }
     buffs.clear();
@@ -75,10 +79,13 @@ public class CallToArms extends SingleCastSpell
 
     int diceFaces = determineBuffDiceFaces(target);
 
-    DiceRollCmd roll = new DiceRollCmd(1, diceFaces);
-    CommandDelegate.execute(roll);
+    DiceRollCmd roll1 = new DiceRollCmd(1, diceFaces);
+    CommandDelegate.execute(roll1);
 
-    return roll.getTotal();
+    DiceRollCmd roll2 = new DiceRollCmd(1, diceFaces);
+    CommandDelegate.execute(roll2);
+
+    return Math.min(roll1.getTotal(), roll2.getTotal());
   }
 
   private int determineBuffDiceFaces(Fighter targetChar)
@@ -109,12 +116,6 @@ public class CallToArms extends SingleCastSpell
       return 0;
     }
     return 0;
-  }
-
-  @Override
-  public int getManaCost()
-  {
-    return 1;
   }
 
   @Override
