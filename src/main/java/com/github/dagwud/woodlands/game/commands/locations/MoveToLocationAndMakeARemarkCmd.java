@@ -21,10 +21,10 @@ public class MoveToLocationAndMakeARemarkCmd extends MoveToLocationCmd
   @Override
   public void execute()
   {
-    super.execute();
     if (characterToMove instanceof PlayerCharacter)
     {
       CommandDelegate.execute(new SendMessageCmd((PlayerCharacter)characterToMove, remark));
     }
+    super.execute();
   }
 }

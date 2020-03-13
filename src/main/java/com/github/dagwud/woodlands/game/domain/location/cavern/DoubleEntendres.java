@@ -27,7 +27,7 @@ public class DoubleEntendres implements Serializable
             "Spank my ass!",
             "Pull my hair!",
             "I'm givin' her all she's got Capt'n!",
-            "Faster"
+            "Faster!"
     ));
   }
 
