@@ -83,8 +83,9 @@ public class EncounterRoundFightCmd extends AbstractCmd
 
     BuildRoundSummaryCmd summary = new BuildRoundSummaryCmd(encounter, roundActivity, passivesActivity, spellsActivity);
     CommandDelegate.execute(summary);
-    SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getAggressor(), summary.getSummary());
-    CommandDelegate.execute(status);
+
+    CommandDelegate.execute(new SendPartyMessageCmd(encounter.getAggressor(), summary.getSummary()));
+    CommandDelegate.execute(new SendPartyMessageCmd(encounter.getEnemies(), summary.getSummary()));
 
     if (!encounter.anyEnemyConscious() || !encounter.anyAggressorsStillConscious())
     {
