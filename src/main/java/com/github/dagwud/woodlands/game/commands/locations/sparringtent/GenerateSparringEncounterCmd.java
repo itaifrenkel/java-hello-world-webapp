@@ -51,6 +51,12 @@ public class GenerateSparringEncounterCmd extends GenerateManualEncounterCmd
   }
 
   @Override
+  protected FightingGroup produceAggressor()
+  {
+    return new SingleFighter(getPlayerState().getActiveCharacter());
+  }
+
+  @Override
   protected Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy)
   {
     FightingGroup enemies = produceEnemies();

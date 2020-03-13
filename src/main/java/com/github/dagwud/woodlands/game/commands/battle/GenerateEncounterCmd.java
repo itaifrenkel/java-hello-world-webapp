@@ -136,7 +136,12 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
   private Encounter createEncounter()
   {
-    return createEncounter(getPlayerState().getActiveCharacter().getParty(), produceEnemies());
+    return createEncounter(produceAggressor(), produceEnemies());
+  }
+
+  protected FightingGroup produceAggressor()
+  {
+    return getPlayerState().getActiveCharacter().getParty();
   }
 
   protected FightingGroup produceEnemies()

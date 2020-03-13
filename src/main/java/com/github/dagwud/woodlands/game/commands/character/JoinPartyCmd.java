@@ -62,12 +62,6 @@ public class JoinPartyCmd extends AbstractCmd
       EEvent.JOINED_PARTY.trigger((PlayerCharacter) joiner);
     }
 
-    if (party.getLeader() != null)
-    {
-      // Unless you're the founder
-      joiner.setLocation(party.getLeader().getLocation());
-    }
-
     for (PassivePartySpell passivePartySpell : joiner.getSpellAbilities().getPassivePartySpells())
     {
       CommandDelegate.execute(new CastSpellCmd(passivePartySpell));
