@@ -7,7 +7,6 @@ import com.github.dagwud.woodlands.game.domain.ECharacterClass;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
-import com.github.dagwud.woodlands.game.domain.characters.Pimp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,7 @@ public class CallToArms extends SingleCastSpell
 
   private Map<Fighter, Integer> buffs;
 
-  public CallToArms(Pimp caster)
+  public CallToArms(General caster)
   {
     super("Call to Arms", caster);
     buffs = new HashMap<>();
