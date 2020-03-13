@@ -4,7 +4,7 @@ public enum EAchievement
 {
   MUGGED_A_CREATURE("Your Loot Or Your Life", "Through the threat of violence, you've taken a creature's belongings"),
   EVERYONE_FOR_THEMSELVES("Everyone For Themselves", "You were their leader. You made it out, they didn't"),
-  ALL_THE_ACHIEVEMENTS("All The Achievements", "You have more achievements than anyone else - that's quite an achievement"),
+  ALL_THE_ACHIEVEMENTS("Overachiever", "You have more achievements than anyone else - that's quite an achievement"),
   DRUNKEN_COMMAND("NOW LISHTEN HERE YOU", "You were drunk enough that you issued a command that was not a command"),
   PARTY_IS_OVER("Party's Over... Forever", "You managed to get your entire party killed. Nice one"),
   CAPTAIN_MY_CAPTAIN("Captain My Captain", "You've led your party the most times"),
