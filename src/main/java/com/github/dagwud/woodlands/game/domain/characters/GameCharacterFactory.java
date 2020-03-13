@@ -24,6 +24,8 @@ public abstract class GameCharacterFactory
         return new Wizard(player);
       case DRUID:
         return new Druid(player);
+      case PIMP:
+        return new Pimp(player);
       default:
         throw new WoodlandsRuntimeException("Unimplemented class");
     }
