@@ -1,6 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.locations.village;
 
-import com.github.dagwud.woodlands.game.domain.EState;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;

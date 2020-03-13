@@ -7,8 +7,6 @@ import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.stats.Stats;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;
 
-import java.io.IOException;
-
 public class SendMessageCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
