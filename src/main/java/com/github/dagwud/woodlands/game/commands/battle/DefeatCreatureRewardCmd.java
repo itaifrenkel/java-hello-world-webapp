@@ -55,13 +55,9 @@ public class DefeatCreatureRewardCmd extends AbstractCmd
     Item dropped = itemDrop.getSpawned();
     victoriousParty.getCollectedItems().add(dropped);
 
-    for (GameCharacter activeMember : victoriousParty.getActiveMembers())
+    for (PlayerCharacter activeMember : victoriousParty.getActivePlayerCharacters())
     {
-      if (activeMember instanceof PlayerCharacter)
-      {
-        PlayerCharacter member = (PlayerCharacter) activeMember;
-        EEvent.CREATURE_DROPPED_ITEM.trigger(new CreatureDroppedItemEvent(member, createdDefeated, dropped));
-      }
+      EEvent.CREATURE_DROPPED_ITEM.trigger(new CreatureDroppedItemEvent(activeMember, createdDefeated, dropped));
     }
   }
 }

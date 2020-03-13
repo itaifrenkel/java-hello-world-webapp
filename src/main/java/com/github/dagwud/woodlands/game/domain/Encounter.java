@@ -5,16 +5,16 @@ import com.github.dagwud.woodlands.game.commands.battle.AutomaticEncounterRoundC
 import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 public class Encounter implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private Party party;
-  private List<? extends Fighter> enemies;
+  private FightingGroup aggressor;
+  private FightingGroup enemies;
   private boolean ended;
   private int currentRound;
   private final int actionsAllowedPerRound;
@@ -26,14 +26,14 @@ public class Encounter implements Serializable
   private boolean farmed = true;
   private EncounterStatus status;
 
-  public Encounter(Party party, List<? extends Fighter> enemies)
+  public Encounter(FightingGroup aggressor, FightingGroup enemies)
   {
-    this(party, enemies, 3); // two attacks and a spell
+    this(aggressor, enemies, 3); // two attacks and a spell
   }
 
-  protected Encounter(Party party, List<? extends Fighter> enemies, int actionsAllowedPerRound)
+  protected Encounter(FightingGroup aggressor, FightingGroup enemies, int actionsAllowedPerRound)
   {
-    this.party = party;
+    this.aggressor = aggressor;
     this.enemies = enemies;
     this.actionsAllowedPerRound = actionsAllowedPerRound;
   }
@@ -46,28 +46,41 @@ public class Encounter implements Serializable
   public void end()
   {
     ended = true;
+    Party party;
+    if (getAggressor() instanceof Party)
+    {
+      party = (Party) getAggressor();
+    }
+    else
+    {
+      if (getAggressor().getLeader() instanceof GameCharacter)
+      {
+        GameCharacter leader = (GameCharacter) getAggressor().getLeader();
+        party = leader.getParty();
+      }
+      else
+      {
+        throw new UnsupportedOperationException("Leader is a " + getAggressor().getLeader().getClass().getSimpleName());
+      }
+    }
+    party.setActiveEncounter(null);
   }
 
-  public List<? extends Fighter> getEnemies()
+  public FightingGroup getEnemies()
   {
     return enemies;
   }
 
   public Collection<Fighter> getAllFighters()
   {
-    Collection<Fighter> fighters = new HashSet<>(party.getActiveMembers());
-    fighters.addAll(enemies);
+    Collection<Fighter> fighters = new HashSet<>(aggressor.getActiveMembers());
+    fighters.addAll(enemies.getActiveMembers());
     return fighters;
   }
 
-  public Party getParty()
+  public FightingGroup getAggressor()
   {
-    return party;
-  }
-
-  public void setParty(Party party)
-  {
-    this.party = party;
+    return aggressor;
   }
 
   public int getBattleRound()
@@ -131,9 +144,29 @@ public class Encounter implements Serializable
 
   public boolean anyAggressorsStillConscious()
   {
-    for (PlayerCharacter member : getParty().getActivePlayerCharacters())
+    for (PlayerCharacter member : getAggressor().getActivePlayerCharacters())
     {
       if (member.isConscious())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public Collection<FightingGroup> getAllFightingGroups()
+  {
+    Collection<FightingGroup> groups = new ArrayList<>(2);
+    groups.add(getAggressor());
+    groups.add(getEnemies());
+    return groups;
+  }
+
+  public boolean anyEnemyConscious()
+  {
+    for (Fighter enemy : getEnemies().getActiveMembers())
+    {
+      if (enemy.isConscious())
       {
         return true;
       }

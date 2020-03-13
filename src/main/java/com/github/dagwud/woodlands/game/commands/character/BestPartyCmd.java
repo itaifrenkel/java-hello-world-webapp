@@ -4,7 +4,7 @@ import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PartyRegistry;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.Party;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class BestPartyCmd extends AbstractCmd
   private CombinedStats calculate(Party party)
   {
     double total = 0;
-    for (GameCharacter activeMember : party.getActiveMembers())
+    for (Fighter activeMember : party.getActiveMembers())
     {
       total += activeMember.getStats().getExperience();
     }

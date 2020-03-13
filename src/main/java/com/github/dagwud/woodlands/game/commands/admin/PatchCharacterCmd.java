@@ -21,9 +21,9 @@ public class PatchCharacterCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    if (character.getName().trim().equalsIgnoreCase("N00b ice king"))
+    if (null == character)
     {
-      character.setName(character.getName() + (uniqueNameIndex++));
+      return;
     }
 
     if (null != character.getStats())

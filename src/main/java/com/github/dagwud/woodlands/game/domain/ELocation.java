@@ -47,7 +47,7 @@ public enum ELocation
 
   THE_GORGE("The Gorge", new GorgeMenu(), false, "Here be dragons. Dragons can't be attacked with melee weapons - only ranged ones!"),
 
-  CAVERN_ENTRANCE("The Cavern Entrance", new CavernEntranceMenu(), false, "The rock face is marred by a large hole - the entrance to an underground system of caverns once used by miners. The miners cleared out long ago, tellling tales of monsters in the deep."),
+  CAVERN_ENTRANCE("The Cavern Entrance", new CavernEntranceMenu(), false, "The rock face is marred by a large hole - the entrance to an underground system of caverns once used by miners. The miners cleared out long ago, telling tales of monsters in the deep."),
   CAVERN_1("The Cavern", new Cavern1Menu(), false, "You're in a cavern - it's damp."),
   CAVERN_2("The Cavern", new Cavern2Menu(), false, "You're in a cavern - it's quite dark and damp"),
   CAVERN_3("The Cavern", new Cavern3Menu(), false, "You're in a cavern - it's dark and damp"),
@@ -63,7 +63,7 @@ public enum ELocation
   private final String lookText;
   private final AbstractRoomCmd roomCmd;
 
-  private final List<GameCharacter> charactersInRoom = new ArrayList<>();
+  private final List<Fighter> charactersInRoom = new ArrayList<>();
 
   ELocation(String displayName, GameMenu menu, boolean autoRetreat, String lookText)
   {
@@ -104,7 +104,7 @@ public enum ELocation
     CommandDelegate.execute(new RunLaterCmd(Settings.ROOM_INTERVAL_MS, new ScheduledRoomIntervalsCmd(schedule), false));
   }
 
-  public List<GameCharacter> getCharactersInRoom()
+  public List<Fighter> getCharactersInRoom()
   {
     return charactersInRoom;
   }

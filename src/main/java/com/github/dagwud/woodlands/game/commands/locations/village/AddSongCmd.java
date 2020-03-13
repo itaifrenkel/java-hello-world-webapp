@@ -25,7 +25,12 @@ public class AddSongCmd extends SuspendableCmd
         break;
 
       case 1:
-        persistSong(capturedInput);
+        String[] split = capturedInput.split("\n");
+        for (String song : split)
+        {
+          persistSong(song);
+        }
+
         break;
     }
   }
@@ -46,6 +51,5 @@ public class AddSongCmd extends SuspendableCmd
     jukeBox.getLyrics().add(capturedInput);
 
     CommandDelegate.execute(new SendMessageCmd(getPlayerState().getActiveCharacter(), "Righto, added: " + capturedInput));
-
   }
 }

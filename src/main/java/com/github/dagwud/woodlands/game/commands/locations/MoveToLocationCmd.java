@@ -80,11 +80,14 @@ public class MoveToLocationCmd extends AbstractCmd
   private void doMove(Party partyToMove, ELocation moveTo, GameCharacter movedBy)
   {
     partyToMove.changeLeader(movedBy);
-    List<GameCharacter> charactersToMove = partyToMove.getActiveMembers();
+    List<Fighter> charactersToMove = partyToMove.getActiveMembers();
 
-    for (GameCharacter character : charactersToMove)
+    for (Fighter character : charactersToMove)
     {
-      doMove(character, moveTo, movedBy);
+      if (character instanceof GameCharacter)
+      {
+        doMove((GameCharacter) character, moveTo, movedBy);
+      }
     }
 
     movedBy.getStats().incrementLeadershipMovesCount();
@@ -162,7 +165,7 @@ public class MoveToLocationCmd extends AbstractCmd
   private boolean allAtSameLocation(Party party)
   {
     Set<ELocation> locations = new HashSet<>();
-    for (GameCharacter member : party.getActiveMembers())
+    for (Fighter member : party.getActiveMembers())
     {
       locations.add(member.getLocation());
     }
@@ -171,7 +174,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
   private boolean anyResting(Party party)
   {
-    for (GameCharacter member : party.getActiveMembers())
+    for (Fighter member : party.getActiveMembers())
     {
       if (member.isResting())
       {

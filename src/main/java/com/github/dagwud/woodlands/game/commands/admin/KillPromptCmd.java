@@ -6,7 +6,7 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.battle.DeathCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
@@ -53,7 +53,7 @@ public class KillPromptCmd extends SuspendableCmd
     StringBuilder done = new StringBuilder("Killing off...\n");
     for (Party party : PartyRegistry.listAllParties())
     {
-      for (GameCharacter character : party.getActiveMembers())
+      for (Fighter character : party.getActiveMembers())
       {
         if (character.getName().equalsIgnoreCase(name))
         {

@@ -5,9 +5,7 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
-import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
+import com.github.dagwud.woodlands.game.domain.*;
 
 public class LookCmd extends AbstractCmd
 {
@@ -33,7 +31,7 @@ public class LookCmd extends AbstractCmd
     StringBuilder otherPartyMembersHere = new StringBuilder();
     if (playerState.getActiveCharacter().getParty() != null)
     {
-      for (GameCharacter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
+      for (Fighter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
       {
         if (activeMember != playerState.getActiveCharacter() && activeMember.getLocation() == location)
         {

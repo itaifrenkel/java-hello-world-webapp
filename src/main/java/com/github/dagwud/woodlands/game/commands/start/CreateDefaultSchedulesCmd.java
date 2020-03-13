@@ -21,6 +21,7 @@ public class CreateDefaultSchedulesCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (character == null) { return; } // wtf... crash during a /new???
     CommandDelegate.execute(new PeriodicSoberUpCmd(character, character.getPlayedBy().getChatId()));
     CommandDelegate.execute(new PeriodicRecoverManaCmd(character));
     CommandDelegate.execute(new PeriodicRecoverHPCmd(character));

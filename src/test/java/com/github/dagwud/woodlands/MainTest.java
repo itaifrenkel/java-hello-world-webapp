@@ -90,7 +90,7 @@ public class MainTest
   private int getPeasantPoints(PlayerState playerState)
   {
     int hitpoints = 0;
-    for (GameCharacter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
+    for (Fighter activeMember : playerState.getActiveCharacter().getParty().getActiveMembers())
     {
       if (activeMember instanceof Peasant)
       {

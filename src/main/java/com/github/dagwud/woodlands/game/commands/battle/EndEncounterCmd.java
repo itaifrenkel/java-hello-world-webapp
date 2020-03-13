@@ -25,9 +25,8 @@ public class EndEncounterCmd extends AbstractCmd
     }
 
     encounter.end();
-    encounter.getParty().setActiveEncounter(null);
 
-    for (PlayerCharacter playerCharacter : encounter.getParty().getActivePlayerCharacters())
+    for (PlayerCharacter playerCharacter : encounter.getAggressor().getActivePlayerCharacters())
     {
       if (playerCharacter instanceof General)
       {
@@ -36,6 +35,6 @@ public class EndEncounterCmd extends AbstractCmd
       }
     }
 
-    encounter.getParty().removeDeadNPCs();
+    encounter.getAggressor().removeDeadNPCs();
   }
 }

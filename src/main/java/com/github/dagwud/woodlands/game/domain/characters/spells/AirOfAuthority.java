@@ -3,8 +3,8 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
 import com.github.dagwud.woodlands.game.domain.ECharacterClass;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
 
@@ -15,7 +15,7 @@ public class AirOfAuthority extends PassiveBattleRoundSpell
 {
   private static final long serialVersionUID = 1L;
 
-  private Map<GameCharacter, Integer> buffs;
+  private Map<Fighter, Integer> buffs;
 
   public AirOfAuthority(General caster)
   {
@@ -32,7 +32,7 @@ public class AirOfAuthority extends PassiveBattleRoundSpell
   @Override
   public boolean cast()
   {
-    for (GameCharacter target : getCaster().getParty().getActiveMembers())
+    for (Fighter target : getCaster().getParty().getActiveMembers())
     {
       int buffAmount = rollBuff(target);
       if (buffAmount != 0)
@@ -54,7 +54,7 @@ public class AirOfAuthority extends PassiveBattleRoundSpell
   @Override
   public void expire()
   {
-    for (GameCharacter target : buffs.keySet())
+    for (Fighter target : buffs.keySet())
     {
       Integer buffedAmount = buffs.get(target);
       target.getStats().getStrength().removeBonus(buffedAmount);
@@ -68,7 +68,7 @@ public class AirOfAuthority extends PassiveBattleRoundSpell
     buffs.clear();
   }
 
-  private int rollBuff(GameCharacter target)
+  private int rollBuff(Fighter target)
   {
     if (getCaster() == target)
     {
@@ -87,7 +87,7 @@ public class AirOfAuthority extends PassiveBattleRoundSpell
     return Math.min(roll1.getTotal(), roll2.getTotal());
   }
 
-  private int determineBuffDiceFaces(GameCharacter targetChar)
+  private int determineBuffDiceFaces(Fighter targetChar)
   {
     if (!(targetChar instanceof PlayerCharacter))
     {

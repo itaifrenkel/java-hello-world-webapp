@@ -2,10 +2,10 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.Icons;
+import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.RollShortRestCmd;
-import com.github.dagwud.woodlands.game.commands.RecoverHitPointsCmd;
-import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class HealingBlast extends SingleCastSpell
   public boolean cast()
   {
     List<String> healed = new ArrayList<>();
-    for (GameCharacter target : getCaster().getParty().getActiveMembers())
+    for (Fighter target : getCaster().getParty().getActiveMembers())
     {
       if (target.getLocation() == getCaster().getLocation() && !target.isDead())
       {
