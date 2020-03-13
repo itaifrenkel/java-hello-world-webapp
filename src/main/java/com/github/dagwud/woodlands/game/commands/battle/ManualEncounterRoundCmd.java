@@ -19,13 +19,14 @@ public class ManualEncounterRoundCmd extends EncounterRoundCmd
   void executePreparationPhase(Encounter encounter)
   {
     ManualEncounter manualEncounter = (ManualEncounter) encounter;
-    List<PlayerCharacter> allPlayers = new ArrayList<>();
-    allPlayers.addAll(encounter.getAggressor().getActivePlayerCharacters());
-    allPlayers.addAll(encounter.getEnemies().getActivePlayerCharacters());
-    for (PlayerCharacter character : allPlayers)
+
+    for (FightingGroup group : encounter.getAllFightingGroups())
     {
-      RequestEncounterRoundPlanningCmd planning = new RequestEncounterRoundPlanningCmd(character.getPlayedBy().getPlayerState(), manualEncounter);
-      CommandDelegate.execute(planning);
+      for (PlayerCharacter character : group.getActivePlayerCharacters())
+      {
+        RequestEncounterRoundPlanningCmd planning = new RequestEncounterRoundPlanningCmd(character.getPlayedBy().getPlayerState(), manualEncounter);
+        CommandDelegate.execute(planning);
+      }
     }
   }
 

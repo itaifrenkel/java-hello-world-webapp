@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.commands.battle.AutomaticEncounterRoundC
 import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -146,6 +147,26 @@ public class Encounter implements Serializable
     for (PlayerCharacter member : getAggressor().getActivePlayerCharacters())
     {
       if (member.isConscious())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public Collection<FightingGroup> getAllFightingGroups()
+  {
+    Collection<FightingGroup> groups = new ArrayList<>(2);
+    groups.add(getAggressor());
+    groups.add(getEnemies());
+    return groups;
+  }
+
+  public boolean anyEnemyConscious()
+  {
+    for (Fighter enemy : getEnemies().getActiveMembers())
+    {
+      if (enemy.isConscious())
       {
         return true;
       }

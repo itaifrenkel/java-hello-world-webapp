@@ -14,10 +14,7 @@ import com.github.dagwud.woodlands.game.domain.characters.spells.Spell;
 import com.github.dagwud.woodlands.gson.game.Creature;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class EncounterRoundFightCmd extends AbstractCmd
 {
@@ -89,7 +86,7 @@ public class EncounterRoundFightCmd extends AbstractCmd
     SendPartyMessageCmd status = new SendPartyMessageCmd(encounter.getAggressor(), summary.getSummary());
     CommandDelegate.execute(status);
 
-    if (!anyEnemyConscious() || !encounter.anyAggressorsStillConscious())
+    if (!encounter.anyEnemyConscious() || !encounter.anyAggressorsStillConscious())
     {
       for (Fighter enemy : encounter.getEnemies().getActiveMembers())
       {
@@ -115,27 +112,31 @@ public class EncounterRoundFightCmd extends AbstractCmd
       CommandDelegate.execute(end);
     }
 
-    PlayerCharacter inDanger = getAnyPlayerInDanger();
-    if (inDanger != null)
+    Collection<FightingGroup> groups = encounter.getAllFightingGroups();
+    for (FightingGroup group : groups)
     {
-      if (encounter.getAggressor().capableOfRetreat())
+      PlayerCharacter inDanger = getAnyPlayerInDanger(group);
+      if (inDanger != null)
       {
-        if (inDanger.getLocation().isAutoRetreat())
+        if (group.capableOfRetreat())
         {
-          RetreatCmd retreat = new RetreatCmd(inDanger);
-          CommandDelegate.execute(retreat);
+          if (inDanger.getLocation().isAutoRetreat())
+          {
+            RetreatCmd retreat = new RetreatCmd(inDanger);
+            CommandDelegate.execute(retreat);
+            return;
+          }
+        }
+        else
+        {
+          TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(group);
+          CommandDelegate.execute(killall);
+
+          EndEncounterCmd end = new EndEncounterCmd(encounter);
+          CommandDelegate.execute(end);
+
           return;
         }
-      }
-      else
-      {
-        TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(encounter.getAggressor());
-        CommandDelegate.execute(killall);
-
-        EndEncounterCmd end = new EndEncounterCmd(encounter);
-        CommandDelegate.execute(end);
-
-        return;
       }
     }
 
@@ -151,18 +152,6 @@ public class EncounterRoundFightCmd extends AbstractCmd
         CommandDelegate.execute(cmd);
       }
     }
-  }
-
-  private boolean anyEnemyConscious()
-  {
-    for (Fighter enemy : encounter.getEnemies().getActiveMembers())
-    {
-      if (enemy.isConscious())
-      {
-        return true;
-      }
-    }
-    return false;
   }
 
   private boolean shouldEnemyFlee(Creature enemy)
@@ -228,9 +217,9 @@ public class EncounterRoundFightCmd extends AbstractCmd
     return roundActivity;
   }
 
-  private PlayerCharacter getAnyPlayerInDanger()
+  private PlayerCharacter getAnyPlayerInDanger(FightingGroup inGroup)
   {
-    for (PlayerCharacter member : encounter.getAggressor().getActivePlayerCharacters())
+    for (PlayerCharacter member : inGroup.getActivePlayerCharacters())
     {
       double hpPerc = ((double) member.getStats().getHitPoints()) / ((double) member.getStats().getMaxHitPoints().total());
       if (!member.isDead() && hpPerc <= 0.2)
