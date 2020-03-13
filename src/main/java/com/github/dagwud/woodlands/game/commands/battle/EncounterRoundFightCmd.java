@@ -129,9 +129,11 @@ public class EncounterRoundFightCmd extends AbstractCmd
         }
         else
         {
-          TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(group);
-          CommandDelegate.execute(killall);
-
+          if (inDanger.getLocation() != ELocation.SPARRING_TENT)
+          {
+            TooManyUnconsciousCmd killall = new TooManyUnconsciousCmd(group);
+            CommandDelegate.execute(killall);
+          }
           EndEncounterCmd end = new EndEncounterCmd(encounter);
           CommandDelegate.execute(end);
 
