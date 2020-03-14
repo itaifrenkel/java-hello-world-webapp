@@ -107,7 +107,6 @@ public class DoPlayerSetupCmd extends SuspendableCmd
         if (c == 'B') shadowClass = ECharacterClass.BRAWLER;
         if (c == 'D') shadowClass = ECharacterClass.DRUID;
         if (c == 'G') shadowClass = ECharacterClass.GENERAL;
-        if (c == 'P') shadowClass = ECharacterClass.PIMP;
         if (c == 'E') shadowClass = ECharacterClass.EXPLORER;
         if (c == 'T') shadowClass = ECharacterClass.TRICKSTER;
         CreateShadowPlayerCmd shadow = new CreateShadowPlayerCmd(-100 - i,

@@ -58,7 +58,7 @@ public class SpeakCmd extends AbstractCmd
             "dragon", "army", "pheasant", "herbivore",
             "broadsword", "robe", "raisins", "tavern", "ogre",
             "cyclops", "battle axe", "goat", "witch",
-            "lion", "evil", "demon", "golem", "duck", "niel"};
+            "lion", "evil", "demon", "golem"};
     int a = (int) (Math.random() * dreams.length);
     int b = (int) (Math.random() * dreams.length);
     int c = (int) (Math.random() * dreams.length);

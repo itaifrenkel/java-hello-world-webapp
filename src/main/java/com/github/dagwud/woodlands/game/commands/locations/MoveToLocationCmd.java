@@ -15,7 +15,7 @@ public class MoveToLocationCmd extends AbstractCmd
 {
   private static final long serialVersionUID = 1L;
 
-  protected final GameCharacter characterToMove;
+  private final GameCharacter characterToMove;
   private final ELocation location;
 
   public MoveToLocationCmd(GameCharacter characterToMove, ELocation location)

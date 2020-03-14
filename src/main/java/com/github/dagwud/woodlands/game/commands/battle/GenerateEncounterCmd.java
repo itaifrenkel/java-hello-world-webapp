@@ -68,7 +68,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
       String msg = "<i>Time passes. You keep moving. Nothing interesting happens.</i>";
       if (Math.random() <= 0.1d)
       {
-        msg = "<i>You see some acacia trees, they look yummy... you resist and move on...</i>";
+        msg = "<i>You see some trees.</i>";
       }
       SendPartyMessageCmd cmd = new SendPartyMessageCmd(playerState.getPlayer().getActiveCharacter().getParty(), msg);
       CommandDelegate.execute(cmd);

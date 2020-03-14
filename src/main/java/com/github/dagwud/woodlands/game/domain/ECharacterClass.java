@@ -3,6 +3,8 @@ package com.github.dagwud.woodlands.game.domain;
 import com.github.dagwud.woodlands.game.domain.stats.*;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 
 public enum ECharacterClass implements Serializable
 {
@@ -11,7 +13,6 @@ public enum ECharacterClass implements Serializable
   BRAWLER("Brawler", new BrawlerInitialStats()),
   WIZARD("Wizard", new WizardInitialStats()),
   DRUID("Druid", new DruidInitialStats()),
-  PIMP("Pimp", new DruidInitialStats()),
   GENERAL("General", new GeneralInitialStats());
 
   private static final long serialVersionUID = 1L;
