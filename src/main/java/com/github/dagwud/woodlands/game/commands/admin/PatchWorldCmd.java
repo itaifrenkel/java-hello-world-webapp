@@ -48,16 +48,19 @@ public class PatchWorldCmd extends AbstractCmd
     for (PlayerState playerState : GameStatesRegistry.allPlayerStates())
     {
       PlayerCharacter character = playerState.getActiveCharacter();
-      if (character.isResting() || character.isDrinking())
+      if (character != null)
       {
-        character.getStats().setState(EState.ALIVE);
-        CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
-        CommandDelegate.execute(new SendAdminMessageCmd("Unrested " + character.getName()));
-      }
+        if (character.isResting() || character.isDrinking())
+        {
+          character.getStats().setState(EState.ALIVE);
+          CommandDelegate.execute(new MoveToLocationCmd(character, ELocation.VILLAGE_SQUARE));
+          CommandDelegate.execute(new SendAdminMessageCmd("Unrested " + character.getName()));
+        }
 
-      // Crafting schedules are lost:
-      character.getParty().getAlchemist().completeCrafting(character);
-      character.getParty().getBlacksmith().completeCrafting(character);
+        // Crafting schedules are lost:
+        character.getParty().getAlchemist().completeCrafting(character);
+        character.getParty().getBlacksmith().completeCrafting(character);
+      }
     }
   }
 
