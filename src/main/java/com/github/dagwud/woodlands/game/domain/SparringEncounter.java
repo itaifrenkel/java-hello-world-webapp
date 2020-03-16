@@ -7,9 +7,9 @@ public class SparringEncounter extends ManualEncounter
 {
   private static final long serialVersionUID = 1L;
 
-  public SparringEncounter(FightingGroup aggressor, FightingGroup enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
+  public SparringEncounter(FightingGroup aggressor, FightingGroup enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound, ELocation location)
   {
-    super(aggressor, enemies, timeAllowedForPlanningMS, actionsAllowedPerRound);
+    super(aggressor, enemies, timeAllowedForPlanningMS, actionsAllowedPerRound, location);
   }
 
   @Override

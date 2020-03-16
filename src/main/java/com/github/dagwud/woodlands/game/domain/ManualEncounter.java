@@ -12,9 +12,9 @@ public class ManualEncounter extends Encounter
   private static final long serialVersionUID = 1L;
   private final long timeAllowedForPlanningMS;
 
-  public ManualEncounter(FightingGroup aggressor, FightingGroup enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound)
+  public ManualEncounter(FightingGroup aggressor, FightingGroup enemies, int timeAllowedForPlanningMS, int actionsAllowedPerRound, ELocation location)
   {
-    super(aggressor, enemies, actionsAllowedPerRound);
+    super(aggressor, enemies, actionsAllowedPerRound, location);
     this.timeAllowedForPlanningMS = timeAllowedForPlanningMS;
   }
 

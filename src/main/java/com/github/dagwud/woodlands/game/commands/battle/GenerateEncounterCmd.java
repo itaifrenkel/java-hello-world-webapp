@@ -136,7 +136,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
 
   private Encounter createEncounter()
   {
-    return createEncounter(produceAggressor(), produceEnemies());
+    return createEncounter(produceAggressor(), produceEnemies(), location);
   }
 
   protected FightingGroup produceAggressor()
@@ -156,7 +156,7 @@ public abstract class GenerateEncounterCmd extends AbstractCmd
     return new CreatureGroup(creatures);
   }
 
-  abstract Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy);
+  abstract Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy, ELocation location);
 
   protected final PlayerState getPlayerState()
   {

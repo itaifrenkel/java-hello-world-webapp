@@ -3,9 +3,10 @@ package com.github.dagwud.woodlands.game.commands.battle;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.Settings;
-import com.github.dagwud.woodlands.game.domain.*;
-
-import java.util.List;
+import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.Encounter;
+import com.github.dagwud.woodlands.game.domain.FightingGroup;
+import com.github.dagwud.woodlands.game.domain.ManualEncounter;
 
 public abstract class GenerateManualEncounterCmd extends GenerateEncounterCmd
 {
@@ -27,9 +28,9 @@ public abstract class GenerateManualEncounterCmd extends GenerateEncounterCmd
   }
 
   @Override
-  protected Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy)
+  protected Encounter createEncounter(FightingGroup aggressor, FightingGroup enemy, ELocation location)
   {
-    return new ManualEncounter(aggressor, enemy, timeAllowedForPlanningMS, actionsPerRound);
+    return new ManualEncounter(aggressor, enemy, timeAllowedForPlanningMS, actionsPerRound, location);
   }
 
   @Override

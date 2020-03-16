@@ -18,6 +18,7 @@ public class Encounter implements Serializable
   private boolean ended;
   private int currentRound;
   private final int actionsAllowedPerRound;
+  private ELocation location;
   private boolean hasAnyPlayerActivityPrepared;
 
   /**
@@ -26,16 +27,17 @@ public class Encounter implements Serializable
   private boolean farmed = true;
   private EncounterStatus status;
 
-  public Encounter(FightingGroup aggressor, FightingGroup enemies)
+  public Encounter(FightingGroup aggressor, FightingGroup enemies, ELocation location)
   {
-    this(aggressor, enemies, 3); // two attacks and a spell
+    this(aggressor, enemies, 3, location); // two attacks and a spell
   }
 
-  protected Encounter(FightingGroup aggressor, FightingGroup enemies, int actionsAllowedPerRound)
+  protected Encounter(FightingGroup aggressor, FightingGroup enemies, int actionsAllowedPerRound, ELocation location)
   {
     this.aggressor = aggressor;
     this.enemies = enemies;
     this.actionsAllowedPerRound = actionsAllowedPerRound;
+    this.location = location;
   }
 
   public boolean isEnded()
@@ -172,5 +174,10 @@ public class Encounter implements Serializable
       }
     }
     return false;
+  }
+
+  public ELocation getLocation()
+  {
+    return location;
   }
 }

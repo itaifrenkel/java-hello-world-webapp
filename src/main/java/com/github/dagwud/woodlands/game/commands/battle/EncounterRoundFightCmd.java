@@ -33,6 +33,12 @@ public class EncounterRoundFightCmd extends AbstractCmd
   @Override
   public void execute()
   {
+    if (encounter.getLocation() != playerState.getActiveCharacter().getLocation())
+    {
+      encounter.end();
+      return;
+    }
+
     encounter.startFighting();
     if (encounter.isEnded())
     {

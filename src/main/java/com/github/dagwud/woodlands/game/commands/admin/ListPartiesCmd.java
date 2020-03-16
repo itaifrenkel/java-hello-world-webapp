@@ -30,6 +30,19 @@ public class ListPartiesCmd extends AdminCmd
               .append(" (").append(party.size()).append(") - ")
               .append(party.getLeader() == null ? "No leader" : Icons.LEADER + party.getLeader().getName())
               .append("\n");
+
+      if (party.getActiveEncounter() != null)
+      {
+        b.append("Current encounter in: ").append(party.getActiveEncounter().getLocation().getDisplayName());
+
+        if (party.getActiveEncounter().isEnded())
+        {
+          b.append(" (ended)");
+        }
+
+        b.append("\n");
+      }
+
       for (Fighter c : party.getActiveMembers())
       {
         b.append(" • ").append(c.summary())
