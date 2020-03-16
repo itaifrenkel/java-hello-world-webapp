@@ -6,9 +6,9 @@ import com.github.dagwud.woodlands.game.domain.location.tavern.JukeBox;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GameStatesRegistry implements Serializable
 {
@@ -51,7 +51,11 @@ public class GameStatesRegistry implements Serializable
 
   public static Collection<PlayerState> allPlayerStates()
   {
-    return Collections.unmodifiableCollection(instance().gameStatesByCharacter.values());
+    Collection<PlayerState> values = instance().gameStatesByCharacter.values();
+
+    return values.stream()
+            .filter(p -> p.getActiveCharacter() != null)
+            .collect(Collectors.toList());
   }
 
   public static void reset()

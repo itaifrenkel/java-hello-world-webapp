@@ -13,10 +13,8 @@ import com.github.dagwud.woodlands.game.commands.admin.PatchWorldCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.commands.core.SendPartyAlertCmd;
 import com.github.dagwud.woodlands.game.domain.EEvent;
 import com.github.dagwud.woodlands.game.domain.ELocation;
-import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.*;
@@ -71,7 +69,7 @@ public class RetrieveWorldCmd extends AbstractCmd
       GameStatesRegistry.instance();
     }
 
-System.out.println("Scheduler restores with " + Scheduler.instance().count() + " schedules");
+    System.out.println("Scheduler restores with " + Scheduler.instance().count() + " schedules");
     if (Scheduler.instance().count() >= 30)
     {
       SendAdminMessageCmd msg = new SendAdminMessageCmd("<b><i>WARNING! THERE ARE " + Scheduler.instance().count() + " SCHEDULES TO RESTORE!</i></b>");
