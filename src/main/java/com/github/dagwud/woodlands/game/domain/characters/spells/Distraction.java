@@ -22,6 +22,10 @@ public class Distraction extends SingleCastSpell
   public boolean cast()
   {
     Fighter target = getCaster().getParty().getActiveEncounter().chooseFighterToAttack(getCaster());
+    if (target == null)
+    {
+      return false;
+    }
 
     int hitBoost = target.getStats().getHitBoost();
 
