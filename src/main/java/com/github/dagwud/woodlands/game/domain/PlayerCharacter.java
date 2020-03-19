@@ -102,35 +102,47 @@ public abstract class PlayerCharacter extends GameCharacter
 
   private double determinePercentageOfMaxDamageThatPlayerCanHandle()
   {
-    if (getStats().getLevel() >= 14)
+    if (getStats().getLevel() >= 13)
     {
       return 100;
     }
-    if (getStats().getLevel() >= 13)
-    {
-      return 85;
-    }
     if (getStats().getLevel() >= 12)
     {
-      return 75;
+      return 95;
     }
     if (getStats().getLevel() >= 11)
     {
-      return 65;
+      return 90;
     }
     if (getStats().getLevel() >= 10)
     {
-      return 50;
+      return 75;
     }
     if (getStats().getLevel() >= 9)
     {
-      return 35;
+      return 60;
     }
-    if (getStats().getLevel() >= 8)
+    if (getStats().getLevel() >= 8
+    {
+      return 50;
+    }
+    if (getStats().getLevel() >= 7)
+    {
+      return 40;
+    }
+    if (getStats().getLevel() >= 6)
+    {
+      return 30;
+    }
+    if (getStats().getLevel() >= 5)
     {
       return 20;
     }
-    if (getStats().getLevel() >= 7)
+    if (getStats().getLevel() >= 4)
+    {
+      return 15;
+    }
+    if (getStats().getLevel() >= 4)
     {
       return 10;
     }
