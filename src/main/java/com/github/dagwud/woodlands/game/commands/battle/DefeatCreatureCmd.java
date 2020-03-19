@@ -58,8 +58,7 @@ public class DefeatCreatureCmd extends AbstractCmd
 
       EEvent.CREATURE_DEFEATED.trigger(new CreatureDefeatedEvent(member, creatureDefeated, rewardPerCharacter));
 
-      GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
-      CommandDelegate.execute(cmd);
+      CommandDelegate.execute(new GrantExperienceCmd(member, rewardPerCharacter));
 
       if (victors instanceof Party)
       {
@@ -67,8 +66,7 @@ public class DefeatCreatureCmd extends AbstractCmd
         if (party.isLedBy(member))
         {
           int leadershipBonus = (int)(Math.ceil(0.30d * rewardPerCharacter));
-          GrantExperienceCmd cmd = new GrantExperienceCmd(member, rewardPerCharacter);
-          CommandDelegate.execute(cmd);
+          CommandDelegate.execute(new GrantExperienceCmd(member, rewardPerCharacter));
           CommandDelegate.execute(new SendMessageCmd(member, "<b>Your leadership skills have resulted in victory! You earn an extra " + leadershipBonus + " experience</b>"));
         }
       }
