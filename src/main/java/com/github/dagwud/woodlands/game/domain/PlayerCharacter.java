@@ -122,7 +122,7 @@ public abstract class PlayerCharacter extends GameCharacter
     {
       return 60;
     }
-    if (getStats().getLevel() >= 8
+    if (getStats().getLevel() >= 8)
     {
       return 50;
     }
