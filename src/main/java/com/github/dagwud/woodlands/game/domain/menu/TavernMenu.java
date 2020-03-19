@@ -46,6 +46,11 @@ public class TavernMenu extends GameMenu
   @Override
   public String produceExitText(PlayerCharacter playerState, ELocation to)
   {
+    if (to == ELocation.SPARRING_TENT)
+    {
+      return String.format("%s strides into the Sparring Tent with a determined look on their face", playerState.getName());
+    }
+
     return produceRandomText(playerState, EXIT_TEXT);
   }
 
