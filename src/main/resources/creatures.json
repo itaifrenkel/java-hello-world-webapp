@@ -84,7 +84,7 @@
     {"name": "Troll", "difficulty": 3, "weapon-left": "Staff", "fight-mode": "STRONGEST", "creature-type":  "normal"},
     {"name": "Bridge Troll", "difficulty": 3, "weapon-left": "Staff", "fight-mode": "SICKEST", "creature-type":  "normal"},
     {"name": "Dwarf", "difficulty": 4, "weapon-left": "l4", "fight-mode": "HEALTHIEST", "creature-type":  "normal"},
-    {"name": "Ogre", "difficulty": 6, "weapon-left": "Sword", "fight-mode": "RANDOM", "creature-type":  "normal"},
+    {"name": "Ogre", "difficulty": 6, "weapon-left": "l6", "fight-mode": "RANDOM", "creature-type":  "normal"},
     {"name": "Cyclops Ogre", "difficulty": 6, "weapon-left": "l6", "fight-mode": "WEAKEST", "creature-type":  "normal"},
     {"name": "Enraged Ogre", "difficulty": 7, "weapon-left": "l7", "weapon-right": "l7", "fight-mode": "HEALTHIEST", "creature-type":  "normal"},
     {"name": "Three-Eyed Ogre", "difficulty": 8, "weapon-left": "l8l", "weapon-right": "l8r", "fight-mode": "STRONGEST", "creature-type":  "normal"},
