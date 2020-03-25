@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.ChoiceCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.DoGiveItemCmd;
+import com.github.dagwud.woodlands.game.commands.inventory.InventoryCmd;
 import com.github.dagwud.woodlands.game.domain.Crafter;
 import com.github.dagwud.woodlands.game.domain.ELocation;
 import com.github.dagwud.woodlands.game.domain.Item;
@@ -94,6 +95,7 @@ public abstract class CraftPromptCmd<A extends Item, B extends Item, C extends I
 
   private void promptForFirstWeapon()
   {
+    CommandDelegate.execute(new InventoryCmd(getPlayerState().getPlayer().getChatId(), getCharacter()));
     ChoiceCmd choice = new ChoiceCmd(getCharacter().getPlayedBy().getChatId(),
             produceFirstItemPromptMessage(), produceFirstItemOptions());
     CommandDelegate.execute(choice);
