@@ -2,6 +2,7 @@ package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
+import com.github.dagwud.woodlands.game.commands.battle.ChooseConsciousCharacterCmd;
 import com.github.dagwud.woodlands.game.commands.battle.EncounterRoundCmd;
 import com.github.dagwud.woodlands.game.commands.battle.ManualEncounterRoundCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
@@ -24,11 +25,13 @@ public class ManualEncounter extends Encounter
     if (!hasAnyPlayerActivityPrepared())
     {
       CommandDelegate.execute(new SendPartyMessageCmd(getAggressor(), "Nobody is keen for a fight"));
-      if (getAggressor().getLeader() instanceof GameCharacter)
+      ChooseConsciousCharacterCmd retreat = new ChooseConsciousCharacterCmd(getAggressor());
+      CommandDelegate.execute(retreat);
+      if (retreat.getChosen() == null)
       {
-        GameCharacter leader = (GameCharacter) getAggressor().getLeader();
-        CommandDelegate.execute(new MoveToLocationCmd(leader, ELocation.VILLAGE_SQUARE));
+        throw new WoodlandsRuntimeException("Nobody is alive to sound the retreat!");
       }
+      CommandDelegate.execute(new MoveToLocationCmd(retreat.getChosen(), ELocation.VILLAGE_SQUARE));
     }
   }
 

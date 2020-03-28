@@ -20,7 +20,7 @@ public class RetreatCmd extends AbstractCmd
   @Override
   public void execute()
   {
-    GameCharacter retreater = inDanger.isConscious() ? inDanger : findActiveCharacter(inDanger.getParty());
+    GameCharacter retreater = inDanger.isConscious() ? inDanger : findConsciousCharacter(inDanger.getParty());
     String message = buildRetreatMessage(inDanger, retreater);
     SendPartyMessageCmd msg = new SendPartyMessageCmd(inDanger.getParty(), message);
     CommandDelegate.execute(msg);
@@ -46,15 +46,14 @@ public class RetreatCmd extends AbstractCmd
     return "<i>" + inDanger.getName() + " is badly wounded so " + retreater.getName() + " sounds the retreat; " + party.getName() + " falls back to The Village</i>";
   }
 
-  private GameCharacter findActiveCharacter(Party party)
+  private GameCharacter findConsciousCharacter(Party party)
   {
-    for (Fighter member : party.getActiveMembers())
+    ChooseConsciousCharacterCmd choose = new ChooseConsciousCharacterCmd(party);
+    CommandDelegate.execute(choose);
+    if (choose.getChosen() == null)
     {
-      if (member instanceof GameCharacter && member.isConscious())
-      {
-        return (GameCharacter) member;
-      }
+      throw new WoodlandsRuntimeException("Nobody is alive to sound the retreat");
     }
-    throw new WoodlandsRuntimeException("Nobody is alive to sound the retreat");
+    return choose.getChosen();
   }
 }
