@@ -1,6 +1,5 @@
 package com.github.dagwud.woodlands.game.commands.core;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.log.Logger;
 
 import java.io.Serializable;

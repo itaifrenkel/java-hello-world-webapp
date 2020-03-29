@@ -33,8 +33,8 @@ public class SendLocationMessageCmd extends AbstractCmd
   public void execute()
   {
     // grab a copy to avoid concurrent modification errors.
-
     List<Fighter> charactersInRoom = new ArrayList<>(eLocation.getCharactersInRoom());
+
     for (Fighter gameCharacter : charactersInRoom)
     {
       if (gameCharacter == originator)

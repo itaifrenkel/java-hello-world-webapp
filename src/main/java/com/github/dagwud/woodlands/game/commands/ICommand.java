@@ -7,7 +7,7 @@ public interface ICommand
 {
   boolean isMenuCmd();
 
-  AbstractCmd build(PlayerCharacter activeCharacter, int chatId);
+  AbstractCmd build(PlayerCharacter activeCharacter, int chatId, String text);
 
   String getMenuText();
 }

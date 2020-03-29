@@ -23,7 +23,7 @@ public class Command implements ICommand
   }
 
   @Override
-  public final AbstractCmd build(PlayerCharacter character, int chatId)
+  public final AbstractCmd build(PlayerCharacter character, int chatId, String text)
   {
     return commandBuilder.build(character, chatId);
   }

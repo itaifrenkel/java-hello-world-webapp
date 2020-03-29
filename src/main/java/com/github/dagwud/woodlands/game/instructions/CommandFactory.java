@@ -1,10 +1,14 @@
 package com.github.dagwud.woodlands.game.instructions;
 
-import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
-import com.github.dagwud.woodlands.game.commands.*;
+import com.github.dagwud.woodlands.game.commands.ECommand;
+import com.github.dagwud.woodlands.game.commands.ICommand;
+import com.github.dagwud.woodlands.game.commands.SpeakCmd;
 import com.github.dagwud.woodlands.game.commands.character.CastSpellPromptCmd;
-import com.github.dagwud.woodlands.game.commands.core.*;
+import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.AcceptInputCmd;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
+import com.github.dagwud.woodlands.game.commands.core.SuspendableCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.DropItemCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.EquipItemCmd;
 import com.github.dagwud.woodlands.game.domain.characters.spells.SingleCastSpell;
@@ -38,6 +42,7 @@ public class CommandFactory
   {
     int chatId = telegramUpdate.message.chat.id;
     String cmd = telegramUpdate.message.text;
+
     if (cmd == null)
     {
       return new SendMessageCmd(chatId, "(・_・ヾ");
@@ -70,7 +75,7 @@ public class CommandFactory
 
     if (by != null && (!by.isMenuCmd() || isValidMenuOption(cmd, playerState.getCurrentMenu(), playerState)))
     {
-      return by.build(playerState.getActiveCharacter(), chatId);
+      return by.build(playerState.getActiveCharacter(), chatId, getFree(cmd));
     }
 
     if (cmd.matches("/[Dd][LRW0-9]+"))
@@ -92,6 +97,25 @@ public class CommandFactory
     }
 
     return new SendMessageCmd(chatId, "I'm not sure what you mean... perhaps try /help?");
+  }
+
+  private String getFree(String incoming)
+  {
+    String cmd = incoming.trim();
+
+    int space = cmd.indexOf(" ");
+
+    if (space == -1)
+    {
+      return "";
+    }
+
+    if (space == cmd.length() - 1)
+    {
+      return "";
+    }
+
+    return cmd.substring(space + 1);
   }
 
   private boolean isValidMenuOption(String cmd, GameMenu currentMenu, PlayerState playerState)

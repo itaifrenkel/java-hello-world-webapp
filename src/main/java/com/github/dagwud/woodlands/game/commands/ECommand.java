@@ -5,8 +5,10 @@ import com.github.dagwud.woodlands.game.commands.admin.*;
 import com.github.dagwud.woodlands.game.commands.battle.*;
 import com.github.dagwud.woodlands.game.commands.character.*;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
+import com.github.dagwud.woodlands.game.commands.core.FreeTextCmd;
 import com.github.dagwud.woodlands.game.commands.creatures.ListCreaturesCmd;
 import com.github.dagwud.woodlands.game.commands.inventory.*;
+import com.github.dagwud.woodlands.game.commands.locations.EmoteCmd;
 import com.github.dagwud.woodlands.game.commands.locations.LookCmd;
 import com.github.dagwud.woodlands.game.commands.locations.MoveToLocationCmd;
 import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnchantItemPromptCmd;
@@ -37,6 +39,7 @@ public enum ECommand implements ICommand
   INVENTORY("/inv", false, (character, chatId) -> new InventoryCmd(chatId, character)),
   LOOK("/look", false, (character, chatId) -> new LookCmd(chatId, character)),
   GIVE("/give", false, (character, chatId) -> new GiveItemCmd(character.getPlayedBy())),
+  EMOTE("/emote", false, (character, chatId) -> new EmoteCmd(character)),
   SPELL("/spell", false, (character, chatId) -> new ManualSpellCastCmd(chatId, character)),
   LIST_CREATURES("/creatures", false, (character, chatId) -> new ListCreaturesCmd(chatId)),
   ACHIEVEMENTS("/achievements", false, (character, chatId) -> new ListAchievementsCmd(character)),
@@ -130,6 +133,12 @@ public enum ECommand implements ICommand
 
   public static ECommand by(String name)
   {
+    if (name.contains(" "))
+    {
+      String[] parts = name.split(" ");
+      return COMMANDS.get(parts[0]);
+    }
+
     return COMMANDS.get(name);
   }
 
@@ -149,9 +158,17 @@ public enum ECommand implements ICommand
   }
 
   @Override
-  public AbstractCmd build(PlayerCharacter character, int chatId)
+  public AbstractCmd  build(PlayerCharacter character, int chatId, String text)
   {
-    return commandBuilder.build(character, chatId);
+    AbstractCmd build = commandBuilder.build(character, chatId);
+
+    if (build instanceof FreeTextCmd)
+    {
+      FreeTextCmd freeTextCmd = (FreeTextCmd) build;
+      freeTextCmd.setFreeText(text);
+    }
+
+    return build;
   }
 
   @Override
