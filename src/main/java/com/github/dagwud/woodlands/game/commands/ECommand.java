@@ -133,7 +133,7 @@ public enum ECommand implements ICommand
 
   public static ECommand by(String name)
   {
-    if (name.contains(" "))
+    if (name.startsWith("/") && name.contains(" "))
     {
       String[] parts = name.split(" ");
       return COMMANDS.get(parts[0]);
