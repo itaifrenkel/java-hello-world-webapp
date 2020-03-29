@@ -5,6 +5,7 @@ import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.ECommand;
 import com.github.dagwud.woodlands.game.commands.core.DiceRollCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class TavernMenu extends GameMenu
   public TavernMenu()
   {
     setPrompt("<i>This is the Tavern</i>");
-    setOptions(ECommand.BUY_DRINKS, ECommand.SPARRING_TENT, ECommand.JOIN, ECommand.CLAIM_ITEM, ECommand.WAKE);
+    setOptions(ECommand.BUY_DRINKS, ECommand.SPARRING_TENT, ECommand.JOIN, ECommand.CLAIM_ITEM);
   }
 
   @Override
@@ -60,6 +61,11 @@ public class TavernMenu extends GameMenu
     // Arrays.asList produces an immutable list
     List<String> options = new ArrayList<>(Arrays.asList(super.produceOptions(playerState)));
 
+    if (someoneIsDead(playerState.getActiveCharacter().getParty()))
+    {
+      options.add(ECommand.WAKE.getMenuText());
+    }
+
     if (playerState.getActiveCharacter().getStats().getAvailableStatsPointUpgrades() > 0)
     {
       options.add(ECommand.UPGRADE.getMenuText());
@@ -73,5 +79,18 @@ public class TavernMenu extends GameMenu
     options.add(ECommand.VILLAGE_SQUARE.getMenuText());
 
     return options.toArray(new String[0]);
+  }
+
+  private boolean someoneIsDead(Party party)
+  {
+    for (PlayerCharacter activePlayerCharacter : party.getActivePlayerCharacters())
+    {
+      if (activePlayerCharacter.isDead())
+      {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
