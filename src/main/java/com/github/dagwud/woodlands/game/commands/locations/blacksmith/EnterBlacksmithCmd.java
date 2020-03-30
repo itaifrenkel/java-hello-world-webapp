@@ -52,7 +52,7 @@ public class EnterBlacksmithCmd extends AbstractCmd
                 "He must be busy with something, because he yells out \"I'm busy with something, come back in " + remainingTimeMins + "!\""));
       }
 
-      if (!couldPotentiallyCraftSomething)
+      if (!blacksmith.isBusyCrafting() && !couldPotentiallyCraftSomething)
       {
         CommandDelegate.execute(new SendMessageCmd(character, "I'm sure the Blacksmith would love to just hang out and chat with you, but he's a busy man, battling to find trustworthy apprentices." +
                 " He has no time to waste - you'll need to visit him with at least two items that he work with."));
