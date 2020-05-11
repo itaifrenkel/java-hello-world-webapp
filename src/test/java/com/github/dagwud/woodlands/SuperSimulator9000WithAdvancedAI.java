@@ -29,7 +29,7 @@ public class SuperSimulator9000WithAdvancedAI
 
     telegramServlet.processTelegramUpdate(createUpdate("/start", -1));
 
-    // vaarious things don't happen without a persisted state to get at without erroring
+    // various things don't happen without a persisted state to get at without erroring
     // may behave weird if your persistence works, then comment it out
     ELocation.scheduleRooms();
     EEvent.subscribeToStandardEvents();
