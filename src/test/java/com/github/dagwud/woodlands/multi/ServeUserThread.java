@@ -12,51 +12,72 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ServeUserThread implements Runnable {
-    private final Socket clientSocket;
-    private final int chatId;
-    private final TelegramServlet telegramServlet;
+public class ServeUserThread implements Runnable
+{
+  private final Socket clientSocket;
+  private final int chatId;
+  private final TelegramServlet telegramServlet;
 
-    private PrintWriter out;
+  private PrintWriter out;
 
-    public ServeUserThread(Socket clientSocket, int chatId, TelegramServlet telegramServlet) {
-        this.clientSocket = clientSocket;
-        this.chatId = chatId;
-        this.telegramServlet = telegramServlet;
-    }
+  public ServeUserThread(Socket clientSocket, int chatId, TelegramServlet telegramServlet)
+  {
+    this.clientSocket = clientSocket;
+    this.chatId = chatId;
+    this.telegramServlet = telegramServlet;
+  }
 
-    @Override
-    public void run() {
-        try {
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String s = in.readLine();
+  @Override
+  public void run()
+  {
+    try
+    {
+      out = new PrintWriter(clientSocket.getOutputStream(), true);
+      BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            while (s != null) {
-                Update update = createUpdate(s, chatId);
-                telegramServlet.processTelegramUpdate(update);
-                s = in.readLine();
-            }
-        } catch (Exception ioException) {
-            ioException.printStackTrace();
+      telegramServlet.processTelegramUpdate(createUpdate("/start", chatId));
+      String s = in.readLine();
+
+      while (s != null)
+      {
+        try
+        {
+          Update update = createUpdate(s, chatId);
+          telegramServlet.processTelegramUpdate(update);
+          s = in.readLine();
         }
-    }
-
-    private static Update createUpdate(String messageText, int id) {
-        Update u = new Update();
-        u.message = new Message();
-        u.message.text = messageText;
-        u.message.chat = new Chat();
-        u.message.chat.id = id;
-        u.message.from = new User();
-        return u;
-    }
-
-    public void sendMessage(String message, String replyMarkup) {
-        if (replyMarkup != null) {
-            out.println(message + " Markup: " + replyMarkup);
-        } else {
-            out.println(message);
+        catch (Exception ex)
+        {
+          ex.printStackTrace();
         }
+      }
     }
+    catch (Exception ioException)
+    {
+      ioException.printStackTrace();
+    }
+  }
+
+  private static Update createUpdate(String messageText, int id)
+  {
+    Update u = new Update();
+    u.message = new Message();
+    u.message.text = messageText;
+    u.message.chat = new Chat();
+    u.message.chat.id = id;
+    u.message.from = new User();
+    return u;
+  }
+
+  public void sendMessage(String message, String replyMarkup)
+  {
+    if (replyMarkup != null)
+    {
+      out.println(message + " Markup: " + replyMarkup);
+    }
+    else
+    {
+      out.println(message);
+    }
+  }
 }

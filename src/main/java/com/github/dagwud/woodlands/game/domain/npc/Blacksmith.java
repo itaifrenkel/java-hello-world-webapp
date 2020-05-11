@@ -1,12 +1,14 @@
-package com.github.dagwud.woodlands.game.domain;
+package com.github.dagwud.woodlands.game.domain.npc;
 
+import com.github.dagwud.woodlands.game.domain.EEvent;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class Blacksmith extends Crafter<Weapon>
 {
   private static final long serialVersionUID = 1L;
 
-  Blacksmith()
+  public Blacksmith()
   {
     super(null);
     setName("the Blacksmith");

@@ -1,5 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
+import com.github.dagwud.woodlands.game.domain.npc.NonPlayerCharacter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,4 +1,8 @@
-package com.github.dagwud.woodlands.game.domain;
+package com.github.dagwud.woodlands.game.domain.npc;
+
+import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.domain.Player;
+import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 
 import java.util.HashMap;
 import java.util.Map;

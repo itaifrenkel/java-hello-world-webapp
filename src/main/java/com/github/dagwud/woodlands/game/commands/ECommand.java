@@ -16,6 +16,10 @@ import com.github.dagwud.woodlands.game.commands.locations.alchemist.EnchantShie
 import com.github.dagwud.woodlands.game.commands.locations.blacksmith.CraftWeaponPromptCmd;
 import com.github.dagwud.woodlands.game.commands.locations.village.*;
 import com.github.dagwud.woodlands.game.commands.logs.ShowLogsCmd;
+import com.github.dagwud.woodlands.game.commands.poker.DisplayStandingsCmd;
+import com.github.dagwud.woodlands.game.commands.poker.PlaceBetCmd;
+import com.github.dagwud.woodlands.game.commands.poker.SitAtTableCmd;
+import com.github.dagwud.woodlands.game.commands.poker.StartGameCmd;
 import com.github.dagwud.woodlands.game.commands.start.PlayerSetupCmd;
 import com.github.dagwud.woodlands.game.commands.start.StartCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
@@ -72,6 +76,7 @@ public enum ECommand implements ICommand
   ADD_SONG("/song", false, ((character, chatId) -> new AddSongCmd(character.getPlayedBy().getPlayerState()))),
   LIST_SONGS("/songs", false, ((character, chatId) -> new ListSongsCmd(chatId))),
   ADD_EMISSION("/emit", false, ((character, chatId) -> new AddEmissionCmd(character.getPlayedBy().getPlayerState()))),
+  POKER_STANDINGS("/poker", false, (character, chatId) -> new DisplayStandingsCmd(character)),
 
   THE_INN("The Inn", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.INN)),
   THE_TAVERN("The Tavern", true, (character, chatId) -> new MoveToLocationCmd(character, ELocation.TAVERN)),
@@ -103,6 +108,7 @@ public enum ECommand implements ICommand
   JOIN("Join a Party", false, (character, chatId) -> new PromptJoinPartyCmd(character)),
   BUY_DRINKS("Buy Drinks", true, (character, chatId) -> new BuyDrinksCmd(chatId, character)),
   SPARRING_TENT("Pick a Fight", false, (character, chatIt) -> new MoveToLocationCmd(character, ELocation.SPARRING_TENT)),
+  BACK_ROOM("Back Room", false, (character, chatIt) -> new MoveToLocationCmd(character, ELocation.TAVERN_BACK_ROOM)),
   WAKE("Host a Wake", true, (character, chatId) -> new WakeCmd(chatId, character)),
   UPGRADE("Celebrate", true, (character, chatId) -> new CelebrateCmd(chatId, character.getPlayedBy().getPlayerState())),
   SHORT_REST("Short Rest", true, (character, chatId) -> new ShortRestCmd(chatId, character)),
@@ -112,6 +118,12 @@ public enum ECommand implements ICommand
   CLAIM_ITEM("Claim Item", true, (character, chatId) -> new ClaimItemCmd(character.getPlayedBy())),
   SWITCH_CHARACTERS("Switch Characters", true, (character, chatId) -> new SwitchCharacterPromptCmd(character.getPlayedBy())),
   CHANGE_NAME("Change Name", true, (character, chatId) -> new ChangeNamePromptCmd(character.getPlayedBy())),
+
+  SIT_AT_POKER("Sit at poker table", true, (character, chatId) -> new SitAtTableCmd(character)),
+  START_GAME("Start", true, (character, chatId) -> new StartGameCmd(character)),
+  BET("Bet", true, (character, chatId) -> new PlaceBetCmd(character)),
+  CHECK("Check", true, (character, chatId) -> new PlaceBetCmd(character, 0)),
+  FOLD("Fold", true, (character, chatId) -> new PlaceBetCmd(character, 0)),
   ;
 
   ECommand(String name, boolean menuCmd, ICommandBuilder commandBuilder)

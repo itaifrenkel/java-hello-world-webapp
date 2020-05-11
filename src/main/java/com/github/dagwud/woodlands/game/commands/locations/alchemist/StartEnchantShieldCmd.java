@@ -6,9 +6,8 @@ import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
 import com.github.dagwud.woodlands.game.commands.locations.blacksmith.FinishCraftingCmd;
-import com.github.dagwud.woodlands.game.domain.Alchemist;
+import com.github.dagwud.woodlands.game.domain.npc.Alchemist;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.game.domain.trinkets.consumable.ConsumableTrinket;
 import com.github.dagwud.woodlands.gson.game.Shield;
 
 public class StartEnchantShieldCmd extends AbstractCmd

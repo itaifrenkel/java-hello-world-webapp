@@ -2,8 +2,8 @@ package com.github.dagwud.woodlands.game.commands.admin;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.inventory.DoGiveItemCmd;
-import com.github.dagwud.woodlands.game.domain.Alchemist;
-import com.github.dagwud.woodlands.game.domain.Blacksmith;
+import com.github.dagwud.woodlands.game.domain.npc.Alchemist;
+import com.github.dagwud.woodlands.game.domain.npc.Blacksmith;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.items.EquippableItem;
 import com.github.dagwud.woodlands.gson.game.Weapon;

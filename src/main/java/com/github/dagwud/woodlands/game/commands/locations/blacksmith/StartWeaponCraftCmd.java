@@ -5,9 +5,8 @@ import com.github.dagwud.woodlands.game.Settings;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.core.RunLaterCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendAdminMessageCmd;
-import com.github.dagwud.woodlands.game.domain.Blacksmith;
+import com.github.dagwud.woodlands.game.domain.npc.Blacksmith;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
-import com.github.dagwud.woodlands.gson.game.Damage;
 import com.github.dagwud.woodlands.gson.game.Weapon;
 
 public class StartWeaponCraftCmd extends AbstractCmd

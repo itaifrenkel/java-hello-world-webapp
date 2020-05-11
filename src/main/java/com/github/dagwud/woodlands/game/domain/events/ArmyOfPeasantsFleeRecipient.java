@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game.domain.events;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.LeavePartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
-import com.github.dagwud.woodlands.game.domain.Peasant;
+import com.github.dagwud.woodlands.game.domain.npc.Peasant;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
 

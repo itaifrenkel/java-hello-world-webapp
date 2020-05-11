@@ -3,7 +3,7 @@ package com.github.dagwud.woodlands.game.domain.characters.spells;
 import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.commands.character.JoinPartyCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
-import com.github.dagwud.woodlands.game.domain.Peasant;
+import com.github.dagwud.woodlands.game.domain.npc.Peasant;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.characters.General;
 import com.github.dagwud.woodlands.game.items.ItemsCacheFactory;

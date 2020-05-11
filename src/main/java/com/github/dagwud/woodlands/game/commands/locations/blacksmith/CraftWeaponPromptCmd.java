@@ -3,14 +3,11 @@ package com.github.dagwud.woodlands.game.commands.locations.blacksmith;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 import com.github.dagwud.woodlands.game.commands.locations.CraftPromptCmd;
-import com.github.dagwud.woodlands.game.domain.Crafter;
-import com.github.dagwud.woodlands.game.domain.Item;
+import com.github.dagwud.woodlands.game.domain.npc.Crafter;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.gson.game.Damage;
 import com.github.dagwud.woodlands.gson.game.Weapon;
-import com.github.dagwud.woodlands.game.Settings;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CraftWeaponPromptCmd extends CraftPromptCmd<Weapon, Weapon, Weapon>

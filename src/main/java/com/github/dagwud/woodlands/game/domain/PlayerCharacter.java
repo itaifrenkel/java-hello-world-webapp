@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.Settings;
+import com.github.dagwud.woodlands.game.domain.npc.Innkeeper;
 import com.github.dagwud.woodlands.game.domain.trinkets.LootBag;
 import com.github.dagwud.woodlands.game.GameStatesRegistry;
 import com.github.dagwud.woodlands.gson.game.Creature;
@@ -84,6 +85,7 @@ public abstract class PlayerCharacter extends GameCharacter
     {
       innkeeper = new Innkeeper(getPlayedBy());
     }
+
     return innkeeper;
   }
 
@@ -96,7 +98,7 @@ public abstract class PlayerCharacter extends GameCharacter
   public boolean canHandleWeapon(Weapon weapon)
   {
     double percentage = determinePercentageOfMaxDamageThatPlayerCanHandle();
-    double maxDamageAllowed = ((double)Settings.MAX_CRAFTABLE_WEAPON_DAMAGE) * percentage / 100d;
+    double maxDamageAllowed = ((double) Settings.MAX_CRAFTABLE_WEAPON_DAMAGE) * percentage / 100d;
     return weapon.damage.determineAverageRollAmount() <= maxDamageAllowed;
   }
 

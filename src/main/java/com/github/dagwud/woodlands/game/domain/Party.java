@@ -1,6 +1,9 @@
 package com.github.dagwud.woodlands.game.domain;
 
 import com.github.dagwud.woodlands.game.Settings;
+import com.github.dagwud.woodlands.game.domain.npc.Alchemist;
+import com.github.dagwud.woodlands.game.domain.npc.Blacksmith;
+import com.github.dagwud.woodlands.game.domain.npc.PokerDealer;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,6 +21,8 @@ public class Party extends FightingGroup implements Serializable
   private Long alertChatId;
   private Blacksmith blacksmith;
   private Alchemist alchemist;
+
+  private PokerDealer pokerDealer;
 
   public Party()
   {
@@ -102,8 +107,14 @@ public class Party extends FightingGroup implements Serializable
   @Override
   public boolean equals(Object o)
   {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o)
+    {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass())
+    {
+      return false;
+    }
     Party party = (Party) o;
     return Objects.equals(name, party.name);
   }
@@ -111,7 +122,6 @@ public class Party extends FightingGroup implements Serializable
   @Override
   public int hashCode()
   {
-
     return Objects.hash(name);
   }
 
@@ -134,6 +144,16 @@ public class Party extends FightingGroup implements Serializable
       blacksmith = new Blacksmith();
     }
     return blacksmith;
+  }
+
+  public PokerDealer getPokerDealer()
+  {
+    if (pokerDealer == null)
+    {
+      pokerDealer = new PokerDealer();
+    }
+
+    return pokerDealer;
   }
 
   public Alchemist getAlchemist()

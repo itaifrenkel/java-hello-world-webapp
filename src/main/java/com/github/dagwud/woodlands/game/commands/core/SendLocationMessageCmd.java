@@ -16,10 +16,20 @@ public class SendLocationMessageCmd extends AbstractCmd
 
   private GameCharacter originator;
 
+  private boolean partyOnly = false;
+
   public SendLocationMessageCmd(ELocation eLocation, String message)
   {
     this.eLocation = eLocation;
     this.message = message;
+  }
+
+  public SendLocationMessageCmd(ELocation eLocation, String message, GameCharacter originator, boolean partyOnly)
+  {
+    this.eLocation = eLocation;
+    this.message = message;
+    this.originator = originator;
+    this.partyOnly = partyOnly;
   }
 
   public SendLocationMessageCmd(ELocation eLocation, String message, GameCharacter originator)
@@ -42,11 +52,13 @@ public class SendLocationMessageCmd extends AbstractCmd
         continue;
       }
 
-      // should this be party only?
       if (gameCharacter instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) gameCharacter;
-        CommandDelegate.execute(new SendMessageCmd(character, message));
+        if (!partyOnly || character.getParty().getAllMembers().contains(originator))
+        {
+          CommandDelegate.execute(new SendMessageCmd(character, message));
+        }
       }
     }
   }

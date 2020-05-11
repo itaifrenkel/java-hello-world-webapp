@@ -29,6 +29,8 @@ public enum ELocation
             "\"Long journey?\" he asks jovially, though something about his demeanor suggests he’s not that interested in your journey so much as how many coins are in your pocket.",
           new TavernIntervalCmd()),
 
+  TAVERN_BACK_ROOM("The Back Room", new BackRoomMenu(), false, "This room is crowded, warm, filled with smoke, and has the look of a place that hasn't seen anything legal in years."),
+
   SPARRING_TENT("Sparring Tent", new SparringTentMenu(), false, "The dusty ground is splattered with drops of blood"),
 
   BLACKSMITH("Blacksmith", new BlacksmithMenu(), true, "The Blacksmith's shop is........ hot"),
@@ -141,6 +143,7 @@ public enum ELocation
             || this == TAVERN
             || this == BLACKSMITH
             || this == ALCHEMIST
+            || this == TAVERN_BACK_ROOM
             || this == SPARRING_TENT;
   }
 }

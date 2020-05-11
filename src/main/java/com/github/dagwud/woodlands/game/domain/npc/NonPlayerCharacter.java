@@ -1,4 +1,7 @@
-package com.github.dagwud.woodlands.game.domain;
+package com.github.dagwud.woodlands.game.domain.npc;
+
+import com.github.dagwud.woodlands.game.domain.GameCharacter;
+import com.github.dagwud.woodlands.game.domain.Player;
 
 public abstract class NonPlayerCharacter extends GameCharacter
 {

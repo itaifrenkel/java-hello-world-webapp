@@ -4,6 +4,7 @@ import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.AirOfAuthority;
 import com.github.dagwud.woodlands.game.domain.characters.spells.ArmyOfPeasants;
 import com.github.dagwud.woodlands.game.domain.characters.spells.CallToArms;
+import com.github.dagwud.woodlands.game.domain.npc.Peasant;
 
 import java.util.ArrayList;
 import java.util.Collection;

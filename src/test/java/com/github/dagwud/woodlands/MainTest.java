@@ -10,6 +10,7 @@ import com.github.dagwud.woodlands.game.commands.inventory.SpawnTrinketCmd;
 import com.github.dagwud.woodlands.game.domain.*;
 import com.github.dagwud.woodlands.game.domain.characters.spells.ArmyOfPeasants;
 import com.github.dagwud.woodlands.game.domain.characters.spells.HealingBlast;
+import com.github.dagwud.woodlands.game.domain.npc.Peasant;
 import com.github.dagwud.woodlands.game.domain.trinkets.AmuletOfProtection;
 import com.github.dagwud.woodlands.game.log.Logger;
 import com.github.dagwud.woodlands.game.messaging.MessagingFactory;

@@ -1,4 +1,6 @@
-package com.github.dagwud.woodlands.game.domain;
+package com.github.dagwud.woodlands.game.domain.npc;
+
+import com.github.dagwud.woodlands.game.domain.Player;
 
 public class Peasant extends NonPlayerCharacter
 {
