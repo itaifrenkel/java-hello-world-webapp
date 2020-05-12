@@ -8,6 +8,7 @@ import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.commands.core.AbstractCmd;
 
 import com.github.dagwud.woodlands.game.commands.locations.HandleLocationEntryCmd;
+import com.github.dagwud.woodlands.game.commands.locations.HandleLocationExitCmd;
 import com.github.dagwud.woodlands.game.commands.prerequisites.AbleToActPrerequisite;
 import com.github.dagwud.woodlands.game.domain.Fighter;
 import com.github.dagwud.woodlands.game.domain.GameCharacter;
@@ -48,11 +49,14 @@ public class RallyCmd extends AbstractCmd
 
     if (characterToMove != movedBy && characterToMove.isConscious())
     {
+      ELocation originalLocation = characterToMove.getLocation();
       characterToMove.setLocation(moveTo);
 
       if (characterToMove instanceof PlayerCharacter)
       {
         PlayerCharacter character = (PlayerCharacter) characterToMove;
+
+        CommandDelegate.execute(new HandleLocationExitCmd(character, moveTo, originalLocation));
         CommandDelegate.execute(new SendMessageCmd(character, "<i>You have moved to " + moveTo.getDisplayName() + "</i>"));
         showMenuForLocation(moveTo, character.getPlayedBy().getPlayerState());
         CommandDelegate.execute(new HandleLocationEntryCmd(moveTo, character.getPlayedBy().getPlayerState()));

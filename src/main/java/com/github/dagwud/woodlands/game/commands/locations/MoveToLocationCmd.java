@@ -108,7 +108,7 @@ public class MoveToLocationCmd extends AbstractCmd
 
     ELocation from = characterToMove.getLocation();
 
-    produceExitMessage(characterToMove, moveTo, from);
+    CommandDelegate.execute(new HandleLocationExitCmd(characterToMove, moveTo, from));
 
     characterToMove.setLocation(moveTo);
 
@@ -133,23 +133,6 @@ public class MoveToLocationCmd extends AbstractCmd
     if (entryText != null)
     {
       CommandDelegate.execute(new SendLocationMessageCmd(moveTo, "<i>" + entryText + "</i>", character));
-    }
-  }
-
-  private void produceExitMessage(GameCharacter characterToMove, ELocation moveTo, ELocation from)
-  {
-    if (characterToMove instanceof PlayerCharacter)
-    {
-      PlayerCharacter toMove = (PlayerCharacter) characterToMove;
-
-      if (from != null)
-      {
-        String exitText = from.getMenu().produceExitText(toMove, moveTo);
-        if (exitText != null)
-        {
-          CommandDelegate.execute(new SendLocationMessageCmd(from, "<i>" + exitText + "</i>", characterToMove));
-        }
-      }
     }
   }
 
