@@ -34,7 +34,7 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
   {
     getBusyCrafting().put(character, item);
   }
-  
+
   public void setCraftingExpectedEndTime(long craftingDurationMS)
   {
     craftingStartedAt = System.currentTimeMillis();
@@ -46,7 +46,7 @@ public abstract class Crafter<T extends Item> extends NonPlayerCharacter
     long remainingMS = craftingDurationMS - (System.currentTimeMillis() - craftingStartedAt);
     long remainingMin = -Math.floorDiv(-remainingMS, 60_000); // ceil div
     remainingMin = -Math.floorDiv(-remainingMin, 5) * 5; // make time less accurate
-    return (int)remainingMin;
+    return (int) remainingMin;
   }
 
   public boolean isBusyCrafting()

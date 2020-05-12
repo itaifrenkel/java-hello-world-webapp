@@ -1,8 +1,11 @@
 package com.github.dagwud.woodlands.game.domain.menu;
 
+import com.github.dagwud.woodlands.game.CommandDelegate;
 import com.github.dagwud.woodlands.game.PlayerState;
 import com.github.dagwud.woodlands.game.commands.ECommand;
+import com.github.dagwud.woodlands.game.commands.poker.HardFoldCmd;
 import com.github.dagwud.woodlands.game.domain.ELocation;
+import com.github.dagwud.woodlands.game.domain.Party;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
 import com.github.dagwud.woodlands.game.domain.npc.PokerDealer;
 import za.co.knonchalant.pokewhat.domain.Game;
@@ -31,6 +34,17 @@ public class BackRoomMenu extends GameMenu
   @Override
   public String produceExitText(PlayerCharacter playerState, ELocation to)
   {
+    Party party = playerState.getParty();
+    if (!party.isPrivateParty())
+    {
+      PokerDealer pokerDealer = party.getPokerDealer();
+      if (pokerDealer.playerIsInGame(playerState))
+      {
+        CommandDelegate.execute(new HardFoldCmd(playerState));
+        return playerState.getName() + " throws down their cards and runs out of the room.";
+      }
+    }
+
     return playerState.getName() + " hurries back into the bar"; // add indication if they won or lost money
   }
 

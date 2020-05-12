@@ -1,6 +1,7 @@
 package com.github.dagwud.woodlands.game.domain.npc;
 
 import com.github.dagwud.woodlands.game.CommandDelegate;
+import com.github.dagwud.woodlands.game.commands.core.SendMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.SendPartyMessageCmd;
 import com.github.dagwud.woodlands.game.commands.core.ShowMenuCmd;
 import com.github.dagwud.woodlands.game.domain.PlayerCharacter;
@@ -122,7 +123,8 @@ public class PokerDealer extends NonPlayerCharacter
     {
       for (Map.Entry<PlayerCharacter, Player> woodToPoker : inCurrentGame.entrySet())
       {
-        if (woodToPoker.getValue().equals(player)) {
+        if (woodToPoker.getValue().equals(player))
+        {
           cash.put(woodToPoker.getKey(), player.getMoney());
         }
       }
@@ -140,5 +142,42 @@ public class PokerDealer extends NonPlayerCharacter
   public Map<PlayerCharacter, Double> getCash()
   {
     return cash;
+  }
+
+  public void foldOut(PlayerCharacter playerCharacter)
+  {
+    if (!inCurrentGame.containsKey(playerCharacter))
+    {
+      return;
+    }
+
+    tellPlayers(playerCharacter.getName() + " folds, just like that.");
+    currentGame.fold(inCurrentGame.get(playerCharacter));
+  }
+
+  private void tellPlayers(String message)
+  {
+    for (PlayerCharacter player : getPlayers())
+    {
+      CommandDelegate.execute(new SendMessageCmd(player, message));
+    }
+  }
+
+  public boolean isGameOver()
+  {
+    return currentGame.getState() == EGameState.DONE;
+  }
+
+  public PlayerCharacter playerFor(Player winner)
+  {
+    for (Map.Entry<PlayerCharacter, Player> playerCharacterPlayerEntry : inCurrentGame.entrySet())
+    {
+      if (playerCharacterPlayerEntry.getValue() == winner)
+      {
+        return playerCharacterPlayerEntry.getKey();
+      }
+    }
+
+    return null;
   }
 }

@@ -19,6 +19,7 @@ public class NotInPrivatePartyPrerequisite implements CommandPrerequisite
   public boolean verify()
   {
     boolean publicParty = !playerCharacter.getParty().isPrivateParty();
+
     if (!publicParty)
     {
       CommandDelegate.execute(new SendMessageCmd(playerCharacter, "Can't play poker by yourself - join a party."));

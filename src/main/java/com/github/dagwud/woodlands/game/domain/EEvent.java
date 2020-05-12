@@ -17,7 +17,7 @@ public enum EEvent
 {
   PLAYER_DEATH, PLAYER_UNCONSCIOUS, JOINED_PARTY, LEFT_PARTY, MOVED, CREATURE_DROPPED_ITEM,
   CREATURE_DEFEATED, PLAYER_DROPPED_ITEM, PLAYER_GAVE_ITEM_AWAY, LEFT_ITEM, CRAFTED_ITEM,
-  ENCHANTED_ITEM, CLAIMED_ITEM, LED_PARTY, SPARRING;
+  ENCHANTED_ITEM, CLAIMED_ITEM, LED_PARTY, SPARRING, WON_POKER;
 
   private static transient Map<EEvent, List<EventRecipient<? extends Event>>> subscribers;
 
@@ -86,6 +86,11 @@ public enum EEvent
   // Ease-of-use standard case where it just involves a player character.
   public void trigger(PlayerCharacter playerCharacter)
   {
+    if (playerCharacter == null)
+    {
+      return;
+    }
+
     trigger(new Event(playerCharacter));
   }
 
