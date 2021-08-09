@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1 
+
+kind: Deployment 
+
+metadata: 
+
+  name: shconnect-deployment 
+
+  labels: 
+
+spec: 
+
+  replicas: 2 
+
+  template: 
+
+    metadata: 
+
+      labels: 
+
+        app: shconnect-deployment 
+
+    spec: 
+
+      containers: 
+
+        - name: shconnect 
+
+          image: kcscr.azurecr.io/kcsgopidiomkarhttpd:#{tag}# 
+
+          imagePullPolicy: Always 
+
+          name: shconnect-deployment 
+
+          ports: 
+
+          - containerPort: 80 
+
+      imagePullSecrets: 
+
+        - name: acr-secret 
+
+ 
+
+Choose the image from ACR with repository and #{tag}# is for tagging image. 
