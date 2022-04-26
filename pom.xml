@@ -9,13 +9,44 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>3.3.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+</properties>
+
   <build>
-    <finalName>java-hello-world</finalName>
-  </build>
+<plugins>
+<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.1</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
+<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <inherited>true</inherited>
+            <version>3.8.1</version>
+            <configuration>
+                <source>16</source>
+                <target>16</target>
+                <compilerArguments>
+                    <endorseddirs>${endorsed.dir}</endorseddirs>
+                </compilerArguments>
+            </configuration>
+        </plugin>
+</plugins>
+</build>
 </project>
+
+
+
