@@ -17,5 +17,10 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage('preprod') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
     }
 }
