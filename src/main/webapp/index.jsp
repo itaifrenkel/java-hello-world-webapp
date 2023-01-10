@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>M REDDY KALYAN </h2> 
+<h2>M R KALYAN </h2> 
 </body>
 </html>
 
